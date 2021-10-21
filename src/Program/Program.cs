@@ -22,6 +22,7 @@ namespace ConsoleApplication
             var train = new Train();
             train.StartEngines();
             Console.WriteLine("Hello World!");
+            CompanyMaterial x=new CompanyMaterial();
         }
     }
 }
