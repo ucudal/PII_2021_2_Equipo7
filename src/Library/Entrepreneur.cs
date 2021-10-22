@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using ClassLibrary;
 
 namespace Library
 
 {    
-    
+    /// <summary>
+    /// Esta clase representa Entrepreneur.
+    /// </summary>
     public class Entrepreneur
     {
         /// <summary>
@@ -15,7 +18,7 @@ namespace Library
         /// <param name="user">usuario del emprendedor</param>
         /// <param name="id">id del emprendedor</param>
         /// <param name="trade">en que se especializa el emprendedor</param>
-        public Entrepreneur(string name,User user,int id, string trade
+        public Entrepreneur(string name,Entrepreneur user,int id, string trade
         )
         {
             this.Name =Name;
@@ -24,6 +27,10 @@ namespace Library
             this.Trade = Trade;
             this.Deleted= false;
         }
+
+        /// <summary>
+        /// constructor de emprendedor vacio
+        /// </summary>
         public Entrepreneur()
         {
 
