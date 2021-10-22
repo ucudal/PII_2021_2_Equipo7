@@ -12,48 +12,23 @@ namespace Library
         /// </summary>
         /// <typeparam name="string"> parametro string</typeparam>
         /// <returns>lista de localizaciones </returns>
-        private List<Locations> Locations  = new List<Locations>();
-        /// <summary>
-        /// constructor de la clase Company
-        /// </summary>
-        /// <param name="Name"> nombre de la company</param>
-        /// <param name="Id">id de la company</param>
-        /// <param name="Trade">trade de la company</param>
-        
-        public Company(string Name, int Id, string Trade)
-        {
-            this.Name =Name;
-            this.Id = Id;
-            this.Trade = Trade;
-            this.Deleted= false;
-            this.Companys.Add(this);
-        }
-        /// <summary>
-        /// Lista de todas las companias disponibles
-        /// </summary>
-        /// <typeparam name="Company">aca que pongo</typeparam>
-        /// <returns>aca que pongo</returns>
-        private List<Company> Companys  = new List<Company>();
+        public List<Locations> Locations  = new List<Locations>();
+
         /// <summary>
         /// lista de los materiales de la compania 
         /// </summary>
         /// <typeparam name="CompanyMaterial"></typeparam>
         /// <returns>lista de los materiales de la compania</returns>
-        private List<CompanyMaterial> CompanyMaterials  = new List<CompanyMaterial>();
-        /// <summary>
-        /// lista de la categoria de los materiales de la compania
-        /// para saber las categorias que hay en enta compania
-        /// </summary>
-        /// <typeparam name="CompanyMaterialCategory"></typeparam>
-        /// <returns>lista de la categoria de los materiales</returns>
-        
-        private List<CompanyMaterialCategory> CompanyMaterialCategorys  = new List<CompanyMaterialCategory>();
+        public List<CompanyMaterial> CompanyMaterials  = new List<CompanyMaterial>();
+
         /// <summary>
         /// lista de los usuarios que van a ser los administradores de la compania
         /// </summary>
         /// <typeparam name="User"></typeparam>
         /// <returns>lista de usuarios</returns>
         public List<User> ListAdminUsers = new List<User>();
+
+
         /// <summary>
         /// nombre de la compania
         /// </summary>
@@ -77,7 +52,33 @@ namespace Library
         /// <summary>
         /// añadir a la lista la ubicacion de la empresa
         /// </summary>
-        /// <param name="Location"></param>
+        /// <param name="Location">location pasado por parametro</param>
+
+
+        /// <summary>
+        /// constructor de la clase Company
+        /// </summary>
+        /// <param name="name"> nombre de la company</param>
+        /// <param name="id">id de la company</param>
+        ///  <param name="trade">trade de la company</param>
+        
+        public Company(int id, string name, string trade)
+        {
+            this.Name =name;
+            this.Id = id;
+            this.Trade = trade;
+            this.Deleted= false;
+            
+        }
+        /// <summary>
+        /// constructor vacio de company
+        /// </summary>
+        public Company()
+        {
+
+        }
+
+
 
         public void AddLocation(Location Location)
         {
@@ -86,7 +87,7 @@ namespace Library
         /// <summary>
         /// quitar de la lista la ubicacion de la empresa
         /// </summary>
-        /// <param name="Location"></param>
+        /// <param name="Location">location pasado por parametro</param>
         public void RemoveLocation(Location Location)
         {
             this.Locations.Remove(Location);
@@ -94,7 +95,7 @@ namespace Library
         /// <summary>
         /// agrega a la lista de usuarios administradores de company
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="user">objeto de user pasado por parametro</param>
          public void AddAdminUser(User user)
 
         {
@@ -103,19 +104,14 @@ namespace Library
         /// <summary>
         /// remueve lso usuarios de administradores
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="user">objeto de usuario pasado por parametro</param>
         public void RemoveAdminUser(User user)
 
         {
             this.ListAdminUsers.Remove(user);
         }
-        /// <summary>
-        /// remueve company de la lista poniendo el valor de Deleted como true
-        /// </summary>
-        public void RemoveCompany()
-        {
-            this.Deleted= true;
-        }
+
+
         /// <summary>
         /// aggrega un material a la company situandolo en una lista
         /// </summary>
@@ -132,26 +128,13 @@ namespace Library
         public void RemoveCompanyMaterial(CompanyMaterial material)
 
         {
+
+            if(CompanyMaterials.Contains(material)){
             this.CompanyMaterials.Remove(material);
+            }
         }
-        /// <summary>
-        /// agrega uan nueva categoria de materiales para la empresa
-        /// </summary>
-        /// <param name="categoria"></param>
-        public void AddCompanyMaterialCategory(CompanyMaterialCategory categoria)
+      
 
-        {
-            this.CompanyMaterialCategorys.Add(categoria);
-        }
-        /// <summary>
-        /// remueve las la categoria del material 
-        /// </summary>
-        /// <param name="categoria"></param>
-        public void RemoveCompanyMaterialCategory(CompanyMaterialCategory categoria)
-
-        {
-            this.CompanyMaterialCategorys.Remove(categoria);
-        }
        
 
     }
