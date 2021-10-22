@@ -42,11 +42,11 @@ namespace ClassLibrary
         /// <summary>
         /// Constructor de la clase.
         /// </summary>
-        public User(int id, string name,bool deleted, Role role)
+        public User(int id, string name, Role role)
         {
             this.Id=id;
             this.Name=name;
-            this.Deleted=deleted;
+            this.Deleted=false;
             this.Role=role;
             this.Accounts=new List<Account>();
         }
