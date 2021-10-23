@@ -4,9 +4,9 @@ ChatBot diseñado para actuar de intermediario entre empresas en posesion de mat
 
 ## Consigna y Entregas
 
-1. [Consigna](docs\Consigna\Consigna.md)
-2. [1ra Entrega](docs\Entregas\Entrega1.md)
-3. [2da Entrega](docs\Entregas\Entrega2.md)
+1. [Consigna](./docs/Consigna/Consigna.md)
+2. [1ra Entrega](./docs/Entregas/Entrega1.md)
+3. [2da Entrega](./docs/Entregas/Entrega2.md)
 
 ## Diagramas
 
