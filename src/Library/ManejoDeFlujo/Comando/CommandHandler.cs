@@ -1,4 +1,4 @@
-namespace Library
+namespace ClassLibrary
 {
     /// <summary>
     /// Encargada de recibir el mensaje y procesar

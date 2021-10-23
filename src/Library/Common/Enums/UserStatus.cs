@@ -1,4 +1,4 @@
-namespace Library
+namespace ClassLibrary
 {
     /// <summary>
     /// Enumerable que lista los estados generales

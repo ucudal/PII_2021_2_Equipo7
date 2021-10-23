@@ -1,4 +1,4 @@
-namespace Library
+namespace ClassLibrary
 {
     /// <summary>
     /// Clase abstracta que forma la base para

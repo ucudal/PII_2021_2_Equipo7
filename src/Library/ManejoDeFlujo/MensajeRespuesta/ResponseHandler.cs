@@ -1,6 +1,6 @@
 using System;
 
-namespace Library
+namespace ClassLibrary
 {
     /// <summary>
     /// Encargada de enviar la respuesta al usuario.

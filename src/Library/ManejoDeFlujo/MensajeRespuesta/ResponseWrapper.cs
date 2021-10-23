@@ -1,4 +1,4 @@
-namespace Library
+namespace ClassLibrary
 {
     /// <summary>
     /// Contenedor de la respuesta.
