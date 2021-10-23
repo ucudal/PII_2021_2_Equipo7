@@ -50,7 +50,7 @@ Deberá existir ademas un archivo `README.md` en la raiz del repositorio para in
 
 Véase [Tabla de Entregas](../Consigna/Consigna.md#entregas). 
 
-## Notas
+## <a name="notas">Notas</a>
 
 Alentamos al equipo a que utilice el archivo de README en su repositorio para incluír notas de reflexión durante el desarrollo del proyecto. Estas notas pueden incluír:
 
