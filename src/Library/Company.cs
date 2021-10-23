@@ -17,7 +17,7 @@ namespace ClassLibrary
         /// </summary>
         /// <typeparam name="string"> parametro string</typeparam>
         /// <returns>lista de localizaciones </returns>
-        public List<Locations> Locations  = new List<Locations>();
+        public List<Location> Locations  = new List<Location>();
 
         /// <summary>
         /// lista de los materiales de la compania 
