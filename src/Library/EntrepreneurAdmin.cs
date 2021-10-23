@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using ClassLibrary;
 
 namespace Library
 {
+    /// <summary>
+    /// Esta clase representa la administracion de Entrepreneur.
+    /// </summary>
     public class EntrepreneurAdmin: DataAdmin<Entrepreneur>
     {
         /// <summary>
@@ -91,7 +95,7 @@ namespace Library
             
             while(i<Items.Count && !esesta)
             {
-                if(Items[i].Name==nombreFinal)
+                if(Items[i].Name==Nombre)
                 {
                     esesta=true;
                     nombreFinal=Items[i];
