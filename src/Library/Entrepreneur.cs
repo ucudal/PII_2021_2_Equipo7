@@ -36,7 +36,7 @@ namespace ClassLibrary
         /// <summary>
         /// lista de la locacion georeferenciada de el emprendedor
         /// </summary>
-        /// <typeparam name="Locations">lista de location </typeparam>
+    
         /// <returns>lista de ubicaciones</returns>
         public List<Location> Locations  = new List<Location>();
         /// <summary>
