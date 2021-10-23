@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
-using ClassLibrary;
 
 namespace ClassLibrary
+    
 {    
     /// <summary>
     /// esta clase representa a la compania
@@ -15,21 +15,20 @@ namespace ClassLibrary
         /// que referencian a una geolocalizacion la cual se va a ser 
         /// la zona en donde se encuentre la empresa.
         /// </summary>
-        /// <typeparam name="string"> parametro string</typeparam>
         /// <returns>lista de localizaciones </returns>
         public List<Location> Locations  = new List<Location>();
 
         /// <summary>
         /// lista de los materiales de la compania 
         /// </summary>
-        /// <typeparam name="CompanyMaterial"></typeparam>
+        
         /// <returns>lista de los materiales de la compania</returns>
         public List<CompanyMaterial> CompanyMaterials  = new List<CompanyMaterial>();
 
         /// <summary>
         /// lista de los usuarios que van a ser los administradores de la compania
         /// </summary>
-        /// <typeparam name="User"></typeparam>
+        
         /// <returns>lista de usuarios</returns>
         public List<User> ListAdminUsers = new List<User>();
 
@@ -54,10 +53,7 @@ namespace ClassLibrary
         /// </summary>
         /// <value></value>
         public bool Deleted {get;set;}
-        /// <summary>
-        /// añadir a la lista la ubicacion de la empresa
-        /// </summary>
-        /// <param name="Location">location pasado por parametro</param>
+
 
 
         /// <summary>
@@ -141,5 +137,10 @@ namespace ClassLibrary
             this.CompanyMaterials.Remove(material);
             }
         }
-    }
+      
+
+       
+
+    } 
+
 }
