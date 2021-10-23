@@ -1,6 +1,6 @@
 using System;
 
-namespace Library
+namespace ClassLibrary
 {
     /// <summary>
     /// Clase que contiene los datos de una sesion de usuario.

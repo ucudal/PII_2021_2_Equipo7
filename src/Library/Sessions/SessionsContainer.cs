@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Library
+namespace ClassLibrary
 {
     /// <summary>
     /// Contenedor de sesiones. Almacena una lista

@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Library
+namespace ClassLibrary
 {
     /// <summary>
     /// Encargado de recibir un mensaje y procesar
