@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using ClassLibrary;
 
 namespace ClassLibrary
 
@@ -17,7 +18,7 @@ namespace ClassLibrary
         /// <param name="user">usuario del emprendedor</param>
         /// <param name="id">id del emprendedor</param>
         /// <param name="trade">en que se especializa el emprendedor</param>
-        public Entrepreneur(string name,User user,int id, string trade
+        public Entrepreneur(string name,Entrepreneur user,int id, string trade
         )
         {
             this.Name =Name;
@@ -81,12 +82,6 @@ namespace ClassLibrary
         public void RemoveLocation(Location Location)
         {
             this.Locations.Remove(Location);
-        }
-
-
-
-
-
-        
+        }      
     }
 }

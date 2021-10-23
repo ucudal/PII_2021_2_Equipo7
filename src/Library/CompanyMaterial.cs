@@ -139,7 +139,6 @@ namespace ClassLibrary
        /// <returns>
         /// Retornamos xretorno con la suma de todos los stocks de todos los lugares donde esta almacenado el materialEmpresa.
         /// </returns>
-        ///<param name="pLocation">Lugar en el cual buscamos cuanto stock hay</param>
         public int GetStockTotal()
         {
             int xretorno=0;

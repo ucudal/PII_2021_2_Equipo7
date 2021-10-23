@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections;
 
 namespace ClassLibrary
-    
 {    
     /// <summary>
     /// esta clase representa a la compania
@@ -141,9 +140,5 @@ namespace ClassLibrary
             this.CompanyMaterials.Remove(material);
             }
         }
-      
-
-       
-
     }
 }
