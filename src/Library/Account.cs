@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 
-namespace Library
+namespace ClassLibrary
 {
     /// <summary>
     /// la clase account maneja las cuentas de lso usuarios

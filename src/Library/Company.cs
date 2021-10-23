@@ -2,8 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 
-namespace Library
-{    public class Company 
+namespace ClassLibrary
+    
+{    
+    /// <summary>
+    /// esta clase representa a la compania
+    /// </summary>
+    public class Company 
     {
         /// <summary>
         /// la Lista locations es una list en la cual se guardan strings
@@ -79,7 +84,10 @@ namespace Library
         }
 
 
-
+        /// <summary>
+        /// añadir locacion de la compania
+        /// </summary>
+        /// <param name="Location">se le pasa un objeto de tipo location como parametro</param>
         public void AddLocation(Location Location)
         {
             this.Locations.Add(Location);

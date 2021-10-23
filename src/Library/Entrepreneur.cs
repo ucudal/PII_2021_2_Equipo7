@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 
-namespace Library
+namespace ClassLibrary
 
 {    
-    
+    /// <summary>
+    /// clase que representa los emprendedores
+    /// </summary>
     public class Entrepreneur
     {
         /// <summary>
@@ -24,6 +26,9 @@ namespace Library
             this.Trade = Trade;
             this.Deleted= false;
         }
+        /// <summary>
+        /// constructor vacio de emprendedor
+        /// </summary>
         public Entrepreneur()
         {
 
@@ -33,7 +38,7 @@ namespace Library
         /// </summary>
         /// <typeparam name="Locations">Locacion</typeparam>
         /// <returns>lista de ubicaciones</returns>
-        public List<Locations> Locations  = new List<Locations>();
+        public List<Location> Locations  = new List<Location>();
         /// <summary>
         /// usuario del emprendedor
         /// </summary>

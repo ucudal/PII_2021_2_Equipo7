@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 
-namespace Library
+namespace ClassLibrary
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class EntrepreneurAdmin: DataAdmin<Entrepreneur>
     {
         /// <summary>
@@ -81,9 +84,9 @@ namespace Library
         /// <summary>
         /// buscamos el emprendedor por nombre
         /// </summary>
-        /// <param name="Nombre">nombre de emprendedor</param>
+        /// <param name="nombre">nombre de emprendedor</param>
         /// <returns>objeto de tipo Entrepreneur</returns>
-        public override Entrepreneur GetByName(string Nombre)
+        public override Entrepreneur GetByName(string nombre)
         {
             Entrepreneur nombreFinal=null;
             int i=0;
@@ -91,7 +94,7 @@ namespace Library
             
             while(i<Items.Count && !esesta)
             {
-                if(Items[i].Name==nombreFinal)
+                if(Items[i].Name == nombre)
                 {
                     esesta=true;
                     nombreFinal=Items[i];
