@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using ClassLibrary;
 
-namespace Library
+namespace ClassLibrary
 {
     /// <summary>
     /// Esta clase representa la administracion de Entrepreneur.
@@ -85,9 +85,9 @@ namespace Library
         /// <summary>
         /// buscamos el emprendedor por nombre
         /// </summary>
-        /// <param name="Nombre">nombre de emprendedor</param>
+        /// <param name="nombre">nombre de emprendedor</param>
         /// <returns>objeto de tipo Entrepreneur</returns>
-        public override Entrepreneur GetByName(string Nombre)
+        public override Entrepreneur GetByName(string nombre)
         {
             Entrepreneur nombreFinal=null;
             int i=0;
@@ -95,7 +95,7 @@ namespace Library
             
             while(i<Items.Count && !esesta)
             {
-                if(Items[i].Name==Nombre)
+                if(Items[i].Name == nombre)
                 {
                     esesta=true;
                     nombreFinal=Items[i];
@@ -103,9 +103,5 @@ namespace Library
             }
             return nombreFinal;
         }
-
-
     }
-    
-
 }

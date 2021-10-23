@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Collections;
 using ClassLibrary;
 
-namespace Library
+namespace ClassLibrary
 
 {    
     /// <summary>
-    /// Esta clase representa Entrepreneur.
+    /// clase que representa los emprendedores
     /// </summary>
     public class Entrepreneur
     {
@@ -27,9 +27,8 @@ namespace Library
             this.Trade = Trade;
             this.Deleted= false;
         }
-
         /// <summary>
-        /// constructor de emprendedor vacio
+        /// constructor vacio de emprendedor
         /// </summary>
         public Entrepreneur()
         {
@@ -38,9 +37,9 @@ namespace Library
         /// <summary>
         /// lista de la locacion georeferenciada de el emprendedor
         /// </summary>
-        /// <typeparam name="Locations">Locacion</typeparam>
+        /// <typeparam name="Locations">lista de location </typeparam>
         /// <returns>lista de ubicaciones</returns>
-        public List<Locations> Locations  = new List<Locations>();
+        public List<Location> Locations  = new List<Location>();
         /// <summary>
         /// usuario del emprendedor
         /// </summary>
@@ -83,12 +82,6 @@ namespace Library
         public void RemoveLocation(Location Location)
         {
             this.Locations.Remove(Location);
-        }
-
-
-
-
-
-        
+        }      
     }
 }

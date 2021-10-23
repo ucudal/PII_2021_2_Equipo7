@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 
-namespace Library
+namespace ClassLibrary
 {
 
     /// <summary>
