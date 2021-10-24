@@ -8,10 +8,6 @@ namespace ClassLibrary
     /// </summary>
     public class Publication
     {
-        /// <summary>
-        /// Lista de publicaciones para guardar la informacion de cada publicación.
-        /// </summary>
-
 
         /// <summary>
         /// Lista de materiales de la compania.
@@ -26,9 +22,9 @@ namespace ClassLibrary
 
 
         /// <summary>
-        /// Lista de PublicationItem, para saber la cantidad de material de cada material.
+        /// Property de la clase PublicationItem.
         /// </summary>
-        List<PublicationItem> ListQuantity = new List<PublicationItem>();
+        public PublicationItem PublicationItem {get; set;}
 
         /// <summary>
         /// Publication tiene una property de Company.
@@ -59,7 +55,7 @@ namespace ClassLibrary
         /// <summary>
         /// Divisa del precio del material o materiales.
         /// </summary>
-        Currency Currency{get; set;}
+        public Currency Currency{get; set;}
 
         /// <summary>
         ///  Deleted sirve para saber si la publicación se borra o no.
@@ -83,6 +79,8 @@ namespace ClassLibrary
             this.Deleted = false;
         }
 
+
+
         /// <summary>
         /// Metodo para añadir materiales a una compania.
         /// </summary>
@@ -95,6 +93,7 @@ namespace ClassLibrary
             }
         }
 
+
         /// <summary>
         /// Metodo para borrar los materiales de una compania.
         /// </summary>
@@ -106,6 +105,7 @@ namespace ClassLibrary
                 ListCompanyMaterial.Remove(CompanyMaterial);
             }
         }
+
 
         /// <summary>
         /// Metodo para añadir una palabra clave del tipo string a la lista de palabras claves.
@@ -120,6 +120,7 @@ namespace ClassLibrary
 
         }
 
+
         /// <summary>
         /// Metodo para remover palabra clave de la lista de palabras claves del tipo string.
         /// </summary>
@@ -131,35 +132,6 @@ namespace ClassLibrary
                 KeyWords.Remove(KeyWord);
             }
         }
-
-
-        /// <summary>
-        /// Metodo para añadir la cantidad de unidades de cada material.
-        /// </summary>
-        public void AddQuantity(PublicationItem Quantity)
-        {
-            if (!ListQuantity.Contains(Quantity))
-            {
-                ListQuantity.Add(Quantity);
-            }
-
-        }
-
-
-        /// <summary>
-        /// Metodo para borrar la cantidad de unidades de cada material.
-        /// </summary>
-        public void RemoveQuantity(PublicationItem Quantity)
-        {
-            if (ListQuantity.Contains(Quantity))
-            {
-                ListQuantity.Remove(Quantity);
-            }
-
-        }
-
-        
-
     }
 
 }
