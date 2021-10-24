@@ -1,6 +1,6 @@
 using System;
 
-namespace Library
+namespace ClassLibrary
 {
     /// <summary>
     /// Contenedor de los datos de un procedimiento
