@@ -6,24 +6,27 @@ namespace ClassLibrary
     /// <summary>
     /// Proveedor de storage In Process.
     /// </summary>
-    public class StorageProvider
+    public class StorageProviderInProcess : IStorageProvider
     {
         private Dictionary<Type, List<dynamic>> tables;
 
         /// <summary>
-        /// Conseguir un listado de los registros
-        /// almacenados del tipo recibido.
+        /// Inicializa una nueva instancia de la clase <see cref="StorageProviderInProcess"/>.
         /// </summary>
-        /// <typeparam name="T">
-        /// Tipo que indica el listado de registros a devolver.
-        /// </typeparam>
-        /// <returns>
-        /// Listado de registros del tipo T.
-        /// </returns>
+        public StorageProviderInProcess()
+        {
+            this.tables = new Dictionary<Type, List<dynamic>>();
+        }
+
+        /// <inheritdoc/>
         public List<T> GetTable<T>()
         {
             Type type = typeof(T);
-            return tables[type] as List<T>;
+            if (!this.tables.ContainsKey(type))
+            {
+                this.tables[type] = new List<dynamic>();
+            }
+            return this.tables[type] as List<T>;
         }
     }    
 }
