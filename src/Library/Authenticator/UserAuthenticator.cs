@@ -22,7 +22,7 @@ namespace ClassLibrary
             else
             {
                 message.UserId = user.Id;
-                if (user.Suspended)
+                if (user.Deleted)
                 {
                     message.UserStatus = UserStatus.Suspended;
                 }
