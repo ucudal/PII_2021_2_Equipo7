@@ -10,6 +10,13 @@ namespace ClassLibrary
     {
         private static UserAdmin userAdmin = Singleton<UserAdmin>.Instance;
 
+        /// <summary>
+        /// Añade informacion del usuario y su estado de registro
+        /// al contenedor de mensaje recibido.
+        /// </summary>
+        /// <param name="message">
+        /// Contenedor del mensaje enviado por el usuario.
+        /// </param>
         public static void Authenticate(MessageWrapper message)
         {
             List<User> users = userAdmin.Items;
@@ -22,7 +29,7 @@ namespace ClassLibrary
             else
             {
                 message.UserId = user.Id;
-                if (user.Suspended)
+                if (user.Deleted)
                 {
                     message.UserStatus = UserStatus.Suspended;
                 }
@@ -31,7 +38,6 @@ namespace ClassLibrary
                     message.UserStatus = UserStatus.Registered;
                 }
             }
-            //return message;
         }
     }
 }
