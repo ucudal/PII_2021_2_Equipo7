@@ -11,7 +11,7 @@ ChatBot diseñado para actuar de intermediario entre empresas en posesion de mat
 ## Diagramas
 
 <img src="./docs/Diagramas/DiagramaUML.svg">
-
+<img src="./docs/Diagramas/DiagramaFlujoEmpresa.svg">
 ## Notas del Proceso
 
 TODO: Agregar notas.
