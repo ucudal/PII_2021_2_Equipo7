@@ -9,8 +9,7 @@ namespace ClassLibrary
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_BadCommand"/>.
         /// </summary>
-        /// <param name="next">Siguiente handler.</param>
-        public CDH_BadCommand(ChatDialogHandlerBase next) : base(next, "bad_command")
+        public CDH_BadCommand() : base(null, "bad_command")
         {
             this.route = null;
         }

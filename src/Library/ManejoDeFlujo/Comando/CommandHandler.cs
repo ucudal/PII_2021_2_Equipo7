@@ -7,7 +7,7 @@ namespace ClassLibrary
     public class CommandHandler
     {
         private SessionsContainer sessions = Singleton<SessionsContainer>.Instance;
-        private DiscussionEntry discussionEntry = Singleton<DiscussionEntry>.Instance;
+        private ChatDialogEntry chatEntry = Singleton<ChatDialogEntry>.Instance;
         
         /// <summary>
         /// Procesa el comando enviado por el usuario
@@ -64,9 +64,9 @@ namespace ClassLibrary
                     }
                 }
             }
-            DiscussionSelector selector = new DiscussionSelector(message, context, null);
+            ChatDialogSelector selector = new ChatDialogSelector(message, context, null);
 
-            return this.discussionEntry.Start(selector);
+            return this.chatEntry.Start(selector);
         }
     }
 }
