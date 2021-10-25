@@ -1,28 +1,22 @@
-﻿//--------------------------------------------------------------------------------
-// <copyright file="Program.cs" company="Universidad Católica del Uruguay">
-//     Copyright (c) Programación II. Derechos reservados.
-// </copyright>
-//--------------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using ClassLibrary;
 
-namespace ConsoleApplication
+namespace Program
 {
-    /// <summary>
-    /// Programa de consola de demostración.
-    /// </summary>
-    public static class Program
+    class Program
     {
-        /// <summary>
-        /// Punto de entrada al programa principal.
-        /// </summary>
-        public static void Main()
+        static void Main(string[] args)
         {
-            var train = new Train();
-            train.StartEngines();
-            Console.WriteLine("Hello World!");
-            CompanyMaterial x=new CompanyMaterial();
+            string userInput;
+            MessageHandler msgHandler = new MessageHandler();
+            MessageWrapper msg;
+            while (true)
+            {
+                Console.Write("\nIngrese un commando: ");
+                userInput = Console.ReadLine();
+                msg = new MessageWrapper(userInput, MessagingService.Console, "1597534826");
+                msgHandler.HandleMessage(msg);
+            }
         }
     }
 }
