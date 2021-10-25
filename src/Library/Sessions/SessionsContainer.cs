@@ -30,7 +30,7 @@ namespace ClassLibrary
             if (session is null)
             {
                 session = new Session(service, account, null);
-                item.LastActivity = DateTime.Now;
+                session.LastActivity = DateTime.Now;
                 sessions.Add(session);
             }
             return session;
