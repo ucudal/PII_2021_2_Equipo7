@@ -7,18 +7,18 @@ namespace ClassLibrary
     /// <summary>
     /// Esta es una clase abstacta de la cual van a heredar todas las clases admin. Su funcion es almacenar y manipular los elementos de tipo T
     /// </summary>
-    public abstract class DataAdmin <T>
+    public abstract class DataAdmin <T> where T : IManagableData
     {
         /// <summary>
         /// Conexion con la base de datos
         /// </summary>
-        private StorageProvider storage=Singleton<StorageProvider>.Instance;
+        private IStorageProvider storage=Singleton<StorageProviderInProcess>.Instance;
 
         /// <summary>
         /// Lista de objetos de tipo T 
         /// </summary>
         /// <value>Almacenamos en la lista Item objetos de tipo T.</value>
-        protected static List<T> Items;
+        protected List<T> Items;
         
         /// <summary>
         /// Agregar a la lista 
