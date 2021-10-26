@@ -6,7 +6,7 @@ namespace ClassLibrary
     /// <summary>
     /// Esta clase representa las categorias de los materialesEmpresa.
     /// </summary>
-    public class MaterialCategory
+    public class MaterialCategory:IManagableData
     {
         
         /// <summary>
