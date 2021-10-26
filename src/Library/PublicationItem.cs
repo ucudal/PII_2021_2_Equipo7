@@ -4,11 +4,14 @@ using System.Collections.Generic;
 namespace ClassLibrary
 {
     /// <summary>
-    /// Clase creada para saber la cantidad de publicaciones creadas?
+    /// Clase creada para saber que material se va a publicar y su cantidad
     /// </summary>
     public class PublicationItem
     {
-        // Atributo para saber la cantidad de material agregado.
+        /// <summary>
+        /// Atributo para saber la cantidad de material agregado.
+        /// </summary>
+        /// <value></value>
         int Quantity{get; set;}
 
 
