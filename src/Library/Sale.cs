@@ -37,7 +37,7 @@ namespace ClassLibrary
         /// Property de Publication.
         /// </summary>
         /// <value></value>
-        public Publication Publication{get;     set;}
+        public Publication Publication{get; set;}
 
         /// <summary>
         /// Id privado de cada Sale.

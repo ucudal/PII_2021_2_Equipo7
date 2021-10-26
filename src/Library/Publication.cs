@@ -10,7 +10,7 @@ namespace ClassLibrary
     {
 
         /// <summary>
-        /// Lista de materiales de la compania.
+        /// Lista de materiales de la compañia.
         /// </summary>
         List<CompanyMaterial> ListCompanyMaterial = new List<CompanyMaterial>();
 
@@ -80,7 +80,6 @@ namespace ClassLibrary
         }
 
 
-
         /// <summary>
         /// Metodo para añadir materiales a una compania.
         /// </summary>
@@ -92,7 +91,6 @@ namespace ClassLibrary
                 ListCompanyMaterial.Add(CompanyMaterial);
             }
         }
-
 
         /// <summary>
         /// Metodo para borrar los materiales de una compania.
@@ -106,7 +104,6 @@ namespace ClassLibrary
             }
         }
 
-
         /// <summary>
         /// Metodo para añadir una palabra clave del tipo string a la lista de palabras claves.
         /// </summary>
@@ -119,7 +116,6 @@ namespace ClassLibrary
             }
 
         }
-
 
         /// <summary>
         /// Metodo para remover palabra clave de la lista de palabras claves del tipo string.
