@@ -9,7 +9,7 @@ namespace ClassLibrary
     /// <summary>
     /// clase que representa los emprendedores
     /// </summary>
-    public class Entrepreneur
+    public class Entrepreneur: IManagableData
     {
         /// <summary>
         /// constructor de emprendedor
