@@ -6,7 +6,7 @@ namespace ClassLibrary
     /// <summary>
     /// Clase creada para crear una publicación y publicar los materiales para vender.
     /// </summary>
-    public class Publication
+    public class Publication : IManagableData
     {
 
         /// <summary>
@@ -35,22 +35,22 @@ namespace ClassLibrary
         /// <summary>
         /// Id que se la da a cada publicación.
         /// </summary>
-        public  int Id{get; private set;}
+        public  int Id{get; set;}
 
         /// <summary>
         /// DateTime con la fecha de activación.
         /// </summary>
-        DateTime ActiveFrom{get; set;}
+        public DateTime ActiveFrom{get; set;}
 
         /// <summary>
         /// Datetime con la fecha de desactivación de la publicación.
         /// </summary>
-        DateTime ActiveUntill{get; set;}
+        public DateTime ActiveUntill{get; set;}
 
         /// <summary>
         /// Precio de lo que se vende en la publicación, ya sea un material o varios.
         /// </summary>
-        int Price{get; set;}
+        public int Price{get; set;}
 
         /// <summary>
         /// Divisa del precio del material o materiales.
@@ -60,7 +60,7 @@ namespace ClassLibrary
         /// <summary>
         ///  Deleted sirve para saber si la publicación se borra o no.
         /// </summary>
-        bool Deleted{get; set;}
+        public bool Deleted{get; set;}
 
         /// <summary>
         /// Constructor de la publicación para definir los atributos.
@@ -77,6 +77,14 @@ namespace ClassLibrary
             this.Price = Price;
             this.Currency = Currency;
             this.Deleted = false;
+        }
+
+        /// <summary>
+        /// Constructor vacio para PublicationAdmin.
+        /// </summary>
+        public Publication()
+        {
+
         }
 
 
