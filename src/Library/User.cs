@@ -18,13 +18,13 @@ namespace ClassLibrary
         /// Nombre del Usuario
         /// </summary>
         /// <value>Almacenamos el nombre del Usuario en un string</value>
-        public string Name{get;set;}
+        public string FirstName{get;set;}
 
         /// <summary>
         /// Apellido del Usuario
         /// </summary>
         /// <value>Almacenamos el apellido del Usuario en un string</value>
-        public  string Apellido{get;set;}
+        public  string LastName{get;set;}
     
         /// <summary>
         /// Obtiene un valor que indica si el usuario fue eliminado
@@ -36,7 +36,7 @@ namespace ClassLibrary
         /// Rol del Usuario
         /// </summary>
         /// <value>Almacenamos el rol del Usuario en un objeto de tipo Role</value>
-        public Role Role{get;set;}
+        public UserRole Role{get;set;}
 
         /// <summary>
         /// Lista de cuentas
@@ -47,11 +47,11 @@ namespace ClassLibrary
         /// <summary>
         /// Constructor de la clase.
         /// </summary>
-        public User(int id, string name,string apellido, Role role)
+        public User(int id, string firstName,string lastName, UserRole role)
         {
             this.Id=id;
-            this.Name=name;
-            this.Apellido=apellido;
+            this.FirstName=firstName;
+            this.LastName=lastName;
             this.Deleted=false;
             this.Role=role;
             this.Accounts=new List<Account>();
