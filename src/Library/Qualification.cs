@@ -6,26 +6,26 @@ namespace ClassLibrary
     /// <summary>
     /// Clase para definir habilitaciones.
     /// </summary>
-    public class Qualification
+    public class Qualification : IManagableData
     {
         /// <summary>
         /// Id de habilitaciones.
         /// </summary>
         /// <value></value>
-        public int Id{get; private set;}
+        public int Id{get; set;}
 
         /// <summary>
         /// Nombre de la habilitacion.
         /// </summary>
         /// <value></value>
-        string Name{get; set;}
+        public string Name{get; set;}
 
 
         /// <summary>
         /// Habilita la habilitación.
         /// </summary>
         /// <value></value>
-        bool Deleted{get; set;}
+        public bool Deleted{get; set;}
 
         /// <summary>
         /// Constructor de Qualification.
@@ -35,6 +35,14 @@ namespace ClassLibrary
         {
             this.Name = Name;
             this.Deleted = false;
+        }
+
+        /// <summary>
+        /// Constructor vacio para la utilización de Qualification Admin
+        /// </summary>
+        public Qualification()
+        {
+
         }
     }
 }
