@@ -21,6 +21,12 @@ namespace ClassLibrary
         public string Name{get;set;}
 
         /// <summary>
+        /// Apellido del Usuario
+        /// </summary>
+        /// <value>Almacenamos el apellido del Usuario en un string</value>
+        public  string Apellido{get;set;}
+    
+        /// <summary>
         /// Obtiene un valor que indica si el usuario fue eliminado
         /// </summary>
         /// <value><c>true</c> si el usuario fue eliminado, <c>false</c> en caso contrario.</value>
@@ -41,10 +47,11 @@ namespace ClassLibrary
         /// <summary>
         /// Constructor de la clase.
         /// </summary>
-        public User(int id, string name, Role role)
+        public User(int id, string name,string apellido, Role role)
         {
             this.Id=id;
             this.Name=name;
+            this.Apellido=apellido;
             this.Deleted=false;
             this.Role=role;
             this.Accounts=new List<Account>();

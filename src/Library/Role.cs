@@ -16,11 +16,13 @@ namespace ClassLibrary
         /// </summary>
         /// <value>guardo el nombre en un string</value>
         public string Name {get;set;}
+
         /// <summary>
         /// guardo el id en un int
         /// </summary>
         /// <value>guardo el id en un int</value>
         public string Id {get;set;}
+        
         /// <summary>
         /// constructor de role
         /// </summary>
