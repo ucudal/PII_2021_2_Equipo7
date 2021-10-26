@@ -6,13 +6,12 @@ namespace ClassLibrary
     /// <summary>
     /// Esta clase representa Usuarios.
     /// </summary>
-    public class User
+    public class User:IManagableData
     {
 
         /// <summary>
         /// Identificador de cada Usuario
         /// </summary>
-        /// <value>Almacenamos un numero el cual va a identificar cada materialEmpresa. Este numero se saca de la lista de materialesEmpresa</value>
         public int Id{get;set;}
 
         /// <summary>
