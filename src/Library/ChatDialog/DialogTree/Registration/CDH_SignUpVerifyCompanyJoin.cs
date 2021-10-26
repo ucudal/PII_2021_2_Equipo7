@@ -44,7 +44,7 @@ namespace ClassLibrary
             {
                  if (!selector.Code.StartsWith('\\'))
                 {
-                    Invitation invite = this.invitationAdmin.GetById(selector.Code);
+                    Invitation invite = this.invitationAdmin.GetByCode(selector.Code);
                     if (invite is not null)
                     {
                         if (invite.Type == RegistrationType.CompanyJoin)

@@ -28,9 +28,7 @@ namespace ClassLibrary
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             SignUpData data = session.Process.GetData<SignUpData>();
-            Account account = new Account();
-            account.Service = selector.Service;
-            account.Identifier = selector.Account;
+            Account account = new Account(selector.Service, selector.Account);
             User user = data.User;
             user.Id = 1;
             user.Role = UserRole.CompanyAdministrator;
@@ -39,8 +37,8 @@ namespace ClassLibrary
             company.Id = 1;
             company.AddAdminUser(user);
 
-            bool isOk = userAdmin.Insert(user);
-            isOk = companyAdmin.Insert(company);
+            userAdmin.Insert(user);
+            companyAdmin.Insert(company);
             session.MenuLocation = null;
             session.Process = null;
 

@@ -45,7 +45,7 @@ namespace ClassLibrary
             {
                 if (!selector.Code.StartsWith('\\'))
                 {
-                    Invitation invite = invitationAdmin.Load(selector.Code);
+                    Invitation invite = invitationAdmin.GetByCode(selector.Code);
                     if (invite is null)
                     {
                         return true;
