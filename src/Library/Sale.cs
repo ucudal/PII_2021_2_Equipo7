@@ -6,7 +6,7 @@ namespace ClassLibrary
     /// <summary>
     /// Clase Sale.
     /// </summary>
-    public class Sale
+    public class Sale : IManagableData
     {
         /// <summary>
         /// Lista de materiales de la compania.
@@ -42,27 +42,27 @@ namespace ClassLibrary
         /// <summary>
         /// Id privado de cada Sale.
         /// </summary>
-        public int Id{get; private set;}
+        public int Id{get; set;}
 
         /// <summary>
         /// Fecha de la venta.
         /// </summary>
-        DateTime DateTime{get; set;}
+        public DateTime DateTime{get; set;}
 
         /// <summary>
         /// Precio de la venta.
         /// </summary>
-        int Price{get; set;}
+        public int Price{get; set;}
 
         /// <summary>
         /// Divisa en la que se realiza cada venta.
         /// </summary>
-        Currency Currency{get; set;}
+        public Currency Currency{get; set;}
 
         /// <summary>
         /// Atributo para saber si la venta esta suspendida o no.
         /// </summary>
-        bool Suspended{get; set;}
+        public bool Deleted{get; set;}
 
         /// <summary>
         /// Constructor de la clase Sale para definir los atributos.
@@ -75,7 +75,15 @@ namespace ClassLibrary
             this.DateTime = DateTime;
             this.Price = Price;
             this.Currency = Currency;
-            this.Suspended = false;
+            this.Deleted = false;
+        }
+
+        /// <summary>
+        /// Constructor vacio para la clase SaleAdmin.
+        /// </summary>
+        public Sale()
+        {
+
         }
 
         /// <summary>
