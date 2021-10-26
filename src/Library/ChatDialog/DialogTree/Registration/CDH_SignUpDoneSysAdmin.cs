@@ -28,15 +28,13 @@ namespace ClassLibrary
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             SignUpData data = session.Process.GetData<SignUpData>();
-            Account account = new Account();
-            account.Service = selector.Service;
-            account.Identifier = selector.Account;
+            Account account = new Account(selector.Service, selector.Account);
             User user = data.User;
             user.Id = 1;
             user.Role = UserRole.SystemAdministrator;
             user.Accounts.Add(account);
 
-            bool isOk = userAdmin.Insert(user);
+            userAdmin.Insert(user);
             session.MenuLocation = null;
             session.Process = null;
 
