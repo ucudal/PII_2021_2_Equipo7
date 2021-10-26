@@ -100,7 +100,6 @@ namespace ClassLibrary
             }
         }
         
-
         /// <summary>
         /// Metodo para añadir una publicación en una lista.
         /// </summary>
@@ -112,7 +111,6 @@ namespace ClassLibrary
             }
 
         }
-
 
         /// <summary>
         /// Metodo para remover una publicación de una lista.
