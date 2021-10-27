@@ -19,6 +19,20 @@ namespace ClassLibrary
             this.parents.Add("welcome_company");
             this.route = "\\listar";
         }
+        /// <inheritdoc/>
+        public override string Execute(ChatDialogSelector selector)
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append("Listado de materiales existentes: \n");
+            builder.Append("En caso de querer hacer una accion sobre algun material ingrese su numero.\n");
+            builder.Append("Ademas puede realizar las\n");
+            builder.Append("siguientes operaciones:\n\n");
+            //builder.Append("\\siguiente : Siguiente pagina de materiales.\n");
+            //builder.Append("\\anterior: Pagina anterior de materiales.\n");
+            builder.Append("\\cancelar : Volver a menu de materiales .\n");
+            builder.Append(TextToPrintCompanyMaterial(selector));
+            return builder.ToString();
+        }
 
     }
 
