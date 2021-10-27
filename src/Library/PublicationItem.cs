@@ -12,7 +12,7 @@ namespace ClassLibrary
         /// Atributo para saber la cantidad de material agregado.
         /// </summary>
         /// <value></value>
-        int Quantity{get; set;}
+        public int Quantity{get; set;}
 
 
         /// <summary>
