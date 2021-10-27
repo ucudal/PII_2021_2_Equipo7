@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace ClassLibrary
 {
@@ -71,7 +73,17 @@ namespace ClassLibrary
             }
             else
             {
-                return this.next.Next(selector);
+                try
+                {
+                    return this.next.Next(selector);
+                }
+                catch (NullReferenceException)
+                {
+                    string msg = "Se intento pasar al proximo paso, pero el objeto relevante 'next' esta vacio.";
+                    Debug.WriteLine($"Excepcion: {msg}");
+                    throw new NullReferenceException(msg);
+                    throw;
+                }
             }
         }
 

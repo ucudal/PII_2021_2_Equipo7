@@ -1,3 +1,5 @@
+using System;
+using System.Diagnostics;
 using System.Text;
 
 namespace ClassLibrary
@@ -24,14 +26,31 @@ namespace ClassLibrary
         /// <param name="message"></param>
         public void HandleMessage(MessageWrapper message)
         {
-            UserAuthenticator.Authenticate(message);
+            try
+            {
+                StringBuilder stringBuilder = new StringBuilder();
+                this.MessageIsValid(message);
+                UserAuthenticator.Authenticate(message);
 
-            StringBuilder stringBuilder = new StringBuilder();
-            string commandResponse = commandHandler.HandleMessage(message);
-            stringBuilder.Append(commandResponse);
+                string commandResponse = commandHandler.HandleMessage(message);
+                stringBuilder.Append(commandResponse);
 
-            ResponseWrapper response = new ResponseWrapper(stringBuilder.ToString(), message.Service, message.Account);
-            responseHandler.SendResponse(response);
+                ResponseWrapper response = new ResponseWrapper(stringBuilder.ToString(), message.Service, message.Account);
+                responseHandler.SendResponse(response);
+            }
+            catch(ArgumentNullException e)
+            {
+                Debug.WriteLine($"Excepcion al recibir un mensaje: {e.Message}");
+            }
+            catch(NotSupportedMessagingPlataformException e)
+            {
+                Debug.WriteLine($"Excepcion al enviar un mensaje: {e.Message}");
+            }
+        }
+
+        private void MessageIsValid(MessageWrapper message)
+        {
+            if (message is null) throw new ArgumentNullException("Se intento recibir un mensaje sin ningun dato.");
         }
     }
 }

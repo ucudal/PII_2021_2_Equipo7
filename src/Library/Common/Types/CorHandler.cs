@@ -1,3 +1,5 @@
+using System;
+
 namespace ClassLibrary
 {
     /// <summary>
@@ -38,6 +40,7 @@ namespace ClassLibrary
         /// <param name="code"></param>
         public CorHandler(T next, string code)
         {
+            if (code is null) throw new ArgumentNullException("Se intento crear un handler sin codigo.");
             this.next = next;
             this.code = code;
         }
