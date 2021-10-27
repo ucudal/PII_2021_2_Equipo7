@@ -10,12 +10,16 @@ namespace Tests
     [TestFixture]
     public class PublicationTest
     {
+
+        
         /// <summary>
         /// 
         /// </summary>
         [SetUp]
         public void Setup()
         {
+            
+
         }
         /// <summary>
         /// 
@@ -37,8 +41,22 @@ namespace Tests
             Assert.AreEqual(Deleted,publication.Deleted);
 
         }
-    
 
+        /// <summary>
+        /// Test para añadir elementos a la lista CompanyMaterial
+        /// </summary>
+        [Test]
+        public void AddItemTest()
+        {
+
+
+            Publication publication = new Publication();
+            CompanyMaterial companyMaterial = new CompanyMaterial();
+            var x = publication.ListCompanyMaterial;
+            publication.ListCompanyMaterial.Add(companyMaterial);
+            Assert.AreEqual(x,publication.ListCompanyMaterial);
+
+        }
 
     }
 }
