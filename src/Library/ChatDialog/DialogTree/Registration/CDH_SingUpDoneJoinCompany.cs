@@ -5,7 +5,7 @@ namespace ClassLibrary
     /// <summary>
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Responde a la confirmacion de los datos
-    /// ingresados en el registro de un nuevo 
+    /// ingresados en el registro de un usiario  
     /// a una compañía ya existente. Ingresa los
     /// datos al sistema.
     /// </summary>
