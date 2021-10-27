@@ -1,3 +1,6 @@
+using System;
+using System.Diagnostics;
+
 namespace ClassLibrary
 {
     /// <summary>
@@ -53,7 +56,16 @@ namespace ClassLibrary
         /// </returns>
         public string Start(ChatDialogSelector selector)
         { 
-            return this.firstHandler.Next(selector);
+            try
+            {
+                return this.firstHandler.Next(selector);
+            }
+            catch (NullReferenceException)
+            {
+                string msg = "No hay configurado un ChatDialogHandler inicial en el objeto de entrada.";
+                Debug.WriteLine($"Excepcion: {msg}");
+                throw new NullReferenceException(msg);
+            }
         }
     }
 }
