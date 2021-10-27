@@ -6,7 +6,7 @@ namespace ClassLibrary
     /// <summary>
     /// Esta clase representa material empresa.
     /// </summary>
-    public class CompanyMaterial
+    public class CompanyMaterial : IManagableData
     {
         //private static List<CompanyMaterial> companyMaterials = new List<CompanyMaterial>(); 
 
@@ -14,7 +14,7 @@ namespace ClassLibrary
         /// Identificador de cada materialEmpresa
         /// </summary>
         /// <value>Almacenamos un numero el cual va a identificar cada materialEmpresa. Este numero se saca de la lista de materialesEmpresa</value>
-        public int Id{get; private set;}
+        public int Id{get; set;}
         
         /// <summary>
         /// Nombre del materialEmpresa

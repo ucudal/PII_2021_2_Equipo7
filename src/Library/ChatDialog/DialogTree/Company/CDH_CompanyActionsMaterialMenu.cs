@@ -9,6 +9,7 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_CompanyActionsMaterialMenu : ChatDialogHandlerBase
     {
+        private CompanyMaterialAdmin companyMaterialAdmin = Singleton<CompanyMaterialAdmin>.Instance;
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
@@ -23,6 +24,14 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
+            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            DProcessData process = session.Process;
+            InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
+
+            ARREGLAR
+            CompanyMaterial mat=this.companyMaterialAdmin.GetById(int.Parse(selector.Code));
+            data.CompanyMaterial=mat;
+
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu acciones sobre el material elegido.\n");
             builder.Append("Desde este menu puede realizar las\n");

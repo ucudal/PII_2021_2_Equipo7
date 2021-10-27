@@ -85,7 +85,18 @@ namespace ClassLibrary
             T xretorno=new T();
             return xretorno;
         }
+        public virtual List<T> GetItemPage(int page,int itemCount)
+        {
+            List<T> xlista= new List<T>();
+            int indice=page*itemCount;
+            this.Items.GetRange(indice,itemCount);
+            if(!(indice>=this.Items.Count))
+            {
+                xlista=this.Items.GetRange(indice,itemCount);
+            }
+            return xlista;
+        }        
 
     }
-
+    
 }
