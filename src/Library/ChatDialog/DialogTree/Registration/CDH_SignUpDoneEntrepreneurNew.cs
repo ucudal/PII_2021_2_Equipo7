@@ -35,7 +35,7 @@ namespace ClassLibrary
             user.Accounts.Add(account);
             Entrepreneur entrepreneur = data.Entrepreneur;
             entrepreneur.Id = 1;
-            //entrepreneur.AddUser(user);
+            entrepreneur.User= user;
 
             userAdmin.Insert(user);
             entrepreneurAdmin.Insert(entrepreneur);
