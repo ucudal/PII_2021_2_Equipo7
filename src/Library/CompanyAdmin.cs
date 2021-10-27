@@ -9,8 +9,17 @@ namespace ClassLibrary
     /// </summary>
     public class CompanyAdmin: DataAdmin<Company>
     {
-        
-    }
 
+        /// <summary>
+        /// encuentra el USUARIO
+        /// </summary>
+        /// <param name="id">id del usuario</param>
+        /// <returns></returns>
+        public Company FindAdminUser(int id)
+        {
+
+        return this.Items.Find(obj => obj.ListAdminUsers.Exists(admin => admin.Id==id));
+        }
+    }
 }
 
