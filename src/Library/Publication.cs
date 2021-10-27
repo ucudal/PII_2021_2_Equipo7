@@ -12,7 +12,7 @@ namespace ClassLibrary
         /// <summary>
         /// Lista de materiales de la compañia.
         /// </summary>
-        List<CompanyMaterial> ListCompanyMaterial = new List<CompanyMaterial>();
+        public List<CompanyMaterial> ListCompanyMaterial = new List<CompanyMaterial>();
 
 
         /// <summary>
