@@ -40,8 +40,8 @@ namespace ClassLibrary
         {
             StringBuilder xListMats=new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            NECESITO LA COMPANIA QUE ESTA LOGUEADA
-            Company company = this.companyAdmin.GetById(session.UserId);
+            
+            Company company = this.companyAdmin.Items.Find(obj => obj.ListAdminUsers.Exists(admin => admin.Id==session.UserId));
             foreach(CompanyMaterial xMat in company.CompanyMaterials)
             {
                 xListMats.Append("" + xMat.Name +" " +xMat.Id + "\n");
