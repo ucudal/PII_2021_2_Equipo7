@@ -20,7 +20,7 @@ namespace ClassLibrary
         public static void Authenticate(MessageWrapper message)
         {
             List<User> users = userAdmin.Items;
-            User user = users.Find(userObj => userObj.Accounts.Exists(accountObj => accountObj.Service == message.Service && accountObj.Id == message.Account));
+            User user = userAdmin.GetByAccount(message.Service, message.Account);
             if (user is null)
             {
                 message.UserId = 0;
