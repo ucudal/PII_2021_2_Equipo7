@@ -10,19 +10,17 @@ namespace Tests
     [TestFixture]
     public class PublicationTest
     {
-
         
         /// <summary>
         /// 
         /// </summary>
         [SetUp]
         public void Setup()
-        {
-            
+        { 
 
         }
         /// <summary>
-        /// 
+        /// Constructor de la clase.
         /// </summary>
         public void Constructor_Test()
         {
@@ -49,14 +47,45 @@ namespace Tests
         public void AddItemTest()
         {
 
-
             Publication publication = new Publication();
             CompanyMaterial companyMaterial = new CompanyMaterial();
             var x = publication.ListCompanyMaterial;
             publication.ListCompanyMaterial.Add(companyMaterial);
-            Assert.AreEqual(x,publication.ListCompanyMaterial);
+            Assert.AreNotEqual(x,publication.ListCompanyMaterial);
 
         }
+
+
+        /// <summary>
+        /// Test para remover elementos de una lista del tipo CompanyMaterial.
+        /// </summary>
+        [Test]
+        public void removeItem()
+        {
+
+        }
+
+
+        /// <summary>
+        /// Test para añadir elementos a una lista del tipo KeyWord.
+        /// </summary>
+        [Test]
+        public void AddKeyWordTest()
+        {
+
+        }
+
+
+        /// <summary>
+        /// Test para remover elementos a una lista del tipo KeyWord.
+        /// </summary>
+        [Test]
+        public void RemoveKeyWordTest()
+        {
+
+        }
+
+
 
     }
 }
