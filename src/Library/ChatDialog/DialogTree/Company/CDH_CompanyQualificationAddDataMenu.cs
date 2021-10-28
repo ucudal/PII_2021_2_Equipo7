@@ -9,6 +9,8 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_CompanyQualificationAddDataMenu : ChatDialogHandlerBase
     {
+        private CompanyAdmin companyAdmin = Singleton<CompanyAdmin>.Instance;
+        private CompanyMaterialAdmin companyMaterialAdmin = Singleton<CompanyMaterialAdmin>.Instance;
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
@@ -24,16 +26,23 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            AddQualificationToMaterial();
+            AddQualificationToMaterial(selector);
             builder.Append("Habilitacion agregada con exito.\n");
             builder.Append("escriba \n");
             builder.Append("\\volver : para retornar al menu de materiales.\n");
             return builder.ToString();
         }
         
-        private void AddQualificationToMaterial()
+        private void AddQualificationToMaterial(ChatDialogSelector selector)
         {
-            TENGO UN PROBLEMA, TENGO EL MATERIAL GUARDADO EN DATA.CompanyMaterial Y LA HABILITACION EN DATA.Qualification
+            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            DProcessData process = new DProcessData("select_companymaterial",this.code,null);
+            SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
+            data.CompanyMaterial.AddQualification(data.Qualification);
+            Company company=this.companyAdmin.Items.Find(obj => obj.ListAdminUsers.Exists(admin => admin.Id==session.UserId));
+            companyAdmin.Update(company);
+            CompanyMaterial companyMaterial=this.companyMaterialAdmin.Items.Find(obj => obj.Id==session.UserId);
+            companyMaterialAdmin.Update(companyMaterial);
         }
     }
 }

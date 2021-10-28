@@ -9,6 +9,8 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_CompanyQualificationEraseDataMenu : ChatDialogHandlerBase
     {
+        private CompanyAdmin companyAdmin = Singleton<CompanyAdmin>.Instance;
+        private CompanyMaterialAdmin companyMaterialAdmin = Singleton<CompanyMaterialAdmin>.Instance;
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
@@ -24,15 +26,22 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            QualificationEraseData();
+            QualificationEraseData(selector);
             builder.Append("La habilitacion se elimino con exito.\n");
             builder.Append("Escriba ");
             builder.Append("\\cancelar : para volver al menu de materiales .\n");
             return builder.ToString();
         }
-        private void QualificationEraseData()
+        private void QualificationEraseData(ChatDialogSelector selector)
         {
-            LISTADEHABILITACIONESDELMATERIALDELACOMPAÑIA.RemoveAll(Hacer GetQuialificationById(IDQUALIFICATION));
+            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            DProcessData process = new DProcessData("select_companymaterial",this.code,null);
+            SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
+            data.CompanyMaterial.Qualifications.Remove(data.Qualification);
+            Company company=this.companyAdmin.Items.Find(obj => obj.ListAdminUsers.Exists(admin => admin.Id==session.UserId));
+            companyAdmin.Update(company);
+            CompanyMaterial companyMaterial=this.companyMaterialAdmin.Items.Find(obj => obj.Id==session.UserId);
+            companyMaterialAdmin.Update(companyMaterial);
         }
     }
 }

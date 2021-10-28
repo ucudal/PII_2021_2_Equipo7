@@ -27,9 +27,6 @@ namespace ClassLibrary
         {
             StringBuilder builder = new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
-            InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
-            data.CompanyMaterial=companyMaterialAdmin.Items.Find(obj => obj.Id==int.Parse(selector.Code));
             
             builder.Append("Listado de materiales existentes: \n");
             builder.Append("En caso de querer hacer una accion sobre algun material ingrese su numero.\n");
@@ -53,19 +50,6 @@ namespace ClassLibrary
                 xListMats.Append("" + xMat.Name +" " +xMat.Id + "\n");
             }
             return xListMats.ToString();
-        }
-
-        /// <inheritdoc/>
-        public override bool ValidateDataEntry(ChatDialogSelector selector)
-        {
-            if (this.parents.Contains(selector.Context))
-            {
-                if (!selector.Code.StartsWith('\\'))
-                {
-                    return true;
-                }
-            }
-            return false;
         }
     }
 }
