@@ -26,7 +26,7 @@ namespace ClassLibrary
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
-            InsertQualificationData data = process.GetData<InsertQualificationData>();
+            SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
 
             Qualification habilitaciones = this.qualificationAdmin.FindQualificationById(int.Parse(selector.Code));
             data.Qualification=habilitaciones;

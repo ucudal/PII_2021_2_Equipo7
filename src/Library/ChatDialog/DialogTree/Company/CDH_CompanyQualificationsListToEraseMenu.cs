@@ -30,13 +30,17 @@ namespace ClassLibrary
             builder.Append("Ingrese el numero de la habilitacion que desea eliminar, \n");
             builder.Append(" en caso contrario escriba \n");
             builder.Append("\\cancelar : Volver al menu de materiales .\n");
-            builder.Append(TextoToPrintQualificationsToErase());
+            builder.Append(TextoToPrintQualificationsToErase(selector));
             return builder.ToString();
         }
-        private string TextoToPrintQualificationsToErase()
+        private string TextoToPrintQualificationsToErase(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            foreach(Qualification xQual in LISTADEHABILITACIONESDELMATERIALDELAEMPRESA)
+            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            DProcessData process = new DProcessData("select_companymaterial",this.code,null);
+            SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
+            
+            foreach(Qualification xQual in data.CompanyMaterial.Qualifications)
             {
                 builder.Append("" + xQual.Name + " "+ xQual.Id + "\n");
             }

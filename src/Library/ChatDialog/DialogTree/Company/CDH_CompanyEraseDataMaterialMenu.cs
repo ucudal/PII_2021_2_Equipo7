@@ -38,7 +38,9 @@ namespace ClassLibrary
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
-            this.companyAdmin.FindAdminUser(session.UserId).RemoveCompanyMaterial(data.CompanyMaterial);
+            Company company=this.companyAdmin.FindAdminUser(session.UserId);
+            company.RemoveCompanyMaterial(data.CompanyMaterial);
+            this.companyAdmin.Update(company);
         }
     }
 }

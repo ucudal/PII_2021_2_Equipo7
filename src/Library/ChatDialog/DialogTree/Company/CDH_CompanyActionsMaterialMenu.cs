@@ -25,12 +25,10 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
-            InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
-
-            CompanyMaterial mat=this.companyMaterialAdmin.GetById(int.Parse(selector.Code));
-            data.CompanyMaterial=mat;
-
+            DProcessData process = new DProcessData("select_companymaterial",this.code,null);
+            SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
+            data.CompanyMaterial=companyMaterialAdmin.Items.Find(obj => obj.Id==int.Parse(selector.Code));
+            
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu acciones sobre el material elegido.\n");
             builder.Append("Desde este menu puede realizar las\n");

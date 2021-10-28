@@ -40,7 +40,7 @@ namespace ClassLibrary
             StringBuilder builder=new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
-            InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
+            SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
             List<Qualification> xhabilitacionesNoAgegadas=new List<Qualification>();
             int i=0;
             bool xSigo=true;

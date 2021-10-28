@@ -9,7 +9,8 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_CompanyMaterialModifiDataMenu : ChatDialogHandlerBase
     {
-
+        private CompanyMaterialAdmin companyMaterialAdmin = Singleton<CompanyMaterialAdmin>.Instance;
+        private CompanyAdmin companyAdmin = Singleton<CompanyAdmin>.Instance;
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
         /// </summary>
@@ -24,15 +25,28 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            MaterialModifi();
+            MaterialModifi(selector);
             builder.Append("El material se modifico satisfactoriamente.\n");
             builder.Append("Escriba ");
             builder.Append("\\volver : para volver al menu de materiales.\n");
             return builder.ToString();
         }
-        private void MaterialModifi()
+        private void MaterialModifi(ChatDialogSelector selector)
         {
-            Modificar el material
+            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            DProcessData process = session.Process;
+            InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
+
+            CompanyMaterial companyMaterial=data.CompanyMaterial;
+            companyMaterialAdmin.Update(companyMaterial);
+
+
+            Company company=this.companyAdmin.Items.Find(obj => obj.ListAdminUsers.Exists(admin => admin.Id==session.UserId));
+            if(company!=null)
+            {
+                company.AddCompanyMaterial(companyMaterial);
+            }
+            companyAdmin.Update(company);
         }
     }
 }
