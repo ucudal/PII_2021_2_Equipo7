@@ -16,7 +16,7 @@ namespace Tests
         /// </summary>
         [SetUp]
         public void Setup()
-        { 
+        {
 
         }
         /// <summary>
@@ -62,6 +62,12 @@ namespace Tests
         [Test]
         public void removeItem()
         {
+            Publication publication = new Publication();
+            CompanyMaterial companyMaterial = new CompanyMaterial();
+            var x = publication.ListCompanyMaterial;
+            publication.ListCompanyMaterial.Add(companyMaterial);
+            publication.ListCompanyMaterial.Remove(companyMaterial);
+            Assert.AreEqual(x,publication.ListCompanyMaterial);
 
         }
 
@@ -72,6 +78,11 @@ namespace Tests
         [Test]
         public void AddKeyWordTest()
         {
+            Publication publication = new Publication();
+            string KeyWord = "Madera";
+            var z = publication.KeyWords;
+            publication.AddKeyWord(KeyWord);
+            Assert.AreNotEqual(z,publication.KeyWords);
 
         }
 
@@ -82,10 +93,11 @@ namespace Tests
         [Test]
         public void RemoveKeyWordTest()
         {
-
+            Publication publication = new Publication();
+            string KeyWord = "Piedra";
+            var Y = publication.KeyWords;
+            publication.RemoveKeyWord(KeyWord);
+            Assert.AreNotEqual(Y,publication.KeyWords);
         }
-
-
-
     }
 }
