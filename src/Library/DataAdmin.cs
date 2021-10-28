@@ -7,7 +7,7 @@ namespace ClassLibrary
     /// <summary>
     /// Esta es una clase abstacta de la cual van a heredar todas las clases admin. Su funcion es almacenar y manipular los elementos de tipo T
     /// </summary>
-    public abstract class DataAdmin <T> where T : IManagableData, new()
+    public abstract class DataAdmin <T> where T : IManagableData<T>, new()
     {
         /// <summary>
         /// Conexion con la base de datos

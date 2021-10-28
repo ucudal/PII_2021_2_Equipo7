@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace ClassLibrary
 {
     /// <summary>
     /// Esta clase representa las categorias de los materialesEmpresa.
     /// </summary>
-    public class MaterialCategory:IManagableData
+    public class MaterialCategory:IManagableData<MaterialCategory>
     {
         
         /// <summary>
@@ -30,10 +32,13 @@ namespace ClassLibrary
         /// <summary>
         /// Constructor de la clase
         /// </summary>
+        
+        [JsonConstructor]
         public MaterialCategory(int id,string name)
         {
             this.Id=id;
             this.Name=name;
+            this.Deleted=false;
         }
 
         /// <summary>
@@ -42,6 +47,26 @@ namespace ClassLibrary
         public MaterialCategory()
         {
 
+        }
+
+        public void LoadFromJson(string json)
+        {
+            MaterialCategory category=JsonSerializer.Deserialize<MaterialCategory>(json);
+            this.Id=category.Id;
+            this.Name=category.Name;
+            this.Deleted=category.Deleted;
+        }
+
+        public MaterialCategory Clone()
+        {
+            MaterialCategory category=new MaterialCategory();
+            category.LoadFromJson(this.ConvertToJson());
+            return category;
+        }
+
+        public string ConvertToJson()
+        {
+            return JsonSerializer.Serialize(this);
         }
     }
 }
