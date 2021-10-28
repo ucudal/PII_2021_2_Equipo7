@@ -8,6 +8,9 @@ namespace ClassLibrary
     /// </summary>
     public class UserAdmin : DataAdmin<User>
     {
-        
+        public User GetByAccount(MessagingService service,string account)
+        {
+            return this.Items.Find(userObj => userObj.Accounts.Exists(accountObj => accountObj.Service == service && accountObj.Id == account));
+        }
     }
 }
