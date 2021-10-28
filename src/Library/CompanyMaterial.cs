@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace ClassLibrary
 {
     /// <summary>
     /// Esta clase representa material empresa.
     /// </summary>
-    public class CompanyMaterial : IManagableData
+    public class CompanyMaterial : IManagableData<CompanyMaterial>
     {
         //private static List<CompanyMaterial> companyMaterials = new List<CompanyMaterial>(); 
 
@@ -51,12 +53,14 @@ namespace ClassLibrary
         /// Obtiene una lista de habilitaciones necesarias para cada materialEmpresa.
         /// </summary>
         /// <value>Almacenamos las habilitaciones de cada materialEmpresa. Esto nos sirve para saber que habilitaciones exigirle al emprendedor para el uso/adquisicion del material</value>
+        [JsonInclude]
         public List<Qualification> Qualifications {get;set;}
 
         /// <summary>
         /// Obtiene una lista del stock que hay en cada location
         /// </summary>
         /// <value>Almacenamos el stock que tiene cada empreza de un material empresa en cada locacion</value>
+        [JsonInclude]
         public List<CompanyStock> StockPerLocations {get;set;}
 
 
@@ -183,6 +187,31 @@ namespace ClassLibrary
                 }
             }
             return xretorno;
+        }
+
+        public void LoadFromJson(string json)
+        {
+            CompanyMaterial companyMaterial=JsonSerializer.Deserialize<CompanyMaterial>(json);
+            this.Id=companyMaterial.Id;
+            this.Name=companyMaterial.Name;
+            this.LastRestock=companyMaterial.LastRestock;
+            this.DateBetweenRestocks=companyMaterial.DateBetweenRestocks;
+            this.Deleted=companyMaterial.Deleted;
+            this.MaterialCategory=companyMaterial.MaterialCategory;
+            this.Qualifications=companyMaterial.Qualifications;
+            this.StockPerLocations=companyMaterial.StockPerLocations;
+        }
+            
+        public CompanyMaterial Clone()
+        {
+            CompanyMaterial companyMaterial=new CompanyMaterial();
+            companyMaterial.LoadFromJson(this.ConvertToJson());
+            return companyMaterial;
+        }
+
+        public string ConvertToJson()
+        {
+            return JsonSerializer.Serialize(this);
         }
     }
 }

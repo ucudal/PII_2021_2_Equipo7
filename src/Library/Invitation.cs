@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace ClassLibrary
 {
     /// <summary>
     /// Clase encargada para conocer los datos de la invitacion
     /// </summary>
-    public class Invitation:IManagableData
+    public class Invitation:IManagableData<Invitation>
     {
         /// <summary>
         /// Identificador de cada Invitacion
@@ -52,5 +54,47 @@ namespace ClassLibrary
         /// </summary>
         /// <value>En caso de que la invitacion haya sido eliminada entonces deleted=true. En caso contrario deleted=false</value>
         public bool Deleted{get; set;}
+
+        [JsonConstructor]
+        public Invitation(int id, string code,RegistrationType type,DateTime validAfter,DateTime validBefore,int companyId,bool used,bool deleted)
+        {
+            this.Id=id;
+            this.Code=code;
+            this.Type=type;
+            this.ValidAfter=validAfter;
+            this.ValidBefore=validBefore;
+            this.CompanyId=companyId;
+            this.Used=used;
+            this.Deleted=deleted;
+        }
+        public Invitation()
+        {
+            
+        }
+
+        public void LoadFromJson(string json)
+        {
+            Invitation invitation=JsonSerializer.Deserialize<Invitation>(json);
+            this.Id=invitation.Id;
+            this.Code=invitation.Code;
+            this.Type=invitation.Type;
+            this.ValidAfter=invitation.ValidAfter;
+            this.ValidBefore=invitation.ValidBefore;
+            this.CompanyId=invitation.CompanyId;
+            this.Used=invitation.Used;
+            this.Deleted=invitation.Deleted;
+        }
+            
+        public Invitation Clone()
+        {
+            Invitation invitation=new Invitation();
+            invitation.LoadFromJson(this.ConvertToJson());
+            return invitation;
+        }
+
+        public string ConvertToJson()
+        {
+            return JsonSerializer.Serialize(this);
+        }
     }
 }
