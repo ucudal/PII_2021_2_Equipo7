@@ -28,7 +28,6 @@ namespace ClassLibrary
             DProcessData process = session.Process;
             InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
 
-            ARREGLAR
             CompanyMaterial mat=this.companyMaterialAdmin.GetById(int.Parse(selector.Code));
             data.CompanyMaterial=mat;
 

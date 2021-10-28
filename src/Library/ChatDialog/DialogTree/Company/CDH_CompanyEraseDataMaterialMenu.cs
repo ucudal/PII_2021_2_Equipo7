@@ -10,6 +10,7 @@ namespace ClassLibrary
     public class CDH_CompanyEraseDataMaterialMenu : ChatDialogHandlerBase
     {
         private CompanyAdmin companyAdmin = Singleton<CompanyAdmin>.Instance;
+        private CompanyMaterialAdmin materialAdmin=Singleton<CompanyMaterialAdmin>.Instance;
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
@@ -35,9 +36,9 @@ namespace ClassLibrary
         {
             StringBuilder xListMats=new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            NECESITO LA COMPAÑIA QUE ESTA LOGUEADA
-            Company company = this.companyAdmin.GetById(session.UserId);
-            company.CompanyMaterials.RemoveAll(obj=>obj.Id==IDMATERIAL)
+            DProcessData process = session.Process;
+            InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
+            this.companyAdmin.FindAdminUser(session.UserId).RemoveCompanyMaterial(data.CompanyMaterial);
         }
     }
 }

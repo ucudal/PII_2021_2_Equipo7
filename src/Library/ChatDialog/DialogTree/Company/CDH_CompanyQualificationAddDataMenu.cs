@@ -33,9 +33,7 @@ namespace ClassLibrary
         
         private void AddQualificationToMaterial()
         {
-            Necesito traerme el id del material con el que estoy trabajando y la habilitacion que voy a agregar
-            Necesito un metodo que busque la habilitacion por id
-            Necesito meter la habilitacion en una lista de habilitaciones dentro de CompanyMaterial y para eso necesito saber que company es la que esta trabajando
+            TENGO UN PROBLEMA, TENGO EL MATERIAL GUARDADO EN DATA.CompanyMaterial Y LA HABILITACION EN DATA.Qualification
         }
     }
 }

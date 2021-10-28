@@ -23,10 +23,14 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
+            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            InsertCompanyMaterialData data = session.Process.GetData<InsertCompanyMaterialData>();
+            
+
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu confirmar eliminacion.\n");
-            builder.Append("Desde este menu puede realizar las\n");
-            builder.Append("siguientes operaciones:\n\n");
+            builder.Append($"El nombre del material es {data.CompanyMaterial.Name}");
+            builder.Append("¿Seguro que desea eliminar el material?");
             builder.Append("\\confirmar : Confirmar que quiere eliminar el material.\n");
             builder.Append("\\cancelar : Cancelar operacion.\n");
             return builder.ToString();

@@ -10,9 +10,10 @@ namespace ClassLibrary
     public class CDH_CompanyListMaterialsMenu : ChatDialogHandlerBase
     {
         private CompanyAdmin companyAdmin = Singleton<CompanyAdmin>.Instance;
+        private CompanyMaterialAdmin companyMaterialAdmin=Singleton<CompanyMaterialAdmin>.Instance;
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyListMaterialsMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyListMaterialsMenu(ChatDialogHandlerBase next) : base(next, "company_list_material_menu")
@@ -25,6 +26,11 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
+            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            DProcessData process = session.Process;
+            InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
+            data.CompanyMaterial=companyMaterialAdmin.Items.Find(obj => obj.Id==int.Parse(selector.Code));
+            
             builder.Append("Listado de materiales existentes: \n");
             builder.Append("En caso de querer hacer una accion sobre algun material ingrese su numero.\n");
             builder.Append("Ademas puede realizar las\n");
@@ -47,6 +53,19 @@ namespace ClassLibrary
                 xListMats.Append("" + xMat.Name +" " +xMat.Id + "\n");
             }
             return xListMats.ToString();
+        }
+
+        /// <inheritdoc/>
+        public override bool ValidateDataEntry(ChatDialogSelector selector)
+        {
+            if (this.parents.Contains(selector.Context))
+            {
+                if (!selector.Code.StartsWith('\\'))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

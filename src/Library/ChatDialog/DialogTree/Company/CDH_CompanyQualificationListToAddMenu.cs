@@ -10,7 +10,8 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_CompanyQualificationListToAddMenu : ChatDialogHandlerBase
     {
-         private QualificationAdmin qualificationAdmin = Singleton<QualificationAdmin>.Instance;
+        private QualificationAdmin qualificationAdmin = Singleton<QualificationAdmin>.Instance;
+        private CompanyAdmin companyAdmin=Singleton<CompanyAdmin>.Instance;
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
@@ -31,21 +32,24 @@ namespace ClassLibrary
             builder.Append("Ingrese el numero de la habilitacion que quiere agregar.\n");
             builder.Append("Sino, en caso de querer retornar escriba\n");
             builder.Append("\\volver para volver al menu de materiales.\n");
-            builder.Append(TextoToPrintQualifications());
+            builder.Append(TextoToPrintQualifications(selector));
             return builder.ToString();
         }
-        private string TextoToPrintQualifications()
+        private string TextoToPrintQualifications(ChatDialogSelector selector)
         {
-            StringBuilder builder = new StringBuilder();
+            StringBuilder builder=new StringBuilder();
+            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            DProcessData process = session.Process;
+            InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
             List<Qualification> xhabilitacionesNoAgegadas=new List<Qualification>();
             int i=0;
             bool xSigo=true;
             foreach(Qualification xHabi in qualificationAdmin.Items)
             {
                 xSigo=true;
-                while(i<LISTADEHABILITACIONESDELMATERIALDELACOMPANY && xSigo==true)
+                while(i<data.CompanyMaterial.Qualifications.Count && xSigo==true)
                 {
-                   if(xHabi==LISTADEHABILITACIONESDELMATERIALDELACOMPANY[i])
+                   if(xHabi==data.CompanyMaterial.Qualifications[i])
                    {
                        xSigo=false;
                        xhabilitacionesNoAgegadas.Add(xHabi);
@@ -57,7 +61,6 @@ namespace ClassLibrary
                 builder.Append(""+ x.Name+" "+ x.Id + "\n");
             }
             return builder.ToString();
-
         }
     }
 }
