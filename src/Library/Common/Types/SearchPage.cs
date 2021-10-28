@@ -6,7 +6,7 @@ namespace ClassLibrary
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class SearchPage<T> where T : IManagableData
+    public class SearchPage<T> where T : IManagableData<SearchPage<T>>
     {
         private List<T> searchResults = new List<T>();
         private int currentPage;
