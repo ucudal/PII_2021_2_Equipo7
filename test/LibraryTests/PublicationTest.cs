@@ -20,7 +20,7 @@ namespace Tests
 
         }
         /// <summary>
-        /// 
+        /// Constructor de la clase.
         /// </summary>
         public void Constructor_Test()
         {
@@ -47,12 +47,11 @@ namespace Tests
         public void AddItemTest()
         {
 
-
             Publication publication = new Publication();
             CompanyMaterial companyMaterial = new CompanyMaterial();
             var x = publication.ListCompanyMaterial;
             publication.ListCompanyMaterial.Add(companyMaterial);
-            Assert.AreEqual(x,publication.ListCompanyMaterial);
+            Assert.AreNotEqual(x,publication.ListCompanyMaterial);
 
         }
 
