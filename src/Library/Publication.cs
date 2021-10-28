@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace ClassLibrary
 {
     /// <summary>
     /// Clase creada para crear una publicación y publicar los materiales para vender.
     /// </summary>
-    public class Publication : IManagableData
+    public class Publication : IManagableData<Publication>
     {
 
         /// <summary>
@@ -71,6 +73,7 @@ namespace ClassLibrary
         /// <param name="Price"></param>
         /// <param name="Currency"></param>
         /// <param name="Deleted"></param>
+        [JsonConstructor]
         public Publication(DateTime ActiveFrom, DateTime ActiveUntill, int Price, Currency Currency, bool Deleted)
         {
             this.ActiveFrom = ActiveFrom;
@@ -137,6 +140,39 @@ namespace ClassLibrary
                 KeyWords.Remove(KeyWord);
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="json"></param>
+        public void LoadFromJson(string json)
+        {
+            Publication publication=JsonSerializer.Deserialize<Publication>(json);
+            this.Id=publication.Id;
+            this.ActiveFrom=publication.ActiveFrom;
+            this.ActiveUntill=publication.ActiveUntill;
+            this.Deleted=publication.Deleted;
+            this.Currency=publication.Currency;
+            this.Price=publication.Price;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public Publication Clone()
+        {
+            Publication publication =new Publication();
+            publication.LoadFromJson(this.ConvertToJson());
+            return publication;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string ConvertToJson()
+        {
+            return JsonSerializer.Serialize(this);
+        }
     }
+    
 
 }
