@@ -39,7 +39,6 @@ namespace ClassLibrary
         /// <summary>
         /// Texto del mensaje recibido.
         /// </summary>
-        /// <value><c>string</c></value>
         public string Message
         {
             get => this.message;
@@ -50,7 +49,6 @@ namespace ClassLibrary
         /// Servicio de mensajeria desde el que se
         /// recibe el mensaje.
         /// </summary>
-        /// <value><c>MessagingService</c></value>
         public MessagingService Service 
         {
             get => this.service;
@@ -61,7 +59,6 @@ namespace ClassLibrary
         /// Cuenta remota en el servicio de mensajeria
         /// que envio el mensaje.
         /// </summary>
-        /// <value><c>string</c></value>
         public string Account
         {
             get => this.account;
@@ -72,7 +69,6 @@ namespace ClassLibrary
         /// Identificador del usuario dentro
         /// de la plataforma.
         /// </summary>
-        /// <value><c>int</c></value>
         public int UserId 
         {
             get => this.userId;
@@ -83,7 +79,6 @@ namespace ClassLibrary
         /// Estado del usuario dentro de la
         /// plataforma.
         /// </summary>
-        /// <value><c>UserStatus</c></value>
         public UserStatus UserStatus 
         {
             get => this.userStatus;

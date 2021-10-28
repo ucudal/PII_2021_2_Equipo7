@@ -10,6 +10,8 @@ namespace ClassLibrary
         private MessagingService service;
         private string account;
         private int userId;
+        private int entityId;
+        private UserRole userRole;
         private string menuLocation;
         private DProcessData process;
         private DateTime lastActivity;
@@ -46,13 +48,11 @@ namespace ClassLibrary
         /// <summary>
         /// Identificador en el servicio de mensajeria.
         /// </summary>
-        /// <value><c>string</c></value>
         public string Account { get => this.account; }
 
         /// <summary>
         /// Localizacion del usuario en el arbol de discusiones.
         /// </summary>
-        /// <value><c>string</c></value>
         public string MenuLocation
         {
             get => this.menuLocation;
@@ -66,7 +66,6 @@ namespace ClassLibrary
         /// <summary>
         /// Ultimo momento de actividad del usuario.
         /// </summary>
-        /// <value><c>DateTime</c></value>
         public DateTime LastActivity
         {
             get => this.lastActivity;
@@ -76,7 +75,6 @@ namespace ClassLibrary
         /// <summary>
         /// Datos del proceso actual si hay uno activo.
         /// </summary>
-        /// <value><c>DProcessData</c></value>
         public DProcessData Process
         {
             get => this.process;
@@ -90,11 +88,19 @@ namespace ClassLibrary
         /// <summary>
         /// Id del usuario en la plataforma
         /// </summary>
-        /// <value><c>int</c></value>
         public int UserId 
         { 
             get => this.userId;
             set => this.userId = value; 
+        }
+
+        /// <summary>
+        /// Id de empresa o emprendedor asociado al usuario.
+        /// </summary>
+        public int EntityId 
+        { 
+            get => this.entityId; 
+            set => this.entityId = value; 
         }
     }
 }
