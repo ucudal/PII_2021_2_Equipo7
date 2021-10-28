@@ -24,6 +24,12 @@ namespace ClassLibrary
         void LoadFromJson(string json);
 
         /// <summary>
+        /// Convierte el objeto a json.
+        /// </summary>
+        /// <returns>Cadena Json con los datos del objeto.</returns>
+        string ConvertToJson();
+
+        /// <summary>
         /// Devuelve un nuevo objeto equivalente pero no identico
         /// al cual se le envia el mensaje.
         /// </summary>
