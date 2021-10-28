@@ -8,6 +8,9 @@ namespace ClassLibrary
     {
         private SessionsContainer sessions = Singleton<SessionsContainer>.Instance;
         private ChatDialogEntry chatEntry = Singleton<ChatDialogEntry>.Instance;
+        private UserAdmin userAdmin = Singleton<UserAdmin>.Instance;
+        private CompanyAdmin companyAdmin = Singleton<CompanyAdmin>.Instance;
+        private EntrepreneurAdmin entrepreneurAdmin = Singleton<EntrepreneurAdmin>.Instance;
         
         /// <summary>
         /// Procesa el comando enviado por el usuario
@@ -21,7 +24,24 @@ namespace ClassLibrary
         public string HandleMessage(MessageWrapper message)
         {
             Session session = this.sessions.CreateSession(message.Service, message.Account);
-            session.UserId = message.UserId;
+            User user = this.userAdmin.GetById(message.UserId);
+            
+            session.UserId = user.Id;
+            switch (user.Role)
+            {
+                case UserRole.CompanyAdministrator:
+                    Company company = companyAdmin.FindAdminUser(message.UserId);
+                    session.EntityId = company.Id;
+                    break;
+                case UserRole.Entrepreneur:
+                    Entrepreneur entrepreneur = entrepreneurAdmin.GetByUser(message.UserId);
+                    session.EntityId = entrepreneur.Id;
+                    break;
+                default:
+                    session.EntityId = 0;
+                    break;
+            }
+
             string context;
             if (message.UserStatus == UserStatus.Suspended)
             {

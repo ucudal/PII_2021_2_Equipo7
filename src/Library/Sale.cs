@@ -14,10 +14,9 @@ namespace ClassLibrary
         List<CompanyMaterial> ListCompanyMaterial = new List<CompanyMaterial>();
 
         /// <summary>
-        /// Lista de publicaciones.
+        ///   Property de publication.
         /// </summary>
-        List<Publication> Publications = new List<Publication>();
-
+        public Publication Publication{get; set;}
         /// <summary>
         /// Property a la clase PublicationItem.
         /// </summary>
@@ -32,13 +31,6 @@ namespace ClassLibrary
         /// Property de Entrepreneur.
         /// </summary>
         public Entrepreneur Entrepreneur{get; set;}
-
-        /// <summary>
-        /// Property de Publication.
-        /// </summary>
-        /// <value></value>
-        public Publication Publication{get; set;}
-
         /// <summary>
         /// Id privado de cada Sale.
         /// </summary>
@@ -106,30 +98,6 @@ namespace ClassLibrary
             {
                 ListCompanyMaterial.Remove(CompanyMaterial);
             }
-        }
-        
-        /// <summary>
-        /// Metodo para añadir una publicación en una lista.
-        /// </summary>
-        public void AddPublication(Publication publication)
-        {
-            if (!Publications.Contains(publication))
-            {
-                Publications.Add(publication);
-            }
-
-        }
-
-        /// <summary>
-        /// Metodo para remover una publicación de una lista.
-        /// </summary>
-        public void RemovePublication(Publication publication)
-        {
-            if (Publications.Contains(publication))
-            {
-                Publications.Remove(publication);
-            }
-
         }
 
     }

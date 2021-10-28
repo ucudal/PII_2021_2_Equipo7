@@ -12,13 +12,13 @@ namespace ClassLibrary
         /// <summary>
         /// Lista de materiales de la compañia.
         /// </summary>
-        List<CompanyMaterial> ListCompanyMaterial = new List<CompanyMaterial>();
+        public List<CompanyMaterial> ListCompanyMaterial = new List<CompanyMaterial>();
 
 
         /// <summary>
         /// Lista de palabras clave para encontrar facilmente publicaciones.
         /// </summary>
-        List<string> KeyWords = new List<string>();
+        public List<string> KeyWords = new List<string>();
 
 
         /// <summary>
@@ -56,6 +56,7 @@ namespace ClassLibrary
         /// Divisa del precio del material o materiales.
         /// </summary>
         public Currency Currency{get; set;}
+
 
         /// <summary>
         ///  Deleted sirve para saber si la publicación se borra o no.

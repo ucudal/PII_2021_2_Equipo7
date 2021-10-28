@@ -8,6 +8,11 @@ namespace ClassLibrary
     /// </summary>
     public class SaleAdmin : DataAdmin<Sale>
     {
+        public List<Sale> GetByCompanyId(int id)
+        {
+            return this.Items.FindAll(obj=>obj.Company.Id==id);
+
+        }
         
     }
 }

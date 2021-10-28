@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 
 namespace ClassLibrary
 {
@@ -22,7 +23,7 @@ namespace ClassLibrary
                     Console.WriteLine(response.Message);
                     break;
                 default:
-                    break;
+                    throw new NotSupportedMessagingPlataformException("Servicio de mensajeria no implementado.");
             }
         }
     }
