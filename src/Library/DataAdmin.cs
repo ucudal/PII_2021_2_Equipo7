@@ -62,7 +62,7 @@ namespace ClassLibrary
         /// <param name="pId ">Se pasa el el id del objeto a eliminar</param>
         public virtual void Delete(int pId)
         {
-             this.Items.RemoveAll(obj=>obj.Id==pId);
+            this.Items.RemoveAll(obj=>obj.Id==pId);
         }
         
         /// <summary>

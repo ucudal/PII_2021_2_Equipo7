@@ -25,6 +25,6 @@ namespace ClassLibrary
             builder.Append("Bienvenido! Uso de esta plataforma requiere una invitacion.\n");
             builder.Append("Si usted tiene un codigo de invitacion, por favor ingrese el\ncommando '\\registrar'.");
             return builder.ToString();
-        }
+        } 
     }
 }

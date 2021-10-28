@@ -33,8 +33,9 @@ namespace ClassLibrary
             data.CompanyMaterial = companyMaterial;
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("S.\n");
-            builder.Append("\\confirmar : Listar todos los materiales que ya posee.\n");
+            builder.Append("Seguro que desea crear un material con los siguientes datos.\n");
+            builder.Append("Nombre: " + data.CompanyMaterial.Name);
+            builder.Append("\\confirmar : En caso de querer confirmar la operacion.\n");
             return builder.ToString();
         }
     }

@@ -7,7 +7,7 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_CompanyAddModifiMenu : ChatDialogHandlerBase
+    public class CDH_CompanyModifiMenu : ChatDialogHandlerBase
     {
 
         private MaterialCategoryAdmin categoryAdmin = Singleton<MaterialCategoryAdmin>.Instance;
@@ -16,10 +16,8 @@ namespace ClassLibrary
         /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_CompanyAddModifiMenu(ChatDialogHandlerBase next) : base(next, "company_add_modifi_menu")
+        public CDH_CompanyModifiMenu(ChatDialogHandlerBase next) : base(next, "company_add_menu")
         {
-            this.parents.Add("company_material_menu");
-            this.route = "\\ingresar";
             this.parents.Add("company_actions_material_menu");
             this.route = "\\modificar";
         }
@@ -28,7 +26,7 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("Menu para agregar/modificar un material.\n");
+            builder.Append("Menu para modificar un material.\n");
             builder.Append("Ingrese el numero de la categoria en la cual va el material.\n");
             builder.Append("En caso de querer cancelar la operacion escriba\n\n");
             builder.Append("\\cancelar : Listar todos los materiales que ya posee.\n");

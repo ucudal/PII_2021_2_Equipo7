@@ -7,7 +7,7 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_CompanyMaterialNameMenu : ChatDialogHandlerBase
+    public class CDH_CompanyMaterialModifiNameMenu : ChatDialogHandlerBase
     {
         private MaterialCategoryAdmin matCatAdmin = Singleton<MaterialCategoryAdmin>.Instance;
 
@@ -15,9 +15,9 @@ namespace ClassLibrary
         /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_CompanyMaterialNameMenu(ChatDialogHandlerBase next) : base(next, "company_material_name_menu")
+        public CDH_CompanyMaterialModifiNameMenu(ChatDialogHandlerBase next) : base(next, "company_material_modifi_name_menu")
         {
-            this.parents.Add("company_add_modifi_menu");
+            this.parents.Add("company_modifi_menu");
             this.route = null;
         }
 
@@ -42,7 +42,6 @@ namespace ClassLibrary
             {
                 if (!selector.Code.StartsWith('\\'))
                 {
-                    //Falta pasar de string a int el code
                     MaterialCategory matCat = matCatAdmin.GetById(int.Parse(selector.Code));
                     if (matCat is not null)
                     {
