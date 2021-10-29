@@ -35,6 +35,5 @@ namespace Tests
             Assert.False(qualification.Deleted);
         }
 
-
     }
 }
