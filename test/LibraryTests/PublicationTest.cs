@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using ClassLibrary;
 using NUnit.Framework;
 
@@ -40,37 +41,6 @@ namespace Tests
 
         }
 
-        /// <summary>
-        /// Test para añadir elementos a la lista CompanyMaterial
-        /// </summary>
-        [Test]
-        public void AddItemTest()
-        {
-
-            Publication publication = new Publication();
-            CompanyMaterial companyMaterial = new CompanyMaterial();
-            var x = publication.ListCompanyMaterial;
-            publication.ListCompanyMaterial.Add(companyMaterial);
-            Assert.AreNotEqual(x,publication.ListCompanyMaterial);
-
-        }
-
-
-        /// <summary>
-        /// Test para remover elementos de una lista del tipo CompanyMaterial.
-        /// </summary>
-        [Test]
-        public void removeItem()
-        {
-            Publication publication = new Publication();
-            CompanyMaterial companyMaterial = new CompanyMaterial();
-            var x = publication.ListCompanyMaterial;
-            publication.ListCompanyMaterial.Add(companyMaterial);
-            publication.ListCompanyMaterial.Remove(companyMaterial);
-            Assert.AreEqual(x,publication.ListCompanyMaterial);
-
-        }
-
 
         /// <summary>
         /// Test para añadir elementos a una lista del tipo KeyWord.
@@ -78,11 +48,12 @@ namespace Tests
         [Test]
         public void AddKeyWordTest()
         {
+            String XkeyWord = "Madera";
+            List<string> keyWords = new List<string>();
+            keyWords.Add(XkeyWord);
             Publication publication = new Publication();
-            string KeyWord = "Madera";
-            var z = publication.KeyWords;
-            publication.AddKeyWord(KeyWord);
-            Assert.AreNotEqual(z,publication.KeyWords);
+            publication.AddKeyWord(XkeyWord);
+            Assert.AreEqual(keyWords,publication.KeyWords);
 
         }
 
@@ -93,11 +64,13 @@ namespace Tests
         [Test]
         public void RemoveKeyWordTest()
         {
+            String XkeyWord = "Madera";
+            List<string> keyWords = new List<string>();
             Publication publication = new Publication();
-            string KeyWord = "Piedra";
-            var Y = publication.KeyWords;
-            publication.RemoveKeyWord(KeyWord);
-            Assert.AreNotEqual(Y,publication.KeyWords);
+            publication.AddKeyWord(XkeyWord);
+            Assert.AreNotEqual(keyWords,publication.KeyWords);
+            publication.RemoveKeyWord(XkeyWord);
+            Assert.AreEqual(keyWords,publication.KeyWords);
         }
     }
 }

@@ -12,12 +12,6 @@ namespace ClassLibrary
     {
 
         /// <summary>
-        /// Lista de materiales de la compañia.
-        /// </summary>
-        public List<CompanyMaterial> ListCompanyMaterial = new List<CompanyMaterial>();
-
-
-        /// <summary>
         /// Lista de palabras clave para encontrar facilmente publicaciones.
         /// </summary>
         public List<string> KeyWords = new List<string>();
@@ -91,30 +85,7 @@ namespace ClassLibrary
 
         }
 
-
-        /// <summary>
-        /// Metodo para añadir materiales a una compania.
-        /// </summary>
-        /// <param name="CompanyMaterial">Ingreso una material que la compania quiere agregar.</param>
-        public void AddItem(CompanyMaterial CompanyMaterial)
-        {
-            if (!ListCompanyMaterial.Contains(CompanyMaterial))
-            {
-                ListCompanyMaterial.Add(CompanyMaterial);
-            }
-        }
-
-        /// <summary>
-        /// Metodo para borrar los materiales de una compania.
-        /// </summary>
-        /// <param name="CompanyMaterial">Ingreso una material que la compania quiere borrar.</param>
-        public void RemoveItem(CompanyMaterial CompanyMaterial)
-        {
-            if (ListCompanyMaterial.Contains(CompanyMaterial))
-            {
-                ListCompanyMaterial.Remove(CompanyMaterial);
-            }
-        }
+        
 
         /// <summary>
         /// Metodo para añadir una palabra clave del tipo string a la lista de palabras claves.
@@ -129,6 +100,7 @@ namespace ClassLibrary
 
         }
 
+
         /// <summary>
         /// Metodo para remover palabra clave de la lista de palabras claves del tipo string.
         /// </summary>
@@ -140,6 +112,9 @@ namespace ClassLibrary
                 KeyWords.Remove(KeyWord);
             }
         }
+
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -154,6 +129,8 @@ namespace ClassLibrary
             this.Currency=publication.Currency;
             this.Price=publication.Price;
         }
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -164,6 +141,8 @@ namespace ClassLibrary
             publication.LoadFromJson(this.ConvertToJson());
             return publication;
         }
+
+        
         /// <summary>
         /// 
         /// </summary>
