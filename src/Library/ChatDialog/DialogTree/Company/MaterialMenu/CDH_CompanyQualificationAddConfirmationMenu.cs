@@ -7,15 +7,15 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_CompanyQualificationAddMenu : ChatDialogHandlerBase
+    public class CDH_CompanyQualificationAddConfirmationMenu : ChatDialogHandlerBase
     {
         private QualificationAdmin qualificationAdmin = Singleton<QualificationAdmin>.Instance;
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyQualificationAddConfirmationMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_CompanyQualificationAddMenu(ChatDialogHandlerBase next) : base(next, "company_qualification_add_menu")
+        public CDH_CompanyQualificationAddConfirmationMenu(ChatDialogHandlerBase next) : base(next, "company_qualification_add_confirmation_menu")
         {
             this.parents.Add("company_qualification_list_to_add_menu");
             this.route = null;
@@ -37,6 +37,22 @@ namespace ClassLibrary
             builder.Append("\\confirmar : En caso de querer confirmar la operacion.\n");
             builder.Append("\\volver : Listar todos los materiales que ya posee.\n");
             return builder.ToString();
+        }
+        /// <inheritdoc/>
+        public override bool ValidateDataEntry(ChatDialogSelector selector)
+        {
+            if (this.parents.Contains(selector.Context))
+            {
+                if (!selector.Code.StartsWith('\\'))
+                {
+                    Qualification qualification = qualificationAdmin.GetById(int.Parse(selector.Code));
+                    if (qualification is not null)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }

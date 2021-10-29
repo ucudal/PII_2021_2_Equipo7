@@ -7,31 +7,30 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_CompanyMaterialAddNameMenu : ChatDialogHandlerBase
+    public class CDH_CompanyMaterialModifiNameMenu : ChatDialogHandlerBase
     {
         private MaterialCategoryAdmin matCatAdmin = Singleton<MaterialCategoryAdmin>.Instance;
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyMaterialModifiNameMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_CompanyMaterialAddNameMenu(ChatDialogHandlerBase next) : base(next, "company_material_name_menu")
+        public CDH_CompanyMaterialModifiNameMenu(ChatDialogHandlerBase next) : base(next, "company_material_modifi_name_menu")
         {
-            this.parents.Add("company_add_modifi_menu");
+            this.parents.Add("company_modifi_menu");
             this.route = null;
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            DProcessData process = new DProcessData("add_Material", this.code, null);
+            DProcessData process = new DProcessData("modifi_material", this.code, null);
 
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             session.Process = process;
             MaterialCategory matCat = matCatAdmin.GetById(int.Parse(selector.Code));
-            InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
+            SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
             data.MaterialCategory=matCat;
-
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese el nombre del material.\n");
