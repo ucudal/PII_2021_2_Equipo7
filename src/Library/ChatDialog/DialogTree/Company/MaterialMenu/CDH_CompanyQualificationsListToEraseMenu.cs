@@ -11,7 +11,7 @@ namespace ClassLibrary
     {
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyQualificationsListToEraseMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyQualificationsListToEraseMenu(ChatDialogHandlerBase next) : base(next, "company_qualifications_list_to_erase_menu")

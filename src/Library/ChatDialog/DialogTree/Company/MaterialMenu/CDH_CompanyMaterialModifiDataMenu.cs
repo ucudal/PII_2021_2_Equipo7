@@ -12,12 +12,12 @@ namespace ClassLibrary
         private CompanyMaterialAdmin companyMaterialAdmin = Singleton<CompanyMaterialAdmin>.Instance;
         private CompanyAdmin companyAdmin = Singleton<CompanyAdmin>.Instance;
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyMaterialModifiDataMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyMaterialModifiDataMenu(ChatDialogHandlerBase next) : base(next, "company_material_modifi_data_menu")
         {
-            this.parents.Add("company_material_add_modifi_confirmation_menu");
+            this.parents.Add("company_material_modifi_confirmation_menu");
             this.route = "\\confirmar";
         }
 
@@ -35,7 +35,7 @@ namespace ClassLibrary
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
-            InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
+            SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
 
             CompanyMaterial companyMaterial=data.CompanyMaterial;
             companyMaterialAdmin.Update(companyMaterial);

@@ -12,7 +12,7 @@ namespace ClassLibrary
         private CompanyMaterialAdmin companyMaterialAdmin = Singleton<CompanyMaterialAdmin>.Instance;
         private CompanyAdmin companyAdmin = Singleton<CompanyAdmin>.Instance;
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyMaterialAddDataMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyMaterialAddDataMenu(ChatDialogHandlerBase next) : base(next, "company_material_add_data_menu")

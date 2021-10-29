@@ -38,5 +38,21 @@ namespace ClassLibrary
             builder.Append("\\habilitaciones : Acceder a menu de habilitaciones.\n");
             return builder.ToString();
         }
+        /// <inheritdoc/>
+        public override bool ValidateDataEntry(ChatDialogSelector selector)
+        {
+            if (this.parents.Contains(selector.Context))
+            {
+                if (!selector.Code.StartsWith('\\'))
+                {
+                    CompanyMaterial companyMaterial = companyMaterialAdmin.GetById(int.Parse(selector.Code));
+                    if (companyMaterial is not null)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }

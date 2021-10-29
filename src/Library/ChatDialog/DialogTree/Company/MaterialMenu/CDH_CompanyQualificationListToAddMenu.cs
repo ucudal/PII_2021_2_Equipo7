@@ -14,7 +14,7 @@ namespace ClassLibrary
         private CompanyAdmin companyAdmin=Singleton<CompanyAdmin>.Instance;
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyQualificationListToAddMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyQualificationListToAddMenu(ChatDialogHandlerBase next) : base(next, "company_qualification_list_to_add_menu")

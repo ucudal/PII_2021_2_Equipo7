@@ -13,12 +13,12 @@ namespace ClassLibrary
         private CompanyMaterialAdmin materialAdmin=Singleton<CompanyMaterialAdmin>.Instance;
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyEraseDataMaterialMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyEraseDataMaterialMenu(ChatDialogHandlerBase next) : base(next, "company_erase_data_material_menu")
         {
-            this.parents.Add("company_confirmation_elimination_material_menu");
+            this.parents.Add("company_confirmation_erase_material_menu");
             this.route = "\\confirmar";
         }
 
@@ -37,7 +37,7 @@ namespace ClassLibrary
             StringBuilder xListMats=new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
-            InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
+            SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
             Company company=this.companyAdmin.FindAdminUser(session.UserId);
             company.RemoveCompanyMaterial(data.CompanyMaterial);
             this.companyAdmin.Update(company);

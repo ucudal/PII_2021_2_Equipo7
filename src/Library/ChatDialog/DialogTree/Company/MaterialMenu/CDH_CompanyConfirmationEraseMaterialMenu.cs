@@ -11,7 +11,7 @@ namespace ClassLibrary
     {
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyConfirmationEraseMaterialMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyConfirmationEraseMaterialMenu(ChatDialogHandlerBase next) : base(next, "company_confirmation_erase_material_menu")
@@ -24,13 +24,13 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            InsertCompanyMaterialData data = session.Process.GetData<InsertCompanyMaterialData>();
+            SelectCompanyMaterialData data = session.Process.GetData<SelectCompanyMaterialData>();
             
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu confirmar eliminacion.\n");
-            builder.Append($"El nombre del material es {data.CompanyMaterial.Name}");
-            builder.Append("¿Seguro que desea eliminar el material?");
+            builder.Append($"El nombre del material es {data.CompanyMaterial.Name}\n");
+            builder.Append("¿Seguro que desea eliminar el material? \n");
             builder.Append("\\confirmar : Confirmar que quiere eliminar el material.\n");
             builder.Append("\\cancelar : Cancelar operacion.\n");
             return builder.ToString();

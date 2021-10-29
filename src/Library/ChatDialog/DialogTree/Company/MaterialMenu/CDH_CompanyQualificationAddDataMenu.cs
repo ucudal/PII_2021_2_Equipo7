@@ -13,12 +13,12 @@ namespace ClassLibrary
         private CompanyMaterialAdmin companyMaterialAdmin = Singleton<CompanyMaterialAdmin>.Instance;
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyQualificationAddDataMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyQualificationAddDataMenu(ChatDialogHandlerBase next) : base(next, "company_qualification_add_data_menu")
         {
-            this.parents.Add("company_qualification_add_menu");
+            this.parents.Add("company_qualification_add_confirmation_menu");
             this.route = "\\confirmar";
         }
 

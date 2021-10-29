@@ -10,7 +10,6 @@ namespace ClassLibrary
        private CompanyMaterial companyMaterial;
        private MaterialCategory materialCategory;
 
-        private CompanyStock stock;
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="InsertCompanyMaterialData"/>.
         /// </summary>
@@ -28,10 +27,6 @@ namespace ClassLibrary
         /// mensajeria del usuario a registrar.
         /// </summary>
         public MaterialCategory MaterialCategory { get => this.materialCategory;set => this.materialCategory = value;}
-        /// <summary>
-        /// Identificador dentro del servicio de
-        /// mensajeria del usuario a registrar.
-        /// </summary>
-        public CompanyStock Stock { get => this.stock;set => this.stock = value;}
+        
     }
 }

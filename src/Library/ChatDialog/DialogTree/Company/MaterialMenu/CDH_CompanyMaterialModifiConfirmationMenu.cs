@@ -12,12 +12,12 @@ namespace ClassLibrary
         private CompanyMaterialAdmin companyMatAdmin = Singleton<CompanyMaterialAdmin>.Instance;
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyMaterialModifiConfirmationMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_CompanyMaterialModifiConfirmationMenu(ChatDialogHandlerBase next) : base(next, "company_material_add_confirmation_menu")
+        public CDH_CompanyMaterialModifiConfirmationMenu(ChatDialogHandlerBase next) : base(next, "company_material_modifi_confirmation_menu")
         {
-            this.parents.Add("company_material_name_menu");
+            this.parents.Add("company_material_modifi_dateBetweenReStock_menu");
             this.route = null;
         }
 
@@ -26,7 +26,7 @@ namespace ClassLibrary
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
-            InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
+            SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
 
             data.CompanyMaterial.DateBetweenRestocks=int.Parse(selector.Code);
             data.CompanyMaterial.StockPerLocations.Add(data.Stock);
@@ -41,6 +41,18 @@ namespace ClassLibrary
             builder.Append("\\confirmar : En caso de querer confirmar la operacion.\n");
             builder.Append("\\cancelar : En caso de querer cancelar la operacion.\n");
             return builder.ToString();
+        }
+        /// <inheritdoc/>
+        public override bool ValidateDataEntry(ChatDialogSelector selector)
+        {
+            if (this.parents.Contains(selector.Context))
+            {
+                if (!selector.Code.StartsWith('\\'))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
