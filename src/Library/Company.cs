@@ -10,7 +10,7 @@ namespace ClassLibrary
     /// <summary>
     /// esta clase representa a la compania
     /// </summary>
-    public class Company : IManagableData
+    public class Company : IManagableData<Company>
     {
         /// <summary>
         /// la Lista locations es una list en la cual se guardan strings
