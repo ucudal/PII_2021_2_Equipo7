@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using ClassLibrary;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace ClassLibrary
 
@@ -18,13 +20,12 @@ namespace ClassLibrary
         /// <param name="user">usuario del emprendedor</param>
         /// <param name="id">id del emprendedor</param>
         /// <param name="trade">en que se especializa el emprendedor</param>
-        public Entrepreneur(string name,Entrepreneur user,int id, string trade
-        )
+        public Entrepreneur(string name,User user,int id, string trade)
         {
-            this.Name =Name;
-            this.User= User;
-            this.Id = Id;
-            this.Trade = Trade;
+            this.Name =name;
+            this.User= user;
+            this.Id = id;
+            this.Trade = trade;
             this.Deleted= false;
         }
         /// <summary>
@@ -39,6 +40,7 @@ namespace ClassLibrary
         /// </summary>
     
         /// <returns>lista de ubicaciones</returns>
+        [JsonInclude]
         public List<Location> Locations  = new List<Location>();
         /// <summary>
         /// usuario del emprendedor
@@ -82,6 +84,39 @@ namespace ClassLibrary
         public void RemoveLocation(Location Location)
         {
             this.Locations.Remove(Location);
-        }      
+        }   
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="json"></param>
+        public void LoadFromJson(string json)
+        {
+            Entrepreneur emprendedor=JsonSerializer.Deserialize<Entrepreneur>(json);
+            this.Id=emprendedor.Id;
+            this.Name=emprendedor.Name;
+            this.User= emprendedor.User;            
+            this.Deleted=emprendedor.Deleted;
+            this.Trade=emprendedor.Trade;
+            
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public Entrepreneur Clone()
+        {
+            Entrepreneur emprendedor =new Entrepreneur();
+            emprendedor.LoadFromJson(this.ConvertToJson());
+            return emprendedor;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string ConvertToJson()
+        {
+            return JsonSerializer.Serialize(this);
+        }   
     }
 }
