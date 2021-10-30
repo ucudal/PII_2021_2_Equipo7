@@ -22,6 +22,14 @@ namespace ClassLibrary
     {
         
     }
+    /// <summary>
+    /// constructor de location
+    /// </summary>
+    /// <param name="Georeference">georeferenciacion</param>
+        public Location(string Georeference)
+    {
+        this.Georeference=Georeference;
+    }
 
     }
     

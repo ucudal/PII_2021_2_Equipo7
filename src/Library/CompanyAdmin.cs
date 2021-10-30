@@ -20,6 +20,16 @@ namespace ClassLibrary
 
         return this.Items.Find(obj => obj.ListAdminUsers.Exists(admin => admin.Id==id));
         }
+        /// <summary>
+        /// de 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public Company GetByName(string name)
+        {
+            return this.Items.Find(obj => obj.Name== name);
+        }
+
     }
 
 }

@@ -38,8 +38,10 @@ namespace ClassLibrary
         {
             StringBuilder xListMats=new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Company company = this.companyAdmin.FindAdminUser(session.UserId);
             
-            List<Sale> sales = this.saleAdmin.Items.FindAll(obj => obj.Company.Id ==session.UserId );
+            List<Sale> sales = this.saleAdmin.GetByCompanyId(company.Id);
+            
             foreach(Sale sale  in sales)
             {
                 xListMats.Append("en la fecha" + sale.DateTime.ToString() +"se compro" + sale.PublicationItem.CompanyMaterial.Name + "\n");

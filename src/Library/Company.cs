@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace ClassLibrary
     
@@ -16,6 +18,7 @@ namespace ClassLibrary
         /// la zona en donde se encuentre la empresa.
         /// </summary>
         /// <returns>lista de localizaciones </returns>
+        [JsonInclude]
         public List<Location> Locations  = new List<Location>();
 
         /// <summary>
@@ -23,6 +26,7 @@ namespace ClassLibrary
         /// </summary>
         
         /// <returns>lista de los materiales de la compania</returns>
+        [JsonInclude]
         public List<CompanyMaterial> CompanyMaterials  = new List<CompanyMaterial>();
 
         /// <summary>
@@ -30,6 +34,7 @@ namespace ClassLibrary
         /// </summary>
         
         /// <returns>lista de usuarios</returns>
+        [JsonInclude]
         public List<User> ListAdminUsers = new List<User>();
 
 
@@ -136,6 +141,38 @@ namespace ClassLibrary
             if(CompanyMaterials.Contains(material)){
             this.CompanyMaterials.Remove(material);
             }
+        }
+                /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="json"></param>
+        public void LoadFromJson(string json)
+        {
+            Company compania=JsonSerializer.Deserialize<Company>(json);
+            this.Id=compania.Id;
+            this.Name=compania.Name;
+            
+            this.Deleted=compania.Deleted;
+            this.Trade=compania.Trade;
+            
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public Company Clone()
+        {
+            Company company =new Company();
+            company.LoadFromJson(this.ConvertToJson());
+            return company;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string ConvertToJson()
+        {
+            return JsonSerializer.Serialize(this);
         }
       
 
