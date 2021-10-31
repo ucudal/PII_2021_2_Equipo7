@@ -7,17 +7,16 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_CompanyMaterialAddConfirmationMenu : ChatDialogHandlerBase
+    public class CDH_CompanyPublicationPriceMaterialToAddMenu : ChatDialogHandlerBase
     {
-        private CompanyMaterialAdmin companyMatAdmin = Singleton<CompanyMaterialAdmin>.Instance;
-
+        
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyMaterialAddConfirmationMenu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyPublicationPriceMaterialToAddMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_CompanyMaterialAddConfirmationMenu(ChatDialogHandlerBase next) : base(next, "company_material_add_confirmation_menu")
+        public CDH_CompanyPublicationPriceMaterialToAddMenu(ChatDialogHandlerBase next) : base(next, "company_publication_price_material_to_add_menu")
         {
-            this.parents.Add("company_material_add_name_menu");
+            this.parents.Add("company_publication_quantity_material_to_add_menu");
             this.route = null;
         }
 
@@ -26,17 +25,14 @@ namespace ClassLibrary
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
-            InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
+            InsertPublicationData data = process.GetData<InsertPublicationData>();
 
-            CompanyMaterial companyMaterial = this.companyMatAdmin.New();
-            companyMaterial.Name = selector.Code.Trim();
-            companyMaterial.MaterialCategory=data.MaterialCategory;
-            data.CompanyMaterial = companyMaterial;
+            PublicationItem item = new PublicationItem(int.Parse(selector.Code));
+            data.PublicationItem=item;
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Seguro que desea crear un material con los siguientes datos.\n");
-            builder.Append("Nombre: " + data.CompanyMaterial.Name);
-            builder.Append("\\confirmar : En caso de querer confirmar la operacion.\n");
+            builder.Append("Ingrese el precio que le quiere poner a la publicacion.\n");
+            builder.Append("\\cancelar : En caso de querer canclear la operacion.\n");
             return builder.ToString();
         }
 

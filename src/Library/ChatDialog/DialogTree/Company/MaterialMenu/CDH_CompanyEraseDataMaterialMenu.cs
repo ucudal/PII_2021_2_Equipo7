@@ -34,7 +34,6 @@ namespace ClassLibrary
         }
         private void EraseMaterialFromCompany(ChatDialogSelector selector)
         {
-            StringBuilder xListMats=new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();

@@ -17,7 +17,7 @@ namespace ClassLibrary
         public CDH_CompanyQualificationsListToEraseMenu(ChatDialogHandlerBase next) : base(next, "company_qualifications_list_to_erase_menu")
         {
             this.parents.Add("company_qualifications_menu");
-            this.route = "\\listar";
+            this.route = "\\eliminar";
         }
 
         /// <inheritdoc/>
@@ -37,7 +37,7 @@ namespace ClassLibrary
         {
             StringBuilder builder = new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = new DProcessData("select_companymaterial",this.code,null);
+            DProcessData process = session.Process;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
             
             foreach(Qualification xQual in data.CompanyMaterial.Qualifications)
