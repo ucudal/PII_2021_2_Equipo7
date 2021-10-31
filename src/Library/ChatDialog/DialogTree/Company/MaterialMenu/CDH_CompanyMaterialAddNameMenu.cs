@@ -24,13 +24,13 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            DProcessData process = new DProcessData("add_Material", this.code, null);
-
+            MaterialCategory matCat = matCatAdmin.GetById(int.Parse(selector.Code));
+            InsertCompanyMaterialData data = new InsertCompanyMaterialData();
+            data.MaterialCategory=matCat;
+            DProcessData process = new DProcessData("add_Material", this.code, data);
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             session.Process = process;
-            MaterialCategory matCat = matCatAdmin.GetById(int.Parse(selector.Code));
-            InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
-            data.MaterialCategory=matCat;
+            
 
 
             StringBuilder builder = new StringBuilder();

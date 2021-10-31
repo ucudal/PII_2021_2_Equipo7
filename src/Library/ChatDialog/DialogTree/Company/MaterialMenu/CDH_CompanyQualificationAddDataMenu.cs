@@ -36,13 +36,13 @@ namespace ClassLibrary
         private void AddQualificationToMaterial(ChatDialogSelector selector)
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = new DProcessData("select_companymaterial",this.code,null);
+            DProcessData process = session.Process;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
             data.CompanyMaterial.AddQualification(data.Qualification);
             Company company=this.companyAdmin.Items.Find(obj => obj.ListAdminUsers.Exists(admin => admin.Id==session.UserId));
-            companyAdmin.Update(company);
-            CompanyMaterial companyMaterial=this.companyMaterialAdmin.Items.Find(obj => obj.Id==session.UserId);
+            CompanyMaterial companyMaterial=data.CompanyMaterial;
             companyMaterialAdmin.Update(companyMaterial);
+            companyAdmin.Update(company);
         }
     }
 }

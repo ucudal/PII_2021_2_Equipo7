@@ -7,35 +7,34 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_CompanyActionsMaterialMenu : ChatDialogHandlerBase
+    public class CDH_CompanyPublicationActionMenu : ChatDialogHandlerBase
     {
-        private CompanyMaterialAdmin companyMaterialAdmin = Singleton<CompanyMaterialAdmin>.Instance;
+        private PublicationAdmin publicationAdmin = Singleton<PublicationAdmin>.Instance;
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyPublicationActionMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_CompanyActionsMaterialMenu(ChatDialogHandlerBase next) : base(next, "company_actions_material_menu")
+        public CDH_CompanyPublicationActionMenu(ChatDialogHandlerBase next) : base(next, "company_publication_action_menu")
         {
-            this.parents.Add("company_list_material_menu");
+            this.parents.Add("company_publication_list_menu");
             this.route = null;
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            SelectCompanyMaterialData data = new SelectCompanyMaterialData();
+            InsertPublicationData data = new InsertPublicationData();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = new DProcessData("select_companymaterial",this.code,data);
-            data.CompanyMaterial=companyMaterialAdmin.Items.Find(obj => obj.Id==int.Parse(selector.Code));
+            DProcessData process = new DProcessData("select_publication",this.code,data);
+            data.Publication=publicationAdmin.Items.Find(obj => obj.Id==int.Parse(selector.Code));
             
             StringBuilder builder = new StringBuilder();
-            builder.Append("Menu acciones sobre el material elegido.\n");
+            builder.Append("Menu acciones sobre la publicacion elegido.\n");
             builder.Append("Desde este menu puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\modificar : Modificar el material.\n");
-            builder.Append("\\eliminar : Eliminar el material.\n");
-            builder.Append("\\habilitaciones : Acceder a menu de habilitaciones.\n");
+            builder.Append("\\modificar : Modificar la publicacion.\n");
+            builder.Append("\\eliminar : Eliminar la publicacion.\n");
             return builder.ToString();
         }
         /// <inheritdoc/>
@@ -45,8 +44,8 @@ namespace ClassLibrary
             {
                 if (!selector.Code.StartsWith('\\'))
                 {
-                    CompanyMaterial companyMaterial = companyMaterialAdmin.GetById(int.Parse(selector.Code));
-                    if (companyMaterial is not null)
+                    Publication publication = publicationAdmin.GetById(int.Parse(selector.Code));
+                    if (publication is not null)
                     {
                         return true;
                     }

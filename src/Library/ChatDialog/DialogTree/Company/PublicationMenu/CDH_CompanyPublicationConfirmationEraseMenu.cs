@@ -7,17 +7,17 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_CompanyQualificationConfirmEraseMenu : ChatDialogHandlerBase
+    public class CDH_CompanyPublicationConfirmationEraseMenu : ChatDialogHandlerBase
     {
-        private QualificationAdmin qualificationAdmin = Singleton<QualificationAdmin>.Instance;
+        private PublicationAdmin publicationAdmin = Singleton<PublicationAdmin>.Instance;
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyQualificationConfirmEraseMenu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyPublicationConfirmationEraseMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_CompanyQualificationConfirmEraseMenu(ChatDialogHandlerBase next) : base(next, "company_qualification_confirm_to_erase_menu")
+        public CDH_CompanyPublicationConfirmationEraseMenu(ChatDialogHandlerBase next) : base(next, "company_publication_confirmation_erase_menu")
         {
-            this.parents.Add("company_qualifications_list_to_erase_menu");
+            this.parents.Add("company_publication_action_menu");
             this.route = null;
         }
 
@@ -27,12 +27,12 @@ namespace ClassLibrary
             StringBuilder builder = new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
-            SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            data.Qualification=qualificationAdmin.Items.Find(obj => obj.Id==int.Parse(selector.Code));
+            InsertPublicationData data = process.GetData<InsertPublicationData>();
+            
 
-            builder.Append("Esta seguro que desea eliminar la habilitacion con el nombre " + data.Qualification.Name + " ?\n ");
+            builder.Append("Esta seguro que desea eliminar la publicacion del material " + data.Publication.PublicationItem.CompanyMaterial.Name + " ?\n ");
             builder.Append("\\confirmar : Confirmar en caso de que este seguro.\n");
-            builder.Append("\\cancelar : Volver al menu de materiales .\n");
+            builder.Append("\\cancelar : Volver al menu de publicaciones .\n");
             return builder.ToString();
         }
         /// <inheritdoc/>
@@ -42,8 +42,8 @@ namespace ClassLibrary
             {
                 if (!selector.Code.StartsWith('\\'))
                 {
-                    Qualification qualification = qualificationAdmin.GetById(int.Parse(selector.Code));
-                    if (qualification is not null)
+                    Publication publication = publicationAdmin.GetById(int.Parse(selector.Code));
+                    if (publication is not null)
                     {
                         return true;
                     }
