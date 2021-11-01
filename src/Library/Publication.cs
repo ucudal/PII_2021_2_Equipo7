@@ -18,6 +18,13 @@ namespace ClassLibrary
 
 
         /// <summary>
+        /// Publication tiene una property de Company.
+        /// </summary>
+        /// <value></value>
+        public int CompanyId { get; set; }
+
+
+        /// <summary>
         /// Property de la clase PublicationItem.
         /// </summary>
         public PublicationItem PublicationItem {get; set;}
@@ -82,6 +89,8 @@ namespace ClassLibrary
         /// </summary>
         public Publication()
         {
+            this.Id = 0;
+            this.Deleted = false;
 
         }
 

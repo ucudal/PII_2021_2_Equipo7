@@ -45,13 +45,12 @@ namespace ClassLibrary
         /// </summary>
         public Qualification()
         {
+            this.Id = 0;
+            this.Deleted = false; 
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="json"></param>
+        /// <inheritdoc/>
         public void LoadFromJson(string json)
         {
             Qualification qualification=JsonSerializer.Deserialize<Qualification>(json);
@@ -60,20 +59,18 @@ namespace ClassLibrary
             this.Deleted=qualification.Deleted;
         
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        
+
+        /// <inheritdoc/>
         public Qualification Clone()
         {
             Qualification qualification =new Qualification();
             qualification.LoadFromJson(this.ConvertToJson());
             return qualification;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        
+
+        /// <inheritdoc/>
         public string ConvertToJson()
         {
             return JsonSerializer.Serialize(this);
