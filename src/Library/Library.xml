@@ -1542,6 +1542,37 @@
             
             </summary>
         </member>
+        <member name="T:ClassLibrary.SearchData">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ClassLibrary.SearchPage`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:ClassLibrary.SearchPage`1.SearchResults">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.SearchPage`1.CurrentPage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.SearchPage`1.PageItemCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.SearchPage`1.PageItems">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:ClassLibrary.Company">
             <summary>
             esta clase representa a la compania
@@ -1662,6 +1693,20 @@
             <summary>
             clase administradora de company
             </summary>
+        </member>
+        <member name="M:ClassLibrary.CompanyAdmin.FindAdminUser(System.Int32)">
+            <summary>
+            encuentra el USUARIO
+            </summary>
+            <param name="id">id del usuario</param>
+            <returns></returns>
+        </member>
+        <member name="M:ClassLibrary.CompanyAdmin.GetByName(System.String)">
+            <summary>
+            de 
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
         </member>
         <member name="M:ClassLibrary.CompanyAdmin.FindAdminUser(System.Int32)">
             <summary>
