@@ -10,10 +10,6 @@ namespace ClassLibrary
     /// </summary>
     public class Sale : IManagableData<Sale>
     {
-        /// <summary>
-        /// Lista de materiales de la compania.
-        /// </summary>
-        List<CompanyMaterial> ListCompanyMaterial = new List<CompanyMaterial>();
 
         /// <summary>
         ///   Property de publication.
@@ -79,28 +75,6 @@ namespace ClassLibrary
         public Sale()
         {
 
-        }
-
-        /// <summary>
-        /// Metodo para añadir materiales a una compania.
-        /// </summary>
-        public void AddItem(CompanyMaterial CompanyMaterial)
-        {
-            if (!ListCompanyMaterial.Contains(CompanyMaterial))
-            {
-                ListCompanyMaterial.Add(CompanyMaterial);
-            }
-        }
-
-        /// <summary>
-        /// Metodo para remover materiales de una compania.
-        /// </summary>
-        public void RemoveItem(CompanyMaterial CompanyMaterial)
-        {
-            if (ListCompanyMaterial.Contains(CompanyMaterial))
-            {
-                ListCompanyMaterial.Remove(CompanyMaterial);
-            }
         }
 
 

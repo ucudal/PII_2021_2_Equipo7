@@ -26,24 +26,6 @@ namespace Tests
 
         }
 
-        /// <summary>
-        /// Test añadir una compañia a una lista
-        /// </summary>
-        [Test]
-        public void AddItemTest()
-        {
-
-        }
-
-
-        /// <summary>
-        /// Test remover una compañia a una lista
-        /// </summary>
-        [Test]
-        public void RemoveItemTest()
-        {
-
-        }
 
     }
 }

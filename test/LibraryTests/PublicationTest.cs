@@ -23,6 +23,7 @@ namespace Tests
         /// <summary>
         /// Constructor de la clase.
         /// </summary>
+        [Test]
         public void Constructor_Test()
         {
             DateTime ActiveFrom = DateTime.Now;
