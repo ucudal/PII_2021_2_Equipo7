@@ -17,8 +17,10 @@ namespace Tests
         [Test] 
         public void InsertTest()
         {
-            Company compania = new Company();
-            compania.Name="pepito";
+            int id = 1;
+            string name="nombre compania";
+            string trade ="rubro";
+            Company compania = new Company(id,name,trade);
             companyAdmin.Insert(compania);
             Assert.That(companyAdmin.Items.Exists(item=>item.Name=="pepito"));
             
@@ -74,7 +76,7 @@ namespace Tests
         [Test] 
         public void DeleteTest()
         {
-            Company company =companyAdmin.New();
+            Company company =new Company();
             company.Name="pepito";
             companyAdmin.Insert(company);
             Company company2 =companyAdmin.GetByName("pepito");

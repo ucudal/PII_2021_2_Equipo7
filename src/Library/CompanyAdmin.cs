@@ -11,24 +11,29 @@ namespace ClassLibrary
     {
 
         /// <summary>
-        /// encuentra el USUARIO
+        /// Obtiene una compania por
+        /// su nombre.
         /// </summary>
-        /// <param name="id">id del usuario</param>
-        /// <returns></returns>
-        public Company FindAdminUser(int id)
-        {
-
-        return this.Items.Find(obj => obj.ListAdminUsers.Exists(admin => admin.Id==id));
-        }
-        /// <summary>
-        /// de 
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="name">
+        /// Nombre por el cual buscar.
+        /// </param>
+        /// <returns>
+        /// Compania encontrada.
+        /// </returns>
         public Company GetByName(string name)
         {
-            return this.Items.Find(obj => obj.Name== name);
+            ReadOnlyCollection<Company> companies = this.Items;
+            foreach (Company comp in companies)
+            {
+                if (comp.Name == name)
+                {
+                    return comp.Clone();
+                }
+            }
+            
+            return null;
         }
+    }
 
     }
 

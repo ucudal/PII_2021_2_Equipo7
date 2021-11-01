@@ -4,15 +4,5 @@
         <name>Program</name>
     </assembly>
     <members>
-        <member name="T:ConsoleApplication.Program">
-            <summary>
-            Programa de consola de demostración.
-            </summary>
-        </member>
-        <member name="M:ConsoleApplication.Program.Main">
-            <summary>
-            Punto de entrada al programa principal.
-            </summary>
-        </member>
     </members>
 </doc>
