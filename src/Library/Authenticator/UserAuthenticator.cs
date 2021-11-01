@@ -8,6 +8,7 @@ namespace ClassLibrary
     /// </summary>
     public class UserAuthenticator
     {
+        private static AccountAdmin accountAdmin=Singleton<AccountAdmin>.Instance;
         private static UserAdmin userAdmin = Singleton<UserAdmin>.Instance;
 
         /// <summary>
@@ -19,24 +20,21 @@ namespace ClassLibrary
         /// </param>
         public static void Authenticate(MessageWrapper message)
         {
-            List<User> users = userAdmin.Items;
-            User user = userAdmin.GetByAccount(message.Service, message.Account);
-            if (user is null)
+            message.UserId=accountAdmin.GetUserIdFromAccount(message.Service,message.Account);
+            if(message.UserId==0)
             {
-                message.UserId = 0;
-                message.UserStatus = UserStatus.Unregistered;
+                message.UserStatus= UserStatus.Unregistered;
             }
             else
             {
-                message.UserId = user.Id;
-                if (user.Deleted)
-                {
-                    message.UserStatus = UserStatus.Suspended;
-                }
-                else
-                {
-                    message.UserStatus = UserStatus.Registered;
-                }
+               if(userAdmin.GetUserIsSuspended(message.UserId))
+               {
+                   message.UserStatus=UserStatus.Suspended;
+               }
+               else
+               {
+                   message.UserStatus= UserStatus.Registered;
+               }
             }
         }
     }
