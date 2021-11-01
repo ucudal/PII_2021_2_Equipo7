@@ -12,26 +12,26 @@ namespace ClassLibrary
     {
 
         /// <summary>
-        ///   Property de publication.
+        /// Material de empresa comprado.
         /// </summary>
-        public Publication Publication{get; set;}
+        public int ProductCompanyMaterialId { get; set; }
+
         /// <summary>
-        /// Property a la clase PublicationItem.
+        /// Cantidad del material comprado.
         /// </summary>
-        public PublicationItem PublicationItem {get; set;}
+        public int ProductQuantity { get; set; }
 
         /// <summary>
         /// Property de Company.
         /// </summary>
-        public Company Company{get; set;}
+        public int SellerCompanyId { get; set; }
 
         /// <summary>
         /// Property de Entrepreneur.
         /// </summary>
-        public Entrepreneur Entrepreneur{get; set;}
-        /// <summary>
-        /// Id privado de cada Sale.
-        /// </summary>
+        public int BuyerEntrepreneurId { get; set; }
+
+        /// <inheritdoc/>
         public int Id{get; set;}
 
         /// <summary>
@@ -49,9 +49,7 @@ namespace ClassLibrary
         /// </summary>
         public Currency Currency{get; set;}
 
-        /// <summary>
-        /// Atributo para saber si la venta esta suspendida o no.
-        /// </summary>
+        /// <inheritdoc/>
         public bool Deleted{get; set;}
 
         /// <summary>
@@ -74,14 +72,13 @@ namespace ClassLibrary
         /// </summary>
         public Sale()
         {
+            this.Id = 0;
+            this.Deleted = false;
 
         }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="json"></param>
+        /// <inheritdoc/>
         public void LoadFromJson(string json)
         {
             Sale sale=JsonSerializer.Deserialize<Sale>(json);
@@ -91,20 +88,18 @@ namespace ClassLibrary
             this.Currency=sale.Currency;
             this.Price=sale.Price;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+
+
+        /// <inheritdoc/>
         public Sale Clone()
         {
             Sale sale =new Sale();
             sale.LoadFromJson(this.ConvertToJson());
             return sale;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+
+
+        /// <inheritdoc/>
         public string ConvertToJson()
         {
             return JsonSerializer.Serialize(this);

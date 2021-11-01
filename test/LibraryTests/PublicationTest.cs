@@ -27,51 +27,42 @@ namespace Tests
         public void Constructor_Test()
         {
             DateTime ActiveFrom = DateTime.Now;
-            DateTime ActiveUntill = DateTime.Now.AddMonths(2);
+            DateTime ActiveUntil = DateTime.Now.AddMonths(2);
             int Price = 100;
             Currency Currency = Currency.PesoUruguayo;
             bool Deleted = false;
            
-            Publication publication = new Publication(ActiveFrom, ActiveUntill,Price,Currency,Deleted);
+            Publication publication = new Publication(ActiveFrom, ActiveUntil,Price,Currency);
 
             Assert.AreEqual(ActiveFrom,publication.ActiveFrom);
-            Assert.AreEqual(ActiveUntill,publication.ActiveUntill);
+            Assert.AreEqual(ActiveUntil,publication.ActiveUntil);
             Assert.AreEqual(Price,publication.Price);
             Assert.AreEqual(Currency,publication.Currency);
             Assert.AreEqual(Deleted,publication.Deleted);
 
         }
 
-
         /// <summary>
-        /// Test para añadir elementos a una lista del tipo KeyWord.
+        /// Constructor de la clase test.
         /// </summary>
         [Test]
-        public void AddKeyWordTest()
+        public void Constructor_Test2()
         {
-            String XkeyWord = "Madera";
-            List<string> keyWords = new List<string>();
-            keyWords.Add(XkeyWord);
-            Publication publication = new Publication();
-            publication.AddKeyWord(XkeyWord);
-            Assert.AreEqual(keyWords,publication.KeyWords);
+            DateTime ActiveFrom = DateTime.Now;
+            DateTime ActiveUntil = DateTime.Now.AddDays(12);
+            int Price = 78;
+            Currency Currency = Currency.PesoUruguayo;
+            bool Deleted = false;
+           
+            Publication publication = new Publication(ActiveFrom, ActiveUntil,Price,Currency);
 
-        }
+            Assert.AreEqual(ActiveFrom,publication.ActiveFrom);
+            Assert.AreEqual(ActiveUntil,publication.ActiveUntil);
+            Assert.AreEqual(Price,publication.Price);
+            Assert.AreEqual(Currency,publication.Currency);
+            Assert.AreEqual(Deleted,publication.Deleted);
 
-
-        /// <summary>
-        /// Test para remover elementos a una lista del tipo KeyWord.
-        /// </summary>
-        [Test]
-        public void RemoveKeyWordTest()
-        {
-            String XkeyWord = "Madera";
-            List<string> keyWords = new List<string>();
-            Publication publication = new Publication();
-            publication.AddKeyWord(XkeyWord);
-            Assert.AreNotEqual(keyWords,publication.KeyWords);
-            publication.RemoveKeyWord(XkeyWord);
-            Assert.AreEqual(keyWords,publication.KeyWords);
         }
     }
+
 }

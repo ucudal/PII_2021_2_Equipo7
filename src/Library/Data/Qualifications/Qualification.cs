@@ -41,7 +41,7 @@ namespace ClassLibrary
         }
 
         /// <summary>
-        /// Constructor vacio para la utilización de Qualification Admin
+        /// Constructor para la utilización de Qualification Admin
         /// </summary>
         public Qualification()
         {
