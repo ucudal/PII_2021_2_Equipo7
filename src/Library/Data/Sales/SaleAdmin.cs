@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace ClassLibrary
 {
@@ -38,12 +40,8 @@ namespace ClassLibrary
         /// <param name="companyId">
         /// Id de la compania para la cual se le quieren encontrar todas las ventas.
         /// </param>
-        /// <param name="itemCount">
-        /// Cantidad de items por hoja.
-        /// </param>
-        /// <param name="page">
-        /// Hoja la cual recuperar.
-        /// </param>
+        /// <param name="itemCount">Cantidad de items por hoja.</param>
+        /// <param name="page">Hoja la cual recuperar.</param>
         /// <returns>
         /// Listado de Ids de ventas realizadas por la compania.
         /// </returns>
@@ -94,12 +92,8 @@ namespace ClassLibrary
         /// <param name="entrepreneurId">
         /// Id del emprendedor para el cual se le quieren buscar las compras.
         /// </param>
-        /// <param name="itemCount">
-        /// Cantidad de items por hoja.
-        /// </param>
-        /// <param name="page">
-        /// Hoja la cual recuperar.
-        /// </param>
+        /// <param name="itemCount">Cantidad de items por hoja.</param>
+        /// <param name="page">Hoja la cual recuperar.</param>
         /// <returns>
         /// Listado de Ids de compras realizadas por el emprendedor.
         /// </returns>

@@ -19,17 +19,6 @@ namespace ClassLibrary
 
 
         /// <summary>
-        /// Property de la clase PublicationItem.
-        /// </summary>
-        public PublicationItem PublicationItem {get; set;}
-
-        /// <summary>
-        /// Publication tiene una property de Company.
-        /// </summary>
-        public Company Company{get; set;}
-
-
-        /// <summary>
         /// Id que se la da a cada publicación.
         /// </summary>
         public  int Id{get; set;}
@@ -42,7 +31,7 @@ namespace ClassLibrary
         /// <summary>
         /// Datetime con la fecha de desactivación de la publicación.
         /// </summary>
-        public DateTime ActiveUntill{get; set;}
+        public DateTime ActiveUntil{get; set;}
 
         /// <summary>
         /// Precio de lo que se vende en la publicación, ya sea un material o varios.
@@ -63,18 +52,13 @@ namespace ClassLibrary
         /// <summary>
         /// Constructor de la publicación para definir los atributos.
         /// </summary>
-        /// <param name="ActiveFrom"></param>
-        /// <param name="ActiveUntill"></param>
-        /// <param name="Price"></param>
-        /// <param name="Currency"></param>
-        /// <param name="Deleted"></param>
         [JsonConstructor]
-        public Publication(DateTime ActiveFrom, DateTime ActiveUntill, int Price, Currency Currency, bool Deleted)
+        public Publication(DateTime from, DateTime until, int price, Currency currency)
         {
-            this.ActiveFrom = ActiveFrom;
-            this.ActiveUntill = ActiveUntill;
-            this.Price = Price;
-            this.Currency = Currency;
+            this.ActiveFrom = from;
+            this.ActiveUntil = until;
+            this.Price = price;
+            this.Currency = currency;
             this.Deleted = false;
         }
 
@@ -89,26 +73,19 @@ namespace ClassLibrary
         }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="json"></param>
+        /// <inheritdoc/>
         public void LoadFromJson(string json)
         {
             Publication publication=JsonSerializer.Deserialize<Publication>(json);
             this.Id=publication.Id;
             this.ActiveFrom=publication.ActiveFrom;
-            this.ActiveUntill=publication.ActiveUntill;
+            this.ActiveUntil=publication.ActiveUntil;
             this.Deleted=publication.Deleted;
             this.Currency=publication.Currency;
             this.Price=publication.Price;
         }
 
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public Publication Clone()
         {
             Publication publication =new Publication();
@@ -117,10 +94,7 @@ namespace ClassLibrary
         }
 
         
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public string ConvertToJson()
         {
             return JsonSerializer.Serialize(this);
