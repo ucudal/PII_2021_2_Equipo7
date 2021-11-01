@@ -12,12 +12,6 @@ namespace ClassLibrary
     {
 
         /// <summary>
-        /// Lista de palabras clave para encontrar facilmente publicaciones.
-        /// </summary>
-        public List<string> KeyWords = new List<string>();
-
-
-        /// <summary>
         /// Publication tiene una property de Company.
         /// </summary>
         /// <value></value>
@@ -93,35 +87,6 @@ namespace ClassLibrary
             this.Deleted = false;
 
         }
-
-        
-
-        /// <summary>
-        /// Metodo para añadir una palabra clave del tipo string a la lista de palabras claves.
-        /// </summary>
-        /// <param name="KeyWord">Ingreso palabra clave.</param>
-        public void AddKeyWord(string KeyWord)
-        {
-            if (!KeyWords.Contains(KeyWord))
-            {
-                KeyWords.Add(KeyWord);
-            }
-
-        }
-
-
-        /// <summary>
-        /// Metodo para remover palabra clave de la lista de palabras claves del tipo string.
-        /// </summary>
-        /// <param name="KeyWord">Ingreso palabra clave que quiero remover.</param>
-        public void RemoveKeyWord(string KeyWord)
-        {
-            if (KeyWords.Contains(KeyWord))
-            {
-                KeyWords.Remove(KeyWord);
-            }
-        }
-
 
 
         /// <summary>
