@@ -46,37 +46,25 @@ namespace ClassLibrary
         ///La categoria donde se guarda el materialEmpresa
         /// </summary>
         /// <value>Almacenamos en que categoria esta situado el materialEmpresa</value>
-        public MaterialCategory MaterialCategory{get;set;}
-        
+        public int MaterialCategoryId { get; set; }
 
         /// <summary>
-        /// Obtiene una lista de habilitaciones necesarias para cada materialEmpresa.
+        /// Id de la empresa a la cual pertenece el material de empresa.
         /// </summary>
-        /// <value>Almacenamos las habilitaciones de cada materialEmpresa. Esto nos sirve para saber que habilitaciones exigirle al emprendedor para el uso/adquisicion del material</value>
-        [JsonInclude]
-        public List<Qualification> Qualifications {get;set;}
-
-        /// <summary>
-        /// Obtiene una lista del stock que hay en cada location
-        /// </summary>
-        /// <value>Almacenamos el stock que tiene cada empreza de un material empresa en cada locacion</value>
-        [JsonInclude]
-        public List<CompanyStock> StockPerLocations {get;set;}
-
+        public int CompanyId { get; set; }
 
         /// <summary>
         /// Constructor de la clase con parametros.
         /// </summary>
-        public CompanyMaterial(int id,string name,DateTime lastRestock, int dateBetweenRestocks,MaterialCategory materialCategory)
+        public CompanyMaterial(int id, string name, DateTime lastRestock, int dateBetweenRestocks, int materialCategoryId, int companyId)
         {
             this.Id=id;
             this.Name=name;
             this.LastRestock=lastRestock;
             this.DateBetweenRestocks=dateBetweenRestocks;
             this.Deleted=false;
-            this.MaterialCategory=materialCategory;
-            this.Qualifications=new List<Qualification>();
-            this.StockPerLocations=new List<CompanyStock>();
+            this.MaterialCategoryId=materialCategoryId;
+            this.CompanyId=companyId;
         }
 
         /// <summary>
@@ -84,111 +72,11 @@ namespace ClassLibrary
         /// </summary>
         public CompanyMaterial()
         {
-
+            this.Id = 0;
+            this.Deleted = false;
         }
 
-        /// <summary>
-        /// Elimina el materialEmpresa.
-        /// </summary>
-        ///<value>Modificamos el atributo deleted del objeto. Los marcamos como true para que nos aparezca que esta eliminado</value> 
-        public void RemoveCompanyMaterial()
-        {
-            this.Deleted=true;
-        }
-
-        /// <summary>
-        /// Agregar habilitacion para el uso del materialEmpresa
-        /// </summary>
-        ///<value>Agregamos a la lista de habilitaciones, la habilitacion pasada por parametro. Esto pasa si y solo si la habilitacion no esta agregada previamente</value>
-        /// <param name="pQualification">Se pasa la habilitacion a agregar</param>
-        public void AddQualification(Qualification pQualification)
-        {
-            if(!this.Qualifications.Contains(pQualification))
-            {
-                this.Qualifications.Add(pQualification);
-            }
-        }
-
-        /// <summary>
-        /// Eliminar habilitacion para el uso del materialEmpresa
-        /// </summary>
-        ///<value>Eliminamos a la lista de habilitaciones, la habilitacion pasada por parametro. Esto pasa si y solo si la habilitacion esta agregada previamente</value>
-        ///<param name="pQualification">Se pasa la habilitacion a eliminar</param>
-        public void RemoveQualification(Qualification pQualification)
-        {
-            if(this.Qualifications.Contains(pQualification))
-            {
-                this.Qualifications.Remove(pQualification);
-            }
-        }
-
-        /// <summary>
-        /// Buscar la cantidad de stock del materialEmpresa que hay que una lugar
-        /// </summary>
-       /// <returns>
-        /// Retornamos xretorno con la cantidad de stock que tiene el materialEmpresa en ese lugar.
-        /// </returns>
-        ///<param name="pLocation">Lugar en el cual buscamos cuanto stock hay</param>
-        public int GetStockForLocation(Location pLocation)
-        {
-            int xretorno=0;
-            int xIndex= this.GetIndexOfStockFromLocation(pLocation);
-            xretorno=this.StockPerLocations[xIndex].Stock;
-            return xretorno;
-        }
-
-        /// <summary>
-        /// Obtiene la cantidad TOTAL de stock que hay de un materialEmpresa
-        /// </summary>
-       /// <returns>
-        /// Retornamos xretorno con la suma de todos los stocks de todos los lugares donde esta almacenado el materialEmpresa.
-        /// </returns>
-        public int GetStockTotal()
-        {
-            int xretorno=0;
-            foreach (CompanyStock xItem in this.StockPerLocations)
-            {
-                xretorno=xretorno+xItem.Stock;
-            }
-            return xretorno;
-        }
-
-        /// <summary>
-        /// Hace un reabastecimiento del stock del materialEmpresa que hay en un lugar en particular
-        /// </summary>
-        ///<param name="pLocation">Lugar en el cual vamos a hacer el reabastecimiento</param>
-        /// ///<param name="pStock">Cantidad de stock que vamos a reabastecer</param>
-        public void RestockLocation(Location pLocation, int pStock)
-        {
-            int xIndex=this.GetIndexOfStockFromLocation(pLocation);
-            this.StockPerLocations[xIndex].Stock=pStock;
-        }
-
-        /// <summary>
-        /// Obtiene el indice en el cual esta el CompanyStock
-        /// </summary>
-       /// <returns>
-        /// Retornamos xretorno el idice en el cual se encuentra el CompanyStock dentro de nuestra lista de StockPerLocation.
-        /// </returns>
-        ///<param name="pLocation">Lugar en el cual buscamos cuanto stock hay</param>
-        public int GetIndexOfStockFromLocation(Location pLocation)
-        {
-            int xretorno=0;
-            bool xEsta=false;
-            while(xretorno<this.StockPerLocations.Count && xEsta==false)
-            {
-                if(this.StockPerLocations[xretorno].Location==pLocation)
-                {
-                    xEsta=true;
-                }
-                else
-                {
-                    xretorno++;
-                }
-            }
-            return xretorno;
-        }
-
+        /// <inheritdoc/>
         public void LoadFromJson(string json)
         {
             CompanyMaterial companyMaterial=JsonSerializer.Deserialize<CompanyMaterial>(json);
@@ -197,18 +85,19 @@ namespace ClassLibrary
             this.LastRestock=companyMaterial.LastRestock;
             this.DateBetweenRestocks=companyMaterial.DateBetweenRestocks;
             this.Deleted=companyMaterial.Deleted;
-            this.MaterialCategory=companyMaterial.MaterialCategory;
-            this.Qualifications=companyMaterial.Qualifications;
-            this.StockPerLocations=companyMaterial.StockPerLocations;
+            this.MaterialCategoryId = companyMaterial.MaterialCategoryId;
+            this.CompanyId = companyMaterial.CompanyId;
         }
-            
+
+        /// <inheritdoc/>    
         public CompanyMaterial Clone()
         {
             CompanyMaterial companyMaterial=new CompanyMaterial();
             companyMaterial.LoadFromJson(this.ConvertToJson());
             return companyMaterial;
         }
-
+    
+        /// <inheritdoc/>
         public string ConvertToJson()
         {
             return JsonSerializer.Serialize(this);
