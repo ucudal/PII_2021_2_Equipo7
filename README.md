@@ -25,7 +25,7 @@ Todo usuario registrado esta en el sistema con una lista de cuentas asociadas. E
 
 1. El mensaje es recibido por los puntos de contacto con las API soportadas, que formatea los datos de la cuenta y el mensaje para utilizar un `MessageWrapper`.
 2. El `MessageWrapper` es enviado al `MessageHandler` para cargar datos del usuario con el `UserAuthenticator`.
-3. Se envia el mismo objeto, ahora con los datos del usuario, al `CommandHandler` quien procesa los datos de la sesion existente y crea un Selector para enviar a la cadena de responsabilidad encargada de procesar los mesajes.
+3. Se envia el mismo objeto, ahora con los datos del usuario, al `CommandHandler` quien procesa los datos de la sesion existente y crea un Selector para enviar a la cadena de responsabilidad encargada de procesar los mensajes.
 4. El objeto `ChatDialogEntry` configura todos los casos concretos de la cadena de responsabilidad y envia el selector recibido desde el `CommandHandler` al primer miembro de la cadena.
 5. Dentro de la cadena, cada miembro utiliza el metodo `ValidateDataEntry(...)` para confirmar si el mismo es quien debe responder al mensaje enviado por el usuario. De serlo asi, este llama al metodo `Execute(...)` quien realiza las operaciones relevantes y fabrica el mensaje de respuesta al usuario.
 6. El mensaje de respuesta es retornado desde el miembro concreto de la cadena hasta el `MessageHandler` (pasando por el `ChatDialogEntry` y `CommandHandler`) quien crea un contenedor de respuesta y lo envia al `ResponseHandler`.

@@ -24,9 +24,8 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            DProcessData process = new DProcessData("modifi_Material", this.code, null);
-
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            DProcessData process = session.Process;;
             session.Process = process;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
             data.Stock.Location.Georeference=selector.Code;

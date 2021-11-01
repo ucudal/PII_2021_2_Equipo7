@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+
 
 namespace ClassLibrary
 {
@@ -8,9 +10,31 @@ namespace ClassLibrary
     /// </summary>
     public class UserAdmin : DataAdmin<User>
     {
-        public User GetByAccount(MessagingService service,string account)
+        /// <summary>
+        /// Verifica si un usuario
+        /// esta o no suspendido.
+        /// </summary>
+        /// <param name="userId">
+        /// Id del usuario para el
+        /// cual se quiere verificar
+        /// el estado de suspension.
+        /// </param>
+        /// <returns>
+        /// Valor booleano con el
+        /// estado de suspension.
+        /// </returns>
+        public bool GetUserIsSuspended(int userId)
         {
-            return this.Items.Find(userObj => userObj.Accounts.Exists(accountObj => accountObj.Service == service && accountObj.Id == account));
+            ReadOnlyCollection<User> users = this.Items;
+            foreach (User user in users)
+            {
+                if (user.Id == userId)
+                {
+                    return user.Suspended;
+                }
+            }
+
+            return false;
         }
     }
 }

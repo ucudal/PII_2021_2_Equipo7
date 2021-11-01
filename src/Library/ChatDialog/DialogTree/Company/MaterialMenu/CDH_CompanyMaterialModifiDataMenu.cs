@@ -38,14 +38,12 @@ namespace ClassLibrary
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
 
             CompanyMaterial companyMaterial=data.CompanyMaterial;
-            companyMaterialAdmin.Update(companyMaterial);
-
-
             Company company=this.companyAdmin.Items.Find(obj => obj.ListAdminUsers.Exists(admin => admin.Id==session.UserId));
             if(company!=null)
             {
                 company.AddCompanyMaterial(companyMaterial);
             }
+            companyMaterialAdmin.Update(companyMaterial);
             companyAdmin.Update(company);
         }
     }
