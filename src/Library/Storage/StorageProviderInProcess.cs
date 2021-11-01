@@ -9,11 +9,6 @@ namespace ClassLibrary
     /// <summary>
     /// Proveedor de storage In Process.
     /// </summary>
-    namespace ClassLibrary
-{
-    /// <summary>
-    /// Proveedor de storage In Process.
-    /// </summary>
     public class StorageProviderInProcess : IStorageProvider
     {
         private Dictionary<Type, List<dynamic>> tables;
@@ -101,15 +96,5 @@ namespace ClassLibrary
         {
             return item as T;
         }
-
-            ReadOnlyCollection<T> IStorageProvider.SelectAll<T>()
-            {
-                throw new NotImplementedException();
-            }
-
-            ReadOnlyCollection<T> IStorageProvider.SelectAll<T>()
-            {
-                throw new NotImplementedException();
-            }
-        }    
+    }    
 }
