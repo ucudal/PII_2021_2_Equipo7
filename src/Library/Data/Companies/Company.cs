@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace ClassLibrary
     
-{    
+{   
     /// <summary>
     /// esta clase representa a la compania
     /// </summary>

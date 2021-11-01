@@ -1,33 +1,100 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace ClassLibrary
 {
     /// <summary>
     /// la clase account maneja las cuentas de lso usuarios
     /// </summary>
-    public class Account
+    public class Account: IManagableData<Account>
     {
-    /// <summary>
-    /// Servicio de mensajeria
-    /// </summary>
-    /// <value></value>
-        public MessagingService Service {get;set;}
+        private int id;
+        private bool deleted;
+        private int userId;
+        private MessagingService service;
+        private string codeInService;
+
         /// <summary>
-        /// id de el usuario dado por el servicio de mensajeria
+        /// Inicializa una nueva instancia de la clase <see cref="Account"/>.
         /// </summary>
-        /// <value></value>
-        public string Id {get;set;}
-        /// <summary>
-        /// constructor de Account
-        /// </summary>
-        /// <param name="service">Servicio de mensajeria </param>
-        /// <param name="id">id de la cuenta del servicio de mensajeria</param>
-        public Account(MessagingService service, string id)
+        [JsonConstructor]
+        public Account()
         {
-            this.Service=service;
-            this.Id=id;
+            this.Id = 0;
+            this.deleted = false;
+        }
+
+        /// <inheritdoc/>
+        public int Id 
+        { 
+            get => this.id; 
+            set => this.id = value; 
+        }
+
+        /// <inheritdoc/>
+        public bool Deleted 
+        { 
+            get => this.deleted; 
+            set => this.deleted = value; 
+        }
+
+        /// <summary>
+        /// Id del usuario asociado
+        /// a la cuenta
+        /// </summary>
+        public int UserId 
+        { 
+            get => this.userId; 
+            set => this.userId = value; 
+        }
+
+        /// <summary>
+        /// Servicio de mensajeria
+        /// asociado a la cuenta.
+        /// </summary>
+        public MessagingService Service 
+        { 
+            get => this.service; 
+            set => this.service = value; 
+        }
+
+        /// <summary>
+        /// Identificador de la
+        /// cuenta en el servicio
+        /// de mensajeria asociado
+        /// </summary>
+        public string CodeInService 
+        { 
+            get => this.codeInService; 
+            set => this.codeInService = value; 
+        }
+
+        /// <inheritdoc/>
+        public Account Clone()
+        {
+            Account acc = new Account();
+            acc.LoadFromJson(this.ConvertToJson());
+            return acc;
+        }
+
+        /// <inheritdoc/>
+        public string ConvertToJson()
+        {
+            return JsonSerializer.Serialize(this);
+        }
+
+        /// <inheritdoc/>
+        public void LoadFromJson(string json)
+        {
+            Account acc = JsonSerializer.Deserialize<Account>(json);
+            this.Id = acc.Id;
+            this.Deleted = acc.Deleted;
+            this.UserId = acc.UserId;
+            this.Service = acc.Service;
+            this.CodeInService = acc.CodeInService;
         }
     }
 }

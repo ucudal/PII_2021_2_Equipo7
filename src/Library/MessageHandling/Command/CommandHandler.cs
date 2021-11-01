@@ -10,6 +10,7 @@ namespace ClassLibrary
         private ChatDialogEntry chatEntry = Singleton<ChatDialogEntry>.Instance;
         private UserAdmin userAdmin = Singleton<UserAdmin>.Instance;
         private CompanyAdmin companyAdmin = Singleton<CompanyAdmin>.Instance;
+        private CompanyUserAdmin companyUserAdmin = Singleton<CompanyUserAdmin>.Instance;
         private EntrepreneurAdmin entrepreneurAdmin = Singleton<EntrepreneurAdmin>.Instance;
         
         /// <summary>
@@ -24,23 +25,26 @@ namespace ClassLibrary
         public string HandleMessage(MessageWrapper message)
         {
             Session session = this.sessions.CreateSession(message.Service, message.Account);
-            User user = this.userAdmin.GetById(message.UserId);
-            
-            session.UserId = user.Id;
-            switch (user.Role)
+            if (message.UserStatus == UserStatus.Registered)
             {
-                case UserRole.CompanyAdministrator:
-                    Company company = companyAdmin.FindAdminUser(message.UserId);
-                    session.EntityId = company.Id;
-                    break;
-                case UserRole.Entrepreneur:
-                    Entrepreneur entrepreneur = entrepreneurAdmin.GetByUser(message.UserId);
-                    session.EntityId = entrepreneur.Id;
-                    break;
-                default:
-                    session.EntityId = 0;
-                    break;
+                User user = this.userAdmin.GetById(message.UserId);
+                session.UserId = user.Id;
+                switch (user.Role)
+                {
+                    case UserRole.CompanyAdministrator:
+                        int companyId = companyUserAdmin.GetCompanyForUser(message.UserId);
+                        session.EntityId = companyId;
+                        break;
+                    case UserRole.Entrepreneur:
+                        Entrepreneur entrepreneur = entrepreneurAdmin.GetByUser(message.UserId);
+                        session.EntityId = entrepreneur.Id;
+                        break;
+                    default:
+                        session.EntityId = 0;
+                        break;
+                }
             }
+
 
             string context;
             if (message.UserStatus == UserStatus.Suspended)
