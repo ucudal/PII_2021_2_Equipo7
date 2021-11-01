@@ -12,89 +12,134 @@ namespace ClassLibrary
         /// <summary>
         /// Conexion con la base de datos
         /// </summary>
-        private IStorageProvider storage=Singleton<StorageProviderInProcess>.Instance;
+        private IStorageProvider storage = Singleton<StorageProviderInProcess>.Instance;
 
         /// <summary>
         /// Lista de objetos de tipo T 
         /// </summary>
         /// <value>Almacenamos en la lista Item objetos de tipo T.</value>
-        public List<T> Items 
+        public ReadOnlyCollection<T> Items 
         {
             get
             {
-                return this.storage.GetTable<T>();
+                return this.storage.SelectAll<T>();
             }
         }
         
         /// <summary>
-        /// Agregar a la lista 
+        /// Inserta un registro en el 
+        /// almacenamiento.
         /// </summary>
-        ///<value>Agregamos a la lista Items, el objeto de tipo T. Esto pasa si y solo si el objeto no esta agregado previamente</value>
-        /// <param name="pElemento ">Se pasa el objeto de tipo T</param>
-        public virtual void Insert(T pElemento)
+        /// <param name="pElemento">
+        /// Elemento a insertar.
+        /// </param>
+        /// <returns>
+        /// Id del elemento insertado.
+        /// </returns>
+        public virtual int Insert(T pElemento)
         {
-            pElemento.Id=IndexCalculator();
-            if(!Items.Contains(pElemento))
-            {
-                Items.Add(pElemento);
-            }
+            return this.storage.Insert<T>(pElemento);
         }
-        private int IndexCalculator()
-        {
-            int xretorno=this.Items.Max(obj=>obj.Id)+1;
-            return xretorno;
-        }
-       
+        
         /// <summary>
-        /// Modificar elemento de la lista 
+        /// Actualiza un elemento segun su id.
         /// </summary>
-        ///<value>Modificamos un elemento de tipo T de la lista Items. Esto pasa si y solo si el objeto  esta agregado previamente</value>
-        /// <param name="pElemento ">Se pasa el objeto de tipo T</param>
-        public virtual void Update(T pElemento)
+        /// <param name="pElemento">
+        /// Elemento a actualizar con sus
+        /// datos nuevos.
+        /// </param>
+        /// <returns>
+        /// Confirmacion de la actualizacion.
+        /// </returns>
+        public virtual bool Update(T pElemento)
+        {   
+            return this.storage.Update<T>(pElemento);
+        }
+        
+        /// <summary>
+        /// Elimina un elemento segun el id
+        /// recibido.
+        /// </summary>
+        /// <param name="pId">
+        /// Id del elemento a eliminar.
+        /// </param>
+        /// <returns>
+        /// Confirmacion de la eliminacion.
+        /// </returns>
+        public virtual bool Delete(int pId)
         {
-            Items[Items.IndexOf(this.GetById(pElemento.Id))]=pElemento;
+            return this.storage.Delete<T>(pId);
+        }
+        
+        /// <summary>
+        /// Obtener un registro por su id.
+        /// </summary>
+        /// <param name="pId">
+        /// Id del registro a obtener.
+        /// </param>
+        /// <returns>
+        /// Registro obtenido o nulo
+        /// en caso de no existir.
+        /// </returns>
+        public virtual T GetById(int pId)
+        {
+            T recordFound = this.Items.First<T>(recordItem => recordItem.Id == pId && !recordItem.Deleted);
+            if (recordFound is null)
+            {
+                return null;
+            }
+
+            return recordFound.Clone();
+        }
+        
+        /// <summary>
+        /// Crear un objeto nuevo del tipo
+        /// asociado al DataAdmin
+        /// </summary>
+        /// <returns>
+        /// Objeto creado.
+        /// </returns>
+        public virtual T New()
+        {
+            T newItem = new T();
+            return newItem;
         }
 
         /// <summary>
-        /// Eliminar de la lista al objeto de tipo T 
+        /// Toma una lista de items T, la
+        /// separa en paginas de cierta 
+        /// cantidad de items, y recupera
+        /// una pagina concreta de estas.
         /// </summary>
-        ///<value>Eliminamos de la lista Items, el objeto de tipo T. Esto pasa si y solo si el objeto esta agregado previamente</value>
-        /// <param name="pId ">Se pasa el el id del objeto a eliminar</param>
-        public virtual void Delete(int pId)
+        /// <param name="items">
+        /// Listado de items a reducir.
+        /// </param>
+        /// <param name="itemCount">
+        /// Cantidad de items por pagina.
+        /// </param>
+        /// <param name="page">
+        /// Pagina la cual retornar.
+        /// </param>
+        /// <returns>
+        /// Listado de items pertenecientes
+        /// a la pagina con el indice provisto
+        /// al dividir la lista original
+        /// en la grupos de la cantidad de
+        /// items especificada.
+        /// </returns>
+        protected List<T> GetItemPage(List<T> items, int itemCount, int page)
         {
-            this.Items.RemoveAll(obj=>obj.Id==pId);
-        }
-        
-        /// <summary>
-        /// Busca un obejto de tipo T 
-        /// </summary>
-        ///<value>Recorremos la lista y devolvemos el objeto de tipo T que tenga el id pasado por parametro. Esto pasa si y solo si el objeto esta agregado previamente</value>
-        ///<result>Retorna un elemento de tipo T </result>
-        /// <param name="pId ">Se pasa el objeto de tipo T</param>
-        public virtual T GetById(int pId)
-        {
-            return this.Items.Find(obj=>obj.Id==pId);
-        }
-        
-        /// <summary>
-        /// Crea un objeto de tipo User vacio
-        /// </summary>
-        ///<result>Retorna un elemento de tipo User vacio </result>
-        public virtual T New()
-        {
-            T xretorno=new T();
-            return xretorno;
-        }
-        public virtual List<T> GetItemPage(int page,int itemCount)
-        {
-            List<T> xlista= new List<T>();
-            int indice=page*itemCount;
-            this.Items.GetRange(indice,itemCount);
-            if(!(indice>=this.Items.Count))
+            List<T> listForPage = new List<T>();
+            int startIndex = page * itemCount;
+            if (startIndex < items.Count)
             {
-                xlista=this.Items.GetRange(indice,itemCount);
+                for (int index = startIndex; index < items.Count && index < (startIndex + itemCount) ; index++)
+                {
+                    listForPage.Add(items.ElementAt(index));
+                }
             }
-            return xlista;
+
+            return listForPage;
         }        
 
     }

@@ -41,37 +41,35 @@ namespace ClassLibrary
         public UserRole Role{get;set;}
 
         /// <summary>
-        /// Lista de cuentas
+        /// Estado de suspension del usuario.
         /// </summary>
-        /// <value>Almacenamos en una lista llamada Accounts todas las cuentas</value>
-        
-        [JsonInclude]
-        public List<Account> Accounts{get;set;}
+        public bool Suspended { get; set; }
 
         /// <summary>
         /// Constructor de la clase.
         /// </summary>
 
+        public User(int id, string firstName, string lastName, UserRole role)
+        {
+            this.Id = id;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Deleted = false;
+            this.Role = role;
+        }
+
+        /// <summary>
+        /// Constructor de la clase.
+        /// </summary>
         [JsonConstructor]
-        public User(int id, string firstName,string lastName, UserRole role)
+        public User() 
         {
-            this.Id=id;
-            this.FirstName=firstName;
-            this.LastName=lastName;
-            this.Deleted=false;
-            this.Role=role;
-            this.Accounts=new List<Account>();
-
+            this.Id = 0;
+            this.Deleted = false;
+            this.Suspended = false;
         }
 
-        /// <summary>
-        /// Constructor de la clase.
-        /// </summary>
-        public User()
-        {
-
-        }
-
+        /// <inheritdoc/>
         public void LoadFromJson(string json)
         {
             User user=JsonSerializer.Deserialize<User>(json);
@@ -80,16 +78,18 @@ namespace ClassLibrary
             this.LastName=user.LastName;
             this.Deleted=user.Deleted;
             this.Role=user.Role;
-            this.Accounts=user.Accounts;
+            this.Suspended=user.Suspended;
         }
 
+        /// <inheritdoc/>
         public User Clone()
         {
-            User usuario=new User();
+            User usuario = new User();
             usuario.LoadFromJson(this.ConvertToJson());
             return usuario;
         }
 
+        /// <inheritdoc/>
         public string ConvertToJson()
         {
             return JsonSerializer.Serialize(this);
