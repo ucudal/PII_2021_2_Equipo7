@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections;
 using ClassLibrary;
 
+using System.Collections.ObjectModel;
+
 namespace ClassLibrary
 {
     /// <summary>
@@ -17,10 +19,11 @@ namespace ClassLibrary
         /// <returns></returns>
         public Entrepreneur GetByUser(int id)
         {
+            ReadOnlyCollection<Entrepreneur> entrepreneurs = this.Items;
             foreach (Entrepreneur item in this.Items)
             {
-                if (item.User.Id== id)
-                return item;
+                if (item.UserId== id)
+                return item.Clone();
 
 
             }

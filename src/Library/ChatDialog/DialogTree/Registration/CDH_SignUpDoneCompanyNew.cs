@@ -12,6 +12,8 @@ namespace ClassLibrary
     {
         private UserAdmin userAdmin = Singleton<UserAdmin>.Instance;
         private CompanyAdmin companyAdmin = Singleton<CompanyAdmin>.Instance;
+                private AccountAdmin accAdmin = Singleton<AccountAdmin>.Instance;
+        private CompanyUserAdmin compUsrAdmin = Singleton<CompanyUserAdmin>.Instance;
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpDoneCompanyNew"/>.
@@ -24,21 +26,39 @@ namespace ClassLibrary
         }
 
         /// <inheritdoc/>
-        public override string Execute(ChatDialogSelector selector)
+            public override string Execute(ChatDialogSelector selector)
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             SignUpData data = session.Process.GetData<SignUpData>();
-            Account account = new Account(selector.Service, selector.Account);
-            User user = data.User;
-            user.Id = 1;
-            user.Role = UserRole.CompanyAdministrator;
-            user.Accounts.Add(account);
-            Company company = data.Company;
-            company.Id = 1;
-            company.AddAdminUser(user);
 
-            userAdmin.Insert(user);
-            companyAdmin.Insert(company);
+            User user = userAdmin.New();
+            user.FirstName = data.User.FirstName;
+            user.LastName = data.User.LastName;
+            user.Role = UserRole.CompanyAdministrator;
+            int userId = userAdmin.Insert(user);
+
+            if (userId != 0)
+            {
+                Account acc = accAdmin.New();
+                acc.UserId = userId;
+                acc.Service = selector.Service;
+                acc.CodeInService = selector.Account;
+                accAdmin.Insert(acc);
+            }
+        
+            Company comp = companyAdmin.New();
+            comp.Name = data.Company.Name;
+            comp.Trade = data.Company.Trade;
+            int compId = companyAdmin.Insert(comp);
+
+            if (compId != 0)
+            {
+                CompanyUser compUsr = compUsrAdmin.New();
+                compUsr.CompanyId = compId;
+                compUsr.AdminUserId = userId;
+                compUsrAdmin.Insert(compUsr);
+            }
+
             session.MenuLocation = null;
             session.Process = null;
 
