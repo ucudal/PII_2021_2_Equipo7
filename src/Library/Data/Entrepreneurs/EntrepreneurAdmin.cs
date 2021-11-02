@@ -29,5 +29,23 @@ namespace ClassLibrary
             }
             return null;
         }
+        /// <summary>
+        /// encontramos un emprendedor por nombre 
+        /// </summary>
+        /// <param name="name">nombre del emprendedor</param>
+        /// <returns></returns>
+         public Entrepreneur GetByName(string name)
+        {
+            ReadOnlyCollection<Entrepreneur> entrepreneurs = this.Items;
+            foreach (Entrepreneur comp in entrepreneurs)
+            {
+                if (comp.Name == name)
+                {
+                    return comp.Clone();
+                }
+            }
+            
+            return null;
+        }
     }
 }

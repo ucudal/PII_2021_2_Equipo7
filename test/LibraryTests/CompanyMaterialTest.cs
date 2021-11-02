@@ -17,10 +17,11 @@ namespace Tests
         {
             int id = 1;
             string name="nombre material";
-            
+            int companyid = 0;
+            int materialcatid=
             DateTime hoy = DateTime.Today;
             MaterialCategory material = new MaterialCategory(2,"categoria x");
-            CompanyMaterial companiaMaterial = new CompanyMaterial(id,name,hoy,10,material);
+            CompanyMaterial companiaMaterial = new CompanyMaterial(id,name,hoy,10,,companyid);
             Assert.AreEqual(name,companiaMaterial.Name);
             Assert.AreEqual(id,companiaMaterial.Id);
             Assert.AreEqual(hoy,companiaMaterial.LastRestock);

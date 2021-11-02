@@ -24,6 +24,9 @@ namespace Tests
             Assert.AreEqual(id,compania.Id);
             Assert.AreEqual(trade,compania.Trade);
         }
+
+        
+        /*
         /// <summary>
         /// testa para añadir la o las locaciones de la empresa
         /// </summary>
@@ -131,7 +134,7 @@ namespace Tests
             }
 
         }
-
+*/
 
         
 
