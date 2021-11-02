@@ -19,17 +19,20 @@ namespace Tests
             int id = 1;
             string name="nombre Emprendedor";
             string trade ="rubro";
-
-            User usuario = new User();
+            int userid = 2;
             
-            Entrepreneur emprendedor  = new Entrepreneur(name,usuario, id,trade);
+
+            
+            
+            Entrepreneur emprendedor  = new Entrepreneur(name,userid, id,trade);
 
 
             Assert.AreEqual(name,emprendedor.Name);
             Assert.AreEqual(id,emprendedor.Id);
             Assert.AreEqual(trade,emprendedor.Trade);
-            Assert.AreEqual(usuario,emprendedor.User);
+            Assert.AreEqual(userid,emprendedor.UserId);
         }
+        /*
         /// <summary>
         /// añadimos la locacion del emprendedor
         /// </summary>
@@ -95,6 +98,7 @@ namespace Tests
             }
 
         }
+        */
 
     }
 }

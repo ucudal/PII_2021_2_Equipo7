@@ -1,6 +1,8 @@
 using System;
+using System.Collections.ObjectModel;
 using ClassLibrary;
 using NUnit.Framework;
+
 
 namespace Tests
 {
@@ -14,16 +16,27 @@ namespace Tests
         /// <summary>
         /// 
         /// </summary>
+        
+
+        
         [Test] 
         public void InsertTest()
         {
-            int id = 1;
+            ReadOnlyCollection<Company> items = companyAdmin.Items;
+            
+            
             string name="nombre compania";
             string trade ="rubro";
-            Company compania = new Company(id,name,trade);
-            companyAdmin.Insert(compania);
-            Assert.That(companyAdmin.Items.Exists(item=>item.Name=="pepito"));
-            
+            Company compania = companyAdmin.New();
+            compania.Name = name;
+            compania.Trade = trade;
+            int companyid = companyAdmin.Insert(compania);
+            Assert.AreNotEqual(0,companyid);
+
+            compania = companyAdmin.GetById(companyid);
+            Assert.AreEqual(name,compania.Name);
+            Assert.AreEqual(trade,compania.Trade);
+
         }
 
         /// <summary>
@@ -32,10 +45,10 @@ namespace Tests
         [Test] 
         public void UpdateTest()
         {
-            Company compania = new Company();
+            Company compania = companyAdmin.New();
             compania.Name="pepito";
-            companyAdmin.Insert(compania);
-            Company compania2 = new Company();
+            int idcompania = companyAdmin.Insert(compania);
+            Company compania2 = companyAdmin.New();
             compania2=companyAdmin.GetByName("pepito");
             int id =compania2.Id;
             compania2.Trade="armas";
@@ -43,8 +56,9 @@ namespace Tests
             Company compania3 = new Company();
             compania3=companyAdmin.GetById(id);
             Assert.AreEqual("armas",compania3.Trade);
+            Assert.AreNotEqual(0,idcompania);
+            // no se que hacer en esta patyre si me falta algo
 
-            Assert.That(companyAdmin.Items.Exists(item=>item.Name=="pepito"));
             
         }
                 /// <summary>
@@ -88,7 +102,7 @@ namespace Tests
 
 
         }
-        
+
 
     }
 }
