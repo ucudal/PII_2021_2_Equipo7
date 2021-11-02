@@ -2456,6 +2456,27 @@
             <param name="id">id de user</param>
             <returns></returns>
         </member>
+        <member name="M:ClassLibrary.EntrepreneurAdmin.GetByName(System.String)">
+            <summary>
+            encontramos un emprendedor por nombre 
+            </summary>
+            <param name="name">nombre del emprendedor</param>
+            <returns></returns>
+        </member>
+        <member name="T:ClassLibrary.Invitation">
+            <summary>
+            Clase encargada para conocer los datos de la invitacion
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Invitation.Id">
+            <summary>
+            Identificador de cada Invitacion
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Invitation.Code">
+            <summary>
+            Codigo de la invitacion
+            </summary>
         <member name="T:ClassLibrary.Invitation">
             <summary>
             Clase encargada para conocer los datos de la invitacion
@@ -2730,6 +2751,18 @@
         <member name="P:ClassLibrary.Sale.ProductCompanyMaterialId">
             <summary>
             Material de empresa comprado.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Sale.ProductQuantity">
+            <summary>
+            Cantidad del material comprado.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Sale.SellerCompanyId">
+            <summary>
+            Property de Company.
+            </summary>
+        </member>
             </summary>
         </member>
         <member name="P:ClassLibrary.Sale.ProductQuantity">
