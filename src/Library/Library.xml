@@ -4,30 +4,6 @@
         <name>Library</name>
     </assembly>
     <members>
-        <member name="T:ClassLibrary.Account">
-            <summary>
-            la clase account maneja las cuentas de lso usuarios
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Account.Service">
-            <summary>
-            Servicio de mensajeria
-            </summary>
-            <value></value>
-        </member>
-        <member name="P:ClassLibrary.Account.Id">
-            <summary>
-            id de el usuario dado por el servicio de mensajeria
-            </summary>
-            <value></value>
-        </member>
-        <member name="M:ClassLibrary.Account.#ctor(ClassLibrary.MessagingService,System.String)">
-            <summary>
-            constructor de Account
-            </summary>
-            <param name="service">Servicio de mensajeria </param>
-            <param name="id">id de la cuenta del servicio de mensajeria</param>
-        </member>
         <member name="T:ClassLibrary.UserAuthenticator">
             <summary>
             Clase que expone los metodos necesarios para 
@@ -210,6 +186,22 @@
             <inheritdoc/>
         </member>
         <member name="M:ClassLibrary.CDH_BadCommand.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_SessionExpired">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            no registrado en la plataforma.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_SessionExpired.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_SessionExpired"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_SessionExpired.Execute(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
         <member name="T:ClassLibrary.CDH_WelcomeCompany">
@@ -888,26 +880,6 @@
         <member name="M:ClassLibrary.CDH_CompanyPublicationQuantityMaterialToAddMenu.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
-        <member name="T:ClassLibrary.CDH_SignReviewJoinCompany">
-            <summary>
-            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
-            Responde a la introduccion del oficio de la
-            empresa. Le pide al usuario revisar los datos 
-            ingresados y confirmar su ingreso al sistema.
-            </summary>
-        </member>
-        <member name="M:ClassLibrary.CDH_SignReviewJoinCompany.#ctor(ClassLibrary.ChatDialogHandlerBase)">
-            <summary>
-            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_SignReviewJoinCompany"/>.
-            </summary>
-            <param name="next">Siguiente handler.</param>
-        </member>
-        <member name="M:ClassLibrary.CDH_SignReviewJoinCompany.Execute(ClassLibrary.ChatDialogSelector)">
-            <inheritdoc/>
-        </member>
-        <member name="M:ClassLibrary.CDH_SignReviewJoinCompany.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
-            <inheritdoc/>
-        </member>
         <member name="T:ClassLibrary.CDH_SignUpBadCode">
             <summary>
             <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
@@ -1039,6 +1011,24 @@
         <member name="M:ClassLibrary.CDH_SignUpDoneEntrepreneurNew.Execute(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
+        <member name="T:ClassLibrary.CDH_SignUpDoneJoinCompany">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde a la confirmacion de los datos
+            ingresados en el registro de un usiario  
+            a una compañía ya existente. Ingresa los
+            datos al sistema.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_SignUpDoneJoinCompany.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_SignUpDoneJoinCompany"/>.
+            </summary>
+            <param name="next">Siguiente handler</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_SignUpDoneJoinCompany.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
         <member name="T:ClassLibrary.CDH_SignUpDoneSysAdmin">
             <summary>
             <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
@@ -1057,7 +1047,7 @@
         <member name="M:ClassLibrary.CDH_SignUpDoneSysAdmin.Execute(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
-        <member name="T:ClassLibrary.CDH_SignUpEnterpreneurName">
+        <member name="T:ClassLibrary.CDH_SignUpEntrepreneurName">
             <summary>
             <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
             Responde a la introduccion del apellido del
@@ -1066,19 +1056,19 @@
             de la empresa a ingresar.
             </summary>
         </member>
-        <member name="M:ClassLibrary.CDH_SignUpEnterpreneurName.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+        <member name="M:ClassLibrary.CDH_SignUpEntrepreneurName.#ctor(ClassLibrary.ChatDialogHandlerBase)">
             <summary>
-            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_SignUpEnterpreneurName"/>.
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_SignUpEntrepreneurName"/>.
             </summary>
             <param name="next">Siguiente handler.</param>
         </member>
-        <member name="M:ClassLibrary.CDH_SignUpEnterpreneurName.Execute(ClassLibrary.ChatDialogSelector)">
+        <member name="M:ClassLibrary.CDH_SignUpEntrepreneurName.Execute(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
-        <member name="M:ClassLibrary.CDH_SignUpEnterpreneurName.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
+        <member name="M:ClassLibrary.CDH_SignUpEntrepreneurName.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
-        <member name="T:ClassLibrary.CDH_SignUpEnterpreneurTrade">
+        <member name="T:ClassLibrary.CDH_SignUpEntrepreneurTrade">
             <summary>
             <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
             Responde a la introduccion del nombre de la
@@ -1086,16 +1076,16 @@
             usuario introducir el oficio de la Empresa.
             </summary>
         </member>
-        <member name="M:ClassLibrary.CDH_SignUpEnterpreneurTrade.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+        <member name="M:ClassLibrary.CDH_SignUpEntrepreneurTrade.#ctor(ClassLibrary.ChatDialogHandlerBase)">
             <summary>
-            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_SignUpEnterpreneurTrade"/>.
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_SignUpEntrepreneurTrade"/>.
             </summary>
             <param name="next">Siguiente handler.</param>
         </member>
-        <member name="M:ClassLibrary.CDH_SignUpEnterpreneurTrade.Execute(ClassLibrary.ChatDialogSelector)">
+        <member name="M:ClassLibrary.CDH_SignUpEntrepreneurTrade.Execute(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
-        <member name="M:ClassLibrary.CDH_SignUpEnterpreneurTrade.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
+        <member name="M:ClassLibrary.CDH_SignUpEntrepreneurTrade.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
         <member name="T:ClassLibrary.CDH_SignUpReviewCompanyNew">
@@ -1116,6 +1106,46 @@
             <inheritdoc/>
         </member>
         <member name="M:ClassLibrary.CDH_SignUpReviewCompanyNew.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_SignUpReviewEntrepreneurNew">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde a la introduccion del oficio de la
+            empresa. Le pide al usuario revisar los datos 
+            ingresados y confirmar su ingreso al sistema.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_SignUpReviewEntrepreneurNew.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_SignUpReviewEntrepreneurNew"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_SignUpReviewEntrepreneurNew.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.CDH_SignUpReviewEntrepreneurNew.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_SignUpReviewJoinCompany">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde a la introduccion del oficio de la
+            empresa. Le pide al usuario revisar los datos 
+            ingresados y confirmar su ingreso al sistema.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_SignUpReviewJoinCompany.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_SignUpReviewJoinCompany"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_SignUpReviewJoinCompany.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.CDH_SignUpReviewJoinCompany.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
         <member name="T:ClassLibrary.CDH_SignUpReviewSysAdmin">
@@ -1258,44 +1288,6 @@
         <member name="M:ClassLibrary.CDH_SignUpVerifySysAdminNew.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
-        <member name="T:ClassLibrary.CDH_SingUpDoneJoinCompany">
-            <summary>
-            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
-            Responde a la confirmacion de los datos
-            ingresados en el registro de un usiario  
-            a una compañía ya existente. Ingresa los
-            datos al sistema.
-            </summary>
-        </member>
-        <member name="M:ClassLibrary.CDH_SingUpDoneJoinCompany.#ctor(ClassLibrary.ChatDialogHandlerBase)">
-            <summary>
-            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_SingUpDoneJoinCompany"/>.
-            </summary>
-            <param name="next">Siguiente handler</param>
-        </member>
-        <member name="M:ClassLibrary.CDH_SingUpDoneJoinCompany.Execute(ClassLibrary.ChatDialogSelector)">
-            <inheritdoc/>
-        </member>
-        <member name="T:ClassLibrary.CDH_SingUpReviewEnterpreneurnew">
-            <summary>
-            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
-            Responde a la introduccion del oficio de la
-            empresa. Le pide al usuario revisar los datos 
-            ingresados y confirmar su ingreso al sistema.
-            </summary>
-        </member>
-        <member name="M:ClassLibrary.CDH_SingUpReviewEnterpreneurnew.#ctor(ClassLibrary.ChatDialogHandlerBase)">
-            <summary>
-            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_SignUpReviewCompanyNew"/>.
-            </summary>
-            <param name="next">Siguiente handler.</param>
-        </member>
-        <member name="M:ClassLibrary.CDH_SingUpReviewEnterpreneurnew.Execute(ClassLibrary.ChatDialogSelector)">
-            <inheritdoc/>
-        </member>
-        <member name="M:ClassLibrary.CDH_SingUpReviewEnterpreneurnew.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
-            <inheritdoc/>
-        </member>
         <member name="T:ClassLibrary.Currency">
             <summary>
             Enumerable que lista las monedas
@@ -1366,6 +1358,28 @@
         </member>
         <member name="F:ClassLibrary.UserStatus.Suspended">
             <summary>Usuario suspendido.</summary>
+        </member>
+        <member name="T:ClassLibrary.Location">
+            <summary>
+            clase location
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Location.Georeference">
+            <summary>
+            valor de georeferencia
+            </summary>
+            <value>string de georeferencia</value>
+        </member>
+        <member name="M:ClassLibrary.Location.#ctor">
+            <summary>
+            constructor vacio de location
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.Location.#ctor(System.String)">
+            <summary>
+            constructor de location
+            </summary>
+            <param name="Georeference">georeferenciacion</param>
         </member>
         <member name="T:ClassLibrary.Singleton`1">
             <summary>
@@ -1457,6 +1471,105 @@
             de procesar el paso.
             </returns>
         </member>
+        <member name="T:ClassLibrary.DataAdmin`1">
+            <summary>
+            Esta es una clase abstracta de la cual van
+            a heredar todas las clases admin. Su funcion 
+            es almacenar y manipular los elementos de tipo T.
+            </summary>
+        </member>
+        <member name="F:ClassLibrary.DataAdmin`1.storage">
+            <summary>
+            Conexion con la base de datos
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.DataAdmin`1.Items">
+            <summary>
+            Lista de objetos de tipo T 
+            </summary>
+            <value>Almacenamos en la lista Item objetos de tipo T.</value>
+        </member>
+        <member name="M:ClassLibrary.DataAdmin`1.Insert(`0)">
+            <summary>
+            Inserta un registro en el 
+            almacenamiento.
+            </summary>
+            <param name="pElemento">
+            Elemento a insertar.
+            </param>
+            <returns>
+            Id del elemento insertado.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.DataAdmin`1.Update(`0)">
+            <summary>
+            Actualiza un elemento segun su id.
+            </summary>
+            <param name="pElemento">
+            Elemento a actualizar con sus
+            datos nuevos.
+            </param>
+            <returns>
+            Confirmacion de la actualizacion.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.DataAdmin`1.Delete(System.Int32)">
+            <summary>
+            Elimina un elemento segun el id
+            recibido.
+            </summary>
+            <param name="pId">
+            Id del elemento a eliminar.
+            </param>
+            <returns>
+            Confirmacion de la eliminacion.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.DataAdmin`1.GetById(System.Int32)">
+            <summary>
+            Obtener un registro por su id.
+            </summary>
+            <param name="pId">
+            Id del registro a obtener.
+            </param>
+            <returns>
+            Registro obtenido o nulo
+            en caso de no existir.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.DataAdmin`1.New">
+            <summary>
+            Crear un objeto nuevo del tipo
+            asociado al DataAdmin
+            </summary>
+            <returns>
+            Objeto creado.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.DataAdmin`1.GetItemPage(System.Collections.Generic.List{`0},System.Int32,System.Int32)">
+            <summary>
+            Toma una lista de items T, la
+            separa en paginas de cierta 
+            cantidad de items, y recupera
+            una pagina concreta de estas.
+            </summary>
+            <param name="items">
+            Listado de items a reducir.
+            </param>
+            <param name="itemCount">
+            Cantidad de items por pagina.
+            </param>
+            <param name="page">
+            Pagina la cual retornar.
+            </param>
+            <returns>
+            Listado de items pertenecientes
+            a la pagina con el indice provisto
+            al dividir la lista original
+            en la grupos de la cantidad de
+            items especificada.
+            </returns>
+        </member>
         <member name="T:ClassLibrary.IManagableData`1">
             <summary>
             Interface para estructuras de datos que
@@ -1499,104 +1612,149 @@
             de datos.
             </summary>
         </member>
-        <member name="M:ClassLibrary.IStorageProvider.GetTable``1">
+        <member name="M:ClassLibrary.IStorageProvider.SelectAll``1">
             <summary>
-            Conseguir un listado de los registros
-            almacenados del tipo recibido.
+            Interface para implementar proveedores de almacenamiento
+            de datos.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.IStorageProvider.Insert``1(``0)">
+            <summary>
+            Inserta un registro en el 
+            alacenamiento.
             </summary>
             <typeparam name="T">
-            Tipo que indica el listado de registros a devolver.
+            Clase de datos del registro.
+            Asociado a la tabla en si.
             </typeparam>
+        </member>
+        <member name="M:ClassLibrary.IStorageProvider.Update``1(``0)">
+            <summary>
+            Modifica un registro segun su id.
+            </summary>
+            <typeparam name="T">
+            Clase de datos del registro.
+            Asociado a la tabla en si.
+            </typeparam>
+        </member>
+        <member name="M:ClassLibrary.IStorageProvider.Delete``1(System.Int32)">
+            <summary>
+            Elimina un registro por su id.
+            </summary>
+            <typeparam name="T">
+            Clase de datos del registro.
+            Asociado a la tabla en si.
+            </typeparam>
+        </member>
+        <member name="T:ClassLibrary.SearchData">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ClassLibrary.SearchPage`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:ClassLibrary.SearchPage`1.SearchResults">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.SearchPage`1.CurrentPage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.SearchPage`1.PageItemCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.SearchPage`1.PageItems">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ClassLibrary.CompanyUser">
+            <summary>
+            Registro de asociacion entre
+            compania y usuario que la 
+            administra.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CompanyUser.#ctor">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CompanyUser"/>.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.CompanyUser.Id">
+            <inheritdoc/>
+        </member>
+        <member name="P:ClassLibrary.CompanyUser.Deleted">
+            <inheritdoc/>
+        </member>
+        <member name="P:ClassLibrary.CompanyUser.CompanyId">
+            <summary>
+            Id de la compania a la 
+            cual pertenece el usuario.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.CompanyUser.AdminUserId">
+            <summary>
+            Identificador del
+            usuario.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CompanyUser.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.CompanyUser.ConvertToJson">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.CompanyUser.LoadFromJson(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CompanyUserAdmin">
+            <summary>
+            Clase administradora de
+            asociaciones entre companias
+            y usuarios.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CompanyUserAdmin.GetAdminUserForCompany(System.Int32)">
+            <summary>
+            Lista todos los usuarios
+            administradores de una
+            compania.
+            </summary>
+            <param name="companyId">
+            Id de la compania por la
+            cual buscar usuarios.
+            </param>
             <returns>
-            Listado de registros del tipo T.
+            Listado de ids de usuarios.
             </returns>
         </member>
-        <member name="T:ClassLibrary.SearchData">
+        <member name="M:ClassLibrary.CompanyUserAdmin.GetCompanyForUser(System.Int32)">
             <summary>
-            
+            Encuentra la compania que es
+            administrada por el usuario
+            con el id provisto.
             </summary>
-        </member>
-        <member name="T:ClassLibrary.SearchPage`1">
-            <summary>
-            
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:ClassLibrary.SearchPage`1.SearchResults">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.SearchPage`1.CurrentPage">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.SearchPage`1.PageItemCount">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.SearchPage`1.PageItems">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:ClassLibrary.SearchData">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:ClassLibrary.SearchPage`1">
-            <summary>
-            
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="P:ClassLibrary.SearchPage`1.SearchResults">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.SearchPage`1.CurrentPage">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.SearchPage`1.PageItemCount">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.SearchPage`1.PageItems">
-            <summary>
-            
-            </summary>
+            <param name="userId">
+            Id del usuario para el cual
+            buscar su compania.
+            </param>
+            <returns>
+            Id de la compania encontrada.
+            </returns>
         </member>
         <member name="T:ClassLibrary.Company">
             <summary>
             esta clase representa a la compania
             </summary>
-        </member>
-        <member name="F:ClassLibrary.Company.Locations">
-            <summary>
-            la Lista locations es una list en la cual se guardan strings
-            que referencian a una geolocalizacion la cual se va a ser 
-            la zona en donde se encuentre la empresa.
-            </summary>
-            <returns>lista de localizaciones </returns>
-        </member>
-        <member name="F:ClassLibrary.Company.CompanyMaterials">
-            <summary>
-            lista de los materiales de la compania 
-            </summary>
-            <returns>lista de los materiales de la compania</returns>
-        </member>
-        <member name="F:ClassLibrary.Company.ListAdminUsers">
-            <summary>
-            lista de los usuarios que van a ser los administradores de la compania
-            </summary>
-            <returns>lista de usuarios</returns>
         </member>
         <member name="P:ClassLibrary.Company.Name">
             <summary>
@@ -1635,42 +1793,6 @@
             constructor vacio de company
             </summary>
         </member>
-        <member name="M:ClassLibrary.Company.AddLocation(ClassLibrary.Location)">
-            <summary>
-            añadir locacion de la compania
-            </summary>
-            <param name="Location">se le pasa un objeto de tipo location como parametro</param>
-        </member>
-        <member name="M:ClassLibrary.Company.RemoveLocation(ClassLibrary.Location)">
-            <summary>
-            quitar de la lista la ubicacion de la empresa
-            </summary>
-            <param name="Location">location pasado por parametro</param>
-        </member>
-        <member name="M:ClassLibrary.Company.AddAdminUser(ClassLibrary.User)">
-            <summary>
-            agrega a la lista de usuarios administradores de company
-            </summary>
-            <param name="user">objeto de user pasado por parametro</param>
-        </member>
-        <member name="M:ClassLibrary.Company.RemoveAdminUser(ClassLibrary.User)">
-            <summary>
-            remueve lso usuarios de administradores
-            </summary>
-            <param name="user">objeto de usuario pasado por parametro</param>
-        </member>
-        <member name="M:ClassLibrary.Company.AddCompanyMaterial(ClassLibrary.CompanyMaterial)">
-            <summary>
-            aggrega un material a la company situandolo en una lista
-            </summary>
-            <param name="material"></param>
-        </member>
-        <member name="M:ClassLibrary.Company.RemoveCompanyMaterial(ClassLibrary.CompanyMaterial)">
-            <summary>
-            remueve el material de la compania
-            </summary>
-            <param name="material"></param>
-        </member>
         <member name="M:ClassLibrary.Company.LoadFromJson(System.String)">
             <summary>
             
@@ -1694,33 +1816,17 @@
             clase administradora de company
             </summary>
         </member>
-        <member name="M:ClassLibrary.CompanyAdmin.FindAdminUser(System.Int32)">
-            <summary>
-            encuentra el USUARIO
-            </summary>
-            <param name="id">id del usuario</param>
-            <returns></returns>
-        </member>
         <member name="M:ClassLibrary.CompanyAdmin.GetByName(System.String)">
             <summary>
-            de 
+            Obtiene una compania por
+            su nombre.
             </summary>
-            <param name="name"></param>
-            <returns></returns>
-        </member>
-        <member name="M:ClassLibrary.CompanyAdmin.FindAdminUser(System.Int32)">
-            <summary>
-            encuentra el USUARIO
-            </summary>
-            <param name="id">id del usuario</param>
-            <returns></returns>
-        </member>
-        <member name="M:ClassLibrary.CompanyAdmin.GetByName(System.String)">
-            <summary>
-            de 
-            </summary>
-            <param name="name"></param>
-            <returns></returns>
+            <param name="name">
+            Nombre por el cual buscar.
+            </param>
+            <returns>
+            Compania encontrada.
+            </returns>
         </member>
         <member name="T:ClassLibrary.CompanyMaterial">
             <summary>
@@ -1757,25 +1863,18 @@
             </summary>
             <value><c>true</c> si el materialEmpresa fue eliminado, <c>false</c> en caso contrario.</value>
         </member>
-        <member name="P:ClassLibrary.CompanyMaterial.MaterialCategory">
+        <member name="P:ClassLibrary.CompanyMaterial.MaterialCategoryId">
              <summary>
             La categoria donde se guarda el materialEmpresa
              </summary>
              <value>Almacenamos en que categoria esta situado el materialEmpresa</value>
         </member>
-        <member name="P:ClassLibrary.CompanyMaterial.Qualifications">
+        <member name="P:ClassLibrary.CompanyMaterial.CompanyId">
             <summary>
-            Obtiene una lista de habilitaciones necesarias para cada materialEmpresa.
+            Id de la empresa a la cual pertenece el material de empresa.
             </summary>
-            <value>Almacenamos las habilitaciones de cada materialEmpresa. Esto nos sirve para saber que habilitaciones exigirle al emprendedor para el uso/adquisicion del material</value>
         </member>
-        <member name="P:ClassLibrary.CompanyMaterial.StockPerLocations">
-            <summary>
-            Obtiene una lista del stock que hay en cada location
-            </summary>
-            <value>Almacenamos el stock que tiene cada empreza de un material empresa en cada locacion</value>
-        </member>
-        <member name="M:ClassLibrary.CompanyMaterial.#ctor(System.Int32,System.String,System.DateTime,System.Int32,ClassLibrary.MaterialCategory)">
+        <member name="M:ClassLibrary.CompanyMaterial.#ctor(System.Int32,System.String,System.DateTime,System.Int32,System.Int32,System.Int32)">
             <summary>
             Constructor de la clase con parametros.
             </summary>
@@ -1785,148 +1884,512 @@
             Constructor de la clase vacio.
             </summary>
         </member>
-        <member name="M:ClassLibrary.CompanyMaterial.RemoveCompanyMaterial">
-             <summary>
-             Elimina el materialEmpresa.
-             </summary>
-            <value>Modificamos el atributo deleted del objeto. Los marcamos como true para que nos aparezca que esta eliminado</value> 
+        <member name="M:ClassLibrary.CompanyMaterial.LoadFromJson(System.String)">
+            <inheritdoc/>
         </member>
-        <member name="M:ClassLibrary.CompanyMaterial.AddQualification(ClassLibrary.Qualification)">
-             <summary>
-             Agregar habilitacion para el uso del materialEmpresa
-             </summary>
-            <value>Agregamos a la lista de habilitaciones, la habilitacion pasada por parametro. Esto pasa si y solo si la habilitacion no esta agregada previamente</value>
-             <param name="pQualification">Se pasa la habilitacion a agregar</param>
+        <member name="M:ClassLibrary.CompanyMaterial.Clone">
+            <inheritdoc/>    
         </member>
-        <member name="M:ClassLibrary.CompanyMaterial.RemoveQualification(ClassLibrary.Qualification)">
-             <summary>
-             Eliminar habilitacion para el uso del materialEmpresa
-             </summary>
-            <value>Eliminamos a la lista de habilitaciones, la habilitacion pasada por parametro. Esto pasa si y solo si la habilitacion esta agregada previamente</value>
-            <param name="pQualification">Se pasa la habilitacion a eliminar</param>
-        </member>
-        <member name="M:ClassLibrary.CompanyMaterial.GetStockForLocation(ClassLibrary.Location)">
-             <summary>
-             Buscar la cantidad de stock del materialEmpresa que hay que una lugar
-             </summary>
-             <returns>
-             Retornamos xretorno con la cantidad de stock que tiene el materialEmpresa en ese lugar.
-             </returns>
-            <param name="pLocation">Lugar en el cual buscamos cuanto stock hay</param>
-        </member>
-        <member name="M:ClassLibrary.CompanyMaterial.GetStockTotal">
-            <summary>
-            Obtiene la cantidad TOTAL de stock que hay de un materialEmpresa
-            </summary>
-            <returns>
-            Retornamos xretorno con la suma de todos los stocks de todos los lugares donde esta almacenado el materialEmpresa.
-            </returns>
-        </member>
-        <member name="M:ClassLibrary.CompanyMaterial.RestockLocation(ClassLibrary.Location,System.Int32)">
-             <summary>
-             Hace un reabastecimiento del stock del materialEmpresa que hay en un lugar en particular
-             </summary>
-            <param name="pLocation">Lugar en el cual vamos a hacer el reabastecimiento</param>
-             ///<param name="pStock">Cantidad de stock que vamos a reabastecer</param>
-        </member>
-        <member name="M:ClassLibrary.CompanyMaterial.GetIndexOfStockFromLocation(ClassLibrary.Location)">
-             <summary>
-             Obtiene el indice en el cual esta el CompanyStock
-             </summary>
-             <returns>
-             Retornamos xretorno el idice en el cual se encuentra el CompanyStock dentro de nuestra lista de StockPerLocation.
-             </returns>
-            <param name="pLocation">Lugar en el cual buscamos cuanto stock hay</param>
+        <member name="M:ClassLibrary.CompanyMaterial.ConvertToJson">
+            <inheritdoc/>
         </member>
         <member name="T:ClassLibrary.CompanyMaterialAdmin">
             <summary>
             Esta clase representa la administracion de Usuarios.
             </summary>
         </member>
-        <member name="T:ClassLibrary.CompanyStock">
+        <member name="M:ClassLibrary.CompanyMaterialAdmin.GetCompanyMaterialsInCompany(System.Int32)">
             <summary>
-            Esta clase representa el stock de cada materialEmpresa.
+            Obtiene un listado de materiales de
+            empresa filtrados por su empresa.
+            </summary>
+            <param name="companyId">
+            Id de la empresa por la cual
+            filtrar la lista.
+            </param>
+            <returns>
+            Listado de Ids de materiales
+            de empresa pertenecientes a
+            la empresa dada.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.CompanyMaterialAdmin.GetCompanyMaterialsInCompany(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Obtiene un listado de materiales de
+            empresa filtrados por su empresa.
+            </summary>
+            <param name="companyId">
+            Id de la empresa por la cual
+            filtrar la lista.
+            </param>
+            <param name="itemCount">
+            Cantidad de items por hoja.
+            </param>
+            <param name="page">
+            Hoja la cual recuperar.
+            </param>
+            <returns>
+            Listado de Ids de materiales
+            de empresa pertenecientes a
+            la empresa dada.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.CompanyMaterialAdmin.GetCompanyMaterialsInCompanyForCategory(System.Int32,System.Int32)">
+            <summary>
+            Obtiene un listado de materiales
+            de compania filtrado por una dada
+            categoria de materiales.
+            </summary>
+            <param name="companyId">
+            Id de la compania dentro de la
+            cual se buscaran los materiales.
+            </param>
+            <param name="materialCatId">
+            Id de la categoria por la cual
+            filtrar los materiales.
+            </param>
+            <returns>
+            Listado de Ids de todos los materiales
+            de la empresa que pertenecen a la
+            categoria dada.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.CompanyMaterialAdmin.GetCompanyMaterialsInCompanyForCategory(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Obtiene un listado de materiales
+            de compania filtrado por una dada
+            categoria de materiales.
+            </summary>
+            <param name="companyId">
+            Id de la compania dentro de la
+            cual se buscaran los materiales.
+            </param>
+            <param name="materialCatId">
+            Id de la categoria por la cual
+            filtrar los materiales.
+            </param>
+            <param name="itemCount">
+            Cantidad de items por hoja.
+            </param>
+            <param name="page">
+            Hoja la cual recuperar.
+            </param>
+            <returns>
+            Listado de Ids de todos los materiales
+            de la empresa que pertenecen a la
+            categoria dada.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.CompanyMaterialAdmin.GetCompanyMaterialsForCategory(System.Int32)">
+            <summary>
+            Obtiene un listado de materiales
+            de empresas filtrado por su 
+            categoria de materiales.
+            </summary>
+            <param name="materialCatId">
+            Id de la categoria de materiales
+            por la cual filtrar.
+            </param>
+            <returns>
+            Listado de Ids de todos los
+            materiales de empresas que
+            cumplen con el filtro de
+            categoria.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.CompanyMaterialAdmin.GetCompanyMaterialsForCategory(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Obtiene un listado de materiales
+            de empresas filtrado por su 
+            categoria de materiales.
+            </summary>
+            <param name="materialCatId">
+            Id de la categoria de materiales
+            por la cual filtrar.
+            </param>
+            <param name="itemCount">
+            Cantidad de items por hoja.
+            </param>
+            <param name="page">
+            Hoja la cual recuperar.
+            </param>
+            <returns>
+            Listado de Ids de todos los
+            materiales de empresas que
+            cumplen con el filtro de
+            categoria.
+            </returns>
+        </member>
+        <member name="T:ClassLibrary.CompanyMaterialQualification">
+            <summary>
+            Contenedor de asociacion entre un material de empresa y sus
+            habilitaciones requeridas.
             </summary>
         </member>
-        <member name="P:ClassLibrary.CompanyStock.Stock">
+        <member name="M:ClassLibrary.CompanyMaterialQualification.#ctor">
             <summary>
-            Cantidad de stock del materialEmpresa
-            </summary>
-            <value>Se almacena  la cantidad del materialEmpresa que hay.</value>
-        </member>
-        <member name="P:ClassLibrary.CompanyStock.Location">
-            <summary>
-            Lugar del stock del materialEmpresa
-            </summary>
-            <value>Se almacena el lugar donde esta el stock del materialEmpresa que hay.</value>
-        </member>
-        <member name="M:ClassLibrary.CompanyStock.#ctor(System.Int32,ClassLibrary.Location)">
-            <summary>
-            Constructor de la clase.
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CompanyMaterialQualification"/>.
             </summary>
         </member>
-        <member name="T:ClassLibrary.DataAdmin`1">
+        <member name="P:ClassLibrary.CompanyMaterialQualification.Id">
+            <inheritdoc/>
+        </member>
+        <member name="P:ClassLibrary.CompanyMaterialQualification.Deleted">
+            <inheritdoc/>
+        </member>
+        <member name="P:ClassLibrary.CompanyMaterialQualification.CompanyMatId">
             <summary>
-            Esta es una clase abstacta de la cual van a heredar todas las clases admin. Su funcion es almacenar y manipular los elementos de tipo T
+            Id del material de la compania.
             </summary>
         </member>
-        <member name="F:ClassLibrary.DataAdmin`1.storage">
+        <member name="P:ClassLibrary.CompanyMaterialQualification.QualificationId">
             <summary>
-            Conexion con la base de datos
+            Habilitacion asociada al material de la compania.
             </summary>
         </member>
-        <member name="P:ClassLibrary.DataAdmin`1.Items">
+        <member name="M:ClassLibrary.CompanyMaterialQualification.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.CompanyMaterialQualification.ConvertToJson">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.CompanyMaterialQualification.LoadFromJson(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CompanyMaterialQualificationAdmin">
             <summary>
-            Lista de objetos de tipo T 
+            Clase administradora de habilitaciones para un material de empresa.
             </summary>
-            <value>Almacenamos en la lista Item objetos de tipo T.</value>
         </member>
-        <member name="M:ClassLibrary.DataAdmin`1.Insert(`0)">
-             <summary>
-             Agregar a la lista 
-             </summary>
-            <value>Agregamos a la lista Items, el objeto de tipo T. Esto pasa si y solo si el objeto no esta agregado previamente</value>
-             <param name="pElemento ">Se pasa el objeto de tipo T</param>
+        <member name="M:ClassLibrary.CompanyMaterialQualificationAdmin.GetQualificationsForCompanyMaterial(System.Int32)">
+            <summary>
+            Obtiene la lista de habilitaciones para un material de empresa por su id.
+            </summary>
+            <param name="companyMaterialId">
+            Id del material de empresa por el cual buscar habilitaciones. </param>
+            <returns>
+            Listado de Ids para cada habilitacion asociada al material de empresa.
+            </returns>
         </member>
-        <member name="M:ClassLibrary.DataAdmin`1.Update(`0)">
-             <summary>
-             Modificar elemento de la lista 
-             </summary>
-            <value>Modificamos un elemento de tipo T de la lista Items. Esto pasa si y solo si el objeto  esta agregado previamente</value>
-             <param name="pElemento ">Se pasa el objeto de tipo T</param>
+        <member name="M:ClassLibrary.CompanyMaterialQualificationAdmin.GetQualificationsForCompanyMaterial(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Obtiene la lista de habilitaciones para un material de empresa por su id.
+            </summary>
+            <param name="companyMaterialId">
+            Id del material de empresa por el cual buscar habilitaciones.
+            </param>
+            <param name="itemCount">Cantidad de items por hoja.</param>
+            <param name="page">Hoja la cual recuperar.</param>
+            <returns>
+            Listado de Ids para cada habilitacion asociada al material de empresa.
+            </returns>
         </member>
-        <member name="M:ClassLibrary.DataAdmin`1.Delete(System.Int32)">
-             <summary>
-             Eliminar de la lista al objeto de tipo T 
-             </summary>
-            <value>Eliminamos de la lista Items, el objeto de tipo T. Esto pasa si y solo si el objeto esta agregado previamente</value>
-             <param name="pId ">Se pasa el el id del objeto a eliminar</param>
+        <member name="M:ClassLibrary.CompanyMaterialQualificationAdmin.GetCompanyMaterialHasQualification(System.Int32,System.Int32)">
+            <summary>
+            Verifica si un material de empresa requiere una habilitacion concreta o no.
+            </summary>
+            <param name="companyMatId">Id del material de empresa por el cual buscar.</param>
+            <param name="qualificationId"> Habilitacion la cual se busca verificar. </param>
+            <returns>
+            Valor booleano referenciando si el material de empresa requiere
+            la habilitacion o no.
+            </returns>
         </member>
-        <member name="M:ClassLibrary.DataAdmin`1.GetById(System.Int32)">
-             <summary>
-             Busca un obejto de tipo T 
-             </summary>
-            <value>Recorremos la lista y devolvemos el objeto de tipo T que tenga el id pasado por parametro. Esto pasa si y solo si el objeto esta agregado previamente</value>
-            <result>Retorna un elemento de tipo T </result>
-             <param name="pId ">Se pasa el objeto de tipo T</param>
+        <member name="T:ClassLibrary.CompanyMaterialStock">
+            <summary>
+            Registro de Stock por
+            material de empresa
+            asociado a una localizacion
+            de la empresa.
+            </summary>
         </member>
-        <member name="M:ClassLibrary.DataAdmin`1.New">
-             <summary>
-             Crea un objeto de tipo User vacio
-             </summary>
-            <result>Retorna un elemento de tipo User vacio </result>
+        <member name="M:ClassLibrary.CompanyMaterialStock.#ctor">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CompanyMaterialStock"/>.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.CompanyMaterialStock.Id">
+            <inheritdoc/>
+        </member>
+        <member name="P:ClassLibrary.CompanyMaterialStock.Deleted">
+            <inheritdoc/>
+        </member>
+        <member name="P:ClassLibrary.CompanyMaterialStock.CompanyMatId">
+            <summary>
+            Id del material de compania
+            al cual se le va a indicar
+            el stock
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.CompanyMaterialStock.CompanyLocationId">
+            <summary>
+            Localizacion sobre la cual
+            se indicara el stock del
+            material de empresa.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.CompanyMaterialStock.Stock">
+            <summary>
+            Cantidad de existencias del
+            material en su dada unidad
+            dentro del lugar especificado.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CompanyMaterialStock.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.CompanyMaterialStock.ConvertToJson">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.CompanyMaterialStock.LoadFromJson(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CompanyMaterialStockAdmin">
+            <summary>
+            Administrador de datos asociado
+            al stock por localizacion de cada
+            material de las empresas.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CompanyMaterialStockAdmin.GetStockTotalForCompanyMaterial(System.Int32)">
+            <summary>
+            Obtiene el stock total
+            de un material de empresa.
+            </summary>
+            <param name="companyMaterialId">
+            Id del material de empresa
+            al cual se le quiere obtener
+            el stock.
+            </param>
+            <returns>
+            Stock total del material.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.CompanyMaterialStockAdmin.GetLocationsWithStockForCompanyMaterial(System.Int32)">
+            <summary>
+            Obtiene una lista de las
+            localizaciones de la empresa
+            donde hay stock del material.
+            </summary>
+            <param name="companyMaterialId">
+            Id del material por el cual
+            se quiere buscar localizaciones.
+            </param>
+            <returns>
+            Listado de Ids de localizaciones
+            de la empresa con stock del material.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.CompanyMaterialStockAdmin.GetLocationsWithStockForCompanyMaterial(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Obtiene una lista de las
+            localizaciones de la empresa
+            donde hay stock del material.
+            </summary>
+            <param name="companyMaterialId">
+            Id del material por el cual
+            se quiere buscar localizaciones.
+            </param>
+            <param name="itemCount">
+            Cantidad de items por hoja.
+            </param>
+            <param name="page">
+            Hoja la cual recuperar.
+            </param>
+            <returns>
+            Listado de Ids de localizaciones
+            de la empresa con stock del material.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.CompanyMaterialStockAdmin.GetCompanyMaterialsInStockForLocation(System.Int32)">
+            <summary>
+            Obtiene un listado de materiales
+            de empresa con stock para una
+            localizacion concreta de la 
+            empresa.
+            </summary>
+            <param name="companyLocationId">
+            Id de la localizacion de la empresa.
+            </param>
+            <returns>
+            Listado de Ids para cada material
+            de empresa con stock en la
+            localizacion.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.CompanyMaterialStockAdmin.GetCompanyMaterialsInStockForLocation(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Obtiene un listado de materiales
+            de empresa con stock para una
+            localizacion concreta de la 
+            empresa.
+            </summary>
+            <param name="companyLocationId">
+            Id de la localizacion de la empresa.
+            </param>
+            <param name="itemCount">
+            Cantidad de items por hoja.
+            </param>
+            <param name="page">
+            Hoja la cual recuperar.
+            </param>
+            <returns>
+            Listado de Ids para cada material
+            de empresa con stock en la
+            localizacion.
+            </returns>
+        </member>
+        <member name="T:ClassLibrary.PublicationKeyWord">
+            <summary>
+            Registro de asociación de palabras claves y publicación.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.PublicationKeyWord.#ctor">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.PublicationKeyWord"/>.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.PublicationKeyWord.Id">
+            <inheritdoc/>
+        </member>
+        <member name="P:ClassLibrary.PublicationKeyWord.Deleted">
+            <inheritdoc/>
+        </member>
+        <member name="P:ClassLibrary.PublicationKeyWord.PublicationId">
+            <summary>
+            Id de la publicacion a la
+            que pertenece la key word.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.PublicationKeyWord.KeyWord">
+            <summary>
+            Key word asociada a la 
+            publicacion.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.PublicationKeyWord.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.PublicationKeyWord.ConvertToJson">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.PublicationKeyWord.LoadFromJson(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.PublicationKeyWordAdmin">
+            <summary>
+            Administrador de registros de
+            palabras clave asociadas a las
+            publicaciones.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.PublicationKeyWordAdmin.PublicationMatchesKeyWord(System.Int32,System.String)">
+            <summary>
+            Verifica si una publicación tiene una palabra concreta entre sus palabras claves.
+            </summary>
+            <param name="pubId">Id de la publicación relevante</param>
+            <param name="keyWord">Palabra a verificar.</param>
+            <returns>Valor booleano indicacndo si la palabra existe en la lista de palabras clave o no.</returns>
+        </member>
+        <member name="M:ClassLibrary.PublicationKeyWordAdmin.GetKeyWordsForPublication(System.Int32)">
+            <summary>
+            Obtiene una lista de palabras que actuan como palabra clave para una publicación concreta.
+            </summary>
+            <param name="pubId">Id de la publicación para la cual se busca obtener sus palabras claves.</param>
+            <returns>Listado de strings con las palabras claves obtenidas.</returns>
+        </member>
+        <member name="T:ClassLibrary.Publication">
+            <summary>
+            Clase creada para crear una publicación y publicar los materiales para vender.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Publication.CompanyId">
+            <summary>
+            Publication tiene una property de Company.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ClassLibrary.Publication.Id">
+            <summary>
+            Id que se la da a cada publicación.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Publication.ActiveFrom">
+            <summary>
+            DateTime con la fecha de activación.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Publication.ActiveUntil">
+            <summary>
+            Datetime con la fecha de desactivación de la publicación.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Publication.Price">
+            <summary>
+            Precio de lo que se vende en la publicación, ya sea un material o varios.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Publication.Currency">
+            <summary>
+            Divisa del precio del material o materiales.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Publication.Deleted">
+            <summary>
+             Deleted sirve para saber si la publicación se borra o no.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.Publication.#ctor(System.DateTime,System.DateTime,System.Int32,ClassLibrary.Currency)">
+            <summary>
+            Constructor de la publicación para definir los atributos.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.Publication.#ctor">
+            <summary>
+            Constructor vacio para PublicationAdmin.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.Publication.LoadFromJson(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.Publication.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.Publication.ConvertToJson">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.PublicationAdmin">
+            <summary>
+            Clase para administrar las publicaciones
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.PublicationAdmin.GetPublicationsByCompany(System.Int32)">
+            <summary>
+            Obtiene una lista de publicaciones filtrada por la empresa que las realizó.
+            </summary>
+            <param name="companyId">Id de la empresa por la cual se busca filtrar la lista.</param>
+            <returns>Listado de Ids de todas las publicaciones pertenecientes a la empresa.</returns>
+        </member>
+        <member name="M:ClassLibrary.PublicationAdmin.GetPublicationsByCompany(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Obtiene una lista de publicaciones filtrada por la empresa que las realizó.
+            </summary>
+            <param name="companyId">Id de la empresa por la cual se busca filtrar la lista.</param>
+            <param name="itemCount">Cantidad de items por hoja.</param>
+            <param name="page">Hoja la cual recuperar.</param>
+            <returns>Listado de Ids de todas las publicaciones pertenecientes a la empresa.</returns>
         </member>
         <member name="T:ClassLibrary.Entrepreneur">
             <summary>
             clase que representa los emprendedores
             </summary>
         </member>
-        <member name="M:ClassLibrary.Entrepreneur.#ctor(System.String,ClassLibrary.User,System.Int32,System.String)">
+        <member name="M:ClassLibrary.Entrepreneur.#ctor(System.String,System.Int32,System.Int32,System.String)">
             <summary>
             constructor de emprendedor
             </summary>
             <param name="name">nombre del emprendedor</param>
-            <param name="user">usuario del emprendedor</param>
+            <param name="userId">id de usuario del emprendedor</param>
             <param name="id">id del emprendedor</param>
             <param name="trade">en que se especializa el emprendedor</param>
         </member>
@@ -1935,13 +2398,13 @@
             constructor vacio de emprendedor
             </summary>
         </member>
-        <member name="F:ClassLibrary.Entrepreneur.Locations">
+        <member name="P:ClassLibrary.Entrepreneur.Location">
             <summary>
-            lista de la locacion georeferenciada de el emprendedor
+            Geo referencia de localizacion del
+            emprendedor
             </summary>
-            <returns>lista de ubicaciones</returns>
         </member>
-        <member name="P:ClassLibrary.Entrepreneur.User">
+        <member name="P:ClassLibrary.Entrepreneur.UserId">
             <summary>
             usuario del emprendedor
             </summary>
@@ -1972,35 +2435,14 @@
             <value>si la compania fue eliminada<c>true</c>
              en caso contrario <c>false</c> </value>
         </member>
-        <member name="M:ClassLibrary.Entrepreneur.AddLocation(ClassLibrary.Location)">
-            <summary>
-            metodo para añadir una ubicacion a la company
-            </summary>
-            <param name="Location">location de la company</param>
-        </member>
-        <member name="M:ClassLibrary.Entrepreneur.RemoveLocation(ClassLibrary.Location)">
-            <summary>
-            quitar de la lista la ubicacion de la empresa
-            </summary>
-            <param name="Location">ex location de la company</param>
-        </member>
         <member name="M:ClassLibrary.Entrepreneur.LoadFromJson(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="json"></param>
+            <inheritdoc/>
         </member>
         <member name="M:ClassLibrary.Entrepreneur.Clone">
-            <summary>
-            
-            </summary>
-            <returns></returns>
+            <inheritdoc/>
         </member>
         <member name="M:ClassLibrary.Entrepreneur.ConvertToJson">
-            <summary>
-            
-            </summary>
-            <returns></returns>
+            <inheritdoc/>
         </member>
         <member name="T:ClassLibrary.EntrepreneurAdmin">
             <summary>
@@ -2014,35 +2456,12 @@
             <param name="id">id de user</param>
             <returns></returns>
         </member>
-        <member name="T:ClassLibrary.NotSupportedMessagingPlataformException">
+        <member name="M:ClassLibrary.EntrepreneurAdmin.GetByName(System.String)">
             <summary>
-            
+            encontramos un emprendedor por nombre 
             </summary>
-        </member>
-        <member name="M:ClassLibrary.NotSupportedMessagingPlataformException.#ctor">
-            <summary>
-            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.NotSupportedMessagingPlataformException"/>.
-            </summary>
-        </member>
-        <member name="M:ClassLibrary.NotSupportedMessagingPlataformException.#ctor(System.String)">
-            <summary>
-            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.NotSupportedMessagingPlataformException"/>.
-            </summary>
-            <param name="message"></param>
-        </member>
-        <member name="M:ClassLibrary.NotSupportedMessagingPlataformException.#ctor(System.String,System.Exception)">
-            <summary>
-            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.NotSupportedMessagingPlataformException"/>.
-            </summary>
-            <param name="message"></param>
-            <param name="innerException"></param>
-        </member>
-        <member name="M:ClassLibrary.NotSupportedMessagingPlataformException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
-            <summary>
-            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.NotSupportedMessagingPlataformException"/>.
-            </summary>
-            <param name="info"></param>
-            <param name="context"></param>
+            <param name="name">nombre del emprendedor</param>
+            <returns></returns>
         </member>
         <member name="T:ClassLibrary.Invitation">
             <summary>
@@ -2094,6 +2513,20 @@
             </summary>
             <value>En caso de que la invitacion haya sido eliminada entonces deleted=true. En caso contrario deleted=false</value>
         </member>
+        <member name="M:ClassLibrary.Invitation.#ctor">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.Invitation"/>.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.Invitation.LoadFromJson(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.Invitation.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.Invitation.ConvertToJson">
+            <inheritdoc/>
+        </member>
         <member name="T:ClassLibrary.InvitationAdmin">
             <summary>
             Esta clase representa la administracion de Invitaciones.
@@ -2101,32 +2534,105 @@
         </member>
         <member name="M:ClassLibrary.InvitationAdmin.GetByCode(System.String)">
             <summary>
-            Obetener la invitacion a partir de su codigo
+            Obtener la invitacion a 
+            partir de su codigo.
             </summary>
-            <param name="pCode">Codigo de la invtacion</param>
+            <param name="pCode">
+            Codigo de la invitacion.
+            </param>
             <returns></returns>
         </member>
-        <member name="T:ClassLibrary.Location">
+        <member name="M:ClassLibrary.InvitationAdmin.GetInvitationIsOfType(System.String,ClassLibrary.RegistrationType)">
             <summary>
-            clase location
+            Verifica si una invitacion
+            pertenece al tipo sugerido.
+            </summary>
+            <param name="code">
+            Codigo de la invitacion a
+            verificar.
+            </param>
+            <param name="type">
+            Tipo de invitacion contra
+            el cual comparar.
+            </param>
+            <returns>
+            Valor booleano representado
+            si la invitacion pertenece
+            al tipo.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.InvitationAdmin.GenerateNewInviteCode(System.Int32)">
+            <summary>
+            Actualizar una invitacion con un
+            nuevo codigo de invitacion generado
+            dinamicamente a partir de la fecha
+            actual y el Id.
+            </summary>
+            <param name="inviteId">
+            Id de la invitacion para la cual se
+            busca generar un nuevo codigo.
+            </param>
+        </member>
+        <member name="T:ClassLibrary.CompanyLocation">
+            <summary>
+            Registro que contiene una asociacion
+            entre empresea y localizacion por
+            geo referencia.
             </summary>
         </member>
-        <member name="P:ClassLibrary.Location.Georeference">
+        <member name="M:ClassLibrary.CompanyLocation.#ctor">
             <summary>
-            valor de georeferencia
-            </summary>
-            <value>string de georeferencia</value>
-        </member>
-        <member name="M:ClassLibrary.Location.#ctor">
-            <summary>
-            constructor vacio de location
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CompanyLocation"/>.
             </summary>
         </member>
-        <member name="M:ClassLibrary.Location.#ctor(System.String)">
+        <member name="P:ClassLibrary.CompanyLocation.Id">
+            <inheritdoc/>
+        </member>
+        <member name="P:ClassLibrary.CompanyLocation.Deleted">
+            <inheritdoc/>
+        </member>
+        <member name="P:ClassLibrary.CompanyLocation.CompanyId">
             <summary>
-            constructor de location
+            Identificador de la
+            compania asociada a
+            la localizacion.
             </summary>
-            <param name="Georeference">georeferenciacion</param>
+        </member>
+        <member name="P:ClassLibrary.CompanyLocation.GeoReference">
+            <summary>
+            Geo referencia de la
+            localizacion.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CompanyLocation.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.CompanyLocation.ConvertToJson">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.CompanyLocation.LoadFromJson(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CompanyLocationAdmin">
+            <summary>
+            Clase administradora de las
+            localizaciones de una empresa.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CompanyLocationAdmin.GetLocationsForCompany(System.Int32)">
+            <summary>
+            Obtiene una lista de localizaciones
+            pertenecientes a una empresa.
+            </summary>
+            <param name="companyId">
+            Id de la empresa por la cual
+            buscar localizaciones.
+            </param>
+            <returns>
+            Lista de localizaciones
+            pertenecientes a la empresa
+            por la cual se busco.
+            </returns>
         </member>
         <member name="T:ClassLibrary.MaterialCategory">
             <summary>
@@ -2161,10 +2667,379 @@
             Constructor de la clase vacio
             </summary>
         </member>
+        <member name="M:ClassLibrary.MaterialCategory.LoadFromJson(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.MaterialCategory.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.MaterialCategory.ConvertToJson">
+            <inheritdoc/>
+        </member>
         <member name="T:ClassLibrary.MaterialCategoryAdmin">
             <summary>
             Esta clase representa la administracion de Usuarios.
             </summary>
+        </member>
+        <member name="T:ClassLibrary.Qualification">
+            <summary>
+            Clase para definir habilitaciones.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Qualification.Id">
+            <summary>
+            Id de habilitaciones.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ClassLibrary.Qualification.Name">
+            <summary>
+            Nombre de la habilitacion.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:ClassLibrary.Qualification.Deleted">
+            <summary>
+            Habilita la habilitación.
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:ClassLibrary.Qualification.#ctor(System.String)">
+            <summary>
+            Constructor de Qualification.
+            </summary>
+            <param name="Name"></param>
+        </member>
+        <member name="M:ClassLibrary.Qualification.#ctor">
+            <summary>
+            Constructor para la utilización de Qualification Admin
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.Qualification.LoadFromJson(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.Qualification.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.Qualification.ConvertToJson">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.QualificationAdmin">
+            <summary>
+            Clase para la administración de las habilitaciones.
+            </summary>
+        </member>
+        <member name="T:ClassLibrary.Sale">
+            <summary>
+            Clase Sale.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Sale.ProductCompanyMaterialId">
+            <summary>
+            Material de empresa comprado.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Sale.ProductQuantity">
+            <summary>
+            Cantidad del material comprado.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Sale.SellerCompanyId">
+            <summary>
+            Property de Company.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Sale.BuyerEntrepreneurId">
+            <summary>
+            Property de Entrepreneur.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Sale.Id">
+            <inheritdoc/>
+        </member>
+        <member name="P:ClassLibrary.Sale.DateTime">
+            <summary>
+            Fecha de la venta.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Sale.Price">
+            <summary>
+            Precio de la venta.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Sale.Currency">
+            <summary>
+            Divisa en la que se realiza cada venta.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Sale.Deleted">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.Sale.#ctor(System.DateTime,System.Int32,ClassLibrary.Currency)">
+            <summary>
+            Constructor de la clase Sale para definir los atributos.
+            </summary>
+            <param name="DateTime"></param>
+            <param name="Price"></param>
+            <param name="Currency"></param>
+        </member>
+        <member name="M:ClassLibrary.Sale.#ctor">
+            <summary>
+            Constructor vacio para la clase SaleAdmin.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.Sale.LoadFromJson(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.Sale.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.Sale.ConvertToJson">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.SaleAdmin">
+            <summary>
+            Clase para administrar las ventas.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.SaleAdmin.GetSalesBySeller(System.Int32)">
+            <summary>
+            Obtiene un listado de ventas para una compania concreta.
+            </summary>
+            <param name="companyId">
+            Id de la compania para la cual se le quieren encontrar todas las ventas.
+            </param>
+            <returns>
+            Listado de Ids de ventas realizadas por la compania.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.SaleAdmin.GetSalesBySeller(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Obtiene un listado de ventas para una compania concreta.
+            </summary>
+            <param name="companyId">
+            Id de la compania para la cual se le quieren encontrar todas las ventas.
+            </param>
+            <param name="itemCount">Cantidad de items por hoja.</param>
+            <param name="page">Hoja la cual recuperar.</param>
+            <returns>
+            Listado de Ids de ventas realizadas por la compania.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.SaleAdmin.GetSalesByBuyer(System.Int32)">
+            <summary>
+            Obtiene un listado de compras realizadas por un emprendedor
+            </summary>
+            <param name="entrepreneurId">
+            Id del emprendedor para el cual se le quieren buscar las compras.
+            </param>
+            <returns>
+            Listado de Ids de compras realizadas por el emprendedor.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.SaleAdmin.GetSalesByBuyer(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Obtiene un listado de compras realizadas por un emprendedor
+            </summary>
+            <param name="entrepreneurId">
+            Id del emprendedor para el cual se le quieren buscar las compras.
+            </param>
+            <param name="itemCount">Cantidad de items por hoja.</param>
+            <param name="page">Hoja la cual recuperar.</param>
+            <returns>
+            Listado de Ids de compras realizadas por el emprendedor.
+            </returns>
+        </member>
+        <member name="T:ClassLibrary.Account">
+            <summary>
+            la clase account maneja las cuentas de lso usuarios
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.Account.#ctor">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.Account"/>.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Account.Id">
+            <inheritdoc/>
+        </member>
+        <member name="P:ClassLibrary.Account.Deleted">
+            <inheritdoc/>
+        </member>
+        <member name="P:ClassLibrary.Account.UserId">
+            <summary>
+            Id del usuario asociado
+            a la cuenta
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Account.Service">
+            <summary>
+            Servicio de mensajeria
+            asociado a la cuenta.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Account.CodeInService">
+            <summary>
+            Identificador de la
+            cuenta en el servicio
+            de mensajeria asociado
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.Account.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.Account.ConvertToJson">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.Account.LoadFromJson(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.AccountAdmin">
+            <summary>
+            Administrador de datos persistentes para
+            el tipo de datos administrable de cuentas
+            <see cref="T:ClassLibrary.Account" />.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.AccountAdmin.GetByUserId(System.Int32)">
+            <summary>
+            Obtiene una lista de cuentas 
+            segun el id del usuario al
+            cual pertenecen.
+            </summary>
+            <param name="userId">
+            Id del usuario por el cual
+            realizar la busqueda.
+            </param>
+            <returns>
+            Listado de cuentas.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.AccountAdmin.GetUserIdForAccount(ClassLibrary.MessagingService,System.String)">
+            <summary>
+            Obtiene el id de usuario para 
+            una cuenta en concreto.
+            </summary>
+            <param name="service">
+            Servicio de mensajeria de la
+            cuenta.
+            </param>
+            <param name="account">
+            Identificador de la cuenta en el 
+            servicio de mensajeria.
+            </param>
+            <returns>
+            Id del usuario al que pertenece
+            la cuenta.
+            </returns>
+        </member>
+        <member name="T:ClassLibrary.User">
+            <summary>
+            Esta clase representa Usuarios.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.User.Id">
+            <summary>
+            Identificador de cada Usuario
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.User.FirstName">
+            <summary>
+            Nombre del Usuario
+            </summary>
+            <value>Almacenamos el nombre del Usuario en un string</value>
+        </member>
+        <member name="P:ClassLibrary.User.LastName">
+            <summary>
+            Apellido del Usuario
+            </summary>
+            <value>Almacenamos el apellido del Usuario en un string</value>
+        </member>
+        <member name="P:ClassLibrary.User.Deleted">
+            <summary>
+            Obtiene un valor que indica si el usuario fue eliminado
+            </summary>
+            <value><c>true</c> si el usuario fue eliminado, <c>false</c> en caso contrario.</value>
+        </member>
+        <member name="P:ClassLibrary.User.Role">
+            <summary>
+            Rol del Usuario
+            </summary>
+            <value>Almacenamos el rol del Usuario en un objeto de tipo Role</value>
+        </member>
+        <member name="P:ClassLibrary.User.Suspended">
+            <summary>
+            Estado de suspension del usuario.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.User.#ctor(System.Int32,System.String,System.String,ClassLibrary.UserRole)">
+            <summary>
+            Constructor de la clase.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.User.#ctor">
+            <summary>
+            Constructor de la clase.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.User.LoadFromJson(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.User.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.User.ConvertToJson">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.UserAdmin">
+            <summary>
+            Esta clase representa la administracion de Usuarios.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.UserAdmin.GetUserIsSuspended(System.Int32)">
+            <summary>
+            Verifica si un usuario
+            esta o no suspendido.
+            </summary>
+            <param name="userId">
+            Id del usuario para el
+            cual se quiere verificar
+            el estado de suspension.
+            </param>
+            <returns>
+            Valor booleano con el
+            estado de suspension.
+            </returns>
+        </member>
+        <member name="T:ClassLibrary.NotSupportedMessagingPlataformException">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.NotSupportedMessagingPlataformException.#ctor">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.NotSupportedMessagingPlataformException"/>.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.NotSupportedMessagingPlataformException.#ctor(System.String)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.NotSupportedMessagingPlataformException"/>.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:ClassLibrary.NotSupportedMessagingPlataformException.#ctor(System.String,System.Exception)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.NotSupportedMessagingPlataformException"/>.
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:ClassLibrary.NotSupportedMessagingPlataformException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.NotSupportedMessagingPlataformException"/>.
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
         </member>
         <member name="T:ClassLibrary.CommandHandler">
             <summary>
@@ -2314,309 +3189,6 @@
             </summary>
             <value><c>string</c></value>
         </member>
-        <member name="T:ClassLibrary.Publication">
-            <summary>
-            Clase creada para crear una publicación y publicar los materiales para vender.
-            </summary>
-        </member>
-        <member name="F:ClassLibrary.Publication.KeyWords">
-            <summary>
-            Lista de palabras clave para encontrar facilmente publicaciones.
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Publication.PublicationItem">
-            <summary>
-            Property de la clase PublicationItem.
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Publication.Company">
-            <summary>
-            Publication tiene una property de Company.
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Publication.Id">
-            <summary>
-            Id que se la da a cada publicación.
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Publication.ActiveFrom">
-            <summary>
-            DateTime con la fecha de activación.
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Publication.ActiveUntill">
-            <summary>
-            Datetime con la fecha de desactivación de la publicación.
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Publication.Price">
-            <summary>
-            Precio de lo que se vende en la publicación, ya sea un material o varios.
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Publication.Currency">
-            <summary>
-            Divisa del precio del material o materiales.
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Publication.Deleted">
-            <summary>
-             Deleted sirve para saber si la publicación se borra o no.
-            </summary>
-        </member>
-        <member name="M:ClassLibrary.Publication.#ctor(System.DateTime,System.DateTime,System.Int32,ClassLibrary.Currency,System.Boolean)">
-            <summary>
-            Constructor de la publicación para definir los atributos.
-            </summary>
-            <param name="ActiveFrom"></param>
-            <param name="ActiveUntill"></param>
-            <param name="Price"></param>
-            <param name="Currency"></param>
-            <param name="Deleted"></param>
-        </member>
-        <member name="M:ClassLibrary.Publication.#ctor">
-            <summary>
-            Constructor vacio para PublicationAdmin.
-            </summary>
-        </member>
-        <member name="M:ClassLibrary.Publication.AddKeyWord(System.String)">
-            <summary>
-            Metodo para añadir una palabra clave del tipo string a la lista de palabras claves.
-            </summary>
-            <param name="KeyWord">Ingreso palabra clave.</param>
-        </member>
-        <member name="M:ClassLibrary.Publication.RemoveKeyWord(System.String)">
-            <summary>
-            Metodo para remover palabra clave de la lista de palabras claves del tipo string.
-            </summary>
-            <param name="KeyWord">Ingreso palabra clave que quiero remover.</param>
-        </member>
-        <member name="M:ClassLibrary.Publication.LoadFromJson(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="json"></param>
-        </member>
-        <member name="M:ClassLibrary.Publication.Clone">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:ClassLibrary.Publication.ConvertToJson">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:ClassLibrary.PublicationAdmin">
-            <summary>
-            Clase para administrar las publicaciones
-            </summary>
-        </member>
-        <member name="T:ClassLibrary.PublicationItem">
-            <summary>
-            Clase creada para saber que material se va a publicar y su cantidad
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.PublicationItem.Quantity">
-            <summary>
-            Atributo para saber la cantidad de material agregado.
-            </summary>
-            <value></value>
-        </member>
-        <member name="P:ClassLibrary.PublicationItem.CompanyMaterial">
-            <summary>
-            Property de CompanyMaterial.
-            </summary>
-        </member>
-        <member name="M:ClassLibrary.PublicationItem.#ctor(System.Int32)">
-            <summary>
-            Constructor de la clase PublicationItem para definir el atributo Quantity.
-            </summary>
-        </member>
-        <member name="T:ClassLibrary.Qualification">
-            <summary>
-            Clase para definir habilitaciones.
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Qualification.Id">
-            <summary>
-            Id de habilitaciones.
-            </summary>
-            <value></value>
-        </member>
-        <member name="P:ClassLibrary.Qualification.Name">
-            <summary>
-            Nombre de la habilitacion.
-            </summary>
-            <value></value>
-        </member>
-        <member name="P:ClassLibrary.Qualification.Deleted">
-            <summary>
-            Habilita la habilitación.
-            </summary>
-            <value></value>
-        </member>
-        <member name="M:ClassLibrary.Qualification.#ctor(System.String)">
-            <summary>
-            Constructor de Qualification.
-            </summary>
-            <param name="Name"></param>
-        </member>
-        <member name="M:ClassLibrary.Qualification.#ctor">
-            <summary>
-            Constructor vacio para la utilización de Qualification Admin
-            </summary>
-        </member>
-        <member name="M:ClassLibrary.Qualification.LoadFromJson(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="json"></param>
-        </member>
-        <member name="M:ClassLibrary.Qualification.Clone">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:ClassLibrary.Qualification.ConvertToJson">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:ClassLibrary.QualificationAdmin">
-            <summary>
-            Clase para la administración de las habilitaciones.
-            </summary>
-        </member>
-        <member name="T:ClassLibrary.Role">
-            <summary>
-            clase para el rol de los usuarios
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Role.Name">
-            <summary>
-            nombre del rol
-            </summary>
-            <value>guardo el nombre en un string</value>
-        </member>
-        <member name="P:ClassLibrary.Role.Id">
-            <summary>
-            guardo el id en un int
-            </summary>
-            <value>guardo el id en un int</value>
-        </member>
-        <member name="M:ClassLibrary.Role.#ctor(System.String,System.String)">
-            <summary>
-            constructor de role
-            </summary>
-            <param name="name">nobre del rol</param>
-            <param name="id">id del rol</param>
-        </member>
-        <member name="T:ClassLibrary.Sale">
-            <summary>
-            Clase Sale.
-            </summary>
-        </member>
-        <member name="F:ClassLibrary.Sale.ListCompanyMaterial">
-            <summary>
-            Lista de materiales de la compania.
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Sale.Publication">
-            <summary>
-              Property de publication.
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Sale.PublicationItem">
-            <summary>
-            Property a la clase PublicationItem.
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Sale.Company">
-            <summary>
-            Property de Company.
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Sale.Entrepreneur">
-            <summary>
-            Property de Entrepreneur.
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Sale.Id">
-            <summary>
-            Id privado de cada Sale.
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Sale.DateTime">
-            <summary>
-            Fecha de la venta.
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Sale.Price">
-            <summary>
-            Precio de la venta.
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Sale.Currency">
-            <summary>
-            Divisa en la que se realiza cada venta.
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Sale.Deleted">
-            <summary>
-            Atributo para saber si la venta esta suspendida o no.
-            </summary>
-        </member>
-        <member name="M:ClassLibrary.Sale.#ctor(System.DateTime,System.Int32,ClassLibrary.Currency)">
-            <summary>
-            Constructor de la clase Sale para definir los atributos.
-            </summary>
-            <param name="DateTime"></param>
-            <param name="Price"></param>
-            <param name="Currency"></param>
-        </member>
-        <member name="M:ClassLibrary.Sale.#ctor">
-            <summary>
-            Constructor vacio para la clase SaleAdmin.
-            </summary>
-        </member>
-        <member name="M:ClassLibrary.Sale.AddItem(ClassLibrary.CompanyMaterial)">
-            <summary>
-            Metodo para añadir materiales a una compania.
-            </summary>
-        </member>
-        <member name="M:ClassLibrary.Sale.RemoveItem(ClassLibrary.CompanyMaterial)">
-            <summary>
-            Metodo para remover materiales de una compania.
-            </summary>
-        </member>
-        <member name="M:ClassLibrary.Sale.LoadFromJson(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="json"></param>
-        </member>
-        <member name="M:ClassLibrary.Sale.Clone">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:ClassLibrary.Sale.ConvertToJson">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:ClassLibrary.SaleAdmin">
-            <summary>
-            Clase para administrar las ventas.
-            </summary>
-        </member>
         <member name="T:ClassLibrary.InsertCompanyMaterialData">
             <summary>
             Contenedor con los datos
@@ -2659,12 +3231,6 @@
             mensajeria del usuario a registrar.
             </summary>
         </member>
-        <member name="P:ClassLibrary.InsertPublicationData.PublicationItem">
-            <summary>
-            Identificador dentro del servicio de
-            mensajeria del usuario a registrar.
-            </summary>
-        </member>
         <member name="P:ClassLibrary.InsertPublicationData.Publication">
             <summary>
             Identificador dentro del servicio de
@@ -2701,12 +3267,6 @@
             </summary>
         </member>
         <member name="P:ClassLibrary.SelectCompanyMaterialData.MaterialCategory">
-            <summary>
-            Identificador dentro del servicio de
-            mensajeria del usuario a registrar.
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.SelectCompanyMaterialData.Stock">
             <summary>
             Identificador dentro del servicio de
             mensajeria del usuario a registrar.
@@ -2927,63 +3487,17 @@
             Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.StorageProviderInProcess"/>.
             </summary>
         </member>
-        <member name="M:ClassLibrary.StorageProviderInProcess.GetTable``1">
+        <member name="M:ClassLibrary.StorageProviderInProcess.SelectAll``1">
             <inheritdoc/>
         </member>
-        <member name="T:ClassLibrary.User">
-            <summary>
-            Esta clase representa Usuarios.
-            </summary>
+        <member name="M:ClassLibrary.StorageProviderInProcess.Insert``1(``0)">
+            <inheritdoc/>
         </member>
-        <member name="P:ClassLibrary.User.Id">
-            <summary>
-            Identificador de cada Usuario
-            </summary>
+        <member name="M:ClassLibrary.StorageProviderInProcess.Update``1(``0)">
+            <inheritdoc/>
         </member>
-        <member name="P:ClassLibrary.User.FirstName">
-            <summary>
-            Nombre del Usuario
-            </summary>
-            <value>Almacenamos el nombre del Usuario en un string</value>
-        </member>
-        <member name="P:ClassLibrary.User.LastName">
-            <summary>
-            Apellido del Usuario
-            </summary>
-            <value>Almacenamos el apellido del Usuario en un string</value>
-        </member>
-        <member name="P:ClassLibrary.User.Deleted">
-            <summary>
-            Obtiene un valor que indica si el usuario fue eliminado
-            </summary>
-            <value><c>true</c> si el usuario fue eliminado, <c>false</c> en caso contrario.</value>
-        </member>
-        <member name="P:ClassLibrary.User.Role">
-            <summary>
-            Rol del Usuario
-            </summary>
-            <value>Almacenamos el rol del Usuario en un objeto de tipo Role</value>
-        </member>
-        <member name="P:ClassLibrary.User.Accounts">
-            <summary>
-            Lista de cuentas
-            </summary>
-            <value>Almacenamos en una lista llamada Accounts todas las cuentas</value>
-        </member>
-        <member name="M:ClassLibrary.User.#ctor(System.Int32,System.String,System.String,ClassLibrary.UserRole)">
-            <summary>
-            Constructor de la clase.
-            </summary>
-        </member>
-        <member name="M:ClassLibrary.User.#ctor">
-            <summary>
-            Constructor de la clase.
-            </summary>
-        </member>
-        <member name="T:ClassLibrary.UserAdmin">
-            <summary>
-            Esta clase representa la administracion de Usuarios.
-            </summary>
+        <member name="M:ClassLibrary.StorageProviderInProcess.Delete``1(System.Int32)">
+            <inheritdoc/>
         </member>
     </members>
 </doc>
