@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Text;
 
 namespace ClassLibrary
@@ -30,10 +29,10 @@ namespace ClassLibrary
             builder.Append("Listado de Ventas existentes: \n");
             builder.Append("En caso de querer hacer una accion sobre algun material ingrese su numero.\n");
             builder.Append("\\cancelar : Volver a menu de Empresa .\n");
-            builder.Append(TextToPrintCompanyMaterial(selector));
+            //builder.Append(TextToPrintCompanyMaterial(selector));
             return builder.ToString();
         }
-
+        /*
         private string TextToPrintCompanyMaterial(ChatDialogSelector selector)
         {
             StringBuilder xListMats=new StringBuilder();
@@ -47,6 +46,6 @@ namespace ClassLibrary
                 xListMats.Append("en la fecha" + sale.DateTime.ToString() +"se compro" + sale.PublicationItem.CompanyMaterial.Name + "\n");
             }
             return xListMats.ToString();
-        }
+        }*/
     }
 }

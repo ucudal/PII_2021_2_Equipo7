@@ -28,9 +28,10 @@ namespace ClassLibrary
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            data.Qualification=qualificationAdmin.Items.Find(obj => obj.Id==int.Parse(selector.Code));
+            //data.Qualification=qualificationAdmin.Items.Find(obj => obj.Id==int.Parse(selector.Code));
 
-            builder.Append("Esta seguro que desea eliminar la habilitacion con el nombre " + data.Qualification.Name + " ?\n ");
+            //builder.Append("Esta seguro que desea eliminar la habilitacion con el nombre " + data.Qualification.Name + " ?\n ");
+            builder.Append("Esta seguro que desea eliminar la habilitacion con el nombre NOMBRE?\n");
             builder.Append("\\confirmar : Confirmar en caso de que este seguro.\n");
             builder.Append("\\cancelar : Volver al menu de materiales .\n");
             return builder.ToString();

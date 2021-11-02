@@ -1,5 +1,6 @@
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Text;
 
 namespace ClassLibrary
 {
@@ -58,6 +59,56 @@ namespace ClassLibrary
             }
             return false;
 
+        }
+
+        
+
+        /// <summary>
+        /// Actualizar una invitacion con un
+        /// nuevo codigo de invitacion generado
+        /// dinamicamente a partir de la fecha
+        /// actual y el Id.
+        /// </summary>
+        /// <param name="inviteId">
+        /// Id de la invitacion para la cual se
+        /// busca generar un nuevo codigo.
+        /// </param>
+        public void GenerateNewInviteCode(int inviteId)
+        {
+            Invitation invite = this.GetById(inviteId);
+            
+            if (invite is not null)
+            {
+                DateTime now = DateTime.Now;
+                StringBuilder builder = new StringBuilder();
+                builder.Append(now.Year.ToString("D4"));
+                builder.Append(now.DayOfYear.ToString("D3"));
+                builder.Append("-");
+                switch (invite.Type)
+                {
+                    case RegistrationType.CopmanyNew:
+                        builder.Append("CN-");
+                        break;
+                    case RegistrationType.CompanyJoin:
+                        builder.Append("CJ-");
+                        break;
+                    case RegistrationType.EntrepreneurNew:
+                        builder.Append("EN-");
+                        break;
+                    case RegistrationType.SystemAdminJoin:
+                        builder.Append("SJ-");
+                        break;
+                    default:
+                        builder.Append("XX-");
+                        break;
+                }
+                string idTransformed = inviteId.ToString().PadLeft(8, '0');
+                idTransformed = idTransformed.Substring(idTransformed.Length - 5);
+                builder.Append(idTransformed);
+
+                invite.Code = builder.ToString();
+                this.Update(invite);
+            }
         }
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-
 namespace ClassLibrary
 {
     /// <summary>
@@ -32,12 +31,23 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public int Insert<T>(T record) where T : class, IManagableData<T>
         {
+            Type type = typeof(T);
             List<T> table = GetTable<T>();
             T recordAux = record.Clone();
-            int newId = table.Max(obj => obj.Id) + 1;
+            int newId;
+            
+            if (table.Count > 0)
+            {
+                newId = table.Max(obj => obj.Id) + 1;
+            }
+            else
+            {
+                newId = 1;
+            }
+
             recordAux.Id = newId;
             recordAux.Deleted = false;
-            table.Add(recordAux);
+            this.tables[type].Add(recordAux);
             return newId;
         }
 

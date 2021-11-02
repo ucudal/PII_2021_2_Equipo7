@@ -25,6 +25,8 @@ namespace ClassLibrary
         public string HandleMessage(MessageWrapper message)
         {
             Session session = this.sessions.CreateSession(message.Service, message.Account);
+            
+            
             if (message.UserStatus == UserStatus.Registered)
             {
                 User user = this.userAdmin.GetById(message.UserId);
@@ -44,7 +46,6 @@ namespace ClassLibrary
                         break;
                 }
             }
-
 
             string context;
             if (message.UserStatus == UserStatus.Suspended)
@@ -84,6 +85,13 @@ namespace ClassLibrary
                             default:
                                 message.Message = "\\welcome";
                                 break;
+                        }
+                    }
+                    else
+                    {
+                        if (context == "session_expired")
+                        {
+                            message.Message = "\\resetsession";
                         }
                     }
                 }

@@ -9,13 +9,13 @@ namespace ClassLibrary
     /// empresa. Procede a pedirle al usuario el nombre
     /// de la empresa a ingresar.
     /// </summary>
-    public class CDH_SignUpEnterpreneurName : ChatDialogHandlerBase
+    public class CDH_SignUpEntrepreneurName : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpEnterpreneurName"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpEntrepreneurName"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpEnterpreneurName(ChatDialogHandlerBase next) : base(next, "registration_new_entre_name")
+        public CDH_SignUpEntrepreneurName(ChatDialogHandlerBase next) : base(next, "registration_new_entre_name")
         {
             this.parents.Add("registration_user_l_name");
             this.route = null;

@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace ClassLibrary
@@ -40,7 +40,7 @@ namespace ClassLibrary
         /// </returns>
         public virtual int Insert(T pElemento)
         {
-            return this.storage.Insert<T>(pElemento);
+            return this.storage.Insert<T>(pElemento.Clone());
         }
         
         /// <summary>
@@ -55,7 +55,7 @@ namespace ClassLibrary
         /// </returns>
         public virtual bool Update(T pElemento)
         {   
-            return this.storage.Update<T>(pElemento);
+            return this.storage.Update<T>(pElemento.Clone());
         }
         
         /// <summary>
@@ -85,13 +85,16 @@ namespace ClassLibrary
         /// </returns>
         public virtual T GetById(int pId)
         {
-            T recordFound = this.Items.First<T>(recordItem => recordItem.Id == pId && !recordItem.Deleted);
-            if (recordFound is null)
+            T recordFound;
+            recordFound = this.Items.FirstOrDefault<T>(recordItem => recordItem.Id == pId && !recordItem.Deleted);
+            if (recordFound is not null)
+            {
+                return recordFound.Clone();
+            }
+            else
             {
                 return null;
             }
-
-            return recordFound.Clone();
         }
         
         /// <summary>

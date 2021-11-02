@@ -5,23 +5,24 @@ namespace ClassLibrary
     /// <summary>
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Responde a la confirmacion de los datos
-    /// ingresados en el registro de una nueva
-    /// empresa. Ingresa los datos al sistema.
+    /// ingresados en el registro de un usiario  
+    /// a una compañía ya existente. Ingresa los
+    /// datos al sistema.
     /// </summary>
-    public class CDH_SignUpDoneEntrepreneurNew : ChatDialogHandlerBase
+    public class CDH_SignUpDoneJoinCompany : ChatDialogHandlerBase
     {
         private UserAdmin userAdmin = Singleton<UserAdmin>.Instance;
         private AccountAdmin accAdmin = Singleton<AccountAdmin>.Instance;
-        private EntrepreneurAdmin entreAdmin = Singleton<EntrepreneurAdmin>.Instance;
-        private InvitationAdmin invAdmin = Singleton<InvitationAdmin>.Instance;
+        private InvitationAdmin inviteAdmin = Singleton<InvitationAdmin>.Instance;
+        private CompanyUserAdmin compUsrAdmin = Singleton<CompanyUserAdmin>.Instance;
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpDoneEntrepreneurNew"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpDoneJoinCompany"/>.
         /// </summary>
-        /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpDoneEntrepreneurNew(ChatDialogHandlerBase next) : base(next, "registration_new_entre_end")
+        /// <param name="next">Siguiente handler</param>
+        public CDH_SignUpDoneJoinCompany(ChatDialogHandlerBase next) : base(next, "registration_Done_join_Company")
         {
-            this.parents.Add("registration_new_entre_verify");
+            this.parents.Add("Sign_Review_Join_Company");
             this.route = "\\confirmar";
         }
 
@@ -34,7 +35,7 @@ namespace ClassLibrary
             User user = userAdmin.New();
             user.FirstName = data.User.FirstName;
             user.LastName = data.User.LastName;
-            user.Role = UserRole.Entrepreneur;
+            user.Role = UserRole.CompanyAdministrator;
             int userId = userAdmin.Insert(user);
 
             if (userId != 0)
@@ -44,16 +45,19 @@ namespace ClassLibrary
                 acc.Service = selector.Service;
                 acc.CodeInService = selector.Account;
                 accAdmin.Insert(acc);
+                
+                Invitation inv = inviteAdmin.GetByCode(data.InviteCode);
 
-                Entrepreneur entre = entreAdmin.New();
-                entre.Name = data.Entrepreneur.Name;
-                entre.Trade = data.Entrepreneur.Trade;
-                entre.UserId = userId;
-                int entreId = entreAdmin.Insert(entre);
+                if (inv.CompanyId != 0)
+                {
+                    CompanyUser compUsr = compUsrAdmin.New();
+                    compUsr.CompanyId = inv.CompanyId;
+                    compUsr.AdminUserId = userId;
+                    compUsrAdmin.Insert(compUsr);
+                }
 
-                Invitation invite = invAdmin.GetByCode(data.InviteCode);
-                invite.Used = true;
-                invAdmin.Update(invite);
+                inv.Used = true;
+                inviteAdmin.Update(inv);
             }
 
             session.MenuLocation = null;

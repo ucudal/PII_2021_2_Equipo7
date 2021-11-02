@@ -25,12 +25,13 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            MaterialAdd(selector);
+            //MaterialAdd(selector);
             builder.Append("El material se agrego satisfactoriamente.\n");
             builder.Append("Escriba ");
             builder.Append("\\volver : para volver al menu de materiales.\n");
             return builder.ToString();
         }
+        /*
         private void MaterialAdd(ChatDialogSelector selector)
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
@@ -47,6 +48,6 @@ namespace ClassLibrary
                 company.AddCompanyMaterial(companyMaterial);
             }
             companyAdmin.Update(company);
-        }
+        }*/
     }
 }

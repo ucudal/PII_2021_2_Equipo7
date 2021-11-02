@@ -27,12 +27,12 @@ namespace ClassLibrary
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
-
+            /*
             CompanyMaterial companyMaterial = this.companyMatAdmin.New();
             companyMaterial.Name = selector.Code.Trim();
             companyMaterial.MaterialCategory=data.MaterialCategory;
             data.CompanyMaterial = companyMaterial;
-
+            */
             StringBuilder builder = new StringBuilder();
             builder.Append("Seguro que desea crear un material con los siguientes datos.\n");
             builder.Append("Nombre: " + data.CompanyMaterial.Name);

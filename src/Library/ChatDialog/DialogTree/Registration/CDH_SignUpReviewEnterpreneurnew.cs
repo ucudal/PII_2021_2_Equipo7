@@ -8,19 +8,17 @@ namespace ClassLibrary
     /// empresa. Le pide al usuario revisar los datos 
     /// ingresados y confirmar su ingreso al sistema.
     /// </summary>
-    public class CDH_SignReviewJoinCompany : ChatDialogHandlerBase
+    public class CDH_SignUpReviewEntrepreneurNew : ChatDialogHandlerBase
     {
-        private InvitationAdmin invitationAdmin = Singleton<InvitationAdmin>.Instance;
-
-        private CompanyAdmin companyAdmin = Singleton<CompanyAdmin>.Instance;
+        EntrepreneurAdmin entrepreneurAdmin = Singleton<EntrepreneurAdmin>.Instance;
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignReviewJoinCompany"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpReviewEntrepreneurNew"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignReviewJoinCompany(ChatDialogHandlerBase next) : base(next, "Sign_Review_Join_Company")
+        public CDH_SignUpReviewEntrepreneurNew(ChatDialogHandlerBase next) : base(next, "registration_new_entre_verify")
         {
-            this.parents.Add("registration_user_l_name");
+            this.parents.Add("registration_new_entre_trade");
             this.route = null;
         }
 
@@ -28,18 +26,16 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
-            SignUpData data = process.GetData<SignUpData>();
+            SignUpData data = session.Process.GetData<SignUpData>();
+            Entrepreneur entrepreneur = data.Entrepreneur;
+            entrepreneur.Trade = selector.Code;
             User user = data.User;
-            user.LastName = selector.Code.Trim();
 
-            Invitation invitation = invitationAdmin.GetByCode(data.InviteCode);
-            Company company = companyAdmin.GetById(invitation.CompanyId);
             StringBuilder builder = new StringBuilder();
             builder.Append("Segun los datos ingresados su nombre\n");
             builder.Append($"es {user.FirstName} {user.LastName}, y su\n");
-            builder.Append($"empresa se llama {company.Name} que\n");
-            builder.Append($"trabaja en el oficio de {company.Trade}.\n");
+            builder.Append($"empresa se llama {entrepreneur.Name} que\n");
+            builder.Append($"trabaja en el oficio de {entrepreneur.Trade}.\n");
             builder.Append("Si estos datos son correctos, confirme el\n");
             builder.Append("registro con el commando '\\confirmar'\n");
             builder.Append("Si no son correctos, ingrese '\\cancelar'");

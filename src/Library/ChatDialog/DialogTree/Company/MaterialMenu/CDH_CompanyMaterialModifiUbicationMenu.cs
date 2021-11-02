@@ -27,8 +27,8 @@ namespace ClassLibrary
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;;
             session.Process = process;
-            SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            data.Stock.Stock=int.Parse(selector.Code);
+            //SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
+            //data.Stock.Stock=int.Parse(selector.Code);
             
 
             StringBuilder builder = new StringBuilder();
