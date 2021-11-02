@@ -38,8 +38,15 @@ namespace ClassLibrary
             ChatDialogHandlerBase handler17 = new CDH_SignUpReviewSysAdmin(handler16);
             ChatDialogHandlerBase handler18 = new CDH_SignUpDoneSysAdmin(handler17);
             ChatDialogHandlerBase handler19 = new CDH_SignUpVerifySysAdminNew(handler18);
+            ChatDialogHandlerBase handler20 = new CDH_SignUpDoneEntrepreneurNew(handler19);
+            ChatDialogHandlerBase handler21 = new CDH_SignUpReviewJoinCompany(handler20);
+            ChatDialogHandlerBase handler22 = new CDH_SignUpEntrepreneurName(handler21);
+            ChatDialogHandlerBase handler23 = new CDH_SignUpEntrepreneurTrade(handler22);
+            ChatDialogHandlerBase handler24 = new CDH_SignUpDoneJoinCompany(handler23);
+            ChatDialogHandlerBase handler25 = new CDH_SignUpReviewEntrepreneurNew(handler24);
+            ChatDialogHandlerBase handler26 = new CDH_SessionExpired(handler25);
 
-            this.firstHandler = handler19;
+            this.firstHandler = handler26;
         }
 
         /// <summary>

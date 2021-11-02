@@ -32,9 +32,11 @@ namespace ClassLibrary
             builder.Append("Ingrese el numero de la habilitacion que quiere agregar.\n");
             builder.Append("Sino, en caso de querer retornar escriba\n");
             builder.Append("\\volver para volver al menu de materiales.\n");
-            builder.Append(TextoToPrintQualifications(selector));
+            //builder.Append(TextoToPrintQualifications(selector));
+            builder.Append("LISTADO_HABILITACIONES");
             return builder.ToString();
         }
+        /*
         private string TextoToPrintQualifications(ChatDialogSelector selector)
         {
             StringBuilder builder=new StringBuilder();
@@ -61,6 +63,6 @@ namespace ClassLibrary
                 builder.Append(""+ x.Name+" "+ x.Id + "\n");
             }
             return builder.ToString();
-        }
+        }*/
     }
 }

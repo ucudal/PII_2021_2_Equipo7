@@ -20,7 +20,7 @@ namespace ClassLibrary
         /// </param>
         public static void Authenticate(MessageWrapper message)
         {
-            message.UserId=accountAdmin.GetUserIdFromAccount(message.Service,message.Account);
+            message.UserId=accountAdmin.GetUserIdForAccount(message.Service,message.Account);
             if(message.UserId==0)
             {
                 message.UserStatus= UserStatus.Unregistered;

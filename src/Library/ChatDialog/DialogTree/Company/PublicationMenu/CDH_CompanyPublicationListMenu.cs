@@ -30,9 +30,11 @@ namespace ClassLibrary
             builder.Append("Ingrese el numero de la publicacion con la cual quiere trabajar \n");
             builder.Append(" en caso contrario escriba \n");
             builder.Append("\\cancelar : Volver al menu de materiales .\n");
-            builder.Append(TextoToPrintQualificationsToErase(selector));
+            //builder.Append(TextoToPrintQualificationsToErase(selector));
+            builder.Append("LISTADO_PUBLICACIONES");
             return builder.ToString();
         }
+        /*
         private string TextoToPrintQualificationsToErase(ChatDialogSelector selector)
         {            
              StringBuilder builder = new StringBuilder();
@@ -41,6 +43,6 @@ namespace ClassLibrary
                 builder.Append("" + xPub.Id + " "+  xPub.PublicationItem.CompanyMaterial.Name + " " + xPub.Price + "\n");
             }
             return builder.ToString();
-        }
+        }*/
     }
 }

@@ -23,13 +23,19 @@ namespace ClassLibrary
             this.parents.Add("registration_invite_comp_join");
             this.parents.Add("registration_invite_comp_new");
             this.parents.Add("registration_invite_entre_new");
+            this.parents.Add("registration_invite_sysadmin_join");
             this.parents.Add("registration_user_f_name");
             this.parents.Add("registration_user_l_name");
             this.parents.Add("registration_new_comp_name");
             this.parents.Add("registration_new_comp_trade");
             this.parents.Add("registration_new_comp_verify");
             this.parents.Add("registration_new_sysadmin_verify");
-            this.parents.Add("registration_invite_sysadmin_join");
+            this.parents.Add("Sign_Review_Join_Company");
+            this.parents.Add("registration_new_entre_name");
+            this.parents.Add("registration_new_entre_trade");
+            this.parents.Add("registration_join_sysadmin_verify");
+            this.parents.Add("registration_new_entre_verify");
+
             this.route = "\\cancelar";
         }
 

@@ -26,12 +26,13 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            PublicationAdd(selector);
+            //PublicationAdd(selector);
             builder.Append("La publicacion se agrego satisfactoriamente.\n");
             builder.Append("Escriba ");
             builder.Append("\\volver : para volver al menu de materiales.\n");
             return builder.ToString();
         }
+        /*
         private void PublicationAdd(ChatDialogSelector selector)
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
@@ -42,6 +43,6 @@ namespace ClassLibrary
             xPubl.PublicationItem=data.PublicationItem;
             xPubl.Company=this.companyAdmin.Items.Find(obj => obj.ListAdminUsers.Exists(admin => admin.Id==session.UserId));
             publicationAdmin.Insert(xPubl);
-        }
+        }*/
     }
 }

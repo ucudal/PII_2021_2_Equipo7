@@ -26,12 +26,13 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            EraseMaterialFromCompany(selector);
+            //EraseMaterialFromCompany(selector);
             builder.Append("Los datos se eliminaron correctamente.\n");
             builder.Append("escriba \n");
             builder.Append("\\volver : para retornar al menu de materiales.\n");
             return builder.ToString();
         }
+        /*
         private void EraseMaterialFromCompany(ChatDialogSelector selector)
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
@@ -40,6 +41,6 @@ namespace ClassLibrary
             Company company=this.companyAdmin.FindAdminUser(session.UserId);
             company.RemoveCompanyMaterial(data.CompanyMaterial);
             this.companyAdmin.Update(company);
-        }
+        }*/
     }
 }

@@ -31,10 +31,11 @@ namespace ClassLibrary
             builder.Append("Ademas puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
             builder.Append("\\cancelar : Volver a menu de materiales .\n");
-            builder.Append(TextToPrintCompanyMaterial(selector));
+            //builder.Append(TextToPrintCompanyMaterial(selector));
+            builder.Append("LISTADO_MATERIALES");
             return builder.ToString();
         }
-
+        /*
         private string TextToPrintCompanyMaterial(ChatDialogSelector selector)
         {
             StringBuilder xListMats=new StringBuilder();
@@ -46,6 +47,6 @@ namespace ClassLibrary
                 xListMats.Append("" + xMat.Name +" " +xMat.Id + "\n");
             }
             return xListMats.ToString();
-        }
+        }*/
     }
 }

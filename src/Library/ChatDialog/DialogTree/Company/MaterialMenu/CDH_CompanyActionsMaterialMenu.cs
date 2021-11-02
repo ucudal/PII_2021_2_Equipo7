@@ -27,7 +27,7 @@ namespace ClassLibrary
             SelectCompanyMaterialData data = new SelectCompanyMaterialData();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = new DProcessData("select_companymaterial",this.code,data);
-            data.CompanyMaterial=companyMaterialAdmin.Items.Find(obj => obj.Id==int.Parse(selector.Code));
+            //data.CompanyMaterial=companyMaterialAdmin.Items.Find(obj => obj.Id==int.Parse(selector.Code));
             
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu acciones sobre el material elegido.\n");

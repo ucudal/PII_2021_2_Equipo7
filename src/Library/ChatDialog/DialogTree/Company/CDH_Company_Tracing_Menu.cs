@@ -30,11 +30,11 @@ namespace ClassLibrary
             //builder.Append("\\siguiente : Siguiente pagina de materiales.\n");
             //builder.Append("\\anterior: Pagina anterior de materiales.\n");
             builder.Append("\\cancelar : Volver a menu de empresas .\n");
-            builder.Append(TextToPrintCompanyMaterial(selector));
+            //builder.Append(TextToPrintCompanyMaterial(selector));
             return builder.ToString();
         }
 
-
+        /*
         private string TextToPrintCompanyMaterial(ChatDialogSelector selector)
         {
             StringBuilder xListMats=new StringBuilder();
@@ -60,7 +60,6 @@ namespace ClassLibrary
             }
             return xListMats.ToString();
         }
-
+        */
     }
-
 }
