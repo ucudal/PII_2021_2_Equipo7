@@ -144,6 +144,16 @@
             Test del metodo GetById(int pId).
             </summary>
         </member>
+        <member name="M:Tests.CompanyMaterialQualificationAdminTest.GetQualificationsForCompanyMaterialTest">
+            <summary>
+            Test del metodo GetQualificationsForCompanyMaterial(int companyMaterialId).
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialQualificationAdminTest.GetCompanyMaterialHasQualificationTest">
+            <summary>
+            Test del metodo GetCompanyMaterialHasQualification(int companyMatId, int qualificationId)
+            </summary>
+        </member>
         <member name="T:Tests.CompanyMaterialStockAdminTest">
             <summary>
             Tests del administrador de stock de un material.
