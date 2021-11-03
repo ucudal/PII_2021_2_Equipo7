@@ -2332,6 +2332,11 @@
             </summary>
             <value></value>
         </member>
+        <member name="P:ClassLibrary.Publication.CompanyMaterialId">
+            <summary>
+            Id del material de empresa publicado.
+            </summary>
+        </member>
         <member name="P:ClassLibrary.Publication.Id">
             <summary>
             Id que se la da a cada publicación.
@@ -2396,6 +2401,13 @@
             <param name="itemCount">Cantidad de items por hoja.</param>
             <param name="page">Hoja la cual recuperar.</param>
             <returns>Listado de Ids de todas las publicaciones pertenecientes a la empresa.</returns>
+        </member>
+        <member name="M:ClassLibrary.PublicationAdmin.GetPublicationsWithCompanyMaterial(System.Int32)">
+            <summary>
+            Obtiene una lista de publicaciones filtrada por el material de empresa.
+            </summary>
+            <param name="compMatId">Id del material de empresa.</param>
+            <returns>Listado de Ids de todas las publicaciones encontradas.</returns>
         </member>
         <member name="T:ClassLibrary.Entrepreneur">
             <summary>

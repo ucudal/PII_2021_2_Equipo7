@@ -54,5 +54,24 @@ namespace ClassLibrary
             return publicationsPage.Select(pub => pub.Id).ToList().AsReadOnly();
         }
 
+        /// <summary>
+        /// Obtiene una lista de publicaciones filtrada por el material de empresa.
+        /// </summary>
+        /// <param name="compMatId">Id del material de empresa.</param>
+        /// <returns>Listado de Ids de todas las publicaciones encontradas.</returns>
+        public ReadOnlyCollection<int> GetPublicationsWithCompanyMaterial(int compMatId)
+        {
+            List<int> resultList = new List<int>();
+            ReadOnlyCollection<Publication> publications = this.Items;
+            foreach (Publication pub in publications)
+            {
+                if (pub.CompanyMaterialId == compMatId)
+                {
+                    resultList.Add(pub.Id);
+                }
+            }
+
+            return resultList.AsReadOnly();
+        }
     }
 }
