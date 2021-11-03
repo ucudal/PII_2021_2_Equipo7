@@ -24,8 +24,9 @@ namespace ClassLibrary
         public ReadOnlyCollection<T> SelectAll<T>() where T : class, IManagableData<T>
         {
             List<T> table = GetTable<T>();
-            List<T> orderedTable = table.OrderBy(recordItem => recordItem.Id).ToList<T>();
-            return table.AsReadOnly();
+            List<T> tableNotDeleted = table.FindAll(recordItem => !recordItem.Deleted);
+            List<T> orderedTable = tableNotDeleted.OrderBy(recordItem => recordItem.Id).ToList<T>();
+            return orderedTable.AsReadOnly();
         }
 
         /// <inheritdoc/>
