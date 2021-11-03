@@ -179,6 +179,16 @@
             Test del metodo GetById(int pId).
             </summary>
         </member>
+        <member name="M:Tests.CompanyMaterialStockAdminTest.GetStockTotalForCompanyMaterialTest">
+            <summary>
+            Test del metodo GetStockTotalForCompanyMaterial(int companyMaterialId).
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialStockAdminTest.GetLocationsWithStockForCompanyMaterialTest">
+            <summary>
+            Test del metodo GetLocationsWithStockForCompanyMaterial(int companyMaterialId).
+            </summary>
+        </member>
         <member name="T:Tests.CompanyUserAdminTest">
             <summary>
             Prueba de la clase <see cref="T:ClassLibrary.CompanyUserAdmin"/>.
