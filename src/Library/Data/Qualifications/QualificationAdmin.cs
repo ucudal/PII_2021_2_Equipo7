@@ -7,7 +7,8 @@ namespace ClassLibrary
     /// Clase para la administración de las habilitaciones.
     /// </summary>
     public class QualificationAdmin : DataAdmin<Qualification>
-    {
+    {  
+        
     }
 
 }

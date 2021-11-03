@@ -34,58 +34,6 @@
             
             </summary>
         </member>
-        <member name="T:Tests.CompanyMaterialTest">
-            <summary>
-            Prueba de la clase <see cref="T:ClassLibrary.CompanyMaterial"/>.
-            </summary>
-        </member>
-        <member name="M:Tests.CompanyMaterialTest.TestConstructor">
-            <summary>
-            test de el constructor
-            </summary>
-        </member>
-        <member name="M:Tests.CompanyMaterialTest.RemoveCompanyMaterialTest">
-            <summary>
-            test para comprobar que el atributo deleted en
-             company material es verdadero cuando se aplica 
-            el test
-            </summary>
-        </member>
-        <member name="M:Tests.CompanyMaterialTest.AddQualificationTest">
-            <summary>
-            test para añadir una cualification de company material
-            </summary>
-        </member>
-        <member name="M:Tests.CompanyMaterialTest.RemoveQualificationTest">
-            <summary>
-            test para eliminar un permiso de company material
-            </summary>
-        </member>
-        <member name="M:Tests.CompanyMaterialTest.GetsStockByLocationTest">
-            <summary>
-            buacamos el stock de materiales segun la ubicacion
-            </summary>
-        </member>
-        <member name="M:Tests.CompanyMaterialTest.GetStockTotalTest">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Tests.CompanyMaterialTest.RestockLocationTest">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="T:Tests.CompanyStockTest">
-            <summary>
-            Test de la clase CompanyStock.
-            </summary>
-        </member>
-        <member name="M:Tests.CompanyStockTest.ConstructorTest">
-            <summary>
-            Test del constructor de la clase.
-            </summary>
-        </member>
         <member name="T:Tests.CompanyTest">
             <summary>
             Prueba de la clase <see cref="T:ClassLibrary.Company"/>.
@@ -94,29 +42,6 @@
         <member name="M:Tests.CompanyTest.TestConstructor">
             <summary>
             test de el constructor
-            </summary>
-        </member>
-        <member name="M:Tests.CompanyTest.TestAddLocation">
-            <summary>
-            testa para añadir la o las locaciones de la empresa
-            </summary>
-        </member>
-        <member name="M:Tests.CompanyTest.TestRemoveLocations">
-            <summary>
-            test para eliminar una locacion de una compania
-            creamos 2 ubicaciones y removemos una y psteriormente
-            comprobamos que esta nos e encuentre en la lista de 
-            locations
-            </summary>
-        </member>
-        <member name="M:Tests.CompanyTest.TestAddCompanyMaterial">
-            <summary>
-            test para añadir un company material
-            </summary>
-        </member>
-        <member name="M:Tests.CompanyTest.TestRemoveCompanyMaterial">
-            <summary>
-            test para remover un company material
             </summary>
         </member>
         <member name="T:Tests.EntrepreneurTest">
@@ -129,17 +54,69 @@
             test de el constructor
             </summary>
         </member>
-        <member name="M:Tests.EntrepreneurTest.TestAddLocation">
+        <member name="T:Tests.EntrepreneurAdminTest">
             <summary>
-            añadimos la locacion del emprendedor
+            Prueba de la clase <see cref="T:ClassLibrary.EntrepreneurAdmin"/>.
             </summary>
         </member>
-        <member name="M:Tests.EntrepreneurTest.TestRemoveLocations">
+        <member name="M:Tests.EntrepreneurAdminTest.InsertTest">
             <summary>
-            test para eliminar una locacion de un emprendedor
-            creamos 2 ubicaciones y removemos una y Posteriormente
-            comprobamos que esta nos e encuentre en la lista de 
-            locations
+            test para incertar un objeto en emprendedor 
+            </summary>
+        </member>
+        <member name="M:Tests.EntrepreneurAdminTest.UpdateTest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Tests.EntrepreneurAdminTest.NewTest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Tests.EntrepreneurAdminTest.GetByIdTest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Tests.EntrepreneurAdminTest.DeleteTest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Tests.InvitationAdminTests">
+            <summary>
+            Tests del administrador de invitaciones.
+            </summary>
+        </member>
+        <member name="M:Tests.InvitationAdminTests.CreateInvitationTest">
+            <summary>
+            Test de creacion de una invitacion.
+            </summary>
+        </member>
+        <member name="M:Tests.InvitationAdminTests.GetByCodeTest">
+            <summary>
+            Test del metodo GetByCode(string pCode).
+            </summary>
+        </member>
+        <member name="M:Tests.InvitationAdminTests.InsertTest">
+            <summary>
+            Test del metodo Insert(Invitation pElemento).
+            </summary>
+        </member>
+        <member name="M:Tests.InvitationAdminTests.UpdateTest">
+            <summary>
+            Test del metodo Update(Invitation pElemento).
+            </summary>
+        </member>
+        <member name="M:Tests.InvitationAdminTests.DeleteTest">
+            <summary>
+            Test del metodo Delete(int pId).
+            </summary>
+        </member>
+        <member name="M:Tests.InvitationAdminTests.GetByIdTest">
+            <summary>
+            Test del metodo GetById(int pId).
             </summary>
         </member>
         <member name="T:Tests.MaterialCategoryTest">
@@ -152,19 +129,29 @@
             Test del constructor de la clase.
             </summary>
         </member>
-        <member name="T:Tests.PublicationItemTest">
+        <member name="T:Tests.PublicationAdminTest">
             <summary>
-            Prueba de la clase <see cref="T:ClassLibrary.PublicationItem"/>.
+            Test de la clase que administra las publicaciones.
             </summary>
         </member>
-        <member name="M:Tests.PublicationItemTest.Setup">
+        <member name="M:Tests.PublicationAdminTest.InsertTest">
             <summary>
-            Setup para inicializar variables u objetos
+            Testear que los valores se ingresan en la data.
             </summary>
         </member>
-        <member name="M:Tests.PublicationItemTest.ConstructorTest">
+        <member name="M:Tests.PublicationAdminTest.NewTest">
             <summary>
-            Test del constructor de la clase PublicationItem.
+            Comprobar que se crea una nueva publicación.
+            </summary>
+        </member>
+        <member name="M:Tests.PublicationAdminTest.DeleteTest">
+            <summary>
+            Comprobar que se borran los datos.
+            </summary>
+        </member>
+        <member name="M:Tests.PublicationAdminTest.UpdateTest">
+            <summary>
+            Comprobar que funciona el update del DataAdmin.
             </summary>
         </member>
         <member name="T:Tests.PublicationTest">
@@ -182,14 +169,34 @@
             Constructor de la clase.
             </summary>
         </member>
-        <member name="M:Tests.PublicationTest.AddKeyWordTest">
+        <member name="M:Tests.PublicationTest.Constructor_Test2">
             <summary>
-            Test para añadir elementos a una lista del tipo KeyWord.
+            Constructor de la clase test.
             </summary>
         </member>
-        <member name="M:Tests.PublicationTest.RemoveKeyWordTest">
+        <member name="T:Tests.QualificationAdminTest">
             <summary>
-            Test para remover elementos a una lista del tipo KeyWord.
+            Test de la clase que administra las habilitaciones.
+            </summary>
+        </member>
+        <member name="M:Tests.QualificationAdminTest.InsertTestQ">
+            <summary>
+            Testear que los valores se ingresan en la data.
+            </summary>
+        </member>
+        <member name="M:Tests.QualificationAdminTest.NewTestQ">
+            <summary>
+            Comprobar que se crea una nueva habilitación.
+            </summary>
+        </member>
+        <member name="M:Tests.QualificationAdminTest.DeleteTestQ">
+            <summary>
+            Comprobar que se borra un id.
+            </summary>
+        </member>
+        <member name="M:Tests.QualificationAdminTest.UpdateTestQ">
+            <summary>
+            Comprobar que funciona el update del DataAdmin.
             </summary>
         </member>
         <member name="T:Tests.QualificationTest">
@@ -209,12 +216,37 @@
         </member>
         <member name="T:Tests.RoleTest">
             <summary>
-            Prueba de la clase <see cref="T:ClassLibrary.Role"/>.
+            Prueba de la clase <see cref="!:Role"/>.
             </summary>
         </member>
         <member name="M:Tests.RoleTest.ConstructorTest">
             <summary>
             test del constructor
+            </summary>
+        </member>
+        <member name="T:Tests.SaleAdminTest">
+            <summary>
+            Test de la clase que administra las ventas.
+            </summary>
+        </member>
+        <member name="M:Tests.SaleAdminTest.InsertTest">
+            <summary>
+            Testear que los valores se ingresan en la data.
+            </summary>
+        </member>
+        <member name="M:Tests.SaleAdminTest.NewTest">
+            <summary>
+            Comprobar que se crea una nueva venta.
+            </summary>
+        </member>
+        <member name="M:Tests.SaleAdminTest.DeleteTest">
+            <summary>
+            Comprobar que se borran los datos.
+            </summary>
+        </member>
+        <member name="M:Tests.SaleAdminTest.UpdateTest">
+            <summary>
+            Comprobar que funciona el update del DataAdmin.
             </summary>
         </member>
         <member name="T:Tests.SaleTest">
@@ -227,14 +259,34 @@
             Test para el constructor de Sale.
             </summary>
         </member>
-        <member name="M:Tests.SaleTest.AddItemTest">
+        <member name="T:Tests.UserAdminTest">
             <summary>
-            Test añadir una compañia a una lista
+            Tests del administrador de Usuarios.
             </summary>
         </member>
-        <member name="M:Tests.SaleTest.RemoveItemTest">
+        <member name="M:Tests.UserAdminTest.GetUserIsSuspendedTest">
             <summary>
-            Test remover una compañia a una lista
+            Test del metodo GetUserIsSuspended(int userId).
+            </summary>
+        </member>
+        <member name="M:Tests.UserAdminTest.InsertTest">
+            <summary>
+            Test del metodo Insert(User pElemento).
+            </summary>
+        </member>
+        <member name="M:Tests.UserAdminTest.UpdateTest">
+            <summary>
+            Test del metodo Update(Invitation pElemento).
+            </summary>
+        </member>
+        <member name="M:Tests.UserAdminTest.DeleteTest">
+            <summary>
+            Test del metodo Delete(int pId).
+            </summary>
+        </member>
+        <member name="M:Tests.UserAdminTest.GetByIdTest">
+            <summary>
+            Test del metodo GetById(int pId).
             </summary>
         </member>
     </members>
