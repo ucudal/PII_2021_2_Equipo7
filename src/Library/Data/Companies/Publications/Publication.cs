@@ -50,18 +50,6 @@ namespace ClassLibrary
         public bool Deleted{get; set;}
 
         /// <summary>
-        /// Constructor de la publicación para definir los atributos.
-        /// </summary>
-        public Publication(DateTime from, DateTime until, int price, Currency currency)
-        {
-            this.ActiveFrom = from;
-            this.ActiveUntil = until;
-            this.Price = price;
-            this.Currency = currency;
-            this.Deleted = false;
-        }
-
-        /// <summary>
         /// Constructor vacio para PublicationAdmin.
         /// </summary>
         [JsonConstructor]
