@@ -4,6 +4,31 @@
         <name>LibraryTests</name>
     </assembly>
     <members>
+        <member name="T:Tests.AccountAdminTest">
+            <summary>
+            Tests del administrador de Usuarios.
+            </summary>
+        </member>
+        <member name="M:Tests.AccountAdminTest.InsertTest">
+            <summary>
+            Test del metodo Insert(Account pElemento).
+            </summary>
+        </member>
+        <member name="M:Tests.AccountAdminTest.UpdateTest">
+            <summary>
+            Test del metodo Update(Invitation pElemento).
+            </summary>
+        </member>
+        <member name="M:Tests.AccountAdminTest.DeleteTest">
+            <summary>
+            Test del metodo Delete(int pId).
+            </summary>
+        </member>
+        <member name="M:Tests.AccountAdminTest.GetByIdTest">
+            <summary>
+            Test del metodo GetById(int pId).
+            </summary>
+        </member>
         <member name="T:Tests.CompanyAdminTest">
             <summary>
             Prueba de la clase <see cref="T:ClassLibrary.CompanyAdmin"/>.
@@ -32,6 +57,81 @@
         <member name="M:Tests.CompanyAdminTest.DeleteTest">
             <summary>
             
+            </summary>
+        </member>
+        <member name="T:Tests.CompanyMaterialAdminTest">
+            <summary>
+            Tests del administrador de MaterialCategory.
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialAdminTest.InsertTest">
+            <summary>
+            Test del metodo Insert(CompanyMaterial pElemento).
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialAdminTest.UpdateTest">
+            <summary>
+            Test del metodo Update(CompanyMaterial pElemento).
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialAdminTest.DeleteTest">
+            <summary>
+            Test del metodo Delete(int pId).
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialAdminTest.GetByIdTest">
+            <summary>
+            Test del metodo GetById(int pId).
+            </summary>
+        </member>
+        <member name="T:Tests.CompanyMaterialQualificationAdminTest">
+            <summary>
+            Tests del administrador de MaterialCategory.
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialQualificationAdminTest.InsertTest">
+            <summary>
+            Test del metodo Insert(CompanyMaterialQualification pElemento).
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialQualificationAdminTest.UpdateTest">
+            <summary>
+            Test del metodo Update(CompanyMaterialQualification pElemento).
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialQualificationAdminTest.DeleteTest">
+            <summary>
+            Test del metodo Delete(int pId).
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialQualificationAdminTest.GetByIdTest">
+            <summary>
+            Test del metodo GetById(int pId).
+            </summary>
+        </member>
+        <member name="T:Tests.CompanyMaterialStockAdminTest">
+            <summary>
+            Tests del administrador de stock de un material.
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialStockAdminTest.InsertTest">
+            <summary>
+            Test del metodo Insert(CompanyMaterialStock pElemento).
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialStockAdminTest.UpdateTest">
+            <summary>
+            Test del metodo Update(CompanyMaterialStock pElemento).
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialStockAdminTest.DeleteTest">
+            <summary>
+            Test del metodo Delete(int pId).
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialStockAdminTest.GetByIdTest">
+            <summary>
+            Test del metodo GetById(int pId).
             </summary>
         </member>
         <member name="T:Tests.CompanyTest">
@@ -84,6 +184,19 @@
             
             </summary>
         </member>
+        <member name="T:Tests.LocationAPIClientTests">
+            <summary>
+            Tests de la API de localizacion.
+            </summary>
+        </member>
+        <member name="M:Tests.LocationAPIClientTests.CompareLocationBetweenClientAndCompany">
+            <summary>
+            Test que prueba si se puede encontrar
+            la localizacion de una empresa mas
+            cercana al emprendedor por medio de la
+            API de localizacion.
+            </summary>
+        </member>
         <member name="T:Tests.InvitationAdminTests">
             <summary>
             Tests del administrador de invitaciones.
@@ -115,6 +228,31 @@
             </summary>
         </member>
         <member name="M:Tests.InvitationAdminTests.GetByIdTest">
+            <summary>
+            Test del metodo GetById(int pId).
+            </summary>
+        </member>
+        <member name="T:Tests.MaterialCategoryAdminTest">
+            <summary>
+            Tests del administrador de MaterialCategory.
+            </summary>
+        </member>
+        <member name="M:Tests.MaterialCategoryAdminTest.InsertTest">
+            <summary>
+            Test del metodo Insert(MaterialCategory pElemento).
+            </summary>
+        </member>
+        <member name="M:Tests.MaterialCategoryAdminTest.UpdateTest">
+            <summary>
+            Test del metodo Update(Invitation pElemento).
+            </summary>
+        </member>
+        <member name="M:Tests.MaterialCategoryAdminTest.DeleteTest">
+            <summary>
+            Test del metodo Delete(int pId).
+            </summary>
+        </member>
+        <member name="M:Tests.MaterialCategoryAdminTest.GetByIdTest">
             <summary>
             Test del metodo GetById(int pId).
             </summary>

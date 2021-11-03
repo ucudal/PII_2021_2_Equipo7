@@ -68,8 +68,9 @@ namespace Tests
             pPrueba1.ActiveUntil=DateTime.Today.AddMonths(3);
             pPrueba1.Price=100;
             pPrueba1.Currency= Currency.DolarEstadounidense;
-
-            publiAdmin.Insert(pPrueba1);
+        
+            int prueba = publiAdmin.Insert(pPrueba1);
+            Assert.AreEqual(0,prueba);
 
             int NewId =pPrueba1.Id;
             publiAdmin.Delete(NewId);
