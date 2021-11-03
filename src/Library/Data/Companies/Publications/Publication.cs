@@ -71,6 +71,7 @@ namespace ClassLibrary
             this.Deleted=publication.Deleted;
             this.Currency=publication.Currency;
             this.Price=publication.Price;
+            this.CompanyId = publication.CompanyId;
         }
 
         /// <inheritdoc/>

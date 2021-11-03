@@ -109,5 +109,123 @@ namespace Tests
 
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Test]
+        public void GetSalesBySellerTest()
+        {
+
+            Sale sale1 = saleAdmin.New();
+
+            DateTime datetime = DateTime.Today;
+            sale1.DateTime = datetime;
+
+            int Price = 100;
+            sale1.Price = Price;
+
+            Currency currency = Currency.PesoUruguayo;
+            sale1.Currency = currency;
+
+            int sellerCompanyId = 2;
+            sale1.SellerCompanyId = sellerCompanyId;
+
+
+            Sale sale2 = saleAdmin.New();
+
+            DateTime datetime2 = DateTime.Today;
+            sale2.DateTime = datetime2;
+
+            int Price2 = 100;
+            sale2.Price = Price2;
+
+            Currency currency2 = Currency.PesoUruguayo;
+            sale2.Currency = currency2;
+
+            sale2.SellerCompanyId = sellerCompanyId;
+
+
+            Sale sale3 = saleAdmin.New();
+
+            DateTime datetime3 = DateTime.Today;
+            sale3.DateTime = datetime3;
+
+            int Price3 = 100;
+            sale3.Price = Price3;
+
+            Currency currency3 = Currency.PesoUruguayo;
+            sale3.Currency = currency3;
+
+            sale3.SellerCompanyId = sellerCompanyId;
+
+            saleAdmin.Insert(sale1);
+            saleAdmin.Insert(sale2);
+            saleAdmin.Insert(sale3);
+
+            int Cventa = 3;
+
+            ReadOnlyCollection<int> lista = saleAdmin.GetSalesBySeller(sellerCompanyId);
+
+            Assert.AreEqual(Cventa,lista.Count);
+            
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Test]
+        public void GetSalesByBuyerTest()
+        {
+            Sale sale1 = saleAdmin.New();
+
+            DateTime datetime = DateTime.Today;
+            sale1.DateTime = datetime;
+
+            int Price = 1033;
+            sale1.Price = Price;
+
+            Currency currency = Currency.DolarEstadounidense;
+            sale1.Currency = currency;
+
+            sale1.BuyerEntrepreneurId = 2;
+
+            Sale sale2 = saleAdmin.New();
+
+            DateTime datetime2 = DateTime.Today;
+            sale2.DateTime = datetime2;
+
+            int Price2 = 100;
+            sale2.Price = Price2;
+
+            Currency currency2 = Currency.PesoUruguayo;
+            sale2.Currency = currency2;
+
+            sale2.BuyerEntrepreneurId = 2;
+
+            Sale sale3 = saleAdmin.New();
+
+            DateTime datetime3 = DateTime.Today;
+            sale3.DateTime = datetime3;
+
+            int Price3 = 100;
+            sale3.Price = Price3;
+
+            Currency currency3 = Currency.PesoUruguayo;
+            sale3.Currency = currency3;
+
+            sale3.BuyerEntrepreneurId = 2;
+
+            saleAdmin.Insert(sale1);
+            saleAdmin.Insert(sale2);
+            saleAdmin.Insert(sale3);
+
+            int Cventa = 3;
+
+            ReadOnlyCollection<int> lista = saleAdmin.GetSalesByBuyer(2);
+
+            Assert.AreEqual(Cventa,lista.Count);
+
+        }
     }
 }
