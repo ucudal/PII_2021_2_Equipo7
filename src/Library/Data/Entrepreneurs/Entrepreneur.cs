@@ -43,7 +43,7 @@ namespace ClassLibrary
         /// Geo referencia de localizacion del
         /// emprendedor
         /// </summary>
-        public Location Location { get; set; }
+        public string GeoReference { get; set; }
         /// <summary>
         /// usuario del emprendedor
         /// </summary>
@@ -81,6 +81,7 @@ namespace ClassLibrary
             this.UserId= emprendedor.UserId;            
             this.Deleted=emprendedor.Deleted;
             this.Trade=emprendedor.Trade;
+            this.GeoReference = emprendedor.GeoReference;
             
         }
         /// <inheritdoc/>
