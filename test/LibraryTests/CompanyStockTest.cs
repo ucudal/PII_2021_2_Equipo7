@@ -9,6 +9,7 @@ namespace Tests
     /// </summary>
     public class CompanyStockTest
     {
+        /*
         /// <summary>
         /// Test del constructor de la clase.
         /// </summary>
@@ -21,5 +22,6 @@ namespace Tests
             Assert.AreEqual(stock, companyStock.Stock);
             Assert.AreEqual(location, companyStock.Location);
         }
+        */
     }
 }
