@@ -94,6 +94,11 @@
             
             </summary>
         </member>
+        <member name="M:Tests.CompanyLocationAdminTest.GetLocationsForCompany">
+            <summary>
+            busca por el id de compania las locaciones de la misma
+            </summary>
+        </member>
         <member name="T:Tests.CompanyMaterialAdminTest">
             <summary>
             Tests del administrador de MaterialCategory.
@@ -115,6 +120,16 @@
             </summary>
         </member>
         <member name="M:Tests.CompanyMaterialAdminTest.GetByIdTest">
+            <summary>
+            Test del metodo GetById(int pId).
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialAdminTest.GetCompanyMaterialsInCompanyTest">
+            <summary>
+            Test del metodo GetById(int pId).
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialAdminTest.GetCompanyMaterialsInCompanyForCategoryTest">
             <summary>
             Test del metodo GetById(int pId).
             </summary>
