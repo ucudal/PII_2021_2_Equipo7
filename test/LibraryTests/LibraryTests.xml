@@ -189,6 +189,11 @@
             Test del metodo GetLocationsWithStockForCompanyMaterial(int companyMaterialId).
             </summary>
         </member>
+        <member name="M:Tests.CompanyMaterialStockAdminTest.GetCompanyMaterialsInStockForLocationTest">
+            <summary>
+            Test del metodo GetCompanyMaterialsInStockForLocation(int companyLocationId).
+            </summary>
+        </member>
         <member name="T:Tests.CompanyUserAdminTest">
             <summary>
             Prueba de la clase <see cref="T:ClassLibrary.CompanyUserAdmin"/>.
@@ -402,6 +407,11 @@
             Comprobar que funciona el update del DataAdmin.
             </summary>
         </member>
+        <member name="M:Tests.PublicationAdminTest.GetPublicationsByCompanyTest">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Tests.PublicationKeyWordsAdminTest">
             <summary>
             Test de la clase que administra las palabras claves de las publicaciones.
@@ -421,6 +431,11 @@
             <summary>
             Test del deleted
             </summary>
+        </member>
+        <member name="M:Tests.PublicationKeyWordsAdminTest.GetKeyWordsForPublicationTest">
+            <summary>
+            
+            </summary>        
         </member>
         <member name="T:Tests.QualificationAdminTest">
             <summary>
@@ -470,6 +485,16 @@
         <member name="M:Tests.SaleAdminTest.UpdateTest">
             <summary>
             Comprobar que funciona el update del DataAdmin.
+            </summary>
+        </member>
+        <member name="M:Tests.SaleAdminTest.GetSalesBySellerTest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Tests.SaleAdminTest.GetSalesByBuyerTest">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Tests.UserAdminTest">

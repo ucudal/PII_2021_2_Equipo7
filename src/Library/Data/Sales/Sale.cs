@@ -58,7 +58,6 @@ namespace ClassLibrary
         /// <param name="DateTime"></param>
         /// <param name="Price"></param>
         /// <param name="Currency"></param>
-        [JsonConstructor]
         public Sale(DateTime DateTime, int Price, Currency Currency)
         {
             this.DateTime = DateTime;
@@ -70,6 +69,7 @@ namespace ClassLibrary
         /// <summary>
         /// Constructor vacio para la clase SaleAdmin.
         /// </summary>
+        [JsonConstructor]
         public Sale()
         {
             this.Id = 0;
@@ -87,6 +87,8 @@ namespace ClassLibrary
             this.Deleted=sale.Deleted;
             this.Currency=sale.Currency;
             this.Price=sale.Price;
+            this.SellerCompanyId = sale.SellerCompanyId;
+            this.BuyerEntrepreneurId = sale.BuyerEntrepreneurId;
         }
 
 

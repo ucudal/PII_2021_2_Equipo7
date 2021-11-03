@@ -48,5 +48,32 @@ namespace Tests
             Assert.IsNull(keyadmin.GetById(NewId));
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>        
+        [Test]
+        public void GetKeyWordsForPublicationTest()
+        {
+            PublicationKeyWord keyw = keyadmin.New();
+            keyw.PublicationId = 1;
+            keyadmin.Insert(keyw);
+
+            PublicationKeyWord keyw1 = keyadmin.New();
+            keyw1.PublicationId = 1;
+            keyadmin.Insert(keyw1);
+
+            PublicationKeyWord keyw2 = keyadmin.New();
+            keyw2.PublicationId = 1;
+            keyadmin.Insert(keyw2);
+
+            ReadOnlyCollection<string> lista = keyadmin.GetKeyWordsForPublication(1);
+
+            Assert.AreEqual(3,lista.Count);
+
+        }
+
+
+
     }
 }
