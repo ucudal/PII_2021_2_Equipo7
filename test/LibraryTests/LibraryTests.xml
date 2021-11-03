@@ -29,6 +29,11 @@
             Test del metodo GetById(int pId).
             </summary>
         </member>
+        <member name="M:Tests.AccountAdminTest.GetUserIdForAccountTest">
+            <summary>
+            Test del metodo GetUserIdForAccount(MessagingService service, string account).
+            </summary>
+        </member>
         <member name="T:Tests.CompanyAdminTest">
             <summary>
             Prueba de la clase <see cref="T:ClassLibrary.CompanyAdmin"/>.
@@ -154,6 +159,16 @@
             Test del metodo GetById(int pId).
             </summary>
         </member>
+        <member name="M:Tests.CompanyMaterialQualificationAdminTest.GetQualificationsForCompanyMaterialTest">
+            <summary>
+            Test del metodo GetQualificationsForCompanyMaterial(int companyMaterialId).
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialQualificationAdminTest.GetCompanyMaterialHasQualificationTest">
+            <summary>
+            Test del metodo GetCompanyMaterialHasQualification(int companyMatId, int qualificationId)
+            </summary>
+        </member>
         <member name="T:Tests.CompanyMaterialStockAdminTest">
             <summary>
             Tests del administrador de stock de un material.
@@ -179,14 +194,14 @@
             Test del metodo GetById(int pId).
             </summary>
         </member>
-        <member name="T:Tests.CompanyMaterialTest">
+        <member name="M:Tests.CompanyMaterialStockAdminTest.GetStockTotalForCompanyMaterialTest">
             <summary>
-            Prueba de la clase <see cref="T:ClassLibrary.CompanyMaterial"/>.
+            Test del metodo GetStockTotalForCompanyMaterial(int companyMaterialId).
             </summary>
         </member>
-        <member name="T:Tests.CompanyStockTest">
+        <member name="M:Tests.CompanyMaterialStockAdminTest.GetLocationsWithStockForCompanyMaterialTest">
             <summary>
-            Test de la clase CompanyStock.
+            Test del metodo GetLocationsWithStockForCompanyMaterial(int companyMaterialId).
             </summary>
         </member>
         <member name="T:Tests.CompanyUserAdminTest">
@@ -327,6 +342,56 @@
             Test del metodo GetById(int pId).
             </summary>
         </member>
+        <member name="T:Tests.CompanyMaterialTest">
+            <summary>
+            Prueba de la clase <see cref="T:ClassLibrary.CompanyMaterial"/>.
+            </summary>
+        </member>
+        <member name="T:Tests.CompanyStockTest">
+            <summary>
+            Test de la clase CompanyStock.
+            </summary>
+        </member>
+        <member name="T:Tests.CompanyTest">
+            <summary>
+            Prueba de la clase <see cref="T:ClassLibrary.Company"/>.
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyTest.TestConstructor">
+            <summary>
+            test de el constructor
+            </summary>
+        </member>
+        <member name="T:Tests.EntrepreneurTest">
+            <summary>
+            Prueba de la clase <see cref="T:ClassLibrary.Company"/>.
+            </summary>
+        </member>
+        <member name="M:Tests.EntrepreneurTest.TestConstructor">
+            <summary>
+            test de el constructor
+            </summary>
+        </member>
+        <member name="T:Tests.MaterialCategoryTest">
+            <summary>
+            Test de la clase Qualification.
+            </summary>
+        </member>
+        <member name="M:Tests.MaterialCategoryTest.ConstructorTest">
+            <summary>
+            Test del constructor de la clase.
+            </summary>
+        </member>
+        <member name="T:Tests.RoleTest">
+            <summary>
+            Prueba de la clase <see cref="!:Role"/>.
+            </summary>
+        </member>
+        <member name="M:Tests.RoleTest.ConstructorTest">
+            <summary>
+            test del constructor
+            </summary>
+        </member>
         <member name="T:Tests.PublicationAdminTest">
             <summary>
             Test de la clase que administra las publicaciones.
@@ -360,6 +425,16 @@
         <member name="M:Tests.PublicationKeyWordsAdminTest.Insert">
             <summary>
             
+            </summary>
+        </member>
+        <member name="M:Tests.PublicationKeyWordsAdminTest.NewTest">
+            <summary>
+            Test para crear una nueva key
+            </summary>
+        </member>
+        <member name="M:Tests.PublicationKeyWordsAdminTest.DeleteTest">
+            <summary>
+            Test del deleted
             </summary>
         </member>
         <member name="T:Tests.QualificationAdminTest">
@@ -412,14 +487,47 @@
             Comprobar que funciona el update del DataAdmin.
             </summary>
         </member>
-        <member name="T:Tests.SaleTest">
+        <member name="T:Tests.SysAdminOperationTests">
             <summary>
-            
+            Conjunto de Tests para la operacion de
+            un administrador del sistema.
             </summary>
         </member>
-        <member name="M:Tests.SaleTest.ConstructorTest">
+        <member name="M:Tests.SysAdminOperationTests.InvitationCreationTest(ClassLibrary.RegistrationType)">
             <summary>
-            Test para el constructor de Sale.
+            Test de creacion de una invitacion
+            a la plataforma.
+            </summary>
+            <param name="type">
+            Tipo de invitacion a crear.
+            </param>
+        </member>
+        <member name="M:Tests.SysAdminOperationTests.MaterialCategoryCreationTest">
+            <summary>
+            Test de creacion de una
+            categoria de material.
+            </summary>
+        </member>
+        <member name="M:Tests.SysAdminOperationTests.MaterialCategoryDeletionTest">
+            <summary>
+            Test de eliminacion de una
+            categoria de material.
+            </summary>
+        </member>
+        <member name="M:Tests.SysAdminOperationTests.SuspendUserTest">
+            <summary>
+            Test de suspender un usuario.
+            </summary>
+        </member>
+        <member name="T:Tests.UnregisteredUserOperationTests">
+            <summary>
+            Conjunto de Tests para la operacion de
+            un administrador del sistema.
+            </summary>
+        </member>
+        <member name="M:Tests.UnregisteredUserOperationTests.AcceptCompanyNewInvitationTest">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Tests.UserAdminTest">

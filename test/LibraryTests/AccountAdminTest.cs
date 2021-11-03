@@ -186,5 +186,41 @@ namespace Tests
             Assert.AreEqual(account.UserId, xComp.UserId);
             Assert.AreEqual(account.Deleted, xComp.Deleted);
         }
+
+        /// <summary>
+        /// Test del metodo GetUserIdForAccount(MessagingService service, string account).
+        /// </summary>
+        [Test]
+        public void GetUserIdForAccountTest()
+        {
+            //Agregamos una cuenta 
+            ReadOnlyCollection<Account> prevAccount = accountAdmin.Items;
+
+            int userId = 1;
+            MessagingService service=MessagingService.Console;
+            string codeInService = "Code";
+
+            Account account=accountAdmin.New();
+            account.UserId=userId;
+            account.Service=service;
+            account.CodeInService=codeInService;
+
+            int accountId=accountAdmin.Insert(account);
+
+            //Validamos que se haya añadido correctamente con un id!= 0
+            Assert.AreNotEqual(0, accountId);
+
+            int expected=prevAccount.Count + 1;
+
+            ReadOnlyCollection<Account> postAccount = accountAdmin.Items;
+
+            //Validamos que se agrego una Cuenta
+            Assert.AreEqual(expected,postAccount.Count);
+            
+            int userGetId=accountAdmin.GetUserIdForAccount(service,codeInService);
+
+            Assert.AreEqual(account.UserId,userGetId);
+            
+        }
     }
 }
