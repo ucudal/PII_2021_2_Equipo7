@@ -123,7 +123,9 @@ namespace Tests
             CompanyUser company2 =companyUsAdmin.GetById(id);
 
 
-            Assert.AreEqual(company,company2);
+            Assert.AreEqual(company.CompanyId,company2.CompanyId);
+            Assert.AreEqual(id,company2.Id);
+            
         }
         /// <summary>
         /// 
@@ -159,7 +161,7 @@ namespace Tests
             companyUsAdmin.Delete(locId);
 
             ReadOnlyCollection<CompanyUser> afterDelete = companyUsAdmin.Items;
-
+            expectedInvites = locationspost.Count - 1;
             //Comprobamos que se elimino una invitacion
             Assert.AreEqual(expectedInvites,afterDelete.Count);
 

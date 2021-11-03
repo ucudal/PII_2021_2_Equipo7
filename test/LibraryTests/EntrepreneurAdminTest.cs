@@ -82,7 +82,8 @@ namespace Tests
             Entrepreneur empre2 =entrepreneurAdmin.GetById(idempre);
             int id =empre2.Id;
             Entrepreneur entre3= entrepreneurAdmin.GetById(id);
-            Assert.AreEqual(empre2,entre3);
+            Assert.AreEqual(empre2.Id,entre3.Id);
+            Assert.AreEqual(empre2.Name,entre3.Name);
         }
         /// <summary>
         /// 
