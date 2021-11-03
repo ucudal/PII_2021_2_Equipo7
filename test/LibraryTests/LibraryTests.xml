@@ -89,6 +89,11 @@
             
             </summary>
         </member>
+        <member name="M:Tests.CompanyLocationAdminTest.GetLocationsForCompany">
+            <summary>
+            busca por el id de compania las locaciones de la misma
+            </summary>
+        </member>
         <member name="T:Tests.CompanyMaterialAdminTest">
             <summary>
             Tests del administrador de MaterialCategory.
@@ -305,81 +310,6 @@
         <member name="M:Tests.MaterialCategoryAdminTest.GetByIdTest">
             <summary>
             Test del metodo GetById(int pId).
-            </summary>
-        </member>
-        <member name="T:Tests.CompanyTest">
-            <summary>
-            Prueba de la clase <see cref="T:ClassLibrary.Company"/>.
-            </summary>
-        </member>
-        <member name="M:Tests.CompanyTest.TestConstructor">
-            <summary>
-            test de el constructor
-            </summary>
-        </member>
-        <member name="T:Tests.EntrepreneurTest">
-            <summary>
-            Prueba de la clase <see cref="T:ClassLibrary.Company"/>.
-            </summary>
-        </member>
-        <member name="M:Tests.EntrepreneurTest.TestConstructor">
-            <summary>
-            test de el constructor
-            </summary>
-        </member>
-        <member name="T:Tests.MaterialCategoryTest">
-            <summary>
-            Test de la clase Qualification.
-            </summary>
-        </member>
-        <member name="M:Tests.MaterialCategoryTest.ConstructorTest">
-            <summary>
-            Test del constructor de la clase.
-            </summary>
-        </member>
-        <member name="T:Tests.PublicationTest">
-            <summary>
-            Prueba de la clase <see cref="T:ClassLibrary.Publication"/>.
-            </summary>
-        </member>
-        <member name="M:Tests.PublicationTest.Setup">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Tests.PublicationTest.Constructor_Test">
-            <summary>
-            Constructor de la clase.
-            </summary>
-        </member>
-        <member name="M:Tests.PublicationTest.Constructor_Test2">
-            <summary>
-            Constructor de la clase test.
-            </summary>
-        </member>
-        <member name="T:Tests.QualificationTest">
-            <summary>
-            Test de la clase Qualification.
-            </summary>
-        </member>
-        <member name="M:Tests.QualificationTest.ConstructorTest">
-            <summary>
-            Test del constructor de la clase.
-            </summary>
-        </member>
-        <member name="M:Tests.QualificationTest.ConstructorTest2">
-            <summary>
-            Prueba 2 del constructor
-            </summary>
-        </member>
-        <member name="T:Tests.RoleTest">
-            <summary>
-            Prueba de la clase <see cref="!:Role"/>.
-            </summary>
-        </member>
-        <member name="M:Tests.RoleTest.ConstructorTest">
-            <summary>
-            test del constructor
             </summary>
         </member>
         <member name="T:Tests.PublicationAdminTest">
