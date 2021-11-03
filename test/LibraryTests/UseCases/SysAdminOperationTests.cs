@@ -12,6 +12,9 @@ namespace Tests
     [TestFixture]
     public class SysAdminOperationTests
     {
+
+        private QualificationAdmin qualificationAdmin=Singleton<QualificationAdmin>.Instance;
+
         /// <summary>
         /// Test de creacion de una invitacion
         /// a la plataforma.
@@ -167,6 +170,37 @@ namespace Tests
             usr = usrAdmin.GetById(usrId);
             
             Assert.AreEqual(true, usr.Suspended);
+        }
+
+        /// <summary>
+        /// Test de creacion de una
+        /// habilitacion.
+        /// </summary>
+        [Test]
+        public void QualificationCreationTest()
+        {
+            ReadOnlyCollection<Qualification> prevQualificationAdd = qualificationAdmin.Items;
+
+            string name="Habilitacion madera";
+
+            Qualification qualification = qualificationAdmin.New();
+            qualification.Name = name;
+            int qualificationId = qualificationAdmin.Insert(qualification);
+
+            //Valido que se le haya agregado una habilitacion
+            Assert.AreNotEqual(0,qualificationId);
+
+            Qualification xNuevo = qualificationAdmin.GetById(qualificationId);
+            //Valido que la habilitacion traida por GetById= al que ingrese
+            Assert.AreEqual(name,xNuevo.Name);
+            Assert.AreEqual(qualificationId,xNuevo.Id);
+
+            ReadOnlyCollection<Qualification> postQualificationAdd = qualificationAdmin.Items;
+
+            int expectedQualificationCount = prevQualificationAdd.Count + 1;
+
+            //Valido que se haya agregado una habilitacion a la lista de habilitaciones dentro de qualificationAdmin.Items
+            Assert.AreEqual(expectedQualificationCount, postQualificationAdd.Count);
         }
     }
 }
