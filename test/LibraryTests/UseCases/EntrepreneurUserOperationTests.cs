@@ -16,27 +16,28 @@ namespace Tests
         private PublicationAdmin publiAdmin = Singleton<PublicationAdmin>.Instance;
         private CompanyAdmin compadmin = Singleton<CompanyAdmin>.Instance;
         private CompanyMaterialAdmin comaadmin = Singleton<CompanyMaterialAdmin>.Instance;
-
+        private SaleAdmin saleadmin = Singleton<SaleAdmin>.Instance;
+        private EntrepreneurAdmin enadmin = Singleton<EntrepreneurAdmin>.Instance;
         /// <summary>
         /// Test de listar publicaciones.
         /// </summary>
         [Test]
         public void ListPublicationsTest()
         {
-            Company com = compadmin.New();
+            Company company = compadmin.New();
+            company.Id = 3;
+            int com_id = company.Id;
+            Publication publica1 = publiAdmin.New();
+            publica1.CompanyId = com_id;
 
-            Publication pub1 = publiAdmin.New();
-            pub1.CompanyId = com.Id;
+            Publication publica2 = publiAdmin.New();
+            publica2.CompanyId = com_id;
+            publiAdmin.Insert(publica1);
+            publiAdmin.Insert(publica2);
 
-            Publication pub2 = publiAdmin.New();
-            pub2.CompanyId = com.Id;
+            ReadOnlyCollection<int> lista1 = publiAdmin.GetPublicationsByCompany(com_id);
 
-            publiAdmin.Insert(pub1);
-            publiAdmin.Insert(pub2);
-
-            ReadOnlyCollection<int> lista = publiAdmin.GetPublicationsByCompany(com.Id);
-
-            Assert.AreEqual(2,lista.Count);
+            Assert.AreEqual(2,lista1.Count);
 
         }
         
@@ -355,16 +356,16 @@ namespace Tests
         [Test]
         public void GetIfMaterialIsConstantlyRestocked()
         {
-            CompanyMaterial com = comaadmin.New();
+            CompanyMaterial xcom = comaadmin.New();
 
             // Fecha que sirve para saber cuantos dias pasaron desde que se regenero 
             // un material respecto a su ultima fecha.
             int DiasEntreMaterial = 10;
-            com.DateBetweenRestocks = DiasEntreMaterial;
+            xcom.DateBetweenRestocks = DiasEntreMaterial;
             int dias = -10;
-            com.LastRestock = DateTime.Today.AddDays(dias);
-            Assert.AreEqual(DateTime.Today.AddDays(dias),com.LastRestock);
-            Assert.AreEqual(10,com.DateBetweenRestocks);
+            xcom.LastRestock = DateTime.Today.AddDays(dias);
+            Assert.AreEqual(DateTime.Today.AddDays(dias),xcom.LastRestock);
+            Assert.AreEqual(10,xcom.DateBetweenRestocks);
 
         }
         
@@ -375,12 +376,12 @@ namespace Tests
         [Test]
         public void GetMaterialRestockDate()
         {
-            CompanyMaterial com = comaadmin.New();
+            CompanyMaterial compa = comaadmin.New();
 
             DateTime LastRest = DateTime.Today.AddDays(-6);
 
-            com.LastRestock = LastRest;
-            Assert.AreEqual(LastRest, com.LastRestock);
+            compa.LastRestock = LastRest;
+            Assert.AreEqual(LastRest, compa.LastRestock);
             
         }
 
@@ -391,6 +392,38 @@ namespace Tests
         [Test]
         public void ListBoughtMaterials()
         {
+            Publication pub0 = publiAdmin.New();
+            Publication pub3 = publiAdmin.New();
+            
+
+            pub0.CompanyMaterialId = 1;
+            pub3.CompanyMaterialId = 1;
+            
+
+            Sale venta = saleadmin.New();
+            Sale venta2 = saleadmin.New();
+            
+
+            
+            Entrepreneur entre = enadmin.New();
+
+            int id_entrepenur = entre.Id;
+            saleadmin.Insert(venta);
+            saleadmin.Insert(venta2);
+            venta.BuyerEntrepreneurId = id_entrepenur;
+            venta2.BuyerEntrepreneurId = id_entrepenur;
+            
+
+
+            ReadOnlyCollection<int> lista = saleadmin.GetSalesByBuyer(id_entrepenur);
+
+            Assert.AreEqual(2,lista.Count);
+
+
+
+
+
+
             
         }
     }

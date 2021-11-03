@@ -56,18 +56,18 @@ namespace Tests
         public void GetKeyWordsForPublicationTest()
         {
             PublicationKeyWord keyw = keyadmin.New();
-            keyw.PublicationId = 1;
+            keyw.PublicationId = 5;
             keyadmin.Insert(keyw);
 
             PublicationKeyWord keyw1 = keyadmin.New();
-            keyw1.PublicationId = 1;
+            keyw1.PublicationId = 5;
             keyadmin.Insert(keyw1);
 
             PublicationKeyWord keyw2 = keyadmin.New();
-            keyw2.PublicationId = 1;
+            keyw2.PublicationId = 5;
             keyadmin.Insert(keyw2);
 
-            ReadOnlyCollection<string> lista = keyadmin.GetKeyWordsForPublication(1);
+            ReadOnlyCollection<string> lista = keyadmin.GetKeyWordsForPublication(5);
 
             Assert.AreEqual(3,lista.Count);
 
