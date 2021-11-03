@@ -33,7 +33,6 @@ namespace ClassLibrary
         /// Constructor de Qualification.
         /// </summary>
         /// <param name="Name"></param>
-        [JsonConstructor]
         public Qualification(string Name)
         {
             this.Name = Name;
@@ -43,6 +42,7 @@ namespace ClassLibrary
         /// <summary>
         /// Constructor para la utilización de Qualification Admin
         /// </summary>
+        [JsonConstructor]
         public Qualification()
         {
             this.Id = 0;
