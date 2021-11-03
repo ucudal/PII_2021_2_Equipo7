@@ -19,7 +19,65 @@ namespace Tests
         [Test]
         public void PublicationCreationTest()
         {
-            Assert.Pass();
+            CompanyAdmin compAdmin = Singleton<CompanyAdmin>.Instance;
+            CompanyMaterialAdmin compMatAdmin = Singleton<CompanyMaterialAdmin>.Instance;
+            PublicationAdmin pubAdmin = Singleton<PublicationAdmin>.Instance;
+            ReadOnlyCollection<Publication> prevpub = pubAdmin.Items;
+
+
+            // creo la company
+            Company comp = compAdmin.New();
+
+            comp.Name="nombre de la company" ;
+            comp.Trade = "trade";
+            
+            int idComp = compAdmin.Insert(comp);
+
+
+            // creo un material de compania y le paso el id de la company
+
+
+            CompanyMaterial compmat = compMatAdmin.New();
+            compmat.Name="material";
+            compmat.CompanyId = idComp;
+            compmat.DateBetweenRestocks = 100;
+            compmat.LastRestock =DateTime.Now.AddMonths(-1);
+            compmat.MaterialCategoryId =2;
+            int idCompMat = compMatAdmin.Insert(compmat);
+
+
+            // creo una publicacion 
+
+
+            Publication pub = pubAdmin.New();
+            pub.ActiveFrom = DateTime.Now.AddMonths(-1);
+            pub.ActiveUntil = DateTime.Now.AddMonths(1);
+            pub.CompanyId = idComp;
+
+
+            Currency currency = Currency.DolarEstadounidense;
+            pub.Currency = currency;
+
+            int Price = 120;
+            pub.Price = Price;
+            int idPub = pubAdmin.Insert(pub);
+
+
+            ReadOnlyCollection<Publication> postpub = pubAdmin.Items;
+            int postcheck = postpub.Count;
+            
+
+            int check = prevpub.Count +1;
+
+            Assert.AreNotEqual(0, idPub);
+            Assert.AreNotEqual(0, idCompMat);
+
+            Assert.AreEqual(check, postcheck);
+
+
+
+
+
         }
 
         /// <summary>

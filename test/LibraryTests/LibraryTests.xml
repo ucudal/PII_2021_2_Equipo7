@@ -204,6 +204,11 @@
             Test del metodo GetLocationsWithStockForCompanyMaterial(int companyMaterialId).
             </summary>
         </member>
+        <member name="M:Tests.CompanyMaterialStockAdminTest.GetCompanyMaterialsInStockForLocationTest">
+            <summary>
+            Test del metodo GetCompanyMaterialsInStockForLocation(int companyLocationId).
+            </summary>
+        </member>
         <member name="T:Tests.CompanyUserAdminTest">
             <summary>
             Prueba de la clase <see cref="T:ClassLibrary.CompanyUserAdmin"/>.
@@ -352,46 +357,6 @@
             Test de la clase CompanyStock.
             </summary>
         </member>
-        <member name="T:Tests.CompanyTest">
-            <summary>
-            Prueba de la clase <see cref="T:ClassLibrary.Company"/>.
-            </summary>
-        </member>
-        <member name="M:Tests.CompanyTest.TestConstructor">
-            <summary>
-            test de el constructor
-            </summary>
-        </member>
-        <member name="T:Tests.EntrepreneurTest">
-            <summary>
-            Prueba de la clase <see cref="T:ClassLibrary.Company"/>.
-            </summary>
-        </member>
-        <member name="M:Tests.EntrepreneurTest.TestConstructor">
-            <summary>
-            test de el constructor
-            </summary>
-        </member>
-        <member name="T:Tests.MaterialCategoryTest">
-            <summary>
-            Test de la clase Qualification.
-            </summary>
-        </member>
-        <member name="M:Tests.MaterialCategoryTest.ConstructorTest">
-            <summary>
-            Test del constructor de la clase.
-            </summary>
-        </member>
-        <member name="T:Tests.RoleTest">
-            <summary>
-            Prueba de la clase <see cref="!:Role"/>.
-            </summary>
-        </member>
-        <member name="M:Tests.RoleTest.ConstructorTest">
-            <summary>
-            test del constructor
-            </summary>
-        </member>
         <member name="T:Tests.PublicationAdminTest">
             <summary>
             Test de la clase que administra las publicaciones.
@@ -487,6 +452,89 @@
             Comprobar que funciona el update del DataAdmin.
             </summary>
         </member>
+        <member name="T:Tests.CompanyAdminUserOperationTests">
+            <summary>
+            Conjunto de Tests para la operacion de
+            un administrador de empresa.
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyAdminUserOperationTests.PublicationCreationTest">
+            <summary>
+            Test de creacion de una publicacion
+            de materiales para la empresa.
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyAdminUserOperationTests.CompanyMaterialCreationTest">
+            <summary>
+            Test de creacion de un material de
+            la empresa.
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyAdminUserOperationTests.CompanyMaterialAddQualificationsTest">
+            <summary>
+            Test de añadir habilitaciones al
+            material de la empresa.
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyAdminUserOperationTests.PublicationAddKeyWordsTest">
+            <summary>
+            Test de añadir palabras claves
+            a una publicacion.
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyAdminUserOperationTests.SaleListTest">
+            <summary>
+            Test de listar todas las ventas
+            en un periodo de tiempo.
+            </summary>
+        </member>
+        <member name="T:Tests.EntrepreneurUserOperationTests">
+            <summary>
+            Conjunto de Tests para la operacion de
+            un emprededor.
+            </summary>
+        </member>
+        <member name="M:Tests.EntrepreneurUserOperationTests.ListPublicationsTest">
+            <summary>
+            Test de listar publicaciones.
+            </summary>
+        </member>
+        <member name="M:Tests.EntrepreneurUserOperationTests.SearchPublicationsByKeyWords">
+            <summary>
+            Test de buscar publicaciones por
+            palabras clave.
+            </summary>
+        </member>
+        <member name="M:Tests.EntrepreneurUserOperationTests.SearchPublicationsByLocation">
+            <summary>
+            Test de buscar publicaciones por
+            su localizacion.
+            </summary>
+        </member>
+        <member name="M:Tests.EntrepreneurUserOperationTests.SearchPublicationsByCategory">
+            <summary>
+            Test de buscar publicaciones por
+            su categoria.
+            </summary>
+        </member>
+        <member name="M:Tests.EntrepreneurUserOperationTests.GetIfMaterialIsConstantlyRestocked">
+            <summary>
+            Test de verificar si un material se
+            regenera constantemente.
+            </summary>
+        </member>
+        <member name="M:Tests.EntrepreneurUserOperationTests.GetMaterialRestockDate">
+            <summary>
+            Test de conseguir la fecha de
+            regeneracion de un material.
+            </summary>
+        </member>
+        <member name="M:Tests.EntrepreneurUserOperationTests.ListBoughtMaterials">
+            <summary>
+            Test de listar los materiales
+            comprados en un periodo de tiempo.
+            </summary>
+        </member>
         <member name="T:Tests.SysAdminOperationTests">
             <summary>
             Conjunto de Tests para la operacion de
@@ -521,13 +569,35 @@
         </member>
         <member name="T:Tests.UnregisteredUserOperationTests">
             <summary>
-            Conjunto de Tests para la operacion de
-            un administrador del sistema.
+            Conjunto de Tests para la operacion
+            de un usuario no registrado.
             </summary>
         </member>
         <member name="M:Tests.UnregisteredUserOperationTests.AcceptCompanyNewInvitationTest">
             <summary>
-            
+            Operacion de registrarse como
+            un usuario con nueva compania.
+            </summary>
+        </member>
+        <member name="M:Tests.UnregisteredUserOperationTests.AcceptCompanyJoinInvitationTest">
+            <summary>
+            Operacion de registrarse como
+            un usuario a una compania ya
+            existente.
+            </summary>
+        </member>
+        <member name="M:Tests.UnregisteredUserOperationTests.AcceptEntrepreneurNewInvitationTest">
+            <summary>
+            Operacion de registrarse como
+            un usuario con un nuevo
+            emprendimiento.
+            </summary>
+        </member>
+        <member name="M:Tests.UnregisteredUserOperationTests.AcceptSysAdminNewInvitationTest">
+            <summary>
+            Operacion de registrarse como
+            un usuario administrador de la
+            plataforma.
             </summary>
         </member>
         <member name="T:Tests.UserAdminTest">
