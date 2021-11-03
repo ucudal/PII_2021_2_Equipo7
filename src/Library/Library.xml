@@ -2362,11 +2362,6 @@
              Deleted sirve para saber si la publicación se borra o no.
             </summary>
         </member>
-        <member name="M:ClassLibrary.Publication.#ctor(System.DateTime,System.DateTime,System.Int32,ClassLibrary.Currency)">
-            <summary>
-            Constructor de la publicación para definir los atributos.
-            </summary>
-        </member>
         <member name="M:ClassLibrary.Publication.#ctor">
             <summary>
             Constructor vacio para PublicationAdmin.
