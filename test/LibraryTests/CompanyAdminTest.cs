@@ -78,11 +78,14 @@ namespace Tests
         {
             Company company =companyAdmin.New();
             company.Name="pepito";
+            company.Trade="pepito";
             companyAdmin.Insert(company);
             Company company2 =companyAdmin.GetByName("pepito");
             int id =company2.Id;
             Company company3= companyAdmin.GetById(id);
-            Assert.AreEqual(company2,company3);
+            Assert.AreEqual(company2.Id,company3.Id);
+            Assert.AreEqual(company2.Name,company3.Name);
+            Assert.AreEqual(company2.Trade,company3.Trade);
         }
         /// <summary>
         /// 

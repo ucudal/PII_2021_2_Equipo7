@@ -72,12 +72,12 @@ namespace Tests
             Assert.AreEqual(expectedInvites, locationspost.Count);
             
           
-            CompanyLocation xToUpdate=companyLocAdmin.New();
+            CompanyLocation xToUpdate = companyLocAdmin.New();
             xToUpdate=companyLocAdmin.GetById(locId);
             
             
 
-            string geo1="georeference11111111";
+            string geo1 = "georeference11111111";
             int companyid1 = 3;
             
             bool used1 = false;
@@ -127,7 +127,7 @@ namespace Tests
             CompanyLocation company2 =companyLocAdmin.GetById(id);
 
 
-            Assert.AreEqual(company,company2);
+            
             Assert.AreEqual(id,company2.Id);
             Assert.AreEqual(company.GeoReference,company2.GeoReference);
             Assert.AreEqual(company.CompanyId,company2.CompanyId);
@@ -159,13 +159,15 @@ namespace Tests
         
             ReadOnlyCollection<CompanyLocation> locationspost = companyLocAdmin.Items;
 
-            int expectedInvites = locationspre.Count + 1;
+            int expectedInvites = locationspre.Count +  1;
 
             Assert.AreEqual(expectedInvites, locationspost.Count);
 
             companyLocAdmin.Delete(locId);
 
             ReadOnlyCollection<CompanyLocation> afterDelete = companyLocAdmin.Items;
+
+            expectedInvites = locationspost.Count -  1;
 
             //Comprobamos que se elimino una invitacion
             Assert.AreEqual(expectedInvites,afterDelete.Count);
