@@ -96,6 +96,48 @@ namespace Tests
         }
 
         /// <summary>
+        /// Test del metodo GetInvitationIsOfType(string code, RegistrationType type).
+        /// </summary>
+        [Test]
+        public void GetInvitationIsOfTypeTest()
+        {
+            //Inserto una company
+            ReadOnlyCollection<Invitation> prevInvites = invAdmin.Items;
+
+            RegistrationType type = RegistrationType.CopmanyNew;
+            DateTime validAfter = DateTime.Now.AddMonths(-1);
+            DateTime validBefore = DateTime.Now.AddMonths(1);
+            int companyId = 0;
+            bool used = false;
+
+            Invitation inv = invAdmin.New();
+            inv.Type = type;
+            inv.ValidAfter = validAfter;
+            inv.ValidBefore = validBefore;
+            inv.CompanyId = companyId;
+            inv.Used = used;
+            int invId = invAdmin.Insert(inv);
+
+            Assert.AreNotEqual(0, invId);
+
+            invAdmin.GenerateNewInviteCode(invId);
+
+            Invitation CompanyInvitation=invAdmin.GetById(invId);
+        
+            ReadOnlyCollection<Invitation> afterInvites = invAdmin.Items;
+
+            int expectedInvites = prevInvites.Count + 1;
+
+            //Valido que me haya agregado bien
+            Assert.AreEqual(expectedInvites, afterInvites.Count);
+            
+            bool expectedIsCompanyInvitation=true;
+            Assert.AreEqual(expectedIsCompanyInvitation, invAdmin.GetInvitationIsOfType(CompanyInvitation.Code,RegistrationType.CopmanyNew));
+
+
+        }
+
+        /// <summary>
         /// Test del metodo Insert(Invitation pElemento).
         /// </summary>
         [Test]
