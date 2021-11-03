@@ -38,7 +38,7 @@ namespace Tests
             Assert.AreEqual(companyid,compania.CompanyId);
 
         }
-        /*
+        
 
         /// <summary>
         /// 
@@ -48,54 +48,54 @@ namespace Tests
         {
         
             //Insertamos una invitacion y validamos que haya quedado agregada
-            ReadOnlyCollection<CompanyLocation> locationspre = companyLocAdmin.Items;
+            ReadOnlyCollection<CompanyUser> userpre = companyUsAdmin.Items;
 
-            string geo="georeference";
+            int userid=3;
             int companyid = 2;
             
             bool used = false;
 
-            CompanyLocation loc = companyLocAdmin.New();
+            CompanyUser loc = companyUsAdmin.New();
             loc.CompanyId = companyid;
-            loc.GeoReference = geo;
-            loc.Deleted = used;
+            loc.AdminUserId= userid;
             
-            int locId = companyLocAdmin.Insert(loc);
+            
+            int locId = companyUsAdmin.Insert(loc);
 
             Assert.AreNotEqual(0, locId);
 
             
         
-            ReadOnlyCollection<CompanyLocation> locationspost = companyLocAdmin.Items;
+            ReadOnlyCollection<CompanyUser> locationspost = companyUsAdmin.Items;
 
-            int expectedInvites = locationspre.Count + 1;
+            int expectedInvites = userpre.Count + 1;
 
             Assert.AreEqual(expectedInvites, locationspost.Count);
             
           
-            CompanyLocation xToUpdate=companyLocAdmin.New();
-            xToUpdate=companyLocAdmin.GetById(locId);
+            CompanyUser xToUpdate=companyUsAdmin.New();
+            xToUpdate=companyUsAdmin.GetById(locId);
             
             
 
-            string geo1="georeference11111111";
+            int userid2= 111;
             int companyid1 = 3;
             
-            bool used1 = false;
+            
 
-            xToUpdate.GeoReference=geo1;
+            xToUpdate.AdminUserId= userid2;
             xToUpdate.CompanyId=companyid1;
-            xToUpdate.Deleted=used1;
+            
 
 
-            companyLocAdmin.Update(xToUpdate);
+            companyUsAdmin.Update(xToUpdate);
 
-            CompanyLocation xComp=companyLocAdmin.GetById(locId);
+            CompanyUser xComp=companyUsAdmin.GetById(locId);
 
             Assert.AreEqual(xToUpdate.Id, xComp.Id);
             Assert.AreEqual(xToUpdate.Deleted,xComp.Deleted);
             Assert.AreEqual(xToUpdate.CompanyId, xComp.CompanyId);
-            Assert.AreEqual(xToUpdate.GeoReference, xComp.GeoReference);
+            
             Assert.AreEqual(xToUpdate.CompanyId, xComp.CompanyId);
 
 
@@ -108,8 +108,8 @@ namespace Tests
         [Test] 
         public void NewTest()
         {
-            CompanyLocation company =companyLocAdmin.New();
-            Assert.IsInstanceOf(typeof(CompanyLocation),company);
+            CompanyUser company =companyUsAdmin.New();
+            Assert.IsInstanceOf(typeof(CompanyUser),company);
         }
         /// <summary>
         /// 
@@ -117,10 +117,10 @@ namespace Tests
         [Test] 
         public void GetByIdTest()
         {
-            CompanyLocation company =companyLocAdmin.New();
-            company.GeoReference="pepito";
-            int id = companyLocAdmin.Insert(company);
-            CompanyLocation company2 =companyLocAdmin.GetById(id);
+            CompanyUser company =companyUsAdmin.New();
+            company.CompanyId= 1;
+            int id = companyUsAdmin.Insert(company);
+            CompanyUser company2 =companyUsAdmin.GetById(id);
 
 
             Assert.AreEqual(company,company2);
@@ -132,40 +132,40 @@ namespace Tests
         public void DeleteTest()
         {
  //Insertamos un elemento
-            ReadOnlyCollection<CompanyLocation> locationspre = companyLocAdmin.Items;
+            ReadOnlyCollection<CompanyUser> locationspre = companyUsAdmin.Items;
 
-            string geo="georeference";
+            int usid= 2;
             int companyid = 2;
             
             bool used = false;
 
-            CompanyLocation loc = companyLocAdmin.New();
+            CompanyUser loc = companyUsAdmin.New();
             loc.CompanyId = companyid;
-            loc.GeoReference = geo;
-            loc.Deleted = used;
+            loc.AdminUserId = usid;
             
-            int locId = companyLocAdmin.Insert(loc);
+            
+            int locId = companyUsAdmin.Insert(loc);
 
             Assert.AreNotEqual(0, locId);
 
             
         
-            ReadOnlyCollection<CompanyLocation> locationspost = companyLocAdmin.Items;
+            ReadOnlyCollection<CompanyUser> locationspost = companyUsAdmin.Items;
 
             int expectedInvites = locationspre.Count + 1;
 
             Assert.AreEqual(expectedInvites, locationspost.Count);
 
-            companyLocAdmin.Delete(locId);
+            companyUsAdmin.Delete(locId);
 
-            ReadOnlyCollection<CompanyLocation> afterDelete = companyLocAdmin.Items;
+            ReadOnlyCollection<CompanyUser> afterDelete = companyUsAdmin.Items;
 
             //Comprobamos que se elimino una invitacion
             Assert.AreEqual(expectedInvites,afterDelete.Count);
 
 
         }
-        */
+        
 
 
     }
