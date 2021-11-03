@@ -12,13 +12,31 @@ namespace Tests
     [TestFixture]
     public class EntrepreneurUserOperationTests
     {
+        private PublicationAdmin publiAdmin = Singleton<PublicationAdmin>.Instance;
+        private CompanyAdmin compadmin = Singleton<CompanyAdmin>.Instance;
+        private CompanyMaterialAdmin comaadmin = Singleton<CompanyMaterialAdmin>.Instance;
+
         /// <summary>
         /// Test de listar publicaciones.
         /// </summary>
         [Test]
         public void ListPublicationsTest()
         {
-            Assert.Pass();
+            Company com = compadmin.New();
+
+            Publication pub1 = publiAdmin.New();
+            pub1.CompanyId = com.Id;
+
+            Publication pub2 = publiAdmin.New();
+            pub2.CompanyId = com.Id;
+
+            publiAdmin.Insert(pub1);
+            publiAdmin.Insert(pub2);
+
+            ReadOnlyCollection<int> lista = publiAdmin.GetPublicationsByCompany(com.Id);
+
+            Assert.AreEqual(2,lista.Count);
+
         }
         
         /// <summary>
@@ -58,7 +76,17 @@ namespace Tests
         [Test]
         public void GetIfMaterialIsConstantlyRestocked()
         {
-            Assert.Pass();
+            CompanyMaterial com = comaadmin.New();
+
+            // Fecha que sirve para saber cuantos dias pasaron desde que se regenero 
+            // un material respecto a su ultima fecha.
+            int DiasEntreMaterial = 10;
+            com.DateBetweenRestocks = DiasEntreMaterial;
+            int dias = -10;
+            com.LastRestock = DateTime.Today.AddDays(dias);
+            Assert.AreEqual(DateTime.Today.AddDays(dias),com.LastRestock);
+            Assert.AreEqual(10,com.DateBetweenRestocks);
+
         }
         
         /// <summary>
@@ -68,7 +96,13 @@ namespace Tests
         [Test]
         public void GetMaterialRestockDate()
         {
-            Assert.Pass();
+            CompanyMaterial com = comaadmin.New();
+
+            DateTime LastRest = DateTime.Today.AddDays(-6);
+
+            com.LastRestock = LastRest;
+            Assert.AreEqual(LastRest, com.LastRestock);
+            
         }
 
         /// <summary>
@@ -78,7 +112,7 @@ namespace Tests
         [Test]
         public void ListBoughtMaterials()
         {
-            Assert.Pass();
+            
         }
     }
 }
