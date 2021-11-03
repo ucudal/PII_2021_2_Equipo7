@@ -186,5 +186,93 @@ namespace Tests
             Assert.AreEqual(companyMaterialStock.Stock,xComp.Stock);
             Assert.AreEqual(companyMaterialStock.Deleted, xComp.Deleted);
         }
+        /// <summary>
+        /// Test del metodo GetStockTotalForCompanyMaterial(int companyMaterialId).
+        /// </summary>
+        [Test]
+        public void GetStockTotalForCompanyMaterialTest()
+        {
+            //Agregamos un stock de un material 
+
+            int companyMatId = 20;
+            int companyLocationId=1;
+            int stock=100;
+
+            CompanyMaterialStock companyMaterialStock=companyMaterialStockAdmin.New();
+            companyMaterialStock.CompanyMatId=companyMatId;
+            companyMaterialStock.CompanyLocationId=companyLocationId;
+            companyMaterialStock.Stock=stock;
+            int companyMaterialStockId = companyMaterialStockAdmin.Insert(companyMaterialStock);
+
+            int expected=stock;
+
+            Assert.AreEqual(expected,companyMaterialStockAdmin.GetStockTotalForCompanyMaterial(20));
+        }
+
+        /// <summary>
+        /// Test del metodo GetLocationsWithStockForCompanyMaterial(int companyMaterialId).
+        /// </summary>
+        [Test]
+        public void GetLocationsWithStockForCompanyMaterialTest()
+        {
+            //Agregamos un stock de un material 
+
+            int companyMatId = 21;
+            int companyLocationId=1;
+            int stock=100;
+
+            CompanyMaterialStock companyMaterialStock=companyMaterialStockAdmin.New();
+            companyMaterialStock.CompanyMatId=companyMatId;
+            companyMaterialStock.CompanyLocationId=companyLocationId;
+            companyMaterialStock.Stock=stock;
+            int companyMaterialStockId = companyMaterialStockAdmin.Insert(companyMaterialStock);
+
+            companyMatId = 21;
+            companyLocationId=2;
+            stock=200;
+
+            CompanyMaterialStock companyMaterialStock2=companyMaterialStockAdmin.New();
+            companyMaterialStock2.CompanyMatId=companyMatId;
+            companyMaterialStock2.CompanyLocationId=companyLocationId;
+            companyMaterialStock2.Stock=stock;
+            companyMaterialStockId = companyMaterialStockAdmin.Insert(companyMaterialStock);
+
+            int expected=2;
+
+            Assert.AreEqual(expected,companyMaterialStockAdmin.GetLocationsWithStockForCompanyMaterial(21).Count);
+        }
+
+        /// <summary>
+        /// Test del metodo GetCompanyMaterialsInStockForLocation(int companyLocationId).
+        /// </summary>
+        [Test]
+        public void GetCompanyMaterialsInStockForLocationTest()
+        {
+            //Agregamos un stock de un material 
+
+            int companyMatId = 22;
+            int companyLocationId=3;
+            int stock=100;
+
+            CompanyMaterialStock companyMaterialStock=companyMaterialStockAdmin.New();
+            companyMaterialStock.CompanyMatId=companyMatId;
+            companyMaterialStock.CompanyLocationId=companyLocationId;
+            companyMaterialStock.Stock=stock;
+            int companyMaterialStockId = companyMaterialStockAdmin.Insert(companyMaterialStock);
+
+            companyMatId = 23;
+            companyLocationId=3;
+            stock=200;
+
+            CompanyMaterialStock companyMaterialStock2=companyMaterialStockAdmin.New();
+            companyMaterialStock2.CompanyMatId=companyMatId;
+            companyMaterialStock2.CompanyLocationId=companyLocationId;
+            companyMaterialStock2.Stock=stock;
+            companyMaterialStockId = companyMaterialStockAdmin.Insert(companyMaterialStock);
+
+            int expected=2;
+
+            Assert.AreEqual(expected,companyMaterialStockAdmin.GetCompanyMaterialsInStockForLocation(3).Count);
+        }
     }
 }

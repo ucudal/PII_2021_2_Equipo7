@@ -184,7 +184,7 @@ namespace Tests
             //Agregamos una Habilitacion de un material 
 
             bool deleted=false;
-            int companyMatId=1;
+            int companyMatId=10;
             int qualificationId=1;
 
             CompanyMaterialQualification companyMaterialQualification=companyMaterialQualificationAdmin.New();
@@ -196,7 +196,7 @@ namespace Tests
             //Agregamos  Habilitacion2 de un material 
 
             deleted=false;
-            companyMatId=1;
+            companyMatId=10;
             qualificationId=2;
 
             CompanyMaterialQualification companyMaterialQualification2=companyMaterialQualificationAdmin.New();
@@ -208,7 +208,7 @@ namespace Tests
             int expectedCountQualificationsFromMaterial1=2;
 
             //Comparo que el numero de habilitaciones agregadas= al numero de habilitaciones que agregue
-            Assert.AreEqual(expectedCountQualificationsFromMaterial1,companyMaterialQualificationAdmin.GetQualificationsForCompanyMaterial(1).Count);
+            Assert.AreEqual(expectedCountQualificationsFromMaterial1,companyMaterialQualificationAdmin.GetQualificationsForCompanyMaterial(10).Count);
         }
 
         /// <summary>
