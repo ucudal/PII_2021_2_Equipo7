@@ -283,7 +283,6 @@ namespace Tests
             Assert.AreEqual(inv.CompanyId, xComp.CompanyId);
             Assert.AreEqual(inv.Used, xComp.Used);
             Assert.AreEqual(inv.Deleted, xComp.Deleted);
-            Assert.AreEqual(inv.Code, xComp.Code);
         }
     }
 }

@@ -180,7 +180,7 @@ namespace Tests
             //Obtenemos la categoria agregada con GetById y comparamos
             CompanyMaterialStock xComp=companyMaterialStockAdmin.GetById(companyMaterialStockId);
             
-            Assert.AreEqual(companyMaterialStock.Id, xComp.Id);
+            Assert.AreEqual(companyMaterialStockId, xComp.Id);
             Assert.AreEqual(companyMaterialStock.CompanyMatId,xComp.CompanyMatId);
             Assert.AreEqual(companyMaterialStock.CompanyLocationId,xComp.CompanyLocationId);
             Assert.AreEqual(companyMaterialStock.Stock,xComp.Stock);

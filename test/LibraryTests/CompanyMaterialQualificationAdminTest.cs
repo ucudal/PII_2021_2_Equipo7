@@ -169,7 +169,7 @@ namespace Tests
             //Obtenemos la categoria agregada con GetById y comparamos
             CompanyMaterialQualification xComp=companyMaterialQualificationAdmin.GetById(companyMaterialQualificationId);
             
-            Assert.AreEqual(companyMaterialQualification.Id, xComp.Id);
+            Assert.AreEqual(companyMaterialQualificationId, xComp.Id);
             Assert.AreEqual(companyMaterialQualification.CompanyMatId,xComp.CompanyMatId);
             Assert.AreEqual(companyMaterialQualification.QualificationId,xComp.QualificationId);
             Assert.AreEqual(companyMaterialQualification.Deleted, xComp.Deleted);
