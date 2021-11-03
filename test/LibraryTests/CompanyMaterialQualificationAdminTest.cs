@@ -174,5 +174,65 @@ namespace Tests
             Assert.AreEqual(companyMaterialQualification.QualificationId,xComp.QualificationId);
             Assert.AreEqual(companyMaterialQualification.Deleted, xComp.Deleted);
         }
+
+        /// <summary>
+        /// Test del metodo GetQualificationsForCompanyMaterial(int companyMaterialId).
+        /// </summary>
+        [Test]
+        public void GetQualificationsForCompanyMaterialTest()
+        {
+            //Agregamos una Habilitacion de un material 
+
+            bool deleted=false;
+            int companyMatId=10;
+            int qualificationId=1;
+
+            CompanyMaterialQualification companyMaterialQualification=companyMaterialQualificationAdmin.New();
+            companyMaterialQualification.Deleted=deleted;
+            companyMaterialQualification.CompanyMatId=companyMatId;
+            companyMaterialQualification.QualificationId=qualificationId;
+            int companyMaterialQualificationId = companyMaterialQualificationAdmin.Insert(companyMaterialQualification);
+
+            //Agregamos  Habilitacion2 de un material 
+
+            deleted=false;
+            companyMatId=10;
+            qualificationId=2;
+
+            CompanyMaterialQualification companyMaterialQualification2=companyMaterialQualificationAdmin.New();
+            companyMaterialQualification2.Deleted=deleted;
+            companyMaterialQualification2.CompanyMatId=companyMatId;
+            companyMaterialQualification2.QualificationId=qualificationId;
+            companyMaterialQualificationId = companyMaterialQualificationAdmin.Insert(companyMaterialQualification2);
+        
+            int expectedCountQualificationsFromMaterial1=2;
+
+            //Comparo que el numero de habilitaciones agregadas= al numero de habilitaciones que agregue
+            Assert.AreEqual(expectedCountQualificationsFromMaterial1,companyMaterialQualificationAdmin.GetQualificationsForCompanyMaterial(10).Count);
+        }
+
+        /// <summary>
+        /// Test del metodo GetCompanyMaterialHasQualification(int companyMatId, int qualificationId)
+        /// </summary>
+        [Test]
+        public void GetCompanyMaterialHasQualificationTest()
+        {
+            //Agregamos una Habilitacion de un material 
+
+            bool deleted=false;
+            int companyMatId=1;
+            int qualificationId=1;
+
+            CompanyMaterialQualification companyMaterialQualification=companyMaterialQualificationAdmin.New();
+            companyMaterialQualification.Deleted=deleted;
+            companyMaterialQualification.CompanyMatId=companyMatId;
+            companyMaterialQualification.QualificationId=qualificationId;
+            int companyMaterialQualificationId = companyMaterialQualificationAdmin.Insert(companyMaterialQualification);
+
+            bool expected=true;
+
+            //Comparo que el numero de habilitaciones agregadas= al numero de habilitaciones que agregue
+            Assert.AreEqual(expected,companyMaterialQualificationAdmin.GetCompanyMaterialHasQualification(1,1));
+        }
     }
 }
