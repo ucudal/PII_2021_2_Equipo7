@@ -54,35 +54,18 @@ namespace Tests
             loc.GeoReference = locationExtra2;
             compLocAdmin.Insert(loc);
 
-            ClassLibrary.Location location = new ClassLibrary.Location();
-            location.Georeference = locationEntrepreneur;
+            Entrepreneur entre = entreAdmin.New();
+            entre.Name = "Steve Vai";
+            entre.Trade = "Guitar godness";
+            entre.UserId = 1;
+            entre.GeoReference = locationEntrepreneur;
+            int entreId = entreAdmin.Insert(entre);
 
-            ReadOnlyCollection<CompanyLocation> locs = compLocAdmin.GetLocationsForCompany(compId);
-            double shortestDistance = 0.0;
-            int closestLocationId = 0;
+            entre = entreAdmin.GetById(entreId);
 
+            CompanyLocation closestLocation = compLocAdmin.GetClosestCompanyLocationToGeoReference(compId, entre.GeoReference);
 
-            Distance distance;
-            foreach (CompanyLocation compLoc in locs)
-            {
-                Task<Distance> task = locClient.GetDistanceAsync(compLoc.GeoReference, location.Georeference); 
-                distance = AsyncContext.Run(() => task);
-                if (closestLocationId == 0)
-                {
-                    closestLocationId = compLoc.Id;
-                    shortestDistance = distance.TravelDistance;
-                }
-                else
-                {
-                    if (shortestDistance >= distance.TravelDistance)
-                    {
-                        closestLocationId = compLoc.Id;
-                        shortestDistance = distance.TravelDistance;
-                    }
-                }
-            }
-
-            Assert.AreEqual(locId, closestLocationId);
+            Assert.AreEqual(locId, closestLocation.Id);
         }
     }
 }

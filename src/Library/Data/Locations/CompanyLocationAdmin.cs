@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using ClassLibrary.Services.Location.Client;
+using Nito.AsyncEx;
 
 namespace ClassLibrary
 {
@@ -35,6 +38,58 @@ namespace ClassLibrary
             }
 
             return resultList.AsReadOnly();
+        }
+
+        /// <summary>
+        /// Obtiene un <see cref="CompanyLocation"/> con
+        /// la localizacion de la empresa mas
+        /// cercana a la geo referencia dada.
+        /// </summary>
+        /// <param name="companyId">
+        /// Id de la compania para la cual se
+        /// desea buscar la localizacion mas
+        /// cercana.
+        /// </param>
+        /// <param name="geoRef">
+        /// Geo referencia contra cual se quiere
+        /// comparar la distancia a las localizaciones
+        /// de la empresa
+        /// </param>
+        /// <returns>
+        /// <see cref="CompanyLocation"/> con los datos
+        /// de la localizacion mas cercana.
+        /// </returns>
+        public CompanyLocation GetClosestCompanyLocationToGeoReference(int companyId, string geoRef)
+        {
+            ReadOnlyCollection<CompanyLocation> compLocs = this.GetLocationsForCompany(companyId);
+            LocationAPIClient locClient = new LocationAPIClient();
+
+            double closestDistance = 0;
+            CompanyLocation closestLocation = null;
+            
+            Distance distance;
+
+            foreach (CompanyLocation compLoc in compLocs)
+            {
+                Task<Distance> task = locClient.GetDistanceAsync(compLoc.GeoReference, geoRef); 
+                distance = AsyncContext.Run(() => task);
+
+                if (closestLocation is null)
+                {
+                    closestLocation = compLoc;
+                    closestDistance = distance.TravelDistance;
+                }
+                else
+                {
+                    if (distance.TravelDistance < closestDistance)
+                    {
+                        closestLocation = compLoc;
+                        closestDistance = distance.TravelDistance;
+                    }
+                }
+            }
+
+            return closestLocation.Clone();
         }
     }
 }

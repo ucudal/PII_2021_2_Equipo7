@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
+using ClassLibrary.Services.Location.Client;
+using Nito.AsyncEx;
 
 namespace ClassLibrary
 {
@@ -164,6 +167,63 @@ namespace ClassLibrary
 
             List<CompanyMaterialStock> companyMatStockPage = this.GetItemPage(resultList, itemCount, page);
             return companyMatStockPage.Select(matStock => matStock.CompanyMatId).ToList().AsReadOnly();
+        }
+
+        /// <summary>
+        /// Obtiene el id la localizacion de
+        /// la empresa donde todavia hay stock
+        /// de un cierto material dado.
+        /// </summary>
+        /// <param name="compMatId">
+        /// Material de la empresa para el cual
+        /// se busca conseguir la localizacion
+        /// con stock mas cercana.
+        /// </param>
+        /// <param name="geoReference">
+        /// Geo referencia contra la cual comparar
+        /// las localizaciones con stock del
+        /// material dado.
+        /// </param>
+        /// <returns>
+        /// Id de la localizacion con stock
+        /// del material de la empresa mas
+        /// cercana a la geo referencia
+        /// provista.
+        /// </returns>
+        public int GetClosestLocationWithMaterialStock(int compMatId, string geoReference)
+        {
+            CompanyLocationAdmin compLocAdmin = Singleton<CompanyLocationAdmin>.Instance;
+            LocationAPIClient locClient = new LocationAPIClient();
+
+            double closestDistance = 0;
+            int closestLocationId = 0;
+
+            ReadOnlyCollection<int> locationIds = this.GetLocationsWithStockForCompanyMaterial(compMatId);
+            CompanyLocation compLoc;
+            Distance distance;
+
+            foreach (int compLocId in locationIds)
+            {
+                compLoc = compLocAdmin.GetById(compLocId);
+                Task<Distance> task = locClient.GetDistanceAsync(compLoc.GeoReference, geoReference); 
+                distance = AsyncContext.Run(() => task);
+
+                if (closestLocationId == 0)
+                {
+                    closestLocationId = compLocId;
+                    closestDistance = distance.TravelDistance;
+                }
+                else
+                {
+                    if (distance.TravelDistance < closestDistance)
+                    {
+                        closestLocationId = compLocId;
+                        closestDistance = distance.TravelDistance;
+                    }
+                }
+            }
+
+            return closestLocationId;
         }
     }
 }
