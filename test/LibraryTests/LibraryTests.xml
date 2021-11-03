@@ -587,6 +587,12 @@
             Test de suspender un usuario.
             </summary>
         </member>
+        <member name="M:Tests.SysAdminOperationTests.QualificationCreationTest">
+            <summary>
+            Test de creacion de una
+            habilitacion.
+            </summary>
+        </member>
         <member name="T:Tests.UnregisteredUserOperationTests">
             <summary>
             Conjunto de Tests para la operacion
