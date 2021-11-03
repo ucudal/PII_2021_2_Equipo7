@@ -2239,6 +2239,29 @@
             localizacion.
             </returns>
         </member>
+        <member name="M:ClassLibrary.CompanyMaterialStockAdmin.GetClosestLocationWithMaterialStock(System.Int32,System.String)">
+            <summary>
+            Obtiene el id la localizacion de
+            la empresa donde todavia hay stock
+            de un cierto material dado.
+            </summary>
+            <param name="compMatId">
+            Material de la empresa para el cual
+            se busca conseguir la localizacion
+            con stock mas cercana.
+            </param>
+            <param name="geoReference">
+            Geo referencia contra la cual comparar
+            las localizaciones con stock del
+            material dado.
+            </param>
+            <returns>
+            Id de la localizacion con stock
+            del material de la empresa mas
+            cercana a la geo referencia
+            provista.
+            </returns>
+        </member>
         <member name="T:ClassLibrary.PublicationKeyWord">
             <summary>
             Registro de asociación de palabras claves y publicación.
@@ -2398,7 +2421,7 @@
             constructor vacio de emprendedor
             </summary>
         </member>
-        <member name="P:ClassLibrary.Entrepreneur.Location">
+        <member name="P:ClassLibrary.Entrepreneur.GeoReference">
             <summary>
             Geo referencia de localizacion del
             emprendedor
@@ -2632,6 +2655,27 @@
             Lista de localizaciones
             pertenecientes a la empresa
             por la cual se busco.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.CompanyLocationAdmin.GetClosestCompanyLocationToGeoReference(System.Int32,System.String)">
+            <summary>
+            Obtiene un <see cref="T:ClassLibrary.CompanyLocation"/> con
+            la localizacion de la empresa mas
+            cercana a la geo referencia dada.
+            </summary>
+            <param name="companyId">
+            Id de la compania para la cual se
+            desea buscar la localizacion mas
+            cercana.
+            </param>
+            <param name="geoRef">
+            Geo referencia contra cual se quiere
+            comparar la distancia a las localizaciones
+            de la empresa
+            </param>
+            <returns>
+            <see cref="T:ClassLibrary.CompanyLocation"/> con los datos
+            de la localizacion mas cercana.
             </returns>
         </member>
         <member name="T:ClassLibrary.MaterialCategory">

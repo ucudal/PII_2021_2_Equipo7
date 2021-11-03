@@ -52,7 +52,6 @@ namespace ClassLibrary
         /// <summary>
         /// Constructor de la publicación para definir los atributos.
         /// </summary>
-        [JsonConstructor]
         public Publication(DateTime from, DateTime until, int price, Currency currency)
         {
             this.ActiveFrom = from;
@@ -65,6 +64,7 @@ namespace ClassLibrary
         /// <summary>
         /// Constructor vacio para PublicationAdmin.
         /// </summary>
+        [JsonConstructor]
         public Publication()
         {
             this.Id = 0;

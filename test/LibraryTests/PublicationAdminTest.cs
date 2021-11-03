@@ -42,7 +42,7 @@ namespace Tests
             pPrueba = publiAdmin.GetById(publi1);
 
             Assert.AreEqual(activeFrom,pPrueba.ActiveFrom);
-            Assert.AreEqual(activeFrom,pPrueba.ActiveUntil);
+            Assert.AreEqual(activeuntil,pPrueba.ActiveUntil);
             Assert.AreEqual(Price,pPrueba.Price);
             Assert.AreEqual(currency,pPrueba.Currency);
         }
