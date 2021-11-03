@@ -9,6 +9,7 @@ namespace Tests
     /// </summary>
      public class CompanyMaterialTest
     {
+        /*
         /// <summary>
         /// test de el constructor
         /// </summary>
@@ -172,6 +173,6 @@ namespace Tests
 
         }
        
-
+    */
     }
 }
