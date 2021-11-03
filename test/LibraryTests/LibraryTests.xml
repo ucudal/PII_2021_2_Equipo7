@@ -422,6 +422,11 @@
             Comprobar que funciona el update del DataAdmin.
             </summary>
         </member>
+        <member name="M:Tests.PublicationAdminTest.GetPublicationsByCompanyTest">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Tests.PublicationKeyWordsAdminTest">
             <summary>
             Test de la clase que administra las palabras claves de las publicaciones.
@@ -441,6 +446,11 @@
             <summary>
             Test del deleted
             </summary>
+        </member>
+        <member name="M:Tests.PublicationKeyWordsAdminTest.GetKeyWordsForPublicationTest">
+            <summary>
+            
+            </summary>        
         </member>
         <member name="T:Tests.QualificationAdminTest">
             <summary>
@@ -492,6 +502,14 @@
             Comprobar que funciona el update del DataAdmin.
             </summary>
         </member>
+
+        <member name="M:Tests.SaleAdminTest.GetSalesBySellerTest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Tests.SaleAdminTest.GetSalesByBuyerTest">
+
         <member name="T:Tests.SysAdminOperationTests">
             <summary>
             Conjunto de Tests para la operacion de
@@ -531,6 +549,7 @@
             </summary>
         </member>
         <member name="M:Tests.UnregisteredUserOperationTests.AcceptCompanyNewInvitationTest">
+
             <summary>
             
             </summary>
