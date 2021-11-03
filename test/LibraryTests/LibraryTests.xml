@@ -29,6 +29,11 @@
             Test del metodo GetById(int pId).
             </summary>
         </member>
+        <member name="M:Tests.AccountAdminTest.GetUserIdForAccountTest">
+            <summary>
+            Test del metodo GetUserIdForAccount(MessagingService service, string account).
+            </summary>
+        </member>
         <member name="T:Tests.CompanyAdminTest">
             <summary>
             Prueba de la clase <see cref="T:ClassLibrary.CompanyAdmin"/>.
@@ -260,6 +265,11 @@
         <member name="M:Tests.InvitationAdminTests.GetByCodeTest">
             <summary>
             Test del metodo GetByCode(string pCode).
+            </summary>
+        </member>
+        <member name="M:Tests.InvitationAdminTests.GetInvitationIsOfTypeTest">
+            <summary>
+            Test del metodo GetInvitationIsOfType(string code, RegistrationType type).
             </summary>
         </member>
         <member name="M:Tests.InvitationAdminTests.InsertTest">
