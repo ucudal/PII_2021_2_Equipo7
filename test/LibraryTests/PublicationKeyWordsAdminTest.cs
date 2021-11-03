@@ -24,6 +24,9 @@ namespace Tests
             Assert.AreNotEqual(0,pInt);
         }
 
+        /// <summary>
+        /// Test para crear una nueva key
+        /// </summary>
         [Test]
         public void NewTest()
         {
@@ -31,7 +34,9 @@ namespace Tests
             Assert.IsInstanceOf(typeof(PublicationKeyWord),publikey);
         }
 
-
+        /// <summary>
+        /// Test del deleted
+        /// </summary>
         [Test]
         public void DeleteTest()
         {

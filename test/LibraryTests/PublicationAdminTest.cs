@@ -42,7 +42,7 @@ namespace Tests
             pPrueba = publiAdmin.GetById(publi1);
 
             Assert.AreEqual(activeFrom,pPrueba.ActiveFrom);
-            Assert.AreEqual(activeFrom,pPrueba.ActiveUntil);
+            Assert.AreEqual(activeuntil,pPrueba.ActiveUntil);
             Assert.AreEqual(Price,pPrueba.Price);
             Assert.AreEqual(currency,pPrueba.Currency);
         }
@@ -70,7 +70,7 @@ namespace Tests
             pPrueba1.Currency= Currency.DolarEstadounidense;
         
             int prueba = publiAdmin.Insert(pPrueba1);
-            Assert.AreEqual(0,prueba);
+            Assert.AreNotEqual(0,prueba);
 
             int NewId =pPrueba1.Id;
             publiAdmin.Delete(NewId);
