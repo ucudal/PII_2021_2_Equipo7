@@ -144,6 +144,16 @@
             Test del metodo GetById(int pId).
             </summary>
         </member>
+        <member name="M:Tests.CompanyMaterialQualificationAdminTest.GetQualificationsForCompanyMaterialTest">
+            <summary>
+            Test del metodo GetQualificationsForCompanyMaterial(int companyMaterialId).
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialQualificationAdminTest.GetCompanyMaterialHasQualificationTest">
+            <summary>
+            Test del metodo GetCompanyMaterialHasQualification(int companyMatId, int qualificationId)
+            </summary>
+        </member>
         <member name="T:Tests.CompanyMaterialStockAdminTest">
             <summary>
             Tests del administrador de stock de un material.
@@ -347,21 +357,6 @@
             Test del constructor de la clase.
             </summary>
         </member>
-        <member name="T:Tests.QualificationTest">
-            <summary>
-            Test de la clase Qualification.
-            </summary>
-        </member>
-        <member name="M:Tests.QualificationTest.ConstructorTest">
-            <summary>
-            Test del constructor de la clase.
-            </summary>
-        </member>
-        <member name="M:Tests.QualificationTest.ConstructorTest2">
-            <summary>
-            Prueba 2 del constructor
-            </summary>
-        </member>
         <member name="T:Tests.RoleTest">
             <summary>
             Prueba de la clase <see cref="!:Role"/>.
@@ -370,16 +365,6 @@
         <member name="M:Tests.RoleTest.ConstructorTest">
             <summary>
             test del constructor
-            </summary>
-        </member>
-        <member name="T:Tests.SaleTest">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Tests.SaleTest.ConstructorTest">
-            <summary>
-            Test para el constructor de Sale.
             </summary>
         </member>
         <member name="T:Tests.PublicationAdminTest">
@@ -415,6 +400,16 @@
         <member name="M:Tests.PublicationKeyWordsAdminTest.Insert">
             <summary>
             
+            </summary>
+        </member>
+        <member name="M:Tests.PublicationKeyWordsAdminTest.NewTest">
+            <summary>
+            Test para crear una nueva key
+            </summary>
+        </member>
+        <member name="M:Tests.PublicationKeyWordsAdminTest.DeleteTest">
+            <summary>
+            Test del deleted
             </summary>
         </member>
         <member name="T:Tests.QualificationAdminTest">
