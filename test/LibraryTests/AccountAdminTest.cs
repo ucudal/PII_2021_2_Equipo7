@@ -36,7 +36,7 @@ namespace Tests
             int accountId=accountAdmin.Insert(account);
 
             //Validamos que se haya añadido correctamente con un id!= 0
-            Assert.AreNotEqual(0, userId);
+            Assert.AreNotEqual(0, accountId);
 
             int expected=prevAccount.Count + 1;
 
@@ -79,9 +79,8 @@ namespace Tests
             Assert.AreEqual(expected,postAccount.Count);
             
             //Obtenemos la invitacion recien agregada, le cambiamos los campos y le damos a update
-            Account xToUpdate=accountAdmin.New();
-            xToUpdate=accountAdmin.GetById(accountId);
-            
+            Account xToUpdate=accountAdmin.GetById(accountId);
+
             //atributos nuevos
             userId = 2;
             service =new MessagingService();
@@ -95,7 +94,7 @@ namespace Tests
 
             accountAdmin.Update(xToUpdate);
 
-            Account xComp=accountAdmin.GetById(userId);
+            Account xComp=accountAdmin.GetById(accountId);
 
             Assert.AreEqual(xToUpdate.Id, xComp.Id);
             Assert.AreEqual(xToUpdate.UserId,xComp.UserId);
@@ -126,7 +125,7 @@ namespace Tests
             int accountId=accountAdmin.Insert(account);
 
             //Validamos que se haya añadido correctamente con un id!= 0
-            Assert.AreNotEqual(0, userId);
+            Assert.AreNotEqual(0, accountId);
 
             int expected=prevAccount.Count + 1;
 
@@ -136,11 +135,10 @@ namespace Tests
             Assert.AreEqual(expected,postAccount.Count);
 
             //Hacemos el delete y luego validamos que al cantidad haya disminuido 1
-            ReadOnlyCollection<Account> beforeDelete=postAccount;
 
-            expected=postAccount.Count - 1;
+            expected=prevAccount.Count;
 
-            accountAdmin.Delete(userId);
+            accountAdmin.Delete(accountId);
 
             ReadOnlyCollection<Account> afterDelete = accountAdmin.Items;
 
@@ -171,7 +169,7 @@ namespace Tests
             int accountId=accountAdmin.Insert(account);
 
             //Validamos que se haya añadido correctamente con un id!= 0
-            Assert.AreNotEqual(0, userId);
+            Assert.AreNotEqual(0, accountId);
 
             int expected=prevAccount.Count + 1;
 
