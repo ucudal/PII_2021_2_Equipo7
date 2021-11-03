@@ -208,5 +208,58 @@ namespace Tests
             Assert.AreEqual(companyMaterial.CompanyId,xComp.CompanyId);
             Assert.AreEqual(companyMaterial.Deleted, xComp.Deleted);
         }
+
+        /// <summary>
+        /// Test del metodo GetById(int pId).
+        /// </summary>
+        [Test]
+        public void GetCompanyMaterialsInCompanyTest()
+        { 
+            CompanyMaterial company1= companyMaterialAdmin.New();
+            company1.CompanyId=1;
+            CompanyMaterial company2= companyMaterialAdmin.New();
+            company2.CompanyId=1;
+            CompanyMaterial company3= companyMaterialAdmin.New();
+            company3.CompanyId=1;
+
+            companyMaterialAdmin.Insert(company1);
+            companyMaterialAdmin.Insert(company2);   
+            companyMaterialAdmin.Insert(company3);
+
+
+
+
+            ReadOnlyCollection<int> lista = companyMaterialAdmin.GetCompanyMaterialsInCompany(1); 
+            Assert.AreEqual(lista.Count,3);            
+        }
+        /// <summary>
+        /// Test del metodo GetById(int pId).
+        /// </summary>
+        [Test]
+        public void GetCompanyMaterialsInCompanyForCategoryTest()
+        { 
+            CompanyMaterial company1= companyMaterialAdmin.New();
+            company1.CompanyId=1;
+            company1.MaterialCategoryId=1;
+            CompanyMaterial company2= companyMaterialAdmin.New();
+            company2.CompanyId=1;
+            company2.MaterialCategoryId=1;
+            CompanyMaterial company3= companyMaterialAdmin.New();
+            company3.CompanyId=1;
+            company3.MaterialCategoryId=1;
+
+            companyMaterialAdmin.Insert(company1);
+            companyMaterialAdmin.Insert(company2);   
+            companyMaterialAdmin.Insert(company3);
+
+
+
+
+            ReadOnlyCollection<int> lista = companyMaterialAdmin.GetCompanyMaterialsInCompanyForCategory(1,1); 
+            Assert.AreEqual(lista.Count,3);            
+        }
+
+
+
     }
 }

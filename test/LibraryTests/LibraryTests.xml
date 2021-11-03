@@ -119,6 +119,16 @@
             Test del metodo GetById(int pId).
             </summary>
         </member>
+        <member name="M:Tests.CompanyMaterialAdminTest.GetCompanyMaterialsInCompanyTest">
+            <summary>
+            Test del metodo GetById(int pId).
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialAdminTest.GetCompanyMaterialsInCompanyForCategoryTest">
+            <summary>
+            Test del metodo GetById(int pId).
+            </summary>
+        </member>
         <member name="T:Tests.CompanyMaterialQualificationAdminTest">
             <summary>
             Tests del administrador de MaterialCategory.
@@ -267,6 +277,11 @@
             Test del metodo GetByCode(string pCode).
             </summary>
         </member>
+        <member name="M:Tests.InvitationAdminTests.GetInvitationIsOfTypeTest">
+            <summary>
+            Test del metodo GetInvitationIsOfType(string code, RegistrationType type).
+            </summary>
+        </member>
         <member name="M:Tests.InvitationAdminTests.InsertTest">
             <summary>
             Test del metodo Insert(Invitation pElemento).
@@ -335,6 +350,16 @@
         <member name="M:Tests.PublicationAdminTest.UpdateTest">
             <summary>
             Comprobar que funciona el update del DataAdmin.
+            </summary>
+        </member>
+        <member name="T:Tests.PublicationKeyWordsAdminTest">
+            <summary>
+            Test de la clase que administra las palabras claves de las publicaciones.
+            </summary>
+        </member>
+        <member name="M:Tests.PublicationKeyWordsAdminTest.Insert">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Tests.QualificationAdminTest">
