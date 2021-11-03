@@ -189,6 +189,11 @@
             Test del metodo GetLocationsWithStockForCompanyMaterial(int companyMaterialId).
             </summary>
         </member>
+        <member name="M:Tests.CompanyMaterialStockAdminTest.GetCompanyMaterialsInStockForLocationTest">
+            <summary>
+            Test del metodo GetCompanyMaterialsInStockForLocation(int companyLocationId).
+            </summary>
+        </member>
         <member name="T:Tests.CompanyUserAdminTest">
             <summary>
             Prueba de la clase <see cref="T:ClassLibrary.CompanyUserAdmin"/>.
