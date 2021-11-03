@@ -176,5 +176,28 @@ namespace Tests
         }
 
 
+        /// <summary>
+        /// busca por el id de compania las locaciones de la misma
+        /// </summary>
+        [Test]
+        public void GetLocationsForCompany()
+        {
+            CompanyLocation company1 = companyLocAdmin.New();
+            company1.CompanyId=1; 
+            CompanyLocation company2 = companyLocAdmin.New();
+            company2.CompanyId=1; 
+            CompanyLocation company3 = companyLocAdmin.New();
+            company3.CompanyId=1; 
+            companyLocAdmin.Insert(company1);
+            companyLocAdmin.Insert(company2);
+            companyLocAdmin.Insert(company3);
+
+            ReadOnlyCollection<CompanyLocation> lista = companyLocAdmin.GetLocationsForCompany(1);
+
+            Assert.AreEqual(lista.Count,3);
+
+        }
+
+
     }
 }

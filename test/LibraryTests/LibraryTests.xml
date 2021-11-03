@@ -94,6 +94,11 @@
             
             </summary>
         </member>
+        <member name="M:Tests.CompanyLocationAdminTest.GetLocationsForCompany">
+            <summary>
+            busca por el id de compania las locaciones de la misma
+            </summary>
+        </member>
         <member name="T:Tests.CompanyMaterialAdminTest">
             <summary>
             Tests del administrador de MaterialCategory.
@@ -115,6 +120,16 @@
             </summary>
         </member>
         <member name="M:Tests.CompanyMaterialAdminTest.GetByIdTest">
+            <summary>
+            Test del metodo GetById(int pId).
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialAdminTest.GetCompanyMaterialsInCompanyTest">
+            <summary>
+            Test del metodo GetById(int pId).
+            </summary>
+        </member>
+        <member name="M:Tests.CompanyMaterialAdminTest.GetCompanyMaterialsInCompanyForCategoryTest">
             <summary>
             Test del metodo GetById(int pId).
             </summary>
@@ -487,12 +502,54 @@
             Comprobar que funciona el update del DataAdmin.
             </summary>
         </member>
+
         <member name="M:Tests.SaleAdminTest.GetSalesBySellerTest">
             <summary>
             
             </summary>
         </member>
         <member name="M:Tests.SaleAdminTest.GetSalesByBuyerTest">
+
+        <member name="T:Tests.SysAdminOperationTests">
+            <summary>
+            Conjunto de Tests para la operacion de
+            un administrador del sistema.
+            </summary>
+        </member>
+        <member name="M:Tests.SysAdminOperationTests.InvitationCreationTest(ClassLibrary.RegistrationType)">
+            <summary>
+            Test de creacion de una invitacion
+            a la plataforma.
+            </summary>
+            <param name="type">
+            Tipo de invitacion a crear.
+            </param>
+        </member>
+        <member name="M:Tests.SysAdminOperationTests.MaterialCategoryCreationTest">
+            <summary>
+            Test de creacion de una
+            categoria de material.
+            </summary>
+        </member>
+        <member name="M:Tests.SysAdminOperationTests.MaterialCategoryDeletionTest">
+            <summary>
+            Test de eliminacion de una
+            categoria de material.
+            </summary>
+        </member>
+        <member name="M:Tests.SysAdminOperationTests.SuspendUserTest">
+            <summary>
+            Test de suspender un usuario.
+            </summary>
+        </member>
+        <member name="T:Tests.UnregisteredUserOperationTests">
+            <summary>
+            Conjunto de Tests para la operacion de
+            un administrador del sistema.
+            </summary>
+        </member>
+        <member name="M:Tests.UnregisteredUserOperationTests.AcceptCompanyNewInvitationTest">
+
             <summary>
             
             </summary>
