@@ -384,7 +384,8 @@
         </member>
         <member name="M:Tests.PublicationAdminTest.GetPublicationsByCompanyTest">
             <summary>
-            
+            Comprobar que funciona el obtener una publicación por su id y si se guardan 
+            en la lista de publicaciones.
             </summary>
         </member>
         <member name="T:Tests.PublicationKeyWordsAdminTest">

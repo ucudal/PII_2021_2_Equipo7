@@ -122,7 +122,8 @@ namespace Tests
 
         }
         /// <summary>
-        /// 
+        /// Comprobar que funciona el obtener una publicación por su id y si se guardan 
+        /// en la lista de publicaciones.
         /// </summary>
         [Test]
         public void GetPublicationsByCompanyTest()
