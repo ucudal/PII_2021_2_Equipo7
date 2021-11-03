@@ -276,7 +276,7 @@ namespace Tests
             //Obtenemos la invitacion agregada con GetById y comparamos
             Invitation xComp=invAdmin.GetById(invId);
             
-            Assert.AreEqual(inv.Id, xComp.Id);
+            Assert.AreEqual(invId, xComp.Id);
             Assert.AreEqual(inv.Type,xComp.Type);
             Assert.AreEqual(inv.ValidAfter, xComp.ValidAfter);
             Assert.AreEqual(inv.ValidBefore, xComp.ValidBefore);

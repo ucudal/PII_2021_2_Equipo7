@@ -218,7 +218,7 @@ namespace Tests
             //Obtenemos el usuario agregada con GetById y comparamos
             User xComp=userAdmin.GetById(userId);
             
-            Assert.AreEqual(user.Id, xComp.Id);
+            Assert.AreEqual(userId, xComp.Id);
             Assert.AreEqual(user.FirstName,xComp.FirstName);
             Assert.AreEqual(user.LastName, xComp.LastName);
             Assert.AreEqual(user.Suspended, xComp.Suspended);

@@ -183,7 +183,7 @@ namespace Tests
             //Obtenemos el usuario agregada con GetById y comparamos
             Account xComp=accountAdmin.GetById(accountId);
             
-            Assert.AreEqual(account.Id, xComp.Id);
+            Assert.AreEqual(accountId, xComp.Id);
             Assert.AreEqual(account.CodeInService,xComp.CodeInService);
             Assert.AreEqual(account.UserId, xComp.UserId);
             Assert.AreEqual(account.Deleted, xComp.Deleted);
