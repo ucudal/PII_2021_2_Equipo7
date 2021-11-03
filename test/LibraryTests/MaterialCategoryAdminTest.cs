@@ -158,7 +158,7 @@ namespace Tests
             //Obtenemos la categoria agregada con GetById y comparamos
             MaterialCategory xComp=materialCategoryAdmin.GetById(materialCategoryId);
             
-            Assert.AreEqual(materialCategory.Id, xComp.Id);
+            Assert.AreEqual(materialCategoryId, xComp.Id);
             Assert.AreEqual(materialCategory.Name,xComp.Name);
             Assert.AreEqual(materialCategory.Deleted, xComp.Deleted);
         }
