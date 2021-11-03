@@ -164,16 +164,6 @@
             Test del metodo GetById(int pId).
             </summary>
         </member>
-        <member name="T:Tests.CompanyMaterialTest">
-            <summary>
-            Prueba de la clase <see cref="T:ClassLibrary.CompanyMaterial"/>.
-            </summary>
-        </member>
-        <member name="T:Tests.CompanyStockTest">
-            <summary>
-            Test de la clase CompanyStock.
-            </summary>
-        </member>
         <member name="T:Tests.CompanyUserAdminTest">
             <summary>
             Prueba de la clase <see cref="T:ClassLibrary.CompanyUserAdmin"/>.
@@ -262,6 +252,11 @@
             Test del metodo GetByCode(string pCode).
             </summary>
         </member>
+        <member name="M:Tests.InvitationAdminTests.GetInvitationIsOfTypeTest">
+            <summary>
+            Test del metodo GetInvitationIsOfType(string code, RegistrationType type).
+            </summary>
+        </member>
         <member name="M:Tests.InvitationAdminTests.InsertTest">
             <summary>
             Test del metodo Insert(Invitation pElemento).
@@ -307,6 +302,16 @@
             Test del metodo GetById(int pId).
             </summary>
         </member>
+        <member name="T:Tests.CompanyMaterialTest">
+            <summary>
+            Prueba de la clase <see cref="T:ClassLibrary.CompanyMaterial"/>.
+            </summary>
+        </member>
+        <member name="T:Tests.CompanyStockTest">
+            <summary>
+            Test de la clase CompanyStock.
+            </summary>
+        </member>
         <member name="T:Tests.CompanyTest">
             <summary>
             Prueba de la clase <see cref="T:ClassLibrary.Company"/>.
@@ -337,26 +342,6 @@
             Test del constructor de la clase.
             </summary>
         </member>
-        <member name="T:Tests.PublicationTest">
-            <summary>
-            Prueba de la clase <see cref="T:ClassLibrary.Publication"/>.
-            </summary>
-        </member>
-        <member name="M:Tests.PublicationTest.Setup">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Tests.PublicationTest.Constructor_Test">
-            <summary>
-            Constructor de la clase.
-            </summary>
-        </member>
-        <member name="M:Tests.PublicationTest.Constructor_Test2">
-            <summary>
-            Constructor de la clase test.
-            </summary>
-        </member>
         <member name="T:Tests.QualificationTest">
             <summary>
             Test de la clase Qualification.
@@ -382,6 +367,16 @@
             test del constructor
             </summary>
         </member>
+        <member name="T:Tests.SaleTest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Tests.SaleTest.ConstructorTest">
+            <summary>
+            Test para el constructor de Sale.
+            </summary>
+        </member>
         <member name="T:Tests.PublicationAdminTest">
             <summary>
             Test de la clase que administra las publicaciones.
@@ -405,6 +400,16 @@
         <member name="M:Tests.PublicationAdminTest.UpdateTest">
             <summary>
             Comprobar que funciona el update del DataAdmin.
+            </summary>
+        </member>
+        <member name="T:Tests.PublicationKeyWordsAdminTest">
+            <summary>
+            Test de la clase que administra las palabras claves de las publicaciones.
+            </summary>
+        </member>
+        <member name="M:Tests.PublicationKeyWordsAdminTest.Insert">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Tests.QualificationAdminTest">
@@ -455,16 +460,6 @@
         <member name="M:Tests.SaleAdminTest.UpdateTest">
             <summary>
             Comprobar que funciona el update del DataAdmin.
-            </summary>
-        </member>
-        <member name="T:Tests.SaleTest">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:Tests.SaleTest.ConstructorTest">
-            <summary>
-            Test para el constructor de Sale.
             </summary>
         </member>
         <member name="T:Tests.UserAdminTest">
