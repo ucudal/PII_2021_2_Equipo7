@@ -218,11 +218,11 @@ namespace Tests
 
 
             CompanyMaterial company1= companyMaterialAdmin.New();
-            company1.CompanyId=5;
+            company1.CompanyId=11;
             CompanyMaterial company2= companyMaterialAdmin.New();
-            company2.CompanyId=5;
+            company2.CompanyId=11;
             CompanyMaterial company3= companyMaterialAdmin.New();
-            company3.CompanyId=5;
+            company3.CompanyId=11;
 
             companyMaterialAdmin.Insert(company1);
             companyMaterialAdmin.Insert(company2);   
@@ -231,7 +231,7 @@ namespace Tests
 
 
 
-            ReadOnlyCollection<int> lista = companyMaterialAdmin.GetCompanyMaterialsInCompany(5); 
+            ReadOnlyCollection<int> lista = companyMaterialAdmin.GetCompanyMaterialsInCompany(11); 
             Assert.AreEqual(lista.Count,3);            
         }
         /// <summary>
