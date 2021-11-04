@@ -382,6 +382,12 @@
             Comprobar que funciona el update del DataAdmin.
             </summary>
         </member>
+        <member name="M:Tests.PublicationAdminTest.GetPublicationsByCompanyTest">
+            <summary>
+            Comprobar que funciona el obtener una publicación por su id y si se guardan 
+            en la lista de publicaciones.
+            </summary>
+        </member>
         <member name="T:Tests.PublicationKeyWordsAdminTest">
             <summary>
             Test de la clase que administra las palabras claves de las publicaciones.
@@ -401,6 +407,11 @@
             <summary>
             Test del deleted
             </summary>
+        </member>
+        <member name="M:Tests.PublicationKeyWordsAdminTest.GetKeyWordsForPublicationTest">
+            <summary>
+            
+            </summary>        
         </member>
         <member name="T:Tests.QualificationAdminTest">
             <summary>
@@ -450,6 +461,16 @@
         <member name="M:Tests.SaleAdminTest.UpdateTest">
             <summary>
             Comprobar que funciona el update del DataAdmin.
+            </summary>
+        </member>
+        <member name="M:Tests.SaleAdminTest.GetSalesBySellerTest">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Tests.SaleAdminTest.GetSalesByBuyerTest">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Tests.CompanyAdminUserOperationTests">
@@ -565,6 +586,12 @@
         <member name="M:Tests.SysAdminOperationTests.SuspendUserTest">
             <summary>
             Test de suspender un usuario.
+            </summary>
+        </member>
+        <member name="M:Tests.SysAdminOperationTests.QualificationCreationTest">
+            <summary>
+            Test de creacion de una
+            habilitacion.
             </summary>
         </member>
         <member name="T:Tests.UnregisteredUserOperationTests">

@@ -17,6 +17,10 @@ namespace ClassLibrary
         /// <value></value>
         public int CompanyId { get; set; }
 
+        /// <summary>
+        /// Id del material de empresa publicado.
+        /// </summary>
+        public int CompanyMaterialId { get; set; }
 
         /// <summary>
         /// Id que se la da a cada publicación.
@@ -71,6 +75,8 @@ namespace ClassLibrary
             this.Deleted=publication.Deleted;
             this.Currency=publication.Currency;
             this.Price=publication.Price;
+            this.CompanyId = publication.CompanyId;
+            this.CompanyMaterialId = publication.CompanyMaterialId;
         }
 
         /// <inheritdoc/>

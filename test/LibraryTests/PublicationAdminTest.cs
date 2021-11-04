@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.ObjectModel;
 using ClassLibrary;
@@ -120,6 +121,36 @@ namespace Tests
 
 
         }
+        /// <summary>
+        /// Comprobar que funciona el obtener una publicación por su id y si se guardan 
+        /// en la lista de publicaciones.
+        /// </summary>
+        [Test]
+        public void GetPublicationsByCompanyTest()
+        {
+            Publication pPrueba = publiAdmin.New();
+            pPrueba.ActiveFrom = DateTime.Today;
+            pPrueba.ActiveUntil = DateTime.Today.AddMonths(3);
+            pPrueba.Price = 120;
+            pPrueba.CompanyId = 1;
+            pPrueba.Currency = Currency.DolarEstadounidense;
 
+            Publication pPrueba1 = pPrueba.Clone();
+            Publication pPrueba2 = pPrueba.Clone();
+
+            int id1 = publiAdmin.Insert(pPrueba);
+            int id2 = publiAdmin.Insert(pPrueba1);
+            int id3 = publiAdmin.Insert(pPrueba2);
+
+            Assert.AreNotEqual(0,id1);
+            Assert.AreNotEqual(0,id2);
+            Assert.AreNotEqual(0,id3);
+            
+
+            ReadOnlyCollection<int> lista = publiAdmin.GetPublicationsByCompany(1);
+
+            Assert.AreEqual(3,lista.Count);
+            
+        }
     }
 }

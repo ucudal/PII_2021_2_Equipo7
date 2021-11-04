@@ -215,12 +215,14 @@ namespace Tests
         [Test]
         public void GetCompanyMaterialsInCompanyTest()
         { 
+
+
             CompanyMaterial company1= companyMaterialAdmin.New();
-            company1.CompanyId=1;
+            company1.CompanyId=5;
             CompanyMaterial company2= companyMaterialAdmin.New();
-            company2.CompanyId=1;
+            company2.CompanyId=5;
             CompanyMaterial company3= companyMaterialAdmin.New();
-            company3.CompanyId=1;
+            company3.CompanyId=5;
 
             companyMaterialAdmin.Insert(company1);
             companyMaterialAdmin.Insert(company2);   
@@ -229,7 +231,7 @@ namespace Tests
 
 
 
-            ReadOnlyCollection<int> lista = companyMaterialAdmin.GetCompanyMaterialsInCompany(1); 
+            ReadOnlyCollection<int> lista = companyMaterialAdmin.GetCompanyMaterialsInCompany(5); 
             Assert.AreEqual(lista.Count,3);            
         }
         /// <summary>
