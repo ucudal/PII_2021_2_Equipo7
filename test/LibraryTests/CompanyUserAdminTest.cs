@@ -53,7 +53,6 @@ namespace Tests
             int userid=3;
             int companyid = 2;
             
-            bool used = false;
 
             CompanyUser loc = companyUsAdmin.New();
             loc.CompanyId = companyid;
@@ -133,13 +132,12 @@ namespace Tests
         [Test] 
         public void DeleteTest()
         {
- //Insertamos un elemento
+            //Insertamos un elemento
             ReadOnlyCollection<CompanyUser> locationspre = companyUsAdmin.Items;
 
             int usid= 2;
             int companyid = 2;
             
-            bool used = false;
 
             CompanyUser loc = companyUsAdmin.New();
             loc.CompanyId = companyid;
