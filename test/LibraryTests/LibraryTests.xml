@@ -379,7 +379,7 @@
         </member>
         <member name="M:Tests.PublicationAdminTest.UpdateTest">
             <summary>
-            Comprobar que funciona el update del DataAdmin.
+            Comprobar que funciona el update del this.datMgr.Data.
             </summary>
         </member>
         <member name="M:Tests.PublicationAdminTest.GetPublicationsByCompanyTest">
@@ -435,7 +435,7 @@
         </member>
         <member name="M:Tests.QualificationAdminTest.UpdateTestQ">
             <summary>
-            Comprobar que funciona el update del DataAdmin.
+            Comprobar que funciona el update del this.datMgr.Data.
             </summary>
         </member>
         <member name="T:Tests.SaleAdminTest">
@@ -460,7 +460,7 @@
         </member>
         <member name="M:Tests.SaleAdminTest.UpdateTest">
             <summary>
-            Comprobar que funciona el update del DataAdmin.
+            Comprobar que funciona el update del this.datMgr.Data.
             </summary>
         </member>
         <member name="M:Tests.SaleAdminTest.GetSalesBySellerTest">

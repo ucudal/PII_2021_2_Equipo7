@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace ClassLibrary
 {
@@ -8,7 +8,7 @@ namespace ClassLibrary
     /// palabras clave asociadas a las
     /// publicaciones.
     /// </summary>
-    public class PublicationKeyWordAdmin : DataAdmin<PublicationKeyWord>
+    public sealed class PublicationKeyWordAdmin : DataAdmin<PublicationKeyWord>
     {
         /// <summary>
         /// Verifica si una publicación tiene una palabra concreta entre sus palabras claves.
@@ -18,7 +18,7 @@ namespace ClassLibrary
         /// <returns>Valor booleano indicacndo si la palabra existe en la lista de palabras clave o no.</returns>
         public bool PublicationMatchesKeyWord(int pubId, string keyWord)
         {
-            ReadOnlyCollection<PublicationKeyWord> keyWords = this.Items;
+            IReadOnlyCollection<PublicationKeyWord> keyWords = this.Items;
             foreach (PublicationKeyWord word in keyWords)
             {
                 if (word.PublicationId == pubId && word.KeyWord.ToLower() == keyWord.ToLower())
@@ -35,10 +35,10 @@ namespace ClassLibrary
         /// </summary>
         /// <param name="pubId">Id de la publicación para la cual se busca obtener sus palabras claves.</param>
         /// <returns>Listado de strings con las palabras claves obtenidas.</returns>
-        public ReadOnlyCollection<string> GetKeyWordsForPublication(int pubId)
+        public IReadOnlyCollection<string> GetKeyWordsForPublication(int pubId)
         {
             List<string> resultList = new List<string>();
-            ReadOnlyCollection<PublicationKeyWord> keyWords = this.Items;
+            IReadOnlyCollection<PublicationKeyWord> keyWords = this.Items;
             foreach (PublicationKeyWord word in keyWords)
             {
                 if (word.PublicationId == pubId)
@@ -50,7 +50,14 @@ namespace ClassLibrary
             return resultList.AsReadOnly();
         }
 
-
-
+        /// <inheritdoc/>
+        protected override void ValidateData(PublicationKeyWord item)
+        {
+            DataManager dataManager = new DataManager();
+            if(item.KeyWord is null || item.KeyWord.Length == 0) 
+                throw new ValidationException("Requerida palabra clave.");
+            if(item.PublicationId == 0/* || !dataManager.Publication.Exists(item.PublicationId)*/) 
+                throw new ValidationException("Requerida publicacion asociada.");
+        }
     }
 }

@@ -14,9 +14,6 @@ namespace Tests
     public class LocationAPIClientTests
     {
         private LocationAPIClient locClient = new LocationAPIClient();
-        private CompanyAdmin compAdmin = Singleton<CompanyAdmin>.Instance;
-        private CompanyLocationAdmin compLocAdmin = Singleton<CompanyLocationAdmin>.Instance;
-        private EntrepreneurAdmin entreAdmin = Singleton<EntrepreneurAdmin>.Instance;
 
         /// <summary>
         /// Test que prueba si se puede encontrar
@@ -42,38 +39,38 @@ namespace Tests
             string locationExtra1 = "Guatemala 1075";
             string locationExtra2 = "Paysandú 1178";
 
-            Company comp = compAdmin.New();
+            Company comp = this.datMgr.Company.New();
             comp.Name = "Combobulative Designs";
             comp.Trade = "Software Dev";
-            int compId = compAdmin.Insert(comp);
+            int compId = this.datMgr.Company.Insert(comp);
 
             CompanyLocation loc;
 
-            loc = compLocAdmin.New();
+            loc = this.datMgr.CompanyLocation.New();
             loc.CompanyId = compId;
             loc.GeoReference = locationClosest;
-            int locId = compLocAdmin.Insert(loc);
+            int locId = this.datMgr.CompanyLocation.Insert(loc);
             
-            loc = compLocAdmin.New();
+            loc = this.datMgr.CompanyLocation.New();
             loc.CompanyId = compId;
             loc.GeoReference = locationExtra1;
-            compLocAdmin.Insert(loc);
+            this.datMgr.CompanyLocation.Insert(loc);
             
-            loc = compLocAdmin.New();
+            loc = this.datMgr.CompanyLocation.New();
             loc.CompanyId = compId;
             loc.GeoReference = locationExtra2;
-            compLocAdmin.Insert(loc);
+            this.datMgr.CompanyLocation.Insert(loc);
 
-            Entrepreneur entre = entreAdmin.New();
+            Entrepreneur entre = this.datMgr.Entrepreneur.New();
             entre.Name = "Steve Vai";
             entre.Trade = "Guitar godness";
             entre.UserId = 1;
             entre.GeoReference = locationEntrepreneur;
-            int entreId = entreAdmin.Insert(entre);
+            int entreId = this.datMgr.Entrepreneur.Insert(entre);
 
-            entre = entreAdmin.GetById(entreId);
+            entre = this.datMgr.Entrepreneur.GetById(entreId);
 
-            CompanyLocation closestLocation = compLocAdmin.GetClosestCompanyLocationToGeoReference(compId, entre.GeoReference);
+            CompanyLocation closestLocation = this.datMgr.CompanyLocation.GetClosestCompanyLocationToGeoReference(compId, entre.GeoReference);
 
             Assert.AreEqual(locId, closestLocation.Id);
             */

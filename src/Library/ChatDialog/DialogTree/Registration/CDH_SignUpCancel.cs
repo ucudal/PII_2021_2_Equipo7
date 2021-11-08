@@ -11,8 +11,6 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_SignUpCancel : ChatDialogHandlerBase
     {
-        private InvitationAdmin invitationAdmin = Singleton<InvitationAdmin>.Instance;
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpCancel"/>.
         /// </summary>

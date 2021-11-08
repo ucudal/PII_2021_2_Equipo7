@@ -1,8 +1,6 @@
-using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using ClassLibrary;
 using NUnit.Framework;
-
 
 namespace Tests
 {
@@ -11,31 +9,34 @@ namespace Tests
     /// </summary>
      public class EntrepreneurAdminTest
     {
-        private EntrepreneurAdmin entrepreneurAdmin = Singleton<EntrepreneurAdmin>.Instance;
+        private DataManager datMgr = new DataManager();
 
         /// <summary>
         /// test para incertar un objeto en emprendedor 
         /// </summary>
-        
-
-        
         [Test] 
         public void InsertTest()
         {
-            ReadOnlyCollection<Entrepreneur> items = entrepreneurAdmin.Items;
+            IReadOnlyCollection<Entrepreneur> items = this.datMgr.Entrepreneur.Items;
             
             
             string name="nombre Entrepreneur";
             string trade ="rubro";
-            Entrepreneur empre = entrepreneurAdmin.New();
+            int userId = 81009;
+            string geoRef = "Centenario y Propios";
+            Entrepreneur empre = this.datMgr.Entrepreneur.New();
             empre.Name = name;
             empre.Trade = trade;
-            int entreid = entrepreneurAdmin.Insert(empre);
+            empre.UserId = userId;
+            empre.GeoReference = geoRef;
+            int entreid = this.datMgr.Entrepreneur.Insert(empre);
             Assert.AreNotEqual(0,entreid);
 
-            empre = entrepreneurAdmin.GetById(entreid);
+            empre = this.datMgr.Entrepreneur.GetById(entreid);
             Assert.AreEqual(name,empre.Name);
             Assert.AreEqual(trade,empre.Trade);
+            Assert.AreEqual(userId,empre.UserId);
+            Assert.AreEqual(geoRef,empre.GeoReference);
 
         }
 
@@ -45,18 +46,22 @@ namespace Tests
         [Test] 
         public void UpdateTest()
         {
-            Entrepreneur entrepreneur = entrepreneurAdmin.New();
+            Entrepreneur entrepreneur = this.datMgr.Entrepreneur.New();
             entrepreneur.Name="pepito";
-            int identre = entrepreneurAdmin.Insert(entrepreneur);
-            Entrepreneur empre2 = entrepreneurAdmin.New();
-            empre2 = entrepreneurAdmin.GetByName("pepito");
-            int id = empre2.Id;
+            entrepreneur.Trade = "galletas";
+            entrepreneur.GeoReference = "Nueva Palmira y La Paz";
+            entrepreneur.UserId = 900990;
+            int identre = this.datMgr.Entrepreneur.Insert(entrepreneur);
+            Entrepreneur empre2 = this.datMgr.Entrepreneur.New();
+            empre2 = this.datMgr.Entrepreneur.GetById(identre);
             empre2.Trade = "armas";
-            entrepreneurAdmin.Update(empre2);
-            Entrepreneur empre3 = entrepreneurAdmin.New();
-            empre3 = entrepreneurAdmin.GetById(id);
+            this.datMgr.Entrepreneur.Update(empre2);
+            Entrepreneur empre3 = this.datMgr.Entrepreneur.New();
+            empre3 = this.datMgr.Entrepreneur.GetById(identre);
             Assert.AreEqual("armas",empre3.Trade);
-            Assert.AreNotEqual(0,identre);
+            Assert.AreEqual(entrepreneur.Name,empre3.Name);
+            Assert.AreEqual(entrepreneur.GeoReference,empre3.GeoReference);
+            Assert.AreEqual(entrepreneur.UserId,empre3.UserId);
             // no se que hacer en esta patyre si me falta algo
 
             
@@ -67,7 +72,7 @@ namespace Tests
         [Test] 
         public void NewTest()
         {
-            Entrepreneur entrepreneur =entrepreneurAdmin.New();
+            Entrepreneur entrepreneur =this.datMgr.Entrepreneur.New();
             Assert.IsInstanceOf(typeof(Entrepreneur),entrepreneur);
         }
         /// <summary>
@@ -76,14 +81,16 @@ namespace Tests
         [Test] 
         public void GetByIdTest()
         {
-            Entrepreneur entrepreneur =entrepreneurAdmin.New();
+            Entrepreneur entrepreneur =this.datMgr.Entrepreneur.New();
             entrepreneur.Name="pepito";
-            int idempre = entrepreneurAdmin.Insert(entrepreneur);
-            Entrepreneur empre2 =entrepreneurAdmin.GetById(idempre);
-            int id =empre2.Id;
-            Entrepreneur entre3= entrepreneurAdmin.GetById(id);
-            Assert.AreEqual(empre2.Id,entre3.Id);
-            Assert.AreEqual(empre2.Name,entre3.Name);
+            entrepreneur.Trade = "galletas";
+            entrepreneur.UserId = 816240;
+            entrepreneur.GeoReference = "Garibaldi y 8 de Octubre";
+            int idempre = this.datMgr.Entrepreneur.Insert(entrepreneur);
+            Entrepreneur entre3= this.datMgr.Entrepreneur.GetById(idempre);
+            Assert.AreEqual(entrepreneur.Trade,entre3.Trade);
+            Assert.AreEqual(entrepreneur.UserId,entre3.UserId);
+            Assert.AreEqual(entrepreneur.Name,entre3.Name);
         }
         /// <summary>
         /// 
@@ -91,19 +98,14 @@ namespace Tests
         [Test] 
         public void DeleteTest()
         {
-            Entrepreneur empre =entrepreneurAdmin.New();
+            Entrepreneur empre =this.datMgr.Entrepreneur.New();
             empre.Name="pepito";
-            entrepreneurAdmin.Insert(empre);
-            Entrepreneur entre2 =entrepreneurAdmin.GetByName("pepito");
-            int id =entre2.Id;
-            entrepreneurAdmin.Delete(id);
-            Entrepreneur entre3 =entrepreneurAdmin.GetById(id);
+            empre.Trade="galletas";
+            empre.UserId = 48927;
+            int id = this.datMgr.Entrepreneur.Insert(empre);
+            this.datMgr.Entrepreneur.Delete(id);
+            Entrepreneur entre3 =this.datMgr.Entrepreneur.GetById(id);
             Assert.IsNull(entre3);
-            
-
-
         }
-
-
     }
 }

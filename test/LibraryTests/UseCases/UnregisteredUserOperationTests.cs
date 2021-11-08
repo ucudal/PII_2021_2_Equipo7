@@ -1,5 +1,5 @@
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using ClassLibrary;
 using NUnit.Framework;
 
@@ -12,6 +12,8 @@ namespace Tests
     [TestFixture]
     public class UnregisteredUserOperationTests
     {
+        private DataManager datMgr = new DataManager();
+
         /// <summary>
         /// Operacion de registrarse como
         /// un usuario con nueva compania.
@@ -19,11 +21,7 @@ namespace Tests
         [Test]
         public void AcceptCompanyNewInvitationTest()
         {
-            CompanyAdmin compAdmin = Singleton<CompanyAdmin>.Instance;
-            UserAdmin usrAdmin = Singleton<UserAdmin>.Instance;
-            InvitationAdmin invAdmin = Singleton<InvitationAdmin>.Instance;
-
-            ReadOnlyCollection<Invitation> prevInvites = invAdmin.Items;
+            IReadOnlyCollection<Invitation> prevInvites = this.datMgr.Invitation.Items;
             
             DateTime validAfter = DateTime.Now.AddMonths(-1);
             DateTime validBefore = DateTime.Now.AddMonths(1);
@@ -31,15 +29,15 @@ namespace Tests
             int companyId = 0;
 
 
-            Invitation inv = invAdmin.New();
+            Invitation inv = this.datMgr.Invitation.New();
             inv.Type = type;
             inv.ValidAfter = validAfter;
             inv.ValidBefore = validBefore;
             inv.CompanyId = companyId;
-            int invId = invAdmin.Insert(inv);
-            invAdmin.GenerateNewInviteCode(invId);
+            int invId = this.datMgr.Invitation.Insert(inv);
+            this.datMgr.Invitation.GenerateNewInviteCode(invId);
 
-            inv = invAdmin.GetById(invId);
+            inv = this.datMgr.Invitation.GetById(invId);
 
             Assert.IsNotNull(inv);
             Assert.That(!inv.Used);
@@ -50,29 +48,29 @@ namespace Tests
             string compName = "Dream Theater";
             string compTrade = "Glorious Music";
 
-            User usr = usrAdmin.New();
+            User usr = this.datMgr.User.New();
             usr.FirstName = usrFName;
             usr.LastName = usrLName;
             usr.Role = role;
-            int usrId = usrAdmin.Insert(usr);
+            int usrId = this.datMgr.User.Insert(usr);
 
             Assert.AreNotEqual(0, usrId);
 
-            usr = usrAdmin.GetById(usrId);
+            usr = this.datMgr.User.GetById(usrId);
 
-            Company comp = compAdmin.New();
+            Company comp = this.datMgr.Company.New();
             comp.Name = compName;
             comp.Trade = compTrade;
-            int compId = compAdmin.Insert(comp);
+            int compId = this.datMgr.Company.Insert(comp);
 
             Assert.AreNotEqual(0, compId);
 
-            comp = compAdmin.GetById(compId);
+            comp = this.datMgr.Company.GetById(compId);
 
             inv.Used = true;
-            invAdmin.Update(inv);
+            this.datMgr.Invitation.Update(inv);
             
-            inv = invAdmin.GetById(invId);
+            inv = this.datMgr.Invitation.GetById(invId);
             
             Assert.That(inv.Used);
             Assert.AreEqual(compId, comp.Id);
@@ -91,27 +89,24 @@ namespace Tests
         [Test]
         public void AcceptCompanyJoinInvitationTest()
         {
-            CompanyAdmin compAdmin = Singleton<CompanyAdmin>.Instance;
-            UserAdmin usrAdmin = Singleton<UserAdmin>.Instance;
-            InvitationAdmin invAdmin = Singleton<InvitationAdmin>.Instance;
-
-            ReadOnlyCollection<Invitation> prevInvites = invAdmin.Items;
+            IReadOnlyCollection<Invitation> prevInvites = this.datMgr.Invitation.Items;
             
             DateTime validAfter = DateTime.Now.AddMonths(-1);
             DateTime validBefore = DateTime.Now.AddMonths(1);
             RegistrationType type = RegistrationType.CompanyJoin;
-            int companyId = 0;
+            int companyId = 5;
 
 
-            Invitation inv = invAdmin.New();
+            Invitation inv = this.datMgr.Invitation.New();
             inv.Type = type;
             inv.ValidAfter = validAfter;
             inv.ValidBefore = validBefore;
             inv.CompanyId = companyId;
-            int invId = invAdmin.Insert(inv);
-            invAdmin.GenerateNewInviteCode(invId);
+            inv.Used = false;
+            int invId = this.datMgr.Invitation.Insert(inv);
+            this.datMgr.Invitation.GenerateNewInviteCode(invId);
 
-            inv = invAdmin.GetById(invId);
+            inv = this.datMgr.Invitation.GetById(invId);
 
             Assert.IsNotNull(inv);
             Assert.That(!inv.Used);
@@ -122,29 +117,29 @@ namespace Tests
             string compName = "Dream Theater";
             string compTrade = "Glorious Music";
 
-            User usr = usrAdmin.New();
+            User usr = this.datMgr.User.New();
             usr.FirstName = usrFName;
             usr.LastName = usrLName;
             usr.Role = role;
-            int usrId = usrAdmin.Insert(usr);
+            int usrId = this.datMgr.User.Insert(usr);
 
             Assert.AreNotEqual(0, usrId);
 
-            usr = usrAdmin.GetById(usrId);
+            usr = this.datMgr.User.GetById(usrId);
 
-            Company comp = compAdmin.New();
+            Company comp = this.datMgr.Company.New();
             comp.Name = compName;
             comp.Trade = compTrade;
-            int compId = compAdmin.Insert(comp);
+            int compId = this.datMgr.Company.Insert(comp);
 
             Assert.AreNotEqual(0, compId);
 
-            comp = compAdmin.GetById(compId);
+            comp = this.datMgr.Company.GetById(compId);
 
             inv.Used = true;
-            invAdmin.Update(inv);
+            this.datMgr.Invitation.Update(inv);
             
-            inv = invAdmin.GetById(invId);
+            inv = this.datMgr.Invitation.GetById(invId);
             
             Assert.That(inv.Used);
             Assert.AreEqual(compId, comp.Id);
@@ -163,11 +158,7 @@ namespace Tests
         [Test]
         public void AcceptEntrepreneurNewInvitationTest()
         {
-            EntrepreneurAdmin entreAdmin = Singleton<EntrepreneurAdmin>.Instance;
-            UserAdmin usrAdmin = Singleton<UserAdmin>.Instance;
-            InvitationAdmin invAdmin = Singleton<InvitationAdmin>.Instance;
-
-            ReadOnlyCollection<Invitation> prevInvites = invAdmin.Items;
+            IReadOnlyCollection<Invitation> prevInvites = this.datMgr.Invitation.Items;
             
             DateTime validAfter = DateTime.Now.AddMonths(-1);
             DateTime validBefore = DateTime.Now.AddMonths(1);
@@ -175,15 +166,16 @@ namespace Tests
             int companyId = 0;
 
 
-            Invitation inv = invAdmin.New();
+            Invitation inv = this.datMgr.Invitation.New();
             inv.Type = type;
             inv.ValidAfter = validAfter;
             inv.ValidBefore = validBefore;
             inv.CompanyId = companyId;
-            int invId = invAdmin.Insert(inv);
-            invAdmin.GenerateNewInviteCode(invId);
+            inv.Used = false;
+            int invId = this.datMgr.Invitation.Insert(inv);
+            this.datMgr.Invitation.GenerateNewInviteCode(invId);
 
-            inv = invAdmin.GetById(invId);
+            inv = this.datMgr.Invitation.GetById(invId);
 
             Assert.IsNotNull(inv);
             Assert.That(!inv.Used);
@@ -194,29 +186,31 @@ namespace Tests
             string entreName = "Dream Theater";
             string entreTrade = "Glorious Music";
 
-            User usr = usrAdmin.New();
+            User usr = this.datMgr.User.New();
             usr.FirstName = usrFName;
             usr.LastName = usrLName;
             usr.Role = role;
-            int usrId = usrAdmin.Insert(usr);
+            int usrId = this.datMgr.User.Insert(usr);
 
             Assert.AreNotEqual(0, usrId);
 
-            usr = usrAdmin.GetById(usrId);
+            usr = this.datMgr.User.GetById(usrId);
 
-            Entrepreneur entre = entreAdmin.New();
+            Entrepreneur entre = this.datMgr.Entrepreneur.New();
             entre.Name = entreName;
             entre.Trade = entreTrade;
-            int entreId = entreAdmin.Insert(entre);
+            entre.UserId = usrId;
+            entre.GeoReference = "Garibaldi y Bvd Artigas";
+            int entreId = this.datMgr.Entrepreneur.Insert(entre);
 
             Assert.AreNotEqual(0, entreId);
 
-            entre = entreAdmin.GetById(entreId);
+            entre = this.datMgr.Entrepreneur.GetById(entreId);
 
             inv.Used = true;
-            invAdmin.Update(inv);
+            this.datMgr.Invitation.Update(inv);
             
-            inv = invAdmin.GetById(invId);
+            inv = this.datMgr.Invitation.GetById(invId);
             
             Assert.That(inv.Used);
             Assert.AreEqual(entreId, entre.Id);
@@ -235,11 +229,7 @@ namespace Tests
         [Test]
         public void AcceptSysAdminNewInvitationTest()
         {
-            CompanyAdmin compAdmin = Singleton<CompanyAdmin>.Instance;
-            UserAdmin usrAdmin = Singleton<UserAdmin>.Instance;
-            InvitationAdmin invAdmin = Singleton<InvitationAdmin>.Instance;
-
-            ReadOnlyCollection<Invitation> prevInvites = invAdmin.Items;
+            IReadOnlyCollection<Invitation> prevInvites = this.datMgr.Invitation.Items;
             
             DateTime validAfter = DateTime.Now.AddMonths(-1);
             DateTime validBefore = DateTime.Now.AddMonths(1);
@@ -247,15 +237,15 @@ namespace Tests
             int companyId = 0;
 
 
-            Invitation inv = invAdmin.New();
+            Invitation inv = this.datMgr.Invitation.New();
             inv.Type = type;
             inv.ValidAfter = validAfter;
             inv.ValidBefore = validBefore;
             inv.CompanyId = companyId;
-            int invId = invAdmin.Insert(inv);
-            invAdmin.GenerateNewInviteCode(invId);
+            int invId = this.datMgr.Invitation.Insert(inv);
+            this.datMgr.Invitation.GenerateNewInviteCode(invId);
 
-            inv = invAdmin.GetById(invId);
+            inv = this.datMgr.Invitation.GetById(invId);
 
             Assert.IsNotNull(inv);
             Assert.That(!inv.Used);
@@ -264,23 +254,23 @@ namespace Tests
             string usrLName = "Petrucci";
             UserRole role = UserRole.SystemAdministrator;
 
-            User usr = usrAdmin.New();
+            User usr = this.datMgr.User.New();
             usr.FirstName = usrFName;
             usr.LastName = usrLName;
             usr.Role = role;
-            int usrId = usrAdmin.Insert(usr);
+            int usrId = this.datMgr.User.Insert(usr);
 
             Assert.AreNotEqual(0, usrId);
 
-            usr = usrAdmin.GetById(usrId);
+            usr = this.datMgr.User.GetById(usrId);
 
           
 
 
             inv.Used = true;
-            invAdmin.Update(inv);
+            this.datMgr.Invitation.Update(inv);
             
-            inv = invAdmin.GetById(invId);
+            inv = this.datMgr.Invitation.GetById(invId);
             
             Assert.That(inv.Used);
             Assert.AreEqual(usrFName, usr.FirstName);

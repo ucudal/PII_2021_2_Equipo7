@@ -1,5 +1,4 @@
-using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using ClassLibrary;
 using NUnit.Framework;
 
@@ -11,7 +10,7 @@ namespace Tests
     [TestFixture]
     public class CompanyMaterialStockAdminTest
     {
-        private CompanyMaterialStockAdmin companyMaterialStockAdmin = Singleton<CompanyMaterialStockAdmin>.Instance;
+        private DataManager datMgr = new DataManager();
 
         /// <summary>
         /// Test del metodo Insert(CompanyMaterialStock pElemento).
@@ -20,26 +19,26 @@ namespace Tests
         public void InsertTest()
         {
             //Agregamos un stock de un material 
-            ReadOnlyCollection<CompanyMaterialStock> prevCompanyMaterialStock = companyMaterialStockAdmin.Items;
+            IReadOnlyCollection<CompanyMaterialStock> prevCompanyMaterialStock = this.datMgr.CompanyMaterialStock.Items;
 
             int companyMatId = 2;
             int companyLocationId=1;
             int stock=100;
             bool deleted = false;
 
-            CompanyMaterialStock companyMaterialStock=companyMaterialStockAdmin.New();
+            CompanyMaterialStock companyMaterialStock=this.datMgr.CompanyMaterialStock.New();
             companyMaterialStock.CompanyMatId=companyMatId;
             companyMaterialStock.CompanyLocationId=companyLocationId;
             companyMaterialStock.Stock=stock;
             companyMaterialStock.Deleted=deleted;
-            int companyMaterialStockId = companyMaterialStockAdmin.Insert(companyMaterialStock);
+            int companyMaterialStockId = this.datMgr.CompanyMaterialStock.Insert(companyMaterialStock);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, companyMaterialStockId);
 
             int expected=prevCompanyMaterialStock.Count + 1;
 
-            ReadOnlyCollection<CompanyMaterialStock> postCompanyMaterialStock = companyMaterialStockAdmin.Items;
+            IReadOnlyCollection<CompanyMaterialStock> postCompanyMaterialStock = this.datMgr.CompanyMaterialStock.Items;
 
             //Validamos que se agrego stock de un material
             Assert.AreEqual(expected,postCompanyMaterialStock.Count);
@@ -52,33 +51,33 @@ namespace Tests
         public void UpdateTest()
         {
             //Agregamos un stock de un material 
-            ReadOnlyCollection<CompanyMaterialStock> prevCompanyMaterialStock = companyMaterialStockAdmin.Items;
+            IReadOnlyCollection<CompanyMaterialStock> prevCompanyMaterialStock = this.datMgr.CompanyMaterialStock.Items;
 
             int companyMatId = 2;
             int companyLocationId=1;
             int stock=100;
             bool deleted = false;
 
-            CompanyMaterialStock companyMaterialStock=companyMaterialStockAdmin.New();
+            CompanyMaterialStock companyMaterialStock=this.datMgr.CompanyMaterialStock.New();
             companyMaterialStock.CompanyMatId=companyMatId;
             companyMaterialStock.CompanyLocationId=companyLocationId;
             companyMaterialStock.Stock=stock;
             companyMaterialStock.Deleted=deleted;
-            int companyMaterialStockId = companyMaterialStockAdmin.Insert(companyMaterialStock);
+            int companyMaterialStockId = this.datMgr.CompanyMaterialStock.Insert(companyMaterialStock);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, companyMaterialStockId);
 
             int expected=prevCompanyMaterialStock.Count + 1;
 
-            ReadOnlyCollection<CompanyMaterialStock> postCompanyMaterialStock = companyMaterialStockAdmin.Items;
+            IReadOnlyCollection<CompanyMaterialStock> postCompanyMaterialStock = this.datMgr.CompanyMaterialStock.Items;
 
             //Validamos que se agrego stock de un material
             Assert.AreEqual(expected,postCompanyMaterialStock.Count);
             
             //Obtenemos el stock recien agregada, le cambiamos los campos y le damos a update
-            CompanyMaterialStock xToUpdate=companyMaterialStockAdmin.New();
-            xToUpdate=companyMaterialStockAdmin.GetById(companyMaterialStockId);
+            CompanyMaterialStock xToUpdate=this.datMgr.CompanyMaterialStock.New();
+            xToUpdate=this.datMgr.CompanyMaterialStock.GetById(companyMaterialStockId);
             
             //atributos nuevos
             companyMatId = 2;
@@ -91,9 +90,9 @@ namespace Tests
             xToUpdate.Stock=stock;
             xToUpdate.Deleted=deleted;
 
-            companyMaterialStockAdmin.Update(xToUpdate);
+            this.datMgr.CompanyMaterialStock.Update(xToUpdate);
 
-            CompanyMaterialStock xComp=companyMaterialStockAdmin.GetById(companyMaterialStockId);
+            CompanyMaterialStock xComp=this.datMgr.CompanyMaterialStock.GetById(companyMaterialStockId);
 
             Assert.AreEqual(xToUpdate.Id, xComp.Id);
             Assert.AreEqual(xToUpdate.CompanyMatId,xComp.CompanyMatId);
@@ -109,38 +108,38 @@ namespace Tests
         public void DeleteTest()
         {
             //Agregamos un stock de un material 
-            ReadOnlyCollection<CompanyMaterialStock> prevCompanyMaterialStock = companyMaterialStockAdmin.Items;
+            IReadOnlyCollection<CompanyMaterialStock> prevCompanyMaterialStock = this.datMgr.CompanyMaterialStock.Items;
 
             int companyMatId = 2;
             int companyLocationId=1;
             int stock=100;
             bool deleted = false;
 
-            CompanyMaterialStock companyMaterialStock=companyMaterialStockAdmin.New();
+            CompanyMaterialStock companyMaterialStock=this.datMgr.CompanyMaterialStock.New();
             companyMaterialStock.CompanyMatId=companyMatId;
             companyMaterialStock.CompanyLocationId=companyLocationId;
             companyMaterialStock.Stock=stock;
             companyMaterialStock.Deleted=deleted;
-            int companyMaterialStockId = companyMaterialStockAdmin.Insert(companyMaterialStock);
+            int companyMaterialStockId = this.datMgr.CompanyMaterialStock.Insert(companyMaterialStock);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, companyMaterialStockId);
 
             int expected=prevCompanyMaterialStock.Count + 1;
 
-            ReadOnlyCollection<CompanyMaterialStock> postCompanyMaterialStock = companyMaterialStockAdmin.Items;
+            IReadOnlyCollection<CompanyMaterialStock> postCompanyMaterialStock = this.datMgr.CompanyMaterialStock.Items;
 
             //Validamos que se agrego stock de un material
             Assert.AreEqual(expected,postCompanyMaterialStock.Count);
 
             //Hacemos el delete y luego validamos que al cantidad haya disminuido 1
-            ReadOnlyCollection<CompanyMaterialStock> beforeDelete=postCompanyMaterialStock;
+            IReadOnlyCollection<CompanyMaterialStock> beforeDelete=postCompanyMaterialStock;
 
             expected=postCompanyMaterialStock.Count - 1;
 
-            companyMaterialStockAdmin.Delete(companyMaterialStockId);
+            this.datMgr.CompanyMaterialStock.Delete(companyMaterialStockId);
 
-            ReadOnlyCollection<CompanyMaterialStock> afterDelete = companyMaterialStockAdmin.Items;
+            IReadOnlyCollection<CompanyMaterialStock> afterDelete = this.datMgr.CompanyMaterialStock.Items;
 
             //Comprobamos que se elimino el stock
             Assert.AreEqual(expected,afterDelete.Count);
@@ -153,32 +152,32 @@ namespace Tests
         public void GetByIdTest()
         {
             //Agregamos un stock de un material 
-            ReadOnlyCollection<CompanyMaterialStock> prevCompanyMaterialStock = companyMaterialStockAdmin.Items;
+            IReadOnlyCollection<CompanyMaterialStock> prevCompanyMaterialStock = this.datMgr.CompanyMaterialStock.Items;
 
             int companyMatId = 2;
             int companyLocationId=1;
             int stock=100;
             bool deleted = false;
 
-            CompanyMaterialStock companyMaterialStock=companyMaterialStockAdmin.New();
+            CompanyMaterialStock companyMaterialStock=this.datMgr.CompanyMaterialStock.New();
             companyMaterialStock.CompanyMatId=companyMatId;
             companyMaterialStock.CompanyLocationId=companyLocationId;
             companyMaterialStock.Stock=stock;
             companyMaterialStock.Deleted=deleted;
-            int companyMaterialStockId = companyMaterialStockAdmin.Insert(companyMaterialStock);
+            int companyMaterialStockId = this.datMgr.CompanyMaterialStock.Insert(companyMaterialStock);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, companyMaterialStockId);
 
             int expected=prevCompanyMaterialStock.Count + 1;
 
-            ReadOnlyCollection<CompanyMaterialStock> postCompanyMaterialStock = companyMaterialStockAdmin.Items;
+            IReadOnlyCollection<CompanyMaterialStock> postCompanyMaterialStock = this.datMgr.CompanyMaterialStock.Items;
 
             //Validamos que se agrego stock de un material
             Assert.AreEqual(expected,postCompanyMaterialStock.Count);
             
             //Obtenemos la categoria agregada con GetById y comparamos
-            CompanyMaterialStock xComp=companyMaterialStockAdmin.GetById(companyMaterialStockId);
+            CompanyMaterialStock xComp=this.datMgr.CompanyMaterialStock.GetById(companyMaterialStockId);
             
             Assert.AreEqual(companyMaterialStockId, xComp.Id);
             Assert.AreEqual(companyMaterialStock.CompanyMatId,xComp.CompanyMatId);
@@ -198,15 +197,15 @@ namespace Tests
             int companyLocationId=1;
             int stock=100;
 
-            CompanyMaterialStock companyMaterialStock=companyMaterialStockAdmin.New();
+            CompanyMaterialStock companyMaterialStock=this.datMgr.CompanyMaterialStock.New();
             companyMaterialStock.CompanyMatId=companyMatId;
             companyMaterialStock.CompanyLocationId=companyLocationId;
             companyMaterialStock.Stock=stock;
-            int companyMaterialStockId = companyMaterialStockAdmin.Insert(companyMaterialStock);
+            int companyMaterialStockId = this.datMgr.CompanyMaterialStock.Insert(companyMaterialStock);
 
             int expected=stock;
 
-            Assert.AreEqual(expected,companyMaterialStockAdmin.GetStockTotalForCompanyMaterial(20));
+            Assert.AreEqual(expected,this.datMgr.CompanyMaterialStock.GetStockTotalForCompanyMaterial(20));
         }
 
         /// <summary>
@@ -221,25 +220,25 @@ namespace Tests
             int companyLocationId=1;
             int stock=100;
 
-            CompanyMaterialStock companyMaterialStock=companyMaterialStockAdmin.New();
+            CompanyMaterialStock companyMaterialStock=this.datMgr.CompanyMaterialStock.New();
             companyMaterialStock.CompanyMatId=companyMatId;
             companyMaterialStock.CompanyLocationId=companyLocationId;
             companyMaterialStock.Stock=stock;
-            int companyMaterialStockId = companyMaterialStockAdmin.Insert(companyMaterialStock);
+            int companyMaterialStockId = this.datMgr.CompanyMaterialStock.Insert(companyMaterialStock);
 
             companyMatId = 21;
             companyLocationId=2;
             stock=200;
 
-            CompanyMaterialStock companyMaterialStock2=companyMaterialStockAdmin.New();
+            CompanyMaterialStock companyMaterialStock2=this.datMgr.CompanyMaterialStock.New();
             companyMaterialStock2.CompanyMatId=companyMatId;
             companyMaterialStock2.CompanyLocationId=companyLocationId;
             companyMaterialStock2.Stock=stock;
-            companyMaterialStockId = companyMaterialStockAdmin.Insert(companyMaterialStock);
+            companyMaterialStockId = this.datMgr.CompanyMaterialStock.Insert(companyMaterialStock);
 
             int expected=2;
 
-            Assert.AreEqual(expected,companyMaterialStockAdmin.GetLocationsWithStockForCompanyMaterial(21).Count);
+            Assert.AreEqual(expected,this.datMgr.CompanyMaterialStock.GetLocationsWithStockForCompanyMaterial(21).Count);
         }
 
         /// <summary>
@@ -254,25 +253,25 @@ namespace Tests
             int companyLocationId=3;
             int stock=100;
 
-            CompanyMaterialStock companyMaterialStock=companyMaterialStockAdmin.New();
+            CompanyMaterialStock companyMaterialStock=this.datMgr.CompanyMaterialStock.New();
             companyMaterialStock.CompanyMatId=companyMatId;
             companyMaterialStock.CompanyLocationId=companyLocationId;
             companyMaterialStock.Stock=stock;
-            int companyMaterialStockId = companyMaterialStockAdmin.Insert(companyMaterialStock);
+            int companyMaterialStockId = this.datMgr.CompanyMaterialStock.Insert(companyMaterialStock);
 
             companyMatId = 23;
             companyLocationId=3;
             stock=200;
 
-            CompanyMaterialStock companyMaterialStock2=companyMaterialStockAdmin.New();
+            CompanyMaterialStock companyMaterialStock2=this.datMgr.CompanyMaterialStock.New();
             companyMaterialStock2.CompanyMatId=companyMatId;
             companyMaterialStock2.CompanyLocationId=companyLocationId;
             companyMaterialStock2.Stock=stock;
-            companyMaterialStockId = companyMaterialStockAdmin.Insert(companyMaterialStock);
+            companyMaterialStockId = this.datMgr.CompanyMaterialStock.Insert(companyMaterialStock);
 
             int expected=2;
 
-            Assert.AreEqual(expected,companyMaterialStockAdmin.GetCompanyMaterialsInStockForLocation(3).Count);
+            Assert.AreEqual(expected,this.datMgr.CompanyMaterialStock.GetCompanyMaterialsInStockForLocation(3).Count);
         }
     }
 }

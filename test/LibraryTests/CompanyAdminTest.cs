@@ -1,8 +1,6 @@
-using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using ClassLibrary;
 using NUnit.Framework;
-
 
 namespace Tests
 {
@@ -11,29 +9,25 @@ namespace Tests
     /// </summary>
      public class CompanyAdminTest
     {
-        private CompanyAdmin companyAdmin = Singleton<CompanyAdmin>.Instance;
+        private DataManager datMgr = new DataManager();
 
         /// <summary>
         /// 
         /// </summary>
-        
-
-        
         [Test] 
         public void InsertTest()
         {
-            ReadOnlyCollection<Company> items = companyAdmin.Items;
-            
+            IReadOnlyCollection<Company> items = this.datMgr.Company.Items;
             
             string name="nombre compania";
             string trade ="rubro";
-            Company compania = companyAdmin.New();
+            Company compania = this.datMgr.Company.New();
             compania.Name = name;
             compania.Trade = trade;
-            int companyid = companyAdmin.Insert(compania);
+            int companyid = this.datMgr.Company.Insert(compania);
             Assert.AreNotEqual(0,companyid);
 
-            compania = companyAdmin.GetById(companyid);
+            compania = this.datMgr.Company.GetById(companyid);
             Assert.AreEqual(name,compania.Name);
             Assert.AreEqual(trade,compania.Trade);
 
@@ -45,16 +39,17 @@ namespace Tests
         [Test] 
         public void UpdateTest()
         {
-            Company compania = companyAdmin.New();
+            Company compania = this.datMgr.Company.New();
             compania.Name="pepito";
-            int idcompania = companyAdmin.Insert(compania);
-            Company compania2 = companyAdmin.New();
-            compania2=companyAdmin.GetByName("pepito");
+            compania.Trade="galletas";
+            int idcompania = this.datMgr.Company.Insert(compania);
+            Company compania2 = this.datMgr.Company.New();
+            compania2=this.datMgr.Company.GetByName("pepito");
             int id =compania2.Id;
             compania2.Trade="armas";
-            companyAdmin.Update(compania2);
+            this.datMgr.Company.Update(compania2);
             Company compania3 = new Company();
-            compania3=companyAdmin.GetById(id);
+            compania3=this.datMgr.Company.GetById(id);
             Assert.AreEqual("armas",compania3.Trade);
             Assert.AreNotEqual(0,idcompania);
             // no se que hacer en esta patyre si me falta algo
@@ -67,7 +62,7 @@ namespace Tests
         [Test] 
         public void NewTest()
         {
-            Company company =companyAdmin.New();
+            Company company =this.datMgr.Company.New();
             Assert.IsInstanceOf(typeof(Company),company);
         }
         /// <summary>
@@ -76,13 +71,13 @@ namespace Tests
         [Test] 
         public void GetByIdTest()
         {
-            Company company =companyAdmin.New();
+            Company company =this.datMgr.Company.New();
             company.Name="pepito";
             company.Trade="pepito";
-            companyAdmin.Insert(company);
-            Company company2 =companyAdmin.GetByName("pepito");
+            this.datMgr.Company.Insert(company);
+            Company company2 =this.datMgr.Company.GetByName("pepito");
             int id =company2.Id;
-            Company company3= companyAdmin.GetById(id);
+            Company company3= this.datMgr.Company.GetById(id);
             Assert.AreEqual(company2.Id,company3.Id);
             Assert.AreEqual(company2.Name,company3.Name);
             Assert.AreEqual(company2.Trade,company3.Trade);
@@ -95,17 +90,13 @@ namespace Tests
         {
             Company company =new Company();
             company.Name="pepito";
-            companyAdmin.Insert(company);
-            Company company2 =companyAdmin.GetByName("pepito");
+            company.Trade="galletas";
+            this.datMgr.Company.Insert(company);
+            Company company2 =this.datMgr.Company.GetByName("pepito");
             int id =company2.Id;
-            companyAdmin.Delete(id);
-            Company company3 =companyAdmin.GetById(id);
+            this.datMgr.Company.Delete(id);
+            Company company3 =this.datMgr.Company.GetById(id);
             Assert.IsNull(company3);
-            
-
-
         }
-
-
     }
 }

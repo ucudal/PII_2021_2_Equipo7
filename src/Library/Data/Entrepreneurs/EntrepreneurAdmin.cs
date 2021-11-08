@@ -1,16 +1,12 @@
-using System;
 using System.Collections.Generic;
-using System.Collections;
-using ClassLibrary;
-
-using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace ClassLibrary
 {
     /// <summary>
     /// Esta clase representa la administracion de Entrepreneur.
     /// </summary>
-    public class EntrepreneurAdmin: DataAdmin<Entrepreneur>
+    public sealed class EntrepreneurAdmin: DataAdmin<Entrepreneur>
     {
         /// <summary>
         /// encontramos un emprendedor por id de user 
@@ -19,8 +15,8 @@ namespace ClassLibrary
         /// <returns></returns>
         public Entrepreneur GetByUser(int id)
         {
-            ReadOnlyCollection<Entrepreneur> entrepreneurs = this.Items;
-            foreach (Entrepreneur item in this.Items)
+            IReadOnlyCollection<Entrepreneur> entrepreneurs = this.Items;
+            foreach (Entrepreneur item in entrepreneurs)
             {
                 if (item.UserId== id)
                 return item.Clone();
@@ -36,7 +32,7 @@ namespace ClassLibrary
         /// <returns></returns>
          public Entrepreneur GetByName(string name)
         {
-            ReadOnlyCollection<Entrepreneur> entrepreneurs = this.Items;
+            IReadOnlyCollection<Entrepreneur> entrepreneurs = this.Items;
             foreach (Entrepreneur comp in entrepreneurs)
             {
                 if (comp.Name == name)
@@ -46,6 +42,20 @@ namespace ClassLibrary
             }
             
             return null;
+        }
+
+        /// <inheritdoc/>
+        protected override void ValidateData(Entrepreneur item)
+        {
+            DataManager dataManager = new DataManager();
+            if(item.GeoReference is null || item.GeoReference.Length == 0)
+                throw new ValidationException("Requerida geo referencia.");
+            if(item.Name is null || item.Name.Length == 0) 
+                throw new ValidationException("Requerido nombre.");
+            if(item.Trade is null || item.Trade.Length == 0) 
+                throw new ValidationException("Requerido oficio del emprendedor.");
+            if(item.UserId == 0/* || !dataManager.User.Exists(item.UserId)*/) 
+                throw new ValidationException("Requerido id del usuario.");
         }
     }
 }

@@ -9,8 +9,6 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_CompanyPublicationActionMenu : ChatDialogHandlerBase
     {
-        private PublicationAdmin publicationAdmin = Singleton<PublicationAdmin>.Instance;
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyPublicationActionMenu"/>.
         /// </summary>
@@ -44,7 +42,7 @@ namespace ClassLibrary
             {
                 if (!selector.Code.StartsWith('\\'))
                 {
-                    Publication publication = publicationAdmin.GetById(int.Parse(selector.Code));
+                    Publication publication = this.datMgr.Publication.GetById(int.Parse(selector.Code));
                     if (publication is not null)
                     {
                         return true;

@@ -9,8 +9,6 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_CompanyMaterialModifiQuantityMenu : ChatDialogHandlerBase
     {
-        private CompanyMaterialAdmin companyMatAdmin = Singleton<CompanyMaterialAdmin>.Instance;
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyMaterialModifiQuantityMenu"/>.
         /// </summary>
@@ -29,7 +27,7 @@ namespace ClassLibrary
             session.Process = process;
             
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            CompanyMaterial companyMaterial = this.companyMatAdmin.New();
+            CompanyMaterial companyMaterial = this.datMgr.CompanyMaterial.New();
             companyMaterial.Name = selector.Code.Trim();
             data.CompanyMaterial = companyMaterial;
             

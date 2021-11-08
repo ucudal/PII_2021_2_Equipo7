@@ -1,5 +1,5 @@
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using ClassLibrary;
 using NUnit.Framework;
 
@@ -10,8 +10,7 @@ namespace Tests
     /// </summary>
     public class SaleAdminTest
     {
-        private SaleAdmin saleAdmin = Singleton<SaleAdmin>.Instance;
-
+        private DataManager datMgr = new DataManager();
 
         /// <summary>
         /// Testear que los valores se ingresan en la data.
@@ -19,9 +18,7 @@ namespace Tests
         [Test]
         public void InsertTest()
         {
-            ReadOnlyCollection<Sale> items = saleAdmin.Items;
-
-            Sale salePrueba = saleAdmin.New();
+            Sale salePrueba = this.datMgr.Sale.New();
 
             DateTime datetime = DateTime.Today;
             salePrueba.DateTime = datetime;
@@ -31,16 +28,30 @@ namespace Tests
 
             Currency currency = Currency.PesoUruguayo;
             salePrueba.Currency = currency;
+            
+            int compId = 119980;
+            int compMatId = 90567;
+            int entreId = 36540;
+            int quantity = 14;
 
-            int sale1 = saleAdmin.Insert(salePrueba);
+            salePrueba.SellerCompanyId = compId;
+            salePrueba.ProductCompanyMaterialId = compMatId;
+            salePrueba.BuyerEntrepreneurId = entreId;
+            salePrueba.ProductQuantity = quantity;
+
+            int sale1 = this.datMgr.Sale.Insert(salePrueba);
 
             Assert.AreNotEqual(0,sale1);
 
-            salePrueba = saleAdmin.GetById(sale1);
+            salePrueba = this.datMgr.Sale.GetById(sale1);
 
             Assert.AreEqual(datetime,salePrueba.DateTime);
             Assert.AreEqual(Price,salePrueba.Price);
             Assert.AreEqual(currency,salePrueba.Currency);
+            Assert.AreEqual(compId,salePrueba.SellerCompanyId);
+            Assert.AreEqual(compMatId,salePrueba.ProductCompanyMaterialId);
+            Assert.AreEqual(entreId,salePrueba.BuyerEntrepreneurId);
+            Assert.AreEqual(quantity,salePrueba.ProductQuantity);
         }
 
         /// <summary>
@@ -49,7 +60,7 @@ namespace Tests
         [Test]
         public void NewTest()
         {
-            Sale saleprueba =saleAdmin.New();
+            Sale saleprueba =this.datMgr.Sale.New();
             Assert.IsInstanceOf(typeof(Sale),saleprueba);
         }
 
@@ -59,25 +70,25 @@ namespace Tests
         [Test]
         public void DeleteTest()
         {
-            Sale saleprueba2 =saleAdmin.New();
+            Sale saleprueba2 =this.datMgr.Sale.New();
             saleprueba2.DateTime=DateTime.Today;
             saleprueba2.Price=100;
             saleprueba2.Currency= Currency.DolarEstadounidense;
 
-            saleAdmin.Insert(saleprueba2);
+            this.datMgr.Sale.Insert(saleprueba2);
 
             int NewId =saleprueba2.Id;
-            saleAdmin.Delete(NewId);
-            Assert.IsNull(saleAdmin.GetById(NewId));
+            this.datMgr.Sale.Delete(NewId);
+            Assert.IsNull(this.datMgr.Sale.GetById(NewId));
         }
 
         /// <summary>
-        /// Comprobar que funciona el update del DataAdmin.
+        /// Comprobar que funciona el update del this.datMgr.Data.
         /// </summary>
         [Test]
         public void UpdateTest()
         {
-            Sale salePrueba = saleAdmin.New();
+            Sale salePrueba = this.datMgr.Sale.New();
 
             DateTime datetime = DateTime.Today;
             salePrueba.DateTime = datetime;
@@ -87,24 +98,37 @@ namespace Tests
 
             Currency currency = Currency.PesoUruguayo;
             salePrueba.Currency = currency;
+            
+            int compId = 119981;
+            int compMatId = 56568;
+            int entreId = 36541;
+            int quantity = 14;
 
-            int sale1 = saleAdmin.Insert(salePrueba);
+            salePrueba.SellerCompanyId = compId;
+            salePrueba.ProductCompanyMaterialId = compMatId;
+            salePrueba.BuyerEntrepreneurId = entreId;
+            salePrueba.ProductQuantity = quantity;
+
+            int sale1 = this.datMgr.Sale.Insert(salePrueba);
 
             Assert.AreNotEqual(0,sale1);
 
-            Sale Sale2 = saleAdmin.GetById(sale1);
+            Sale Sale2 = this.datMgr.Sale.GetById(sale1);
 
             Sale2.DateTime = DateTime.Today.AddMonths(2);
             Sale2.Price = 230;
             Sale2.Currency = Currency.DolarEstadounidense;
-            saleAdmin.Update(Sale2);
+            this.datMgr.Sale.Update(Sale2);
 
-            Sale Sale3 = saleAdmin.GetById(sale1);
+            Sale Sale3 = this.datMgr.Sale.GetById(sale1);
 
-            Assert.AreEqual(Sale2.DateTime,Sale3.DateTime);
-            Assert.AreEqual(Sale2.Currency,Sale3.Currency);
-            Assert.AreEqual(Sale2.Price,Sale3.Price);
-            Assert.AreEqual(Sale2.Id,Sale3.Id);
+            Assert.AreNotEqual(salePrueba.DateTime,Sale3.DateTime);
+            Assert.AreNotEqual(salePrueba.Currency,Sale3.Currency);
+            Assert.AreNotEqual(salePrueba.Price,Sale3.Price);
+            Assert.AreEqual(salePrueba.BuyerEntrepreneurId,Sale3.BuyerEntrepreneurId);
+            Assert.AreEqual(salePrueba.SellerCompanyId,Sale3.SellerCompanyId);
+            Assert.AreEqual(salePrueba.ProductQuantity,Sale3.ProductQuantity);
+            Assert.AreEqual(salePrueba.ProductCompanyMaterialId,Sale3.ProductCompanyMaterialId);
 
 
         }
@@ -117,7 +141,7 @@ namespace Tests
         public void GetSalesBySellerTest()
         {
 
-            Sale sale1 = saleAdmin.New();
+            Sale sale1 = this.datMgr.Sale.New();
 
             DateTime datetime = DateTime.Today;
             sale1.DateTime = datetime;
@@ -131,8 +155,16 @@ namespace Tests
             int sellerCompanyId = 2;
             sale1.SellerCompanyId = sellerCompanyId;
 
+            int compMatId = 91170;
+            sale1.ProductCompanyMaterialId = compMatId;
 
-            Sale sale2 = saleAdmin.New();
+            int entreId = 908977;
+            sale1.BuyerEntrepreneurId = entreId;
+
+            sale1.ProductQuantity = 1;
+
+
+            Sale sale2 = this.datMgr.Sale.New();
 
             DateTime datetime2 = DateTime.Today;
             sale2.DateTime = datetime2;
@@ -145,8 +177,14 @@ namespace Tests
 
             sale2.SellerCompanyId = sellerCompanyId;
 
+            sale2.ProductCompanyMaterialId = compMatId;
 
-            Sale sale3 = saleAdmin.New();
+            sale2.BuyerEntrepreneurId = entreId;
+
+            sale2.ProductQuantity = 1;
+
+
+            Sale sale3 = this.datMgr.Sale.New();
 
             DateTime datetime3 = DateTime.Today;
             sale3.DateTime = datetime3;
@@ -159,13 +197,19 @@ namespace Tests
 
             sale3.SellerCompanyId = sellerCompanyId;
 
-            saleAdmin.Insert(sale1);
-            saleAdmin.Insert(sale2);
-            saleAdmin.Insert(sale3);
+            sale3.ProductCompanyMaterialId = compMatId;
+
+            sale3.BuyerEntrepreneurId = entreId;
+
+            sale3.ProductQuantity = 1;
+
+            this.datMgr.Sale.Insert(sale1);
+            this.datMgr.Sale.Insert(sale2);
+            this.datMgr.Sale.Insert(sale3);
 
             int Cventa = 3;
 
-            ReadOnlyCollection<int> lista = saleAdmin.GetSalesBySeller(sellerCompanyId);
+            IReadOnlyCollection<int> lista = this.datMgr.Sale.GetSalesBySeller(sellerCompanyId);
 
             Assert.AreEqual(Cventa,lista.Count);
             
@@ -177,7 +221,7 @@ namespace Tests
         [Test]
         public void GetSalesByBuyerTest()
         {
-            Sale sale1 = saleAdmin.New();
+            Sale sale1 = this.datMgr.Sale.New();
 
             DateTime datetime = DateTime.Today;
             sale1.DateTime = datetime;
@@ -190,7 +234,15 @@ namespace Tests
 
             sale1.BuyerEntrepreneurId = 2;
 
-            Sale sale2 = saleAdmin.New();
+            int compMatId = 911230;
+            sale1.ProductCompanyMaterialId = compMatId;
+
+            int compId = 908978;
+            sale1.SellerCompanyId = compId;
+
+            sale1.ProductQuantity = 1;
+
+            Sale sale2 = this.datMgr.Sale.New();
 
             DateTime datetime2 = DateTime.Today;
             sale2.DateTime = datetime2;
@@ -203,7 +255,13 @@ namespace Tests
 
             sale2.BuyerEntrepreneurId = 2;
 
-            Sale sale3 = saleAdmin.New();
+            sale2.ProductCompanyMaterialId = compMatId;
+
+            sale2.SellerCompanyId = compId;
+
+            sale2.ProductQuantity = 1;
+
+            Sale sale3 = this.datMgr.Sale.New();
 
             DateTime datetime3 = DateTime.Today;
             sale3.DateTime = datetime3;
@@ -216,13 +274,19 @@ namespace Tests
 
             sale3.BuyerEntrepreneurId = 2;
 
-            saleAdmin.Insert(sale1);
-            saleAdmin.Insert(sale2);
-            saleAdmin.Insert(sale3);
+            sale3.ProductCompanyMaterialId = compMatId;
+
+            sale3.SellerCompanyId = compId;
+
+            sale3.ProductQuantity = 1;
+
+            this.datMgr.Sale.Insert(sale1);
+            this.datMgr.Sale.Insert(sale2);
+            this.datMgr.Sale.Insert(sale3);
 
             int Cventa = 3;
 
-            ReadOnlyCollection<int> lista = saleAdmin.GetSalesByBuyer(2);
+            IReadOnlyCollection<int> lista = this.datMgr.Sale.GetSalesByBuyer(2);
 
             Assert.AreEqual(Cventa,lista.Count);
 

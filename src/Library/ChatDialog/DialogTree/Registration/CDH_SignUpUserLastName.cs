@@ -9,8 +9,6 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_SignUpUserLastName : ChatDialogHandlerBase
     {
-        private UserAdmin userAdmin = Singleton<UserAdmin>.Instance;
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpUserLastName"/>.
         /// </summary>
@@ -28,7 +26,7 @@ namespace ClassLibrary
             DProcessData process = session.Process;
             SignUpData data = process.GetData<SignUpData>();
 
-            User user = this.userAdmin.New();
+            User user = this.datMgr.User.New();
             user.FirstName = selector.Code.Trim();
             data.User = user;
 

@@ -6,6 +6,8 @@ namespace ClassLibrary
     /// </summary>
     public enum RegistrationType
     {
+        ///<summary>No definido.</summary>
+        Undefined,
         ///<summary>Registro de un nuevo emprendedor.</summary>
         EntrepreneurNew,
         ///<summary>Registro de una nueva empresa.</summary>

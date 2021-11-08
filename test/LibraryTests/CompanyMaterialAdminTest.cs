@@ -1,5 +1,5 @@
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using ClassLibrary;
 using NUnit.Framework;
 
@@ -11,7 +11,7 @@ namespace Tests
     [TestFixture]
     public class CompanyMaterialAdminTest
     {
-        private CompanyMaterialAdmin companyMaterialAdmin = Singleton<CompanyMaterialAdmin>.Instance;
+        private DataManager datMgr = new DataManager();
 
         /// <summary>
         /// Test del metodo Insert(CompanyMaterial pElemento).
@@ -20,7 +20,7 @@ namespace Tests
         public void InsertTest()
         {
             //Agregamos una material 
-            ReadOnlyCollection<CompanyMaterial> prevCompanyMaterial = companyMaterialAdmin.Items;
+            IReadOnlyCollection<CompanyMaterial> prevCompanyMaterial = this.datMgr.CompanyMaterial.Items;
 
             string name = "Madera";
             DateTime lastRestock=DateTime.Now.AddMonths(-1);
@@ -29,21 +29,21 @@ namespace Tests
             int companyId=2;
             bool deleted = false;
 
-            CompanyMaterial companyMaterial=companyMaterialAdmin.New();
+            CompanyMaterial companyMaterial=this.datMgr.CompanyMaterial.New();
             companyMaterial.Name=name;
             companyMaterial.LastRestock=lastRestock;
             companyMaterial.DateBetweenRestocks=dateBetweenRestocks;
             companyMaterial.MaterialCategoryId=materialCategoryId;
             companyMaterial.CompanyId=companyId;
             companyMaterial.Deleted=deleted;
-            int companyMaterialId = companyMaterialAdmin.Insert(companyMaterial);
+            int companyMaterialId = this.datMgr.CompanyMaterial.Insert(companyMaterial);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, companyMaterialId);
 
             int expected=prevCompanyMaterial.Count + 1;
 
-            ReadOnlyCollection<CompanyMaterial> postCompanyMaterial = companyMaterialAdmin.Items;
+            IReadOnlyCollection<CompanyMaterial> postCompanyMaterial = this.datMgr.CompanyMaterial.Items;
 
             //Validamos que se agrego un material
             Assert.AreEqual(expected,postCompanyMaterial.Count);
@@ -56,7 +56,7 @@ namespace Tests
         public void UpdateTest()
         {
             //Agregamos una material 
-            ReadOnlyCollection<CompanyMaterial> prevCompanyMaterial = companyMaterialAdmin.Items;
+            IReadOnlyCollection<CompanyMaterial> prevCompanyMaterial = this.datMgr.CompanyMaterial.Items;
 
             string name = "Madera";
             DateTime lastRestock=DateTime.Now.AddMonths(-1);
@@ -65,28 +65,28 @@ namespace Tests
             int companyId=2;
             bool deleted = false;
 
-            CompanyMaterial companyMaterial=companyMaterialAdmin.New();
+            CompanyMaterial companyMaterial=this.datMgr.CompanyMaterial.New();
             companyMaterial.Name=name;
             companyMaterial.LastRestock=lastRestock;
             companyMaterial.DateBetweenRestocks=dateBetweenRestocks;
             companyMaterial.MaterialCategoryId=materialCategoryId;
             companyMaterial.CompanyId=companyId;
             companyMaterial.Deleted=deleted;
-            int companyMaterialId = companyMaterialAdmin.Insert(companyMaterial);
+            int companyMaterialId = this.datMgr.CompanyMaterial.Insert(companyMaterial);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, companyMaterialId);
 
             int expected=prevCompanyMaterial.Count + 1;
 
-            ReadOnlyCollection<CompanyMaterial> postCompanyMaterial = companyMaterialAdmin.Items;
+            IReadOnlyCollection<CompanyMaterial> postCompanyMaterial = this.datMgr.CompanyMaterial.Items;
 
             //Validamos que se agrego un material
             Assert.AreEqual(expected,postCompanyMaterial.Count);
             
             //Obtenemos el material recien agregada, le cambiamos los campos y le damos a update
-            CompanyMaterial xToUpdate=companyMaterialAdmin.New();
-            xToUpdate=companyMaterialAdmin.GetById(companyMaterialId);
+            CompanyMaterial xToUpdate=this.datMgr.CompanyMaterial.New();
+            xToUpdate=this.datMgr.CompanyMaterial.GetById(companyMaterialId);
             
             //atributos nuevos
             name = "plastico";
@@ -103,9 +103,9 @@ namespace Tests
             xToUpdate.CompanyId=companyId;
             xToUpdate.Deleted=deleted;
 
-            companyMaterialAdmin.Update(xToUpdate);
+            this.datMgr.CompanyMaterial.Update(xToUpdate);
 
-            CompanyMaterial xComp=companyMaterialAdmin.GetById(companyMaterialId);
+            CompanyMaterial xComp=this.datMgr.CompanyMaterial.GetById(companyMaterialId);
 
             Assert.AreEqual(xToUpdate.Id, xComp.Id);
             Assert.AreEqual(xToUpdate.Name,xComp.Name);
@@ -122,7 +122,7 @@ namespace Tests
         public void DeleteTest()
         {
             //Agregamos una material 
-            ReadOnlyCollection<CompanyMaterial> prevCompanyMaterial = companyMaterialAdmin.Items;
+            IReadOnlyCollection<CompanyMaterial> prevCompanyMaterial = this.datMgr.CompanyMaterial.Items;
 
             string name = "Madera";
             DateTime lastRestock=DateTime.Now.AddMonths(-1);
@@ -131,33 +131,33 @@ namespace Tests
             int companyId=2;
             bool deleted = false;
 
-            CompanyMaterial companyMaterial=companyMaterialAdmin.New();
+            CompanyMaterial companyMaterial=this.datMgr.CompanyMaterial.New();
             companyMaterial.Name=name;
             companyMaterial.LastRestock=lastRestock;
             companyMaterial.DateBetweenRestocks=dateBetweenRestocks;
             companyMaterial.MaterialCategoryId=materialCategoryId;
             companyMaterial.CompanyId=companyId;
             companyMaterial.Deleted=deleted;
-            int companyMaterialId = companyMaterialAdmin.Insert(companyMaterial);
+            int companyMaterialId = this.datMgr.CompanyMaterial.Insert(companyMaterial);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, companyMaterialId);
 
             int expected=prevCompanyMaterial.Count + 1;
 
-            ReadOnlyCollection<CompanyMaterial> postCompanyMaterial = companyMaterialAdmin.Items;
+            IReadOnlyCollection<CompanyMaterial> postCompanyMaterial = this.datMgr.CompanyMaterial.Items;
 
             //Validamos que se agrego un material
             Assert.AreEqual(expected,postCompanyMaterial.Count);
 
             //Hacemos el delete y luego validamos que al cantidad haya disminuido 1
-            ReadOnlyCollection<CompanyMaterial> beforeDelete=postCompanyMaterial;
+            IReadOnlyCollection<CompanyMaterial> beforeDelete=postCompanyMaterial;
 
             expected=postCompanyMaterial.Count - 1;
 
-            companyMaterialAdmin.Delete(companyMaterialId);
+            this.datMgr.CompanyMaterial.Delete(companyMaterialId);
 
-            ReadOnlyCollection<CompanyMaterial> afterDelete = companyMaterialAdmin.Items;
+            IReadOnlyCollection<CompanyMaterial> afterDelete = this.datMgr.CompanyMaterial.Items;
 
             //Comprobamos que se elimino un material
             Assert.AreEqual(expected,afterDelete.Count);
@@ -170,7 +170,7 @@ namespace Tests
         public void GetByIdTest()
         {
              //Agregamos una material 
-            ReadOnlyCollection<CompanyMaterial> prevCompanyMaterial = companyMaterialAdmin.Items;
+            IReadOnlyCollection<CompanyMaterial> prevCompanyMaterial = this.datMgr.CompanyMaterial.Items;
 
             string name = "Madera";
             DateTime lastRestock=DateTime.Now.AddMonths(-1);
@@ -179,27 +179,27 @@ namespace Tests
             int companyId=2;
             bool deleted = false;
 
-            CompanyMaterial companyMaterial=companyMaterialAdmin.New();
+            CompanyMaterial companyMaterial=this.datMgr.CompanyMaterial.New();
             companyMaterial.Name=name;
             companyMaterial.LastRestock=lastRestock;
             companyMaterial.DateBetweenRestocks=dateBetweenRestocks;
             companyMaterial.MaterialCategoryId=materialCategoryId;
             companyMaterial.CompanyId=companyId;
             companyMaterial.Deleted=deleted;
-            int companyMaterialId = companyMaterialAdmin.Insert(companyMaterial);
+            int companyMaterialId = this.datMgr.CompanyMaterial.Insert(companyMaterial);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, companyMaterialId);
 
             int expected=prevCompanyMaterial.Count + 1;
 
-            ReadOnlyCollection<CompanyMaterial> postCompanyMaterial = companyMaterialAdmin.Items;
+            IReadOnlyCollection<CompanyMaterial> postCompanyMaterial = this.datMgr.CompanyMaterial.Items;
 
             //Validamos que se agrego un material
             Assert.AreEqual(expected,postCompanyMaterial.Count);
             
             //Obtenemos la categoria agregada con GetById y comparamos
-            CompanyMaterial xComp=companyMaterialAdmin.GetById(companyMaterialId);
+            CompanyMaterial xComp=this.datMgr.CompanyMaterial.GetById(companyMaterialId);
             
             Assert.AreEqual(companyMaterialId, xComp.Id);
             Assert.AreEqual(companyMaterial.Name,xComp.Name);
@@ -217,21 +217,27 @@ namespace Tests
         { 
 
 
-            CompanyMaterial company1= companyMaterialAdmin.New();
+            CompanyMaterial company1= this.datMgr.CompanyMaterial.New();
             company1.CompanyId=11;
-            CompanyMaterial company2= companyMaterialAdmin.New();
+            company1.MaterialCategoryId=197;
+            company1.Name = "Pedro";
+            CompanyMaterial company2= this.datMgr.CompanyMaterial.New();
             company2.CompanyId=11;
-            CompanyMaterial company3= companyMaterialAdmin.New();
+            company2.MaterialCategoryId=197;
+            company2.Name = "Pedro";
+            CompanyMaterial company3= this.datMgr.CompanyMaterial.New();
             company3.CompanyId=11;
+            company3.MaterialCategoryId=197;
+            company3.Name = "Pedro";
 
-            companyMaterialAdmin.Insert(company1);
-            companyMaterialAdmin.Insert(company2);   
-            companyMaterialAdmin.Insert(company3);
+            this.datMgr.CompanyMaterial.Insert(company1);
+            this.datMgr.CompanyMaterial.Insert(company2);   
+            this.datMgr.CompanyMaterial.Insert(company3);
 
 
 
 
-            ReadOnlyCollection<int> lista = companyMaterialAdmin.GetCompanyMaterialsInCompany(11); 
+            IReadOnlyCollection<int> lista = this.datMgr.CompanyMaterial.GetCompanyMaterialsInCompany(11); 
             Assert.AreEqual(lista.Count,3);            
         }
         /// <summary>
@@ -240,25 +246,28 @@ namespace Tests
         [Test]
         public void GetCompanyMaterialsInCompanyForCategoryTest()
         { 
-            CompanyMaterial company1= companyMaterialAdmin.New();
-            company1.CompanyId=1;
-            company1.MaterialCategoryId=1;
-            CompanyMaterial company2= companyMaterialAdmin.New();
-            company2.CompanyId=1;
-            company2.MaterialCategoryId=1;
-            CompanyMaterial company3= companyMaterialAdmin.New();
-            company3.CompanyId=1;
-            company3.MaterialCategoryId=1;
+            CompanyMaterial company1= this.datMgr.CompanyMaterial.New();
+            company1.CompanyId=8467;
+            company1.MaterialCategoryId=197;
+            company1.Name = "Juan";
+            CompanyMaterial company2= this.datMgr.CompanyMaterial.New();
+            company2.CompanyId=8467;
+            company2.MaterialCategoryId=197;
+            company2.Name = "Lucas";
+            CompanyMaterial company3= this.datMgr.CompanyMaterial.New();
+            company3.CompanyId=8467;
+            company3.MaterialCategoryId=197;
+            company3.Name = "Pedro";
 
-            companyMaterialAdmin.Insert(company1);
-            companyMaterialAdmin.Insert(company2);   
-            companyMaterialAdmin.Insert(company3);
+            this.datMgr.CompanyMaterial.Insert(company1);
+            this.datMgr.CompanyMaterial.Insert(company2);   
+            this.datMgr.CompanyMaterial.Insert(company3);
 
 
 
 
-            ReadOnlyCollection<int> lista = companyMaterialAdmin.GetCompanyMaterialsInCompanyForCategory(1,1); 
-            Assert.AreEqual(lista.Count,3);            
+            IReadOnlyCollection<int> lista = this.datMgr.CompanyMaterial.GetCompanyMaterialsInCompanyForCategory(8467,197); 
+            Assert.AreEqual(3, lista.Count);            
         }
 
 
