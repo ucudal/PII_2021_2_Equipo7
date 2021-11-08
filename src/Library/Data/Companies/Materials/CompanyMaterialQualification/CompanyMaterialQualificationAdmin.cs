@@ -1,14 +1,13 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
-
 
 namespace ClassLibrary
 {
     /// <summary>
     /// Clase administradora de habilitaciones para un material de empresa.
     /// </summary>
-    public class CompanyMaterialQualificationAdmin : DataAdmin<CompanyMaterialQualification>
+    public sealed class CompanyMaterialQualificationAdmin : DataAdmin<CompanyMaterialQualification>
     {
         /// <summary>
         /// Obtiene la lista de habilitaciones para un material de empresa por su id.
@@ -18,10 +17,10 @@ namespace ClassLibrary
         /// <returns>
         /// Listado de Ids para cada habilitacion asociada al material de empresa.
         /// </returns>
-        public ReadOnlyCollection<int> GetQualificationsForCompanyMaterial(int companyMaterialId)
+        public IReadOnlyCollection<int> GetQualificationsForCompanyMaterial(int companyMaterialId)
         {
             List<int> resultList = new List<int>();
-            ReadOnlyCollection<CompanyMaterialQualification> qualifications = this.Items;
+            IReadOnlyCollection<CompanyMaterialQualification> qualifications = this.Items;
             foreach (CompanyMaterialQualification qualification in qualifications)
             {
                 if (qualification.CompanyMatId == companyMaterialId)
@@ -44,10 +43,10 @@ namespace ClassLibrary
         /// <returns>
         /// Listado de Ids para cada habilitacion asociada al material de empresa.
         /// </returns>
-        public ReadOnlyCollection<int> GetQualificationsForCompanyMaterial(int companyMaterialId, int itemCount, int page)
+        public IReadOnlyCollection<int> GetQualificationsForCompanyMaterial(int companyMaterialId, int itemCount, int page)
         {
             List<CompanyMaterialQualification> resultList = new List<CompanyMaterialQualification>();
-            ReadOnlyCollection<CompanyMaterialQualification> qualifications = this.Items;
+            IReadOnlyCollection<CompanyMaterialQualification> qualifications = this.Items;
             foreach (CompanyMaterialQualification qualification in qualifications)
             {
                 if (qualification.CompanyMatId == companyMaterialId)
@@ -71,7 +70,7 @@ namespace ClassLibrary
         /// </returns>
         public bool GetCompanyMaterialHasQualification(int companyMatId, int qualificationId)
         {
-            ReadOnlyCollection<CompanyMaterialQualification> qualifications = this.Items;
+            IReadOnlyCollection<CompanyMaterialQualification> qualifications = this.Items;
             foreach (CompanyMaterialQualification qualification in qualifications)
             {
                 if (qualification.CompanyMatId == companyMatId && qualification.QualificationId == qualificationId)
@@ -81,6 +80,16 @@ namespace ClassLibrary
             }
 
             return false;
+        }
+
+        /// <inheritdoc/>
+        protected override void ValidateData(CompanyMaterialQualification item)
+        {
+            DataManager dataManager = new DataManager();
+            if(item.CompanyMatId == 0/* || !dataManager.CompanyMaterial.Exists(item.CompanyMatId)*/) 
+                throw new ValidationException("Requerido material de la empresa.");
+            if(item.QualificationId == 0/* || !dataManager.Qualification.Exists(item.QualificationId)*/) 
+                throw new ValidationException("Requerida habilitacion.");
         }
     }
 }

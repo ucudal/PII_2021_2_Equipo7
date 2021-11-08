@@ -1,5 +1,4 @@
-using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using ClassLibrary;
 using NUnit.Framework;
 
@@ -11,7 +10,7 @@ namespace Tests
     [TestFixture]
     public class AccountAdminTest
     {
-        private AccountAdmin accountAdmin = Singleton<AccountAdmin>.Instance;
+        private DataManager datMgr = new DataManager();
 
         /// <summary>
         /// Test del metodo Insert(Account pElemento).
@@ -20,27 +19,27 @@ namespace Tests
         public void InsertTest()
         {
             //Agregamos una cuenta 
-            ReadOnlyCollection<Account> prevAccount = accountAdmin.Items;
+            IReadOnlyCollection<Account> prevAccount = this.datMgr.Account.Items;
 
             int userId = 1;
-            MessagingService service =new MessagingService();
+            MessagingService service = MessagingService.Console;
             string codeInService = "Code";
             bool deleted = false;
 
-            Account account=accountAdmin.New();
+            Account account=this.datMgr.Account.New();
             account.UserId=userId;
             account.Service=service;
             account.CodeInService=codeInService;
             account.Deleted=deleted;
 
-            int accountId=accountAdmin.Insert(account);
+            int accountId=this.datMgr.Account.Insert(account);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, accountId);
 
             int expected=prevAccount.Count + 1;
 
-            ReadOnlyCollection<Account> postAccount = accountAdmin.Items;
+            IReadOnlyCollection<Account> postAccount = this.datMgr.Account.Items;
 
             //Validamos que se agrego una Cuenta
             Assert.AreEqual(expected,postAccount.Count);
@@ -53,37 +52,37 @@ namespace Tests
         public void UpdateTest()
         {
             //Agregamos una cuenta 
-            ReadOnlyCollection<Account> prevAccount = accountAdmin.Items;
+            IReadOnlyCollection<Account> prevAccount = this.datMgr.Account.Items;
 
             int userId = 1;
-            MessagingService service =new MessagingService();
+            MessagingService service = MessagingService.Console;
             string codeInService = "Code";
             bool deleted = false;
 
-            Account account=accountAdmin.New();
+            Account account=this.datMgr.Account.New();
             account.UserId=userId;
             account.Service=service;
             account.CodeInService=codeInService;
             account.Deleted=deleted;
 
-            int accountId=accountAdmin.Insert(account);
+            int accountId=this.datMgr.Account.Insert(account);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, userId);
 
             int expected=prevAccount.Count + 1;
 
-            ReadOnlyCollection<Account> postAccount = accountAdmin.Items;
+            IReadOnlyCollection<Account> postAccount = this.datMgr.Account.Items;
 
             //Validamos que se agrego una Cuenta
             Assert.AreEqual(expected,postAccount.Count);
             
             //Obtenemos la invitacion recien agregada, le cambiamos los campos y le damos a update
-            Account xToUpdate=accountAdmin.GetById(accountId);
+            Account xToUpdate=this.datMgr.Account.GetById(accountId);
 
             //atributos nuevos
             userId = 2;
-            service =new MessagingService();
+            service = MessagingService.Console;
             codeInService = "Code2";
             deleted = false;
 
@@ -92,9 +91,9 @@ namespace Tests
             xToUpdate.CodeInService=codeInService;
             xToUpdate.Deleted=deleted;
 
-            accountAdmin.Update(xToUpdate);
+            this.datMgr.Account.Update(xToUpdate);
 
-            Account xComp=accountAdmin.GetById(accountId);
+            Account xComp=this.datMgr.Account.GetById(accountId);
 
             Assert.AreEqual(xToUpdate.Id, xComp.Id);
             Assert.AreEqual(xToUpdate.UserId,xComp.UserId);
@@ -109,27 +108,27 @@ namespace Tests
         public void DeleteTest()
         {
             //Agregamos una cuenta 
-            ReadOnlyCollection<Account> prevAccount = accountAdmin.Items;
+            IReadOnlyCollection<Account> prevAccount = this.datMgr.Account.Items;
 
             int userId = 1;
-            MessagingService service =new MessagingService();
+            MessagingService service = MessagingService.Console;
             string codeInService = "Code";
             bool deleted = false;
 
-            Account account=accountAdmin.New();
+            Account account=this.datMgr.Account.New();
             account.UserId=userId;
             account.Service=service;
             account.CodeInService=codeInService;
             account.Deleted=deleted;
 
-            int accountId=accountAdmin.Insert(account);
+            int accountId=this.datMgr.Account.Insert(account);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, accountId);
 
             int expected=prevAccount.Count + 1;
 
-            ReadOnlyCollection<Account> postAccount = accountAdmin.Items;
+            IReadOnlyCollection<Account> postAccount = this.datMgr.Account.Items;
 
             //Validamos que se agrego una Cuenta
             Assert.AreEqual(expected,postAccount.Count);
@@ -138,9 +137,9 @@ namespace Tests
 
             expected=prevAccount.Count;
 
-            accountAdmin.Delete(accountId);
+            this.datMgr.Account.Delete(accountId);
 
-            ReadOnlyCollection<Account> afterDelete = accountAdmin.Items;
+            IReadOnlyCollection<Account> afterDelete = this.datMgr.Account.Items;
 
             //Comprobamos que se elimino un usuario
             Assert.AreEqual(expected,afterDelete.Count);
@@ -153,33 +152,33 @@ namespace Tests
         public void GetByIdTest()
         {
             //Agregamos una cuenta 
-            ReadOnlyCollection<Account> prevAccount = accountAdmin.Items;
+            IReadOnlyCollection<Account> prevAccount = this.datMgr.Account.Items;
 
             int userId = 1;
-            MessagingService service =new MessagingService();
+            MessagingService service = MessagingService.Console;
             string codeInService = "Code";
             bool deleted = false;
 
-            Account account=accountAdmin.New();
+            Account account=this.datMgr.Account.New();
             account.UserId=userId;
             account.Service=service;
             account.CodeInService=codeInService;
             account.Deleted=deleted;
 
-            int accountId=accountAdmin.Insert(account);
+            int accountId=this.datMgr.Account.Insert(account);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, accountId);
 
             int expected=prevAccount.Count + 1;
 
-            ReadOnlyCollection<Account> postAccount = accountAdmin.Items;
+            IReadOnlyCollection<Account> postAccount = this.datMgr.Account.Items;
 
             //Validamos que se agrego una Cuenta
             Assert.AreEqual(expected,postAccount.Count);
             
             //Obtenemos el usuario agregada con GetById y comparamos
-            Account xComp=accountAdmin.GetById(accountId);
+            Account xComp=this.datMgr.Account.GetById(accountId);
             
             Assert.AreEqual(accountId, xComp.Id);
             Assert.AreEqual(account.CodeInService,xComp.CodeInService);
@@ -194,30 +193,30 @@ namespace Tests
         public void GetUserIdForAccountTest()
         {
             //Agregamos una cuenta 
-            ReadOnlyCollection<Account> prevAccount = accountAdmin.Items;
+            IReadOnlyCollection<Account> prevAccount = this.datMgr.Account.Items;
 
             int userId = 1;
             MessagingService service=MessagingService.Console;
             string codeInService = "Code";
 
-            Account account=accountAdmin.New();
+            Account account=this.datMgr.Account.New();
             account.UserId=userId;
             account.Service=service;
             account.CodeInService=codeInService;
 
-            int accountId=accountAdmin.Insert(account);
+            int accountId=this.datMgr.Account.Insert(account);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, accountId);
 
             int expected=prevAccount.Count + 1;
 
-            ReadOnlyCollection<Account> postAccount = accountAdmin.Items;
+            IReadOnlyCollection<Account> postAccount = this.datMgr.Account.Items;
 
             //Validamos que se agrego una Cuenta
             Assert.AreEqual(expected,postAccount.Count);
             
-            int userGetId=accountAdmin.GetUserIdForAccount(service,codeInService);
+            int userGetId=this.datMgr.Account.GetUserIdForAccount(service,codeInService);
 
             Assert.AreEqual(account.UserId,userGetId);
             

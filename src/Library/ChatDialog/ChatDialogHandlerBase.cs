@@ -36,6 +36,12 @@ namespace ClassLibrary
         protected SessionsContainer sessions = Singleton<SessionsContainer>.Instance;
 
         /// <summary>
+        /// Acceso a los administradores de datos
+        /// persistentes.
+        /// </summary>
+        protected DataManager datMgr = new DataManager();
+
+        /// <summary>
         /// Constructor que actua de intermediario entre la el paso
         /// concreto y <see cref="CorHandler{T,K}"/> para configurar el siguiente paso
         /// y el codigo identificador de paso en la cadena.

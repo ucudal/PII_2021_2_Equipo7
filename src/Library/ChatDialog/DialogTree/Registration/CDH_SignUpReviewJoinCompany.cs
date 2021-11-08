@@ -10,10 +10,6 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_SignUpReviewJoinCompany : ChatDialogHandlerBase
     {
-        private InvitationAdmin invitationAdmin = Singleton<InvitationAdmin>.Instance;
-
-        private CompanyAdmin companyAdmin = Singleton<CompanyAdmin>.Instance;
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpReviewJoinCompany"/>.
         /// </summary>
@@ -33,8 +29,8 @@ namespace ClassLibrary
             User user = data.User;
             user.LastName = selector.Code.Trim();
 
-            Invitation invitation = invitationAdmin.GetByCode(data.InviteCode);
-            Company company = companyAdmin.GetById(invitation.CompanyId);
+            Invitation invitation = this.datMgr.Invitation.GetByCode(data.InviteCode);
+            Company company = this.datMgr.Company.GetById(invitation.CompanyId);
             StringBuilder builder = new StringBuilder();
             builder.Append("Segun los datos ingresados su nombre\n");
             builder.Append($"es {user.FirstName} {user.LastName}, y su\n");

@@ -11,10 +11,6 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_SignUpDoneSysAdmin : ChatDialogHandlerBase
     {
-        private UserAdmin userAdmin = Singleton<UserAdmin>.Instance;
-        private AccountAdmin accAdmin = Singleton<AccountAdmin>.Instance;
-        private InvitationAdmin invAdmin = Singleton<InvitationAdmin>.Instance;
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpDoneSysAdmin"/>.
         /// </summary>
@@ -31,23 +27,23 @@ namespace ClassLibrary
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             SignUpData data = session.Process.GetData<SignUpData>();
            
-            User user = userAdmin.New();
+            User user = this.datMgr.User.New();
             user.FirstName = data.User.FirstName;
             user.LastName = data.User.LastName;
             user.Role = UserRole.SystemAdministrator;
-            int userId = userAdmin.Insert(user);
+            int userId = this.datMgr.User.Insert(user);
 
             if (userId != 0)
             {
-                Account acc = accAdmin.New();
+                Account acc = this.datMgr.Account.New();
                 acc.UserId = userId;
                 acc.Service = selector.Service;
                 acc.CodeInService = selector.Account;
-                accAdmin.Insert(acc);
+                this.datMgr.Account.Insert(acc);
 
-                Invitation invite = invAdmin.GetByCode(data.InviteCode);
+                Invitation invite = this.datMgr.Invitation.GetByCode(data.InviteCode);
                 invite.Used = true;
-                invAdmin.Update(invite);
+                this.datMgr.Invitation.Update(invite);
             }
 
             session.MenuLocation = null;

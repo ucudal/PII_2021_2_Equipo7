@@ -1,5 +1,6 @@
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace ClassLibrary
 {
@@ -8,7 +9,7 @@ namespace ClassLibrary
     /// el tipo de datos administrable de cuentas
     /// <see cref="Account" />.
     /// </summary>
-    public class AccountAdmin : DataAdmin<Account>
+    public sealed class AccountAdmin : DataAdmin<Account>
     {
         /// <summary>
         /// Obtiene una lista de cuentas 
@@ -22,10 +23,10 @@ namespace ClassLibrary
         /// <returns>
         /// Listado de cuentas.
         /// </returns>
-        public ReadOnlyCollection<Account> GetByUserId(int userId)
+        public IReadOnlyCollection<Account> GetByUserId(int userId)
         {
             List<Account> resultList = new List<Account>();
-            ReadOnlyCollection<Account> accounts = this.Items;
+            IReadOnlyCollection<Account> accounts = this.Items;
             foreach (Account acc in accounts)
             {
                 if (acc.UserId == userId)
@@ -54,7 +55,7 @@ namespace ClassLibrary
         /// </returns>
         public int GetUserIdForAccount(MessagingService service, string account)
         {
-            ReadOnlyCollection<Account> accounts = this.Items;
+            IReadOnlyCollection<Account> accounts = this.Items;
             foreach (Account acc in accounts)
             {
                 if (acc.Service == service && acc.CodeInService == account)
@@ -63,6 +64,15 @@ namespace ClassLibrary
                 }
             }
             return 0;
+        }
+
+        /// <inheritdoc/>
+        protected override void ValidateData(Account item)
+        {
+            DataManager dataManager = new DataManager();
+            if(item.UserId == 0 /*|| !dataManager.User.Exists(item.UserId)*/) throw new ValidationException("Se precisa un identificador de usuario.");
+            if(item.Service == MessagingService.Undefined) throw new ValidationException("Servicio de mensajeria es requerido.");
+            if(item.CodeInService is null || item.CodeInService.Length == 0) throw new ValidationException("Codigo en el servicio de mensajeria requerido.");
         }
     }
 }

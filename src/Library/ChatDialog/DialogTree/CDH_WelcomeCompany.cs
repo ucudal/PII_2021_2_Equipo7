@@ -9,8 +9,6 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_WelcomeCompany : ChatDialogHandlerBase
     {
-        private UserAdmin userAdmin = Singleton<UserAdmin>.Instance;
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
         /// </summary>
@@ -35,7 +33,7 @@ namespace ClassLibrary
         public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            User user = this.userAdmin.GetById(session.UserId);
+            User user = this.datMgr.User.GetById(session.UserId);
             if (selector.Code == "\\welcome" && user.Role == UserRole.CompanyAdministrator)
             {
                 return true;

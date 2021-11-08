@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using ClassLibrary.Services.Location.Client;
 using Nito.AsyncEx;
@@ -10,7 +10,7 @@ namespace ClassLibrary
     /// Clase administradora de las
     /// localizaciones de una empresa.
     /// </summary>
-    public class CompanyLocationAdmin : DataAdmin<CompanyLocation>
+    public sealed class CompanyLocationAdmin : DataAdmin<CompanyLocation>
     {
         /// <summary>
         /// Obtiene una lista de localizaciones
@@ -25,10 +25,10 @@ namespace ClassLibrary
         /// pertenecientes a la empresa
         /// por la cual se busco.
         /// </returns>
-        public ReadOnlyCollection<CompanyLocation> GetLocationsForCompany(int companyId)
+        public IReadOnlyCollection<CompanyLocation> GetLocationsForCompany(int companyId)
         {
             List<CompanyLocation> resultList = new List<CompanyLocation>();
-            ReadOnlyCollection<CompanyLocation> locations = this.Items;
+            IReadOnlyCollection<CompanyLocation> locations = this.Items;
             foreach (CompanyLocation location in locations)
             {
                 if (location.CompanyId == companyId)
@@ -61,7 +61,7 @@ namespace ClassLibrary
         /// </returns>
         public CompanyLocation GetClosestCompanyLocationToGeoReference(int companyId, string geoRef)
         {
-            ReadOnlyCollection<CompanyLocation> compLocs = this.GetLocationsForCompany(companyId);
+            IReadOnlyCollection<CompanyLocation> compLocs = this.GetLocationsForCompany(companyId);
             LocationAPIClient locClient = new LocationAPIClient();
 
             double closestDistance = 0;
@@ -90,6 +90,16 @@ namespace ClassLibrary
             }
 
             return closestLocation.Clone();
+        }
+
+        /// <inheritdoc/>
+        protected override void ValidateData(CompanyLocation item)
+        {
+            DataManager dataManager = new DataManager();
+            if(item.CompanyId == 0 /*|| !dataManager.Company.Exists(item.CompanyId)*/) 
+                throw new ValidationException("Requerida compania valida.");
+            if(item.GeoReference is null || item.GeoReference.Length == 0) 
+                throw new ValidationException("Requerida geo referencia.");
         }
     }
 }

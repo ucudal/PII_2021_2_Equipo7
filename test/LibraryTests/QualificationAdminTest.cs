@@ -1,5 +1,4 @@
-using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using ClassLibrary;
 using NUnit.Framework;
 
@@ -10,8 +9,7 @@ namespace Tests
     /// </summary>
     public class QualificationAdminTest
     {
-        private QualificationAdmin quaAdmin = Singleton<QualificationAdmin>.Instance;
-
+        private DataManager datMgr = new DataManager();
 
         /// <summary>
         /// Testear que los valores se ingresan en la data.
@@ -19,13 +17,13 @@ namespace Tests
         [Test]
         public void InsertTestQ()
         {
-            ReadOnlyCollection<Qualification> items = quaAdmin.Items;
+            IReadOnlyCollection<Qualification> items = this.datMgr.Qualification.Items;
             string Name="Habilitacion madera";
-            Qualification quali = quaAdmin.New();
+            Qualification quali = this.datMgr.Qualification.New();
             quali.Name = Name;
-            int habili = quaAdmin.Insert(quali);
+            int habili = this.datMgr.Qualification.Insert(quali);
             Assert.AreNotEqual(0,habili);
-            quali = quaAdmin.GetById(habili);
+            quali = this.datMgr.Qualification.GetById(habili);
             Assert.AreEqual(Name,quali.Name);
         }
 
@@ -35,7 +33,7 @@ namespace Tests
         [Test]
         public void NewTestQ()
         {
-            Qualification qualification =quaAdmin.New();
+            Qualification qualification =this.datMgr.Qualification.New();
             Assert.IsInstanceOf(typeof(Qualification),qualification);
         }
 
@@ -45,29 +43,29 @@ namespace Tests
         [Test]
         public void DeleteTestQ()
         {
-            Qualification qualification =quaAdmin.New();
+            Qualification qualification =this.datMgr.Qualification.New();
             qualification.Name="Franco";
-            quaAdmin.Insert(qualification);
+            this.datMgr.Qualification.Insert(qualification);
             int NewId =qualification.Id;
-            quaAdmin.Delete(NewId);
-            Assert.IsNull(quaAdmin.GetById(NewId));
+            this.datMgr.Qualification.Delete(NewId);
+            Assert.IsNull(this.datMgr.Qualification.GetById(NewId));
         }
 
         /// <summary>
-        /// Comprobar que funciona el update del DataAdmin.
+        /// Comprobar que funciona el update del this.datMgr.Data.
         /// </summary>
         [Test]
         public void UpdateTestQ()
         {
             string Name="Habilitacion madera";
-            Qualification quali = quaAdmin.New();
+            Qualification quali = this.datMgr.Qualification.New();
             quali.Name = Name;
-            int habili = quaAdmin.Insert(quali);
+            int habili = this.datMgr.Qualification.Insert(quali);
             Assert.AreNotEqual(0,habili);
-            Qualification quali2 = quaAdmin.GetById(habili);
+            Qualification quali2 = this.datMgr.Qualification.GetById(habili);
             quali2.Name = "Habilitacion plastico";
-            quaAdmin.Update(quali2);
-            Qualification quali3 = quaAdmin.GetById(habili);
+            this.datMgr.Qualification.Update(quali2);
+            Qualification quali3 = this.datMgr.Qualification.GetById(habili);
             Assert.AreEqual(quali2.Name,quali3.Name);
             Assert.AreEqual(quali2.Id,quali3.Id);
 

@@ -77,6 +77,12 @@
             de de usuarios.
             </summary>
         </member>
+        <member name="F:ClassLibrary.ChatDialogHandlerBase.datMgr">
+            <summary>
+            Acceso a los administradores de datos
+            persistentes.
+            </summary>
+        </member>
         <member name="M:ClassLibrary.ChatDialogHandlerBase.#ctor(ClassLibrary.ChatDialogHandlerBase,System.String)">
             <summary>
             Constructor que actua de intermediario entre la el paso
@@ -1294,6 +1300,9 @@
             manejadas por la plataforma.
             </summary>
         </member>
+        <member name="F:ClassLibrary.Currency.Undefined">
+            <summary>No definido.</summary>
+        </member>
         <member name="F:ClassLibrary.Currency.PesoUruguayo">
             <summary>Peso Uruguayo.</summary>
         </member>
@@ -1307,6 +1316,9 @@
             por el Bot.
             </summary>
         </member>
+        <member name="F:ClassLibrary.MessagingService.Undefined">
+            <summary>No definido.</summary>
+        </member>
         <member name="F:ClassLibrary.MessagingService.Console">
             <summary>Canal de comunicacion por la consola</summary>
         </member>
@@ -1315,6 +1327,9 @@
             Enumerable que lista los distintos tipos
             de procesos de registro para los usuarios.
             </summary>
+        </member>
+        <member name="F:ClassLibrary.RegistrationType.Undefined">
+            <summary>No definido.</summary>
         </member>
         <member name="F:ClassLibrary.RegistrationType.EntrepreneurNew">
             <summary>Registro de un nuevo emprendedor.</summary>
@@ -1335,6 +1350,9 @@
             usuarios.
             </summary>
         </member>
+        <member name="F:ClassLibrary.UserRole.Undefined">
+            <summary>No definido.</summary>
+        </member>
         <member name="F:ClassLibrary.UserRole.SystemAdministrator">
             <summary>Administrador del sistema.</summary>
         </member>
@@ -1349,6 +1367,9 @@
             Enumerable que lista los estados generales
             de un usuario al conectarse a la plataforma.
             </summary>
+        </member>
+        <member name="F:ClassLibrary.UserStatus.Undefined">
+            <summary>No definido.</summary>
         </member>
         <member name="F:ClassLibrary.UserStatus.Registered">
             <summary>Usuario registrado.</summary>
@@ -1570,6 +1591,46 @@
             items especificada.
             </returns>
         </member>
+        <member name="M:ClassLibrary.DataAdmin`1.Exists(System.Int32)">
+            <summary>
+            Prueba si un registro existe en
+            el almacenamiento persistente.
+            </summary>
+            <param name="id">
+            Id del registro a encontrar
+            </param>
+            <returns>
+            Valor booleano indicando la
+            existencia del registro.
+            </returns>
+        </member>
+        <member name="M:ClassLibrary.DataAdmin`1.ValidateInsert(`0)">
+            <summary>
+            Valida los datos a introducir al storage
+            en un insert
+            </summary>
+            <param name="item">
+            Item a validar.
+            </param>
+        </member>
+        <member name="M:ClassLibrary.DataAdmin`1.ValidateUpdate(`0)">
+            <summary>
+            Valida los datos a introducir al storage
+            en un update
+            </summary>
+            <param name="item">
+            Item a validar.
+            </param>
+        </member>
+        <member name="M:ClassLibrary.DataAdmin`1.ValidateData(`0)">
+            <summary>
+            Valida los datos especificos
+            del data a manipular.
+            </summary>
+            <param name="item">
+            Item a validar.
+            </param>
+        </member>
         <member name="T:ClassLibrary.IManagableData`1">
             <summary>
             Interface para estructuras de datos que
@@ -1751,6 +1812,9 @@
             Id de la compania encontrada.
             </returns>
         </member>
+        <member name="M:ClassLibrary.CompanyUserAdmin.ValidateData(ClassLibrary.CompanyUser)">
+            <inheritdoc/>
+        </member>
         <member name="T:ClassLibrary.Company">
             <summary>
             esta clase representa a la compania
@@ -1827,6 +1891,9 @@
             <returns>
             Compania encontrada.
             </returns>
+        </member>
+        <member name="M:ClassLibrary.CompanyAdmin.ValidateData(ClassLibrary.Company)">
+            <inheritdoc/>
         </member>
         <member name="T:ClassLibrary.CompanyMaterial">
             <summary>
@@ -2020,6 +2087,9 @@
             categoria.
             </returns>
         </member>
+        <member name="M:ClassLibrary.CompanyMaterialAdmin.ValidateData(ClassLibrary.CompanyMaterial)">
+            <inheritdoc/>
+        </member>
         <member name="T:ClassLibrary.CompanyMaterialQualification">
             <summary>
             Contenedor de asociacion entre un material de empresa y sus
@@ -2094,6 +2164,9 @@
             Valor booleano referenciando si el material de empresa requiere
             la habilitacion o no.
             </returns>
+        </member>
+        <member name="M:ClassLibrary.CompanyMaterialQualificationAdmin.ValidateData(ClassLibrary.CompanyMaterialQualification)">
+            <inheritdoc/>
         </member>
         <member name="T:ClassLibrary.CompanyMaterialStock">
             <summary>
@@ -2262,6 +2335,9 @@
             provista.
             </returns>
         </member>
+        <member name="M:ClassLibrary.CompanyMaterialStockAdmin.ValidateData(ClassLibrary.CompanyMaterialStock)">
+            <inheritdoc/>
+        </member>
         <member name="T:ClassLibrary.PublicationKeyWord">
             <summary>
             Registro de asociación de palabras claves y publicación.
@@ -2320,6 +2396,9 @@
             </summary>
             <param name="pubId">Id de la publicación para la cual se busca obtener sus palabras claves.</param>
             <returns>Listado de strings con las palabras claves obtenidas.</returns>
+        </member>
+        <member name="M:ClassLibrary.PublicationKeyWordAdmin.ValidateData(ClassLibrary.PublicationKeyWord)">
+            <inheritdoc/>
         </member>
         <member name="T:ClassLibrary.Publication">
             <summary>
@@ -2409,6 +2488,89 @@
             <param name="compMatId">Id del material de empresa.</param>
             <returns>Listado de Ids de todas las publicaciones encontradas.</returns>
         </member>
+        <member name="M:ClassLibrary.PublicationAdmin.ValidateData(ClassLibrary.Publication)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.DataManager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.DataManager.User">
+            <summary>
+            Administracion de usuarios.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.DataManager.Account">
+            <summary>
+            Administracion de cuentas.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.DataManager.Sale">
+            <summary>
+            Administracion de ventas.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.DataManager.Qualification">
+            <summary>
+            Administracion de habilitaciones.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.DataManager.MaterialCategory">
+            <summary>
+            Administracion de categorias de materiales.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.DataManager.CompanyLocation">
+            <summary>
+            Administracion de localizaciones de empresa.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.DataManager.Invitation">
+            <summary>
+            Administracion de Invitaciones.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.DataManager.Entrepreneur">
+            <summary>
+            Administracion de emprendedores.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.DataManager.Company">
+            <summary>
+            Administracion de empresas.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.DataManager.Publication">
+            <summary>
+            Administracion de publicaciones.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.DataManager.PublicationKeyWord">
+            <summary>
+            Administracion de palabras clave de publicaciones.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.DataManager.CompanyMaterial">
+            <summary>
+            Administracion de materiales de empresas.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.DataManager.CompanyMaterialStock">
+            <summary>
+            Administracion de stock de materiales de empresas.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.DataManager.CompanyMaterialQualification">
+            <summary>
+            Administracion de habilitaciones para materiales de empresas.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.DataManager.CompanyUser">
+            <summary>
+            Administracion de administradores de empresa.
+            </summary>
+        </member>
         <member name="T:ClassLibrary.Entrepreneur">
             <summary>
             clase que representa los emprendedores
@@ -2492,6 +2654,9 @@
             </summary>
             <param name="name">nombre del emprendedor</param>
             <returns></returns>
+        </member>
+        <member name="M:ClassLibrary.EntrepreneurAdmin.ValidateData(ClassLibrary.Entrepreneur)">
+            <inheritdoc/>
         </member>
         <member name="T:ClassLibrary.Invitation">
             <summary>
@@ -2603,6 +2768,12 @@
             busca generar un nuevo codigo.
             </param>
         </member>
+        <member name="M:ClassLibrary.InvitationAdmin.ValidateInsert(ClassLibrary.Invitation)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.InvitationAdmin.ValidateData(ClassLibrary.Invitation)">
+            <inheritdoc/>
+        </member>
         <member name="T:ClassLibrary.CompanyLocation">
             <summary>
             Registro que contiene una asociacion
@@ -2685,6 +2856,9 @@
             de la localizacion mas cercana.
             </returns>
         </member>
+        <member name="M:ClassLibrary.CompanyLocationAdmin.ValidateData(ClassLibrary.CompanyLocation)">
+            <inheritdoc/>
+        </member>
         <member name="T:ClassLibrary.MaterialCategory">
             <summary>
             Esta clase representa las categorias de los materialesEmpresa.
@@ -2731,6 +2905,9 @@
             <summary>
             Esta clase representa la administracion de Usuarios.
             </summary>
+        </member>
+        <member name="M:ClassLibrary.MaterialCategoryAdmin.ValidateData(ClassLibrary.MaterialCategory)">
+            <inheritdoc/>
         </member>
         <member name="T:ClassLibrary.Qualification">
             <summary>
@@ -2779,6 +2956,9 @@
             <summary>
             Clase para la administración de las habilitaciones.
             </summary>
+        </member>
+        <member name="M:ClassLibrary.QualificationAdmin.ValidateData(ClassLibrary.Qualification)">
+            <inheritdoc/>
         </member>
         <member name="T:ClassLibrary.Sale">
             <summary>
@@ -2901,6 +3081,9 @@
             Listado de Ids de compras realizadas por el emprendedor.
             </returns>
         </member>
+        <member name="M:ClassLibrary.SaleAdmin.ValidateData(ClassLibrary.Sale)">
+            <inheritdoc/>
+        </member>
         <member name="T:ClassLibrary.Account">
             <summary>
             la clase account maneja las cuentas de lso usuarios
@@ -2984,6 +3167,9 @@
             la cuenta.
             </returns>
         </member>
+        <member name="M:ClassLibrary.AccountAdmin.ValidateData(ClassLibrary.Account)">
+            <inheritdoc/>
+        </member>
         <member name="T:ClassLibrary.User">
             <summary>
             Esta clase representa Usuarios.
@@ -3061,6 +3247,12 @@
             Valor booleano con el
             estado de suspension.
             </returns>
+        </member>
+        <member name="M:ClassLibrary.UserAdmin.ValidateInsert(ClassLibrary.User)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.UserAdmin.ValidateData(ClassLibrary.User)">
+            <inheritdoc/>
         </member>
         <member name="T:ClassLibrary.NotSupportedMessagingPlataformException">
             <summary>

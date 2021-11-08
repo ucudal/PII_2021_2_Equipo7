@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace ClassLibrary
@@ -7,7 +7,7 @@ namespace ClassLibrary
     /// <summary>
     /// Esta clase representa la administracion de Usuarios.
     /// </summary>
-    public class CompanyMaterialAdmin : DataAdmin<CompanyMaterial>
+    public sealed class CompanyMaterialAdmin : DataAdmin<CompanyMaterial>
     {
         /// <summary>
         /// Obtiene un listado de materiales de
@@ -22,10 +22,10 @@ namespace ClassLibrary
         /// de empresa pertenecientes a
         /// la empresa dada.
         /// </returns>
-        public ReadOnlyCollection<int> GetCompanyMaterialsInCompany(int companyId)
+        public IReadOnlyCollection<int> GetCompanyMaterialsInCompany(int companyId)
         {
             List<int> resultList = new List<int>();
-            ReadOnlyCollection<CompanyMaterial> companyMats = this.Items;
+            IReadOnlyCollection<CompanyMaterial> companyMats = this.Items;
             foreach (CompanyMaterial mat in companyMats)
             {
                 if (mat.CompanyId == companyId)
@@ -56,10 +56,10 @@ namespace ClassLibrary
         /// de empresa pertenecientes a
         /// la empresa dada.
         /// </returns>
-        public ReadOnlyCollection<int> GetCompanyMaterialsInCompany(int companyId, int itemCount, int page)
+        public IReadOnlyCollection<int> GetCompanyMaterialsInCompany(int companyId, int itemCount, int page)
         {
             List<CompanyMaterial> resultList = new List<CompanyMaterial>();
-            ReadOnlyCollection<CompanyMaterial> companyMats = this.Items;
+            IReadOnlyCollection<CompanyMaterial> companyMats = this.Items;
             foreach (CompanyMaterial mat in companyMats)
             {
                 if (mat.CompanyId == companyId)
@@ -90,10 +90,10 @@ namespace ClassLibrary
         /// de la empresa que pertenecen a la
         /// categoria dada.
         /// </returns>
-        public ReadOnlyCollection<int> GetCompanyMaterialsInCompanyForCategory(int companyId, int materialCatId)
+        public IReadOnlyCollection<int> GetCompanyMaterialsInCompanyForCategory(int companyId, int materialCatId)
         {
             List<int> resultList = new List<int>();
-            ReadOnlyCollection<CompanyMaterial> companyMats = this.Items;
+            IReadOnlyCollection<CompanyMaterial> companyMats = this.Items;
             foreach (CompanyMaterial mat in companyMats)
             {
                 if (mat.CompanyId == companyId && mat.MaterialCategoryId == materialCatId)
@@ -129,10 +129,10 @@ namespace ClassLibrary
         /// de la empresa que pertenecen a la
         /// categoria dada.
         /// </returns>
-        public ReadOnlyCollection<int> GetCompanyMaterialsInCompanyForCategory(int companyId, int materialCatId, int itemCount, int page)
+        public IReadOnlyCollection<int> GetCompanyMaterialsInCompanyForCategory(int companyId, int materialCatId, int itemCount, int page)
         {
             List<CompanyMaterial> resultList = new List<CompanyMaterial>();
-            ReadOnlyCollection<CompanyMaterial> companyMats = this.Items;
+            IReadOnlyCollection<CompanyMaterial> companyMats = this.Items;
             foreach (CompanyMaterial mat in companyMats)
             {
                 if (mat.CompanyId == companyId && mat.MaterialCategoryId == materialCatId)
@@ -160,10 +160,10 @@ namespace ClassLibrary
         /// cumplen con el filtro de
         /// categoria.
         /// </returns>
-        public ReadOnlyCollection<int> GetCompanyMaterialsForCategory(int materialCatId)
+        public IReadOnlyCollection<int> GetCompanyMaterialsForCategory(int materialCatId)
         {
             List<int> resultList = new List<int>();
-            ReadOnlyCollection<CompanyMaterial> companyMats = this.Items;
+            IReadOnlyCollection<CompanyMaterial> companyMats = this.Items;
             foreach (CompanyMaterial mat in companyMats)
             {
                 if (mat.MaterialCategoryId == materialCatId)
@@ -196,10 +196,10 @@ namespace ClassLibrary
         /// cumplen con el filtro de
         /// categoria.
         /// </returns>
-        public ReadOnlyCollection<int> GetCompanyMaterialsForCategory(int materialCatId, int itemCount, int page)
+        public IReadOnlyCollection<int> GetCompanyMaterialsForCategory(int materialCatId, int itemCount, int page)
         {
             List<CompanyMaterial> resultList = new List<CompanyMaterial>();
-            ReadOnlyCollection<CompanyMaterial> companyMats = this.Items;
+            IReadOnlyCollection<CompanyMaterial> companyMats = this.Items;
             foreach (CompanyMaterial mat in companyMats)
             {
                 if (mat.MaterialCategoryId == materialCatId)
@@ -210,6 +210,18 @@ namespace ClassLibrary
 
             List<CompanyMaterial> companyMatsPage = this.GetItemPage(resultList, itemCount, page);
             return companyMatsPage.Select(mat => mat.Id).ToList().AsReadOnly();
+        }
+
+        /// <inheritdoc/>
+        protected override void ValidateData(CompanyMaterial item)
+        {
+            DataManager dataManager = new DataManager();
+            if(item.CompanyId == 0/* || !dataManager.Company.Exists(item.CompanyId)*/) 
+                throw new ValidationException("Requerida compania.");
+            if(item.MaterialCategoryId == 0/* || !dataManager.MaterialCategory.Exists(item.MaterialCategoryId)*/) 
+                throw new ValidationException("Requerida categoria del material.");
+            if(item.Name is null || item.Name.Length == 0) 
+                throw new ValidationException("Requerido nombre.");
         }
     }
 }

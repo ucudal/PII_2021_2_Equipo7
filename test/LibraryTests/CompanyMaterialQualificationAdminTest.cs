@@ -1,5 +1,4 @@
-using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using ClassLibrary;
 using NUnit.Framework;
 
@@ -11,7 +10,7 @@ namespace Tests
     [TestFixture]
     public class CompanyMaterialQualificationAdminTest
     {
-        private CompanyMaterialQualificationAdmin companyMaterialQualificationAdmin = Singleton<CompanyMaterialQualificationAdmin>.Instance;
+        private DataManager datMgr = new DataManager();
 
         /// <summary>
         /// Test del metodo Insert(CompanyMaterialQualification pElemento).
@@ -20,24 +19,24 @@ namespace Tests
         public void InsertTest()
         {
             //Agregamos una Habilitacion de un material 
-            ReadOnlyCollection<CompanyMaterialQualification> prevCompanyMaterialQualification = companyMaterialQualificationAdmin.Items;
+            IReadOnlyCollection<CompanyMaterialQualification> prevCompanyMaterialQualification = this.datMgr.CompanyMaterialQualification.Items;
 
             bool deleted=false;
             int companyMatId=1;
             int qualificationId=1;
 
-            CompanyMaterialQualification companyMaterialQualification=companyMaterialQualificationAdmin.New();
+            CompanyMaterialQualification companyMaterialQualification=this.datMgr.CompanyMaterialQualification.New();
             companyMaterialQualification.Deleted=deleted;
             companyMaterialQualification.CompanyMatId=companyMatId;
             companyMaterialQualification.QualificationId=qualificationId;
-            int companyMaterialQualificationId = companyMaterialQualificationAdmin.Insert(companyMaterialQualification);
+            int companyMaterialQualificationId = this.datMgr.CompanyMaterialQualification.Insert(companyMaterialQualification);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, companyMaterialQualificationId);
 
             int expected=prevCompanyMaterialQualification.Count + 1;
 
-            ReadOnlyCollection<CompanyMaterialQualification> postCompanyMaterialQualification = companyMaterialQualificationAdmin.Items;
+            IReadOnlyCollection<CompanyMaterialQualification> postCompanyMaterialQualification = this.datMgr.CompanyMaterialQualification.Items;
 
             //Validamos que se agrego una habilitacion de un material
             Assert.AreEqual(expected,postCompanyMaterialQualification.Count);
@@ -50,31 +49,31 @@ namespace Tests
         public void UpdateTest()
         {
             //Agregamos una Habilitacion de un material 
-            ReadOnlyCollection<CompanyMaterialQualification> prevCompanyMaterialQualification = companyMaterialQualificationAdmin.Items;
+            IReadOnlyCollection<CompanyMaterialQualification> prevCompanyMaterialQualification = this.datMgr.CompanyMaterialQualification.Items;
 
             bool deleted=false;
             int companyMatId=1;
             int qualificationId=1;
 
-            CompanyMaterialQualification companyMaterialQualification=companyMaterialQualificationAdmin.New();
+            CompanyMaterialQualification companyMaterialQualification=this.datMgr.CompanyMaterialQualification.New();
             companyMaterialQualification.Deleted=deleted;
             companyMaterialQualification.CompanyMatId=companyMatId;
             companyMaterialQualification.QualificationId=qualificationId;
-            int companyMaterialQualificationId = companyMaterialQualificationAdmin.Insert(companyMaterialQualification);
+            int companyMaterialQualificationId = this.datMgr.CompanyMaterialQualification.Insert(companyMaterialQualification);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, companyMaterialQualificationId);
 
             int expected=prevCompanyMaterialQualification.Count + 1;
 
-            ReadOnlyCollection<CompanyMaterialQualification> postCompanyMaterialQualification = companyMaterialQualificationAdmin.Items;
+            IReadOnlyCollection<CompanyMaterialQualification> postCompanyMaterialQualification = this.datMgr.CompanyMaterialQualification.Items;
 
             //Validamos que se agrego una habilitacion de un material
             Assert.AreEqual(expected,postCompanyMaterialQualification.Count);
             
             //Obtenemos la categoria recien agregada, le cambiamos los campos y le damos a update
-            CompanyMaterialQualification xToUpdate=companyMaterialQualificationAdmin.New();
-            xToUpdate=companyMaterialQualificationAdmin.GetById(companyMaterialQualificationId);
+            CompanyMaterialQualification xToUpdate=this.datMgr.CompanyMaterialQualification.New();
+            xToUpdate=this.datMgr.CompanyMaterialQualification.GetById(companyMaterialQualificationId);
             
             //atributos nuevos
             deleted=false;
@@ -85,9 +84,9 @@ namespace Tests
             xToUpdate.QualificationId=qualificationId;
             xToUpdate.Deleted=deleted;
 
-            companyMaterialQualificationAdmin.Update(xToUpdate);
+            this.datMgr.CompanyMaterialQualification.Update(xToUpdate);
 
-            CompanyMaterialQualification xComp=companyMaterialQualificationAdmin.GetById(companyMaterialQualificationId);
+            CompanyMaterialQualification xComp=this.datMgr.CompanyMaterialQualification.GetById(companyMaterialQualificationId);
 
             Assert.AreEqual(xToUpdate.Id, xComp.Id);
             Assert.AreEqual(xToUpdate.CompanyMatId,xComp.CompanyMatId);
@@ -102,36 +101,36 @@ namespace Tests
         public void DeleteTest()
         {
             //Agregamos una Habilitacion de un material 
-            ReadOnlyCollection<CompanyMaterialQualification> prevCompanyMaterialQualification = companyMaterialQualificationAdmin.Items;
+            IReadOnlyCollection<CompanyMaterialQualification> prevCompanyMaterialQualification = this.datMgr.CompanyMaterialQualification.Items;
 
             bool deleted=false;
             int companyMatId=1;
             int qualificationId=1;
 
-            CompanyMaterialQualification companyMaterialQualification=companyMaterialQualificationAdmin.New();
+            CompanyMaterialQualification companyMaterialQualification=this.datMgr.CompanyMaterialQualification.New();
             companyMaterialQualification.Deleted=deleted;
             companyMaterialQualification.CompanyMatId=companyMatId;
             companyMaterialQualification.QualificationId=qualificationId;
-            int companyMaterialQualificationId = companyMaterialQualificationAdmin.Insert(companyMaterialQualification);
+            int companyMaterialQualificationId = this.datMgr.CompanyMaterialQualification.Insert(companyMaterialQualification);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, companyMaterialQualificationId);
 
             int expected=prevCompanyMaterialQualification.Count + 1;
 
-            ReadOnlyCollection<CompanyMaterialQualification> postCompanyMaterialQualification = companyMaterialQualificationAdmin.Items;
+            IReadOnlyCollection<CompanyMaterialQualification> postCompanyMaterialQualification = this.datMgr.CompanyMaterialQualification.Items;
 
             //Validamos que se agrego una habilitacion de un material
             Assert.AreEqual(expected,postCompanyMaterialQualification.Count);
 
             //Hacemos el delete y luego validamos que al cantidad haya disminuido 1
-            ReadOnlyCollection<CompanyMaterialQualification> beforeDelete=postCompanyMaterialQualification;
+            IReadOnlyCollection<CompanyMaterialQualification> beforeDelete=postCompanyMaterialQualification;
 
             expected=postCompanyMaterialQualification.Count - 1;
 
-            companyMaterialQualificationAdmin.Delete(companyMaterialQualificationId);
+            this.datMgr.CompanyMaterialQualification.Delete(companyMaterialQualificationId);
 
-            ReadOnlyCollection<CompanyMaterialQualification> afterDelete = companyMaterialQualificationAdmin.Items;
+            IReadOnlyCollection<CompanyMaterialQualification> afterDelete = this.datMgr.CompanyMaterialQualification.Items;
 
             //Comprobamos que se elimino una habilitacion
             Assert.AreEqual(expected,afterDelete.Count);
@@ -144,30 +143,30 @@ namespace Tests
         public void GetByIdTest()
         {
             //Agregamos una Habilitacion de un material 
-            ReadOnlyCollection<CompanyMaterialQualification> prevCompanyMaterialQualification = companyMaterialQualificationAdmin.Items;
+            IReadOnlyCollection<CompanyMaterialQualification> prevCompanyMaterialQualification = this.datMgr.CompanyMaterialQualification.Items;
 
             bool deleted=false;
             int companyMatId=1;
             int qualificationId=1;
 
-            CompanyMaterialQualification companyMaterialQualification=companyMaterialQualificationAdmin.New();
+            CompanyMaterialQualification companyMaterialQualification=this.datMgr.CompanyMaterialQualification.New();
             companyMaterialQualification.Deleted=deleted;
             companyMaterialQualification.CompanyMatId=companyMatId;
             companyMaterialQualification.QualificationId=qualificationId;
-            int companyMaterialQualificationId = companyMaterialQualificationAdmin.Insert(companyMaterialQualification);
+            int companyMaterialQualificationId = this.datMgr.CompanyMaterialQualification.Insert(companyMaterialQualification);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, companyMaterialQualificationId);
 
             int expected=prevCompanyMaterialQualification.Count + 1;
 
-            ReadOnlyCollection<CompanyMaterialQualification> postCompanyMaterialQualification = companyMaterialQualificationAdmin.Items;
+            IReadOnlyCollection<CompanyMaterialQualification> postCompanyMaterialQualification = this.datMgr.CompanyMaterialQualification.Items;
 
             //Validamos que se agrego una habilitacion de un material
             Assert.AreEqual(expected,postCompanyMaterialQualification.Count);
             
             //Obtenemos la categoria agregada con GetById y comparamos
-            CompanyMaterialQualification xComp=companyMaterialQualificationAdmin.GetById(companyMaterialQualificationId);
+            CompanyMaterialQualification xComp=this.datMgr.CompanyMaterialQualification.GetById(companyMaterialQualificationId);
             
             Assert.AreEqual(companyMaterialQualificationId, xComp.Id);
             Assert.AreEqual(companyMaterialQualification.CompanyMatId,xComp.CompanyMatId);
@@ -187,11 +186,11 @@ namespace Tests
             int companyMatId=10;
             int qualificationId=1;
 
-            CompanyMaterialQualification companyMaterialQualification=companyMaterialQualificationAdmin.New();
+            CompanyMaterialQualification companyMaterialQualification=this.datMgr.CompanyMaterialQualification.New();
             companyMaterialQualification.Deleted=deleted;
             companyMaterialQualification.CompanyMatId=companyMatId;
             companyMaterialQualification.QualificationId=qualificationId;
-            int companyMaterialQualificationId = companyMaterialQualificationAdmin.Insert(companyMaterialQualification);
+            int companyMaterialQualificationId = this.datMgr.CompanyMaterialQualification.Insert(companyMaterialQualification);
 
             //Agregamos  Habilitacion2 de un material 
 
@@ -199,16 +198,16 @@ namespace Tests
             companyMatId=10;
             qualificationId=2;
 
-            CompanyMaterialQualification companyMaterialQualification2=companyMaterialQualificationAdmin.New();
+            CompanyMaterialQualification companyMaterialQualification2=this.datMgr.CompanyMaterialQualification.New();
             companyMaterialQualification2.Deleted=deleted;
             companyMaterialQualification2.CompanyMatId=companyMatId;
             companyMaterialQualification2.QualificationId=qualificationId;
-            companyMaterialQualificationId = companyMaterialQualificationAdmin.Insert(companyMaterialQualification2);
+            companyMaterialQualificationId = this.datMgr.CompanyMaterialQualification.Insert(companyMaterialQualification2);
         
             int expectedCountQualificationsFromMaterial1=2;
 
             //Comparo que el numero de habilitaciones agregadas= al numero de habilitaciones que agregue
-            Assert.AreEqual(expectedCountQualificationsFromMaterial1,companyMaterialQualificationAdmin.GetQualificationsForCompanyMaterial(10).Count);
+            Assert.AreEqual(expectedCountQualificationsFromMaterial1,this.datMgr.CompanyMaterialQualification.GetQualificationsForCompanyMaterial(10).Count);
         }
 
         /// <summary>
@@ -223,16 +222,16 @@ namespace Tests
             int companyMatId=1;
             int qualificationId=1;
 
-            CompanyMaterialQualification companyMaterialQualification=companyMaterialQualificationAdmin.New();
+            CompanyMaterialQualification companyMaterialQualification=this.datMgr.CompanyMaterialQualification.New();
             companyMaterialQualification.Deleted=deleted;
             companyMaterialQualification.CompanyMatId=companyMatId;
             companyMaterialQualification.QualificationId=qualificationId;
-            int companyMaterialQualificationId = companyMaterialQualificationAdmin.Insert(companyMaterialQualification);
+            int companyMaterialQualificationId = this.datMgr.CompanyMaterialQualification.Insert(companyMaterialQualification);
 
             bool expected=true;
 
             //Comparo que el numero de habilitaciones agregadas= al numero de habilitaciones que agregue
-            Assert.AreEqual(expected,companyMaterialQualificationAdmin.GetCompanyMaterialHasQualification(1,1));
+            Assert.AreEqual(expected,this.datMgr.CompanyMaterialQualification.GetCompanyMaterialHasQualification(1,1));
         }
     }
 }

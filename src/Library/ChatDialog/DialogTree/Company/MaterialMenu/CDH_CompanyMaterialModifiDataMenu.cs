@@ -9,8 +9,6 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_CompanyMaterialModifiDataMenu : ChatDialogHandlerBase
     {
-        private CompanyMaterialAdmin companyMaterialAdmin = Singleton<CompanyMaterialAdmin>.Instance;
-        private CompanyAdmin companyAdmin = Singleton<CompanyAdmin>.Instance;
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyMaterialModifiDataMenu"/>.
         /// </summary>

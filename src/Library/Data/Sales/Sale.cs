@@ -89,6 +89,8 @@ namespace ClassLibrary
             this.Price=sale.Price;
             this.SellerCompanyId = sale.SellerCompanyId;
             this.BuyerEntrepreneurId = sale.BuyerEntrepreneurId;
+            this.ProductCompanyMaterialId = sale.ProductCompanyMaterialId;
+            this.ProductQuantity = sale.ProductQuantity;
         }
 
 

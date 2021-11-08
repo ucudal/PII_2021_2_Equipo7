@@ -7,6 +7,8 @@ namespace ClassLibrary
     /// </summary>
     public enum MessagingService
     {
+        ///<summary>No definido.</summary>
+        Undefined,
         ///<summary>Canal de comunicacion por la consola</summary>
         Console
     }

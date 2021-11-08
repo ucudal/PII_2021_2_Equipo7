@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace ClassLibrary
@@ -14,7 +16,7 @@ namespace ClassLibrary
         /// <summary>
         /// Conexion con la base de datos
         /// </summary>
-        private IStorageProvider storage = Singleton<StorageProviderInProcess>.Instance;
+        protected IStorageProvider storage = Singleton<StorageProviderInProcess>.Instance;
 
         /// <summary>
         /// Lista de objetos de tipo T 
@@ -24,7 +26,7 @@ namespace ClassLibrary
         {
             get
             {
-                return this.storage.SelectAll<T>();
+                return storage.SelectAll<T>();
             }
         }
         
@@ -38,9 +40,17 @@ namespace ClassLibrary
         /// <returns>
         /// Id del elemento insertado.
         /// </returns>
-        public virtual int Insert(T pElemento)
+        public int Insert(T pElemento)
         {
-            return this.storage.Insert<T>(pElemento.Clone());
+            try
+            {
+                this.ValidateInsert(pElemento);
+                return storage.Insert<T>(pElemento.Clone());
+            }
+            catch (ValidationException)
+            {
+                return 0;
+            }
         }
         
         /// <summary>
@@ -53,9 +63,17 @@ namespace ClassLibrary
         /// <returns>
         /// Confirmacion de la actualizacion.
         /// </returns>
-        public virtual bool Update(T pElemento)
+        public bool Update(T pElemento)
         {   
-            return this.storage.Update<T>(pElemento.Clone());
+            try
+            {
+                this.ValidateUpdate(pElemento);
+                return storage.Update<T>(pElemento.Clone());
+            }
+            catch (ValidationException)
+            {
+                return false;
+            }
         }
         
         /// <summary>
@@ -68,9 +86,9 @@ namespace ClassLibrary
         /// <returns>
         /// Confirmacion de la eliminacion.
         /// </returns>
-        public virtual bool Delete(int pId)
+        public bool Delete(int pId)
         {
-            return this.storage.Delete<T>(pId);
+            return storage.Delete<T>(pId);
         }
         
         /// <summary>
@@ -83,7 +101,7 @@ namespace ClassLibrary
         /// Registro obtenido o nulo
         /// en caso de no existir.
         /// </returns>
-        public virtual T GetById(int pId)
+        public T GetById(int pId)
         {
             T recordFound;
             recordFound = this.Items.FirstOrDefault<T>(recordItem => recordItem.Id == pId && !recordItem.Deleted);
@@ -104,7 +122,7 @@ namespace ClassLibrary
         /// <returns>
         /// Objeto creado.
         /// </returns>
-        public virtual T New()
+        public T New()
         {
             T newItem = new T();
             return newItem;
@@ -145,8 +163,59 @@ namespace ClassLibrary
             }
 
             return listForPage;
-        }        
+        }
 
+        /// <summary>
+        /// Prueba si un registro existe en
+        /// el almacenamiento persistente.
+        /// </summary>
+        /// <param name="id">
+        /// Id del registro a encontrar
+        /// </param>
+        /// <returns>
+        /// Valor booleano indicando la
+        /// existencia del registro.
+        /// </returns>
+        public bool Exists(int id)
+        {
+            T record = this.Items.FirstOrDefault(item => item.Id == id);
+            return record is not null;
+        }
+
+        /// <summary>
+        /// Valida los datos a introducir al storage
+        /// en un insert
+        /// </summary>
+        /// <param name="item">
+        /// Item a validar.
+        /// </param>
+        protected virtual void ValidateInsert(T item)
+        {
+            if(item.Id != 0) throw new ValidationException("Id debe ser vacio.");
+            if(item.Deleted == true) throw new ValidationException("No se puede crear un usuario eliminado.");
+            this.ValidateData(item);
+        }
+
+        /// <summary>
+        /// Valida los datos a introducir al storage
+        /// en un update
+        /// </summary>
+        /// <param name="item">
+        /// Item a validar.
+        /// </param>
+        protected virtual void ValidateUpdate(T item)
+        {
+            if(item.Id == 0 || !this.Exists(item.Id)) throw new ValidationException("Id no debe ser vacio.");
+            this.ValidateData(item);
+        }   
+
+        /// <summary>
+        /// Valida los datos especificos
+        /// del data a manipular.
+        /// </summary>
+        /// <param name="item">
+        /// Item a validar.
+        /// </param>
+        protected abstract void ValidateData(T item);
     }
-    
 }
