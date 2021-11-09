@@ -127,10 +127,10 @@ namespace Tests
         [Test] 
         public void DeleteTest()
         {
- //Insertamos un elemento
+            //Insertamos un elemento
             IReadOnlyCollection<CompanyUser> locationspre = this.datMgr.CompanyUser.Items;
 
-            int usid= 2;
+            int usid = 2;
             int companyid = 2;
 
             CompanyUser loc = this.datMgr.CompanyUser.New();
