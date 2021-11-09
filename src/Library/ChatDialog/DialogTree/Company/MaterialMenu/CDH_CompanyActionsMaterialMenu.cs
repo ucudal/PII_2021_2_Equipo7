@@ -9,8 +9,6 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_CompanyActionsMaterialMenu : ChatDialogHandlerBase
     {
-        private CompanyMaterialAdmin companyMaterialAdmin = Singleton<CompanyMaterialAdmin>.Instance;
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
         /// </summary>
@@ -45,7 +43,7 @@ namespace ClassLibrary
             {
                 if (!selector.Code.StartsWith('\\'))
                 {
-                    CompanyMaterial companyMaterial = companyMaterialAdmin.GetById(int.Parse(selector.Code));
+                    CompanyMaterial companyMaterial = this.datMgr.CompanyMaterial.GetById(int.Parse(selector.Code));
                     if (companyMaterial is not null)
                     {
                         return true;

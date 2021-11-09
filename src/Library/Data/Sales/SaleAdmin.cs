@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace ClassLibrary
@@ -8,7 +8,7 @@ namespace ClassLibrary
     /// <summary>
     /// Clase para administrar las ventas.
     /// </summary>
-    public class SaleAdmin : DataAdmin<Sale>
+    public sealed class SaleAdmin : DataAdmin<Sale>
     {
         /// <summary>
         /// Obtiene un listado de ventas para una compania concreta.
@@ -19,10 +19,10 @@ namespace ClassLibrary
         /// <returns>
         /// Listado de Ids de ventas realizadas por la compania.
         /// </returns>
-        public ReadOnlyCollection<int> GetSalesBySeller(int companyId)
+        public IReadOnlyCollection<int> GetSalesBySeller(int companyId)
         {
             List<int> resultList = new List<int>();
-            ReadOnlyCollection<Sale> sales = this.Items;
+            IReadOnlyCollection<Sale> sales = this.Items;
             foreach (Sale sale in sales)
             {
                 if (sale.SellerCompanyId == companyId)
@@ -45,10 +45,10 @@ namespace ClassLibrary
         /// <returns>
         /// Listado de Ids de ventas realizadas por la compania.
         /// </returns>
-        public ReadOnlyCollection<int> GetSalesBySeller(int companyId, int itemCount, int page)
+        public IReadOnlyCollection<int> GetSalesBySeller(int companyId, int itemCount, int page)
         {
             List<Sale> resultList = new List<Sale>();
-            ReadOnlyCollection<Sale> sales = this.Items;
+            IReadOnlyCollection<Sale> sales = this.Items;
             foreach (Sale sale in sales)
             {
                 if (sale.SellerCompanyId == companyId)
@@ -57,7 +57,7 @@ namespace ClassLibrary
                 }
             }
 
-            List<Sale> salesPage = this.GetItemPage(resultList, itemCount, page);
+            List<Sale> salesPage = GetItemPage(resultList, itemCount, page);
             return salesPage.Select(sale => sale.Id).ToList().AsReadOnly();
         }
         
@@ -70,10 +70,10 @@ namespace ClassLibrary
         /// <returns>
         /// Listado de Ids de compras realizadas por el emprendedor.
         /// </returns>
-        public ReadOnlyCollection<int> GetSalesByBuyer(int entrepreneurId)
+        public IReadOnlyCollection<int> GetSalesByBuyer(int entrepreneurId)
         {
             List<int> resultList = new List<int>();
-            ReadOnlyCollection<Sale> sales = this.Items;
+            IReadOnlyCollection<Sale> sales = this.Items;
             foreach (Sale sale in sales)
             {
                 if (sale.BuyerEntrepreneurId == entrepreneurId)
@@ -97,10 +97,10 @@ namespace ClassLibrary
         /// <returns>
         /// Listado de Ids de compras realizadas por el emprendedor.
         /// </returns>
-        public ReadOnlyCollection<int> GetSalesByBuyer(int entrepreneurId, int itemCount, int page)
+        public IReadOnlyCollection<int> GetSalesByBuyer(int entrepreneurId, int itemCount, int page)
         {
             List<Sale> resultList = new List<Sale>();
-            ReadOnlyCollection<Sale> sales = this.Items;
+            IReadOnlyCollection<Sale> sales = this.Items;
             foreach (Sale sale in sales)
             {
                 if (sale.BuyerEntrepreneurId == entrepreneurId)
@@ -109,10 +109,28 @@ namespace ClassLibrary
                 }
             }
 
-            List<Sale> salesPage = this.GetItemPage(resultList, itemCount, page);
+            List<Sale> salesPage = GetItemPage(resultList, itemCount, page);
             return salesPage.Select(sale => sale.Id).ToList().AsReadOnly();
         }
+
+        /// <inheritdoc/>
+        protected override void ValidateData(Sale item)
+        {
+            DataManager dataManager = new DataManager();
+            if(item.BuyerEntrepreneurId == 0 /*|| !dataManager.Entrepreneur.Exists(item.BuyerEntrepreneurId)*/) 
+                throw new ValidationException("Requerido emprendedor valido.");
+            if(item.Currency == 0) 
+                throw new ValidationException("Requerida moneda.");
+            if(item.DateTime == DateTime.MinValue) 
+                throw new ValidationException("Requerida fecha de transaccion.");
+            if(item.Price == 0) 
+                throw new ValidationException("Requerido precio mayor a cero.");
+            if(item.ProductCompanyMaterialId == 0 /*|| !dataManager.CompanyMaterial.Exists(item.ProductCompanyMaterialId)*/) 
+                throw new ValidationException("Requerido material de empresa vendido.");
+            if(item.ProductQuantity == 0) 
+                throw new ValidationException("Requerida cantidad del material.");
+            if(item.SellerCompanyId == 0 /*|| !dataManager.Company.Exists(item.SellerCompanyId)*/) 
+                throw new ValidationException("Requerida compania vendedora.");
+        }
     }
-        
-    
 }

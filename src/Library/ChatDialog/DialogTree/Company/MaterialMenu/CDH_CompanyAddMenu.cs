@@ -9,9 +9,6 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_CompanyAddMenu : ChatDialogHandlerBase
     {
-
-        private MaterialCategoryAdmin categoryAdmin = Singleton<MaterialCategoryAdmin>.Instance;
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyAddMenu"/>.
         /// </summary>
@@ -36,7 +33,7 @@ namespace ClassLibrary
         private string TextToPrintListCategories()
         {
             StringBuilder builder = new StringBuilder();
-            foreach(MaterialCategory xCat in categoryAdmin.Items)
+            foreach(MaterialCategory xCat in this.datMgr.MaterialCategory.Items)
             {
                 builder.Append("" + xCat.Name + " " + xCat.Id + "");
             }

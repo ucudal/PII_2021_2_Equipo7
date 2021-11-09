@@ -9,8 +9,6 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_CompanyQualificationConfirmEraseMenu : ChatDialogHandlerBase
     {
-        private QualificationAdmin qualificationAdmin = Singleton<QualificationAdmin>.Instance;
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyQualificationConfirmEraseMenu"/>.
         /// </summary>
@@ -43,7 +41,7 @@ namespace ClassLibrary
             {
                 if (!selector.Code.StartsWith('\\'))
                 {
-                    Qualification qualification = qualificationAdmin.GetById(int.Parse(selector.Code));
+                    Qualification qualification = this.datMgr.Qualification.GetById(int.Parse(selector.Code));
                     if (qualification is not null)
                     {
                         return true;

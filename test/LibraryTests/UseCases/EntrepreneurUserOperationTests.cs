@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using ClassLibrary;
 using NUnit.Framework;
 
@@ -13,29 +12,37 @@ namespace Tests
     [TestFixture]
     public class EntrepreneurUserOperationTests
     {
-        private PublicationAdmin publiAdmin = Singleton<PublicationAdmin>.Instance;
-        private CompanyAdmin compadmin = Singleton<CompanyAdmin>.Instance;
-        private CompanyMaterialAdmin comaadmin = Singleton<CompanyMaterialAdmin>.Instance;
-        private SaleAdmin saleadmin = Singleton<SaleAdmin>.Instance;
-        private EntrepreneurAdmin enadmin = Singleton<EntrepreneurAdmin>.Instance;
+        private DataManager datMgr = new DataManager();
+
         /// <summary>
         /// Test de listar publicaciones.
         /// </summary>
         [Test]
         public void ListPublicationsTest()
         {
-            Company company = compadmin.New();
-            company.Id = 3;
-            int com_id = company.Id;
-            Publication publica1 = publiAdmin.New();
+            int com_id = 12300006;
+            
+            Publication publica1 = this.datMgr.Publication.New();
             publica1.CompanyId = com_id;
+            publica1.CompanyMaterialId = 11165;
+            publica1.Currency = Currency.PesoUruguayo;
+            publica1.Price = 987;
+            publica1.ActiveFrom = DateTime.Now.AddDays(-123);
+            publica1.ActiveUntil = DateTime.Now.AddDays(123);
 
-            Publication publica2 = publiAdmin.New();
+
+            Publication publica2 = this.datMgr.Publication.New();
             publica2.CompanyId = com_id;
-            publiAdmin.Insert(publica1);
-            publiAdmin.Insert(publica2);
+            publica2.CompanyMaterialId = 11165;
+            publica2.Currency = Currency.PesoUruguayo;
+            publica2.Price = 987;
+            publica2.ActiveFrom = DateTime.Now.AddDays(-123);
+            publica2.ActiveUntil = DateTime.Now.AddDays(123);
 
-            ReadOnlyCollection<int> lista1 = publiAdmin.GetPublicationsByCompany(com_id);
+            this.datMgr.Publication.Insert(publica1);
+            this.datMgr.Publication.Insert(publica2);
+
+            IReadOnlyCollection<int> lista1 = this.datMgr.Publication.GetPublicationsByCompany(com_id);
 
             Assert.AreEqual(2,lista1.Count);
 
@@ -48,9 +55,6 @@ namespace Tests
         [Test]
         public void SearchPublicationsByKeyWords()
         {
-            PublicationAdmin pubAdmin = Singleton<PublicationAdmin>.Instance;
-            PublicationKeyWordAdmin pubKeyWordsAdmin = Singleton<PublicationKeyWordAdmin>.Instance;
-
             string keyWord1 = "test_entre-op_pub-by-keywords_1";
             string keyWord2 = "test_entre-op_pub-by-keywords_2";
             string keyWord3 = "test_entre-op_pub-by-keywords_3";
@@ -60,70 +64,72 @@ namespace Tests
             DateTime activeUntil = DateTime.Now.AddMonths(1);
             Currency currency = Currency.PesoUruguayo;
             int price = 458;
+            int compMatId = 127349309;
 
-            Publication pub1 = pubAdmin.New();
+            Publication pub1 = this.datMgr.Publication.New();
             pub1.CompanyId = compId;
             pub1.ActiveFrom = activeFrom;
             pub1.ActiveUntil = activeUntil;
             pub1.Currency = currency;
             pub1.Price = price;
+            pub1.CompanyMaterialId = compMatId;
             
             Publication pub2 = pub1.Clone();
             Publication pub3 = pub1.Clone();
 
-            int pubId1 = pubAdmin.Insert(pub1);
-            int pubId2 = pubAdmin.Insert(pub2);
-            int pubId3 = pubAdmin.Insert(pub3);
+            int pubId1 = this.datMgr.Publication.Insert(pub1);
+            int pubId2 = this.datMgr.Publication.Insert(pub2);
+            int pubId3 = this.datMgr.Publication.Insert(pub3);
 
             Assert.NotZero(pubId1);
             Assert.NotZero(pubId2);
             Assert.NotZero(pubId3);
 
-            int keyWordsBefore = pubKeyWordsAdmin.Items.Count;
+            int keyWordsBefore = this.datMgr.PublicationKeyWord.Items.Count;
 
             PublicationKeyWord pubKeyWord;
 
-            pubKeyWord = pubKeyWordsAdmin.New();
+            pubKeyWord = this.datMgr.PublicationKeyWord.New();
             pubKeyWord.PublicationId = pubId1;
             pubKeyWord.KeyWord = keyWord1;
-            pubKeyWordsAdmin.Insert(pubKeyWord);
+            this.datMgr.PublicationKeyWord.Insert(pubKeyWord);
             
-            pubKeyWord = pubKeyWordsAdmin.New();
+            pubKeyWord = this.datMgr.PublicationKeyWord.New();
             pubKeyWord.PublicationId = pubId3;
             pubKeyWord.KeyWord = keyWord1;
-            pubKeyWordsAdmin.Insert(pubKeyWord);
+            this.datMgr.PublicationKeyWord.Insert(pubKeyWord);
             
-            pubKeyWord = pubKeyWordsAdmin.New();
+            pubKeyWord = this.datMgr.PublicationKeyWord.New();
             pubKeyWord.PublicationId = pubId2;
             pubKeyWord.KeyWord = keyWord1;
-            pubKeyWordsAdmin.Insert(pubKeyWord);
+            this.datMgr.PublicationKeyWord.Insert(pubKeyWord);
             
-            pubKeyWord = pubKeyWordsAdmin.New();
+            pubKeyWord = this.datMgr.PublicationKeyWord.New();
             pubKeyWord.PublicationId = pubId2;
             pubKeyWord.KeyWord = keyWord2;
-            pubKeyWordsAdmin.Insert(pubKeyWord);
+            this.datMgr.PublicationKeyWord.Insert(pubKeyWord);
             
-            pubKeyWord = pubKeyWordsAdmin.New();
+            pubKeyWord = this.datMgr.PublicationKeyWord.New();
             pubKeyWord.PublicationId = pubId3;
             pubKeyWord.KeyWord = keyWord2;
-            pubKeyWordsAdmin.Insert(pubKeyWord);
+            this.datMgr.PublicationKeyWord.Insert(pubKeyWord);
             
-            pubKeyWord = pubKeyWordsAdmin.New();
+            pubKeyWord = this.datMgr.PublicationKeyWord.New();
             pubKeyWord.PublicationId = pubId3;
             pubKeyWord.KeyWord = keyWord3;
-            pubKeyWordsAdmin.Insert(pubKeyWord);
+            this.datMgr.PublicationKeyWord.Insert(pubKeyWord);
 
-            int keyWordsAfter = pubKeyWordsAdmin.Items.Count;            
+            int keyWordsAfter = this.datMgr.PublicationKeyWord.Items.Count;            
             int keyWordsExpected = keyWordsBefore + 6;
 
             Assert.AreEqual(keyWordsExpected, keyWordsAfter);
 
-            ReadOnlyCollection<Publication> publications = pubAdmin.Items;
+            IReadOnlyCollection<Publication> publications = this.datMgr.Publication.Items;
 
             List<int> keyWord1Pubs = new List<int>();
             foreach (Publication publication in publications)
             {
-                if (pubKeyWordsAdmin.PublicationMatchesKeyWord(publication.Id, keyWord1))
+                if (this.datMgr.PublicationKeyWord.PublicationMatchesKeyWord(publication.Id, keyWord1))
                 {
                     keyWord1Pubs.Add(publication.Id);
                 }
@@ -132,7 +138,7 @@ namespace Tests
             List<int> keyWord2Pubs = new List<int>();
             foreach (Publication publication in publications)
             {
-                if (pubKeyWordsAdmin.PublicationMatchesKeyWord(publication.Id, keyWord2))
+                if (this.datMgr.PublicationKeyWord.PublicationMatchesKeyWord(publication.Id, keyWord2))
                 {
                     keyWord2Pubs.Add(publication.Id);
                 }
@@ -141,7 +147,7 @@ namespace Tests
             List<int> keyWord3Pubs = new List<int>();
             foreach (Publication publication in publications)
             {
-                if (pubKeyWordsAdmin.PublicationMatchesKeyWord(publication.Id, keyWord3))
+                if (this.datMgr.PublicationKeyWord.PublicationMatchesKeyWord(publication.Id, keyWord3))
                 {
                     keyWord3Pubs.Add(publication.Id);
                 }
@@ -167,74 +173,69 @@ namespace Tests
         [Test]
         public void SearchPublicationsByLocation()
         {
-            EntrepreneurAdmin entreAdmin = Singleton<EntrepreneurAdmin>.Instance;
-            CompanyLocationAdmin compLocAdmin = Singleton<CompanyLocationAdmin>.Instance;
-            CompanyMaterialAdmin compMatAdmin = Singleton<CompanyMaterialAdmin>.Instance;
-            CompanyMaterialStockAdmin compMatStockAdmin = Singleton<CompanyMaterialStockAdmin>.Instance;
-
-            Entrepreneur entre = entreAdmin.New();
+            Entrepreneur entre = this.datMgr.Entrepreneur.New();
             entre.Name = "Juan Carlos";
             entre.Trade = "Guitarras";
             entre.UserId = 8;
             entre.GeoReference = "Av. 8 de Octubre 2519";
-            int entreId = entreAdmin.Insert(entre);
+            int entreId = this.datMgr.Entrepreneur.Insert(entre);
 
             Assert.NotZero(entreId);
-            entre = entreAdmin.GetById(entreId);
+            entre = this.datMgr.Entrepreneur.GetById(entreId);
 
-            CompanyLocation compLoc1 = compLocAdmin.New();
+            CompanyLocation compLoc1 = this.datMgr.CompanyLocation.New();
             compLoc1.CompanyId = 5;
             compLoc1.GeoReference = "Av. 8 de Octubre 2492";
 
-            CompanyLocation compLoc2 = compLocAdmin.New();
+            CompanyLocation compLoc2 = this.datMgr.CompanyLocation.New();
             compLoc2.CompanyId = 3;
             compLoc2.GeoReference = "Av. 18 de Julio 930";
 
-            CompanyLocation compLoc3 = compLocAdmin.New();
+            CompanyLocation compLoc3 = this.datMgr.CompanyLocation.New();
             compLoc3.CompanyId = 6;
             compLoc3.GeoReference = "Paysandú 1178";
 
-            int compLocId1 = compLocAdmin.Insert(compLoc1);
-            int compLocId2 = compLocAdmin.Insert(compLoc2);
-            int compLocId3 = compLocAdmin.Insert(compLoc3);
+            int compLocId1 = this.datMgr.CompanyLocation.Insert(compLoc1);
+            int compLocId2 = this.datMgr.CompanyLocation.Insert(compLoc2);
+            int compLocId3 = this.datMgr.CompanyLocation.Insert(compLoc3);
 
             Assert.NotZero(compLocId1);
             Assert.NotZero(compLocId2);
             Assert.NotZero(compLocId3);
 
-            CompanyMaterial compMat1 = compMatAdmin.New();
+            CompanyMaterial compMat1 = this.datMgr.CompanyMaterial.New();
             compMat1.CompanyId = 5;
             compMat1.DateBetweenRestocks = 5;
             compMat1.LastRestock = DateTime.Now.AddDays(-3);
             compMat1.MaterialCategoryId = 987;
             compMat1.Name = "Madera";
-            int compMatId1 = compMatAdmin.Insert(compMat1);
+            int compMatId1 = this.datMgr.CompanyMaterial.Insert(compMat1);
             
             Assert.NotZero(compMatId1);
 
-            CompanyMaterialStock compMatStock1 = compMatStockAdmin.New();
+            CompanyMaterialStock compMatStock1 = this.datMgr.CompanyMaterialStock.New();
             compMatStock1.CompanyLocationId = compLocId1;
             compMatStock1.CompanyMatId = compMatId1;
             compMatStock1.Stock = 0;
-            int compMatStockId1 = compMatStockAdmin.Insert(compMatStock1);
+            int compMatStockId1 = this.datMgr.CompanyMaterialStock.Insert(compMatStock1);
 
-            CompanyMaterialStock compMatStock2 = compMatStockAdmin.New();
+            CompanyMaterialStock compMatStock2 = this.datMgr.CompanyMaterialStock.New();
             compMatStock2.CompanyLocationId = compLocId2;
             compMatStock2.CompanyMatId = compMatId1;
             compMatStock2.Stock = 5;
-            int compMatStockId2 = compMatStockAdmin.Insert(compMatStock2);
+            int compMatStockId2 = this.datMgr.CompanyMaterialStock.Insert(compMatStock2);
 
-            CompanyMaterialStock compMatStock3 = compMatStockAdmin.New();
+            CompanyMaterialStock compMatStock3 = this.datMgr.CompanyMaterialStock.New();
             compMatStock3.CompanyLocationId = compLocId3;
             compMatStock3.CompanyMatId = compMatId1;
             compMatStock3.Stock = 16;
-            int compMatStockId3 = compMatStockAdmin.Insert(compMatStock3);
+            int compMatStockId3 = this.datMgr.CompanyMaterialStock.Insert(compMatStock3);
 
             Assert.NotZero(compMatStockId1);
             Assert.NotZero(compMatStockId2);
             Assert.NotZero(compMatStockId3);
 
-            int closestLocId = compMatStockAdmin.GetClosestLocationWithMaterialStock(compMatId1, entre.GeoReference);
+            int closestLocId = this.datMgr.CompanyMaterialStock.GetClosestLocationWithMaterialStock(compMatId1, entre.GeoReference);
 
             Assert.AreEqual(compLocId2, closestLocId);
         }
@@ -246,78 +247,74 @@ namespace Tests
         [Test]
         public void SearchPublicationsByCategory()
         {
-            CompanyMaterialStockAdmin compMatStockAdmin = Singleton<CompanyMaterialStockAdmin>.Instance;
-            CompanyMaterialAdmin compMatAdmin = Singleton<CompanyMaterialAdmin>.Instance;
-            PublicationAdmin pubAdmin = Singleton<PublicationAdmin>.Instance;
-
             int matCatId1 = 9871;
             int matCatId2 = 9872;
 
-            CompanyMaterial compMat1 = compMatAdmin.New();
+            CompanyMaterial compMat1 = this.datMgr.CompanyMaterial.New();
             compMat1.CompanyId = 5;
             compMat1.DateBetweenRestocks = 5;
             compMat1.LastRestock = DateTime.Now.AddDays(-3);
             compMat1.MaterialCategoryId = matCatId1;
             compMat1.Name = "Madera";
-            int compMatId1 = compMatAdmin.Insert(compMat1);
+            int compMatId1 = this.datMgr.CompanyMaterial.Insert(compMat1);
 
-            CompanyMaterial compMat2 = compMatAdmin.New();
+            CompanyMaterial compMat2 = this.datMgr.CompanyMaterial.New();
             compMat2.CompanyId = 5;
             compMat2.DateBetweenRestocks = 5;
             compMat2.LastRestock = DateTime.Now.AddDays(-3);
             compMat2.MaterialCategoryId = matCatId1;
             compMat2.Name = "Plastico";
-            int compMatId2 = compMatAdmin.Insert(compMat2);
+            int compMatId2 = this.datMgr.CompanyMaterial.Insert(compMat2);
 
-            CompanyMaterial compMat3 = compMatAdmin.New();
+            CompanyMaterial compMat3 = this.datMgr.CompanyMaterial.New();
             compMat3.CompanyId = 5;
             compMat3.DateBetweenRestocks = 5;
             compMat3.LastRestock = DateTime.Now.AddDays(-3);
             compMat3.MaterialCategoryId = matCatId2;
             compMat3.Name = "Plastico";
-            int compMatId3 = compMatAdmin.Insert(compMat3);
+            int compMatId3 = this.datMgr.CompanyMaterial.Insert(compMat3);
 
             Assert.NotZero(compMatId1);
             Assert.NotZero(compMatId2);
             Assert.NotZero(compMatId3);
 
-            Publication pub1 = pubAdmin.New();
+            Publication pub1 = this.datMgr.Publication.New();
             pub1.CompanyId = 5;
             pub1.ActiveFrom = DateTime.Now.AddMonths(-1);
             pub1.ActiveUntil = DateTime.Now.AddMonths(1);
             pub1.Currency = Currency.PesoUruguayo;
             pub1.Price = 458;
             pub1.CompanyMaterialId = compMatId1;
-            int pubId1 = pubAdmin.Insert(pub1);
+            int pubId1 = this.datMgr.Publication.Insert(pub1);
 
-            Publication pub2 = pubAdmin.New();
+            Publication pub2 = this.datMgr.Publication.New();
             pub2.CompanyId = 5;
             pub2.ActiveFrom = DateTime.Now.AddMonths(-1);
             pub2.ActiveUntil = DateTime.Now.AddMonths(1);
             pub2.Currency = Currency.PesoUruguayo;
             pub2.Price = 458;
             pub2.CompanyMaterialId = compMatId2;
-            int pubId2 = pubAdmin.Insert(pub2);
+            int pubId2 = this.datMgr.Publication.Insert(pub2);
 
-            Publication pub3 = pubAdmin.New();
+            Publication pub3 = this.datMgr.Publication.New();
             pub3.CompanyId = 5;
             pub3.ActiveFrom = DateTime.Now.AddMonths(-1);
             pub3.ActiveUntil = DateTime.Now.AddMonths(1);
             pub3.Currency = Currency.PesoUruguayo;
             pub3.Price = 458;
             pub3.CompanyMaterialId = compMatId3;
-            int pubId3 = pubAdmin.Insert(pub3);
+            int pubId3 = this.datMgr.Publication.Insert(pub3);
 
             Assert.NotZero(pubId1);
             Assert.NotZero(pubId2);
             Assert.NotZero(pubId3);
 
             List<int> pubsList = new List<int>();
-            ReadOnlyCollection<int> pubsSubList;
-            ReadOnlyCollection<int> compMatsList = compMatAdmin.GetCompanyMaterialsForCategory(matCatId1);
+            IReadOnlyCollection<int> pubsSubList;
+            IReadOnlyCollection<int> compMatsList = this.datMgr.CompanyMaterial.GetCompanyMaterialsForCategory(matCatId1);
             foreach (int compMatId in compMatsList)
             {
-                pubsSubList = pubAdmin.GetPublicationsWithCompanyMaterial(compMatId);
+                pubsSubList = this.datMgr.Publication.GetPublicationsWithCompanyMaterial(compMatId);
                 foreach (int pubId in pubsSubList)
                 {
                     if (!pubsList.Contains(pubId))
@@ -332,10 +329,10 @@ namespace Tests
             Assert.Contains(pubId2, pubsList);
 
             pubsList = new List<int>();
-            compMatsList = compMatAdmin.GetCompanyMaterialsForCategory(matCatId2);
+            compMatsList = this.datMgr.CompanyMaterial.GetCompanyMaterialsForCategory(matCatId2);
             foreach (int compMatId in compMatsList)
             {
-                pubsSubList = pubAdmin.GetPublicationsWithCompanyMaterial(compMatId);
+                pubsSubList = this.datMgr.Publication.GetPublicationsWithCompanyMaterial(compMatId);
                 foreach (int pubId in pubsSubList)
                 {
                     if (!pubsList.Contains(pubId))
@@ -356,7 +353,7 @@ namespace Tests
         [Test]
         public void GetIfMaterialIsConstantlyRestocked()
         {
-            CompanyMaterial xcom = comaadmin.New();
+            CompanyMaterial xcom = this.datMgr.CompanyMaterial.New();
 
             // Fecha que sirve para saber cuantos dias pasaron desde que se regenero 
             // un material respecto a su ultima fecha.
@@ -376,7 +373,7 @@ namespace Tests
         [Test]
         public void GetMaterialRestockDate()
         {
-            CompanyMaterial compa = comaadmin.New();
+            CompanyMaterial compa = this.datMgr.CompanyMaterial.New();
 
             DateTime LastRest = DateTime.Today.AddDays(-6);
 
@@ -392,39 +389,31 @@ namespace Tests
         [Test]
         public void ListBoughtMaterials()
         {
-            Publication pub0 = publiAdmin.New();
-            Publication pub3 = publiAdmin.New();
-            
-
-            pub0.CompanyMaterialId = 1;
-            pub3.CompanyMaterialId = 1;
-            
-
-            Sale venta = saleadmin.New();
-            Sale venta2 = saleadmin.New();
-            
-
-            
-            Entrepreneur entre = enadmin.New();
-
-            int id_entrepenur = entre.Id;
-            saleadmin.Insert(venta);
-            saleadmin.Insert(venta2);
+            int id_entrepenur = 12002392;
+            Sale venta = this.datMgr.Sale.New();
             venta.BuyerEntrepreneurId = id_entrepenur;
+            venta.Currency = Currency.DolarEstadounidense;
+            venta.DateTime = DateTime.Now;
+            venta.Price = 123;
+            venta.ProductCompanyMaterialId = 8272711;
+            venta.ProductQuantity = 12;
+            venta.SellerCompanyId = 99202;
+
+            Sale venta2 = this.datMgr.Sale.New();
             venta2.BuyerEntrepreneurId = id_entrepenur;
+            venta2.Currency = Currency.DolarEstadounidense;
+            venta2.DateTime = DateTime.Now;
+            venta2.Price = 123;
+            venta2.ProductCompanyMaterialId = 8272711;
+            venta2.ProductQuantity = 12;
+            venta2.SellerCompanyId = 99202;
+
+            this.datMgr.Sale.Insert(venta);
+            this.datMgr.Sale.Insert(venta2);
             
-
-
-            ReadOnlyCollection<int> lista = saleadmin.GetSalesByBuyer(id_entrepenur);
+            IReadOnlyCollection<int> lista = this.datMgr.Sale.GetSalesByBuyer(id_entrepenur);
 
             Assert.AreEqual(2,lista.Count);
-
-
-
-
-
-
-            
         }
     }
 }

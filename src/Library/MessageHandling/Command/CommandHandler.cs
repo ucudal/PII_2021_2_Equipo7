@@ -6,13 +6,6 @@ namespace ClassLibrary
     /// </summary>
     public class CommandHandler
     {
-        private SessionsContainer sessions = Singleton<SessionsContainer>.Instance;
-        private ChatDialogEntry chatEntry = Singleton<ChatDialogEntry>.Instance;
-        private UserAdmin userAdmin = Singleton<UserAdmin>.Instance;
-        private CompanyAdmin companyAdmin = Singleton<CompanyAdmin>.Instance;
-        private CompanyUserAdmin companyUserAdmin = Singleton<CompanyUserAdmin>.Instance;
-        private EntrepreneurAdmin entrepreneurAdmin = Singleton<EntrepreneurAdmin>.Instance;
-        
         /// <summary>
         /// Procesa el comando enviado por el usuario
         /// de acuerdo a su sesion y lo envia el punto de
@@ -24,21 +17,24 @@ namespace ClassLibrary
         /// <returns>Texto del mensaje de respuesta.</returns>
         public string HandleMessage(MessageWrapper message)
         {
-            Session session = this.sessions.CreateSession(message.Service, message.Account);
-            
+            SessionsContainer sessions = Singleton<SessionsContainer>.Instance;
+            ChatDialogEntry chatEntry = Singleton<ChatDialogEntry>.Instance;
+            DataManager dataManager = new DataManager();
+
+            Session session = sessions.CreateSession(message.Service, message.Account);
             
             if (message.UserStatus == UserStatus.Registered)
             {
-                User user = this.userAdmin.GetById(message.UserId);
+                User user = dataManager.User.GetById(message.UserId);
                 session.UserId = user.Id;
                 switch (user.Role)
                 {
                     case UserRole.CompanyAdministrator:
-                        int companyId = companyUserAdmin.GetCompanyForUser(message.UserId);
+                        int companyId = dataManager.CompanyUser.GetCompanyForUser(message.UserId);
                         session.EntityId = companyId;
                         break;
                     case UserRole.Entrepreneur:
-                        Entrepreneur entrepreneur = entrepreneurAdmin.GetByUser(message.UserId);
+                        Entrepreneur entrepreneur = dataManager.Entrepreneur.GetByUser(message.UserId);
                         session.EntityId = entrepreneur.Id;
                         break;
                     default:
@@ -98,7 +94,7 @@ namespace ClassLibrary
             }
             ChatDialogSelector selector = new ChatDialogSelector(message, context, null);
 
-            return this.chatEntry.Start(selector);
+            return chatEntry.Start(selector);
         }
     }
 }

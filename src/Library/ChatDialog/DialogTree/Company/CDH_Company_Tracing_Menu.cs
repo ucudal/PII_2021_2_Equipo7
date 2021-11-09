@@ -8,10 +8,6 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_Company_Tracing_Menu : ChatDialogHandlerBase
     {
-        private SaleAdmin saleAdmin = Singleton<SaleAdmin>.Instance;
-        
-        private CompanyAdmin companyAdmin = Singleton<CompanyAdmin>.Instance;
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
         /// </summary>
@@ -39,8 +35,8 @@ namespace ClassLibrary
         {
             StringBuilder xListMats=new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            Company company = this.companyAdmin.FindAdminUser(session.UserId);
-            List<Sale> sales = this.saleAdmin.GetByCompanyId(company.Id);
+            Company company = this.datMgr.Company.FindAdminUser(session.UserId);
+            List<Sale> sales = this.datMgr.User.GetByCompanyId(company.Id);
             Dictionary<int,int> saleByMatirial = new Dictionary<int,int>();
         
             foreach(Sale sale in sales)

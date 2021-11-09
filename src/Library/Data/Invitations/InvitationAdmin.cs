@@ -1,5 +1,6 @@
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace ClassLibrary
@@ -7,7 +8,7 @@ namespace ClassLibrary
     /// <summary>
     /// Esta clase representa la administracion de Invitaciones.
     /// </summary>
-    public class InvitationAdmin: DataAdmin<Invitation>
+    public sealed class InvitationAdmin: DataAdmin<Invitation>
     {
         /// <summary>
         /// Obtener la invitacion a 
@@ -19,7 +20,7 @@ namespace ClassLibrary
         /// <returns></returns>
         public Invitation GetByCode(string pCode)
         {
-            ReadOnlyCollection<Invitation> invites = this.Items;
+            IReadOnlyCollection<Invitation> invites = this.Items;
             foreach (Invitation inv in invites)
             {
                 if (inv.Code == pCode)
@@ -49,7 +50,7 @@ namespace ClassLibrary
         /// </returns>
         public bool GetInvitationIsOfType(string code, RegistrationType type)
         {
-            ReadOnlyCollection<Invitation> invites = this.Items;
+            IReadOnlyCollection<Invitation> invites = this.Items;
             foreach (Invitation inv in invites)
             {
                 if (inv.Code == code)
@@ -60,8 +61,6 @@ namespace ClassLibrary
             return false;
 
         }
-
-        
 
         /// <summary>
         /// Actualizar una invitacion con un
@@ -109,6 +108,28 @@ namespace ClassLibrary
                 invite.Code = builder.ToString();
                 this.Update(invite);
             }
+        }
+
+        /// <inheritdoc/>
+        protected override void ValidateInsert(Invitation item)
+        {
+            if(item.Used == true) 
+                throw new ValidationException("Nuevas invitaciones no pueden estar usadas.");
+            base.ValidateInsert(item);
+        }
+
+        /// <inheritdoc/>
+        protected override void ValidateData(Invitation item)
+        {
+            DataManager dataManager = new DataManager();
+            if(item.Type == RegistrationType.CompanyJoin && (item.CompanyId == 0/* || !dataManager.Company.Exists(item.CompanyId)*/)) 
+                throw new ValidationException("Requerida compania valida para registro de union a compania.");
+            if(item.Type == 0) 
+                throw new ValidationException("Requerido tipo de invitacion.");
+            if(item.ValidAfter == DateTime.MinValue) 
+                throw new ValidationException("Requerida fecha para inicio de validez.");
+            if(item.ValidBefore == DateTime.MinValue) 
+                throw new ValidationException("Requerida fecha para fin de validez.");
         }
     }
 }

@@ -9,9 +9,6 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_VentasLista : ChatDialogHandlerBase
     {
-        private SaleAdmin saleAdmin = Singleton<SaleAdmin>.Instance;
-        private CompanyAdmin companyAdmin = Singleton<CompanyAdmin>.Instance;
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
         /// </summary>

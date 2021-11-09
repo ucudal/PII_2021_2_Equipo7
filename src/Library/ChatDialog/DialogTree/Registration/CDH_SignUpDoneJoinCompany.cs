@@ -11,11 +11,6 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_SignUpDoneJoinCompany : ChatDialogHandlerBase
     {
-        private UserAdmin userAdmin = Singleton<UserAdmin>.Instance;
-        private AccountAdmin accAdmin = Singleton<AccountAdmin>.Instance;
-        private InvitationAdmin inviteAdmin = Singleton<InvitationAdmin>.Instance;
-        private CompanyUserAdmin compUsrAdmin = Singleton<CompanyUserAdmin>.Instance;
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpDoneJoinCompany"/>.
         /// </summary>
@@ -32,32 +27,32 @@ namespace ClassLibrary
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             SignUpData data = session.Process.GetData<SignUpData>();
 
-            User user = userAdmin.New();
+            User user = this.datMgr.User.New();
             user.FirstName = data.User.FirstName;
             user.LastName = data.User.LastName;
             user.Role = UserRole.CompanyAdministrator;
-            int userId = userAdmin.Insert(user);
+            int userId = this.datMgr.User.Insert(user);
 
             if (userId != 0)
             {
-                Account acc = accAdmin.New();
+                Account acc = this.datMgr.Account.New();
                 acc.UserId = userId;
                 acc.Service = selector.Service;
                 acc.CodeInService = selector.Account;
-                accAdmin.Insert(acc);
+                this.datMgr.Account.Insert(acc);
                 
-                Invitation inv = inviteAdmin.GetByCode(data.InviteCode);
+                Invitation inv = this.datMgr.Invitation.GetByCode(data.InviteCode);
 
                 if (inv.CompanyId != 0)
                 {
-                    CompanyUser compUsr = compUsrAdmin.New();
+                    CompanyUser compUsr = this.datMgr.CompanyUser.New();
                     compUsr.CompanyId = inv.CompanyId;
                     compUsr.AdminUserId = userId;
-                    compUsrAdmin.Insert(compUsr);
+                    this.datMgr.CompanyUser.Insert(compUsr);
                 }
 
                 inv.Used = true;
-                inviteAdmin.Update(inv);
+                this.datMgr.Invitation.Update(inv);
             }
 
             session.MenuLocation = null;

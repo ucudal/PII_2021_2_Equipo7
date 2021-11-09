@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace ClassLibrary
 {
     /// <summary>
@@ -8,9 +6,6 @@ namespace ClassLibrary
     /// </summary>
     public class UserAuthenticator
     {
-        private static AccountAdmin accountAdmin=Singleton<AccountAdmin>.Instance;
-        private static UserAdmin userAdmin = Singleton<UserAdmin>.Instance;
-
         /// <summary>
         /// Añade informacion del usuario y su estado de registro
         /// al contenedor de mensaje recibido.
@@ -20,20 +15,22 @@ namespace ClassLibrary
         /// </param>
         public static void Authenticate(MessageWrapper message)
         {
-            message.UserId=accountAdmin.GetUserIdForAccount(message.Service,message.Account);
-            if(message.UserId==0)
+            DataManager dataManager = new DataManager();
+
+            message.UserId = dataManager.Account.GetUserIdForAccount(message.Service,message.Account);
+            if(message.UserId == 0)
             {
-                message.UserStatus= UserStatus.Unregistered;
+                message.UserStatus = UserStatus.Unregistered;
             }
             else
             {
-               if(userAdmin.GetUserIsSuspended(message.UserId))
+               if(dataManager.User.GetUserIsSuspended(message.UserId))
                {
-                   message.UserStatus=UserStatus.Suspended;
+                   message.UserStatus = UserStatus.Suspended;
                }
                else
                {
-                   message.UserStatus= UserStatus.Registered;
+                   message.UserStatus = UserStatus.Registered;
                }
             }
         }

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace ClassLibrary
 {
@@ -8,7 +8,7 @@ namespace ClassLibrary
     /// asociaciones entre companias
     /// y usuarios.
     /// </summary>
-    public class CompanyUserAdmin : DataAdmin<CompanyUser>
+    public sealed class CompanyUserAdmin : DataAdmin<CompanyUser>
     {
         /// <summary>
         /// Lista todos los usuarios
@@ -22,10 +22,10 @@ namespace ClassLibrary
         /// <returns>
         /// Listado de ids de usuarios.
         /// </returns>
-        public ReadOnlyCollection<int> GetAdminUserForCompany(int companyId)
+        public IReadOnlyCollection<int> GetAdminUserForCompany(int companyId)
         {
             List<int> resultList = new List<int>();
-            ReadOnlyCollection<CompanyUser> compUsers = this.Items;
+            IReadOnlyCollection<CompanyUser> compUsers = this.Items;
             foreach (CompanyUser user in compUsers)
             {
                 if (user.CompanyId == companyId)
@@ -51,7 +51,7 @@ namespace ClassLibrary
         /// </returns>
         public int GetCompanyForUser(int userId)
         {
-            ReadOnlyCollection<CompanyUser> compUsers = this.Items;
+            IReadOnlyCollection<CompanyUser> compUsers = this.Items;
             foreach (CompanyUser user in compUsers)
             {
                 if (user.AdminUserId == userId)
@@ -61,6 +61,16 @@ namespace ClassLibrary
             }
             
             return 0;
+        }
+
+        /// <inheritdoc/>
+        protected override void ValidateData(CompanyUser item)
+        {
+            DataManager dataManager = new DataManager();
+            if(item.AdminUserId == 0/* || !dataManager.CompanyUser.Exists(item.AdminUserId)*/) 
+                throw new ValidationException("Requerido usuario.");
+            if(item.CompanyId == 0/* || !dataManager.Company.Exists(item.CompanyId)*/) 
+                throw new ValidationException("Requerida compania.");
         }
     }
 }

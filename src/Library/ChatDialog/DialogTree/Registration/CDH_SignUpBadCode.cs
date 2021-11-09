@@ -11,8 +11,6 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_SignUpBadCode : ChatDialogHandlerBase
     {
-        private InvitationAdmin invitationAdmin = Singleton<InvitationAdmin>.Instance;
-        
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpBadCode"/>.
         /// </summary>
@@ -45,7 +43,7 @@ namespace ClassLibrary
             {
                 if (!selector.Code.StartsWith('\\'))
                 {
-                    Invitation invite = invitationAdmin.GetByCode(selector.Code);
+                    Invitation invite = this.datMgr.Invitation.GetByCode(selector.Code);
                     if (invite is null)
                     {
                         return true;

@@ -10,9 +10,6 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_CompanyQualificationListToAddMenu : ChatDialogHandlerBase
     {
-        private QualificationAdmin qualificationAdmin = Singleton<QualificationAdmin>.Instance;
-        private CompanyAdmin companyAdmin=Singleton<CompanyAdmin>.Instance;
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyQualificationListToAddMenu"/>.
         /// </summary>

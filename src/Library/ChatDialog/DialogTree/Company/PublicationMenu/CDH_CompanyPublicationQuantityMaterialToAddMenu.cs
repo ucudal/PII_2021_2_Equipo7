@@ -9,8 +9,6 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_CompanyPublicationQuantityMaterialToAddMenu : ChatDialogHandlerBase
     {
-        private CompanyMaterialAdmin companyMaterialAdmin = Singleton<CompanyMaterialAdmin>.Instance;
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyPublicationQuantityMaterialToAddMenu"/>.
         /// </summary>
@@ -25,7 +23,7 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
         
-            CompanyMaterial xMat=companyMaterialAdmin.GetById(int.Parse(selector.Code));
+            CompanyMaterial xMat=this.datMgr.CompanyMaterial.GetById(int.Parse(selector.Code));
             InsertPublicationData data = new InsertPublicationData();
             data.CompanyMaterial=xMat;
             DProcessData process = new DProcessData("add_material_to_publication", this.code, data);
@@ -45,7 +43,7 @@ namespace ClassLibrary
             {
                 if (!selector.Code.StartsWith('\\'))
                 {
-                    CompanyMaterial xMat = companyMaterialAdmin.GetById(int.Parse(selector.Code));
+                    CompanyMaterial xMat = this.datMgr.CompanyMaterial.GetById(int.Parse(selector.Code));
                     if (xMat is not null)
                     {
                         return true;

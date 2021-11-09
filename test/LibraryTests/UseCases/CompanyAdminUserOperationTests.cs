@@ -1,5 +1,5 @@
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using ClassLibrary;
 using NUnit.Framework;
 
@@ -12,15 +12,7 @@ namespace Tests
     [TestFixture]
     public class CompanyAdminUserOperationTests
     {
-        private CompanyMaterialAdmin companyMaterialAdmin=Singleton<CompanyMaterialAdmin>.Instance;
-        private MaterialCategoryAdmin materialCategoryAdmin=Singleton<MaterialCategoryAdmin>.Instance;
-        private CompanyAdmin companyAdmin=Singleton<CompanyAdmin>.Instance;
-        private QualificationAdmin qualificationAdmin=Singleton<QualificationAdmin>.Instance;
-        private CompanyMaterialQualificationAdmin companyMaterialQualificationAdmin=Singleton<CompanyMaterialQualificationAdmin>.Instance;
-        private PublicationAdmin publicationAdmin=Singleton<PublicationAdmin>.Instance;
-        private PublicationKeyWordAdmin publicationKeyWordAdmin=Singleton<PublicationKeyWordAdmin>.Instance;
-        private SaleAdmin saleAdmin=Singleton<SaleAdmin>.Instance;
-        private EntrepreneurAdmin entrepreneurAdmin=Singleton<EntrepreneurAdmin>.Instance;
+        private DataManager datMgr = new DataManager();
 
         /// <summary>
         /// Test de creacion de una publicacion
@@ -29,40 +21,37 @@ namespace Tests
         [Test]
         public void PublicationCreationTest()
         {
-            CompanyAdmin compAdmin = Singleton<CompanyAdmin>.Instance;
-            CompanyMaterialAdmin compMatAdmin = Singleton<CompanyMaterialAdmin>.Instance;
-            PublicationAdmin pubAdmin = Singleton<PublicationAdmin>.Instance;
-            ReadOnlyCollection<Publication> prevpub = pubAdmin.Items;
-
+            IReadOnlyCollection<Publication> prevpub = this.datMgr.Publication.Items;
 
             // creo la company
-            Company comp = compAdmin.New();
+            Company comp = this.datMgr.Company.New();
 
             comp.Name="nombre de la company" ;
             comp.Trade = "trade";
             
-            int idComp = compAdmin.Insert(comp);
+            int idComp = this.datMgr.Company.Insert(comp);
 
 
             // creo un material de compania y le paso el id de la company
 
 
-            CompanyMaterial compmat = compMatAdmin.New();
+            CompanyMaterial compmat = this.datMgr.CompanyMaterial.New();
             compmat.Name="material";
             compmat.CompanyId = idComp;
             compmat.DateBetweenRestocks = 100;
             compmat.LastRestock =DateTime.Now.AddMonths(-1);
             compmat.MaterialCategoryId =2;
-            int idCompMat = compMatAdmin.Insert(compmat);
+            int idCompMat = this.datMgr.CompanyMaterial.Insert(compmat);
 
 
             // creo una publicacion 
 
 
-            Publication pub = pubAdmin.New();
+            Publication pub = this.datMgr.Publication.New();
             pub.ActiveFrom = DateTime.Now.AddMonths(-1);
             pub.ActiveUntil = DateTime.Now.AddMonths(1);
             pub.CompanyId = idComp;
+            pub.CompanyMaterialId = idCompMat;
 
 
             Currency currency = Currency.DolarEstadounidense;
@@ -70,10 +59,10 @@ namespace Tests
 
             int Price = 120;
             pub.Price = Price;
-            int idPub = pubAdmin.Insert(pub);
+            int idPub = this.datMgr.Publication.Insert(pub);
 
 
-            ReadOnlyCollection<Publication> postpub = pubAdmin.Items;
+            IReadOnlyCollection<Publication> postpub = this.datMgr.Publication.Items;
             int postcheck = postpub.Count;
             
 
@@ -101,10 +90,10 @@ namespace Tests
             string name = "Maderas";
             bool deleted = false;
 
-            MaterialCategory materialCategory=materialCategoryAdmin.New();
+            MaterialCategory materialCategory=this.datMgr.MaterialCategory.New();
             materialCategory.Name=name;
             materialCategory.Deleted=deleted;
-            int materialCategoryId = materialCategoryAdmin.Insert(materialCategory);
+            int materialCategoryId = this.datMgr.MaterialCategory.Insert(materialCategory);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, materialCategoryId);
@@ -113,37 +102,37 @@ namespace Tests
             name="nombre compania";
             string trade ="rubro";
 
-            Company compania = companyAdmin.New();
+            Company compania = this.datMgr.Company.New();
             compania.Name = name;
             compania.Trade = trade;
-            int companyId = companyAdmin.Insert(compania);
+            int companyId = this.datMgr.Company.Insert(compania);
             
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0,companyId);
 
             //Agregamos una material 
-            ReadOnlyCollection<CompanyMaterial> prevCompanyMaterial = companyMaterialAdmin.Items;
+            IReadOnlyCollection<CompanyMaterial> prevCompanyMaterial = this.datMgr.CompanyMaterial.Items;
 
             name = "Tabla de Roble";
             DateTime lastRestock=DateTime.Now.AddMonths(-1);
             int dateBetweenRestocks=15;
             deleted = false;
 
-            CompanyMaterial companyMaterial=companyMaterialAdmin.New();
+            CompanyMaterial companyMaterial=this.datMgr.CompanyMaterial.New();
             companyMaterial.Name=name;
             companyMaterial.LastRestock=lastRestock;
             companyMaterial.DateBetweenRestocks=dateBetweenRestocks;
             companyMaterial.MaterialCategoryId=materialCategoryId;
             companyMaterial.CompanyId=companyId;
             companyMaterial.Deleted=deleted;
-            int companyMaterialId = companyMaterialAdmin.Insert(companyMaterial);
+            int companyMaterialId = this.datMgr.CompanyMaterial.Insert(companyMaterial);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, companyMaterialId);
 
             int expected=prevCompanyMaterial.Count + 1;
 
-            ReadOnlyCollection<CompanyMaterial> postCompanyMaterial = companyMaterialAdmin.Items;
+            IReadOnlyCollection<CompanyMaterial> postCompanyMaterial = this.datMgr.CompanyMaterial.Items;
 
             //Validamos que se agrego un material
             Assert.AreEqual(expected,postCompanyMaterial.Count);
@@ -164,7 +153,7 @@ namespace Tests
             int dateBetweenRestocks=20;
             bool deleted = false;
 
-            CompanyMaterial companyMaterial=companyMaterialAdmin.New();
+            CompanyMaterial companyMaterial=this.datMgr.CompanyMaterial.New();
             companyMaterial.Name=name;
             companyMaterial.LastRestock=lastRestock;
             companyMaterial.DateBetweenRestocks=dateBetweenRestocks;
@@ -172,7 +161,7 @@ namespace Tests
             companyMaterial.CompanyId=companyId;
             companyMaterial.Deleted=deleted;
             //Retorna el id con el que guardo el comapnyMaterial
-            int companyMaterialId = companyMaterialAdmin.Insert(companyMaterial);
+            int companyMaterialId = this.datMgr.CompanyMaterial.Insert(companyMaterial);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, companyMaterialId);
@@ -180,43 +169,43 @@ namespace Tests
             //Agregamos una habilitacion
             name="Habilitacion madera";
 
-            Qualification qualification = qualificationAdmin.New();
+            Qualification qualification = this.datMgr.Qualification.New();
             qualification.Name=name;
             //Retorna el id con el que guardo la habilitacion
-            int qualificationId = qualificationAdmin.Insert(qualification);
+            int qualificationId = this.datMgr.Qualification.Insert(qualification);
             
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0,qualificationId);
         
             //Agregamos una Habilitacion de un material 
-            ReadOnlyCollection<CompanyMaterialQualification> prevCompanyMaterialQualification = companyMaterialQualificationAdmin.Items;
+            IReadOnlyCollection<CompanyMaterialQualification> prevCompanyMaterialQualification = this.datMgr.CompanyMaterialQualification.Items;
 
             deleted=false;
 
-            CompanyMaterialQualification companyMaterialQualification=companyMaterialQualificationAdmin.New();
+            CompanyMaterialQualification companyMaterialQualification=this.datMgr.CompanyMaterialQualification.New();
             companyMaterialQualification.Deleted=deleted;
             companyMaterialQualification.CompanyMatId=companyMaterialId;
             companyMaterialQualification.QualificationId=qualificationId;
-            int companyMaterialQualificationId = companyMaterialQualificationAdmin.Insert(companyMaterialQualification);
+            int companyMaterialQualificationId = this.datMgr.CompanyMaterialQualification.Insert(companyMaterialQualification);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, companyMaterialQualificationId);
 
             int expected=prevCompanyMaterialQualification.Count + 1;
 
-            ReadOnlyCollection<CompanyMaterialQualification> postCompanyMaterialQualification = companyMaterialQualificationAdmin.Items;
+            IReadOnlyCollection<CompanyMaterialQualification> postCompanyMaterialQualification = this.datMgr.CompanyMaterialQualification.Items;
 
             //Validamos que se agrego una habilitacion de un material
             Assert.AreEqual(expected,postCompanyMaterialQualification.Count);
 
-            CompanyMaterialQualification xQualification=companyMaterialQualificationAdmin.GetById(companyMaterialQualificationId);
+            CompanyMaterialQualification xQualification=this.datMgr.CompanyMaterialQualification.GetById(companyMaterialQualificationId);
 
             //Material al que se le agrego la habilitacion para comparar
-            CompanyMaterial xCompMat=companyMaterialAdmin.GetById(xQualification.CompanyMatId);
+            CompanyMaterial xCompMat=this.datMgr.CompanyMaterial.GetById(xQualification.CompanyMatId);
             Assert.AreEqual(xCompMat.Id,companyMaterialId);
 
             //Habilitacion que se le agrego al material para comparar
-            Qualification xQualif=qualificationAdmin.GetById(xQualification.QualificationId);
+            Qualification xQualif=this.datMgr.Qualification.GetById(xQualification.QualificationId);
             Assert.AreEqual(xQualif.Id,qualificationId);
         }
 
@@ -233,29 +222,31 @@ namespace Tests
             int Price = 120;
             Currency currency = Currency.DolarEstadounidense;
 
-            Publication publication = publicationAdmin.New();
+            Publication publication = this.datMgr.Publication.New();
+            publication.CompanyId = 1235324;
+            publication.CompanyMaterialId = 879374;
             publication.ActiveFrom = activeFrom;
             publication.ActiveUntil = activeuntil;
             publication.Price = Price;
             publication.Currency = currency;
             //Retorna el id con el cual se inserto.
-            int publicationId = publicationAdmin.Insert(publication);
+            int publicationId = this.datMgr.Publication.Insert(publication);
 
             //Valido que se haya añadido bien.
             Assert.AreNotEqual(0,publicationId);
 
             //Añadimos una keyWord1 y le asignamos esta publicacion
-            PublicationKeyWord publicationKeyWord1 = publicationKeyWordAdmin.New();
+            PublicationKeyWord publicationKeyWord1 = this.datMgr.PublicationKeyWord.New();
             publicationKeyWord1.KeyWord="Construcción";
             publicationKeyWord1.Deleted=false;
             publicationKeyWord1.PublicationId=publicationId;
-            int publicationKeyWordId  = publicationKeyWordAdmin.Insert(publicationKeyWord1);
+            int publicationKeyWordId  = this.datMgr.PublicationKeyWord.Insert(publicationKeyWord1);
 
-            PublicationKeyWord xComp=publicationKeyWordAdmin.GetById(publicationKeyWordId);
+            PublicationKeyWord xComp=this.datMgr.PublicationKeyWord.GetById(publicationKeyWordId);
             Assert.AreEqual(xComp.Id,publicationKeyWordId);
 
             //Me traigo la publicacion que esta asociada a esa keyWord y valido que sea igual la agregada previamente
-            Publication xPub=publicationAdmin.GetById(xComp.PublicationId);
+            Publication xPub=this.datMgr.Publication.GetById(xComp.PublicationId);
             Assert.AreEqual(xPub.Id,publicationId);           
         }
 
@@ -270,10 +261,12 @@ namespace Tests
             string name="Nicolas";
             string trade ="rubro";
 
-            Entrepreneur entrepreneurBuyer = entrepreneurAdmin.New();
+            Entrepreneur entrepreneurBuyer = this.datMgr.Entrepreneur.New();
             entrepreneurBuyer.Name = name;
             entrepreneurBuyer.Trade = trade;
-            int entrepreneurBuyerId = entrepreneurAdmin.Insert(entrepreneurBuyer);
+            entrepreneurBuyer.UserId = 9872347;
+            entrepreneurBuyer.GeoReference = "Av Italia y Propios";
+            int entrepreneurBuyerId = this.datMgr.Entrepreneur.Insert(entrepreneurBuyer);
             
             Assert.AreNotEqual(0,entrepreneurBuyerId);
 
@@ -281,10 +274,10 @@ namespace Tests
             name="nombre compania";
             trade ="rubro";
 
-            Company compania = companyAdmin.New();
+            Company compania = this.datMgr.Company.New();
             compania.Name = name;
             compania.Trade = trade;
-            int companyId = companyAdmin.Insert(compania);
+            int companyId = this.datMgr.Company.Insert(compania);
             
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0,companyId);
@@ -297,14 +290,14 @@ namespace Tests
             int materialCategoryId=2;
             bool deleted = false;
 
-            CompanyMaterial companyMaterial=companyMaterialAdmin.New();
+            CompanyMaterial companyMaterial=this.datMgr.CompanyMaterial.New();
             companyMaterial.Name=name;
             companyMaterial.LastRestock=lastRestock;
             companyMaterial.DateBetweenRestocks=dateBetweenRestocks;
             companyMaterial.MaterialCategoryId=materialCategoryId;
             companyMaterial.CompanyId=companyId;
             companyMaterial.Deleted=deleted;
-            int companyMaterialId = companyMaterialAdmin.Insert(companyMaterial);
+            int companyMaterialId = this.datMgr.CompanyMaterial.Insert(companyMaterial);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, companyMaterialId);
@@ -315,7 +308,7 @@ namespace Tests
             int quantity=20;
             Currency currency = Currency.PesoUruguayo;
 
-            Sale sale1 = saleAdmin.New();
+            Sale sale1 = this.datMgr.Sale.New();
             sale1.DateTime = datetime;
             sale1.Price = price;
             sale1.Currency = currency;
@@ -323,7 +316,7 @@ namespace Tests
             sale1.BuyerEntrepreneurId=entrepreneurBuyerId;
             sale1.ProductQuantity=quantity;
             sale1.SellerCompanyId=companyId;
-            int sale1Id = saleAdmin.Insert(sale1);
+            int sale1Id = this.datMgr.Sale.Insert(sale1);
 
             Assert.AreNotEqual(0,sale1Id);
 
@@ -333,7 +326,7 @@ namespace Tests
             quantity=500;
             currency = Currency.PesoUruguayo;
 
-            Sale sale2 = saleAdmin.New();
+            Sale sale2 = this.datMgr.Sale.New();
             sale2.DateTime = datetime;
             sale2.Price = price;
             sale2.Currency = currency;
@@ -341,13 +334,13 @@ namespace Tests
             sale2.BuyerEntrepreneurId=entrepreneurBuyerId;
             sale2.ProductQuantity=quantity;
             sale2.SellerCompanyId=companyId;
-            int sale2Id = saleAdmin.Insert(sale2);
+            int sale2Id = this.datMgr.Sale.Insert(sale2);
 
             Assert.AreNotEqual(0,sale2Id);
 
             int salesExpected=2;
 
-            Assert.AreEqual(salesExpected,saleAdmin.GetSalesBySeller(companyId).Count);
+            Assert.AreEqual(salesExpected, this.datMgr.Sale.GetSalesBySeller(companyId).Count);
         }
     }
 }

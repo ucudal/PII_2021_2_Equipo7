@@ -1,5 +1,4 @@
-using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using ClassLibrary;
 using NUnit.Framework;
 
@@ -11,7 +10,7 @@ namespace Tests
     [TestFixture]
     public class UserAdminTest
     {
-        private UserAdmin userAdmin = Singleton<UserAdmin>.Instance;
+        private DataManager datMgr = new DataManager();
 
         /// <summary>
         /// Test del metodo GetUserIsSuspended(int userId).
@@ -23,22 +22,22 @@ namespace Tests
             string firstName = "Nicolas";
             string lastName = "Maisonnave";;
             UserRole role = new UserRole();
-            bool suspended = true;
+            bool suspended = false;
             bool deleted = false;
 
-            User user = userAdmin.New();
+            User user = this.datMgr.User.New();
             user.FirstName = firstName;
             user.LastName=lastName;
             user.Role=role;
             user.Suspended=suspended;
             user.Deleted=deleted;
-            int userId = userAdmin.Insert(user);
+            int userId = this.datMgr.User.Insert(user);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, userId);
 
             //Validamos que nos retorne true el metodo GetUserIsSuspended
-            Assert.AreEqual(userAdmin.GetUserIsSuspended(userId),suspended);
+            Assert.AreEqual(this.datMgr.User.GetUserIsSuspended(userId),suspended);
         }
 
         /// <summary>
@@ -48,28 +47,28 @@ namespace Tests
         public void InsertTest()
         {
             //Agregamos un usuario 
-            ReadOnlyCollection<User> prevUsers = userAdmin.Items;
+            IReadOnlyCollection<User> prevUsers = this.datMgr.User.Items;
 
             string firstName = "Nicolas";
             string lastName = "Maisonnave";;
             UserRole role = new UserRole();
-            bool suspended = true;
+            bool suspended = false;
             bool deleted = false;
 
-            User user = userAdmin.New();
+            User user = this.datMgr.User.New();
             user.FirstName = firstName;
             user.LastName=lastName;
             user.Role=role;
             user.Suspended=suspended;
             user.Deleted=deleted;
-            int userId = userAdmin.Insert(user);
+            int userId = this.datMgr.User.Insert(user);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, userId);
 
             int expeced=prevUsers.Count + 1;
 
-            ReadOnlyCollection<User> postUsers = userAdmin.Items;
+            IReadOnlyCollection<User> postUsers = this.datMgr.User.Items;
 
             //Validamos que se agrego un Usuario
             Assert.AreEqual(expeced,postUsers.Count);
@@ -81,59 +80,53 @@ namespace Tests
         public void UpdateTest()
         {
             //Insertamos una invitacion y validamos que haya quedado agregada
-            ReadOnlyCollection<User> prevUsers = userAdmin.Items;
+            IReadOnlyCollection<User> prevUsers = this.datMgr.User.Items;
 
             string firstName = "Nicolas";
             string lastName = "Maisonnave";;
-            UserRole role = new UserRole();
-            bool suspended = true;
+            UserRole role = UserRole.Entrepreneur;
+            bool suspended = false;
             bool deleted = false;
 
-            User user = userAdmin.New();
+            User user = this.datMgr.User.New();
             user.FirstName = firstName;
             user.LastName=lastName;
             user.Role=role;
             user.Suspended=suspended;
             user.Deleted=deleted;
-            int userId = userAdmin.Insert(user);
+            int userId = this.datMgr.User.Insert(user);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, userId);
 
             int expected=prevUsers.Count + 1;
 
-            ReadOnlyCollection<User> postUsers = userAdmin.Items;
+            IReadOnlyCollection<User> postUsers = this.datMgr.User.Items;
 
             //Validamos que se agrego un Usuario
             Assert.AreEqual(expected,postUsers.Count);
             
             //Obtenemos la invitacion recien agregada, le cambiamos los campos y le damos a update
-            User xToUpdate=userAdmin.New();
-            xToUpdate=userAdmin.GetById(userId);
+            User xToUpdate=this.datMgr.User.New();
+            xToUpdate=this.datMgr.User.GetById(userId);
             
             //atributos nuevos
             firstName = "Andres";
-            lastName = "Espiga";;
-            role = new UserRole();
-            suspended = false;
-            deleted = false;
+            lastName = "Espiga";
+            suspended = true;
 
-            xToUpdate.Id=userId;
             xToUpdate.FirstName=firstName;
             xToUpdate.LastName=lastName;
-            xToUpdate.Role=role;
             xToUpdate.Suspended=suspended;
-            xToUpdate.Deleted=deleted;
 
-            userAdmin.Update(xToUpdate);
+            this.datMgr.User.Update(xToUpdate);
 
-            User xComp=userAdmin.GetById(userId);
+            User xComp=this.datMgr.User.GetById(userId);
 
-            Assert.AreEqual(xToUpdate.Id, xComp.Id);
-            Assert.AreEqual(xToUpdate.FirstName,xComp.FirstName);
-            Assert.AreEqual(xToUpdate.LastName, xComp.LastName);
-            Assert.AreEqual(xToUpdate.Suspended, xComp.Suspended);
-            Assert.AreEqual(xToUpdate.Deleted, xComp.Deleted);
+            Assert.AreNotEqual(user.FirstName,xComp.FirstName);
+            Assert.AreNotEqual(user.LastName, xComp.LastName);
+            Assert.AreNotEqual(user.Suspended, xComp.Suspended);
+            Assert.AreEqual(user.Deleted, xComp.Deleted);
         }
 
         /// <summary>
@@ -143,40 +136,40 @@ namespace Tests
         public void DeleteTest()
         {
             //Insertamos una Usuario y validamos que haya quedado agregado
-            ReadOnlyCollection<User> prevUsers = userAdmin.Items;
+            IReadOnlyCollection<User> prevUsers = this.datMgr.User.Items;
 
             string firstName = "Nicolas";
             string lastName = "Maisonnave";;
             UserRole role = new UserRole();
-            bool suspended = true;
+            bool suspended = false;
             bool deleted = false;
 
-            User user = userAdmin.New();
+            User user = this.datMgr.User.New();
             user.FirstName = firstName;
             user.LastName=lastName;
             user.Role=role;
             user.Suspended=suspended;
             user.Deleted=deleted;
-            int userId = userAdmin.Insert(user);
+            int userId = this.datMgr.User.Insert(user);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, userId);
 
             int expected=prevUsers.Count + 1;
 
-            ReadOnlyCollection<User> postUsers = userAdmin.Items;
+            IReadOnlyCollection<User> postUsers = this.datMgr.User.Items;
 
             //Validamos que se agrego un Usuario
             Assert.AreEqual(expected,postUsers.Count);
 
             //Hacemos el delete y luego validamos que al cantidad haya disminuido 1
-            ReadOnlyCollection<User> beforeDelete=postUsers;
+            IReadOnlyCollection<User> beforeDelete=postUsers;
 
             expected=postUsers.Count - 1;
 
-            userAdmin.Delete(userId);
+            this.datMgr.User.Delete(userId);
 
-            ReadOnlyCollection<User> afterDelete = userAdmin.Items;
+            IReadOnlyCollection<User> afterDelete = this.datMgr.User.Items;
 
             //Comprobamos que se elimino un usuario
             Assert.AreEqual(expected,afterDelete.Count);
@@ -189,34 +182,34 @@ namespace Tests
         public void GetByIdTest()
         {
             //Insertamos una Usuario y validamos que haya quedado agregado
-            ReadOnlyCollection<User> prevUsers = userAdmin.Items;
+            IReadOnlyCollection<User> prevUsers = this.datMgr.User.Items;
 
             string firstName = "Nicolas";
             string lastName = "Maisonnave";;
             UserRole role = new UserRole();
-            bool suspended = true;
+            bool suspended = false;
             bool deleted = false;
 
-            User user = userAdmin.New();
+            User user = this.datMgr.User.New();
             user.FirstName = firstName;
             user.LastName=lastName;
             user.Role=role;
             user.Suspended=suspended;
             user.Deleted=deleted;
-            int userId = userAdmin.Insert(user);
+            int userId = this.datMgr.User.Insert(user);
 
             //Validamos que se haya añadido correctamente con un id!= 0
             Assert.AreNotEqual(0, userId);
 
             int expected=prevUsers.Count + 1;
 
-            ReadOnlyCollection<User> postUsers = userAdmin.Items;
+            IReadOnlyCollection<User> postUsers = this.datMgr.User.Items;
 
             //Validamos que se agrego un Usuario
             Assert.AreEqual(expected,postUsers.Count);
             
             //Obtenemos el usuario agregada con GetById y comparamos
-            User xComp=userAdmin.GetById(userId);
+            User xComp=this.datMgr.User.GetById(userId);
             
             Assert.AreEqual(userId, xComp.Id);
             Assert.AreEqual(user.FirstName,xComp.FirstName);

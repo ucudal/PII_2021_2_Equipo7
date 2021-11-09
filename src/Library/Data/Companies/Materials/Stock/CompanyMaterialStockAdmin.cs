@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using ClassLibrary.Services.Location.Client;
@@ -12,7 +12,7 @@ namespace ClassLibrary
     /// al stock por localizacion de cada
     /// material de las empresas.
     /// </summary>
-    public class CompanyMaterialStockAdmin : DataAdmin<CompanyMaterialStock>
+    public sealed class CompanyMaterialStockAdmin : DataAdmin<CompanyMaterialStock>
     {
         /// <summary>
         /// Obtiene el stock total
@@ -29,7 +29,7 @@ namespace ClassLibrary
         public int GetStockTotalForCompanyMaterial(int companyMaterialId)
         {
             int result = 0;
-            ReadOnlyCollection<CompanyMaterialStock> materialStocks = this.Items;
+            IReadOnlyCollection<CompanyMaterialStock> materialStocks = this.Items;
             foreach (CompanyMaterialStock materialStock in materialStocks)
             {
                 if (materialStock.CompanyMatId == companyMaterialId)
@@ -54,10 +54,10 @@ namespace ClassLibrary
         /// Listado de Ids de localizaciones
         /// de la empresa con stock del material.
         /// </returns>
-        public ReadOnlyCollection<int> GetLocationsWithStockForCompanyMaterial(int companyMaterialId)
+        public IReadOnlyCollection<int> GetLocationsWithStockForCompanyMaterial(int companyMaterialId)
         {
             List<int> resultList = new List<int>();
-            ReadOnlyCollection<CompanyMaterialStock> matStocks = this.Items;
+            IReadOnlyCollection<CompanyMaterialStock> matStocks = this.Items;
             foreach (CompanyMaterialStock matStock in matStocks)
             {
                 if (matStock.CompanyMatId == companyMaterialId && matStock.Stock > 0)
@@ -88,10 +88,10 @@ namespace ClassLibrary
         /// Listado de Ids de localizaciones
         /// de la empresa con stock del material.
         /// </returns>
-        public ReadOnlyCollection<int> GetLocationsWithStockForCompanyMaterial(int companyMaterialId, int itemCount, int page)
+        public IReadOnlyCollection<int> GetLocationsWithStockForCompanyMaterial(int companyMaterialId, int itemCount, int page)
         {
             List<CompanyMaterialStock> resultList = new List<CompanyMaterialStock>();
-            ReadOnlyCollection<CompanyMaterialStock> matStocks = this.Items;
+            IReadOnlyCollection<CompanyMaterialStock> matStocks = this.Items;
             foreach (CompanyMaterialStock matStock in matStocks)
             {
                 if (matStock.CompanyMatId == companyMaterialId && matStock.Stock > 0)
@@ -118,10 +118,10 @@ namespace ClassLibrary
         /// de empresa con stock en la
         /// localizacion.
         /// </returns>
-        public ReadOnlyCollection<int> GetCompanyMaterialsInStockForLocation(int companyLocationId)
+        public IReadOnlyCollection<int> GetCompanyMaterialsInStockForLocation(int companyLocationId)
         {
             List<int> resultList = new List<int>();
-            ReadOnlyCollection<CompanyMaterialStock> matStocks = this.Items;
+            IReadOnlyCollection<CompanyMaterialStock> matStocks = this.Items;
             foreach (CompanyMaterialStock matStock in matStocks)
             {
                 if (matStock.CompanyLocationId == companyLocationId && matStock.Stock > 0)
@@ -153,10 +153,10 @@ namespace ClassLibrary
         /// de empresa con stock en la
         /// localizacion.
         /// </returns>
-        public ReadOnlyCollection<int> GetCompanyMaterialsInStockForLocation(int companyLocationId, int itemCount, int page)
+        public IReadOnlyCollection<int> GetCompanyMaterialsInStockForLocation(int companyLocationId, int itemCount, int page)
         {
             List<CompanyMaterialStock> resultList = new List<CompanyMaterialStock>();
-            ReadOnlyCollection<CompanyMaterialStock> matStocks = this.Items;
+            IReadOnlyCollection<CompanyMaterialStock> matStocks = this.Items;
             foreach (CompanyMaterialStock matStock in matStocks)
             {
                 if (matStock.CompanyLocationId == companyLocationId && matStock.Stock > 0)
@@ -192,19 +192,19 @@ namespace ClassLibrary
         /// </returns>
         public int GetClosestLocationWithMaterialStock(int compMatId, string geoReference)
         {
-            CompanyLocationAdmin compLocAdmin = Singleton<CompanyLocationAdmin>.Instance;
+            DataManager dataManager = new DataManager();
             LocationAPIClient locClient = new LocationAPIClient();
 
             double closestDistance = 0;
             int closestLocationId = 0;
 
-            ReadOnlyCollection<int> locationIds = this.GetLocationsWithStockForCompanyMaterial(compMatId);
+            IReadOnlyCollection<int> locationIds = this.GetLocationsWithStockForCompanyMaterial(compMatId);
             CompanyLocation compLoc;
             Distance distance;
 
             foreach (int compLocId in locationIds)
             {
-                compLoc = compLocAdmin.GetById(compLocId);
+                compLoc = dataManager.CompanyLocation.GetById(compLocId);
                 Task<Distance> task = locClient.GetDistanceAsync(compLoc.GeoReference, geoReference); 
                 distance = AsyncContext.Run(() => task);
 
@@ -224,6 +224,16 @@ namespace ClassLibrary
             }
 
             return closestLocationId;
+        }
+
+        /// <inheritdoc/>
+        protected override void ValidateData(CompanyMaterialStock item)
+        {
+            DataManager dataManager = new DataManager();
+            if(item.CompanyLocationId == 0/* || !dataManager.CompanyLocation.Exists(item.CompanyLocationId)*/) 
+                throw new ValidationException("Requerida localizacion del material.");
+            if(item.CompanyMatId == 0/* || !dataManager.CompanyMaterial.Exists(item.CompanyMatId)*/) 
+                throw new ValidationException("Requerido material de la empresa.");
         }
     }
 }

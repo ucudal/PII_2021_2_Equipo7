@@ -10,8 +10,6 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_SignUpReviewEntrepreneurNew : ChatDialogHandlerBase
     {
-        EntrepreneurAdmin entrepreneurAdmin = Singleton<EntrepreneurAdmin>.Instance;
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpReviewEntrepreneurNew"/>.
         /// </summary>

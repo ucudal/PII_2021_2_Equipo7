@@ -10,8 +10,6 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_SignUpCompanyTrade : ChatDialogHandlerBase
     {
-        CompanyAdmin companyAdmin = Singleton<CompanyAdmin>.Instance;
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpCompanyTrade"/>.
         /// </summary>
@@ -25,7 +23,7 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            Company company = companyAdmin.New();
+            Company company = this.datMgr.Company.New();
             company.Name = selector.Code;
 
             Session session = this.sessions.GetSession(selector.Service, selector.Account);

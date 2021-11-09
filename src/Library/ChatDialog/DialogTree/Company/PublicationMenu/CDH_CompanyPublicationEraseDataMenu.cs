@@ -9,8 +9,6 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_CompanyPublicationEraseDataMenu : ChatDialogHandlerBase
     {
-        private PublicationAdmin publicationAdmin = Singleton<PublicationAdmin>.Instance;
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyPublicationEraseDataMenu"/>.
         /// </summary>
@@ -36,7 +34,7 @@ namespace ClassLibrary
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             InsertPublicationData data = process.GetData<InsertPublicationData>();
-            publicationAdmin.Delete(data.Publication.Id);
+            this.datMgr.Publication.Delete(data.Publication.Id);
         }
     }
 }

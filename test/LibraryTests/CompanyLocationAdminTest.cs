@@ -1,8 +1,6 @@
-using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using ClassLibrary;
 using NUnit.Framework;
-
 
 namespace Tests
 {
@@ -11,29 +9,25 @@ namespace Tests
     /// </summary>
      public class CompanyLocationAdminTest
     {
-        private CompanyLocationAdmin companyLocAdmin = Singleton<CompanyLocationAdmin>.Instance;
+        private DataManager datMgr = new DataManager();
 
         /// <summary>
         /// 
         /// </summary>
-        
-
-        
         [Test] 
         public void InsertTest()
         {
-            ReadOnlyCollection<CompanyLocation> items = companyLocAdmin.Items;
-            
+            IReadOnlyCollection<CompanyLocation> items = this.datMgr.CompanyLocation.Items;
             
             string geo="georeference";
             int companyid = 2;
-            CompanyLocation compania = companyLocAdmin.New();
+            CompanyLocation compania = this.datMgr.CompanyLocation.New();
             compania.CompanyId = companyid;
             compania.GeoReference = geo;
-            int id = companyLocAdmin.Insert(compania);
+            int id = this.datMgr.CompanyLocation.Insert(compania);
             Assert.AreNotEqual(0,id);
 
-            compania = companyLocAdmin.GetById(id);
+            compania = this.datMgr.CompanyLocation.GetById(id);
             Assert.AreEqual(geo,compania.GeoReference);
             Assert.AreEqual(companyid,compania.CompanyId);
 
@@ -47,33 +41,33 @@ namespace Tests
         {
         
             //Insertamos una invitacion y validamos que haya quedado agregada
-            ReadOnlyCollection<CompanyLocation> locationspre = companyLocAdmin.Items;
+            IReadOnlyCollection<CompanyLocation> locationspre = this.datMgr.CompanyLocation.Items;
 
             string geo="georeference";
             int companyid = 2;
             
             bool used = false;
 
-            CompanyLocation loc = companyLocAdmin.New();
+            CompanyLocation loc = this.datMgr.CompanyLocation.New();
             loc.CompanyId = companyid;
             loc.GeoReference = geo;
             loc.Deleted = used;
             
-            int locId = companyLocAdmin.Insert(loc);
+            int locId = this.datMgr.CompanyLocation.Insert(loc);
 
             Assert.AreNotEqual(0, locId);
 
             
         
-            ReadOnlyCollection<CompanyLocation> locationspost = companyLocAdmin.Items;
+            IReadOnlyCollection<CompanyLocation> locationspost = this.datMgr.CompanyLocation.Items;
 
             int expectedInvites = locationspre.Count + 1;
 
             Assert.AreEqual(expectedInvites, locationspost.Count);
             
           
-            CompanyLocation xToUpdate = companyLocAdmin.New();
-            xToUpdate=companyLocAdmin.GetById(locId);
+            CompanyLocation xToUpdate = this.datMgr.CompanyLocation.New();
+            xToUpdate=this.datMgr.CompanyLocation.GetById(locId);
             
             
 
@@ -87,9 +81,9 @@ namespace Tests
             xToUpdate.Deleted=used1;
 
 
-            companyLocAdmin.Update(xToUpdate);
+            this.datMgr.CompanyLocation.Update(xToUpdate);
 
-            CompanyLocation xComp=companyLocAdmin.GetById(locId);
+            CompanyLocation xComp=this.datMgr.CompanyLocation.GetById(locId);
 
             Assert.AreEqual(xToUpdate.Id, xComp.Id);
             Assert.AreEqual(xToUpdate.Deleted,xComp.Deleted);
@@ -107,7 +101,7 @@ namespace Tests
         [Test] 
         public void NewTest()
         {
-            CompanyLocation company =companyLocAdmin.New();
+            CompanyLocation company =this.datMgr.CompanyLocation.New();
             Assert.IsInstanceOf(typeof(CompanyLocation),company);
         }
         /// <summary>
@@ -116,15 +110,15 @@ namespace Tests
         [Test] 
         public void GetByIdTest()
         {
-            CompanyLocation company =companyLocAdmin.New();
+            CompanyLocation company =this.datMgr.CompanyLocation.New();
             company.GeoReference="pepito";
             company.CompanyId =5;
 
 
 
 
-            int id = companyLocAdmin.Insert(company);
-            CompanyLocation company2 =companyLocAdmin.GetById(id);
+            int id = this.datMgr.CompanyLocation.Insert(company);
+            CompanyLocation company2 =this.datMgr.CompanyLocation.GetById(id);
 
 
             
@@ -139,33 +133,33 @@ namespace Tests
         public void DeleteTest()
         {
  //Insertamos un elemento
-            ReadOnlyCollection<CompanyLocation> locationspre = companyLocAdmin.Items;
+            IReadOnlyCollection<CompanyLocation> locationspre = this.datMgr.CompanyLocation.Items;
 
             string geo="georeference";
             int companyid = 2;
             
             bool used = false;
 
-            CompanyLocation loc = companyLocAdmin.New();
+            CompanyLocation loc = this.datMgr.CompanyLocation.New();
             loc.CompanyId = companyid;
             loc.GeoReference = geo;
             loc.Deleted = used;
             
-            int locId = companyLocAdmin.Insert(loc);
+            int locId = this.datMgr.CompanyLocation.Insert(loc);
 
             Assert.AreNotEqual(0, locId);
 
             
         
-            ReadOnlyCollection<CompanyLocation> locationspost = companyLocAdmin.Items;
+            IReadOnlyCollection<CompanyLocation> locationspost = this.datMgr.CompanyLocation.Items;
 
             int expectedInvites = locationspre.Count +  1;
 
             Assert.AreEqual(expectedInvites, locationspost.Count);
 
-            companyLocAdmin.Delete(locId);
+            this.datMgr.CompanyLocation.Delete(locId);
 
-            ReadOnlyCollection<CompanyLocation> afterDelete = companyLocAdmin.Items;
+            IReadOnlyCollection<CompanyLocation> afterDelete = this.datMgr.CompanyLocation.Items;
 
             expectedInvites = locationspost.Count -  1;
 
@@ -182,19 +176,22 @@ namespace Tests
         [Test]
         public void GetLocationsForCompany()
         {
-            CompanyLocation company1 = companyLocAdmin.New();
-            company1.CompanyId=1; 
-            CompanyLocation company2 = companyLocAdmin.New();
-            company2.CompanyId=1; 
-            CompanyLocation company3 = companyLocAdmin.New();
-            company3.CompanyId=1; 
-            companyLocAdmin.Insert(company1);
-            companyLocAdmin.Insert(company2);
-            companyLocAdmin.Insert(company3);
+            CompanyLocation company1 = this.datMgr.CompanyLocation.New();
+            company1.CompanyId=1972; 
+            company1.GeoReference = "Carlos Maria Ramires y Conciliacion";
+            CompanyLocation company2 = this.datMgr.CompanyLocation.New();
+            company2.CompanyId=1972; 
+            company2.GeoReference = "Miguelete y Cabildo";
+            CompanyLocation company3 = this.datMgr.CompanyLocation.New();
+            company3.CompanyId=1972; 
+            company3.GeoReference = "Av 18 de Julio y Paraguay";
+            this.datMgr.CompanyLocation.Insert(company1);
+            this.datMgr.CompanyLocation.Insert(company2);
+            this.datMgr.CompanyLocation.Insert(company3);
 
-            ReadOnlyCollection<CompanyLocation> lista = companyLocAdmin.GetLocationsForCompany(1);
+            IReadOnlyCollection<CompanyLocation> lista = this.datMgr.CompanyLocation.GetLocationsForCompany(1972);
 
-            Assert.AreEqual(lista.Count,3);
+            Assert.AreEqual(3, lista.Count);
 
         }
 

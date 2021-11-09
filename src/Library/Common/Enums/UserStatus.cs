@@ -6,6 +6,8 @@ namespace ClassLibrary
     /// </summary>
     public enum UserStatus
     {
+        ///<summary>No definido.</summary>
+        Undefined,
         ///<summary>Usuario registrado.</summary>
         Registered,
         ///<summary>Usuario no registrado</summary>

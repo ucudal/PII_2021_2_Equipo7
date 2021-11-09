@@ -1,5 +1,4 @@
-using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using ClassLibrary;
 using NUnit.Framework;
 
@@ -10,7 +9,7 @@ namespace Tests
     /// </summary>
     public class PublicationKeyWordsAdminTest
     {
-        private PublicationKeyWordAdmin keyadmin = Singleton<PublicationKeyWordAdmin>.Instance;
+        private DataManager datMgr = new DataManager();
 
         /// <summary>
         /// 
@@ -18,9 +17,10 @@ namespace Tests
         [Test]
         public void Insert()
         {
-            ReadOnlyCollection<PublicationKeyWord> items = keyadmin.Items;
-            PublicationKeyWord keyw = keyadmin.New();
-            int pInt = keyadmin.Insert(keyw);
+            PublicationKeyWord keyw = this.datMgr.PublicationKeyWord.New();
+            keyw.PublicationId = 18776;
+            keyw.KeyWord = "madera";
+            int pInt = this.datMgr.PublicationKeyWord.Insert(keyw);
             Assert.AreNotEqual(0,pInt);
         }
 
@@ -30,7 +30,7 @@ namespace Tests
         [Test]
         public void NewTest()
         {
-            PublicationKeyWord publikey = keyadmin.New();
+            PublicationKeyWord publikey = this.datMgr.PublicationKeyWord.New();
             Assert.IsInstanceOf(typeof(PublicationKeyWord),publikey);
         }
 
@@ -40,12 +40,14 @@ namespace Tests
         [Test]
         public void DeleteTest()
         {
-            PublicationKeyWord pkey = keyadmin.New();
-            int p = keyadmin.Insert(pkey);
+            PublicationKeyWord pkey = this.datMgr.PublicationKeyWord.New();
+            pkey.PublicationId = 98981;
+            pkey.KeyWord = "fiambre";
+            int p = this.datMgr.PublicationKeyWord.Insert(pkey);
             Assert.AreNotEqual(0,p);
             int NewId =pkey.Id;
-            keyadmin.Delete(NewId);
-            Assert.IsNull(keyadmin.GetById(NewId));
+            this.datMgr.PublicationKeyWord.Delete(NewId);
+            Assert.IsNull(this.datMgr.PublicationKeyWord.GetById(NewId));
         }
 
 
@@ -55,19 +57,22 @@ namespace Tests
         [Test]
         public void GetKeyWordsForPublicationTest()
         {
-            PublicationKeyWord keyw = keyadmin.New();
+            PublicationKeyWord keyw = this.datMgr.PublicationKeyWord.New();
             keyw.PublicationId = 5;
-            keyadmin.Insert(keyw);
+            keyw.KeyWord = "madera";
+            this.datMgr.PublicationKeyWord.Insert(keyw);
 
-            PublicationKeyWord keyw1 = keyadmin.New();
+            PublicationKeyWord keyw1 = this.datMgr.PublicationKeyWord.New();
             keyw1.PublicationId = 5;
-            keyadmin.Insert(keyw1);
+            keyw1.KeyWord = "vidrio";
+            this.datMgr.PublicationKeyWord.Insert(keyw1);
 
-            PublicationKeyWord keyw2 = keyadmin.New();
+            PublicationKeyWord keyw2 = this.datMgr.PublicationKeyWord.New();
             keyw2.PublicationId = 5;
-            keyadmin.Insert(keyw2);
+            keyw2.KeyWord = "plastico";
+            this.datMgr.PublicationKeyWord.Insert(keyw2);
 
-            ReadOnlyCollection<string> lista = keyadmin.GetKeyWordsForPublication(5);
+            IReadOnlyCollection<string> lista = this.datMgr.PublicationKeyWord.GetKeyWordsForPublication(5);
 
             Assert.AreEqual(3,lista.Count);
 

@@ -7,6 +7,8 @@ namespace ClassLibrary
     /// </summary>
     public enum UserRole
     {
+        ///<summary>No definido.</summary>
+        Undefined,
         ///<summary>Administrador del sistema.</summary>
         SystemAdministrator,
         ///<summary>Administrador de empresa</summary>
