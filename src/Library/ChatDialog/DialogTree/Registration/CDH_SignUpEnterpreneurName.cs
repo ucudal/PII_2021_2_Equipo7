@@ -31,8 +31,7 @@ namespace ClassLibrary
             user.LastName = selector.Code.Trim();
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Ahora vamos a ingresar los datos de su emprendimiento.\n");
-            builder.Append("Primero ingrese el nombre de la empresa:");
+            builder.Append("Ingrese el nombre de su <b>emprendimiento</b>.");
             return builder.ToString();
         }
 

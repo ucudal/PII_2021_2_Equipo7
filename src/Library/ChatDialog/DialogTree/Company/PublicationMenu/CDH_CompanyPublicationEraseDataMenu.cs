@@ -16,7 +16,7 @@ namespace ClassLibrary
         public CDH_CompanyPublicationEraseDataMenu(ChatDialogHandlerBase next) : base(next, "company_publication_erase_data_menu")
         {
             this.parents.Add("company_publication_confirmation_erase_menu");
-            this.route = "\\confirmar";
+            this.route = "/confirmar";
         }
 
         /// <inheritdoc/>

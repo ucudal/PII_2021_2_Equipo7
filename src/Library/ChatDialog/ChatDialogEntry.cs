@@ -63,16 +63,14 @@ namespace ClassLibrary
         /// </returns>
         public string Start(ChatDialogSelector selector)
         { 
-            try
-            {
-                return this.firstHandler.Next(selector);
-            }
-            catch (NullReferenceException)
+            if (this.firstHandler is null)
             {
                 string msg = "No hay configurado un ChatDialogHandler inicial en el objeto de entrada.";
                 Debug.WriteLine($"Excepcion: {msg}");
-                throw new NullReferenceException(msg);
+                //throw new NullReferenceException(msg);
             }
+
+            return this.firstHandler.Next(selector);
         }
     }
 }

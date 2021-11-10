@@ -79,17 +79,14 @@ namespace ClassLibrary
             }
             else
             {
-                try
-                {
-                    return this.next.Next(selector);
-                }
-                catch (NullReferenceException)
+                if (this.next is null)
                 {
                     string msg = "Se intento pasar al proximo paso, pero el objeto relevante 'next' esta vacio.";
                     Debug.WriteLine($"Excepcion: {msg}");
-                    throw new NullReferenceException(msg);
-                    throw;
+                    //throw new NullReferenceException(msg);
                 }
+
+                return this.next.Next(selector);
             }
         }
 

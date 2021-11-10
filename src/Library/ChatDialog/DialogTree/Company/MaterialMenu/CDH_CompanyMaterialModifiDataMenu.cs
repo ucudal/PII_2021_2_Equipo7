@@ -16,7 +16,7 @@ namespace ClassLibrary
         public CDH_CompanyMaterialModifiDataMenu(ChatDialogHandlerBase next) : base(next, "company_material_modifi_data_menu")
         {
             this.parents.Add("company_material_modifi_confirmation_menu");
-            this.route = "\\confirmar";
+            this.route = "/confirmar";
         }
 
         /// <inheritdoc/>

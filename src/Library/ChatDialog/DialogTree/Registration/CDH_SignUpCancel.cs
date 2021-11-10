@@ -34,7 +34,7 @@ namespace ClassLibrary
             this.parents.Add("registration_join_sysadmin_verify");
             this.parents.Add("registration_new_entre_verify");
 
-            this.route = "\\cancelar";
+            this.route = "/cancelar";
         }
 
         /// <inheritdoc/>
@@ -45,8 +45,7 @@ namespace ClassLibrary
             session.Process = null;
             
             StringBuilder builder = new StringBuilder();
-            builder.Append("Ha cancelado el proceso de registro.\n");
-            builder.Append("Gracias por visitar.");
+            builder.Append("Ha cancelado el proceso de registro. Gracias por visitar.");
             return builder.ToString();
         }
     }

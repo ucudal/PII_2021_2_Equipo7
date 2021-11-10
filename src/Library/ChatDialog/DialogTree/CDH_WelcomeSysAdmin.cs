@@ -33,7 +33,7 @@ namespace ClassLibrary
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             User user = this.datMgr.User.GetById(session.UserId);
-            if (selector.Code == "\\welcome" && user.Role == UserRole.SystemAdministrator)
+            if (selector.Code == "/welcome" && user.Role == UserRole.SystemAdministrator)
             {
                 return true;
             }

@@ -17,7 +17,7 @@ namespace ClassLibrary
         public CDH_SignUpCode(ChatDialogHandlerBase next) : base(next, "registration_invite")
         {
             this.parents.Add("registration_prompt");
-            this.route = "\\registrar";
+            this.route = "/registrar";
         }
 
         /// <inheritdoc/>
@@ -30,7 +30,7 @@ namespace ClassLibrary
             session.Process = process;
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Ingrese su codigo de invitacion:");
+            builder.Append("Ingrese su <b>codigo de invitacion</b>.");
             return builder.ToString();
         }
     }

@@ -18,7 +18,7 @@ namespace ClassLibrary
         public CDH_CompanyQualificationListToAddMenu(ChatDialogHandlerBase next) : base(next, "company_qualification_list_to_add_menu")
         {
             this.parents.Add("company_qualifications_menu");
-            this.route = "\\agregar";
+            this.route = "/agregar";
         }
 
         /// <inheritdoc/>

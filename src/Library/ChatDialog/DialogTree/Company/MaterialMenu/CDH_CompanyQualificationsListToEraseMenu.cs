@@ -19,7 +19,7 @@ namespace ClassLibrary
         public CDH_CompanyQualificationsListToEraseMenu(ChatDialogHandlerBase next) : base(next, "company_qualifications_list_to_erase_menu")
         {
             this.parents.Add("company_qualifications_menu");
-            this.route = "\\eliminar";
+            this.route = "/eliminar";
         }
 
         /// <inheritdoc/>

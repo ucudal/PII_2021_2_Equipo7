@@ -30,13 +30,13 @@ namespace ClassLibrary
             User user = data.User;
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Segun los datos ingresados su nombre\n");
-            builder.Append($"es {user.FirstName} {user.LastName}, y su\n");
-            builder.Append($"empresa se llama {company.Name} que\n");
-            builder.Append($"trabaja en el oficio de {company.Trade}.\n");
-            builder.Append("Si estos datos son correctos, confirme el\n");
-            builder.Append("registro con el commando '\\confirmar'\n");
-            builder.Append("Si no son correctos, ingrese '\\cancelar'");
+            builder.Append("Antes de completar el proceso de registro, por favor verifique los datos ingresados.\n\n");
+            builder.Append($"<b>1er Nombre</b>: {user.FirstName}\n");
+            builder.Append($"<b>1er Apellido</b>: {user.LastName}\n");
+            builder.Append($"<b>Empresa</b>: {company.Name}\n");
+            builder.Append($"<b>Oficio</b>: {company.Trade}\n\n");
+            builder.Append("/confirmar - Completar el registro.\n");
+            builder.Append("/cancelar - Abandonar el registro.\n");
             return builder.ToString();
         }
 

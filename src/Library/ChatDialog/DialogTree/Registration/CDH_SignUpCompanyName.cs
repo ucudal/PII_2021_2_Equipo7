@@ -1,3 +1,5 @@
+using System;
+using System.Diagnostics;
 using System.Text;
 
 namespace ClassLibrary
@@ -31,8 +33,7 @@ namespace ClassLibrary
             user.LastName = selector.Code.Trim();
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Ahora vamos a ingresar los datos de su empresa.\n");
-            builder.Append("Primero ingrese el nombre de la empresa:");
+            builder.Append("Ingrese el nombre de su <b>empresa</b>.");
             return builder.ToString();
         }
 

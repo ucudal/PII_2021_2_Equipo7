@@ -31,7 +31,7 @@ namespace ClassLibrary
             data.User = user;
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Ingrese su primer apellido:");
+            builder.Append("Ingrese su <b>primer apellido</b>");
             return builder.ToString();
         }
 

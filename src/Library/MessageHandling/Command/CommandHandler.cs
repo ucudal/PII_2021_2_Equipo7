@@ -18,7 +18,7 @@ namespace ClassLibrary
         public string HandleMessage(MessageWrapper message)
         {
             SessionsContainer sessions = Singleton<SessionsContainer>.Instance;
-            ChatDialogEntry chatEntry = Singleton<ChatDialogEntry>.Instance;
+            ChatDialogEntry chatEntry = new ChatDialogEntry();
             DataManager dataManager = new DataManager();
 
             Session session = sessions.CreateSession(message.Service, message.Account);
@@ -47,7 +47,7 @@ namespace ClassLibrary
             if (message.UserStatus == UserStatus.Suspended)
             {
                 context = null;
-                message.Message = "\\suspendeduser";
+                message.Message = "/suspendeduser";
             }
             else
             {
@@ -57,12 +57,12 @@ namespace ClassLibrary
                     switch (message.UserStatus)
                     {
                         case UserStatus.Unregistered:
-                            message.Message = "\\registration";
+                            message.Message = "/registration";
                             break;
 
                         case UserStatus.Registered:
                         default:
-                            message.Message = "\\welcome";
+                            message.Message = "/welcome";
                             break;
                     }
                 }
@@ -74,12 +74,12 @@ namespace ClassLibrary
                         switch (message.UserStatus)
                         {
                             case UserStatus.Unregistered:
-                                message.Message = "\\registration";
+                                message.Message = "/registration";
                                 break;
 
                             case UserStatus.Registered:
                             default:
-                                message.Message = "\\welcome";
+                                message.Message = "/welcome";
                                 break;
                         }
                     }
@@ -87,7 +87,7 @@ namespace ClassLibrary
                     {
                         if (context == "session_expired")
                         {
-                            message.Message = "\\resetsession";
+                            message.Message = "/resetsession";
                         }
                     }
                 }

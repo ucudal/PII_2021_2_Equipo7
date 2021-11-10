@@ -15,7 +15,7 @@ namespace ClassLibrary
         public CDH_Company_Tracing_Menu(ChatDialogHandlerBase next) : base(next, "company_Tracing_menu")
         {
             this.parents.Add("welcome_company");
-            this.route = "\\listar";
+            this.route = "/listar";
         }
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)

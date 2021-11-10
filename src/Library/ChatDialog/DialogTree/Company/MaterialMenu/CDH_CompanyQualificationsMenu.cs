@@ -17,7 +17,7 @@ namespace ClassLibrary
         public CDH_CompanyQualificationsMenu(ChatDialogHandlerBase next) : base(next, "company_qualifications_menu")
         {
             this.parents.Add("company_actions_material_menu");
-            this.route = "\\habilitaciones";
+            this.route = "/habilitaciones";
         }
 
         /// <inheritdoc/>

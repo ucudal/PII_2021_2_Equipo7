@@ -23,7 +23,7 @@ namespace ClassLibrary
             IReadOnlyCollection<Invitation> invites = this.Items;
             foreach (Invitation inv in invites)
             {
-                if (inv.Code == pCode)
+                if (inv.Code.Trim() == pCode.Trim())
                 {
                     return inv.Clone();
                 }
