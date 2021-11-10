@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace ClassLibrary
 {
@@ -30,24 +32,23 @@ namespace ClassLibrary
             builder.Append("Ingrese el numero de la habilitacion que desea eliminar, \n");
             builder.Append(" en caso contrario escriba \n");
             builder.Append("\\cancelar : Volver al menu de materiales .\n");
-            //builder.Append(TextoToPrintQualificationsToErase(selector));
+            builder.Append(TextoToPrintQualificationsToErase(selector));
             builder.Append("LISTADO_HABILITACIONES");
             return builder.ToString();
         }
-        /*
         private string TextoToPrintQualificationsToErase(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            
-            foreach(Qualification xQual in data.CompanyMaterial.Qualifications)
+            IReadOnlyCollection<int> xHabilitacionesAgregadas=this.datMgr.CompanyMaterialQualification.GetQualificationsForCompanyMaterial(data.CompanyMaterial.Id);
+            foreach(int i in xHabilitacionesAgregadas)
             {
-                builder.Append("" + xQual.Name + " "+ xQual.Id + "\n");
+                CompanyMaterialQualification xHabili=this.datMgr.CompanyMaterialQualification.GetById(xHabilitacionesAgregadas.ElementAt(i));
+                builder.Append("" + this.datMgr.CompanyMaterial.GetById(xHabili.CompanyMatId).Name + " "+ this.datMgr.Qualification.GetById(xHabili.QualificationId).Id + "\n");
             }
             return builder.ToString();
         }
-        */
     }
 }

@@ -23,23 +23,21 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            //QualificationEraseData(selector);
+            QualificationEraseData(selector);
             builder.Append("La habilitacion se elimino con exito.\n");
             builder.Append("Escriba ");
             builder.Append("\\cancelar : para volver al menu de materiales .\n");
             return builder.ToString();
         }
-        /*
+        
         private void QualificationEraseData(ChatDialogSelector selector)
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
-            SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            data.CompanyMaterial.Qualifications.Remove(data.Qualification);
-            Company company=this.companyAdmin.Items.Find(obj => obj.ListAdminUsers.Exists(admin => admin.Id==session.UserId));
-            CompanyMaterial companyMaterial=data.CompanyMaterial;
-            companyMaterialAdmin.Update(companyMaterial);
-            companyAdmin.Update(company);
-        }*/
+            SelectCompanyMaterialQualificationData data = process.GetData<SelectCompanyMaterialQualificationData>();
+            CompanyMaterialQualification xHabiMat=this.datMgr.CompanyMaterialQualification.GetById(data.CompanyMaterialQualification.Id);
+            xHabiMat.Deleted=true;
+            this.datMgr.CompanyMaterialQualification.Update(xHabiMat);            
+        }
     }
 }

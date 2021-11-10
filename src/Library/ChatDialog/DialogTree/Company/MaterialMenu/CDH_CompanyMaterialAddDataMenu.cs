@@ -23,29 +23,20 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            //MaterialAdd(selector);
+            MaterialAdd(selector);
             builder.Append("El material se agrego satisfactoriamente.\n");
             builder.Append("Escriba ");
             builder.Append("\\volver : para volver al menu de materiales.\n");
             return builder.ToString();
         }
-        /*
+        
         private void MaterialAdd(ChatDialogSelector selector)
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
-
             CompanyMaterial companyMaterial=data.CompanyMaterial;
-            companyMaterialAdmin.Insert(companyMaterial);
-
-
-            Company company=this.companyAdmin.Items.Find(obj => obj.ListAdminUsers.Exists(admin => admin.Id==session.UserId));
-            if(company!=null)
-            {
-                company.AddCompanyMaterial(companyMaterial);
-            }
-            companyAdmin.Update(company);
-        }*/
+            this.datMgr.CompanyMaterial.Insert(companyMaterial);
+        }
     }
 }
