@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using ClassLibrary.Services.Location.Client;
+using Ucu.Poo.Locations.Client;
 using Nito.AsyncEx;
 
 namespace ClassLibrary
@@ -62,7 +62,7 @@ namespace ClassLibrary
         public CompanyLocation GetClosestCompanyLocationToGeoReference(int companyId, string geoRef)
         {
             IReadOnlyCollection<CompanyLocation> compLocs = this.GetLocationsForCompany(companyId);
-            LocationAPIClient locClient = new LocationAPIClient();
+            LocationApiClient locClient = new LocationApiClient();
 
             double closestDistance = 0;
             CompanyLocation closestLocation = null;
