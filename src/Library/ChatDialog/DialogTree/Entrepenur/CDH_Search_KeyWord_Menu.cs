@@ -4,33 +4,32 @@ namespace ClassLibrary
 {
     /// <summary>
     /// <see cref="ChatDialogHandlerBase"/> concreto:
-    /// Responde al inicio de un emprendedor.
+    /// Busca una publicación con una palabra clave
     /// </summary>
     public class CDH_Search_KeyWord_Menu : ChatDialogHandlerBase
     {
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_Search_KeyWord_Menu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Search_KeyWord_Menu(ChatDialogHandlerBase next) : base(next, "Search_KeyWords_Menu")
+        public CDH_Search_KeyWord_Menu(ChatDialogHandlerBase next) : base(next, "Search_KeyWord_Menu")
         {
-            this.parents.Add("welcome_entrepreneur");
-            this.route = "\\buscarpublicacion";
+            this.parents.Add("Search_Publication_Menu");
+            this.route = "\\palabraclave";
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("Menu para buscar una publicación\n");
-            builder.Append("Desde este menu puede realizar las\n");
-            builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\palabraclave : Buscar publicación por palabra clave.\n");
-            builder.Append("\\localidad : Buscar por localidad.\n");
-            builder.Append("\\cartegoria : Buscar por categoria.\n");
-
+            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            
+            builder.Append("Menu para ingresar palabra clave \n");
+            builder.Append("Ingrese su palabra clave.\n");
+            builder.Append("\\cancelar : Volver a menu de busqueda .\n");
             return builder.ToString();
         }
+        
+        
     }
 }

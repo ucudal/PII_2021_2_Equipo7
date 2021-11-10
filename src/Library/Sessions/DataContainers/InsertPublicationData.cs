@@ -9,6 +9,7 @@ namespace ClassLibrary
     {
         private CompanyMaterial companyMaterial;
         private Publication publication;
+        
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="InsertPublicationData"/>.
         /// </summary>
