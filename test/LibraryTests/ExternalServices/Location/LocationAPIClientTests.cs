@@ -1,6 +1,6 @@
 using ClassLibrary;
 using NUnit.Framework;
-using ClassLibrary.Services.Location.Client;
+using Ucu.Poo.Locations.Client;
 using System.Collections.ObjectModel;
 using Nito.AsyncEx;
 using System.Threading.Tasks;
@@ -13,7 +13,7 @@ namespace Tests
     [TestFixture]
     public class LocationAPIClientTests
     {
-        private LocationAPIClient locClient = new LocationAPIClient();
+        private LocationApiClient locClient = new LocationApiClient();
 
         /// <summary>
         /// Test que prueba si se puede encontrar
