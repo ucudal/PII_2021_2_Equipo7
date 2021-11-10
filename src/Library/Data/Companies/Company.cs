@@ -63,13 +63,6 @@ namespace ClassLibrary
             this.Deleted = false;
         }
 
-
-      
-
-       
-
-
-
         /// <summary>
         /// 
         /// </summary>
@@ -101,10 +94,6 @@ namespace ClassLibrary
         {
             return JsonSerializer.Serialize(this);
         }
-      
-
-       
-
     } 
 
 }
