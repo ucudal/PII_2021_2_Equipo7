@@ -23,13 +23,13 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            //MaterialModifi(selector);
+            MaterialModifi(selector);
             builder.Append("El material se modifico satisfactoriamente.\n");
             builder.Append("Escriba ");
             builder.Append("\\volver : para volver al menu de materiales.\n");
             return builder.ToString();
         }
-        /*
+        
         private void MaterialModifi(ChatDialogSelector selector)
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
@@ -37,13 +37,15 @@ namespace ClassLibrary
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
 
             CompanyMaterial companyMaterial=data.CompanyMaterial;
-            Company company=this.companyAdmin.Items.Find(obj => obj.ListAdminUsers.Exists(admin => admin.Id==session.UserId));
+            Company company=this.datMgr.Company.GetById(this.datMgr.CompanyUser.GetCompanyForUser(session.UserId));
             if(company!=null)
             {
-                company.AddCompanyMaterial(companyMaterial);
+                companyMaterial.CompanyId=company.Id;
             }
-            companyMaterialAdmin.Update(companyMaterial);
-            companyAdmin.Update(company);
-        }*/
+            this.datMgr.CompanyLocation.Update(this.datMgr.CompanyLocation.GetById(data.CompanyMaterialStock.CompanyLocationId));
+            this.datMgr.CompanyMaterialStock.Update(data.CompanyMaterialStock);
+            this.datMgr.CompanyMaterial.Update(companyMaterial);
+            this.datMgr.Company.Update(company);
+        }
     }
 }
