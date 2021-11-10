@@ -16,7 +16,7 @@ namespace ClassLibrary
         public CDH_CompanyAddMenu(ChatDialogHandlerBase next) : base(next, "company_add_menu")
         {
             this.parents.Add("company_material_menu");
-            this.route = "\\ingresar";
+            this.route = "/ingresar";
         }
 
         /// <inheritdoc/>

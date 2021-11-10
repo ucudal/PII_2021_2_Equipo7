@@ -9,8 +9,10 @@ namespace ClassLibrary
     {
         ///<summary>No definido.</summary>
         Undefined,
-        ///<summary>Canal de comunicacion por la consola</summary>
-        Console
+        ///<summary>Canal de comunicacion por la consola.</summary>
+        Console,
+        ///<summary>Canal de comunicacion por Telegram.</summary>
+        Telegram
     }
     
 }

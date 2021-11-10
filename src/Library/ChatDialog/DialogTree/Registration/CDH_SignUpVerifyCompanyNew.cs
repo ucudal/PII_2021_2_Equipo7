@@ -27,11 +27,12 @@ namespace ClassLibrary
             DProcessData process = session.Process;
             SignUpData data = process.GetData<SignUpData>();
             data.Type = RegistrationType.CopmanyNew;
+            data.InviteCode = selector.Code;
             
             StringBuilder builder = new StringBuilder();
-            builder.Append("Su codigo de invitacion le permite ingresar como una nueva empresa.\n");
-            builder.Append("Si esto es correcto, ingrese el comando '\\confirmar'.\n");
-            builder.Append("De caso contrario ingrese '\\cancelar'.");
+            builder.Append("Su codigo de invitacion le permite ingresar como una nueva empresa.\n\n");
+            builder.Append("/confirmar - Usar el codigo\n");
+            builder.Append("/cancelar - Cancelar registro.");
             return builder.ToString();
         }
 

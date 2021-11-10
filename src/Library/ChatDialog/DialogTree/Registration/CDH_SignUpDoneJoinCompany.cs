@@ -18,7 +18,7 @@ namespace ClassLibrary
         public CDH_SignUpDoneJoinCompany(ChatDialogHandlerBase next) : base(next, "registration_Done_join_Company")
         {
             this.parents.Add("Sign_Review_Join_Company");
-            this.route = "\\confirmar";
+            this.route = "/confirmar";
         }
 
         /// <inheritdoc/>
@@ -59,8 +59,8 @@ namespace ClassLibrary
             session.Process = null;
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Gracias registrarse en nuestra plataforma.");
-            builder.Append("\nPara continuar ingrese el commando '\\inicio'.");
+            builder.Append("Gracias registrarse en nuestra plataforma.\n\n"); 
+            builder.Append("/inicio - Menu de inicio del usuario.");
             return builder.ToString();
         }
     }

@@ -28,11 +28,12 @@ namespace ClassLibrary
             DProcessData process = session.Process;
             SignUpData data = process.GetData<SignUpData>();
             data.Type = RegistrationType.SystemAdminJoin;
+            data.InviteCode = selector.Code;
             
             StringBuilder builder = new StringBuilder();
-            builder.Append("Su codigo de invitacion le permite ingresar\ncomo un administrador de la plataforma.\n");
-            builder.Append("Si esto es correcto, ingrese el comando '\\confirmar'.\n");
-            builder.Append("De caso contrario ingrese '\\cancelar'.");
+            builder.Append("Su codigo de invitacion le permite ingresar como un administrador de la plataforma.\n\n");
+            builder.Append("/confirmar - Usar el codigo\n");
+            builder.Append("/cancelar - Cancelar registro.");
             return builder.ToString();
         }
 

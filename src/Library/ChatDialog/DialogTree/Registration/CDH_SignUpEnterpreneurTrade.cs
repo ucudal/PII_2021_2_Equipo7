@@ -31,7 +31,7 @@ namespace ClassLibrary
             data.Entrepreneur = entrepreneur;
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Por ultimo, ingrese el oficio de su emprendimiento:");
+            builder.Append("Ingrese el oficio de su <b>emprendimiento</b>.");
             return builder.ToString();
         }
 

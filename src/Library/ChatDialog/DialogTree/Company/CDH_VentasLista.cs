@@ -16,7 +16,7 @@ namespace ClassLibrary
         public CDH_VentasLista(ChatDialogHandlerBase next) : base(next, "listar_vetas")
         {
             this.parents.Add("welcome_company");
-            this.route = "\\listar";
+            this.route = "/listar";
         }
 
         /// <inheritdoc/>

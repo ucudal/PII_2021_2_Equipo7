@@ -31,8 +31,8 @@ namespace ClassLibrary
             session.MenuLocation = "registration_invite";
             
             StringBuilder builder = new StringBuilder();
-            builder.Append("Su codigo de invitacion no es valido.\n");
-            builder.Append("Pruebe ingresar otro o ingrese '\\cancelar'.");
+            builder.Append("Su codigo de invitacion no es valido. Pruebe ingresar otro.\n\n");
+            builder.Append("/cancelar - Abandonar el proceso de registro.");
             return builder.ToString();
         }
 

@@ -15,15 +15,16 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_WelcomeUnregistered(ChatDialogHandlerBase next) : base(next, "registration_prompt")
         {
-            this.route = "\\registration";
+            this.route = "/registration";
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("Bienvenido! Uso de esta plataforma requiere una invitacion.\n");
-            builder.Append("Si usted tiene un codigo de invitacion, por favor ingrese el\ncommando '\\registrar'.");
+            builder.Append("<b>Bienvenido a PieTech!</b>\n\nUso de esta plataforma requiere una invitacion. ");
+            builder.Append("Si usted tiene un codigo de invitacion, por favor ingrese el siguiente commando:\n\n");
+            builder.Append("/registrar");
             return builder.ToString();
         } 
     }

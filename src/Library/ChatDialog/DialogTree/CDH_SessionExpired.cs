@@ -16,7 +16,7 @@ namespace ClassLibrary
         public CDH_SessionExpired(ChatDialogHandlerBase next) : base(next, "session_expired_alert")
         {
             this.parents.Add("session_expired");
-            this.route = "\\resetsession";
+            this.route = "/resetsession";
         }
 
         /// <inheritdoc/>

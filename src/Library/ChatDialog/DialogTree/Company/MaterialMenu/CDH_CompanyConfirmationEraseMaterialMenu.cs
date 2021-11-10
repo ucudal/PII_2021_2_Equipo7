@@ -17,7 +17,7 @@ namespace ClassLibrary
         public CDH_CompanyConfirmationEraseMaterialMenu(ChatDialogHandlerBase next) : base(next, "company_confirmation_erase_material_menu")
         {
             this.parents.Add("company_actions_material_menu");
-            this.route = "\\eliminar";
+            this.route = "/eliminar";
         }
 
         /// <inheritdoc/>

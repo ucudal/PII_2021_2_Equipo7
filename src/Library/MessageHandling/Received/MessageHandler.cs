@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
@@ -11,9 +12,6 @@ namespace ClassLibrary
     /// </summary>
     public class MessageHandler
     {
-        private ResponseHandler responseHandler = new ResponseHandler();
-        private CommandHandler commandHandler = new CommandHandler();
-
         /// <summary>
         /// Metodo llamado por los puntos de contacto
         /// con las API. Procesa el usuario del mensaje,
@@ -24,10 +22,12 @@ namespace ClassLibrary
         /// su envio.
         /// </summary>
         /// <param name="message"></param>
-        public void HandleMessage(MessageWrapper message)
+        public Task<ResponseWrapper> HandleMessage(MessageWrapper message)
         {
             try
             {
+                CommandHandler commandHandler = new CommandHandler();
+                
                 StringBuilder stringBuilder = new StringBuilder();
                 this.MessageIsValid(message);
                 UserAuthenticator.Authenticate(message);
@@ -36,15 +36,13 @@ namespace ClassLibrary
                 stringBuilder.Append(commandResponse);
 
                 ResponseWrapper response = new ResponseWrapper(stringBuilder.ToString(), message.Service, message.Account);
-                responseHandler.SendResponse(response);
+                return Task.FromResult<ResponseWrapper>(response);
+                //responseHandler.SendResponse(response);
             }
             catch(ArgumentNullException e)
             {
                 Debug.WriteLine($"Excepcion al recibir un mensaje: {e.Message}");
-            }
-            catch(NotSupportedMessagingPlataformException e)
-            {
-                Debug.WriteLine($"Excepcion al enviar un mensaje: {e.Message}");
+                throw;
             }
         }
 

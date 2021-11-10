@@ -17,7 +17,7 @@ namespace ClassLibrary
         public CDH_SignUpDoneCompanyNew(ChatDialogHandlerBase next) : base(next, "registration_new_comp_end")
         {
             this.parents.Add("registration_new_comp_verify");
-            this.route = "\\confirmar";
+            this.route = "/confirmar";
         }
 
         /// <inheritdoc/>
@@ -30,11 +30,11 @@ namespace ClassLibrary
             user.FirstName = data.User.FirstName;
             user.LastName = data.User.LastName;
             user.Role = UserRole.CompanyAdministrator;
+            user.Suspended = false;
             int userId = this.datMgr.User.Insert(user);
 
             if (userId != 0)
             {
-        
                 Company comp = this.datMgr.Company.New();
                 comp.Name = data.Company.Name;
                 comp.Trade = data.Company.Trade;
@@ -63,8 +63,8 @@ namespace ClassLibrary
             session.Process = null;
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Gracias registrarse en nuestra plataforma.");
-            builder.Append("\nPara continuar ingrese el commando '\\inicio'.");
+            builder.Append("Gracias registrarse en nuestra plataforma.\n\n"); 
+            builder.Append("/inicio - Menu de inicio del usuario.");
             return builder.ToString();
         }
     }

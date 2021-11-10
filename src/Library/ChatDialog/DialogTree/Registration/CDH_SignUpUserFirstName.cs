@@ -21,15 +21,14 @@ namespace ClassLibrary
             this.parents.Add("registration_invite_comp_join");
             this.parents.Add("registration_invite_entre_new");
             this.parents.Add("registration_invite_sysadmin_join");
-            this.route = "\\confirmar";
+            this.route = "/confirmar";
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("Preciso algunos datos para registrarlo.\n");
-            builder.Append("Ingrese su primer nombre:");
+            builder.Append("Preciso algunos datos para registrarlo. Ingrese su <b>primer nombre</b>.");
             return builder.ToString();
         }
     }

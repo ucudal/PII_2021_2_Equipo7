@@ -16,7 +16,7 @@ namespace ClassLibrary
         public CDH_CompanyQualificationAddDataMenu(ChatDialogHandlerBase next) : base(next, "company_qualification_add_data_menu")
         {
             this.parents.Add("company_qualification_add_confirmation_menu");
-            this.route = "\\confirmar";
+            this.route = "/confirmar";
         }
 
         /// <inheritdoc/>
