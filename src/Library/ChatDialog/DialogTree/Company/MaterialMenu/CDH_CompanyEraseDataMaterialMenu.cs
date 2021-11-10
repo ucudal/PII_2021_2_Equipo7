@@ -23,21 +23,21 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            //EraseMaterialFromCompany(selector);
+            EraseMaterialFromCompany(selector);
             builder.Append("Los datos se eliminaron correctamente.\n");
             builder.Append("escriba \n");
             builder.Append("\\volver : para retornar al menu de materiales.\n");
             return builder.ToString();
         }
-        /*
+        
         private void EraseMaterialFromCompany(ChatDialogSelector selector)
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            Company company=this.companyAdmin.FindAdminUser(session.UserId);
-            company.RemoveCompanyMaterial(data.CompanyMaterial);
-            this.companyAdmin.Update(company);
-        }*/
+            CompanyMaterial xMat=this.datMgr.CompanyMaterial.GetById(data.CompanyMaterial.Id);
+            xMat.Deleted=true;
+            this.datMgr.CompanyMaterial.Update(xMat);
+        }
     }
 }

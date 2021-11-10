@@ -29,25 +29,26 @@ namespace ClassLibrary
             builder.Append("En caso de querer hacer una accion sobre algun material ingrese su numero.\n");
             builder.Append("Ademas puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
-            //builder.Append("\\siguiente : Siguiente pagina de materiales.\n");
-            //builder.Append("\\anterior: Pagina anterior de materiales.\n");
+            builder.Append("\\siguiente : Siguiente pagina de materiales.\n");
+            builder.Append("\\anterior: Pagina anterior de materiales.\n");
             builder.Append("\\cancelar : Volver a menu de materiales .\n");
-            //builder.Append(TextToPrintCompanyMaterial(selector));
+            builder.Append(TextToPrintCompanyMaterial(selector));
             builder.Append("LISTADO_MATERIALES");
             return builder.ToString();
         }
-        /*
+        
         private string TextToPrintCompanyMaterial(ChatDialogSelector selector)
         {
             StringBuilder xListMats=new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             
-            Company company = this.companyAdmin.Items.Find(obj => obj.ListAdminUsers.Exists(admin => admin.Id==session.UserId));
-            foreach(CompanyMaterial xMat in company.CompanyMaterials)
+            Company company = this.datMgr.Company.GetById(this.datMgr.CompanyUser.GetCompanyForUser(session.UserId));
+            foreach(int xIdCompanyMaterial in this.datMgr.CompanyMaterial.GetCompanyMaterialsInCompany(company.Id))
             {
+                CompanyMaterial xMat=this.datMgr.CompanyMaterial.GetById(xIdCompanyMaterial);
                 xListMats.Append("" + xMat.Name +" " +xMat.Id + "\n");
             }
             return xListMats.ToString();
-        }*/
+        }
     }
 }
