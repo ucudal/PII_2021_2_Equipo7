@@ -23,9 +23,9 @@ namespace ClassLibrary
             builder.Append("Usted es un emprendedor.\n");
             builder.Append("Desde este menu puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\busqueda : Buscar materiales.\n");
-            builder.Append("\\compras : Revisar sus compras.\n");
-            builder.Append("\\habilitaciones : Administrar sus habilitaciones.");
+            builder.Append("\\buscarpublicacion : Buscar publicaciones.\n");
+            builder.Append("\\regeneracionmaterial : Muestra la regeneración del material.\n");
+            builder.Append("\\historialcompras: Mostrar historial de compra.");
             return builder.ToString();
         }
         /// <inheritdoc/>
