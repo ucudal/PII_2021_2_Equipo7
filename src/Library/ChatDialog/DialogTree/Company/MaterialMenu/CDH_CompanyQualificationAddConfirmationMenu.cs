@@ -25,13 +25,12 @@ namespace ClassLibrary
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            /*
-            Qualification habilitaciones = this.qualificationAdmin.FindQualificationById(int.Parse(selector.Code));
+            Qualification habilitaciones = this.datMgr.Qualification.GetById(int.Parse(selector.Code));
             data.Qualification=habilitaciones;
-            */
+            
             StringBuilder builder = new StringBuilder();
             builder.Append("Seguro que desea añadir esta habilitacion al material.\n");
-            //builder.Append("Nombre: " + data.Qualification.Name);
+            builder.Append("Nombre: " + data.Qualification.Name);
             builder.Append("Nombre: NOMBRE\n");
             builder.Append("\\confirmar : En caso de querer confirmar la operacion.\n");
             builder.Append("\\volver : Listar todos los materiales que ya posee.\n");

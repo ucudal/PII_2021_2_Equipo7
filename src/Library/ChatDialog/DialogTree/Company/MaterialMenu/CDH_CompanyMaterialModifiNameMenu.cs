@@ -31,7 +31,7 @@ namespace ClassLibrary
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese el nombre del material.\n");
-            builder.Append("\\cancelar : Listar todos los materiales que ya posee.\n");
+            builder.Append("\\cancelar : Volvemos al menu de Modifciacion.\n");
             return builder.ToString();
         }
         /// <inheritdoc/>

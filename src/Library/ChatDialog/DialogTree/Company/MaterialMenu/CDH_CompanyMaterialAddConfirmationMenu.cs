@@ -25,12 +25,13 @@ namespace ClassLibrary
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
-            /*
-            CompanyMaterial companyMaterial = this.companyMatAdmin.New();
+            
+            CompanyMaterial companyMaterial = this.datMgr.CompanyMaterial.New();
             companyMaterial.Name = selector.Code.Trim();
-            companyMaterial.MaterialCategory=data.MaterialCategory;
+            companyMaterial.MaterialCategoryId=data.MaterialCategory.Id;
+            companyMaterial.CompanyId=session.UserId;
             data.CompanyMaterial = companyMaterial;
-            */
+            
             StringBuilder builder = new StringBuilder();
             builder.Append("Seguro que desea crear un material con los siguientes datos.\n");
             builder.Append("Nombre: " + data.CompanyMaterial.Name);
@@ -46,9 +47,7 @@ namespace ClassLibrary
             {
                 if (!selector.Code.StartsWith('\\'))
                 {
-    
                     xretorno=true;
-
                 }
             }
             return xretorno;

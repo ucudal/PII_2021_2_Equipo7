@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace ClassLibrary
 {
@@ -29,11 +30,11 @@ namespace ClassLibrary
             builder.Append("Ingrese el numero de la habilitacion que quiere agregar.\n");
             builder.Append("Sino, en caso de querer retornar escriba\n");
             builder.Append("\\volver para volver al menu de materiales.\n");
-            //builder.Append(TextoToPrintQualifications(selector));
+            builder.Append(TextoToPrintQualifications(selector));
             builder.Append("LISTADO_HABILITACIONES");
             return builder.ToString();
         }
-        /*
+        
         private string TextoToPrintQualifications(ChatDialogSelector selector)
         {
             StringBuilder builder=new StringBuilder();
@@ -43,12 +44,13 @@ namespace ClassLibrary
             List<Qualification> xhabilitacionesNoAgegadas=new List<Qualification>();
             int i=0;
             bool xSigo=true;
-            foreach(Qualification xHabi in qualificationAdmin.Items)
+            foreach(Qualification xHabi in this.datMgr.Qualification.Items)
             {
                 xSigo=true;
-                while(i<data.CompanyMaterial.Qualifications.Count && xSigo==true)
+                IReadOnlyCollection<int> xHabilitaciones=this.datMgr.CompanyMaterialQualification.GetQualificationsForCompanyMaterial(data.CompanyMaterial.Id);
+                while(i<xHabilitaciones.Count && xSigo==true)
                 {
-                   if(xHabi==data.CompanyMaterial.Qualifications[i])
+                   if(xHabi.Id==xHabilitaciones.ElementAt(i))
                    {
                        xSigo=false;
                        xhabilitacionesNoAgegadas.Add(xHabi);
@@ -60,6 +62,6 @@ namespace ClassLibrary
                 builder.Append(""+ x.Name+" "+ x.Id + "\n");
             }
             return builder.ToString();
-        }*/
+        }
     }
 }
