@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using ClassLibrary.Services.Location.Client;
+using Ucu.Poo.Locations.Client;
 using Nito.AsyncEx;
 
 namespace ClassLibrary
@@ -193,7 +193,7 @@ namespace ClassLibrary
         public int GetClosestLocationWithMaterialStock(int compMatId, string geoReference)
         {
             DataManager dataManager = new DataManager();
-            LocationAPIClient locClient = new LocationAPIClient();
+            LocationApiClient locClient = new LocationApiClient();
 
             double closestDistance = 0;
             int closestLocationId = 0;
