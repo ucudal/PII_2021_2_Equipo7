@@ -10,6 +10,7 @@ namespace ClassLibrary
         private Qualification qualification;
         private CompanyMaterial companyMaterial;
         private MaterialCategory materialCategory;
+        private CompanyMaterialStock companyMaterialStock;
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase.
@@ -34,5 +35,12 @@ namespace ClassLibrary
         /// mensajeria del usuario a registrar.
         /// </summary>
        public MaterialCategory MaterialCategory{ get => this.materialCategory;set => this.materialCategory = value;}
+
+       /// <summary>
+        /// Identificador dentro del servicio de
+        /// mensajeria del usuario a registrar.
+        /// </summary>
+       public CompanyMaterialStock CompanyMaterialStock{ get => this.companyMaterialStock;set => this.companyMaterialStock = value;}
+    
     }
 }

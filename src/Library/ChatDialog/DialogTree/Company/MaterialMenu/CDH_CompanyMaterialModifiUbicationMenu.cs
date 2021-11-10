@@ -25,9 +25,9 @@ namespace ClassLibrary
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;;
             session.Process = process;
-            //SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            //data.Stock.Stock=int.Parse(selector.Code);
-            
+            SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
+            data.CompanyMaterialStock.Stock=int.Parse(selector.Code);
+            data.CompanyMaterialStock.CompanyMatId=data.CompanyMaterial.Id;            
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese la ubicacion del material.\n");
