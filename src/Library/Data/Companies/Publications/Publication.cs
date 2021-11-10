@@ -43,6 +43,12 @@ namespace ClassLibrary
         public int Price{get; set;}
 
         /// <summary>
+        /// Cantidad del material.
+        /// </summary>
+        /// <value></value>
+        public int Quantity{get; set;}
+
+        /// <summary>
         /// Divisa del precio del material o materiales.
         /// </summary>
         public Currency Currency{get; set;}
