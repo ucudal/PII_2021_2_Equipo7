@@ -923,6 +923,246 @@
         <member name="M:ClassLibrary.CDH_CompanyPublicationQuantityMaterialToAddMenu.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
+        <member name="T:ClassLibrary.CDH_Confirmation_Sale_Category">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Realiza la confirmación de la ´publicación.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_Confirmation_Sale_Category.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_Confirmation_Sale_Category"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_Confirmation_Sale_Category.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_Confirmation_Sale_KeyWord">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Realiza la confirmación de la ´publicación.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_Confirmation_Sale_KeyWord.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_Confirmation_Sale_KeyWord"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_Confirmation_Sale_KeyWord.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_Confirmation_Sale_Location">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Realiza la confirmación de la ´publicación.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_Confirmation_Sale_Location.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_Confirmation_Sale_Location"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_Confirmation_Sale_Location.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_Final_Sale_Category">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Realiza la transacción de la compra.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_Final_Sale_Category.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_Final_Sale_Category"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_Final_Sale_Category.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_Final_Sale_Keyword">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Realiza la transacción de la compra.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_Final_Sale_Keyword.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_Final_Sale_Keyword"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_Final_Sale_Keyword.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_Final_Sale_Location">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Realiza la transacción de la compra.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_Final_Sale_Location.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_Final_Sale_Location"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_Final_Sale_Location.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_List_Category_Menu">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Muestra una lista de publicaciones por localidad.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_List_Category_Menu.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_List_Category_Menu"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_List_Category_Menu.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_List_KeyWords_Menu">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Muestra una lista de publicaciones.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_List_KeyWords_Menu.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_List_KeyWords_Menu"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_List_KeyWords_Menu.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_List_Location_Menu">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Muestra una lista de publicaciones por localidad.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_List_Location_Menu.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_List_Location_Menu"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_List_Location_Menu.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_Sale_Publication_Category">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Realiza la compra de la ´publicación.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_Sale_Publication_Category.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_Sale_Publication_Category"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_Sale_Publication_Category.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_Sale_Publication_KeyWord">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Realiza la compra de la ´publicación.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_Sale_Publication_KeyWord.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_Sale_Publication_KeyWord"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_Sale_Publication_KeyWord.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_Sale_Publication_Location">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Realiza la compra de la ´publicación.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_Sale_Publication_Location.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_Sale_Publication_Location"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_Sale_Publication_Location.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_Search_Category_Menu">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Busca una publicación por una categoria del material
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_Search_Category_Menu.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_Search_Category_Menu"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_Search_Category_Menu.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_Search_KeyWord_Menu">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Busca una publicación con una palabra clave
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_Search_KeyWord_Menu.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_Search_KeyWord_Menu"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_Search_KeyWord_Menu.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_Search_Location_Menu">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Busca una publicación con una palabra clave
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_Search_Location_Menu.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_Search_Location_Menu"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_Search_Location_Menu.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_Search_Publication_Menu">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un emprendedor.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_Search_Publication_Menu.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_Search_Publication_Menu"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_Search_Publication_Menu.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
         <member name="T:ClassLibrary.CDH_SignUpBadCode">
             <summary>
             <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
@@ -2476,6 +2716,12 @@
             Precio de lo que se vende en la publicación, ya sea un material o varios.
             </summary>
         </member>
+        <member name="P:ClassLibrary.Publication.Quantity">
+            <summary>
+            Cantidad del material.
+            </summary>
+            <value></value>
+        </member>
         <member name="P:ClassLibrary.Publication.Currency">
             <summary>
             Divisa del precio del material o materiales.
@@ -3550,6 +3796,30 @@
             </summary>
         </member>
         <member name="P:ClassLibrary.SelectCompanyMaterialData.MaterialCategory">
+            <summary>
+            Identificador dentro del servicio de
+            mensajeria del usuario a registrar.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.SelectCompanyMaterialData.CompanyMaterialStock">
+            <summary>
+            Identificador dentro del servicio de
+            mensajeria del usuario a registrar.
+            </summary>
+        </member>
+        <member name="T:ClassLibrary.SelectCompanyMaterialQualificationData">
+            <summary>
+            Contenedor con los datos
+            del proceso de registro
+            para un usuario
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.SelectCompanyMaterialQualificationData.#ctor">
+            <summary>
+            Inicializa una nueva instancia de la clase.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.SelectCompanyMaterialQualificationData.CompanyMaterialQualification">
             <summary>
             Identificador dentro del servicio de
             mensajeria del usuario a registrar.
