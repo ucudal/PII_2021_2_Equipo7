@@ -21,12 +21,12 @@ namespace ClassLibrary
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
-        {/*
+        {
             InsertPublicationData data = new InsertPublicationData();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = new DProcessData("select_publication",this.code,data);
-            data.Publication=publicationAdmin.Items.Find(obj => obj.Id==int.Parse(selector.Code));
-           */ 
+            data.Publication=this.datMgr.Publication.GetById(int.Parse(selector.Code));
+    
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu acciones sobre la publicacion elegido.\n");
             builder.Append("Desde este menu puede realizar las\n");

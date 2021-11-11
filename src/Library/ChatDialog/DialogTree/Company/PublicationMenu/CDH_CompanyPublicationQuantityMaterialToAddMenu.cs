@@ -22,13 +22,15 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-        
-            CompanyMaterial xMat=this.datMgr.CompanyMaterial.GetById(int.Parse(selector.Code));
             InsertPublicationData data = new InsertPublicationData();
-            data.CompanyMaterial=xMat;
+            CompanyMaterial xMat=this.datMgr.CompanyMaterial.GetById(int.Parse(selector.Code));            
+            data.Publication.CompanyMaterialId=xMat.CompanyId;
             DProcessData process = new DProcessData("add_material_to_publication", this.code, data);
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             session.Process = process;
+            data.Publication.CompanyId=this.datMgr.CompanyUser.GetCompanyForUser(session.UserId);
+
+            
 
 
             StringBuilder builder = new StringBuilder();

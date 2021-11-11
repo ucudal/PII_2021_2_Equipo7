@@ -26,10 +26,8 @@ namespace ClassLibrary
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             InsertPublicationData data = process.GetData<InsertPublicationData>();
-            /*
-            PublicationItem item = new PublicationItem(int.Parse(selector.Code));
-            data.PublicationItem=item;
-            */
+            data.Publication.Quantity=int.Parse(selector.Code);
+            
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese el precio que le quiere poner a la publicacion.\n");
             builder.Append("\\cancelar : En caso de querer canclear la operacion.\n");
