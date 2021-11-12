@@ -60,6 +60,11 @@ namespace ClassLibrary
         public bool Deleted{get; set;}
 
         /// <summary>
+        ///  Location sirve para saber donde se encuentran los materiales de la publicacion.
+        /// </summary>
+        public CompanyLocation Location{get;set;}
+
+        /// <summary>
         /// Constructor vacio para PublicationAdmin.
         /// </summary>
         [JsonConstructor]

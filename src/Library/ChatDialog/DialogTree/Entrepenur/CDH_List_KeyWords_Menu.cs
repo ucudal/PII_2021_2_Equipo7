@@ -30,9 +30,9 @@ namespace ClassLibrary
             builder.Append("\\siguiente : Siguiente pagina de publicaciones.\n");
             builder.Append("\\anterior: Pagina anterior de publicaciones.\n");
             builder.Append("\\cancelar : Volver a menu de buscar publicacion por palabra clave .\n");
+            builder.Append("LISTADO DE PUBLICACIONES: \n");
             builder.Append(TextToPrintPublicationMaterial(selector));
-            builder.Append("LISTADO DE PUBLICACIONES");
-            builder.Append("Ingrese el id de la publicación para comprar.\n");
+            builder.Append("Ingrese el id de la publicación para ver detalles.\n");
             return builder.ToString();
         }
         

@@ -31,20 +31,15 @@ namespace ClassLibrary
             return builder.ToString();
         }
 
-
         private string TextToPrintMaterialCategory(ChatDialogSelector selector)
         {
-            StringBuilder listlocation=new StringBuilder();
+            StringBuilder listCategory=new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             foreach( MaterialCategory cate in this.datMgr.MaterialCategory.Items)
             {
-                if(cate.Id==int.Parse(selector.Code))
-                {
-                    MaterialCategory cate1=this.datMgr.MaterialCategory.GetById(cate.Id);
-                    listlocation.Append($" Identificador de la categoria del material - {cate1.Id}\n");                
-                }
+               listCategory.Append($" Identificador de la categoria - {cate.Id}\n");                
             }
-            return listlocation.ToString();
+            return listCategory.ToString();
         }
 
 

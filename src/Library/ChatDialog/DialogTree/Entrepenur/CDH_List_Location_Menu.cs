@@ -30,9 +30,9 @@ namespace ClassLibrary
             builder.Append("\\siguiente : Siguiente pagina de publicaciones.\n");
             builder.Append("\\anterior: Pagina anterior de publicaciones.\n");
             builder.Append("\\cancelar : Volver a menu de buscar publicacion por localidad.\n");
+            builder.Append("LISTADO DE PUBLICACIONES:");
             builder.Append(TextToPrintPublicationMaterialLocation(selector));
-            builder.Append("LISTADO DE PUBLICACIONES");
-            builder.Append("Ingrese el id de la publicación para comprar.\n");
+            builder.Append("Ingrese el id de la publicación para ver los detalles de la publicacion.\n");
             return builder.ToString();
         }
         
@@ -41,8 +41,8 @@ namespace ClassLibrary
             StringBuilder listpublicaciones=new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             foreach(Publication publi in this.datMgr.Publication.Items)
-            {//ESTA MAL, LO DEBO COMPARAR CON LA LOCALIDAD DE LA PUBLICACION??
-                if(publi.Id==int.Parse(selector.Code))
+            {
+                if(publi.Location.GeoReference==selector.Code && publi.Deleted==false)
                 {
                     Publication publication=this.datMgr.Publication.GetById(publi.Id);
                     CompanyMaterial mat=this.datMgr.CompanyMaterial.GetById(publication.CompanyMaterialId);
