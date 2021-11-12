@@ -38,17 +38,9 @@ namespace ClassLibrary
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             foreach( CompanyMaterialStock location in this.datMgr.CompanyMaterialStock.Items)
             {
-                if(location.CompanyLocationId==int.Parse(selector.Code))
-                {
-                    CompanyMaterialStock location0=this.datMgr.CompanyMaterialStock.GetById(location.CompanyLocationId);
-                    listlocation.Append($" Identificador de la location - {location.CompanyLocationId}\n");                
-                }
+               listlocation.Append($" Identificador de la location - {location.CompanyLocationId}\n");                
             }
             return listlocation.ToString();
-        }
-
-
-        
-        
+        }     
     }
 }

@@ -24,7 +24,7 @@ namespace ClassLibrary
             StringBuilder builder = new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             
-            builder.Append($"Quieres confirmar la compra de una publicación de Id - {selector.Code} \n");
+            builder.Append($"Seguro que desea comprar la publicacion con Id - {selector.Code} \n");
             builder.Append("\\confirmar : Confirma la compra la publicación\n");
             builder.Append("\\cancelar : Cancelar la compra\n");
             return builder.ToString();

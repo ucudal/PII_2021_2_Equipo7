@@ -134,6 +134,33 @@ namespace ClassLibrary
         }
 
         /// <summary>
+        /// Obtiene el CompanyStock a partir de 
+        /// un id de material y un id de localidad
+        /// </summary>
+        /// <param name="matId">
+        /// Id del material de la empresa.
+        /// </param>
+        /// /// <param name="locId">
+        /// Id de la localidad de la empresa.
+        /// </param>
+        /// <returns>
+        /// Un objeto CompanyMaterialStock
+        /// </returns>
+
+        public CompanyMaterialStock GetCompanyMaterialStockByMatAndLocation(int matId, int locId)
+        {
+            CompanyMaterialStock xretorno=null;
+            foreach(CompanyMaterialStock xMatStock in this.Items)
+            {
+                if(xMatStock.CompanyLocationId==locId && xMatStock.CompanyMatId==matId)
+                {
+                    xretorno=xMatStock;
+                }
+            }
+            return xretorno;
+        }
+
+        /// <summary>
         /// Obtiene un listado de materiales
         /// de empresa con stock para una
         /// localizacion concreta de la 

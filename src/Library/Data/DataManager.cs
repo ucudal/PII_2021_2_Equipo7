@@ -13,6 +13,7 @@ namespace ClassLibrary
         private CompanyLocationAdmin companyLocationAdmin = Singleton<CompanyLocationAdmin>.Instance;
         private InvitationAdmin invitationAdmin = Singleton<InvitationAdmin>.Instance;
         private EntrepreneurAdmin entrepreneurAdmin = Singleton<EntrepreneurAdmin>.Instance;
+        private EntrepreneurQualificationAdmin entrepreneurQualificationAdmin = Singleton<EntrepreneurQualificationAdmin>.Instance;
         private CompanyAdmin companyAdmin = Singleton<CompanyAdmin>.Instance;
         private PublicationAdmin publicationAdmin = Singleton<PublicationAdmin>.Instance;
         private PublicationKeyWordAdmin publicationKeyWordAdmin = Singleton<PublicationKeyWordAdmin>.Instance;
@@ -60,6 +61,11 @@ namespace ClassLibrary
         /// Administracion de emprendedores.
         /// </summary>
         public EntrepreneurAdmin Entrepreneur { get => this.entrepreneurAdmin; }
+
+        /// <summary>
+        /// Administracion de habilitaciones del emprendedor.
+        /// </summary>
+        public EntrepreneurQualificationAdmin EntrepreneurQualification { get => this.entrepreneurQualificationAdmin; }
 
         /// <summary>
         /// Administracion de empresas.
