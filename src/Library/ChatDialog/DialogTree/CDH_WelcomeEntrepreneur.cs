@@ -26,6 +26,7 @@ namespace ClassLibrary
             builder.Append("\\buscarpublicacion : Buscar publicaciones.\n");
             builder.Append("\\regeneracionmaterial : Muestra la regeneración del material.\n");
             builder.Append("\\historialcompras: Mostrar historial de compra.");
+            builder.Append("\\habilitaciones: Menú de habilitaciones.");
             return builder.ToString();
         }
         /// <inheritdoc/>

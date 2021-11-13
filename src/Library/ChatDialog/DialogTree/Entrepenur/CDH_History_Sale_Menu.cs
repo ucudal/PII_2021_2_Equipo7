@@ -1,5 +1,5 @@
 using System.Text;
-
+// ARREGLAR TODA LA CLASE
 namespace ClassLibrary
 {
     /// <summary>
