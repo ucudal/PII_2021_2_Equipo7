@@ -23,7 +23,9 @@ namespace ClassLibrary
         {
             StringBuilder builder = new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            
+            SearchPublication data = new SearchPublication();
+            DProcessData process = new DProcessData("search_Publication_By_Location", this.code, data);
+
             builder.Append($"Listado de publicaciones con la palabra clave ingresada {selector.Code} \n");
             builder.Append("Ademas puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
@@ -31,15 +33,14 @@ namespace ClassLibrary
             builder.Append("\\anterior: Pagina anterior de publicaciones.\n");
             builder.Append("\\cancelar : Volver a menu de buscar publicacion por palabra clave .\n");
             builder.Append("LISTADO DE PUBLICACIONES: \n");
-            builder.Append(TextToPrintPublicationMaterial(selector));
+            builder.Append(TextToPrintPublication(selector));
             builder.Append("Ingrese el id de la publicación para ver detalles.\n");
             return builder.ToString();
         }
         
-        private string TextToPrintPublicationMaterial(ChatDialogSelector selector)
+        private string TextToPrintPublication(ChatDialogSelector selector)
         {
             StringBuilder listpublicaciones=new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
             foreach(PublicationKeyWord keyWord in this.datMgr.PublicationKeyWord.Items)
             {
                 if(keyWord.KeyWord==selector.Code)

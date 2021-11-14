@@ -31,6 +31,25 @@ namespace ClassLibrary
         }
 
         /// <summary>
+        /// Obtiene una lista de publicaciones que tienen una palabra clave en concreto.
+        /// </summary>
+        /// <param name="keyWord">Palabra clave por la cual se van a buscar las publicaciones</param>
+        /// <returns>Listado de int con las publicaciones obtenidas.</returns>
+
+        public IReadOnlyCollection<int> GetPublicationFromKeyWord(string keyWord)
+        {
+            List<int> resultList = new List<int>();
+            foreach(PublicationKeyWord xPubWord in this.Items)
+            {
+                if(xPubWord.KeyWord==keyWord)
+                {
+                    resultList.Add(xPubWord.PublicationId);
+                }
+            }
+            return resultList.AsReadOnly();
+        }
+
+        /// <summary>
         /// Obtiene una lista de palabras que actuan como palabra clave para una publicación concreta.
         /// </summary>
         /// <param name="pubId">Id de la publicación para la cual se busca obtener sus palabras claves.</param>

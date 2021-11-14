@@ -43,7 +43,7 @@ namespace ClassLibrary
         {
             bool xretorno=false;
             DProcessData process=session.Process;
-            InsertPublicationData data=process.GetData<InsertPublicationData>();
+            SearchPublication data=process.GetData<SearchPublication>();
             if(ReadyToBuy(data,session))
             {
                 Sale compra=this.datMgr.Sale.New();
@@ -60,7 +60,7 @@ namespace ClassLibrary
             return xretorno;
         }
 
-        private bool ReadyToBuy(InsertPublicationData data,Session session)
+        private bool ReadyToBuy(SearchPublication data,Session session)
         {
             CompanyMaterial xMat=this.datMgr.CompanyMaterial.GetById(data.Publication.CompanyMaterialId);
             bool xretorno=false;
