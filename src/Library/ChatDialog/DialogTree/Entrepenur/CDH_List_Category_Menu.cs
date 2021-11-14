@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text;
 
 namespace ClassLibrary
@@ -23,7 +24,9 @@ namespace ClassLibrary
         {
             StringBuilder builder = new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            
+            SearchPublication data = new SearchPublication();
+            DProcessData process = new DProcessData("search_Publication_By_Category", this.code, data);
+
             builder.Append($"Listado de publicaciones con el id de categoria ingresada - {selector.Code} \n");
             builder.Append("Ademas puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
@@ -39,15 +42,16 @@ namespace ClassLibrary
         private string TextToPrintPublicationMaterialCategory(ChatDialogSelector selector)
         {
             StringBuilder listpublicaciones=new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            foreach(Publication publi in this.datMgr.Publication.Items)
-            {//ESTA MAL, LO DEBO COMPARAR CON LA LOCALIDAD DE LA PUBLICACION??
-                if(publi.Id==int.Parse(selector.Code))
-                {
-                    Publication publication=this.datMgr.Publication.GetById(publi.Id);
-                    CompanyMaterial mat=this.datMgr.CompanyMaterial.GetById(publication.CompanyMaterialId);
-                    listpublicaciones.Append($" Identificador de la publicación - {publication.Id}, nombre del material - {mat.Name}\n");                
-                }
+            IReadOnlyCollection<int> xListaMaterialesEnCat=this.datMgr.CompanyMaterial.GetCompanyMaterialsForCategory(int.Parse(selector.Code));
+            foreach(int i in xListaMaterialesEnCat)
+            {
+               IReadOnlyCollection<int> xPublicationsPerMat=this.datMgr.Publication.GetPublicationsWithCompanyMaterial(i);
+               foreach(int j in xPublicationsPerMat)
+               {
+                   Publication xPubli=this.datMgr.Publication.GetById(j);
+                   listpublicaciones.Append(" Identificador de la publicacion - " + xPubli.Id + "nombre del material - " + this.datMgr.CompanyMaterial.GetById(i).Name + " \n");
+
+               }
             }
             return listpublicaciones.ToString();
         }

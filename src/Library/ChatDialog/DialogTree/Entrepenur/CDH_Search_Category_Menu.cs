@@ -25,16 +25,15 @@ namespace ClassLibrary
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             
             builder.Append("Menu para ingresar categoria \n");
-            builder.Append(TextToPrintMaterialCategory(selector));
+            builder.Append(TextToPrintMaterialCategory());
             builder.Append("Ingrese el id de la categoria.\n");
             builder.Append("\\cancelar : Volver a menu de busqueda .\n");
             return builder.ToString();
         }
 
-        private string TextToPrintMaterialCategory(ChatDialogSelector selector)
+        private string TextToPrintMaterialCategory()
         {
             StringBuilder listCategory=new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
             foreach( MaterialCategory cate in this.datMgr.MaterialCategory.Items)
             {
                listCategory.Append($" Identificador de la categoria - {cate.Id}\n");                

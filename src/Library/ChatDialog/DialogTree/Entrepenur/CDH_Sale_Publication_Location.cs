@@ -24,14 +24,14 @@ namespace ClassLibrary
             StringBuilder builder = new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process=session.Process;
-            InsertPublicationData data=process.GetData<InsertPublicationData>();
+            SearchPublication data=process.GetData<SearchPublication>();
             data.Publication=this.datMgr.Publication.GetById(int.Parse(selector.Code));
             
             builder.Append($"Datos de la publicacion con Id - {data.Publication.Id} \n");
             builder.Append($"Material - {this.datMgr.CompanyMaterial.GetById(data.Publication.CompanyMaterialId).Name} \n");
             builder.Append($"Cantidad - {data.Publication.Quantity} \n");
             builder.Append($"Precio - {data.Publication.Price} \n");
-            builder.Append($"Lugar - {this.datMgr.CompanyLocation.GetById(data.Publication.Location.Id).GeoReference} \n");
+            builder.Append($"Lugar - {this.datMgr.CompanyLocation.GetById(data.Location.Id).GeoReference} \n");
             builder.Append($"Fecha de publicacion - {data.Publication.ActiveFrom.ToString()} \n");
             builder.Append($"Se pueden realizar las siguientes operaciones sobre esta publicacion \n");
             builder.Append("\\comprar : Compra la publicación\n");

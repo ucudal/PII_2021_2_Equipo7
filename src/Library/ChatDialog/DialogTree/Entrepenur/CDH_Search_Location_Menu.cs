@@ -25,20 +25,19 @@ namespace ClassLibrary
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             
             builder.Append("Menu para ingresar localidad \n");
-            builder.Append(TextToPrintLocationCompany(selector));
+            builder.Append(TextToPrintLocationCompany());
             builder.Append("Ingrese el id de la localidad.\n");
             builder.Append("\\cancelar : Volver a menu de busqueda .\n");
             return builder.ToString();
         }
 
 
-        private string TextToPrintLocationCompany(ChatDialogSelector selector)
+        private string TextToPrintLocationCompany()
         {
             StringBuilder listlocation=new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            foreach( CompanyMaterialStock location in this.datMgr.CompanyMaterialStock.Items)
+            foreach( CompanyLocation location in this.datMgr.CompanyLocation.Items)
             {
-               listlocation.Append($" Identificador de la location - {location.CompanyLocationId}\n");                
+               listlocation.Append($" Identificador de la location - {location.Id}\n");                
             }
             return listlocation.ToString();
         }     

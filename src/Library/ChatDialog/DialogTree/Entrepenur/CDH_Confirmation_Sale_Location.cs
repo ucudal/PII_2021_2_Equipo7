@@ -23,8 +23,10 @@ namespace ClassLibrary
         {
             StringBuilder builder = new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            DProcessData process=session.Process;
+            SearchPublication data=process.GetData<SearchPublication>();
             
-            builder.Append($"Seguro que desea comprar la publicacion con Id - {selector.Code} \n");
+            builder.Append($"Seguro que desea comprar la publicacion con Id - {data.Publication.Id} \n");
             builder.Append("\\confirmar : Confirma la compra la publicación\n");
             builder.Append("\\cancelar : Cancelar la compra\n");
             return builder.ToString();

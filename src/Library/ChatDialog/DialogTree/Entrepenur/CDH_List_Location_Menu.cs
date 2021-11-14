@@ -23,6 +23,9 @@ namespace ClassLibrary
         {
             StringBuilder builder = new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            SearchPublication data = new SearchPublication();
+            data.Location=this.datMgr.CompanyLocation.GetById(int.Parse(selector.Code));
+            DProcessData process = new DProcessData("search_Publication_By_Location", this.code, data);
             
             builder.Append($"Listado de publicaciones con el id de localidad ingresada - {selector.Code} \n");
             builder.Append("Ademas puede realizar las\n");
@@ -31,18 +34,18 @@ namespace ClassLibrary
             builder.Append("\\anterior: Pagina anterior de publicaciones.\n");
             builder.Append("\\cancelar : Volver a menu de buscar publicacion por localidad.\n");
             builder.Append("LISTADO DE PUBLICACIONES:");
-            builder.Append(TextToPrintPublicationMaterialLocation(selector));
+            builder.Append(TextToPrintPublicationMaterialLocation(selector,data));
             builder.Append("Ingrese el id de la publicación para ver los detalles de la publicacion.\n");
             return builder.ToString();
         }
         
-        private string TextToPrintPublicationMaterialLocation(ChatDialogSelector selector)
+        private string TextToPrintPublicationMaterialLocation(ChatDialogSelector selector,SearchPublication data)
         {
             StringBuilder listpublicaciones=new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             foreach(Publication publi in this.datMgr.Publication.Items)
             {
-                if(publi.Location.GeoReference==selector.Code && publi.Deleted==false)
+                if(publi.Location.Id==data.Location.Id && publi.Deleted==false)
                 {
                     Publication publication=this.datMgr.Publication.GetById(publi.Id);
                     CompanyMaterial mat=this.datMgr.CompanyMaterial.GetById(publication.CompanyMaterialId);
