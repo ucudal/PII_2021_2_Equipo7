@@ -3,7 +3,7 @@ using System.Text;
 namespace ClassLibrary
 {
     /// <summary>
-    /// <see cref="ChatDialogHandlerBase"/> concreto:
+    /// <see cref="CDH_WelcomeSysAdmin"/> concreto:
     /// Responde al inicio de un usuario
     /// administrador de la plataforma.
     /// </summary>
@@ -24,7 +24,7 @@ namespace ClassLibrary
             builder.Append("Desde este menu puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
             builder.Append("\\invitar : Invitar usuarios.\n");
-            builder.Append("\\usuarios : Administrar los usuarios de la plataforma.\n");
+            builder.Append("\\habilitaciones : Administrar las habilitaciones de la plataforma.\n");
             builder.Append("\\materiales : Administrar categorias de materiales.");
             return builder.ToString();
         }
