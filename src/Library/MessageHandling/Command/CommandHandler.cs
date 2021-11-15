@@ -1,10 +1,18 @@
+// -----------------------------------------------------------------------
+// <copyright file="CommandHandler.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
+
 namespace ClassLibrary
 {
     /// <summary>
     /// Encargada de recibir el mensaje y procesar
     /// el comando de acuerdo a la sesion del usuario.
     /// </summary>
-    public class CommandHandler
+    public static class CommandHandler
     {
         /// <summary>
         /// Procesa el comando enviado por el usuario
@@ -15,14 +23,19 @@ namespace ClassLibrary
         /// Contenedor del mensaje enviado por el usuario.
         /// </param>
         /// <returns>Texto del mensaje de respuesta.</returns>
-        public string HandleMessage(MessageWrapper message)
+        public static string HandleMessage(MessageWrapper message)
         {
+            if (message is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(message));
+            }
+
             SessionsContainer sessions = Singleton<SessionsContainer>.Instance;
             ChatDialogEntry chatEntry = new ChatDialogEntry();
             DataManager dataManager = new DataManager();
 
             Session session = sessions.CreateSession(message.Service, message.Account);
-            
+
             if (message.UserStatus == UserStatus.Registered)
             {
                 User user = dataManager.User.GetById(message.UserId);
@@ -59,7 +72,8 @@ namespace ClassLibrary
                         case UserStatus.Unregistered:
                             message.Message = "/registration";
                             break;
-
+                        case UserStatus.Undefined:
+                        case UserStatus.Suspended:
                         case UserStatus.Registered:
                         default:
                             message.Message = "/welcome";
@@ -76,7 +90,8 @@ namespace ClassLibrary
                             case UserStatus.Unregistered:
                                 message.Message = "/registration";
                                 break;
-
+                            case UserStatus.Undefined:
+                            case UserStatus.Suspended:
                             case UserStatus.Registered:
                             default:
                                 message.Message = "/welcome";
@@ -92,7 +107,8 @@ namespace ClassLibrary
                     }
                 }
             }
-            ChatDialogSelector selector = new ChatDialogSelector(message, context, null);
+
+            ChatDialogSelector selector = new ChatDialogSelector(message, context);
 
             return chatEntry.Start(selector);
         }

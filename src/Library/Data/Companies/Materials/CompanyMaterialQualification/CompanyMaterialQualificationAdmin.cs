@@ -55,7 +55,7 @@ namespace ClassLibrary
                 }
             }
 
-            List<CompanyMaterialQualification> qualificationsPage = this.GetItemPage(resultList, itemCount, page);
+            IReadOnlyCollection<CompanyMaterialQualification> qualificationsPage = this.GetItemPage(resultList.AsReadOnly(), itemCount, page);
             return qualificationsPage.Select(mat => mat.Id).ToList().AsReadOnly();
         }
 

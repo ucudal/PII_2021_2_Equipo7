@@ -14,8 +14,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_History_Sale_Menu(ChatDialogHandlerBase next) : base(next, "History_Sale_Menu")
         {
-            this.parents.Add("welcome_entrepreneur");
-            this.route = "\\historialcompras";
+            this.Parents.Add("welcome_entrepreneur");
+            this.Route = "\\historialcompras";
         }
 
         /// <inheritdoc/>
@@ -37,13 +37,13 @@ namespace ClassLibrary
         private string TextAllPublicationsBougth(ChatDialogSelector selector)
         {
             StringBuilder listaCompras=new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            foreach(Sale xSale in this.datMgr.Sale.Items)
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            foreach(Sale xSale in this.DatMgr.Sale.Items)
             {
                 if(xSale.BuyerEntrepreneurId==session.UserId)
                 {
                     
-                    listaCompras.Append($" Identificador de la compra - {xSale.Id}, nombre del material - {this.datMgr.CompanyMaterial.GetById(xSale.ProductCompanyMaterialId).Name}\n");                
+                    listaCompras.Append($" Identificador de la compra - {xSale.Id}, nombre del material - {this.DatMgr.CompanyMaterial.GetById(xSale.ProductCompanyMaterialId).Name}\n");                
                 }
                 
             }

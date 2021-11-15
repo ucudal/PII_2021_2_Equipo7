@@ -15,17 +15,17 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_List_Category_Menu(ChatDialogHandlerBase next) : base(next, "List_Category_Menu")
         {
-            this.parents.Add("Search_Category_Menu");
-            this.route = null;
+            this.Parents.Add("Search_Category_Menu");
+            this.Route = null;
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             SearchPublication data = new SearchPublication();
-            DProcessData process = new DProcessData("search_Publication_By_Category", this.code, data);
+            DProcessData process = new DProcessData("search_Publication_By_Category", this.Code, data);
 
             builder.Append($"Listado de publicaciones con el id de categoria ingresada - {selector.Code} \n");
             builder.Append("Ademas puede realizar las\n");
@@ -42,14 +42,14 @@ namespace ClassLibrary
         private string TextToPrintPublicationMaterialCategory(ChatDialogSelector selector)
         {
             StringBuilder listpublicaciones=new StringBuilder();
-            IReadOnlyCollection<int> xListaMaterialesEnCat=this.datMgr.CompanyMaterial.GetCompanyMaterialsForCategory(int.Parse(selector.Code));
+            IReadOnlyCollection<int> xListaMaterialesEnCat=this.DatMgr.CompanyMaterial.GetCompanyMaterialsForCategory(int.Parse(selector.Code));
             foreach(int i in xListaMaterialesEnCat)
             {
-               IReadOnlyCollection<int> xPublicationsPerMat=this.datMgr.Publication.GetPublicationsWithCompanyMaterial(i);
+               IReadOnlyCollection<int> xPublicationsPerMat=this.DatMgr.Publication.GetPublicationsWithCompanyMaterial(i);
                foreach(int j in xPublicationsPerMat)
                {
-                   Publication xPubli=this.datMgr.Publication.GetById(j);
-                   listpublicaciones.Append(" Identificador de la publicacion - " + xPubli.Id + "nombre del material - " + this.datMgr.CompanyMaterial.GetById(i).Name + " \n");
+                   Publication xPubli=this.DatMgr.Publication.GetById(j);
+                   listpublicaciones.Append(" Identificador de la publicacion - " + xPubli.Id + "nombre del material - " + this.DatMgr.CompanyMaterial.GetById(i).Name + " \n");
 
                }
             }

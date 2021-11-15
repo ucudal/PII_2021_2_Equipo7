@@ -18,8 +18,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyQualificationsListToEraseMenu(ChatDialogHandlerBase next) : base(next, "company_qualifications_list_to_erase_menu")
         {
-            this.parents.Add("company_qualifications_menu");
-            this.route = "/eliminar";
+            this.Parents.Add("company_qualifications_menu");
+            this.Route = "/eliminar";
         }
 
         /// <inheritdoc/>
@@ -39,14 +39,14 @@ namespace ClassLibrary
         private string TextoToPrintQualificationsToErase(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            IReadOnlyCollection<int> xHabilitacionesAgregadas=this.datMgr.CompanyMaterialQualification.GetQualificationsForCompanyMaterial(data.CompanyMaterial.Id);
+            IReadOnlyCollection<int> xHabilitacionesAgregadas=this.DatMgr.CompanyMaterialQualification.GetQualificationsForCompanyMaterial(data.CompanyMaterial.Id);
             foreach(int i in xHabilitacionesAgregadas)
             {
-                CompanyMaterialQualification xHabili=this.datMgr.CompanyMaterialQualification.GetById(xHabilitacionesAgregadas.ElementAt(i));
-                builder.Append("" + this.datMgr.CompanyMaterial.GetById(xHabili.CompanyMatId).Name + " "+ this.datMgr.Qualification.GetById(xHabili.QualificationId).Id + "\n");
+                CompanyMaterialQualification xHabili=this.DatMgr.CompanyMaterialQualification.GetById(xHabilitacionesAgregadas.ElementAt(i));
+                builder.Append("" + this.DatMgr.CompanyMaterial.GetById(xHabili.CompanyMatId).Name + " "+ this.DatMgr.Qualification.GetById(xHabili.QualificationId).Id + "\n");
             }
             return builder.ToString();
         }

@@ -2,6 +2,10 @@
     "cSpell.enabled": true,
     "cSpell.language": "en,es",
     "cSpell.words": [
-        "Doxify"
-    ]
+        "autenticacion",
+        "Doxify",
+        "manejador",
+        "serializacion"
+    ],
+    "omnisharp.enableRoslynAnalyzers": true
 }

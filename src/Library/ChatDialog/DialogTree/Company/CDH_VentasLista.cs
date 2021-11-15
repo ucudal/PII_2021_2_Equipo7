@@ -15,8 +15,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_VentasLista(ChatDialogHandlerBase next) : base(next, "listar_vetas")
         {
-            this.parents.Add("welcome_company");
-            this.route = "/listar";
+            this.Parents.Add("welcome_company");
+            this.Route = "/listar";
         }
 
         /// <inheritdoc/>
@@ -33,7 +33,7 @@ namespace ClassLibrary
         private string TextToPrintCompanyMaterial(ChatDialogSelector selector)
         {
             StringBuilder xListMats=new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             Company company = this.companyAdmin.FindAdminUser(session.UserId);
             
             List<Sale> sales = this.saleAdmin.GetByCompanyId(company.Id);

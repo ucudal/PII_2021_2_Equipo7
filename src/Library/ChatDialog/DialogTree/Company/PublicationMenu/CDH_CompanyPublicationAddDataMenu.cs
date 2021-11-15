@@ -15,8 +15,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyPublicationAddDataMenu(ChatDialogHandlerBase next) : base(next, "company_publication_add_data_menu")
         {
-            this.parents.Add("company_publication_confirmation_add_menu");
-            this.route = "/confirmar";
+            this.Parents.Add("company_publication_confirmation_add_menu");
+            this.Route = "/confirmar";
         }
 
         /// <inheritdoc/>
@@ -32,7 +32,7 @@ namespace ClassLibrary
         /*
         private void PublicationAdd(ChatDialogSelector selector)
         {
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             InsertPublicationData data = process.GetData<InsertPublicationData>();
             data.PublicationItem.CompanyMaterial=data.CompanyMaterial;

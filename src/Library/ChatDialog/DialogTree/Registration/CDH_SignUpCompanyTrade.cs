@@ -1,3 +1,10 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_SignUpCompanyTrade.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Text;
 
 namespace ClassLibrary
@@ -11,22 +18,29 @@ namespace ClassLibrary
     public class CDH_SignUpCompanyTrade : ChatDialogHandlerBase
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="CDH_SignUpCompanyTrade"/> class.
         /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpCompanyTrade"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpCompanyTrade(ChatDialogHandlerBase next) : base(next, "registration_new_comp_trade")
+        public CDH_SignUpCompanyTrade(ChatDialogHandlerBase next)
+            : base(next, "registration_new_comp_trade")
         {
-            this.parents.Add("registration_new_comp_name");
-            this.route = null;
+            this.Parents.Add("registration_new_comp_name");
+            this.Route = null;
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            Company company = this.datMgr.Company.New();
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            Company company = this.DatMgr.Company.New();
             company.Name = selector.Code;
 
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             SignUpData data = session.Process.GetData<SignUpData>();
             data.Company = company;
 
@@ -38,13 +52,19 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
-            if (this.parents.Contains(selector.Context))
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            if (this.Parents.Contains(selector.Context))
             {
                 if (!selector.Code.StartsWith('\\'))
                 {
                     return true;
                 }
             }
+
             return false;
         }
     }

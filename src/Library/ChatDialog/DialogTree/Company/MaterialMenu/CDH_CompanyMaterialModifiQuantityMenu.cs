@@ -15,18 +15,18 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyMaterialModifiQuantityMenu(ChatDialogHandlerBase next) : base(next, "company_material_modifi_quantity_menu")
         {
-            this.parents.Add("company_material_modifi_name_menu");
-            this.route = null;
+            this.Parents.Add("company_material_modifi_name_menu");
+            this.Route = null;
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;;
             session.Process = process;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            CompanyMaterial companyMaterial = this.datMgr.CompanyMaterial.New();
+            CompanyMaterial companyMaterial = this.DatMgr.CompanyMaterial.New();
             companyMaterial.Name = selector.Code.Trim();
             data.CompanyMaterial = companyMaterial;
             
@@ -39,7 +39,7 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
-            if (this.parents.Contains(selector.Context))
+            if (this.Parents.Contains(selector.Context))
             {
                 if (!selector.Code.StartsWith('\\'))
                 {

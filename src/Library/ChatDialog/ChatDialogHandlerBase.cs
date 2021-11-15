@@ -1,5 +1,12 @@
+// -----------------------------------------------------------------------
+// <copyright file="ChatDialogHandlerBase.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 
 namespace ClassLibrary
@@ -19,29 +26,30 @@ namespace ClassLibrary
         /// el <see cref="ValidateDataEntry(ChatDialogSelector)"/> con la nueva
         /// condicion a evaluar.
         /// </summary>
-        protected string route;
+        private string route;
 
         /// <summary>
         /// Listado de pasos concretos por su codigo
-        /// donde el usuario debe estar ubicado 
+        /// donde el usuario debe estar ubicado
         /// (su contexto) para que este paso responda
         /// a un mensaje.
         /// </summary>
-        protected List<string> parents = new List<string>();
+        private Collection<string> parents = new Collection<string>();
 
         /// <summary>
         /// Objeto contenedor de las sesiones
         /// de de usuarios.
         /// </summary>
-        protected SessionsContainer sessions = Singleton<SessionsContainer>.Instance;
+        private SessionsContainer sessions = Singleton<SessionsContainer>.Instance;
 
         /// <summary>
         /// Acceso a los administradores de datos
         /// persistentes.
         /// </summary>
-        protected DataManager datMgr = new DataManager();
+        private DataManager datMgr = new DataManager();
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="ChatDialogHandlerBase"/> class.
         /// Constructor que actua de intermediario entre la el paso
         /// concreto y <see cref="CorHandler{T,K}"/> para configurar el siguiente paso
         /// y el codigo identificador de paso en la cadena.
@@ -53,8 +61,54 @@ namespace ClassLibrary
         /// <param name="code">
         /// Codigo identificador del handler concreto en la cadena.
         /// </param>
-        protected ChatDialogHandlerBase(ChatDialogHandlerBase next, string code) : base(next, code) {}
-        
+        protected ChatDialogHandlerBase(ChatDialogHandlerBase next, string code)
+            : base(next, code)
+        {
+        }
+
+        /// <summary>
+        /// Comando al que responde el paso concreto
+        /// en caso de ser nulo, se debe sobreescribir
+        /// el <see cref="ValidateDataEntry(ChatDialogSelector)"/> con la nueva
+        /// condicion a evaluar.
+        /// </summary>
+        public string Route
+        {
+            get => this.route;
+            set => this.route = value;
+        }
+
+        /// <summary>
+        /// Listado de pasos concretos por su codigo
+        /// donde el usuario debe estar ubicado
+        /// (su contexto) para que este paso responda
+        /// a un mensaje.
+        /// </summary>
+        public Collection<string> Parents
+        {
+            get => this.parents;
+        }
+
+        /// <summary>
+        /// Objeto contenedor de las sesiones
+        /// de de usuarios.
+        /// </summary>
+        public SessionsContainer Sessions
+        {
+            get => this.sessions;
+            set => this.sessions = value;
+        }
+
+        /// <summary>
+        /// Acceso a los administradores de datos
+        /// persistentes.
+        /// </summary>
+        public DataManager DatMgr
+        {
+            get => this.datMgr;
+            set => this.datMgr = value;
+        }
+
         /// <summary>
         /// Llama a <see cref="ValidateDataEntry(ChatDialogSelector)"/> para evaluar si
         /// este handler es el correcto que debe ejecutar su codigo.
@@ -62,31 +116,36 @@ namespace ClassLibrary
         /// </summary>
         /// <param name="selector">
         /// Contenedor con los datos para evaluar si este es el paso
-        /// correcto, y con aquellos necesarios para ejecutar el 
+        /// correcto, y con aquellos necesarios para ejecutar el
         /// codigo asociado al paso.
         /// </param>
         /// <returns>
         /// <c>string</c> con el mensaje de respuesta
         /// al usuario.
         /// </returns>
-        public override string Next(ChatDialogSelector selector)
-        {        
+        public override string NextLink(ChatDialogSelector selector)
+        {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
             if (this.ValidateDataEntry(selector))
             {
                 Session session = this.sessions.GetSession(selector.Service, selector.Account);
-                session.MenuLocation = this.code;
+                session.MenuLocation = this.Code;
                 return this.Execute(selector);
             }
             else
             {
-                if (this.next is null)
+                if (this.Next is null)
                 {
                     string msg = "Se intento pasar al proximo paso, pero el objeto relevante 'next' esta vacio.";
                     Debug.WriteLine($"Excepcion: {msg}");
-                    //throw new NullReferenceException(msg);
+                    /*throw new NullReferenceException(msg);*/
                 }
 
-                return this.next.Next(selector);
+                return this.Next.NextLink(selector);
             }
         }
 
@@ -104,12 +163,17 @@ namespace ClassLibrary
         /// </returns>
         public virtual bool ValidateDataEntry(ChatDialogSelector selector)
         {
-            if (this.parents.Contains(selector.Context) || (selector.Context is null && this.parents.Count == 0))
+            if (selector is null)
             {
-                if (this.route == selector.Code)
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            if (this.Parents.Contains(selector.Context) || (selector.Context is null && this.Parents.Count == 0))
+            {
+                if (this.Route == selector.Code)
                 {
                     Session session = this.sessions.GetSession(selector.Service, selector.Account);
-                    session.MenuLocation = this.code;
+                    session.MenuLocation = this.Code;
                     return true;
                 }
                 else

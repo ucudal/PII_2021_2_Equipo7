@@ -14,15 +14,15 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_Search_KeyWord_Menu(ChatDialogHandlerBase next) : base(next, "Search_KeyWord_Menu")
         {
-            this.parents.Add("Search_Publication_Menu");
-            this.route = "\\palabraclave";
+            this.Parents.Add("Search_Publication_Menu");
+            this.Route = "\\palabraclave";
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             
             builder.Append("Menu para ingresar palabra clave \n");
             builder.Append("Ingrese su palabra clave.\n");

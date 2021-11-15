@@ -15,8 +15,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyModifiMenu(ChatDialogHandlerBase next) : base(next, "company_modifi_menu")
         {
-            this.parents.Add("company_actions_material_menu");
-            this.route = "/modificar";
+            this.Parents.Add("company_actions_material_menu");
+            this.Route = "/modificar";
         }
 
         /// <inheritdoc/>
@@ -33,7 +33,7 @@ namespace ClassLibrary
         private string TextToPrintListCategories()
         {
             StringBuilder builder = new StringBuilder();
-            foreach(MaterialCategory xCat in this.datMgr.MaterialCategory.Items)
+            foreach(MaterialCategory xCat in this.DatMgr.MaterialCategory.Items)
             {
                 builder.Append("" + xCat.Name + " " + xCat.Id + "");
             }

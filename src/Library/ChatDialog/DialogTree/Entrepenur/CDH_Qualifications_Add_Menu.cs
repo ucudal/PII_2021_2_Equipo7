@@ -17,8 +17,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_Qualifications_Add_Menu(ChatDialogHandlerBase next) : base(next, "Qualifications_Add_Menu")
         {
-            this.parents.Add("Qualification_Menu");
-            this.route = "/agregar";
+            this.Parents.Add("Qualification_Menu");
+            this.Route = "/agregar";
         }
 
         /// <inheritdoc/>
@@ -38,16 +38,16 @@ namespace ClassLibrary
         private string TextoToPrintQualifications(ChatDialogSelector selector)
         {
             StringBuilder builder=new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
             List<Qualification> habilitacionesNoAgegadas=new List<Qualification>();
             int i=0;
             bool Sigo=true;
-            foreach(Qualification Habi in this.datMgr.Qualification.Items)
+            foreach(Qualification Habi in this.DatMgr.Qualification.Items)
             {
                 Sigo=true;
-                IReadOnlyCollection<int> Habilitaciones=this.datMgr.EntrepreneurQualification.GetQualificationsForEntrepreneur(session.UserId);
+                IReadOnlyCollection<int> Habilitaciones=this.DatMgr.EntrepreneurQualification.GetQualificationsForEntrepreneur(session.UserId);
                 while(i<Habilitaciones.Count && Sigo==true)
                 {
                    if(Habi.Id==Habilitaciones.ElementAt(i))

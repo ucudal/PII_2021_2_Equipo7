@@ -15,8 +15,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_Material_Regeneration_Menu(ChatDialogHandlerBase next) : base(next, "Material_Regeneration_Menu")
         {
-            this.parents.Add("welcome_entrepreneur");
-            this.route = "\\regeneracionmaterial";
+            this.Parents.Add("welcome_entrepreneur");
+            this.Route = "\\regeneracionmaterial";
         }
 
         /// <inheritdoc/>

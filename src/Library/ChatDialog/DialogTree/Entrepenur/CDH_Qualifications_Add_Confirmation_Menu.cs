@@ -15,17 +15,17 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_Qualifications_Add_Confirmation_Menu(ChatDialogHandlerBase next) : base(next, "Qualifications_Add_Confirmation_Menu")
         {
-            this.parents.Add("Qualifications_Add_Menu");
-            this.route = null;
+            this.Parents.Add("Qualifications_Add_Menu");
+            this.Route = null;
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            Qualification habilitaciones = this.datMgr.Qualification.GetById(int.Parse(selector.Code));
+            Qualification habilitaciones = this.DatMgr.Qualification.GetById(int.Parse(selector.Code));
             data.Qualification=habilitaciones;
             
             StringBuilder builder = new StringBuilder();
@@ -39,11 +39,11 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
-            if (this.parents.Contains(selector.Context))
+            if (this.Parents.Contains(selector.Context))
             {
                 if (!selector.Code.StartsWith('\\'))
                 {
-                    Qualification qualification = this.datMgr.Qualification.GetById(int.Parse(selector.Code));
+                    Qualification qualification = this.DatMgr.Qualification.GetById(int.Parse(selector.Code));
                     if (qualification is not null)
                     {
                         return true;

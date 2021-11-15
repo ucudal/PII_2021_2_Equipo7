@@ -1,14 +1,20 @@
+//-----------------------------------------------------------------------------------
+// <copyright file="SignUpData.cs" company="Universidad Católica del Uruguay">
+//     Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+//-----------------------------------------------------------------------------------
+
 namespace ClassLibrary
 {
     /// <summary>
     /// Contenedor con los datos
     /// del proceso de registro
-    /// para un usuario
+    /// para un usuario.
     /// </summary>
     public class SignUpData
     {
-        private string account;
-        private MessagingService service;
+        private readonly string account;
+        private readonly MessagingService service;
         private RegistrationType type;
         private string inviteCode;
         private User user;
@@ -16,7 +22,7 @@ namespace ClassLibrary
         private Entrepreneur entrepreneur;
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="SignUpData"/>.
+        /// Initializes a new instance of the <see cref="SignUpData"/> class.
         /// </summary>
         /// <param name="account">
         /// Identificador dentro del servicio de
@@ -50,7 +56,7 @@ namespace ClassLibrary
         public RegistrationType Type { get => this.type; set => this.type = value; }
 
         /// <summary>
-        /// Codigo de invitacion utilizado por el 
+        /// Codigo de invitacion utilizado por el
         /// usuario para registrarse.
         /// </summary>
         public string InviteCode { get => this.inviteCode; set => this.inviteCode = value; }

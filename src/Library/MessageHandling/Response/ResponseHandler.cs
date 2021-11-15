@@ -1,12 +1,17 @@
+// -----------------------------------------------------------------------
+// <copyright file="ResponseHandler.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System;
-using System.Diagnostics;
 
 namespace ClassLibrary
 {
     /// <summary>
     /// Encargada de enviar la respuesta al usuario.
     /// </summary>
-    public class ResponseHandler
+    public static class ResponseHandler
     {
         /// <summary>
         /// Envia el mensaje de respuesta al usuario.
@@ -15,8 +20,13 @@ namespace ClassLibrary
         /// Contenedor de respuesta con el mensaje y cuenta
         /// remota precisos para el envio de la respuesta.
         /// </param>
-        public void SendResponse(ResponseWrapper response)
+        public static void SendResponse(ResponseWrapper response)
         {
+            if (response is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(response));
+            }
+
             switch (response.Service)
             {
                 case MessagingService.Console:

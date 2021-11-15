@@ -15,8 +15,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_Qualifications_Final_Remove(ChatDialogHandlerBase next) : base(next, "Qualifications_Final_Remove")
         {
-            this.parents.Add("Qualifications_Confirmation_Remove");
-            this.route = "/confirmar";
+            this.Parents.Add("Qualifications_Confirmation_Remove");
+            this.Route = "/confirmar";
         }
 
         /// <inheritdoc/>
@@ -32,12 +32,12 @@ namespace ClassLibrary
         
         private void QualificationEraseData(ChatDialogSelector selector)
         {
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             EntrepreneurQualification data = process.GetData<EntrepreneurQualification>();
-            EntrepreneurQualification Habi=this.datMgr.EntrepreneurQualification.GetById(int.Parse(selector.Code));
+            EntrepreneurQualification Habi=this.DatMgr.EntrepreneurQualification.GetById(int.Parse(selector.Code));
             Habi.Deleted=true;
-            this.datMgr.EntrepreneurQualification.Update(Habi);            
+            this.DatMgr.EntrepreneurQualification.Update(Habi);            
         }
     }
 }

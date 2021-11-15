@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="MessageHandler.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System;
 using System.Diagnostics;
 using System.Text;
@@ -10,7 +16,7 @@ namespace ClassLibrary
     /// el usuario que lo envio. Ajusta el mensaje
     /// de acuerdo a la autenticacion de este.
     /// </summary>
-    public class MessageHandler
+    public static class MessageHandler
     {
         /// <summary>
         /// Metodo llamado por los puntos de contacto
@@ -21,34 +27,41 @@ namespace ClassLibrary
         /// cual es enviado al manejador de respuesta para
         /// su envio.
         /// </summary>
-        /// <param name="message"></param>
-        public Task<ResponseWrapper> HandleMessage(MessageWrapper message)
+        /// <param name="message">
+        /// Mensaje recibido.
+        /// </param>
+        /// <returns>
+        /// Una <see cref="Task"/> con la tarea de
+        /// procesar el mensaje recibido.
+        /// </returns>
+        public static Task<ResponseWrapper> HandleMessage(MessageWrapper message)
         {
             try
             {
-                CommandHandler commandHandler = new CommandHandler();
-                
                 StringBuilder stringBuilder = new StringBuilder();
-                this.MessageIsValid(message);
+                MessageIsValid(message);
                 UserAuthenticator.Authenticate(message);
 
-                string commandResponse = commandHandler.HandleMessage(message);
+                string commandResponse = CommandHandler.HandleMessage(message);
                 stringBuilder.Append(commandResponse);
 
                 ResponseWrapper response = new ResponseWrapper(stringBuilder.ToString(), message.Service, message.Account);
                 return Task.FromResult<ResponseWrapper>(response);
-                //responseHandler.SendResponse(response);
+                /*responseHandler.SendResponse(response);*/
             }
-            catch(ArgumentNullException e)
+            catch (ArgumentNullException e)
             {
                 Debug.WriteLine($"Excepcion al recibir un mensaje: {e.Message}");
                 throw;
             }
         }
 
-        private void MessageIsValid(MessageWrapper message)
+        private static void MessageIsValid(MessageWrapper message)
         {
-            if (message is null) throw new ArgumentNullException("Se intento recibir un mensaje sin ningun dato.");
+            if (message is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(message));
+            }
         }
     }
 }

@@ -14,17 +14,17 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_List_KeyWords_Menu(ChatDialogHandlerBase next) : base(next, "List_KeyWords_Menu")
         {
-            this.parents.Add("Search_KeyWord_Menu");
-            this.route = null;
+            this.Parents.Add("Search_KeyWord_Menu");
+            this.Route = null;
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             SearchPublication data = new SearchPublication();
-            DProcessData process = new DProcessData("search_Publication_By_Location", this.code, data);
+            DProcessData process = new DProcessData("search_Publication_By_Location", this.Code, data);
 
             builder.Append($"Listado de publicaciones con la palabra clave ingresada {selector.Code} \n");
             builder.Append("Ademas puede realizar las\n");
@@ -41,12 +41,12 @@ namespace ClassLibrary
         private string TextToPrintPublication(ChatDialogSelector selector)
         {
             StringBuilder listpublicaciones=new StringBuilder();
-            foreach(PublicationKeyWord keyWord in this.datMgr.PublicationKeyWord.Items)
+            foreach(PublicationKeyWord keyWord in this.DatMgr.PublicationKeyWord.Items)
             {
                 if(keyWord.KeyWord==selector.Code)
                 {
-                    Publication publication=this.datMgr.Publication.GetById(keyWord.PublicationId);
-                    CompanyMaterial mat=this.datMgr.CompanyMaterial.GetById(publication.CompanyMaterialId);
+                    Publication publication=this.DatMgr.Publication.GetById(keyWord.PublicationId);
+                    CompanyMaterial mat=this.DatMgr.CompanyMaterial.GetById(publication.CompanyMaterialId);
                     listpublicaciones.Append($" Identificador de la publicación - {publication.Id}, nombre del material - {mat.Name}\n");                
                 }
             }

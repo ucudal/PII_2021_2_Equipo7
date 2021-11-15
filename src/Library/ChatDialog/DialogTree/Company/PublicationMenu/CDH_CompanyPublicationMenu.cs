@@ -16,8 +16,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyPublicationMenu(ChatDialogHandlerBase next) : base(next, "company_publication_menu")
         {
-            this.parents.Add("welcome_company");
-            this.route = "/publicaciones";
+            this.Parents.Add("welcome_company");
+            this.Route = "/publicaciones";
         }
 
         /// <inheritdoc/>

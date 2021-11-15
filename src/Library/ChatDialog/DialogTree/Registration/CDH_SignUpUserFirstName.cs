@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_SignUpUserFirstName.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Text;
 
 namespace ClassLibrary
@@ -12,16 +18,18 @@ namespace ClassLibrary
     public class CDH_SignUpUserFirstName : ChatDialogHandlerBase
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="CDH_SignUpUserFirstName"/> class.
         /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpUserFirstName"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpUserFirstName(ChatDialogHandlerBase next) : base(next, "registration_user_f_name")
+        public CDH_SignUpUserFirstName(ChatDialogHandlerBase next)
+            : base(next, "registration_user_f_name")
         {
-            this.parents.Add("registration_invite_comp_new");
-            this.parents.Add("registration_invite_comp_join");
-            this.parents.Add("registration_invite_entre_new");
-            this.parents.Add("registration_invite_sysadmin_join");
-            this.route = "/confirmar";
+            this.Parents.Add("registration_invite_comp_new");
+            this.Parents.Add("registration_invite_comp_join");
+            this.Parents.Add("registration_invite_entre_new");
+            this.Parents.Add("registration_invite_sysadmin_join");
+            this.Route = "/confirmar";
         }
 
         /// <inheritdoc/>
