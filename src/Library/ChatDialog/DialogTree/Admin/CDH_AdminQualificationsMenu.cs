@@ -23,7 +23,7 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("Usted ha seleccionado la opcion invitar .\n");
+            builder.Append("Usted ha seleccionado la opcionhabilitaciones .\n");
             builder.Append("Que tipio de invitacion quiere crear:\n\n");
             builder.Append("\\admin : Invitacion de administradores del sistema.\n");
             builder.Append("\\emprendedor : Invitacion de emprendedores al sistema.\n");
