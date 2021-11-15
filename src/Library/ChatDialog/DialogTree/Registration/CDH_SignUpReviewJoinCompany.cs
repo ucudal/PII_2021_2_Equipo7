@@ -50,7 +50,9 @@ namespace ClassLibrary
                 if (!selector.Code.StartsWith('\\'))
                 {
                     Session session = this.sessions.GetSession(selector.Service, selector.Account);
-                    if (session.Process.GetData<SignUpData>()?.Type == RegistrationType.CompanyJoin)
+                    DProcessData process = session.CloneCurrentProcess();
+                    SignUpData data = process.GetData<SignUpData>();
+                    if (data?.Type == RegistrationType.CompanyJoin)
                     {
                         return true;
                     }
