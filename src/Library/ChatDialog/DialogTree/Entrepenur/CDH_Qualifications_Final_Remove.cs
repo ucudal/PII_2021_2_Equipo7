@@ -35,7 +35,7 @@ namespace ClassLibrary
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             EntrepreneurQualification data = process.GetData<EntrepreneurQualification>();
-            EntrepreneurQualification Habi=this.datMgr.EntrepreneurQualification.GetById(session.UserId);
+            EntrepreneurQualification Habi=this.datMgr.EntrepreneurQualification.GetById(int.Parse(selector.Code));
             Habi.Deleted=true;
             this.datMgr.EntrepreneurQualification.Update(Habi);            
         }
