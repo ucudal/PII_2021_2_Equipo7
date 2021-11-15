@@ -41,23 +41,23 @@ namespace ClassLibrary
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            List<Qualification> xhabilitacionesNoAgegadas=new List<Qualification>();
+            List<Qualification> habilitacionesNoAgegadas=new List<Qualification>();
             int i=0;
-            bool xSigo=true;
-            foreach(Qualification xHabi in this.datMgr.Qualification.Items)
+            bool Sigo=true;
+            foreach(Qualification Habi in this.datMgr.Qualification.Items)
             {
-                xSigo=true;
-                IReadOnlyCollection<int> xHabilitaciones=this.datMgr.CompanyMaterialQualification.GetQualificationsForCompanyMaterial(data.CompanyMaterial.Id);
-                while(i<xHabilitaciones.Count && xSigo==true)
+                Sigo=true;
+                IReadOnlyCollection<int> Habilitaciones=this.datMgr.EntrepreneurQualification.GetQualificationsForEntrepreneur(session.UserId);
+                while(i<Habilitaciones.Count && Sigo==true)
                 {
-                   if(xHabi.Id==xHabilitaciones.ElementAt(i))
+                   if(Habi.Id==Habilitaciones.ElementAt(i))
                    {
-                       xSigo=false;
-                       xhabilitacionesNoAgegadas.Add(xHabi);
+                       Sigo=false;
+                       habilitacionesNoAgegadas.Add(Habi);
                    } 
                 }
             }
-            foreach(Qualification x in xhabilitacionesNoAgegadas)
+            foreach(Qualification x in habilitacionesNoAgegadas)
             {
                 builder.Append(""+ x.Name+" "+ x.Id + "\n");
             }
