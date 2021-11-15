@@ -1,7 +1,15 @@
+// -----------------------------------------------------------------------
+// <copyright file="ChatDialogSelector.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
+
 namespace ClassLibrary
 {
     /// <summary>
-    /// Selector para la cadena de responsabilidad 
+    /// Selector para la cadena de responsabilidad
     /// usada en el dialogo de chat con el Bot.
     /// </summary>
     public class ChatDialogSelector
@@ -10,9 +18,9 @@ namespace ClassLibrary
         private string code;
         private string account;
         private MessagingService service;
-        private string[] args;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="ChatDialogSelector"/> class.
         /// Crea un nuevo selector.
         /// </summary>
         /// <param name="message">
@@ -22,16 +30,17 @@ namespace ClassLibrary
         /// Localizacion actual en el arbol de dialogos
         /// del usuario.
         /// </param>
-        /// <param name="args">
-        /// Argumentos (no utilizado).
-        /// </param>
-        public ChatDialogSelector(MessageWrapper message, string context, string[] args)
+        public ChatDialogSelector(MessageWrapper message, string context)
         {
+            if (message is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(message));
+            }
+
             this.code = message.Message;
             this.account = message.Account;
             this.service = message.Service;
             this.context = context;
-            this.args = args;
         }
 
         /// <summary>
@@ -39,11 +48,6 @@ namespace ClassLibrary
         /// del usuario.
         /// </summary>
         public string Context { get => this.context; }
-
-        /// <summary>
-        /// Argumentos (no utilizado).
-        /// </summary>
-        public string[] Args { get => this.args; }
 
         /// <summary>
         /// Codigo ingresado por el usuario en el mensaje
@@ -57,7 +61,7 @@ namespace ClassLibrary
 
         /// <summary>
         /// Cuenta en el servicio de mensajeria del
-        /// usuario que envio el mensaje
+        /// usuario que envio el mensaje.
         /// </summary>
         public string Account { get => this.account; }
 

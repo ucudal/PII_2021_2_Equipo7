@@ -57,7 +57,7 @@ namespace ClassLibrary
                 }
             }
 
-            List<Sale> salesPage = GetItemPage(resultList, itemCount, page);
+            IReadOnlyCollection<Sale> salesPage = this.GetItemPage(resultList.AsReadOnly(), itemCount, page);
             return salesPage.Select(sale => sale.Id).ToList().AsReadOnly();
         }
         
@@ -109,7 +109,7 @@ namespace ClassLibrary
                 }
             }
 
-            List<Sale> salesPage = GetItemPage(resultList, itemCount, page);
+            IReadOnlyCollection<Sale> salesPage = this.GetItemPage(resultList.AsReadOnly(), itemCount, page);
             return salesPage.Select(sale => sale.Id).ToList().AsReadOnly();
         }
 

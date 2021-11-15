@@ -15,8 +15,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyPublicationListMenu(ChatDialogHandlerBase next) : base(next, "company_publication_list_menu")
         {
-            this.parents.Add("company_publication_menu");
-            this.route = "/listar";
+            this.Parents.Add("company_publication_menu");
+            this.Route = "/listar";
         }
 
         /// <inheritdoc/>
@@ -37,9 +37,9 @@ namespace ClassLibrary
         private string TextoToPrintQualificationsToErase(ChatDialogSelector selector)
         {            
              StringBuilder builder = new StringBuilder();
-            foreach(Publication xPub in this.datMgr.Publication.Items)
+            foreach(Publication xPub in this.DatMgr.Publication.Items)
             {
-                builder.Append("" + xPub.Id + " "+  this.datMgr.CompanyMaterial.GetById(xPub.CompanyMaterialId).Name + " " + xPub.Price + "\n");
+                builder.Append("" + xPub.Id + " "+  this.DatMgr.CompanyMaterial.GetById(xPub.CompanyMaterialId).Name + " " + xPub.Price + "\n");
             }
             return builder.ToString();
         }

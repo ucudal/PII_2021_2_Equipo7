@@ -14,8 +14,8 @@ namespace ClassLibrary
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CHD_AdminMaterialMenu(ChatDialogHandlerBase next) : base(next, "mat_menu")
-        {   this.parents.Add("welcome_sysadmin");
-            this.route = "\\materiales";
+        {   this.Parents.Add("welcome_sysadmin");
+            this.Route = "\\materiales";
 
 
         }

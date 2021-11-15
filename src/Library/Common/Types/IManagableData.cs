@@ -1,10 +1,19 @@
+// -----------------------------------------------------------------------
+// <copyright file="IManagableData.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 namespace ClassLibrary
 {
     /// <summary>
     /// Interface para estructuras de datos que
     /// deben ser administradas por una implementacion
-    /// concreta de <see cref="DataAdmin{T}"/>. 
+    /// concreta de <see cref="DataAdmin{T}"/>.
     /// </summary>
+    /// <typeparam name="T">
+    /// Clase misma que implementa la interfaz.
+    /// </typeparam>
     public interface IManagableData<T>
     {
         /// <summary>

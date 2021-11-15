@@ -14,18 +14,18 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_List_Location_Menu(ChatDialogHandlerBase next) : base(next, "List_Location_Menu")
         {
-            this.parents.Add("Search_Location_Menu");
-            this.route = null;
+            this.Parents.Add("Search_Location_Menu");
+            this.Route = null;
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             SearchPublication data = new SearchPublication();
-            data.Location=this.datMgr.CompanyLocation.GetById(int.Parse(selector.Code));
-            DProcessData process = new DProcessData("search_Publication_By_Location", this.code, data);
+            data.Location=this.DatMgr.CompanyLocation.GetById(int.Parse(selector.Code));
+            DProcessData process = new DProcessData("search_Publication_By_Location", this.Code, data);
             
             builder.Append($"Listado de publicaciones con el id de localidad ingresada - {selector.Code} \n");
             builder.Append("Ademas puede realizar las\n");
@@ -42,13 +42,13 @@ namespace ClassLibrary
         private string TextToPrintPublicationMaterialLocation(ChatDialogSelector selector,SearchPublication data)
         {
             StringBuilder listpublicaciones=new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            foreach(Publication publi in this.datMgr.Publication.Items)
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            foreach(Publication publi in this.DatMgr.Publication.Items)
             {
                 if(publi.Location.Id==data.Location.Id && publi.Deleted==false)
                 {
-                    Publication publication=this.datMgr.Publication.GetById(publi.Id);
-                    CompanyMaterial mat=this.datMgr.CompanyMaterial.GetById(publication.CompanyMaterialId);
+                    Publication publication=this.DatMgr.Publication.GetById(publi.Id);
+                    CompanyMaterial mat=this.DatMgr.CompanyMaterial.GetById(publication.CompanyMaterialId);
                     listpublicaciones.Append($" Identificador de la publicación - {publication.Id}, nombre del material - {mat.Name}\n");                
                 }
             }

@@ -14,8 +14,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_Company_Tracing_Menu(ChatDialogHandlerBase next) : base(next, "company_Tracing_menu")
         {
-            this.parents.Add("welcome_company");
-            this.route = "/listar";
+            this.Parents.Add("welcome_company");
+            this.Route = "/listar";
         }
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
@@ -34,9 +34,9 @@ namespace ClassLibrary
         private string TextToPrintCompanyMaterial(ChatDialogSelector selector)
         {
             StringBuilder xListMats=new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            Company company = this.datMgr.Company.FindAdminUser(session.UserId);
-            List<Sale> sales = this.datMgr.User.GetByCompanyId(company.Id);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            Company company = this.DatMgr.Company.FindAdminUser(session.UserId);
+            List<Sale> sales = this.DatMgr.User.GetByCompanyId(company.Id);
             Dictionary<int,int> saleByMatirial = new Dictionary<int,int>();
         
             foreach(Sale sale in sales)

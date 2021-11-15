@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="UserStatus.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 namespace ClassLibrary
 {
     /// <summary>
@@ -6,13 +12,24 @@ namespace ClassLibrary
     /// </summary>
     public enum UserStatus
     {
-        ///<summary>No definido.</summary>
+        /// <summary>
+        /// No definido.
+        /// </summary>
         Undefined,
-        ///<summary>Usuario registrado.</summary>
+
+        /// <summary>
+        /// Usuario registrado.
+        /// </summary>
         Registered,
-        ///<summary>Usuario no registrado</summary>
+
+        /// <summary>
+        /// Usuario no registrado.
+        /// </summary>
         Unregistered,
-        ///<summary>Usuario suspendido.</summary>
-        Suspended
+
+        /// <summary>
+        /// Usuario suspendido.
+        /// </summary>
+        Suspended,
     }
 }

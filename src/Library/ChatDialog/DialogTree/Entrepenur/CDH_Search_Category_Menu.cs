@@ -14,15 +14,15 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_Search_Category_Menu(ChatDialogHandlerBase next) : base(next, "Search_Category_Menu")
         {
-            this.parents.Add("Search_Publication_Menu");
-            this.route = "\\categoria";
+            this.Parents.Add("Search_Publication_Menu");
+            this.Route = "\\categoria";
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             
             builder.Append("Menu para ingresar categoria \n");
             builder.Append(TextToPrintMaterialCategory());
@@ -34,7 +34,7 @@ namespace ClassLibrary
         private string TextToPrintMaterialCategory()
         {
             StringBuilder listCategory=new StringBuilder();
-            foreach( MaterialCategory cate in this.datMgr.MaterialCategory.Items)
+            foreach( MaterialCategory cate in this.DatMgr.MaterialCategory.Items)
             {
                listCategory.Append($" Identificador de la categoria - {cate.Id}\n");                
             }

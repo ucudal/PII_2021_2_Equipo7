@@ -15,8 +15,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyPublicationListMaterialsToAddMenu(ChatDialogHandlerBase next) : base(next, "company_publication_list_material_to_add_menu")
         {
-            this.parents.Add("company_publication_menu");
-            this.route = "/ingresar";
+            this.Parents.Add("company_publication_menu");
+            this.Route = "/ingresar";
         }
 
         /// <inheritdoc/>
@@ -36,12 +36,12 @@ namespace ClassLibrary
         private string TextToPrintCompanyMaterial(ChatDialogSelector selector)
         {
             StringBuilder xListMats=new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             
-            Company company = this.datMgr.Company.GetById(session.UserId);
-            foreach(int i in this.datMgr.CompanyMaterial.GetCompanyMaterialsInCompany(company.Id))
+            Company company = this.DatMgr.Company.GetById(session.UserId);
+            foreach(int i in this.DatMgr.CompanyMaterial.GetCompanyMaterialsInCompany(company.Id))
             {
-                CompanyMaterial xMat=this.datMgr.CompanyMaterial.GetById(i);
+                CompanyMaterial xMat=this.DatMgr.CompanyMaterial.GetById(i);
                 xListMats.Append("" + xMat.Name +" " +xMat.Id + "\n");
             }
             return xListMats.ToString();

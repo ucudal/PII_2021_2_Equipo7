@@ -4,5 +4,10 @@
         <name>Program</name>
     </assembly>
     <members>
+        <member name="T:Program.Program">
+            <summary>
+            Programa Principal.
+            </summary>
+        </member>
     </members>
 </doc>

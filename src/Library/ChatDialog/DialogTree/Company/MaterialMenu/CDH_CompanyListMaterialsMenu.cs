@@ -15,15 +15,15 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyListMaterialsMenu(ChatDialogHandlerBase next) : base(next, "company_list_material_menu")
         {
-            this.parents.Add("company_material_menu");
-            this.route = "/listar";
+            this.Parents.Add("company_material_menu");
+            this.Route = "/listar";
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             
             builder.Append("Listado de materiales existentes: \n");
             builder.Append("En caso de querer hacer una accion sobre algun material ingrese su numero.\n");
@@ -40,12 +40,12 @@ namespace ClassLibrary
         private string TextToPrintCompanyMaterial(ChatDialogSelector selector)
         {
             StringBuilder xListMats=new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             
-            Company company = this.datMgr.Company.GetById(this.datMgr.CompanyUser.GetCompanyForUser(session.UserId));
-            foreach(int xIdCompanyMaterial in this.datMgr.CompanyMaterial.GetCompanyMaterialsInCompany(company.Id))
+            Company company = this.DatMgr.Company.GetById(this.DatMgr.CompanyUser.GetCompanyForUser(session.UserId));
+            foreach(int xIdCompanyMaterial in this.DatMgr.CompanyMaterial.GetCompanyMaterialsInCompany(company.Id))
             {
-                CompanyMaterial xMat=this.datMgr.CompanyMaterial.GetById(xIdCompanyMaterial);
+                CompanyMaterial xMat=this.DatMgr.CompanyMaterial.GetById(xIdCompanyMaterial);
                 xListMats.Append("" + xMat.Name +" " +xMat.Id + "\n");
             }
             return xListMats.ToString();

@@ -1,3 +1,10 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_SignUpCode.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Text;
 
 namespace ClassLibrary
@@ -11,22 +18,29 @@ namespace ClassLibrary
     public class CDH_SignUpCode : ChatDialogHandlerBase
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="CDH_SignUpCode"/> class.
         /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpCode"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpCode(ChatDialogHandlerBase next) : base(next, "registration_invite")
+        public CDH_SignUpCode(ChatDialogHandlerBase next)
+            : base(next, "registration_invite")
         {
-            this.parents.Add("registration_prompt");
-            this.route = "/registrar";
+            this.Parents.Add("registration_prompt");
+            this.Route = "/registrar";
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            SignUpData signUpData = new SignUpData(selector.Account, selector.Service);
-            DProcessData process = new DProcessData("registration", this.code, signUpData);
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
 
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            SignUpData signUpData = new SignUpData(selector.Account, selector.Service);
+            DProcessData process = new DProcessData("registration", this.Code, signUpData);
+
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.Process = process;
 
             StringBuilder builder = new StringBuilder();

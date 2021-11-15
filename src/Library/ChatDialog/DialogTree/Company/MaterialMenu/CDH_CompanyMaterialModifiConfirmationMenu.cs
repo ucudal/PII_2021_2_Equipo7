@@ -15,14 +15,14 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyMaterialModifiConfirmationMenu(ChatDialogHandlerBase next) : base(next, "company_material_modifi_confirmation_menu")
         {
-            this.parents.Add("company_material_modifi_dateBetweenReStock_menu");
-            this.route = null;
+            this.Parents.Add("company_material_modifi_dateBetweenReStock_menu");
+            this.Route = null;
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
             data.CompanyMaterial.DateBetweenRestocks=int.Parse(selector.Code);
@@ -33,7 +33,7 @@ namespace ClassLibrary
             builder.Append("Nombre: " + data.CompanyMaterial.Name + "\n");
             builder.Append("Categoria: " + data.MaterialCategory.Name + "\n");
             builder.Append("Cantidad: " + data.CompanyMaterialStock.Stock + "\n");
-            builder.Append("Ubicacion: " +  this.datMgr.CompanyLocation.GetById(data.CompanyMaterialStock.CompanyLocationId).GeoReference + "\n");
+            builder.Append("Ubicacion: " +  this.DatMgr.CompanyLocation.GetById(data.CompanyMaterialStock.CompanyLocationId).GeoReference + "\n");
             builder.Append("Re-Establecimiento de stock cada: " +  data.CompanyMaterial.DateBetweenRestocks + "\n");
             
             builder.Append("DATOS\n");
@@ -45,7 +45,7 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
-            if (this.parents.Contains(selector.Context))
+            if (this.Parents.Contains(selector.Context))
             {
                 if (!selector.Code.StartsWith('\\'))
                 {

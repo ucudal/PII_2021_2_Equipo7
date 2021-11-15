@@ -5,10 +5,17 @@
     <Rule Id="SA1121" Action="None" />
     <Rule Id="SA1200" Action="None" />
     <Rule Id="SA1636" Action="None" />
+    <Rule Id="SA1623" Action="None" />
   </Rules>
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <Rule Id="CA1014" Action="None" />
     <Rule Id="CA1303" Action="None" />
+    <Rule Id="CA1000" Action="None" />
+    <Rule Id="CA1707" Action="None" />
+    <Rule Id="CA1711" Action="None" />
+    <Rule Id="IDE0090" Action="None" />
+    <Rule Id="IDE0044" Action="None" />
+    <Rule Id="IDE0066" Action="None" />
   </Rules>
 </RuleSet>
 

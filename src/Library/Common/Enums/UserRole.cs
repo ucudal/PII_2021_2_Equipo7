@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="UserRole.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 namespace ClassLibrary
 {
     /// <summary>
@@ -7,13 +13,24 @@ namespace ClassLibrary
     /// </summary>
     public enum UserRole
     {
-        ///<summary>No definido.</summary>
+        /// <summary>
+        /// No definido.
+        /// </summary>
         Undefined,
-        ///<summary>Administrador del sistema.</summary>
+
+        /// <summary>
+        /// Administrador del sistema.
+        /// </summary>
         SystemAdministrator,
-        ///<summary>Administrador de empresa</summary>
+
+        /// <summary>
+        /// Administrador de empresa.
+        /// </summary>
         CompanyAdministrator,
-        ///<summary>Emprendedor.</summary>
-        Entrepreneur
+
+        /// <summary>
+        /// Emprendedor.
+        /// </summary>
+        Entrepreneur,
     }
 }

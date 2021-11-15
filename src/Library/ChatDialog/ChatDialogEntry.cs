@@ -1,4 +1,9 @@
-using System;
+// -----------------------------------------------------------------------
+// <copyright file="ChatDialogEntry.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Diagnostics;
 
 namespace ClassLibrary
@@ -12,9 +17,10 @@ namespace ClassLibrary
         private ChatDialogHandlerBase firstHandler;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="ChatDialogEntry"/> class.
         /// Inicializa una nueva instancia de la clase <see cref="ChatDialogEntry"/>.
         /// Esta instancia ya pre-configura la cadena de responsabilidad entera
-        /// para ser inicializada con el metodo <see cref="Start(ChatDialogSelector)"/>
+        /// para ser inicializada con el metodo <see cref="Start(ChatDialogSelector)"/>.
         /// </summary>
         public ChatDialogEntry()
         {
@@ -59,18 +65,18 @@ namespace ClassLibrary
         /// </param>
         /// <returns>
         /// string con el resultado de ejecutar
-        /// la cadena
+        /// la cadena.
         /// </returns>
         public string Start(ChatDialogSelector selector)
-        { 
+        {
             if (this.firstHandler is null)
             {
                 string msg = "No hay configurado un ChatDialogHandler inicial en el objeto de entrada.";
                 Debug.WriteLine($"Excepcion: {msg}");
-                //throw new NullReferenceException(msg);
+                /*throw new NullReferenceException(msg);*/
             }
 
-            return this.firstHandler.Next(selector);
+            return this.firstHandler.NextLink(selector);
         }
     }
 }

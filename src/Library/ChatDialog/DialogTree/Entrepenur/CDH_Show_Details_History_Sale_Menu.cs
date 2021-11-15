@@ -14,8 +14,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_Show_Details_History_Sale_Menu(ChatDialogHandlerBase next) : base(next, "Show_Details_History_Sale_Menu")
         {
-            this.parents.Add("History_Sale_Menu");
-            this.route = null;
+            this.Parents.Add("History_Sale_Menu");
+            this.Route = null;
         }
 
         /// <inheritdoc/>
@@ -23,17 +23,17 @@ namespace ClassLibrary
         {
             StringBuilder builder = new StringBuilder();
             SearchSalesData data = new SearchSalesData();
-            DProcessData process = new DProcessData("search_Sale", this.code, data);
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            DProcessData process = new DProcessData("search_Sale", this.Code, data);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.Process = process;
-            data.Sale=this.datMgr.Sale.GetById(int.Parse(selector.Code));
+            data.Sale=this.DatMgr.Sale.GetById(int.Parse(selector.Code));
             builder.Append("Datos de la venta:");
             builder.Append("Identificador de la venta" + data.Sale.Id);
-            builder.Append("Nombre del material vendido" + this.datMgr.CompanyMaterial.GetById(data.Sale.ProductCompanyMaterialId).Name);
+            builder.Append("Nombre del material vendido" + this.DatMgr.CompanyMaterial.GetById(data.Sale.ProductCompanyMaterialId).Name);
             builder.Append("Precio de la compra"+ data.Sale.Price);
             builder.Append("Cantidad:" + data.Sale.ProductQuantity);
             builder.Append("Fecha de compra" + data.Sale.DateTime.ToString());
-            builder.Append("Vendedor:" + this.datMgr.User.GetById(data.Sale.SellerCompanyId).FirstName);
+            builder.Append("Vendedor:" + this.DatMgr.User.GetById(data.Sale.SellerCompanyId).FirstName);
             builder.Append("\\cancelar : Volver a menu de buscar publicacion por localidad.\n");
             return builder.ToString();
         }

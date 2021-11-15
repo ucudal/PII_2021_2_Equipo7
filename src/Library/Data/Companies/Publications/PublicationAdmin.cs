@@ -49,7 +49,7 @@ namespace ClassLibrary
                 }
             }
 
-            List<Publication> publicationsPage = this.GetItemPage(resultList, itemCount, page);
+            IReadOnlyCollection<Publication> publicationsPage = this.GetItemPage(resultList.AsReadOnly(), itemCount, page);
             return publicationsPage.Select(pub => pub.Id).ToList().AsReadOnly();
         }
 

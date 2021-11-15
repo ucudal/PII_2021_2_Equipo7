@@ -1,3 +1,10 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_WelcomeCompany.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Text;
 
 namespace ClassLibrary
@@ -10,11 +17,14 @@ namespace ClassLibrary
     public class CDH_WelcomeCompany : ChatDialogHandlerBase
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="CDH_WelcomeCompany"/> class.
         /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_WelcomeCompany(ChatDialogHandlerBase next) : base(next, "welcome_company")
-        {}
+        public CDH_WelcomeCompany(ChatDialogHandlerBase next)
+            : base(next, "welcome_company")
+        {
+        }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
@@ -29,11 +39,17 @@ namespace ClassLibrary
             builder.Append("\\usuarios : Administrar los usuarios administradores.");
             return builder.ToString();
         }
+
         /// <inheritdoc/>
         public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            User user = this.datMgr.User.GetById(session.UserId);
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            User user = this.DatMgr.User.GetById(session.UserId);
             if (selector.Code == "/welcome" && user.Role == UserRole.CompanyAdministrator)
             {
                 return true;

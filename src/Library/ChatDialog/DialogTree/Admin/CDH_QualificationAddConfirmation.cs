@@ -14,8 +14,8 @@ namespace ClassLibrary
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDH_QualificationAddConfirmation(ChatDialogHandlerBase next) : base(next, "hab_confir")
-        {   this.parents.Add("hab_add_name");
-            this.route = null;
+        {   this.Parents.Add("hab_add_name");
+            this.Route = null;
 
 
         }

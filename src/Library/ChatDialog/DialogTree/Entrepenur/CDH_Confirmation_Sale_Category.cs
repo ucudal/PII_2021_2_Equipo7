@@ -14,15 +14,15 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_Confirmation_Sale_Category(ChatDialogHandlerBase next) : base(next, "Confirmation_Sale_Category")
         {
-            this.parents.Add("Sale_Publication_Category");
-            this.route = "\\comprar";
+            this.Parents.Add("Sale_Publication_Category");
+            this.Route = "\\comprar";
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process=session.Process;
             SearchPublication data=process.GetData<SearchPublication>();
             

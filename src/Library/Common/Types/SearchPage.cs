@@ -1,29 +1,60 @@
+// -----------------------------------------------------------------------
+// <copyright file="SearchPage.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace ClassLibrary
 {
     /// <summary>
-    /// 
+    /// Datos de una pagina de un listado.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class SearchPage<T> where T : IManagableData<SearchPage<T>>
+    /// <typeparam name="T">
+    /// Tipo de dato listado por la pagina.
+    /// </typeparam>
+    public class SearchPage<T>
+        where T : IManagableData<SearchPage<T>>
     {
-        private List<T> searchResults = new List<T>();
+        private ReadOnlyCollection<T> searchResults;
         private int currentPage;
         private int pageItemCount = 10;
-        private List<T> pageItems = new List<T>();
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="SearchPage{T}"/> class.
         /// </summary>
-        public List<T> SearchResults
+        public SearchPage()
         {
-            get => this.searchResults;
-            set => this.searchResults = value;
         }
 
         /// <summary>
-        /// 
+        /// Initializes a new instance of the <see cref="SearchPage{T}"/> class.
+        /// </summary>
+        /// <param name="searchResults">
+        /// Listado de resultados completo.
+        /// </param>
+        /// <param name="pageItemCount">
+        /// Items por pagina.
+        /// </param>
+        public SearchPage(ReadOnlyCollection<T> searchResults, int pageItemCount = 10)
+        {
+            this.searchResults = searchResults ?? throw new ArgumentNullException(paramName: nameof(searchResults));
+            this.pageItemCount = pageItemCount;
+        }
+
+        /// <summary>
+        /// Listado completo.
+        /// </summary>
+        public ReadOnlyCollection<T> SearchResults
+        {
+            get => this.searchResults;
+        }
+
+        /// <summary>
+        /// Indice de la pagina actual.
         /// </summary>
         public int CurrentPage
         {
@@ -32,7 +63,7 @@ namespace ClassLibrary
         }
 
         /// <summary>
-        /// 
+        /// Cuenta de items por pagina.
         /// </summary>
         public int PageItemCount
         {
@@ -41,21 +72,23 @@ namespace ClassLibrary
         }
 
         /// <summary>
-        /// 
+        /// Items de la pagina especifica.
         /// </summary>
-        public List<T> PageItems
+        public ReadOnlyCollection<T> PageItems
         {
-            get 
+            get
             {
+                List<T> results = new List<T>();
                 int startIndex = this.currentPage * this.pageItemCount;
-                if (this.pageItems.Count >= startIndex)
+                if (!(this.searchResults.Count >= startIndex))
                 {
-                    return new List<T>();
+                    for (int i = startIndex; i < (startIndex + this.pageItemCount) && i < this.searchResults.Count; i++)
+                    {
+                        results.Add(this.searchResults[i]);
+                    }
                 }
-                else
-                {
-                    return this.searchResults.GetRange(startIndex, this.pageItemCount);
-                }
+
+                return results.AsReadOnly();
             }
         }
     }

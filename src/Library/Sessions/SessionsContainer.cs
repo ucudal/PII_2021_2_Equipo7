@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="SessionsContainer.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
 
@@ -9,8 +15,8 @@ namespace ClassLibrary
     /// </summary>
     public class SessionsContainer
     {
+        private readonly int sessionTimeoutMinutes = 5;
         private List<Session> sessions = new List<Session>();
-        private int sessionTimeoutMinutes = 5;
 
         /// <summary>
         /// Crea una nueva sesion si esta no existe y la retorna.
@@ -20,19 +26,24 @@ namespace ClassLibrary
         /// Servicio de mensajeria de la sesion relevante.
         /// </param>
         /// <param name="account">
-        /// Identificador en el servicio de mensajeria 
+        /// Identificador en el servicio de mensajeria
         /// de la sesion relevante.
         /// </param>
-        /// <returns><c>Session</c></returns>
+        /// <returns>
+        /// Sesion creada.
+        /// </returns>
         public Session CreateSession(MessagingService service, string account)
         {
             Session session = this.GetSession(service, account);
             if (session is null)
             {
-                session = new Session(service, account, null);
-                session.LastActivity = DateTime.Now;
-                sessions.Add(session);
+                session = new Session(service, account, null)
+                {
+                    LastActivity = DateTime.Now,
+                };
+                this.sessions.Add(session);
             }
+
             return session;
         }
 
@@ -46,13 +57,15 @@ namespace ClassLibrary
         /// Servicio de mensajeria de la sesion relevante.
         /// </param>
         /// <param name="account">
-        /// Identificador en el servicio de mensajeria 
+        /// Identificador en el servicio de mensajeria
         /// de la sesion relevante.
         /// </param>
-        /// <returns><c>Session</c></returns>
+        /// <returns>
+        /// Sesion encontrada.
+        /// </returns>
         public Session GetSession(MessagingService service, string account)
         {
-            Session item = sessions.Find(session => session.Account == account && session.Service == service);
+            Session item = this.sessions.Find(session => session.Account == account && session.Service == service);
             if (item is not null)
             {
                 double secondsSinceLastActivity = (DateTime.Now - item.LastActivity).TotalSeconds;
@@ -60,8 +73,10 @@ namespace ClassLibrary
                 {
                     item.MenuLocation = "session_expired";
                 }
+
                 item.LastActivity = DateTime.Now;
             }
+
             return item;
         }
     }

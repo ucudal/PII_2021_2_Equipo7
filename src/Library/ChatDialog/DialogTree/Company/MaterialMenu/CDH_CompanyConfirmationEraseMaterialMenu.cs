@@ -16,14 +16,14 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyConfirmationEraseMaterialMenu(ChatDialogHandlerBase next) : base(next, "company_confirmation_erase_material_menu")
         {
-            this.parents.Add("company_actions_material_menu");
-            this.route = "/eliminar";
+            this.Parents.Add("company_actions_material_menu");
+            this.Route = "/eliminar";
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             SelectCompanyMaterialData data = session.Process.GetData<SelectCompanyMaterialData>();
             
 

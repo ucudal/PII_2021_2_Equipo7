@@ -15,8 +15,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_Qualification_Menu(ChatDialogHandlerBase next) : base(next, "Qualification_Menu")
         {
-            this.parents.Add("welcome_entrepreneur");
-            this.route = "/habilitaciones";
+            this.Parents.Add("welcome_entrepreneur");
+            this.Route = "/habilitaciones";
         }
 
         /// <inheritdoc/>

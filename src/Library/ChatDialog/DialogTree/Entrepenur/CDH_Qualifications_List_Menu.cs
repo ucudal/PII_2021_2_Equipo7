@@ -18,8 +18,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_Qualifications_List_Menu(ChatDialogHandlerBase next) : base(next, "Qualifications_List_Menu")
         {
-            this.parents.Add("Qualification_Menu");
-            this.route = "/listar";
+            this.Parents.Add("Qualification_Menu");
+            this.Route = "/listar";
         }
 
         /// <inheritdoc/>
@@ -39,14 +39,14 @@ namespace ClassLibrary
         private string TextoToPrintQualificationsToErase(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            IReadOnlyCollection<int> Habilitacion=this.datMgr.EntrepreneurQualification.GetQualificationsForEntrepreneur(session.UserId);
+            IReadOnlyCollection<int> Habilitacion=this.DatMgr.EntrepreneurQualification.GetQualificationsForEntrepreneur(session.UserId);
             foreach(int i in Habilitacion)
             {
-                EntrepreneurQualification Habili=this.datMgr.EntrepreneurQualification.GetById(Habilitacion.ElementAt(i));
-                builder.Append($" Nombre de la habilitación {this.datMgr.Qualification.GetById(Habili.EntrepreneurId).Name} de id {this.datMgr.Qualification.GetById(Habili.EntrepreneurId).Id} \n");
+                EntrepreneurQualification Habili=this.DatMgr.EntrepreneurQualification.GetById(Habilitacion.ElementAt(i));
+                builder.Append($" Nombre de la habilitación {this.DatMgr.Qualification.GetById(Habili.EntrepreneurId).Name} de id {this.DatMgr.Qualification.GetById(Habili.EntrepreneurId).Id} \n");
             }
             return builder.ToString();
         }
