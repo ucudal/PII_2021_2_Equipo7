@@ -25,7 +25,7 @@ namespace ClassLibrary
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             SearchPublication data = new SearchPublication();
             data.Location=this.datMgr.CompanyLocation.GetById(int.Parse(selector.Code));
-            DProcessData process = new DProcessData("search_Publication_By_Location", this.code, data);
+            DProcessData process = new DProcessData("search_Publication_By_Location", "/buscarpublicacion", "welcome_entrepreneur", data);
             
             builder.Append($"Listado de publicaciones con el id de localidad ingresada - {selector.Code} \n");
             builder.Append("Ademas puede realizar las\n");

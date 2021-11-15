@@ -11,7 +11,8 @@ namespace ClassLibrary
     public class DProcessData
     {
         private string code;
-        private string initiator;
+        private string initiatorRoute;
+        private string initiatorContext;
         private Type typeOfData;
         private dynamic data;
 
@@ -21,17 +22,22 @@ namespace ClassLibrary
         /// <param name="code">
         /// Codigo identificador del proceso.
         /// </param>
-        /// <param name="initiator">
-        /// Codigo del <p>DiscussionHandler</p>
-        /// que inicia el proceso.
+        /// <param name="initiatorRoute">
+        /// Ruta del <see cref="ChatDialogHandlerBase" /> concreto
+        /// que inicio el proceso.
+        /// </param>
+        /// <param name="initiatorContext">
+        /// Contexto del <see cref="ChatDialogHandlerBase" /> concreto
+        /// que inicio el proceso.
         /// </param>
         /// <param name="data">
         /// Objeto que contiene los datos especificos del proceso.
         /// </param>
-        public DProcessData(string code, string initiator, dynamic data)
+        public DProcessData(string code, string initiatorRoute, string initiatorContext, dynamic data)
         {
             this.code = code;
-            this.initiator = code;
+            this.initiatorRoute = initiatorRoute;
+            this.initiatorContext = initiatorContext;
             this.data = data;
             this.typeOfData = data?.GetType();
         }
@@ -62,9 +68,15 @@ namespace ClassLibrary
         public string Code { get => this.code; }
         
         /// <summary>
-        /// Codigo del <p>DiscussionHandler</p>
-        /// que inicia el proceso.
+        /// Ruta del <see cref="ChatDialogHandlerBase" /> concreto
+        /// que inicio el proceso.
         /// </summary>
-        public string Initiator { get => this.initiator; }
+        public string InitiatorRoute { get => this.initiatorRoute; }
+        
+        /// <summary>
+        /// Contexto del <see cref="ChatDialogHandlerBase" /> concreto
+        /// que inicio el proceso.
+        /// </summary>
+        public string InitiatorContext { get => this.initiatorContext; }
     }
 }

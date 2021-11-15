@@ -23,11 +23,12 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            SignUpData signUpData = new SignUpData(selector.Account, selector.Service);
-            DProcessData process = new DProcessData("registration", this.code, signUpData);
-
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            session.Process = process;
+
+            SignUpData signUpData = new SignUpData(selector.Account, selector.Service);
+            DProcessData process = new DProcessData("registration", "/registration", null, signUpData);
+            
+            session.PushProcess(process);
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese su <b>codigo de invitacion</b>.");

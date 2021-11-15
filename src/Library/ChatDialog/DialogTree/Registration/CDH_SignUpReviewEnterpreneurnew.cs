@@ -24,7 +24,8 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            SignUpData data = session.Process.GetData<SignUpData>();
+            DProcessData process = session.CloneCurrentProcess();
+            SignUpData data = process.GetData<SignUpData>();
             Entrepreneur entrepreneur = data.Entrepreneur;
             entrepreneur.Trade = selector.Code;
             User user = data.User;

@@ -27,8 +27,10 @@ namespace ClassLibrary
             entrepreneur.Name = selector.Code;
 
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            SignUpData data = session.Process.GetData<SignUpData>();
+            DProcessData process = session.CloneCurrentProcess();
+            SignUpData data = process.GetData<SignUpData>();
             data.Entrepreneur = entrepreneur;
+            session.ReplaceProcessInStack(process);
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese el oficio de su <b>emprendimiento</b>.");

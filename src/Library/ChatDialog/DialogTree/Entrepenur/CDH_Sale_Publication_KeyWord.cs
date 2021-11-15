@@ -24,7 +24,7 @@ namespace ClassLibrary
             StringBuilder builder = new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             SearchPublication data=new SearchPublication();
-            DProcessData process = new DProcessData("search_Publication_By_KeyWord", this.code, data);
+            DProcessData process = new DProcessData("search_Publication_By_KeyWord", null, "Search_KeyWord_Menu", data);
             data.Publication=this.datMgr.Publication.GetById(int.Parse(selector.Code));
             
             builder.Append($"Datos de la publicacion con Id - {data.Publication.Id} \n");

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace ClassLibrary
 {
@@ -15,6 +16,7 @@ namespace ClassLibrary
         private string menuLocation;
         private DProcessData process;
         private DateTime lastActivity;
+        private Stack<DProcessData> processStack;
 
         /// <summary>
         /// Crea una instancia de Session a partir de una
@@ -37,6 +39,7 @@ namespace ClassLibrary
             this.account = account;
             this.menuLocation = menuLocation;
             this.lastActivity = DateTime.Now;
+            this.processStack = new Stack<DProcessData>();
         }
 
         /// <summary>
@@ -101,6 +104,63 @@ namespace ClassLibrary
         { 
             get => this.entityId; 
             set => this.entityId = value; 
+        }
+
+        /// <summary>
+        /// Empuja un nuevo proceso al stack de procesos.
+        /// </summary>
+        /// <param name="process">
+        /// Proceso a añadir.
+        /// </param>
+        public void PushProcess(DProcessData process)
+        {
+            processStack.Push(process);
+        }
+
+        /// <summary>
+        /// Saca un proceso del stack de procesos
+        /// </summary>
+        /// <returns>
+        /// Proceso al tope de la lista.
+        /// </returns>
+        public DProcessData PopProcess()
+        {
+            DProcessData data;
+            if (processStack.TryPop(out data))
+            {
+                return data;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Obtiene una copia del ultimo proceso
+        /// en el stack de procesos.
+        /// </summary>
+        /// <returns>
+        /// Copia del proceso al tope del stack.
+        /// </returns>
+        public DProcessData CloneCurrentProcess()
+        {
+            DProcessData data;
+            if (processStack.TryPeek(out data))
+            {
+                return data;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Remplaza el ultimo proceso del stack.
+        /// </summary>
+        /// <param name="process">
+        /// Proceso que va a remplazar al ultimo.
+        /// </param>
+        public void ReplaceProcessInStack(DProcessData process)
+        {
+            DProcessData data;
+            processStack.TryPop(out data);
+            processStack.Push(process);
         }
     }
 }

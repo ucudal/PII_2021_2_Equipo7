@@ -24,7 +24,7 @@ namespace ClassLibrary
         {
             InsertPublicationData data = new InsertPublicationData();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = new DProcessData("select_publication",this.code,data);
+            DProcessData process = new DProcessData("select_publication", "/listar", "company_publication_menu", data);
             data.Publication=this.datMgr.Publication.GetById(int.Parse(selector.Code));
     
             StringBuilder builder = new StringBuilder();

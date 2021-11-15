@@ -25,7 +25,8 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            SignUpData data = session.Process.GetData<SignUpData>();
+            DProcessData process = session.PopProcess();
+            SignUpData data = process.GetData<SignUpData>();
 
             User user = this.datMgr.User.New();
             user.FirstName = data.User.FirstName;
@@ -56,7 +57,6 @@ namespace ClassLibrary
             }
 
             session.MenuLocation = null;
-            session.Process = null;
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Gracias registrarse en nuestra plataforma.\n\n"); 

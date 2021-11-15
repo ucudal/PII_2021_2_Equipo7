@@ -25,10 +25,11 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
+            DProcessData process = session.CloneCurrentProcess();
             SignUpData data = process.GetData<SignUpData>();
             User user = data.User;
             user.LastName = selector.Code.Trim();
+            session.ReplaceProcessInStack(process);
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese el nombre de su <b>emprendimiento</b>.");

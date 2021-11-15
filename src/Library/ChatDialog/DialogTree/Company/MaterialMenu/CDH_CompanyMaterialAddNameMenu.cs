@@ -25,7 +25,7 @@ namespace ClassLibrary
             MaterialCategory matCat = this.datMgr.MaterialCategory.GetById(int.Parse(selector.Code));
             InsertCompanyMaterialData data = new InsertCompanyMaterialData();
             data.MaterialCategory=matCat;
-            DProcessData process = new DProcessData("add_Material", this.code, data);
+            DProcessData process = new DProcessData("add_Material", "/materiales", "welcome_company", data);
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             session.Process = process;
             

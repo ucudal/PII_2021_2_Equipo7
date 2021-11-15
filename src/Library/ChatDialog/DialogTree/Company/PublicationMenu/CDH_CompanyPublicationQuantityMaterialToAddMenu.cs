@@ -25,7 +25,7 @@ namespace ClassLibrary
             InsertPublicationData data = new InsertPublicationData();
             CompanyMaterial xMat=this.datMgr.CompanyMaterial.GetById(int.Parse(selector.Code));            
             data.Publication.CompanyMaterialId=xMat.CompanyId;
-            DProcessData process = new DProcessData("add_material_to_publication", this.code, data);
+            DProcessData process = new DProcessData("add_material_to_publication", "/publicaciones", "welcome_company", data);
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             session.Process = process;
             data.Publication.CompanyId=this.datMgr.CompanyUser.GetCompanyForUser(session.UserId);

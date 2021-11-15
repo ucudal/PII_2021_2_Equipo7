@@ -25,7 +25,7 @@ namespace ClassLibrary
             StringBuilder builder = new StringBuilder();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             SearchPublication data = new SearchPublication();
-            DProcessData process = new DProcessData("search_Publication_By_Category", this.code, data);
+            DProcessData process = new DProcessData("search_Publication_By_Category", "/buscarpublicacion", "welcome_entrepreneur", data);
 
             builder.Append($"Listado de publicaciones con el id de categoria ingresada - {selector.Code} \n");
             builder.Append("Ademas puede realizar las\n");

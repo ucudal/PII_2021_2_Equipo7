@@ -24,7 +24,7 @@ namespace ClassLibrary
         {
             SelectCompanyMaterialData data = new SelectCompanyMaterialData();
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = new DProcessData("select_companymaterial",this.code,data);
+            DProcessData process = new DProcessData("select_companymaterial", null, "company_list_material_menu", data);
             data.CompanyMaterial=this.datMgr.CompanyMaterial.GetById(int.Parse(selector.Code));
             
             StringBuilder builder = new StringBuilder();

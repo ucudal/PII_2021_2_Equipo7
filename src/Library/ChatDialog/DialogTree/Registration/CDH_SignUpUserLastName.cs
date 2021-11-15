@@ -23,12 +23,13 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
+            DProcessData process = session.CloneCurrentProcess();
             SignUpData data = process.GetData<SignUpData>();
 
             User user = this.datMgr.User.New();
             user.FirstName = selector.Code.Trim();
             data.User = user;
+            session.ReplaceProcessInStack(process);
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese su <b>primer apellido</b>");

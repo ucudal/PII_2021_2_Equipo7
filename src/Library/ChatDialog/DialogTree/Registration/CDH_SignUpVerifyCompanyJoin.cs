@@ -24,10 +24,11 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             Session session = sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
+            DProcessData process = session.CloneCurrentProcess();
             SignUpData data = process.GetData<SignUpData>();
             data.Type = RegistrationType.CompanyJoin;
             data.InviteCode = selector.Code;
+            session.ReplaceProcessInStack(process);
             
             StringBuilder builder = new StringBuilder();
             builder.Append("Su codigo de invitacion le permite ingresar como administrador de una empresa ya existente.\n\n");

@@ -41,7 +41,9 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             Session session = sessions.GetSession(selector.Service, selector.Account);
-            session.MenuLocation = null;
+            DProcessData processData = session.Process;
+            SignUpData data = processData.GetData<SignUpData>();
+            session.MenuLocation = processData.InitiatorContext;
             session.Process = null;
             
             StringBuilder builder = new StringBuilder();
