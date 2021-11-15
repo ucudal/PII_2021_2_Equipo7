@@ -7,7 +7,7 @@ namespace ClassLibrary
     /// Contenedor de asociacion entre un emprendedor y sus
     /// habilitaciones.
     /// </summary>
-    public class EntrepreneurQualification : IManagableData<CompanyMaterialQualification>
+    public class EntrepreneurQualification : IManagableData<EntrepreneurQualification>
     {
         private int id;
         private bool deleted;
@@ -57,11 +57,11 @@ namespace ClassLibrary
         }
 
         /// <inheritdoc/>
-        public CompanyMaterialQualification Clone()
+        public EntrepreneurQualification Clone()
         {
-            CompanyMaterialQualification qualification = new CompanyMaterialQualification();
-            qualification.LoadFromJson(this.ConvertToJson());
-            return qualification;
+            EntrepreneurQualification entrepreneurQualification = new EntrepreneurQualification();
+            entrepreneurQualification.LoadFromJson(this.ConvertToJson());
+            return entrepreneurQualification;
         }
 
         /// <inheritdoc/>
@@ -79,6 +79,7 @@ namespace ClassLibrary
             this.EntrepreneurId = qualification.entrepreneurId;
             this.QualificationId = qualification.QualificationId;
         }
+
     }
 
 }
