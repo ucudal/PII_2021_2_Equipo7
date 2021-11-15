@@ -31,8 +31,8 @@ namespace ClassLibrary
             builder.Append("Menu confirmar eliminacion.\n");
             builder.Append($"El nombre del material es {data.CompanyMaterial.Name}\n");
             builder.Append("¿Seguro que desea eliminar el material? \n");
-            builder.Append("\\confirmar : Confirmar que quiere eliminar el material.\n");
-            builder.Append("\\cancelar : Cancelar operacion.\n");
+            builder.Append("/confirmar : Confirmar que quiere eliminar el material.\n");
+            builder.Append("/cancelar : Cancelar operacion.\n");
             return builder.ToString();
         }
     }

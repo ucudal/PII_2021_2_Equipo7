@@ -24,8 +24,8 @@ namespace ClassLibrary
         {
             StringBuilder builder = new StringBuilder();
             builder.Append("Desea agregar la habilitacion.\n");
-            builder.Append("\\confirmar \n");
-            builder.Append("\\cancelar");
+            builder.Append("/confirmar \n");
+            builder.Append("/cancelar");
             return builder.ToString();
             
         }

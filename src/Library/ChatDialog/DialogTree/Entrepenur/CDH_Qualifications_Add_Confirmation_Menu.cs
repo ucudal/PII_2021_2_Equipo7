@@ -31,8 +31,8 @@ namespace ClassLibrary
             StringBuilder builder = new StringBuilder();
             builder.Append("Seguro que desea añadir esta habilitacion al material.\n");
             builder.Append("Nombre: " + habilitaciones.Name);
-            builder.Append("\\confirmar : En caso de querer confirmar la operacion.\n");
-            builder.Append("\\volver : Listar todos los materiales que ya posee.\n");
+            builder.Append("/confirmar : En caso de querer confirmar la operacion.\n");
+            builder.Append("/volver : Listar todos los materiales que ya posee.\n");
             return builder.ToString();
         }
 

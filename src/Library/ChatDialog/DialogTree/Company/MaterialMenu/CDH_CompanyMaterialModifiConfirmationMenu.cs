@@ -37,8 +37,8 @@ namespace ClassLibrary
             builder.Append("Re-Establecimiento de stock cada: " +  data.CompanyMaterial.DateBetweenRestocks + "\n");
             
             builder.Append("DATOS\n");
-            builder.Append("\\confirmar : En caso de querer confirmar la operacion.\n");
-            builder.Append("\\cancelar : En caso de querer cancelar la operacion.\n");
+            builder.Append("/confirmar : En caso de querer confirmar la operacion.\n");
+            builder.Append("/cancelar : En caso de querer cancelar la operacion.\n");
             return builder.ToString();
         }
 

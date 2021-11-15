@@ -15,7 +15,7 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_QualificationsAddNameMenu(ChatDialogHandlerBase next) : base(next, "hab_add_name")
         {   this.parents.Add("hab_menu");
-            this.route = "\\agregar";
+            this.route = "/agregar";
 
 
         }
@@ -24,7 +24,7 @@ namespace ClassLibrary
         {
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese el nombre de la habilitacion\n");
-            builder.Append("\\cancelar");
+            builder.Append("/cancelar");
             return builder.ToString();
         }
 

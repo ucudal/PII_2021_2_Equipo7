@@ -29,8 +29,8 @@ namespace ClassLibrary
             data=this.datMgr.EntrepreneurQualification.GetById(int.Parse(selector.Code));
 
             builder.Append($"Esta seguro que desea eliminar la habilitacion con el id {this.datMgr.EntrepreneurQualification.GetById(session.UserId)} ?\n ");
-            builder.Append("\\confirmar : Confirmar en caso de que este seguro.\n");
-            builder.Append("\\cancelar : Volver al menu de materiales .\n");
+            builder.Append("/confirmar : Confirmar en caso de que este seguro.\n");
+            builder.Append("/cancelar : Volver al menu de materiales .\n");
             return builder.ToString();
         }
         /// <inheritdoc/>

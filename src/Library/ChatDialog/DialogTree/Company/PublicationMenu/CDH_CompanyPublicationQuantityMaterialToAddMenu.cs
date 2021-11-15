@@ -35,7 +35,7 @@ namespace ClassLibrary
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese la cantidad del material que quiere agregar a la publicacion.\n");
-            builder.Append("\\cancelar : Listar todos los materiales que ya posee.\n");
+            builder.Append("/cancelar : Listar todos los materiales que ya posee.\n");
             return builder.ToString();
         }
         /// <inheritdoc/>

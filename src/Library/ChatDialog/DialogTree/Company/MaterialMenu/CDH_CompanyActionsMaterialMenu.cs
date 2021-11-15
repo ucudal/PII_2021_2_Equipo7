@@ -31,9 +31,9 @@ namespace ClassLibrary
             builder.Append("Menu acciones sobre el material elegido.\n");
             builder.Append("Desde este menu puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\modificar : Modificar el material.\n");
-            builder.Append("\\eliminar : Eliminar el material.\n");
-            builder.Append("\\habilitaciones : Acceder a menu de habilitaciones.\n");
+            builder.Append("/modificar : Modificar el material.\n");
+            builder.Append("/eliminar : Eliminar el material.\n");
+            builder.Append("/habilitaciones : Acceder a menu de habilitaciones.\n");
             return builder.ToString();
         }
         /// <inheritdoc/>

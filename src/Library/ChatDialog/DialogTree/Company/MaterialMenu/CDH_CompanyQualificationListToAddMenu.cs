@@ -29,7 +29,7 @@ namespace ClassLibrary
             builder.Append("Aparecen la lista de habilitaciones que puede agregar.\n");
             builder.Append("Ingrese el numero de la habilitacion que quiere agregar.\n");
             builder.Append("Sino, en caso de querer retornar escriba\n");
-            builder.Append("\\volver para volver al menu de materiales.\n");
+            builder.Append("/volver para volver al menu de materiales.\n");
             builder.Append(TextoToPrintQualifications(selector));
             builder.Append("LISTADO_HABILITACIONES");
             return builder.ToString();

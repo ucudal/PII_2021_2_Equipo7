@@ -26,7 +26,7 @@ namespace ClassLibrary
             EraseMaterialFromCompany(selector);
             builder.Append("Los datos se eliminaron correctamente.\n");
             builder.Append("escriba \n");
-            builder.Append("\\volver : para retornar al menu de materiales.\n");
+            builder.Append("/volver : para retornar al menu de materiales.\n");
             return builder.ToString();
         }
         

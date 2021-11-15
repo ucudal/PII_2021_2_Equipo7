@@ -26,7 +26,7 @@ namespace ClassLibrary
             builder.Append("Menu para agregar un material.\n");
             builder.Append("Ingrese el numero de la categoria en la cual va el material.\n");
             builder.Append("En caso de querer cancelar la operacion escriba\n\n");
-            builder.Append("\\cancelar : Listar todos los materiales que ya posee.\n");
+            builder.Append("/cancelar : Listar todos los materiales que ya posee.\n");
             builder.Append(TextToPrintListCategories());
             return builder.ToString();
         }

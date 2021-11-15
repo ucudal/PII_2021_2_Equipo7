@@ -30,8 +30,8 @@ namespace ClassLibrary
 
             builder.Append("Esta seguro que desea eliminar la habilitacion con el nombre " + this.datMgr.CompanyMaterial.GetById(data.CompanyMaterialQualification.CompanyMatId).Name + " ?\n ");
             builder.Append("Esta seguro que desea eliminar la habilitacion con el nombre ?\n");
-            builder.Append("\\confirmar : Confirmar en caso de que este seguro.\n");
-            builder.Append("\\cancelar : Volver al menu de materiales .\n");
+            builder.Append("/confirmar : Confirmar en caso de que este seguro.\n");
+            builder.Append("/cancelar : Volver al menu de materiales .\n");
             return builder.ToString();
         }
         /// <inheritdoc/>

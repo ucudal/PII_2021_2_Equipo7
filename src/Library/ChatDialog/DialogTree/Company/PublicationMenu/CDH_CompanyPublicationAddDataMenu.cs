@@ -26,7 +26,7 @@ namespace ClassLibrary
             //PublicationAdd(selector);
             builder.Append("La publicacion se agrego satisfactoriamente.\n");
             builder.Append("Escriba ");
-            builder.Append("\\volver : para volver al menu de materiales.\n");
+            builder.Append("/volver : para volver al menu de materiales.\n");
             return builder.ToString();
         }
         /*

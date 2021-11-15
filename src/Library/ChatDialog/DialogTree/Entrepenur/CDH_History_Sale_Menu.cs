@@ -15,7 +15,7 @@ namespace ClassLibrary
         public CDH_History_Sale_Menu(ChatDialogHandlerBase next) : base(next, "History_Sale_Menu")
         {
             this.parents.Add("welcome_entrepreneur");
-            this.route = "\\historialcompras";
+            this.route = "/historialcompras";
         }
 
         /// <inheritdoc/>
@@ -27,9 +27,9 @@ namespace ClassLibrary
             builder.Append($"Listado de compras hechas \n");
             builder.Append("Ademas puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\siguiente : Siguiente pagina de publicaciones.\n");
-            builder.Append("\\anterior: Pagina anterior de publicaciones.\n");
-            builder.Append("\\cancelar : Volver a menu de buscar publicacion por localidad.\n");
+            builder.Append("/siguiente : Siguiente pagina de publicaciones.\n");
+            builder.Append("/anterior: Pagina anterior de publicaciones.\n");
+            builder.Append("/cancelar : Volver a menu de buscar publicacion por localidad.\n");
             builder.Append(TextToPrintPublicationDetail(selector));
             builder.Append("LISTADO DE PUBLICACIONES");
             builder.Append("Ingrese el id de la publicación para comprar.\n");

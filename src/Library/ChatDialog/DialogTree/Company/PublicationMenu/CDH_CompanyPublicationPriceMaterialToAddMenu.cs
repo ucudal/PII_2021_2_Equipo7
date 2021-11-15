@@ -30,7 +30,7 @@ namespace ClassLibrary
             
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese el precio que le quiere poner a la publicacion.\n");
-            builder.Append("\\cancelar : En caso de querer canclear la operacion.\n");
+            builder.Append("/cancelar : En caso de querer canclear la operacion.\n");
             return builder.ToString();
         }
 

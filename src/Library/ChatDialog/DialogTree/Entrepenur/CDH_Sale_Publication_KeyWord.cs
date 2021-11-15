@@ -34,8 +34,8 @@ namespace ClassLibrary
             builder.Append($"Lugar - {this.datMgr.CompanyLocation.GetById(data.Location.Id).GeoReference} \n");
             builder.Append($"Fecha de publicacion - {data.Publication.ActiveFrom.ToString()} \n");
             builder.Append($"Se pueden realizar las siguientes operaciones sobre esta publicacion \n");
-            builder.Append("\\comprar : Compra la publicación\n");
-            builder.Append("\\cancelar : Cancela la compra\n");
+            builder.Append("/comprar : Compra la publicación\n");
+            builder.Append("/cancelar : Cancela la compra\n");
             return builder.ToString();
         }
     }

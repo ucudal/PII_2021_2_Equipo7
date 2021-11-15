@@ -15,7 +15,7 @@ namespace ClassLibrary
         public CDH_Search_Location_Menu(ChatDialogHandlerBase next) : base(next, "Search_Location_Menu")
         {
             this.parents.Add("Search_Publication_Menu");
-            this.route = "\\localidad";
+            this.route = "/localidad";
         }
 
         /// <inheritdoc/>
@@ -27,7 +27,7 @@ namespace ClassLibrary
             builder.Append("Menu para ingresar localidad \n");
             builder.Append(TextToPrintLocationCompany());
             builder.Append("Ingrese el id de la localidad.\n");
-            builder.Append("\\cancelar : Volver a menu de busqueda .\n");
+            builder.Append("/cancelar : Volver a menu de busqueda .\n");
             return builder.ToString();
         }
 

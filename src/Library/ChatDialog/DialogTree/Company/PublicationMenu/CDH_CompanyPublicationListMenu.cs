@@ -28,7 +28,7 @@ namespace ClassLibrary
             builder.Append("siguientes operaciones:\n\n");
             builder.Append("Ingrese el numero de la publicacion con la cual quiere trabajar \n");
             builder.Append(" en caso contrario escriba \n");
-            builder.Append("\\cancelar : Volver al menu de materiales .\n");
+            builder.Append("/cancelar : Volver al menu de materiales .\n");
             builder.Append(TextoToPrintQualificationsToErase(selector));
             builder.Append("LISTADO_PUBLICACIONES");
             return builder.ToString();

@@ -26,7 +26,7 @@ namespace ClassLibrary
             QualificationEraseData(selector);
             builder.Append("La habilitacion se elimino con exito.\n");
             builder.Append("Escriba ");
-            builder.Append("\\cancelar : para volver al menu de materiales .\n");
+            builder.Append("/cancelar : para volver al menu de materiales .\n");
             return builder.ToString();
         }
         

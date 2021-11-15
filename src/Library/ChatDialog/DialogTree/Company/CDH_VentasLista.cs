@@ -25,7 +25,7 @@ namespace ClassLibrary
             StringBuilder builder = new StringBuilder();
             builder.Append("Listado de Ventas existentes: \n");
             builder.Append("En caso de querer hacer una accion sobre algun material ingrese su numero.\n");
-            builder.Append("\\cancelar : Volver a menu de Empresa .\n");
+            builder.Append("/cancelar : Volver a menu de Empresa .\n");
             //builder.Append(TextToPrintCompanyMaterial(selector));
             return builder.ToString();
         }

@@ -30,7 +30,7 @@ namespace ClassLibrary
                 
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese la ubicacion del material.\n");
-            builder.Append("\\cancelar : Listar todos los materiales que ya posee.\n");
+            builder.Append("/cancelar : Listar todos los materiales que ya posee.\n");
             return builder.ToString();
         }
         /// <inheritdoc/>

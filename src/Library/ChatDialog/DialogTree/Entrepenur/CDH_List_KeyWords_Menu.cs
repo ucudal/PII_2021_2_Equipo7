@@ -29,9 +29,9 @@ namespace ClassLibrary
             builder.Append($"Listado de publicaciones con la palabra clave ingresada {selector.Code} \n");
             builder.Append("Ademas puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\siguiente : Siguiente pagina de publicaciones.\n");
-            builder.Append("\\anterior: Pagina anterior de publicaciones.\n");
-            builder.Append("\\cancelar : Volver a menu de buscar publicacion por palabra clave .\n");
+            builder.Append("/siguiente : Siguiente pagina de publicaciones.\n");
+            builder.Append("/anterior: Pagina anterior de publicaciones.\n");
+            builder.Append("/cancelar : Volver a menu de buscar publicacion por palabra clave .\n");
             builder.Append("LISTADO DE PUBLICACIONES: \n");
             builder.Append(TextToPrintPublication(selector));
             builder.Append("Ingrese el id de la publicación para ver detalles.\n");

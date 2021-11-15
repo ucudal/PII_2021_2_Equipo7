@@ -23,9 +23,9 @@ namespace ClassLibrary
             builder.Append("Usted es administrador del sistema.\n");
             builder.Append("Desde este menu puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\invitar : Invitar usuarios.\n");
-            builder.Append("\\habilitaciones : Administrar las habilitaciones de la plataforma.\n");
-            builder.Append("\\materiales : Administrar categorias de materiales.");
+            builder.Append("/invitar : Invitar usuarios.\n");
+            builder.Append("/habilitaciones : Administrar las habilitaciones de la plataforma.\n");
+            builder.Append("/materiales : Administrar categorias de materiales.");
             return builder.ToString();
         }
         /// <inheritdoc/>

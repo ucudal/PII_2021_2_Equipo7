@@ -26,7 +26,7 @@ namespace ClassLibrary
             AddQualificationToMaterial(selector);
             builder.Append("Habilitacion agregada con exito.\n");
             builder.Append("escriba \n");
-            builder.Append("\\volver : para retornar al menu de materiales.\n");
+            builder.Append("/volver : para retornar al menu de materiales.\n");
             return builder.ToString();
         }
         

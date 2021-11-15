@@ -29,9 +29,9 @@ namespace ClassLibrary
             builder.Append("En caso de querer hacer una accion sobre algun material ingrese su numero.\n");
             builder.Append("Ademas puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\siguiente : Siguiente pagina de materiales.\n");
-            builder.Append("\\anterior: Pagina anterior de materiales.\n");
-            builder.Append("\\cancelar : Volver a menu de materiales .\n");
+            builder.Append("/siguiente : Siguiente pagina de materiales.\n");
+            builder.Append("/anterior: Pagina anterior de materiales.\n");
+            builder.Append("/cancelar : Volver a menu de materiales .\n");
             builder.Append(TextToPrintCompanyMaterial(selector));
             builder.Append("LISTADO_MATERIALES");
             return builder.ToString();

@@ -26,10 +26,10 @@ namespace ClassLibrary
             builder.Append("Menu de habilitaciones.\n");
             builder.Append("Desde este menu puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\eliminar : Listar todas las habilitaciones para eliminar una de ellas.\n");
-            builder.Append("\\agregar : Agregar una habilitacion\n");
-            builder.Append("\\listar : Listar las habilitaciones\n");
-            builder.Append("\\volver : Volver al menu de emprendedor .\n");
+            builder.Append("/eliminar : Listar todas las habilitaciones para eliminar una de ellas.\n");
+            builder.Append("/agregar : Agregar una habilitacion\n");
+            builder.Append("/listar : Listar las habilitaciones\n");
+            builder.Append("/volver : Volver al menu de emprendedor .\n");
             return builder.ToString();
         }
     }

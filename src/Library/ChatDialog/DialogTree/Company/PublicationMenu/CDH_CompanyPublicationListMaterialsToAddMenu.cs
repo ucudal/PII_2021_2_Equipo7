@@ -27,7 +27,7 @@ namespace ClassLibrary
             builder.Append("Ingrese el numero del material que quiere añadir a la publicacion.\n");
             builder.Append("Ademas puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\cancelar : Volver a menu de materiales .\n");
+            builder.Append("/cancelar : Volver a menu de materiales .\n");
             builder.Append(TextToPrintCompanyMaterial(selector));
             builder.Append("LISTADO_MATERIALES");
             return builder.ToString();

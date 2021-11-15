@@ -31,7 +31,7 @@ namespace ClassLibrary
             StringBuilder builder = new StringBuilder();
             builder.Append("Seguro que desea crear un material con los siguientes datos.\n");
             builder.Append("Nombre: " + data.CompanyMaterial.Name);
-            builder.Append("\\confirmar : En caso de querer confirmar la operacion.\n");
+            builder.Append("/confirmar : En caso de querer confirmar la operacion.\n");
             return builder.ToString();
         }
 

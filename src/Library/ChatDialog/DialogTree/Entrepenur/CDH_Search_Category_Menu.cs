@@ -15,7 +15,7 @@ namespace ClassLibrary
         public CDH_Search_Category_Menu(ChatDialogHandlerBase next) : base(next, "Search_Category_Menu")
         {
             this.parents.Add("Search_Publication_Menu");
-            this.route = "\\categoria";
+            this.route = "/categoria";
         }
 
         /// <inheritdoc/>
@@ -27,7 +27,7 @@ namespace ClassLibrary
             builder.Append("Menu para ingresar categoria \n");
             builder.Append(TextToPrintMaterialCategory());
             builder.Append("Ingrese el id de la categoria.\n");
-            builder.Append("\\cancelar : Volver a menu de busqueda .\n");
+            builder.Append("/cancelar : Volver a menu de busqueda .\n");
             return builder.ToString();
         }
 

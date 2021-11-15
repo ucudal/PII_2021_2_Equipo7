@@ -15,7 +15,7 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_AdminQualificationsMenu(ChatDialogHandlerBase next) : base(next, "hab_manu")
         {   this.parents.Add("welcome_sysadmin");
-            this.route = "\\habilitaciones";
+            this.route = "/habilitaciones";
 
 
         }
@@ -25,10 +25,10 @@ namespace ClassLibrary
             StringBuilder builder = new StringBuilder();
             builder.Append("Usted ha seleccionado la opcionhabilitaciones .\n");
             builder.Append("Que tipio de invitacion quiere crear:\n\n");
-            builder.Append("\\admin : Invitacion de administradores del sistema.\n");
-            builder.Append("\\emprendedor : Invitacion de emprendedores al sistema.\n");
-            builder.Append("\\compania : Invitacion de companias al sistema.\n");
-            builder.Append("\\cancelar \n");
+            builder.Append("/admin : Invitacion de administradores del sistema.\n");
+            builder.Append("/emprendedor : Invitacion de emprendedores al sistema.\n");
+            builder.Append("/compania : Invitacion de companias al sistema.\n");
+            builder.Append("/cancelar \n");
             return builder.ToString();
         }
 

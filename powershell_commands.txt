@@ -1,0 +1,2 @@
+$items = Get-ChildItem . -recurse | where {$_.name -like "CDH*"}
+0..($items.count-1) | foreach { "ChatDialogHandlerBase handler{1} = new {0}(handler{2});" -f $items[$_].Basename,$_,($_ - 1)}

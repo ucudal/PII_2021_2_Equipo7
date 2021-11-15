@@ -15,7 +15,7 @@ namespace ClassLibrary
         public CDH_Search_KeyWord_Menu(ChatDialogHandlerBase next) : base(next, "Search_KeyWord_Menu")
         {
             this.parents.Add("Search_Publication_Menu");
-            this.route = "\\palabraclave";
+            this.route = "/palabraclave";
         }
 
         /// <inheritdoc/>
@@ -26,7 +26,7 @@ namespace ClassLibrary
             
             builder.Append("Menu para ingresar palabra clave \n");
             builder.Append("Ingrese su palabra clave.\n");
-            builder.Append("\\cancelar : Volver a menu de busqueda .\n");
+            builder.Append("/cancelar : Volver a menu de busqueda .\n");
             return builder.ToString();
         }
         

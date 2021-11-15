@@ -26,7 +26,7 @@ namespace ClassLibrary
             MaterialAdd(selector);
             builder.Append("El material se agrego satisfactoriamente.\n");
             builder.Append("Escriba ");
-            builder.Append("\\volver : para volver al menu de materiales.\n");
+            builder.Append("/volver : para volver al menu de materiales.\n");
             return builder.ToString();
         }
         

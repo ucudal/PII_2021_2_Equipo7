@@ -27,8 +27,8 @@ namespace ClassLibrary
             builder.Append("Menu de publicaciones.\n");
             builder.Append("Desde este menu puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\ingresar : Ingresar una nueva publicacion.\n");
-            builder.Append("\\listar : Listar todas las publicaciones que ya posee.\n");
+            builder.Append("/ingresar : Ingresar una nueva publicacion.\n");
+            builder.Append("/listar : Listar todas las publicaciones que ya posee.\n");
             return builder.ToString();
         }
     }

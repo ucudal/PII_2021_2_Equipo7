@@ -17,7 +17,7 @@ namespace ClassLibrary
         public CDH_Final_Sale_Location(ChatDialogHandlerBase next) : base(next, "Final_Sale_Location")
         {
             this.parents.Add("Confirmation_Sale_Location");
-            this.route = "\\confirmar";
+            this.route = "/confirmar";
         }
 
         /// <inheritdoc/>
@@ -35,7 +35,7 @@ namespace ClassLibrary
                 builder.Append("La compra no se pudo realizar \n");
             }
 
-            builder.Append("\\volver : Volver al menu principal.\n");
+            builder.Append("/volver : Volver al menu principal.\n");
             return builder.ToString();
         }
 

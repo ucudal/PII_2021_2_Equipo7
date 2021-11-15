@@ -15,7 +15,7 @@ namespace ClassLibrary
         public CDH_Confirmation_Sale_Category(ChatDialogHandlerBase next) : base(next, "Confirmation_Sale_Category")
         {
             this.parents.Add("Sale_Publication_Category");
-            this.route = "\\comprar";
+            this.route = "/comprar";
         }
 
         /// <inheritdoc/>
@@ -27,8 +27,8 @@ namespace ClassLibrary
             SearchPublication data=process.GetData<SearchPublication>();
             
             builder.Append($"Quieres confirmar la compra de una publicación de Id - {data.Publication.Id} \n");
-            builder.Append("\\confirmar : Confirma la compra la publicación\n");
-            builder.Append("\\cancelar : Cancelar la compra\n");
+            builder.Append("/confirmar : Confirma la compra la publicación\n");
+            builder.Append("/cancelar : Cancelar la compra\n");
             return builder.ToString();
         }
     }

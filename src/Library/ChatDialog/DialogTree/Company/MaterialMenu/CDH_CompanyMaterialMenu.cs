@@ -27,8 +27,8 @@ namespace ClassLibrary
             builder.Append("Menu de materiales.\n");
             builder.Append("Desde este menu puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\ingresar : Ingresar un material nuevo.\n");
-            builder.Append("\\listar : Listar todos los materiales que ya posee.\n");
+            builder.Append("/ingresar : Ingresar un material nuevo.\n");
+            builder.Append("/listar : Listar todos los materiales que ya posee.\n");
             return builder.ToString();
         }
     }

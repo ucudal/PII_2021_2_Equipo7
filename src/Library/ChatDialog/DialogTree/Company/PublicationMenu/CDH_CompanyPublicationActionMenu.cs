@@ -31,8 +31,8 @@ namespace ClassLibrary
             builder.Append("Menu acciones sobre la publicacion elegido.\n");
             builder.Append("Desde este menu puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\modificar : Modificar la publicacion.\n");
-            builder.Append("\\eliminar : Eliminar la publicacion.\n");
+            builder.Append("/modificar : Modificar la publicacion.\n");
+            builder.Append("/eliminar : Eliminar la publicacion.\n");
             return builder.ToString();
         }
         /// <inheritdoc/>

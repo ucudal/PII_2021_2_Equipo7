@@ -23,10 +23,10 @@ namespace ClassLibrary
             builder.Append("Usted es administrador de una empresa.\n");
             builder.Append("Desde este menu puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\materiales : Administrar materiales.\n");
-            builder.Append("\\publicaciones : Administrar sus publicaciones.\n");
-            builder.Append("\\ventas : Manejar sus ventas.\n");
-            builder.Append("\\usuarios : Administrar los usuarios administradores.");
+            builder.Append("/materiales : Administrar materiales.\n");
+            builder.Append("/publicaciones : Administrar sus publicaciones.\n");
+            builder.Append("/ventas : Manejar sus ventas.\n");
+            builder.Append("/usuarios : Administrar los usuarios administradores.");
             return builder.ToString();
         }
         /// <inheritdoc/>

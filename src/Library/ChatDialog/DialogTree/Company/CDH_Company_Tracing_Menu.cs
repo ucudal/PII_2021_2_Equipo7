@@ -23,9 +23,9 @@ namespace ClassLibrary
             StringBuilder builder = new StringBuilder();
             builder.Append("Seguimiento de materiales \n");
             builder.Append("Cantidad vendida por material\n");
-            //builder.Append("\\siguiente : Siguiente pagina de materiales.\n");
-            //builder.Append("\\anterior: Pagina anterior de materiales.\n");
-            builder.Append("\\cancelar : Volver a menu de empresas .\n");
+            //builder.Append("/siguiente : Siguiente pagina de materiales.\n");
+            //builder.Append("/anterior: Pagina anterior de materiales.\n");
+            builder.Append("/cancelar : Volver a menu de empresas .\n");
             //builder.Append(TextToPrintCompanyMaterial(selector));
             return builder.ToString();
         }
