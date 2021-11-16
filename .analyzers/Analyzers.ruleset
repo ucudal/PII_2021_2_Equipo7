@@ -6,6 +6,7 @@
     <Rule Id="SA1200" Action="None" />
     <Rule Id="SA1636" Action="None" />
     <Rule Id="SA1623" Action="None" />
+    <Rule Id="SA1642" Action="None" />
   </Rules>
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <Rule Id="CA1014" Action="None" />

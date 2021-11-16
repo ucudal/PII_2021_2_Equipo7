@@ -102,7 +102,6 @@ namespace ClassLibrary
         /// </summary>
         public void Stop()
         {
-            this.bot.StopReceiving();
             this.cancellationTokenSource.Cancel();
         }
 
