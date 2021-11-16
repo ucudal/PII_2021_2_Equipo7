@@ -26,7 +26,7 @@ namespace ClassLibrary
         /// <summary>
         /// Conexion con la base de datos.
         /// </summary>
-        private IStorageProvider storage = Singleton<StorageProviderInProcess>.Instance;
+        private IStorageProvider storage = Singleton<StorageProviderSerializedJson>.Instance;
 
         /// <summary>
         /// Lista de objetos de tipo T.

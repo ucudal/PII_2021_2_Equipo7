@@ -4656,5 +4656,22 @@
         <member name="M:ClassLibrary.StorageProviderInProcess.Delete``1(System.Int32)">
             <inheritdoc/>
         </member>
+        <member name="T:ClassLibrary.StorageProviderSerializedJson">
+            <summary>
+            Proveedor de storage In Process.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.StorageProviderSerializedJson.SelectAll``1">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.StorageProviderSerializedJson.Insert``1(``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.StorageProviderSerializedJson.Update``1(``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.StorageProviderSerializedJson.Delete``1(System.Int32)">
+            <inheritdoc/>
+        </member>
     </members>
 </doc>
