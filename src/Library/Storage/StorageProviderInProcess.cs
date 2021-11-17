@@ -1,6 +1,11 @@
+//-----------------------------------------------------------------------------------
+// <copyright file="StorageProviderInProcess.cs" company="Universidad Católica del Uruguay">
+//     Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+//-----------------------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace ClassLibrary
@@ -10,10 +15,10 @@ namespace ClassLibrary
     /// </summary>
     public class StorageProviderInProcess : IStorageProvider
     {
-        private Dictionary<Type, List<dynamic>> tables;
+        private IDictionary<Type, List<dynamic>> tables;
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="StorageProviderInProcess"/>.
+        /// Initializes a new instance of the <see cref="StorageProviderInProcess"/> class.
         /// </summary>
         public StorageProviderInProcess()
         {
@@ -21,22 +26,29 @@ namespace ClassLibrary
         }
 
         /// <inheritdoc/>
-        public ReadOnlyCollection<T> SelectAll<T>() where T : class, IManagableData<T>
+        public IReadOnlyCollection<T> SelectAll<T>()
+            where T : class, IManagableData<T>
         {
-            List<T> table = GetTable<T>();
-            List<T> tableNotDeleted = table.FindAll(recordItem => !recordItem.Deleted);
-            List<T> orderedTable = tableNotDeleted.OrderBy(recordItem => recordItem.Id).ToList<T>();
-            return orderedTable.AsReadOnly();
+            IList<T> table = this.GetTable<T>();
+            IList<T> tableNotDeleted = table.Where(recordItem => !recordItem.Deleted).ToList();
+            IList<T> orderedTable = tableNotDeleted.OrderBy(recordItem => recordItem.Id).ToList<T>();
+            return orderedTable.ToList().AsReadOnly();
         }
 
         /// <inheritdoc/>
-        public int Insert<T>(T record) where T : class, IManagableData<T>
+        public int Insert<T>(T record)
+            where T : class, IManagableData<T>
         {
+            if (record is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(record));
+            }
+
             Type type = typeof(T);
-            List<T> table = GetTable<T>();
+            IList<T> table = this.GetTable<T>();
             T recordAux = record.Clone();
             int newId;
-            
+
             if (table.Count > 0)
             {
                 newId = table.Max(obj => obj.Id) + 1;
@@ -53,11 +65,17 @@ namespace ClassLibrary
         }
 
         /// <inheritdoc/>
-        public bool Update<T>(T record) where T : class, IManagableData<T>
+        public bool Update<T>(T record)
+            where T : class, IManagableData<T>
         {
-            List<T> table = GetTable<T>();
-            T storedRecord = table.Find(recordItem => recordItem.Id == record.Id);
-            
+            if (record is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(record));
+            }
+
+            IList<T> table = this.GetTable<T>();
+            T storedRecord = table.SingleOrDefault(recordItem => recordItem.Id == record.Id);
+
             if (storedRecord is null)
             {
                 return false;
@@ -69,11 +87,17 @@ namespace ClassLibrary
         }
 
         /// <inheritdoc/>
-        public bool Delete<T>(int recordId) where T : class, IManagableData<T>
+        public bool Delete<T>(int recordId)
+            where T : class, IManagableData<T>
         {
-            List<T> table = GetTable<T>();
-            T storedRecord = table.Find(recordItem => recordItem.Id == recordId);
-            
+            if (recordId == 0)
+            {
+                throw new ArgumentNullException(paramName: nameof(recordId));
+            }
+
+            IList<T> table = this.GetTable<T>();
+            T storedRecord = table.SingleOrDefault(recordItem => recordItem.Id == recordId);
+
             if (storedRecord is null)
             {
                 return false;
@@ -89,7 +113,14 @@ namespace ClassLibrary
             return true;
         }
 
-        private List<T> GetTable<T>() where T : class
+        private static T ConvertDynToT<T>(dynamic item)
+            where T : class
+        {
+            return item as T;
+        }
+
+        private IList<T> GetTable<T>()
+            where T : class
         {
             Type type = typeof(T);
             if (!this.tables.ContainsKey(type))
@@ -98,14 +129,9 @@ namespace ClassLibrary
             }
 
             Converter<dynamic, T> converter = new Converter<dynamic, T>(ConvertDynToT<T>);
-            List<dynamic> result = this.tables[type];
-            List<T> resultAsT = result.ConvertAll<T>(converter);
+            IList<dynamic> result = this.tables[type];
+            IList<T> resultAsT = result.ToList().ConvertAll(converter);
             return resultAsT;
         }
-
-        private T ConvertDynToT<T>(dynamic item) where T : class
-        {
-            return item as T;
-        }
-    }    
+    }
 }

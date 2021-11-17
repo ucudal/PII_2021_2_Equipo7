@@ -15,18 +15,18 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyMaterialModifiNameMenu(ChatDialogHandlerBase next) : base(next, "company_material_modifi_name_menu")
         {
-            this.parents.Add("company_modifi_menu");
-            this.route = null;
+            this.Parents.Add("company_modifi_menu");
+            this.Route = null;
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            MaterialCategory matCat = this.datMgr.MaterialCategory.GetById(int.Parse(selector.Code));
+            MaterialCategory matCat = this.DatMgr.MaterialCategory.GetById(int.Parse(selector.Code));
             SelectCompanyMaterialData data = new SelectCompanyMaterialData();
             data.MaterialCategory=matCat;
-            DProcessData process = new DProcessData("modifi_material", this.code, data);
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            DProcessData process = new DProcessData("modifi_material", this.Code, data);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.Process = process;
 
             StringBuilder builder = new StringBuilder();
@@ -37,11 +37,11 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
-            if (this.parents.Contains(selector.Context))
+            if (this.Parents.Contains(selector.Context))
             {
                 if (!selector.Code.StartsWith('\\'))
                 {
-                    MaterialCategory matCat = this.datMgr.MaterialCategory.GetById(int.Parse(selector.Code));
+                    MaterialCategory matCat = this.DatMgr.MaterialCategory.GetById(int.Parse(selector.Code));
                     if (matCat is not null)
                     {
                         return true;

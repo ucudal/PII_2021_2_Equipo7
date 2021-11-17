@@ -1,3 +1,10 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_SignUpCancel.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Text;
 
 namespace ClassLibrary
@@ -12,38 +19,45 @@ namespace ClassLibrary
     public class CDH_SignUpCancel : ChatDialogHandlerBase
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="CDH_SignUpCancel"/> class.
         /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpCancel"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpCancel(ChatDialogHandlerBase next) : base(next, "registration_cancel")
+        public CDH_SignUpCancel(ChatDialogHandlerBase next)
+            : base(next, "registration_cancel")
         {
-            this.parents.Add("registration_invite");
-            this.parents.Add("registration_invite_comp_join");
-            this.parents.Add("registration_invite_comp_new");
-            this.parents.Add("registration_invite_entre_new");
-            this.parents.Add("registration_invite_sysadmin_join");
-            this.parents.Add("registration_user_f_name");
-            this.parents.Add("registration_user_l_name");
-            this.parents.Add("registration_new_comp_name");
-            this.parents.Add("registration_new_comp_trade");
-            this.parents.Add("registration_new_comp_verify");
-            this.parents.Add("registration_new_sysadmin_verify");
-            this.parents.Add("Sign_Review_Join_Company");
-            this.parents.Add("registration_new_entre_name");
-            this.parents.Add("registration_new_entre_trade");
-            this.parents.Add("registration_join_sysadmin_verify");
-            this.parents.Add("registration_new_entre_verify");
+            this.Parents.Add("registration_invite");
+            this.Parents.Add("registration_invite_comp_join");
+            this.Parents.Add("registration_invite_comp_new");
+            this.Parents.Add("registration_invite_entre_new");
+            this.Parents.Add("registration_invite_sysadmin_join");
+            this.Parents.Add("registration_user_f_name");
+            this.Parents.Add("registration_user_l_name");
+            this.Parents.Add("registration_new_comp_name");
+            this.Parents.Add("registration_new_comp_trade");
+            this.Parents.Add("registration_new_comp_verify");
+            this.Parents.Add("registration_new_sysadmin_verify");
+            this.Parents.Add("Sign_Review_Join_Company");
+            this.Parents.Add("registration_new_entre_name");
+            this.Parents.Add("registration_new_entre_trade");
+            this.Parents.Add("registration_join_sysadmin_verify");
+            this.Parents.Add("registration_new_entre_verify");
 
-            this.route = "/cancelar";
+            this.Route = "/cancelar";
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            Session session = sessions.GetSession(selector.Service, selector.Account);
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.MenuLocation = null;
             session.Process = null;
-            
+
             StringBuilder builder = new StringBuilder();
             builder.Append("Ha cancelado el proceso de registro. Gracias por visitar.");
             return builder.ToString();

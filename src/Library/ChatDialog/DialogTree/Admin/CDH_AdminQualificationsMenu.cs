@@ -14,11 +14,11 @@ namespace ClassLibrary
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDH_AdminQualificationsMenu(ChatDialogHandlerBase next) : base(next, "hab_menu")
-        {   this.parents.Add("welcome_sysadmin");
+        {   
+            this.parents.Add("welcome_sysadmin");
             this.route = "/habilitaciones";
-
-
         }
+        
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {

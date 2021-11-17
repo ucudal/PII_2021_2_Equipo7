@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="PublicationAdmin.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +12,7 @@ using System.Linq;
 namespace ClassLibrary
 {
     /// <summary>
-    /// Clase para administrar las publicaciones
+    /// Clase para administrar las publicaciones.
     /// </summary>
     public sealed class PublicationAdmin : DataAdmin<Publication>
     {
@@ -49,7 +55,7 @@ namespace ClassLibrary
                 }
             }
 
-            List<Publication> publicationsPage = this.GetItemPage(resultList, itemCount, page);
+            IReadOnlyCollection<Publication> publicationsPage = this.GetItemPage(resultList.AsReadOnly(), itemCount, page);
             return publicationsPage.Select(pub => pub.Id).ToList().AsReadOnly();
         }
 
@@ -76,19 +82,41 @@ namespace ClassLibrary
         /// <inheritdoc/>
         protected override void ValidateData(Publication item)
         {
+            if (item is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(item));
+            }
+
             DataManager dataManager = new DataManager();
-            if(item.CompanyId == 0/* || !dataManager.Company.Exists(item.CompanyId)*/) 
+            if (item.CompanyId == 0/* || !dataManager.Company.Exists(item.CompanyId)*/)
+            {
                 throw new ValidationException("Requerida compania publicante.");
-            if(item.CompanyMaterialId == 0/* || !dataManager.CompanyMaterial.Exists(item.CompanyMaterialId)*/) 
+            }
+
+            if (item.CompanyMaterialId == 0/* || !dataManager.CompanyMaterial.Exists(item.CompanyMaterialId)*/)
+            {
                 throw new ValidationException("Requerido material de empresa publicado.");
-            if(item.Currency == 0) 
+            }
+
+            if (item.Currency == 0)
+            {
                 throw new ValidationException("Requerida moneda.");
-            if(item.Price == 0) 
+            }
+
+            if (item.Price == 0)
+            {
                 throw new ValidationException("Requerido precio de venta.");
-            if(item.ActiveFrom == DateTime.MinValue) 
+            }
+
+            if (item.ActiveFrom == DateTime.MinValue)
+            {
                 throw new ValidationException("Requerida fecha para inicio de validez.");
-            if(item.ActiveUntil == DateTime.MinValue) 
+            }
+
+            if (item.ActiveUntil == DateTime.MinValue)
+            {
                 throw new ValidationException("Requerida fecha para final de validez.");
+            }
         }
     }
 }

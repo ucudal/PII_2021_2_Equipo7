@@ -15,20 +15,20 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyPublicationQuantityMaterialToAddMenu(ChatDialogHandlerBase next) : base(next, "company_publication_quantity_material_to_add_menu")
         {
-            this.parents.Add("company_publication_list_material_to_add_menu");
-            this.route = null;
+            this.Parents.Add("company_publication_list_material_to_add_menu");
+            this.Route = null;
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
             InsertPublicationData data = new InsertPublicationData();
-            CompanyMaterial xMat=this.datMgr.CompanyMaterial.GetById(int.Parse(selector.Code));            
+            CompanyMaterial xMat=this.DatMgr.CompanyMaterial.GetById(int.Parse(selector.Code));            
             data.Publication.CompanyMaterialId=xMat.CompanyId;
-            DProcessData process = new DProcessData("add_material_to_publication", this.code, data);
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            DProcessData process = new DProcessData("add_material_to_publication", this.Code, data);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.Process = process;
-            data.Publication.CompanyId=this.datMgr.CompanyUser.GetCompanyForUser(session.UserId);
+            data.Publication.CompanyId=this.DatMgr.CompanyUser.GetCompanyForUser(session.UserId);
 
             
 
@@ -41,11 +41,11 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
-            if (this.parents.Contains(selector.Context))
+            if (this.Parents.Contains(selector.Context))
             {
                 if (!selector.Code.StartsWith('\\'))
                 {
-                    CompanyMaterial xMat = this.datMgr.CompanyMaterial.GetById(int.Parse(selector.Code));
+                    CompanyMaterial xMat = this.DatMgr.CompanyMaterial.GetById(int.Parse(selector.Code));
                     if (xMat is not null)
                     {
                         return true;

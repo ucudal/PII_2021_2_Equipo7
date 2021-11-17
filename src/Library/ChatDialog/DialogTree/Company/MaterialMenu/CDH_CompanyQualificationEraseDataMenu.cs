@@ -15,8 +15,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyQualificationEraseDataMenu(ChatDialogHandlerBase next) : base(next, "company_qualification_erase_data_menu")
         {
-            this.parents.Add("company_qualification_confirm_to_erase_menu");
-            this.route = "/confirmar";
+            this.Parents.Add("company_qualification_confirm_to_erase_menu");
+            this.Route = "/confirmar";
         }
 
         /// <inheritdoc/>
@@ -32,12 +32,12 @@ namespace ClassLibrary
         
         private void QualificationEraseData(ChatDialogSelector selector)
         {
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             SelectCompanyMaterialQualificationData data = process.GetData<SelectCompanyMaterialQualificationData>();
-            CompanyMaterialQualification xHabiMat=this.datMgr.CompanyMaterialQualification.GetById(data.CompanyMaterialQualification.Id);
+            CompanyMaterialQualification xHabiMat=this.DatMgr.CompanyMaterialQualification.GetById(data.CompanyMaterialQualification.Id);
             xHabiMat.Deleted=true;
-            this.datMgr.CompanyMaterialQualification.Update(xHabiMat);            
+            this.DatMgr.CompanyMaterialQualification.Update(xHabiMat);            
         }
     }
 }

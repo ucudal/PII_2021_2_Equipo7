@@ -1,3 +1,9 @@
+//-----------------------------------------------------------------------------------
+// <copyright file="Session.cs" company="Universidad Católica del Uruguay">
+//     Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+//-----------------------------------------------------------------------------------
+
 using System;
 
 namespace ClassLibrary
@@ -17,6 +23,7 @@ namespace ClassLibrary
         private DateTime lastActivity;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Session"/> class.
         /// Crea una instancia de Session a partir de una
         /// cuenta en un servicio de mensajeria y la posicion
         /// En el arbol de discusiones con el Bot.
@@ -42,9 +49,8 @@ namespace ClassLibrary
         /// <summary>
         /// Servicio de mensajeria.
         /// </summary>
-        /// <value><c>MessagingService</c></value>
         public MessagingService Service { get => this.service; }
-        
+
         /// <summary>
         /// Identificador en el servicio de mensajeria.
         /// </summary>
@@ -56,7 +62,7 @@ namespace ClassLibrary
         public string MenuLocation
         {
             get => this.menuLocation;
-            set 
+            set
             {
                 this.menuLocation = value;
                 this.lastActivity = DateTime.Now;
@@ -78,7 +84,7 @@ namespace ClassLibrary
         public DProcessData Process
         {
             get => this.process;
-            set 
+            set
             {
                 this.process = value;
                 this.lastActivity = DateTime.Now;
@@ -86,21 +92,30 @@ namespace ClassLibrary
         }
 
         /// <summary>
-        /// Id del usuario en la plataforma
+        /// Id del usuario en la plataforma.
         /// </summary>
-        public int UserId 
-        { 
+        public int UserId
+        {
             get => this.userId;
-            set => this.userId = value; 
+            set => this.userId = value;
         }
 
         /// <summary>
         /// Id de empresa o emprendedor asociado al usuario.
         /// </summary>
-        public int EntityId 
-        { 
-            get => this.entityId; 
-            set => this.entityId = value; 
+        public int EntityId
+        {
+            get => this.entityId;
+            set => this.entityId = value;
+        }
+
+        /// <summary>
+        /// Rol del usuario de la sesion.
+        /// </summary>
+        public UserRole UserRole
+        {
+            get => this.userRole;
+            set => this.userRole = value;
         }
     }
 }

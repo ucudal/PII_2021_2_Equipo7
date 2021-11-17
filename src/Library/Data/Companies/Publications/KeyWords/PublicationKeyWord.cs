@@ -1,6 +1,11 @@
+// -----------------------------------------------------------------------
+// <copyright file="PublicationKeyWord.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Text.Json;
 using System.Text.Json.Serialization;
-
 
 namespace ClassLibrary
 {
@@ -14,7 +19,6 @@ namespace ClassLibrary
         private int publicationId;
         private string keyWord;
 
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="PublicationKeyWord"/>.
         /// </summary>
@@ -27,14 +31,14 @@ namespace ClassLibrary
 
         /// <inheritdoc/>
         public int Id
-        { 
+        {
             get => this.id;
             set => this.id = value;
         }
 
         /// <inheritdoc/>
         public bool Deleted
-        { 
+        {
             get => this.deleted;
             set => this.deleted = value;
         }
@@ -44,17 +48,17 @@ namespace ClassLibrary
         /// que pertenece la key word.
         /// </summary>
         public int PublicationId
-        { 
+        {
             get => this.publicationId;
             set => this.publicationId = value;
         }
 
         /// <summary>
-        /// Key word asociada a la 
+        /// Key word asociada a la
         /// publicacion.
         /// </summary>
         public string KeyWord
-        { 
+        {
             get => this.keyWord;
             set => this.keyWord = value;
         }
@@ -82,17 +86,5 @@ namespace ClassLibrary
             this.PublicationId = location.PublicationId;
             this.KeyWord = location.KeyWord;
         }
-
-
-
-
-
-
-
-
-
-        
     }
-
-
 }

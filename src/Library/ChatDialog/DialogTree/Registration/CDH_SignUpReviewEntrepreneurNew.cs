@@ -1,3 +1,10 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_SignUpReviewEntrepreneurNew.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Text;
 
 namespace ClassLibrary
@@ -5,25 +12,32 @@ namespace ClassLibrary
     /// <summary>
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Responde a la introduccion del oficio de la
-    /// empresa. Le pide al usuario revisar los datos 
+    /// empresa. Le pide al usuario revisar los datos
     /// ingresados y confirmar su ingreso al sistema.
     /// </summary>
     public class CDH_SignUpReviewEntrepreneurNew : ChatDialogHandlerBase
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="CDH_SignUpReviewEntrepreneurNew"/> class.
         /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpReviewEntrepreneurNew"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpReviewEntrepreneurNew(ChatDialogHandlerBase next) : base(next, "registration_new_entre_verify")
+        public CDH_SignUpReviewEntrepreneurNew(ChatDialogHandlerBase next)
+            : base(next, "registration_new_entre_verify")
         {
-            this.parents.Add("registration_new_entre_trade");
-            this.route = null;
+            this.Parents.Add("registration_new_entre_trade");
+            this.Route = null;
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             SignUpData data = session.Process.GetData<SignUpData>();
             Entrepreneur entrepreneur = data.Entrepreneur;
             entrepreneur.Trade = selector.Code;
@@ -43,13 +57,19 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
-            if (this.parents.Contains(selector.Context))
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            if (this.Parents.Contains(selector.Context))
             {
                 if (!selector.Code.StartsWith('\\'))
                 {
                     return true;
                 }
             }
+
             return false;
         }
     }

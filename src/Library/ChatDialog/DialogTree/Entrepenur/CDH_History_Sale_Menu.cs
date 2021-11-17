@@ -1,5 +1,12 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_History_Sale_Menu.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Text;
-// ARREGLAR TODA LA CLASE
+
 namespace ClassLibrary
 {
     /// <summary>
@@ -12,44 +19,47 @@ namespace ClassLibrary
         /// Inicializa una nueva instancia de la clase <see cref="CDH_History_Sale_Menu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_History_Sale_Menu(ChatDialogHandlerBase next) : base(next, "History_Sale_Menu")
+        public CDH_History_Sale_Menu(ChatDialogHandlerBase next)
+        : base(next, "History_Sale_Menu")
         {
-            this.parents.Add("welcome_entrepreneur");
-            this.route = "\\historialcompras";
+            this.Parents.Add("welcome_entrepreneur");
+            this.Route = "\\historialcompras";
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
             builder.Append($"Listado de compras hechas \n");
             builder.Append("Ademas puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
             builder.Append("\\siguiente : Siguiente pagina de publicaciones.\n");
             builder.Append("\\anterior: Pagina anterior de publicaciones.\n");
             builder.Append("\\cancelar : Volver a menu de buscar publicacion por localidad.\n");
-            builder.Append(TextToPrintPublicationDetail(selector));
-            builder.Append("LISTADO DE PUBLICACIONES");
-            builder.Append("Ingrese el id de la publicación para comprar.\n");
+            builder.Append(this.TextAllPublicationsBougth(selector));
+            builder.Append("LISTADO DE Compras");
+            builder.Append("Ingrese el id de la compra para ver mas detalles.\n");
             return builder.ToString();
         }
-        //ARREGLAR EL TEXTTOPRINT
-        private string TextToPrintPublicationDetail(ChatDialogSelector selector)
+
+        private string TextAllPublicationsBougth(ChatDialogSelector selector)
         {
-            StringBuilder listpublicaciones=new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            foreach(Publication publi in this.datMgr.Publication.Items)
-            {//ESTA MAL, LO DEBO COMPARAR CON LA LOCALIDAD DE LA PUBLICACION??
-                if(publi.Id==int.Parse(selector.Code))
+            StringBuilder listaCompras = new StringBuilder();
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            foreach (Sale xSale in this.DatMgr.Sale.Items)
+            {
+                if (xSale.BuyerEntrepreneurId == session.UserId)
                 {
-                    Publication publication=this.datMgr.Publication.GetById(publi.Id);
-                    CompanyMaterial mat=this.datMgr.CompanyMaterial.GetById(publication.CompanyMaterialId);
-                    listpublicaciones.Append($" Identificador de la publicación - {publication.Id}, nombre del material - {mat.Name}\n");                
+                    listaCompras.Append($" Identificador de la compra - {xSale.Id}, nombre del material - {this.DatMgr.CompanyMaterial.GetById(xSale.ProductCompanyMaterialId).Name}\n");
                 }
             }
-            return listpublicaciones.ToString();
+
+            return listaCompras.ToString();
         }
     }
 }

@@ -15,8 +15,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyMaterialAddDataMenu(ChatDialogHandlerBase next) : base(next, "company_material_add_data_menu")
         {
-            this.parents.Add("company_material_add_confirmation_menu");
-            this.route = "/confirmar";
+            this.Parents.Add("company_material_add_confirmation_menu");
+            this.Route = "/confirmar";
         }
 
         /// <inheritdoc/>
@@ -32,11 +32,11 @@ namespace ClassLibrary
         
         private void MaterialAdd(ChatDialogSelector selector)
         {
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
             CompanyMaterial companyMaterial=data.CompanyMaterial;
-            this.datMgr.CompanyMaterial.Insert(companyMaterial);
+            this.DatMgr.CompanyMaterial.Insert(companyMaterial);
         }
     }
 }

@@ -14,11 +14,11 @@ namespace ClassLibrary
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDH_QualificationsAddNameMenu(ChatDialogHandlerBase next) : base(next, "hab_add_name")
-        {   this.parents.Add("hab_menu");
+        {   
+            this.parents.Add("hab_menu");
             this.route = "/agregar";
-
-
         }
+        
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {

@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="SaleAdmin.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -57,12 +63,12 @@ namespace ClassLibrary
                 }
             }
 
-            List<Sale> salesPage = GetItemPage(resultList, itemCount, page);
+            IReadOnlyCollection<Sale> salesPage = this.GetItemPage(resultList.AsReadOnly(), itemCount, page);
             return salesPage.Select(sale => sale.Id).ToList().AsReadOnly();
         }
-        
+
         /// <summary>
-        /// Obtiene un listado de compras realizadas por un emprendedor
+        /// Obtiene un listado de compras realizadas por un emprendedor.
         /// </summary>
         /// <param name="entrepreneurId">
         /// Id del emprendedor para el cual se le quieren buscar las compras.
@@ -85,9 +91,8 @@ namespace ClassLibrary
             return resultList.AsReadOnly();
         }
 
-
         /// <summary>
-        /// Obtiene un listado de compras realizadas por un emprendedor
+        /// Obtiene un listado de compras realizadas por un emprendedor.
         /// </summary>
         /// <param name="entrepreneurId">
         /// Id del emprendedor para el cual se le quieren buscar las compras.
@@ -109,28 +114,53 @@ namespace ClassLibrary
                 }
             }
 
-            List<Sale> salesPage = GetItemPage(resultList, itemCount, page);
+            IReadOnlyCollection<Sale> salesPage = this.GetItemPage(resultList.AsReadOnly(), itemCount, page);
             return salesPage.Select(sale => sale.Id).ToList().AsReadOnly();
         }
 
         /// <inheritdoc/>
         protected override void ValidateData(Sale item)
         {
+            if (item is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(item));
+            }
+
             DataManager dataManager = new DataManager();
-            if(item.BuyerEntrepreneurId == 0 /*|| !dataManager.Entrepreneur.Exists(item.BuyerEntrepreneurId)*/) 
+            if (item.BuyerEntrepreneurId == 0 /*|| !dataManager.Entrepreneur.Exists(item.BuyerEntrepreneurId)*/)
+            {
                 throw new ValidationException("Requerido emprendedor valido.");
-            if(item.Currency == 0) 
+            }
+
+            if (item.Currency == 0)
+            {
                 throw new ValidationException("Requerida moneda.");
-            if(item.DateTime == DateTime.MinValue) 
+            }
+
+            if (item.DateTime == DateTime.MinValue)
+            {
                 throw new ValidationException("Requerida fecha de transaccion.");
-            if(item.Price == 0) 
+            }
+
+            if (item.Price == 0)
+            {
                 throw new ValidationException("Requerido precio mayor a cero.");
-            if(item.ProductCompanyMaterialId == 0 /*|| !dataManager.CompanyMaterial.Exists(item.ProductCompanyMaterialId)*/) 
+            }
+
+            if (item.ProductCompanyMaterialId == 0 /*|| !dataManager.CompanyMaterial.Exists(item.ProductCompanyMaterialId)*/)
+            {
                 throw new ValidationException("Requerido material de empresa vendido.");
-            if(item.ProductQuantity == 0) 
+            }
+
+            if (item.ProductQuantity == 0)
+            {
                 throw new ValidationException("Requerida cantidad del material.");
-            if(item.SellerCompanyId == 0 /*|| !dataManager.Company.Exists(item.SellerCompanyId)*/) 
+            }
+
+            if (item.SellerCompanyId == 0 /*|| !dataManager.Company.Exists(item.SellerCompanyId)*/)
+            {
                 throw new ValidationException("Requerida compania vendedora.");
+            }
         }
     }
 }

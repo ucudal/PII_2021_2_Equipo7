@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="EntrepreneurUserOperationTests.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
 using ClassLibrary;
@@ -21,7 +27,6 @@ namespace Tests
         public void ListPublicationsTest()
         {
             int com_id = 12300006;
-            
             Publication publica1 = this.datMgr.Publication.New();
             publica1.CompanyId = com_id;
             publica1.CompanyMaterialId = 11165;
@@ -29,8 +34,6 @@ namespace Tests
             publica1.Price = 987;
             publica1.ActiveFrom = DateTime.Now.AddDays(-123);
             publica1.ActiveUntil = DateTime.Now.AddDays(123);
-
-
             Publication publica2 = this.datMgr.Publication.New();
             publica2.CompanyId = com_id;
             publica2.CompanyMaterialId = 11165;
@@ -44,10 +47,9 @@ namespace Tests
 
             IReadOnlyCollection<int> lista1 = this.datMgr.Publication.GetPublicationsByCompany(com_id);
 
-            Assert.AreEqual(2,lista1.Count);
-
+            Assert.AreEqual(2, lista1.Count);
         }
-        
+
         /// <summary>
         /// Test de buscar publicaciones por
         /// palabras clave.
@@ -58,7 +60,6 @@ namespace Tests
             string keyWord1 = "test_entre-op_pub-by-keywords_1";
             string keyWord2 = "test_entre-op_pub-by-keywords_2";
             string keyWord3 = "test_entre-op_pub-by-keywords_3";
-            
             int compId = 871;
             DateTime activeFrom = DateTime.Now.AddMonths(-1);
             DateTime activeUntil = DateTime.Now.AddMonths(1);
@@ -73,10 +74,8 @@ namespace Tests
             pub1.Currency = currency;
             pub1.Price = price;
             pub1.CompanyMaterialId = compMatId;
-            
             Publication pub2 = pub1.Clone();
             Publication pub3 = pub1.Clone();
-
             int pubId1 = this.datMgr.Publication.Insert(pub1);
             int pubId2 = this.datMgr.Publication.Insert(pub2);
             int pubId3 = this.datMgr.Publication.Insert(pub3);
@@ -93,35 +92,29 @@ namespace Tests
             pubKeyWord.PublicationId = pubId1;
             pubKeyWord.KeyWord = keyWord1;
             this.datMgr.PublicationKeyWord.Insert(pubKeyWord);
-            
             pubKeyWord = this.datMgr.PublicationKeyWord.New();
             pubKeyWord.PublicationId = pubId3;
             pubKeyWord.KeyWord = keyWord1;
             this.datMgr.PublicationKeyWord.Insert(pubKeyWord);
-            
             pubKeyWord = this.datMgr.PublicationKeyWord.New();
             pubKeyWord.PublicationId = pubId2;
             pubKeyWord.KeyWord = keyWord1;
             this.datMgr.PublicationKeyWord.Insert(pubKeyWord);
-            
             pubKeyWord = this.datMgr.PublicationKeyWord.New();
             pubKeyWord.PublicationId = pubId2;
             pubKeyWord.KeyWord = keyWord2;
             this.datMgr.PublicationKeyWord.Insert(pubKeyWord);
-            
             pubKeyWord = this.datMgr.PublicationKeyWord.New();
             pubKeyWord.PublicationId = pubId3;
             pubKeyWord.KeyWord = keyWord2;
             this.datMgr.PublicationKeyWord.Insert(pubKeyWord);
-            
             pubKeyWord = this.datMgr.PublicationKeyWord.New();
             pubKeyWord.PublicationId = pubId3;
             pubKeyWord.KeyWord = keyWord3;
             this.datMgr.PublicationKeyWord.Insert(pubKeyWord);
+            int keyWordsAfter = this.datMgr.PublicationKeyWord.Items.Count;
 
-            int keyWordsAfter = this.datMgr.PublicationKeyWord.Items.Count;            
             int keyWordsExpected = keyWordsBefore + 6;
-
             Assert.AreEqual(keyWordsExpected, keyWordsAfter);
 
             IReadOnlyCollection<Publication> publications = this.datMgr.Publication.Items;
@@ -165,7 +158,7 @@ namespace Tests
             Assert.AreEqual(1, keyWord3Pubs.Count);
             Assert.Contains(pubId3, keyWord3Pubs);
         }
-        
+
         /// <summary>
         /// Test de buscar publicaciones por
         /// su localizacion.
@@ -210,7 +203,6 @@ namespace Tests
             compMat1.MaterialCategoryId = 987;
             compMat1.Name = "Madera";
             int compMatId1 = this.datMgr.CompanyMaterial.Insert(compMat1);
-            
             Assert.NotZero(compMatId1);
 
             CompanyMaterialStock compMatStock1 = this.datMgr.CompanyMaterialStock.New();
@@ -239,7 +231,7 @@ namespace Tests
 
             Assert.AreEqual(compLocId2, closestLocId);
         }
-        
+
         /// <summary>
         /// Test de buscar publicaciones por
         /// su categoria.
@@ -345,7 +337,6 @@ namespace Tests
             Assert.AreEqual(1, pubsList.Count);
             Assert.Contains(pubId3, pubsList);
         }
-        
         /// <summary>
         /// Test de verificar si un material se
         /// regenera constantemente.
@@ -355,17 +346,16 @@ namespace Tests
         {
             CompanyMaterial xcom = this.datMgr.CompanyMaterial.New();
 
-            // Fecha que sirve para saber cuantos dias pasaron desde que se regenero 
+            // Fecha que sirve para saber cuantos dias pasaron desde que se regenero
             // un material respecto a su ultima fecha.
-            int DiasEntreMaterial = 10;
-            xcom.DateBetweenRestocks = DiasEntreMaterial;
+            int diasEntreMaterial = 10;
+            xcom.DateBetweenRestocks = diasEntreMaterial;
             int dias = -10;
             xcom.LastRestock = DateTime.Today.AddDays(dias);
-            Assert.AreEqual(DateTime.Today.AddDays(dias),xcom.LastRestock);
-            Assert.AreEqual(10,xcom.DateBetweenRestocks);
-
+            Assert.AreEqual(DateTime.Today.AddDays(dias), xcom.LastRestock);
+            Assert.AreEqual(10, xcom.DateBetweenRestocks);
         }
-        
+
         /// <summary>
         /// Test de conseguir la fecha de
         /// regeneracion de un material.
@@ -374,12 +364,9 @@ namespace Tests
         public void GetMaterialRestockDate()
         {
             CompanyMaterial compa = this.datMgr.CompanyMaterial.New();
-
-            DateTime LastRest = DateTime.Today.AddDays(-6);
-
-            compa.LastRestock = LastRest;
-            Assert.AreEqual(LastRest, compa.LastRestock);
-            
+            DateTime lastRest = DateTime.Today.AddDays(-6);
+            compa.LastRestock = lastRest;
+            Assert.AreEqual(lastRest, compa.LastRestock);
         }
 
         /// <summary>
@@ -410,10 +397,9 @@ namespace Tests
 
             this.datMgr.Sale.Insert(venta);
             this.datMgr.Sale.Insert(venta2);
-            
             IReadOnlyCollection<int> lista = this.datMgr.Sale.GetSalesByBuyer(id_entrepenur);
 
-            Assert.AreEqual(2,lista.Count);
+            Assert.AreEqual(2, lista.Count);
         }
     }
 }

@@ -15,17 +15,17 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyPublicationActionMenu(ChatDialogHandlerBase next) : base(next, "company_publication_action_menu")
         {
-            this.parents.Add("company_publication_list_menu");
-            this.route = null;
+            this.Parents.Add("company_publication_list_menu");
+            this.Route = null;
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
             InsertPublicationData data = new InsertPublicationData();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = new DProcessData("select_publication",this.code,data);
-            data.Publication=this.datMgr.Publication.GetById(int.Parse(selector.Code));
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            DProcessData process = new DProcessData("select_publication",this.Code,data);
+            data.Publication=this.DatMgr.Publication.GetById(int.Parse(selector.Code));
     
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu acciones sobre la publicacion elegido.\n");
@@ -38,11 +38,11 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
-            if (this.parents.Contains(selector.Context))
+            if (this.Parents.Contains(selector.Context))
             {
                 if (!selector.Code.StartsWith('\\'))
                 {
-                    Publication publication = this.datMgr.Publication.GetById(int.Parse(selector.Code));
+                    Publication publication = this.DatMgr.Publication.GetById(int.Parse(selector.Code));
                     if (publication is not null)
                     {
                         return true;

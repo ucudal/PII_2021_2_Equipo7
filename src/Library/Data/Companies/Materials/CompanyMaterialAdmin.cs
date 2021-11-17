@@ -68,7 +68,7 @@ namespace ClassLibrary
                 }
             }
 
-            List<CompanyMaterial> companyMatsPage = this.GetItemPage(resultList, itemCount, page);
+            IReadOnlyCollection<CompanyMaterial> companyMatsPage = this.GetItemPage(resultList.AsReadOnly(), itemCount, page);
             return companyMatsPage.Select(mat => mat.Id).ToList().AsReadOnly();
         }
 
@@ -141,7 +141,7 @@ namespace ClassLibrary
                 }
             }
 
-            List<CompanyMaterial> companyMatsPage = this.GetItemPage(resultList, itemCount, page);
+            IReadOnlyCollection<CompanyMaterial> companyMatsPage = this.GetItemPage(resultList.AsReadOnly(), itemCount, page);
             return companyMatsPage.Select(mat => mat.Id).ToList().AsReadOnly();
         }
         
@@ -208,7 +208,7 @@ namespace ClassLibrary
                 }
             }
 
-            List<CompanyMaterial> companyMatsPage = this.GetItemPage(resultList, itemCount, page);
+            IReadOnlyCollection<CompanyMaterial> companyMatsPage = this.GetItemPage(resultList.AsReadOnly(), itemCount, page);
             return companyMatsPage.Select(mat => mat.Id).ToList().AsReadOnly();
         }
 

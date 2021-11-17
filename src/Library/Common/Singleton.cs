@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="Singleton.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 namespace ClassLibrary
 {
     /// <summary>
@@ -5,19 +11,20 @@ namespace ClassLibrary
     /// de otra clase por todo el programa.
     /// </summary>
     /// <typeparam name="T">
-    /// Clase de la cual se precisa utilizar la misma 
+    /// Clase de la cual se precisa utilizar la misma
     /// instancia.
     /// </typeparam>
-    public class Singleton<T> where T : new()
+    public static class Singleton<T>
+        where T : new()
     {
         private static T instance;
 
         /// <summary>
         /// Instancia compartida de la clase <c>T</c>.
         /// </summary>
-        /// <value>
+        /// <returns>
         /// Singleton/Instancia de la clase <c>T</c>.
-        /// </value>
+        /// </returns>
         public static T Instance
         {
             get
@@ -30,6 +37,5 @@ namespace ClassLibrary
                 return instance;
             }
         }
-
     }
 }

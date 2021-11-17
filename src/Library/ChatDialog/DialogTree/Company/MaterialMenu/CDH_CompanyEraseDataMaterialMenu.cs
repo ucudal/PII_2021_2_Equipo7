@@ -15,8 +15,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyEraseDataMaterialMenu(ChatDialogHandlerBase next) : base(next, "company_erase_data_material_menu")
         {
-            this.parents.Add("company_confirmation_erase_material_menu");
-            this.route = "/confirmar";
+            this.Parents.Add("company_confirmation_erase_material_menu");
+            this.Route = "/confirmar";
         }
 
         /// <inheritdoc/>
@@ -32,12 +32,12 @@ namespace ClassLibrary
         
         private void EraseMaterialFromCompany(ChatDialogSelector selector)
         {
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            CompanyMaterial xMat=this.datMgr.CompanyMaterial.GetById(data.CompanyMaterial.Id);
+            CompanyMaterial xMat=this.DatMgr.CompanyMaterial.GetById(data.CompanyMaterial.Id);
             xMat.Deleted=true;
-            this.datMgr.CompanyMaterial.Update(xMat);
+            this.DatMgr.CompanyMaterial.Update(xMat);
         }
     }
 }

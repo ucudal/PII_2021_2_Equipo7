@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="MessageWrapper.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 namespace ClassLibrary
 {
     /// <summary>
@@ -15,6 +21,7 @@ namespace ClassLibrary
         private UserStatus userStatus;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="MessageWrapper"/> class.
         /// Crea un contenedor de mensaje con la
         /// cuenta remota y el mensaje recibido.
         /// </summary>
@@ -49,7 +56,7 @@ namespace ClassLibrary
         /// Servicio de mensajeria desde el que se
         /// recibe el mensaje.
         /// </summary>
-        public MessagingService Service 
+        public MessagingService Service
         {
             get => this.service;
             set => this.service = value;
@@ -69,7 +76,7 @@ namespace ClassLibrary
         /// Identificador del usuario dentro
         /// de la plataforma.
         /// </summary>
-        public int UserId 
+        public int UserId
         {
             get => this.userId;
             set => this.userId = value;
@@ -79,7 +86,7 @@ namespace ClassLibrary
         /// Estado del usuario dentro de la
         /// plataforma.
         /// </summary>
-        public UserStatus UserStatus 
+        public UserStatus UserStatus
         {
             get => this.userStatus;
             set => this.userStatus = value;

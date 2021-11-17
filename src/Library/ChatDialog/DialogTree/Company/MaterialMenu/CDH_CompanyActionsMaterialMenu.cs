@@ -15,17 +15,17 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyActionsMaterialMenu(ChatDialogHandlerBase next) : base(next, "company_actions_material_menu")
         {
-            this.parents.Add("company_list_material_menu");
-            this.route = null;
+            this.Parents.Add("company_list_material_menu");
+            this.Route = null;
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
             SelectCompanyMaterialData data = new SelectCompanyMaterialData();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = new DProcessData("select_companymaterial",this.code,data);
-            data.CompanyMaterial=this.datMgr.CompanyMaterial.GetById(int.Parse(selector.Code));
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            DProcessData process = new DProcessData("select_companymaterial",this.Code,data);
+            data.CompanyMaterial=this.DatMgr.CompanyMaterial.GetById(int.Parse(selector.Code));
             
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu acciones sobre el material elegido.\n");
@@ -39,11 +39,11 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
-            if (this.parents.Contains(selector.Context))
+            if (this.Parents.Contains(selector.Context))
             {
                 if (!selector.Code.StartsWith('\\'))
                 {
-                    CompanyMaterial companyMaterial = this.datMgr.CompanyMaterial.GetById(int.Parse(selector.Code));
+                    CompanyMaterial companyMaterial = this.DatMgr.CompanyMaterial.GetById(int.Parse(selector.Code));
                     if (companyMaterial is not null)
                     {
                         return true;

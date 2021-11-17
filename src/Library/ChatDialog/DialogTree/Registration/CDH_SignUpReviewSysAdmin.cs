@@ -1,3 +1,10 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_SignUpReviewSysAdmin.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Text;
 
 namespace ClassLibrary
@@ -13,19 +20,26 @@ namespace ClassLibrary
     public class CDH_SignUpReviewSysAdmin : ChatDialogHandlerBase
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="CDH_SignUpReviewSysAdmin"/> class.
         /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpReviewSysAdmin"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpReviewSysAdmin(ChatDialogHandlerBase next) : base(next, "registration_join_sysadmin_verify")
+        public CDH_SignUpReviewSysAdmin(ChatDialogHandlerBase next)
+            : base(next, "registration_join_sysadmin_verify")
         {
-            this.parents.Add("registration_user_l_name");
-            this.route = null;
+            this.Parents.Add("registration_user_l_name");
+            this.Route = null;
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             SignUpData data = process.GetData<SignUpData>();
             User user = data.User;
@@ -43,17 +57,23 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
-            if (this.parents.Contains(selector.Context))
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            if (this.Parents.Contains(selector.Context))
             {
                 if (!selector.Code.StartsWith('\\'))
                 {
-                    Session session = this.sessions.GetSession(selector.Service, selector.Account);
+                    Session session = this.Sessions.GetSession(selector.Service, selector.Account);
                     if (session.Process.GetData<SignUpData>()?.Type == RegistrationType.SystemAdminJoin)
                     {
                         return true;
                     }
                 }
             }
+
             return false;
         }
     }

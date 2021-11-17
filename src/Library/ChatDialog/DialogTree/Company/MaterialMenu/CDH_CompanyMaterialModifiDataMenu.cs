@@ -15,8 +15,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_CompanyMaterialModifiDataMenu(ChatDialogHandlerBase next) : base(next, "company_material_modifi_data_menu")
         {
-            this.parents.Add("company_material_modifi_confirmation_menu");
-            this.route = "/confirmar";
+            this.Parents.Add("company_material_modifi_confirmation_menu");
+            this.Route = "/confirmar";
         }
 
         /// <inheritdoc/>
@@ -32,20 +32,20 @@ namespace ClassLibrary
         
         private void MaterialModifi(ChatDialogSelector selector)
         {
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
 
             CompanyMaterial companyMaterial=data.CompanyMaterial;
-            Company company=this.datMgr.Company.GetById(this.datMgr.CompanyUser.GetCompanyForUser(session.UserId));
+            Company company=this.DatMgr.Company.GetById(this.DatMgr.CompanyUser.GetCompanyForUser(session.UserId));
             if(company!=null)
             {
                 companyMaterial.CompanyId=company.Id;
             }
-            this.datMgr.CompanyLocation.Update(this.datMgr.CompanyLocation.GetById(data.CompanyMaterialStock.CompanyLocationId));
-            this.datMgr.CompanyMaterialStock.Update(data.CompanyMaterialStock);
-            this.datMgr.CompanyMaterial.Update(companyMaterial);
-            this.datMgr.Company.Update(company);
+            this.DatMgr.CompanyLocation.Update(this.DatMgr.CompanyLocation.GetById(data.CompanyMaterialStock.CompanyLocationId));
+            this.DatMgr.CompanyMaterialStock.Update(data.CompanyMaterialStock);
+            this.DatMgr.CompanyMaterial.Update(companyMaterial);
+            this.DatMgr.Company.Update(company);
         }
     }
 }

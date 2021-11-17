@@ -1,3 +1,9 @@
+//-----------------------------------------------------------------------------------
+// <copyright file="DProcessData.cs" company="Universidad Católica del Uruguay">
+//     Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+//-----------------------------------------------------------------------------------
+
 using System;
 
 namespace ClassLibrary
@@ -10,12 +16,13 @@ namespace ClassLibrary
     /// </summary>
     public class DProcessData
     {
-        private string code;
-        private string initiator;
-        private Type typeOfData;
+        private readonly string code;
+        private readonly string initiator;
+        private readonly Type typeOfData;
         private dynamic data;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="DProcessData"/> class.
         /// Crea un contenedor nuevo.
         /// </summary>
         /// <param name="code">
@@ -31,10 +38,26 @@ namespace ClassLibrary
         public DProcessData(string code, string initiator, dynamic data)
         {
             this.code = code;
-            this.initiator = code;
+            this.initiator = initiator;
             this.data = data;
             this.typeOfData = data?.GetType();
         }
+
+        /// <summary>
+        /// Tipo del objeto que contiene los datos del proceso.
+        /// </summary>
+        public Type TypeOfData { get => this.typeOfData; }
+
+        /// <summary>
+        /// Codigo identificador del proceso.
+        /// </summary>
+        public string Code { get => this.code; }
+
+        /// <summary>
+        /// Codigo del <p>DiscussionHandler</p>
+        /// que inicia el proceso.
+        /// </summary>
+        public string Initiator { get => this.initiator; }
 
         /// <summary>
         /// Devuelve el objeto con los datos especificos del proceso.
@@ -42,29 +65,18 @@ namespace ClassLibrary
         /// <typeparam name="T">
         /// Tipo del objeto que se busca devolver.
         /// </typeparam>
-        public T GetData<T>() where T : class
+        /// <returns>
+        /// Contenedor de datos.
+        /// </returns>
+        public T GetData<T>()
+            where T : class
         {
             if (typeof(T) == this.typeOfData)
             {
                 return (T)this.data;
             }
+
             return null;
         }
-
-        /// <summary>
-        /// Tipo del objeto que contiene los datos del proceso.
-        /// </summary>
-        public Type TypeOfData { get => this.typeOfData; }
-        
-        /// <summary>
-        /// Codigo identificador del proceso.
-        /// </summary>
-        public string Code { get => this.code; }
-        
-        /// <summary>
-        /// Codigo del <p>DiscussionHandler</p>
-        /// que inicia el proceso.
-        /// </summary>
-        public string Initiator { get => this.initiator; }
     }
 }

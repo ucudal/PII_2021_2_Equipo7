@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_Search_Publication_Menu.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Text;
 
 namespace ClassLibrary
@@ -8,15 +14,15 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_Search_Publication_Menu : ChatDialogHandlerBase
     {
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_Search_Publication_Menu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Search_Publication_Menu(ChatDialogHandlerBase next) : base(next, "Search_Publication_Menu")
+        public CDH_Search_Publication_Menu(ChatDialogHandlerBase next)
+        : base(next, "Search_Publication_Menu")
         {
-            this.parents.Add("welcome_entrepreneur");
-            this.route = "\\buscarpublicacion";
+            this.Parents.Add("welcome_entrepreneur");
+            this.Route = "\\buscarpublicacion";
         }
 
         /// <inheritdoc/>

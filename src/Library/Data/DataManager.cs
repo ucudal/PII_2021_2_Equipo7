@@ -1,7 +1,13 @@
+// -----------------------------------------------------------------------
+// <copyright file="DataManager.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 namespace ClassLibrary
 {
     /// <summary>
-    /// 
+    /// Contenedor de todos los administradores de datos.
     /// </summary>
     public class DataManager
     {
@@ -96,7 +102,7 @@ namespace ClassLibrary
         /// Administracion de habilitaciones para materiales de empresas.
         /// </summary>
         public CompanyMaterialQualificationAdmin CompanyMaterialQualification { get => this.companyMaterialQualificationAdmin; }
-        
+
         /// <summary>
         /// Administracion de administradores de empresa.
         /// </summary>

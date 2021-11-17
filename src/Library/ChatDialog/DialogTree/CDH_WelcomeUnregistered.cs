@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_WelcomeUnregistered.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Text;
 
 namespace ClassLibrary
@@ -10,12 +16,14 @@ namespace ClassLibrary
     public class CDH_WelcomeUnregistered : ChatDialogHandlerBase
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="CDH_WelcomeUnregistered"/> class.
         /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeUnregistered"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_WelcomeUnregistered(ChatDialogHandlerBase next) : base(next, "registration_prompt")
+        public CDH_WelcomeUnregistered(ChatDialogHandlerBase next)
+            : base(next, "registration_prompt")
         {
-            this.route = "/registration";
+            this.Route = "/registration";
         }
 
         /// <inheritdoc/>
@@ -26,6 +34,6 @@ namespace ClassLibrary
             builder.Append("Si usted tiene un codigo de invitacion, por favor ingrese el siguiente commando:\n\n");
             builder.Append("/registrar");
             return builder.ToString();
-        } 
+        }
     }
 }

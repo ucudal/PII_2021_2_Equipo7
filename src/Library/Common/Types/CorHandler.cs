@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="CorHandler.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System;
 
 namespace ClassLibrary
@@ -11,38 +17,68 @@ namespace ClassLibrary
     /// <typeparam name="T">
     /// Clase base de cualquier
     /// implementacion concreta del patron. Debe ser
-    /// la misma clase abstracta que implementa 
+    /// la misma clase abstracta que implementa
     /// <c>CorHandler</c>.
     /// </typeparam>
-    /// <typeparam name="K">
+    /// <typeparam name="TK">
     /// Clase que define el selector que se utilizara
-    /// para procesar que paso en la cadena sera el 
+    /// para procesar que paso en la cadena sera el
     /// que se ejecute.
     /// </typeparam>
-    public abstract class CorHandler<T, K>
+    public abstract class CorHandler<T, TK>
     {
         /// <summary>
         /// Siguiente objeto a procesar si este
         /// paso no es el indicado por el selector.
         /// </summary>
-        protected T next;
+        private T next;
+
         /// <summary>
         /// Codigo identificador el paso en la cadena.
         /// </summary>
-        protected string code;
+        private string code;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="CorHandler{T, TK}"/> class.
         /// Constructor base utilizado por las implementaciones
         /// de esta clase para asignar el <c>next</c> y <c>code</c>
         /// al crear instancias.
         /// </summary>
-        /// <param name="next"></param>
-        /// <param name="code"></param>
-        public CorHandler(T next, string code)
+        /// <param name="next">
+        /// Siguiente objeto a procesar si este
+        /// paso no es el indicado por el selector.
+        /// </param>
+        /// <param name="code">
+        /// Codigo identificador el paso en la cadena.
+        /// </param>
+        protected CorHandler(T next, string code)
         {
-            if (code is null) throw new ArgumentNullException("Se intento crear un handler sin codigo.");
+            if (code is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(code));
+            }
+
             this.next = next;
             this.code = code;
+        }
+
+        /// <summary>
+        /// Siguiente objeto a procesar si este
+        /// paso no es el indicado por el selector.
+        /// </summary>
+        public T Next
+        {
+            get => this.next;
+            set => this.next = value;
+        }
+
+        /// <summary>
+        /// Codigo identificador el paso en la cadena.
+        /// </summary>
+        public string Code
+        {
+            get => this.code;
+            set => this.code = value;
         }
 
         /// <summary>
@@ -62,7 +98,7 @@ namespace ClassLibrary
         /// <c>string</c> con el resultado
         /// de procesar la cadena.
         /// </returns>
-        public abstract string Next(K selector);
+        public abstract string NextLink(TK selector);
 
         /// <summary>
         /// Procesa el paso actual en base a los datos
@@ -76,6 +112,6 @@ namespace ClassLibrary
         /// <c>string</c> con el resultado
         /// de procesar el paso.
         /// </returns>
-        public abstract string Execute(K selector);
+        public abstract string Execute(TK selector);
     }
 }

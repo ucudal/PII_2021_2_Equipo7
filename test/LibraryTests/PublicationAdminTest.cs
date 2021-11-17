@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="PublicationAdminTest.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
 using ClassLibrary;
@@ -28,8 +34,8 @@ namespace Tests
             DateTime activeuntil = DateTime.Today.AddMonths(3);
             pPrueba.ActiveUntil = activeuntil;
 
-            int Price = 120;
-            pPrueba.Price = Price;
+            int price = 120;
+            pPrueba.Price = price;
 
             Currency currency = Currency.DolarEstadounidense;
             pPrueba.Currency = currency;
@@ -41,16 +47,16 @@ namespace Tests
 
             int publi1 = this.datMgr.Publication.Insert(pPrueba);
 
-            Assert.AreNotEqual(0,publi1);
+            Assert.AreNotEqual(0, publi1);
 
             pPrueba = this.datMgr.Publication.GetById(publi1);
 
-            Assert.AreEqual(activeFrom,pPrueba.ActiveFrom);
-            Assert.AreEqual(activeuntil,pPrueba.ActiveUntil);
-            Assert.AreEqual(Price,pPrueba.Price);
-            Assert.AreEqual(currency,pPrueba.Currency);
-            Assert.AreEqual(compId,pPrueba.CompanyId);
-            Assert.AreEqual(compMatId,pPrueba.CompanyMaterialId);
+            Assert.AreEqual(activeFrom, pPrueba.ActiveFrom);
+            Assert.AreEqual(activeuntil, pPrueba.ActiveUntil);
+            Assert.AreEqual(price, pPrueba.Price);
+            Assert.AreEqual(currency, pPrueba.Currency);
+            Assert.AreEqual(compId, pPrueba.CompanyId);
+            Assert.AreEqual(compMatId, pPrueba.CompanyMaterialId);
         }
 
         /// <summary>
@@ -59,8 +65,8 @@ namespace Tests
         [Test]
         public void NewTest()
         {
-            Publication pPrueba =this.datMgr.Publication.New();
-            Assert.IsInstanceOf(typeof(Publication),pPrueba);
+            Publication pPrueba = this.datMgr.Publication.New();
+            Assert.IsInstanceOf(typeof(Publication), pPrueba);
         }
 
         /// <summary>
@@ -70,19 +76,19 @@ namespace Tests
         public void DeleteTest()
         {
             Publication pPrueba1 = this.datMgr.Publication.New();
-            pPrueba1.ActiveFrom=DateTime.Today;
-            pPrueba1.ActiveUntil=DateTime.Today.AddMonths(3);
-            pPrueba1.Price=100;
-            pPrueba1.Currency= Currency.DolarEstadounidense;
+            pPrueba1.ActiveFrom = DateTime.Today;
+            pPrueba1.ActiveUntil = DateTime.Today.AddMonths(3);
+            pPrueba1.Price = 100;
+            pPrueba1.Currency = Currency.DolarEstadounidense;
             pPrueba1.CompanyId = 991120;
             pPrueba1.CompanyMaterialId = 9090911;
-        
-            int prueba = this.datMgr.Publication.Insert(pPrueba1);
-            Assert.AreNotEqual(0,prueba);
 
-            int NewId = pPrueba1.Id;
-            this.datMgr.Publication.Delete(NewId);
-            Assert.IsNull(this.datMgr.Publication.GetById(NewId));
+            int prueba = this.datMgr.Publication.Insert(pPrueba1);
+            Assert.AreNotEqual(0, prueba);
+
+            int newId = pPrueba1.Id;
+            this.datMgr.Publication.Delete(newId);
+            Assert.IsNull(this.datMgr.Publication.GetById(newId));
         }
 
         /// <summary>
@@ -99,8 +105,8 @@ namespace Tests
             DateTime activeuntil = DateTime.Today.AddMonths(2);
             pPrueba.ActiveUntil = activeuntil;
 
-            int Price = 1000;
-            pPrueba.Price = Price;
+            int price = 1000;
+            pPrueba.Price = price;
 
             Currency currency = Currency.DolarEstadounidense;
             pPrueba.Currency = currency;
@@ -112,7 +118,7 @@ namespace Tests
 
             int publi1 = this.datMgr.Publication.Insert(pPrueba);
 
-            Assert.AreNotEqual(0,publi1);
+            Assert.AreNotEqual(0, publi1);
 
             Publication publi2 = this.datMgr.Publication.GetById(publi1);
 
@@ -125,17 +131,17 @@ namespace Tests
 
             Publication publi3 = this.datMgr.Publication.GetById(publi1);
 
-            Assert.AreEqual(publi2.ActiveFrom,publi3.ActiveFrom);
-            Assert.AreEqual(publi2.ActiveUntil,publi3.ActiveUntil);
-            Assert.AreEqual(publi2.Currency,publi3.Currency);
-            Assert.AreEqual(publi2.Price,publi3.Price);
-            Assert.AreEqual(publi2.CompanyMaterialId,publi3.CompanyMaterialId);
-            Assert.AreEqual(publi2.CompanyId,publi3.CompanyId);
-            Assert.AreEqual(publi2.Id,publi3.Id);
+            Assert.AreEqual(publi2.ActiveFrom, publi3.ActiveFrom);
+            Assert.AreEqual(publi2.ActiveUntil, publi3.ActiveUntil);
+            Assert.AreEqual(publi2.Currency, publi3.Currency);
+            Assert.AreEqual(publi2.Price, publi3.Price);
+            Assert.AreEqual(publi2.CompanyMaterialId, publi3.CompanyMaterialId);
+            Assert.AreEqual(publi2.CompanyId, publi3.CompanyId);
+            Assert.AreEqual(publi2.Id, publi3.Id);
         }
 
         /// <summary>
-        /// Comprobar que funciona el obtener una publicación por su id y si se guardan 
+        /// Comprobar que funciona el obtener una publicación por su id y si se guardan
         /// en la lista de publicaciones.
         /// </summary>
         [Test]
@@ -156,15 +162,13 @@ namespace Tests
             int id2 = this.datMgr.Publication.Insert(pPrueba1);
             int id3 = this.datMgr.Publication.Insert(pPrueba2);
 
-            Assert.AreNotEqual(0,id1);
-            Assert.AreNotEqual(0,id2);
-            Assert.AreNotEqual(0,id3);
-            
+            Assert.AreNotEqual(0, id1);
+            Assert.AreNotEqual(0, id2);
+            Assert.AreNotEqual(0, id3);
 
             IReadOnlyCollection<int> lista = this.datMgr.Publication.GetPublicationsByCompany(1);
 
-            Assert.AreEqual(3,lista.Count);
-            
+            Assert.AreEqual(3, lista.Count);
         }
     }
 }

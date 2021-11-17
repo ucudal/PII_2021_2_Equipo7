@@ -1,3 +1,10 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_SignUpVerifyCompanyJoin.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Text;
 
 namespace ClassLibrary
@@ -11,24 +18,31 @@ namespace ClassLibrary
     public class CDH_SignUpVerifyCompanyJoin : ChatDialogHandlerBase
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="CDH_SignUpVerifyCompanyJoin"/> class.
         /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpVerifyCompanyJoin"/>.
         /// </summary>
-        /// <param name="next">Siguiente handler</param>
-        public CDH_SignUpVerifyCompanyJoin(ChatDialogHandlerBase next) : base(next, "registration_invite_comp_join")
+        /// <param name="next">Siguiente handler.</param>
+        public CDH_SignUpVerifyCompanyJoin(ChatDialogHandlerBase next)
+            : base(next, "registration_invite_comp_join")
         {
-            this.parents.Add("registration_invite");
-            this.route = null;
+            this.Parents.Add("registration_invite");
+            this.Route = null;
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            Session session = sessions.GetSession(selector.Service, selector.Account);
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             SignUpData data = process.GetData<SignUpData>();
             data.Type = RegistrationType.CompanyJoin;
             data.InviteCode = selector.Code;
-            
+
             StringBuilder builder = new StringBuilder();
             builder.Append("Su codigo de invitacion le permite ingresar como administrador de una empresa ya existente.\n\n");
             builder.Append("/confirmar - Usar el codigo\n");
@@ -39,11 +53,16 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
-            if (this.parents.Contains(selector.Context))
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            if (this.Parents.Contains(selector.Context))
             {
                  if (!selector.Code.StartsWith('\\'))
                 {
-                    Invitation invite = this.datMgr.Invitation.GetByCode(selector.Code);
+                    Invitation invite = this.DatMgr.Invitation.GetByCode(selector.Code);
                     if (invite is not null)
                     {
                         if (invite.Type == RegistrationType.CompanyJoin)
@@ -53,6 +72,7 @@ namespace ClassLibrary
                     }
                 }
             }
+
             return false;
         }
     }
