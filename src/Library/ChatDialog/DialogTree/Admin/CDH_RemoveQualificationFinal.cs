@@ -15,8 +15,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_RemoveQualificationFinal(ChatDialogHandlerBase next) : base(next, "hab_remove_final")
         {
-            this.parents.Add("hab_remove_confirmar");
-            this.route = "/confirmar";
+            this.Parents.Add("hab_remove_confirmar");
+            this.Route = "/confirmar";
         }
 
         /// <inheritdoc/>
@@ -40,13 +40,13 @@ namespace ClassLibrary
         private bool EraseQualification(ChatDialogSelector selector)
         {
             bool xretorno=false;
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             InsertQualificationData data = process.GetData<InsertQualificationData>();
             Qualification qualification=data.Qualification;
             if(IsNotAllReadyToDelete(data)==false)
             {
-                this.datMgr.Qualification.Delete(qualification.Id);
+                this.DatMgr.Qualification.Delete(qualification.Id);
                 xretorno=true;
             }
             return xretorno;
@@ -55,7 +55,7 @@ namespace ClassLibrary
         private bool IsNotAllReadyToDelete(InsertQualificationData data)
         {
             bool xretorno=false;
-            foreach(CompanyMaterialQualification xMatQuali in this.datMgr.CompanyMaterialQualification.Items)
+            foreach(CompanyMaterialQualification xMatQuali in this.DatMgr.CompanyMaterialQualification.Items)
             {
                 if(xMatQuali.QualificationId==data.Qualification.Id)
                 {
@@ -64,7 +64,7 @@ namespace ClassLibrary
             }
             if(xretorno==true)
             {
-                foreach(EntrepreneurQualification xEntreQualification in this.datMgr.EntrepreneurQualification.Items)
+                foreach(EntrepreneurQualification xEntreQualification in this.DatMgr.EntrepreneurQualification.Items)
                 {
                     if(xEntreQualification.QualificationId==data.Qualification.Id)
                     {

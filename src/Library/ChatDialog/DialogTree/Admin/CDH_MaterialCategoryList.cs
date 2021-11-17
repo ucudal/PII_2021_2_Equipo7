@@ -15,15 +15,15 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_MaterialCategoryList(ChatDialogHandlerBase next) : base(next, "material_category_list")
         {
-            this.parents.Add("mat_menu");
-            this.route = "/listar";
+            this.Parents.Add("mat_menu");
+            this.Route = "/listar";
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             
             builder.Append("Listado de Categoria De mMateriales existentes: \n");
             builder.Append("En caso de querer hacer una accion sobre alguna habilitaciom ingrese su numero.\n");
@@ -38,7 +38,7 @@ namespace ClassLibrary
             StringBuilder xListMats=new StringBuilder();
             
             
-            foreach( MaterialCategory materialCategory in this.datMgr.MaterialCategory.Items)
+            foreach( MaterialCategory materialCategory in this.DatMgr.MaterialCategory.Items)
             {
                 
                 xListMats.Append("" + materialCategory.Name +" " +materialCategory.Id + "\n");

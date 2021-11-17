@@ -15,15 +15,15 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_RemoveQualificationRemove(ChatDialogHandlerBase next) : base(next, "hab_remove")
         {
-            this.parents.Add("hab_list");
-            this.route = "/listar";
+            this.Parents.Add("hab_list");
+            this.Route = "/listar";
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             
             builder.Append("Listado de habilitaciones existentes: \n");
             builder.Append("En caso de querer hacer una accion sobre alguna habilitaciom ingrese su numero.\n");
@@ -38,7 +38,7 @@ namespace ClassLibrary
             StringBuilder xListMats=new StringBuilder();
             
             
-            foreach( Qualification qualification in this.datMgr.Qualification.Items)
+            foreach( Qualification qualification in this.DatMgr.Qualification.Items)
             {
                 
                 xListMats.Append("" + qualification.Name +" " +qualification.Id + "\n");

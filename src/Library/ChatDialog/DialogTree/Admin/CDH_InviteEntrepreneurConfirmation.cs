@@ -14,8 +14,8 @@ namespace ClassLibrary
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDH_InviteEntrepreneurConfirmation(ChatDialogHandlerBase next) : base(next, "invite_entre_confirm")
-        {   this.parents.Add("invitemenu");
-            this.route = "/emprendedor" ;
+        {   this.Parents.Add("invitemenu");
+            this.Route = "/emprendedor" ;
 
 
         }
@@ -24,8 +24,8 @@ namespace ClassLibrary
         {
             InsertInvitationData data = new InsertInvitationData();
             data.Invitation.Type= RegistrationType.EntrepreneurNew;
-            DProcessData process = new DProcessData("entrepreneur_invite", this.code, data);
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            DProcessData process = new DProcessData("entrepreneur_invite", this.Code, data);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.Process = process;
 
             StringBuilder builder = new StringBuilder();

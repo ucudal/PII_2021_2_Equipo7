@@ -14,8 +14,8 @@ namespace ClassLibrary
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDH_InviteComapnyExistConfirmation(ChatDialogHandlerBase next) : base(next, "invite_companyexist_confirm")
-        {   this.parents.Add("invite_company_exist_list");
-            this.route = null ;
+        {   this.Parents.Add("invite_company_exist_list");
+            this.Route = null ;
 
 
         }
@@ -25,8 +25,8 @@ namespace ClassLibrary
             InsertInvitationData data = new InsertInvitationData();
             data.Invitation.Type= RegistrationType.CompanyJoin;
             data.Invitation.CompanyId = int.Parse(selector.Code);
-            DProcessData process = new DProcessData("companyexist_invite", this.code, data);
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            DProcessData process = new DProcessData("companyexist_invite", this.Code, data);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.Process = process;
 
             StringBuilder builder = new StringBuilder();

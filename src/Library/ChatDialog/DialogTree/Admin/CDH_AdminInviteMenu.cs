@@ -15,8 +15,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_AdminInviteMenu(ChatDialogHandlerBase next) : base(next, "invitemenu")
         {   
-            this.parents.Add("welcome_sysadmin");
-            this.route = "/invitar";
+            this.Parents.Add("welcome_sysadmin");
+            this.Route = "/invitar";
         }
         
         /// <inheritdoc/>

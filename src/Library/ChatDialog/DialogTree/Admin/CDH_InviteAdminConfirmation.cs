@@ -14,8 +14,8 @@ namespace ClassLibrary
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDH_InviteAdminConfirmation(ChatDialogHandlerBase next) : base(next, "invite_admin_confirm")
-        {   this.parents.Add("invitemenu");
-            this.route = "/admin" ;
+        {   this.Parents.Add("invitemenu");
+            this.Route = "/admin" ;
 
 
         }
@@ -24,8 +24,8 @@ namespace ClassLibrary
         {
             InsertInvitationData data = new InsertInvitationData();
             data.Invitation.Type= RegistrationType.SystemAdminJoin;
-            DProcessData process = new DProcessData("Admin_invite", this.code, data);
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            DProcessData process = new DProcessData("Admin_invite", this.Code, data);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.Process = process;
 
             StringBuilder builder = new StringBuilder();

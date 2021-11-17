@@ -15,8 +15,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_MateralCategoryFinal(ChatDialogHandlerBase next) : base(next, "matcat_final")
         {
-            this.parents.Add("matcat_confir");
-            this.route = "/confirmar";
+            this.Parents.Add("matcat_confir");
+            this.Route = "/confirmar";
         }
 
         /// <inheritdoc/>
@@ -32,11 +32,11 @@ namespace ClassLibrary
         
         private void MaterialCategoryAdd(ChatDialogSelector selector)
         {
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             InsertMaterialCategoryData data = process.GetData<InsertMaterialCategoryData>();
             MaterialCategory materialCategory =data.MaterialCategory;
-            this.datMgr.MaterialCategory.Insert(materialCategory);
+            this.DatMgr.MaterialCategory.Insert(materialCategory);
         }
     }
 }

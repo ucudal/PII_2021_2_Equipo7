@@ -14,8 +14,8 @@ namespace ClassLibrary
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDH_MaterialCategoryConfirm(ChatDialogHandlerBase next) : base(next, "matcat_confir")
-        {   this.parents.Add("matcat_add_name");
-            this.route = null;
+        {   this.Parents.Add("matcat_add_name");
+            this.Route = null;
 
 
         }
@@ -24,8 +24,8 @@ namespace ClassLibrary
         {
             InsertMaterialCategoryData data = new InsertMaterialCategoryData();
             data.MaterialCategory.Name=selector.Code;
-            DProcessData process = new DProcessData("add_MatCat", this.code, data);
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            DProcessData process = new DProcessData("add_MatCat", this.Code, data);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.Process = process;
             StringBuilder builder = new StringBuilder();
 

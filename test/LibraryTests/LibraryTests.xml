@@ -384,7 +384,7 @@
         </member>
         <member name="M:Tests.PublicationAdminTest.GetPublicationsByCompanyTest">
             <summary>
-            Comprobar que funciona el obtener una publicación por su id y si se guardan 
+            Comprobar que funciona el obtener una publicación por su id y si se guardan
             en la lista de publicaciones.
             </summary>
         </member>
@@ -395,23 +395,23 @@
         </member>
         <member name="M:Tests.PublicationKeyWordsAdminTest.Insert">
             <summary>
-            
+            Insertar una publicación.
             </summary>
         </member>
         <member name="M:Tests.PublicationKeyWordsAdminTest.NewTest">
             <summary>
-            Test para crear una nueva key
+            Test para crear una nueva key.
             </summary>
         </member>
         <member name="M:Tests.PublicationKeyWordsAdminTest.DeleteTest">
             <summary>
-            Test del deleted
+            Test del deleted.
             </summary>
         </member>
         <member name="M:Tests.PublicationKeyWordsAdminTest.GetKeyWordsForPublicationTest">
             <summary>
-            
-            </summary>        
+            Palabra clave por publicación.
+            </summary>
         </member>
         <member name="T:Tests.QualificationAdminTest">
             <summary>
@@ -465,12 +465,12 @@
         </member>
         <member name="M:Tests.SaleAdminTest.GetSalesBySellerTest">
             <summary>
-            
+            Obtener la venta como vendedor.
             </summary>
         </member>
         <member name="M:Tests.SaleAdminTest.GetSalesByBuyerTest">
             <summary>
-            
+            Obtener compra con comprador.
             </summary>
         </member>
         <member name="T:Tests.CompanyAdminUserOperationTests">
