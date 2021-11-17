@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_Confirmation_Sale_KeyWord.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;

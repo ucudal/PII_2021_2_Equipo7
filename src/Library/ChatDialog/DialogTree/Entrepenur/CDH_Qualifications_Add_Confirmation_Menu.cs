@@ -1,11 +1,16 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_Confirmation_Sale_KeyWord.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Text;
 
 namespace ClassLibrary
 {
     /// <summary>
     /// <see cref="ChatDialogHandlerBase"/> concreto:
-    /// Responde al inicio de un usuario
-    /// administrador de empresa.
+    /// Confirmación de añadir habilitación.
     /// </summary>
     public class CDH_Qualifications_Add_Confirmation_Menu : ChatDialogHandlerBase
     {
