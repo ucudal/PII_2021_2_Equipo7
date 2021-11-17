@@ -1,9 +1,11 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Confirmation_Sale_KeyWord.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDH_Sale_Publication_Location.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System;
+using System.Globalization;
 using System.Text;
 
 namespace ClassLibrary
@@ -18,7 +20,8 @@ namespace ClassLibrary
         /// Inicializa una nueva instancia de la clase <see cref="CDH_Sale_Publication_Location"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Sale_Publication_Location(ChatDialogHandlerBase next) : base(next, "Sale_Publication_Location")
+        public CDH_Sale_Publication_Location(ChatDialogHandlerBase next)
+        : base(next, "Sale_Publication_Location")
         {
             this.Parents.Add("List_Location_Menu");
             this.Route = null;
@@ -28,17 +31,21 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process=session.Process;
-            SearchPublication data=process.GetData<SearchPublication>();
-            data.Publication=this.DatMgr.Publication.GetById(int.Parse(selector.Code));
-            
+            DProcessData process = session.Process;
+            SearchPublication data = process.GetData<SearchPublication>();
+            data.Publication = this.DatMgr.Publication.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
             builder.Append($"Datos de la publicacion con Id - {data.Publication.Id} \n");
             builder.Append($"Material - {this.DatMgr.CompanyMaterial.GetById(data.Publication.CompanyMaterialId).Name} \n");
             builder.Append($"Cantidad - {data.Publication.Quantity} \n");
             builder.Append($"Precio - {data.Publication.Price} \n");
             builder.Append($"Lugar - {this.DatMgr.CompanyLocation.GetById(data.Location.Id).GeoReference} \n");
-            builder.Append($"Fecha de publicacion - {data.Publication.ActiveFrom.ToString()} \n");
+            builder.Append($"Fecha de publicacion - {data.Publication.ActiveFrom.ToString(CultureInfo.InvariantCulture)} \n");
             builder.Append($"Se pueden realizar las siguientes operaciones sobre esta publicacion \n");
             builder.Append("\\comprar : Compra la publicación\n");
             builder.Append("\\cancelar : Cancela la compra\n");

@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="Sale.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -10,7 +16,6 @@ namespace ClassLibrary
     /// </summary>
     public class Sale : IManagableData<Sale>
     {
-
         /// <summary>
         /// Material de empresa comprado.
         /// </summary>
@@ -32,37 +37,37 @@ namespace ClassLibrary
         public int BuyerEntrepreneurId { get; set; }
 
         /// <inheritdoc/>
-        public int Id{get; set;}
+        public int Id { get; set; }
 
         /// <summary>
         /// Fecha de la venta.
         /// </summary>
-        public DateTime DateTime{get; set;}
+        public DateTime DateTime { get; set; }
 
         /// <summary>
         /// Precio de la venta.
         /// </summary>
-        public int Price{get; set;}
+        public int Price { get; set; }
 
         /// <summary>
         /// Divisa en la que se realiza cada venta.
         /// </summary>
-        public Currency Currency{get; set;}
+        public Currency Currency { get; set; }
 
         /// <inheritdoc/>
-        public bool Deleted{get; set;}
+        public bool Deleted { get; set; }
 
         /// <summary>
         /// Constructor de la clase Sale para definir los atributos.
         /// </summary>
-        /// <param name="DateTime"></param>
-        /// <param name="Price"></param>
-        /// <param name="Currency"></param>
-        public Sale(DateTime DateTime, int Price, Currency Currency)
+        /// <param name="dateTime">.</param>
+        /// <param name="price">.</param>
+        /// <param name="currency">.</param>
+        public Sale(DateTime dateTime, int price, Currency currency)
         {
-            this.DateTime = DateTime;
-            this.Price = Price;
-            this.Currency = Currency;
+            this.DateTime = dateTime;
+            this.Price = price;
+            this.Currency = currency;
             this.Deleted = false;
         }
 
@@ -74,34 +79,30 @@ namespace ClassLibrary
         {
             this.Id = 0;
             this.Deleted = false;
-
         }
-
 
         /// <inheritdoc/>
         public void LoadFromJson(string json)
         {
-            Sale sale=JsonSerializer.Deserialize<Sale>(json);
-            this.Id=sale.Id;
-            this.DateTime=sale.DateTime;
-            this.Deleted=sale.Deleted;
-            this.Currency=sale.Currency;
-            this.Price=sale.Price;
+            Sale sale = JsonSerializer.Deserialize<Sale>(json);
+            this.Id = sale.Id;
+            this.DateTime = sale.DateTime;
+            this.Deleted = sale.Deleted;
+            this.Currency = sale.Currency;
+            this.Price = sale.Price;
             this.SellerCompanyId = sale.SellerCompanyId;
             this.BuyerEntrepreneurId = sale.BuyerEntrepreneurId;
             this.ProductCompanyMaterialId = sale.ProductCompanyMaterialId;
             this.ProductQuantity = sale.ProductQuantity;
         }
 
-
         /// <inheritdoc/>
         public Sale Clone()
         {
-            Sale sale =new Sale();
+            Sale sale = new Sale();
             sale.LoadFromJson(this.ConvertToJson());
             return sale;
         }
-
 
         /// <inheritdoc/>
         public string ConvertToJson()
@@ -109,6 +110,4 @@ namespace ClassLibrary
             return JsonSerializer.Serialize(this);
         }
     }
-    
-
 }

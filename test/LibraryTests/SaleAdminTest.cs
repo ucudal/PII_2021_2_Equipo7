@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="SaleAdminTest.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
 using ClassLibrary;
@@ -23,12 +29,12 @@ namespace Tests
             DateTime datetime = DateTime.Today;
             salePrueba.DateTime = datetime;
 
-            int Price = 100;
-            salePrueba.Price = Price;
+            int price = 100;
+            salePrueba.Price = price;
 
             Currency currency = Currency.PesoUruguayo;
             salePrueba.Currency = currency;
-            
+
             int compId = 119980;
             int compMatId = 90567;
             int entreId = 36540;
@@ -41,17 +47,17 @@ namespace Tests
 
             int sale1 = this.datMgr.Sale.Insert(salePrueba);
 
-            Assert.AreNotEqual(0,sale1);
+            Assert.AreNotEqual(0, sale1);
 
             salePrueba = this.datMgr.Sale.GetById(sale1);
 
-            Assert.AreEqual(datetime,salePrueba.DateTime);
-            Assert.AreEqual(Price,salePrueba.Price);
-            Assert.AreEqual(currency,salePrueba.Currency);
-            Assert.AreEqual(compId,salePrueba.SellerCompanyId);
-            Assert.AreEqual(compMatId,salePrueba.ProductCompanyMaterialId);
-            Assert.AreEqual(entreId,salePrueba.BuyerEntrepreneurId);
-            Assert.AreEqual(quantity,salePrueba.ProductQuantity);
+            Assert.AreEqual(datetime, salePrueba.DateTime);
+            Assert.AreEqual(price, salePrueba.Price);
+            Assert.AreEqual(currency, salePrueba.Currency);
+            Assert.AreEqual(compId, salePrueba.SellerCompanyId);
+            Assert.AreEqual(compMatId, salePrueba.ProductCompanyMaterialId);
+            Assert.AreEqual(entreId, salePrueba.BuyerEntrepreneurId);
+            Assert.AreEqual(quantity, salePrueba.ProductQuantity);
         }
 
         /// <summary>
@@ -60,8 +66,8 @@ namespace Tests
         [Test]
         public void NewTest()
         {
-            Sale saleprueba =this.datMgr.Sale.New();
-            Assert.IsInstanceOf(typeof(Sale),saleprueba);
+            Sale saleprueba = this.datMgr.Sale.New();
+            Assert.IsInstanceOf(typeof(Sale), saleprueba);
         }
 
         /// <summary>
@@ -70,16 +76,16 @@ namespace Tests
         [Test]
         public void DeleteTest()
         {
-            Sale saleprueba2 =this.datMgr.Sale.New();
-            saleprueba2.DateTime=DateTime.Today;
-            saleprueba2.Price=100;
-            saleprueba2.Currency= Currency.DolarEstadounidense;
+            Sale saleprueba2 = this.datMgr.Sale.New();
+            saleprueba2.DateTime = DateTime.Today;
+            saleprueba2.Price = 100;
+            saleprueba2.Currency = Currency.DolarEstadounidense;
 
             this.datMgr.Sale.Insert(saleprueba2);
 
-            int NewId =saleprueba2.Id;
-            this.datMgr.Sale.Delete(NewId);
-            Assert.IsNull(this.datMgr.Sale.GetById(NewId));
+            int newId = saleprueba2.Id;
+            this.datMgr.Sale.Delete(newId);
+            Assert.IsNull(this.datMgr.Sale.GetById(newId));
         }
 
         /// <summary>
@@ -93,12 +99,12 @@ namespace Tests
             DateTime datetime = DateTime.Today;
             salePrueba.DateTime = datetime;
 
-            int Price = 100;
-            salePrueba.Price = Price;
+            int price = 100;
+            salePrueba.Price = price;
 
             Currency currency = Currency.PesoUruguayo;
             salePrueba.Currency = currency;
-            
+
             int compId = 119981;
             int compMatId = 56568;
             int entreId = 36541;
@@ -111,43 +117,39 @@ namespace Tests
 
             int sale1 = this.datMgr.Sale.Insert(salePrueba);
 
-            Assert.AreNotEqual(0,sale1);
+            Assert.AreNotEqual(0, sale1);
 
-            Sale Sale2 = this.datMgr.Sale.GetById(sale1);
+            Sale sale2 = this.datMgr.Sale.GetById(sale1);
 
-            Sale2.DateTime = DateTime.Today.AddMonths(2);
-            Sale2.Price = 230;
-            Sale2.Currency = Currency.DolarEstadounidense;
-            this.datMgr.Sale.Update(Sale2);
+            sale2.DateTime = DateTime.Today.AddMonths(2);
+            sale2.Price = 230;
+            sale2.Currency = Currency.DolarEstadounidense;
+            this.datMgr.Sale.Update(sale2);
 
-            Sale Sale3 = this.datMgr.Sale.GetById(sale1);
+            Sale sale3 = this.datMgr.Sale.GetById(sale1);
 
-            Assert.AreNotEqual(salePrueba.DateTime,Sale3.DateTime);
-            Assert.AreNotEqual(salePrueba.Currency,Sale3.Currency);
-            Assert.AreNotEqual(salePrueba.Price,Sale3.Price);
-            Assert.AreEqual(salePrueba.BuyerEntrepreneurId,Sale3.BuyerEntrepreneurId);
-            Assert.AreEqual(salePrueba.SellerCompanyId,Sale3.SellerCompanyId);
-            Assert.AreEqual(salePrueba.ProductQuantity,Sale3.ProductQuantity);
-            Assert.AreEqual(salePrueba.ProductCompanyMaterialId,Sale3.ProductCompanyMaterialId);
-
-
+            Assert.AreNotEqual(salePrueba.DateTime, sale3.DateTime);
+            Assert.AreNotEqual(salePrueba.Currency, sale3.Currency);
+            Assert.AreNotEqual(salePrueba.Price, sale3.Price);
+            Assert.AreEqual(salePrueba.BuyerEntrepreneurId, sale3.BuyerEntrepreneurId);
+            Assert.AreEqual(salePrueba.SellerCompanyId, sale3.SellerCompanyId);
+            Assert.AreEqual(salePrueba.ProductQuantity, sale3.ProductQuantity);
+            Assert.AreEqual(salePrueba.ProductCompanyMaterialId, sale3.ProductCompanyMaterialId);
         }
 
-
         /// <summary>
-        /// 
+        /// Obtener la venta como vendedor.
         /// </summary>
         [Test]
         public void GetSalesBySellerTest()
         {
-
             Sale sale1 = this.datMgr.Sale.New();
 
             DateTime datetime = DateTime.Today;
             sale1.DateTime = datetime;
 
-            int Price = 100;
-            sale1.Price = Price;
+            int price = 100;
+            sale1.Price = price;
 
             Currency currency = Currency.PesoUruguayo;
             sale1.Currency = currency;
@@ -163,14 +165,13 @@ namespace Tests
 
             sale1.ProductQuantity = 1;
 
-
             Sale sale2 = this.datMgr.Sale.New();
 
             DateTime datetime2 = DateTime.Today;
             sale2.DateTime = datetime2;
 
-            int Price2 = 100;
-            sale2.Price = Price2;
+            int price2 = 100;
+            sale2.Price = price2;
 
             Currency currency2 = Currency.PesoUruguayo;
             sale2.Currency = currency2;
@@ -183,14 +184,13 @@ namespace Tests
 
             sale2.ProductQuantity = 1;
 
-
             Sale sale3 = this.datMgr.Sale.New();
 
             DateTime datetime3 = DateTime.Today;
             sale3.DateTime = datetime3;
 
-            int Price3 = 100;
-            sale3.Price = Price3;
+            int price3 = 100;
+            sale3.Price = price3;
 
             Currency currency3 = Currency.PesoUruguayo;
             sale3.Currency = currency3;
@@ -207,16 +207,15 @@ namespace Tests
             this.datMgr.Sale.Insert(sale2);
             this.datMgr.Sale.Insert(sale3);
 
-            int Cventa = 3;
+            int cventa = 3;
 
             IReadOnlyCollection<int> lista = this.datMgr.Sale.GetSalesBySeller(sellerCompanyId);
 
-            Assert.AreEqual(Cventa,lista.Count);
-            
+            Assert.AreEqual(cventa, lista.Count);
         }
 
         /// <summary>
-        /// 
+        /// Obtener compra con comprador.
         /// </summary>
         [Test]
         public void GetSalesByBuyerTest()
@@ -226,8 +225,8 @@ namespace Tests
             DateTime datetime = DateTime.Today;
             sale1.DateTime = datetime;
 
-            int Price = 1033;
-            sale1.Price = Price;
+            int price = 1033;
+            sale1.Price = price;
 
             Currency currency = Currency.DolarEstadounidense;
             sale1.Currency = currency;
@@ -247,8 +246,8 @@ namespace Tests
             DateTime datetime2 = DateTime.Today;
             sale2.DateTime = datetime2;
 
-            int Price2 = 100;
-            sale2.Price = Price2;
+            int price2 = 100;
+            sale2.Price = price2;
 
             Currency currency2 = Currency.PesoUruguayo;
             sale2.Currency = currency2;
@@ -266,8 +265,8 @@ namespace Tests
             DateTime datetime3 = DateTime.Today;
             sale3.DateTime = datetime3;
 
-            int Price3 = 100;
-            sale3.Price = Price3;
+            int price3 = 100;
+            sale3.Price = price3;
 
             Currency currency3 = Currency.PesoUruguayo;
             sale3.Currency = currency3;
@@ -284,12 +283,11 @@ namespace Tests
             this.datMgr.Sale.Insert(sale2);
             this.datMgr.Sale.Insert(sale3);
 
-            int Cventa = 3;
+            int cventa = 3;
 
             IReadOnlyCollection<int> lista = this.datMgr.Sale.GetSalesByBuyer(2);
 
-            Assert.AreEqual(Cventa,lista.Count);
-
+            Assert.AreEqual(cventa, lista.Count);
         }
     }
 }
