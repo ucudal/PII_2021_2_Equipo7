@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ClassLibrary
 {
@@ -16,7 +17,7 @@ namespace ClassLibrary
     public class SessionsContainer
     {
         private readonly int sessionTimeoutMinutes = 5;
-        private List<Session> sessions = new List<Session>();
+        private IList<Session> sessions = new List<Session>();
 
         /// <summary>
         /// Crea una nueva sesion si esta no existe y la retorna.
@@ -65,7 +66,7 @@ namespace ClassLibrary
         /// </returns>
         public Session GetSession(MessagingService service, string account)
         {
-            Session item = this.sessions.Find(session => session.Account == account && session.Service == service);
+            Session item = this.sessions.SingleOrDefault(session => session.Account == account && session.Service == service);
             if (item is not null)
             {
                 double secondsSinceLastActivity = (DateTime.Now - item.LastActivity).TotalSeconds;

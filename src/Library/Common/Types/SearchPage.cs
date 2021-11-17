@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace ClassLibrary
 {
@@ -19,7 +20,7 @@ namespace ClassLibrary
     public class SearchPage<T>
         where T : IManagableData<SearchPage<T>>
     {
-        private ReadOnlyCollection<T> searchResults;
+        private IReadOnlyCollection<T> searchResults;
         private int currentPage;
         private int pageItemCount = 10;
 
@@ -39,7 +40,7 @@ namespace ClassLibrary
         /// <param name="pageItemCount">
         /// Items por pagina.
         /// </param>
-        public SearchPage(ReadOnlyCollection<T> searchResults, int pageItemCount = 10)
+        public SearchPage(IReadOnlyCollection<T> searchResults, int pageItemCount = 10)
         {
             this.searchResults = searchResults ?? throw new ArgumentNullException(paramName: nameof(searchResults));
             this.pageItemCount = pageItemCount;
@@ -48,7 +49,7 @@ namespace ClassLibrary
         /// <summary>
         /// Listado completo.
         /// </summary>
-        public ReadOnlyCollection<T> SearchResults
+        public IReadOnlyCollection<T> SearchResults
         {
             get => this.searchResults;
         }
@@ -74,21 +75,21 @@ namespace ClassLibrary
         /// <summary>
         /// Items de la pagina especifica.
         /// </summary>
-        public ReadOnlyCollection<T> PageItems
+        public IReadOnlyCollection<T> PageItems
         {
             get
             {
-                List<T> results = new List<T>();
+                IList<T> results = new List<T>();
                 int startIndex = this.currentPage * this.pageItemCount;
                 if (!(this.searchResults.Count >= startIndex))
                 {
                     for (int i = startIndex; i < (startIndex + this.pageItemCount) && i < this.searchResults.Count; i++)
                     {
-                        results.Add(this.searchResults[i]);
+                        results.Add(this.searchResults.ElementAt(i));
                     }
                 }
 
-                return results.AsReadOnly();
+                return results.ToList().AsReadOnly();
             }
         }
     }

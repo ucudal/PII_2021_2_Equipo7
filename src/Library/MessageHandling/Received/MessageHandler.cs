@@ -46,7 +46,7 @@ namespace ClassLibrary
                 stringBuilder.Append(commandResponse);
 
                 ResponseWrapper response = new ResponseWrapper(stringBuilder.ToString(), message.Service, message.Account);
-                return Task.FromResult<ResponseWrapper>(response);
+                return Task.FromResult(response);
                 /*responseHandler.SendResponse(response);*/
             }
             catch (ArgumentNullException e)

@@ -4,7 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace ClassLibrary
 {
@@ -23,7 +23,7 @@ namespace ClassLibrary
         /// <returns>
         /// Listado de registros.
         /// </returns>
-        ReadOnlyCollection<T> SelectAll<T>()
+        IReadOnlyCollection<T> SelectAll<T>()
             where T : class, IManagableData<T>;
 
         /// <summary>
