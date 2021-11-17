@@ -23,14 +23,20 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("Menu para buscar una publicación\n");
+            builder.Append("Menu para saber que materiales se regeneran constantemente. \n");
             builder.Append("Desde este menu puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\palabraclave : Buscar publicación por palabra clave.\n");
-            builder.Append("\\localidad : Buscar por localidad.\n");
-            builder.Append("\\cartegoria : Buscar por categoria.\n");
-
+           // builder.Append($"{GetTextToPrintListMaterialRegeneration(selector)}\n");
+            builder.Append("\\volver : Volver al menú principal.\n");
             return builder.ToString();
         }
+        /*public string GetTextToPrintListMaterialRegeneration(ChatDialogSelector selector)
+        {
+            StringBuilder builder = new StringBuilder();
+            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            DProcessData process = session.Process;
+
+        }*/
+
     }
 }
