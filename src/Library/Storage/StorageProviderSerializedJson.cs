@@ -6,7 +6,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -20,11 +19,13 @@ namespace ClassLibrary
     /// </summary>
     public class StorageProviderSerializedJson : IStorageProvider
     {
+        private static string path = @"database.json";
+
         /// <inheritdoc/>
-        public ReadOnlyCollection<T> SelectAll<T>()
+        public IReadOnlyCollection<T> SelectAll<T>()
             where T : class, IManagableData<T>
         {
-            Dictionary<string, List<dynamic>> tables = GetTables();
+            IDictionary<string, List<dynamic>> tables = GetTables();
             Converter<dynamic, T> converter = new Converter<dynamic, T>(ConvertDynToT<T>);
             string type = typeof(T).Name;
             if (!tables.ContainsKey(type))
@@ -32,10 +33,10 @@ namespace ClassLibrary
                 tables[type] = new List<dynamic>();
             }
 
-            List<T> table = tables[type].ConvertAll<T>(converter);
-            List<T> tableNotDeleted = table.FindAll(recordItem => !recordItem.Deleted);
-            List<T> orderedTable = tableNotDeleted.OrderBy(recordItem => recordItem.Id).ToList<T>();
-            return orderedTable.AsReadOnly();
+            IList<T> table = tables[type].ConvertAll(converter);
+            IList<T> tableNotDeleted = table.Where(recordItem => !recordItem.Deleted).ToList();
+            IList<T> orderedTable = tableNotDeleted.OrderBy(recordItem => recordItem.Id).ToList();
+            return orderedTable.ToList().AsReadOnly();
         }
 
         /// <inheritdoc/>
@@ -47,7 +48,7 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(record));
             }
 
-            Dictionary<string, List<dynamic>> tables = GetTables();
+            IDictionary<string, List<dynamic>> tables = GetTables();
             Converter<dynamic, T> converter = new Converter<dynamic, T>(ConvertDynToT<T>);
             string type = typeof(T).Name;
             if (!tables.ContainsKey(type))
@@ -55,8 +56,8 @@ namespace ClassLibrary
                 tables[type] = new List<dynamic>();
             }
 
-            List<T> table = tables[type].ConvertAll<T>(converter);
-            T storedRecord = table.Find(recordItem => recordItem.Id == record.Id);
+            IList<T> table = tables[type].ConvertAll<T>(converter);
+            T storedRecord = table.SingleOrDefault(recordItem => recordItem.Id == record.Id);
             T recordAux = record.Clone();
             int newId;
 
@@ -88,7 +89,7 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(record));
             }
 
-            Dictionary<string, List<dynamic>> tables = GetTables();
+            IDictionary<string, List<dynamic>> tables = GetTables();
             Converter<dynamic, T> converter = new Converter<dynamic, T>(ConvertDynToT<T>);
             string type = typeof(T).Name;
             if (!tables.ContainsKey(type))
@@ -96,8 +97,8 @@ namespace ClassLibrary
                 tables[type] = new List<dynamic>();
             }
 
-            List<T> table = tables[type].ConvertAll<T>(converter);
-            T storedRecord = table.Find(recordItem => recordItem.Id == record.Id);
+            IList<T> table = tables[type].ConvertAll<T>(converter);
+            T storedRecord = table.SingleOrDefault(recordItem => recordItem.Id == record.Id);
 
             if (storedRecord is null)
             {
@@ -119,7 +120,7 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(recordId));
             }
 
-            Dictionary<string, List<dynamic>> tables = GetTables();
+            IDictionary<string, List<dynamic>> tables = GetTables();
             Converter<dynamic, T> converter = new Converter<dynamic, T>(ConvertDynToT<T>);
             string type = typeof(T).Name;
             if (!tables.ContainsKey(type))
@@ -127,8 +128,8 @@ namespace ClassLibrary
                 tables[type] = new List<dynamic>();
             }
 
-            List<T> table = tables[type].ConvertAll<T>(converter);
-            T storedRecord = table.Find(recordItem => recordItem.Id == recordId);
+            IList<T> table = tables[type].ConvertAll<T>(converter);
+            T storedRecord = table.SingleOrDefault(recordItem => recordItem.Id == recordId);
 
             if (storedRecord is null)
             {
@@ -154,24 +155,24 @@ namespace ClassLibrary
             return objectItem;
         }
 
-        private static Dictionary<string, List<dynamic>> GetTables()
+        private static IDictionary<string, List<dynamic>> GetTables()
         {
-            Dictionary<string, List<dynamic>> tables = new Dictionary<string, List<dynamic>>();
+            IDictionary<string, List<dynamic>> tables = new Dictionary<string, List<dynamic>>();
 
-            if (File.Exists(@"database.json"))
+            if (File.Exists(path))
             {
-                string json = File.ReadAllText(@"database.json");
-                tables = JsonConvert.DeserializeObject<Dictionary<string, List<dynamic>>>(json) ?? new Dictionary<string, List<dynamic>>();
+                string json = File.ReadAllText(path);
+                tables = JsonConvert.DeserializeObject<IDictionary<string, List<dynamic>>>(json) ?? new Dictionary<string, List<dynamic>>();
             }
 
             return tables;
         }
 
-        private static bool StoreData(Dictionary<string, List<dynamic>> tables)
+        private static bool StoreData(IDictionary<string, List<dynamic>> tables)
         {
             try
             {
-                using FileStream fileStream = File.Create(@"database.json");
+                using FileStream fileStream = File.Create(path);
                 using StreamWriter file = new StreamWriter(fileStream, Encoding.UTF8);
                 string json = JsonConvert.SerializeObject(tables);
                 file.Write(json);

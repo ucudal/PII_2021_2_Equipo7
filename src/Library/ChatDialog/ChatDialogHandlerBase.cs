@@ -34,7 +34,7 @@ namespace ClassLibrary
         /// (su contexto) para que este paso responda
         /// a un mensaje.
         /// </summary>
-        private Collection<string> parents = new Collection<string>();
+        private ICollection<string> parents = new Collection<string>();
 
         /// <summary>
         /// Objeto contenedor de las sesiones
@@ -84,7 +84,7 @@ namespace ClassLibrary
         /// (su contexto) para que este paso responda
         /// a un mensaje.
         /// </summary>
-        public Collection<string> Parents
+        public ICollection<string> Parents
         {
             get => this.parents;
         }

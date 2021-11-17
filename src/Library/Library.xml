@@ -2397,7 +2397,7 @@
             Initializes a new instance of the <see cref="T:ClassLibrary.SearchPage`1"/> class.
             </summary>
         </member>
-        <member name="M:ClassLibrary.SearchPage`1.#ctor(System.Collections.ObjectModel.ReadOnlyCollection{`0},System.Int32)">
+        <member name="M:ClassLibrary.SearchPage`1.#ctor(System.Collections.Generic.IReadOnlyCollection{`0},System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:ClassLibrary.SearchPage`1"/> class.
             </summary>

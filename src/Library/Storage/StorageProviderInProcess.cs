@@ -6,7 +6,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace ClassLibrary
@@ -16,7 +15,7 @@ namespace ClassLibrary
     /// </summary>
     public class StorageProviderInProcess : IStorageProvider
     {
-        private Dictionary<Type, List<dynamic>> tables;
+        private IDictionary<Type, List<dynamic>> tables;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StorageProviderInProcess"/> class.
@@ -27,13 +26,13 @@ namespace ClassLibrary
         }
 
         /// <inheritdoc/>
-        public ReadOnlyCollection<T> SelectAll<T>()
+        public IReadOnlyCollection<T> SelectAll<T>()
             where T : class, IManagableData<T>
         {
-            List<T> table = this.GetTable<T>();
-            List<T> tableNotDeleted = table.FindAll(recordItem => !recordItem.Deleted);
-            List<T> orderedTable = tableNotDeleted.OrderBy(recordItem => recordItem.Id).ToList<T>();
-            return orderedTable.AsReadOnly();
+            IList<T> table = this.GetTable<T>();
+            IList<T> tableNotDeleted = table.Where(recordItem => !recordItem.Deleted).ToList();
+            IList<T> orderedTable = tableNotDeleted.OrderBy(recordItem => recordItem.Id).ToList<T>();
+            return orderedTable.ToList().AsReadOnly();
         }
 
         /// <inheritdoc/>
@@ -46,7 +45,7 @@ namespace ClassLibrary
             }
 
             Type type = typeof(T);
-            List<T> table = this.GetTable<T>();
+            IList<T> table = this.GetTable<T>();
             T recordAux = record.Clone();
             int newId;
 
@@ -74,8 +73,8 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(record));
             }
 
-            List<T> table = this.GetTable<T>();
-            T storedRecord = table.Find(recordItem => recordItem.Id == record.Id);
+            IList<T> table = this.GetTable<T>();
+            T storedRecord = table.SingleOrDefault(recordItem => recordItem.Id == record.Id);
 
             if (storedRecord is null)
             {
@@ -96,8 +95,8 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(recordId));
             }
 
-            List<T> table = this.GetTable<T>();
-            T storedRecord = table.Find(recordItem => recordItem.Id == recordId);
+            IList<T> table = this.GetTable<T>();
+            T storedRecord = table.SingleOrDefault(recordItem => recordItem.Id == recordId);
 
             if (storedRecord is null)
             {
@@ -120,7 +119,7 @@ namespace ClassLibrary
             return item as T;
         }
 
-        private List<T> GetTable<T>()
+        private IList<T> GetTable<T>()
             where T : class
         {
             Type type = typeof(T);
@@ -130,8 +129,8 @@ namespace ClassLibrary
             }
 
             Converter<dynamic, T> converter = new Converter<dynamic, T>(ConvertDynToT<T>);
-            List<dynamic> result = this.tables[type];
-            List<T> resultAsT = result.ConvertAll<T>(converter);
+            IList<dynamic> result = this.tables[type];
+            IList<T> resultAsT = result.ToList().ConvertAll(converter);
             return resultAsT;
         }
     }
