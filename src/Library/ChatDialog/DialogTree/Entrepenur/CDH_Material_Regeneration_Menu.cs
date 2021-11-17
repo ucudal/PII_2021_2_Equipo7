@@ -23,20 +23,26 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("Menu para saber que materiales se regeneran constantemente. \n");
+            builder.Append("Menu para saber que materiales se regeneran . \n");
             builder.Append("Desde este menu puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
-           // builder.Append($"{GetTextToPrintListMaterialRegeneration(selector)}\n");
+            builder.Append(GetTextToPrintListMaterialRegeneration());
             builder.Append("\\volver : Volver al menú principal.\n");
             return builder.ToString();
         }
-        /*public string GetTextToPrintListMaterialRegeneration(ChatDialogSelector selector)
+        /// <summary>
+        /// Listar todos los materiales y la compañia que los vende.
+        /// </summary>
+        /// <returns>Una string con el id, nombre del mat y el nombre de la compañia que lo vende</returns>
+        public string GetTextToPrintListMaterialRegeneration()
         {
             StringBuilder builder = new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
-
-        }*/
+            foreach(CompanyMaterial xMat in this.DatMgr.CompanyMaterial.Items)
+            {
+                builder.Append("Identificador -" + xMat.Id + ", el nombre del material " + xMat.Name + ", la compañia que lo vende es " + this.DatMgr.Company.GetById(xMat.CompanyId).Name + " \n");
+            }
+            return builder.ToString();
+        }
 
     }
 }
