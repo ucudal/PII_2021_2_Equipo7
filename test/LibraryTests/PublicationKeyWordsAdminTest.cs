@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="PublicationKeyWordsAdminTest.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Collections.Generic;
 using ClassLibrary;
 using NUnit.Framework;
@@ -12,7 +18,7 @@ namespace Tests
         private DataManager datMgr = new DataManager();
 
         /// <summary>
-        /// 
+        /// Insertar una publicación.
         /// </summary>
         [Test]
         public void Insert()
@@ -21,21 +27,21 @@ namespace Tests
             keyw.PublicationId = 18776;
             keyw.KeyWord = "madera";
             int pInt = this.datMgr.PublicationKeyWord.Insert(keyw);
-            Assert.AreNotEqual(0,pInt);
+            Assert.AreNotEqual(0, pInt);
         }
 
         /// <summary>
-        /// Test para crear una nueva key
+        /// Test para crear una nueva key.
         /// </summary>
         [Test]
         public void NewTest()
         {
             PublicationKeyWord publikey = this.datMgr.PublicationKeyWord.New();
-            Assert.IsInstanceOf(typeof(PublicationKeyWord),publikey);
+            Assert.IsInstanceOf(typeof(PublicationKeyWord), publikey);
         }
 
         /// <summary>
-        /// Test del deleted
+        /// Test del deleted.
         /// </summary>
         [Test]
         public void DeleteTest()
@@ -44,16 +50,15 @@ namespace Tests
             pkey.PublicationId = 98981;
             pkey.KeyWord = "fiambre";
             int p = this.datMgr.PublicationKeyWord.Insert(pkey);
-            Assert.AreNotEqual(0,p);
-            int NewId =pkey.Id;
-            this.datMgr.PublicationKeyWord.Delete(NewId);
-            Assert.IsNull(this.datMgr.PublicationKeyWord.GetById(NewId));
+            Assert.AreNotEqual(0, p);
+            int newId = pkey.Id;
+            this.datMgr.PublicationKeyWord.Delete(newId);
+            Assert.IsNull(this.datMgr.PublicationKeyWord.GetById(newId));
         }
 
-
         /// <summary>
-        /// 
-        /// </summary>        
+        /// Palabra clave por publicación.
+        /// </summary>
         [Test]
         public void GetKeyWordsForPublicationTest()
         {
@@ -74,11 +79,7 @@ namespace Tests
 
             IReadOnlyCollection<string> lista = this.datMgr.PublicationKeyWord.GetKeyWordsForPublication(5);
 
-            Assert.AreEqual(3,lista.Count);
-
+            Assert.AreEqual(3, lista.Count);
         }
-
-
-
     }
 }

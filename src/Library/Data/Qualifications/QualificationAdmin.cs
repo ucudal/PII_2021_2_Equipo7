@@ -1,3 +1,10 @@
+// -----------------------------------------------------------------------
+// <copyright file="QualificationAdmin.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ClassLibrary
@@ -10,8 +17,15 @@ namespace ClassLibrary
         /// <inheritdoc/>
         protected override void ValidateData(Qualification item)
         {
-            if(item.Name is null || item.Name.Length == 0) 
+            if (item is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(item));
+            }
+
+            if (item.Name is null || item.Name.Length == 0)
+            {
                 throw new ValidationException("Requerido nombre.");
+            }
         }
     }
 }

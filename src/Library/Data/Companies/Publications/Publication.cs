@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="Publication.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -10,11 +16,10 @@ namespace ClassLibrary
     /// </summary>
     public class Publication : IManagableData<Publication>
     {
-
         /// <summary>
         /// Publication tiene una property de Company.
         /// </summary>
-        /// <value></value>
+        /// <value>.</value>
         public int CompanyId { get; set; }
 
         /// <summary>
@@ -25,44 +30,43 @@ namespace ClassLibrary
         /// <summary>
         /// Id que se la da a cada publicación.
         /// </summary>
-        public  int Id{get; set;}
+        public int Id { get; set; }
 
         /// <summary>
         /// DateTime con la fecha de activación.
         /// </summary>
-        public DateTime ActiveFrom{get; set;}
+        public DateTime ActiveFrom { get; set; }
 
         /// <summary>
         /// Datetime con la fecha de desactivación de la publicación.
         /// </summary>
-        public DateTime ActiveUntil{get; set;}
+        public DateTime ActiveUntil { get; set; }
 
         /// <summary>
         /// Precio de lo que se vende en la publicación, ya sea un material o varios.
         /// </summary>
-        public int Price{get; set;}
+        public int Price { get; set; }
 
         /// <summary>
         /// Cantidad del material.
         /// </summary>
-        /// <value></value>
-        public int Quantity{get; set;}
+        /// <value>.</value>
+        public int Quantity { get; set; }
 
         /// <summary>
         /// Divisa del precio del material o materiales.
         /// </summary>
-        public Currency Currency{get; set;}
-
+        public Currency Currency { get; set; }
 
         /// <summary>
         ///  Deleted sirve para saber si la publicación se borra o no.
         /// </summary>
-        public bool Deleted{get; set;}
+        public bool Deleted { get; set; }
 
         /// <summary>
         ///  Location sirve para saber donde se encuentran los materiales de la publicacion.
         /// </summary>
-        public CompanyLocation Location{get;set;}
+        public CompanyLocation Location { get; set; }
 
         /// <summary>
         /// Constructor vacio para PublicationAdmin.
@@ -72,20 +76,18 @@ namespace ClassLibrary
         {
             this.Id = 0;
             this.Deleted = false;
-
         }
-
 
         /// <inheritdoc/>
         public void LoadFromJson(string json)
         {
-            Publication publication=JsonSerializer.Deserialize<Publication>(json);
-            this.Id=publication.Id;
-            this.ActiveFrom=publication.ActiveFrom;
-            this.ActiveUntil=publication.ActiveUntil;
-            this.Deleted=publication.Deleted;
-            this.Currency=publication.Currency;
-            this.Price=publication.Price;
+            Publication publication = JsonSerializer.Deserialize<Publication>(json);
+            this.Id = publication.Id;
+            this.ActiveFrom = publication.ActiveFrom;
+            this.ActiveUntil = publication.ActiveUntil;
+            this.Deleted = publication.Deleted;
+            this.Currency = publication.Currency;
+            this.Price = publication.Price;
             this.CompanyId = publication.CompanyId;
             this.CompanyMaterialId = publication.CompanyMaterialId;
         }
@@ -93,18 +95,15 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public Publication Clone()
         {
-            Publication publication =new Publication();
+            Publication publication = new Publication();
             publication.LoadFromJson(this.ConvertToJson());
             return publication;
         }
 
-        
         /// <inheritdoc/>
         public string ConvertToJson()
         {
             return JsonSerializer.Serialize(this);
         }
     }
-    
-
 }

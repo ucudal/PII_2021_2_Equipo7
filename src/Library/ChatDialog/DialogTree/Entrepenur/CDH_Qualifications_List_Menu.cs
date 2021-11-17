@@ -1,28 +1,28 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Confirmation_Sale_KeyWord.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDH_Qualifications_List_Menu.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Text;
 
 namespace ClassLibrary
 {
     /// <summary>
     /// <see cref="ChatDialogHandlerBase"/> concreto:
-    /// Responde al inicio de un usuario
-    /// administrador de empresa.
+    /// Lista de habilitaciones de un emprendedor.
     /// </summary>
     public class CDH_Qualifications_List_Menu : ChatDialogHandlerBase
     {
-
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Qualifications_List_Menu"/>.
+        /// Inicializa una nueva instancia de la clase. <see cref="CDH_Qualifications_List_Menu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Qualifications_List_Menu(ChatDialogHandlerBase next) : base(next, "Qualifications_List_Menu")
+        public CDH_Qualifications_List_Menu(ChatDialogHandlerBase next)
+        : base(next, "Qualifications_List_Menu")
         {
             this.Parents.Add("Qualification_Menu");
             this.Route = "/listar";
@@ -38,22 +38,29 @@ namespace ClassLibrary
             builder.Append("Ingrese el numero de la habilitacion para ver detalles. \n");
             builder.Append(" en caso contrario escriba \n");
             builder.Append("\\cancelar : Volver al menu de materiales .\n");
-            builder.Append(TextoToPrintQualificationsToErase(selector));
+            builder.Append(this.TextoToPrintQualificationsToErase(selector));
             builder.Append("LISTADO_HABILITACIONES");
             return builder.ToString();
         }
+
         private string TextoToPrintQualificationsToErase(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            IReadOnlyCollection<int> Habilitacion=this.DatMgr.EntrepreneurQualification.GetQualificationsForEntrepreneur(session.UserId);
-            foreach(int i in Habilitacion)
+            IReadOnlyCollection<int> habilitacion = this.DatMgr.EntrepreneurQualification.GetQualificationsForEntrepreneur(session.UserId);
+            foreach (int i in habilitacion)
             {
-                EntrepreneurQualification Habili=this.DatMgr.EntrepreneurQualification.GetById(Habilitacion.ElementAt(i));
-                builder.Append($" Nombre de la habilitación {this.DatMgr.Qualification.GetById(Habili.EntrepreneurId).Name} de id {this.DatMgr.Qualification.GetById(Habili.EntrepreneurId).Id} \n");
+                EntrepreneurQualification habili = this.DatMgr.EntrepreneurQualification.GetById(habilitacion.ElementAt(i));
+                builder.Append($" Nombre de la habilitación {this.DatMgr.Qualification.GetById(habili.EntrepreneurId).Name} de id {this.DatMgr.Qualification.GetById(habili.EntrepreneurId).Id} \n");
             }
+
             return builder.ToString();
         }
     }

@@ -1,9 +1,10 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Confirmation_Sale_KeyWord.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDH_Qualification_Menu.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System;
 using System.Text;
 
 namespace ClassLibrary
@@ -14,12 +15,12 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_Qualification_Menu : ChatDialogHandlerBase
     {
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_Qualification_Menu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Qualification_Menu(ChatDialogHandlerBase next) : base(next, "Qualification_Menu")
+        public CDH_Qualification_Menu(ChatDialogHandlerBase next)
+        : base(next, "Qualification_Menu")
         {
             this.Parents.Add("welcome_entrepreneur");
             this.Route = "/habilitaciones";
@@ -29,6 +30,11 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
             builder.Append("Menu de habilitaciones.\n");
             builder.Append("Desde este menu puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");

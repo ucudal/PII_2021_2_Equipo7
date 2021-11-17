@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="QualificationAdminTest.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Collections.Generic;
 using ClassLibrary;
 using NUnit.Framework;
@@ -18,13 +24,13 @@ namespace Tests
         public void InsertTestQ()
         {
             IReadOnlyCollection<Qualification> items = this.datMgr.Qualification.Items;
-            string Name="Habilitacion madera";
+            string name = "Habilitacion madera";
             Qualification quali = this.datMgr.Qualification.New();
-            quali.Name = Name;
+            quali.Name = name;
             int habili = this.datMgr.Qualification.Insert(quali);
-            Assert.AreNotEqual(0,habili);
+            Assert.AreNotEqual(0, habili);
             quali = this.datMgr.Qualification.GetById(habili);
-            Assert.AreEqual(Name,quali.Name);
+            Assert.AreEqual(name, quali.Name);
         }
 
         /// <summary>
@@ -33,8 +39,8 @@ namespace Tests
         [Test]
         public void NewTestQ()
         {
-            Qualification qualification =this.datMgr.Qualification.New();
-            Assert.IsInstanceOf(typeof(Qualification),qualification);
+            Qualification qualification = this.datMgr.Qualification.New();
+            Assert.IsInstanceOf(typeof(Qualification), qualification);
         }
 
         /// <summary>
@@ -43,12 +49,12 @@ namespace Tests
         [Test]
         public void DeleteTestQ()
         {
-            Qualification qualification =this.datMgr.Qualification.New();
-            qualification.Name="Franco";
+            Qualification qualification = this.datMgr.Qualification.New();
+            qualification.Name = "Franco";
             this.datMgr.Qualification.Insert(qualification);
-            int NewId =qualification.Id;
-            this.datMgr.Qualification.Delete(NewId);
-            Assert.IsNull(this.datMgr.Qualification.GetById(NewId));
+            int newId = qualification.Id;
+            this.datMgr.Qualification.Delete(newId);
+            Assert.IsNull(this.datMgr.Qualification.GetById(newId));
         }
 
         /// <summary>
@@ -57,21 +63,17 @@ namespace Tests
         [Test]
         public void UpdateTestQ()
         {
-            string Name="Habilitacion madera";
+            string name = "Habilitacion madera";
             Qualification quali = this.datMgr.Qualification.New();
-            quali.Name = Name;
+            quali.Name = name;
             int habili = this.datMgr.Qualification.Insert(quali);
-            Assert.AreNotEqual(0,habili);
+            Assert.AreNotEqual(0, habili);
             Qualification quali2 = this.datMgr.Qualification.GetById(habili);
             quali2.Name = "Habilitacion plastico";
             this.datMgr.Qualification.Update(quali2);
             Qualification quali3 = this.datMgr.Qualification.GetById(habili);
-            Assert.AreEqual(quali2.Name,quali3.Name);
-            Assert.AreEqual(quali2.Id,quali3.Id);
-
-
+            Assert.AreEqual(quali2.Name, quali3.Name);
+            Assert.AreEqual(quali2.Id, quali3.Id);
         }
-
-
     }
 }
