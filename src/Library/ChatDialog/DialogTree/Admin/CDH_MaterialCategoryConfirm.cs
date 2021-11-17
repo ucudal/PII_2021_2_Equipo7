@@ -7,29 +7,29 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de la plataforma.
     /// </summary>
-    public class CDH_QualificationAddConfirmation : ChatDialogHandlerBase
+    public class CDH_MaterialCategoryConfirm : ChatDialogHandlerBase
     {
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeSysAdmin"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_QualificationAddConfirmation(ChatDialogHandlerBase next) : base(next, "hab_confir")
-        {   this.Parents.Add("hab_add_name");
-            this.Route = null;
+        public CDH_MaterialCategoryConfirm(ChatDialogHandlerBase next) : base(next, "matcat_confir")
+        {   this.parents.Add("matcat_add_name");
+            this.route = null;
 
 
         }
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            InsertQualificationData data = new InsertQualificationData();
-            data.Qualification.Name=selector.Code;
-            DProcessData process = new DProcessData("add_Qualification", this.code, data);
+            InsertMaterialCategoryData data = new InsertMaterialCategoryData();
+            data.MaterialCategory.Name=selector.Code;
+            DProcessData process = new DProcessData("add_MatCat", this.code, data);
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             session.Process = process;
             StringBuilder builder = new StringBuilder();
 
-            builder.Append("Desea agregar la habilitacion.\n");
+            builder.Append("Desea agregar la categoria de el material.\n");
             builder.Append("\\confirmar \n");
             builder.Append("\\cancelar");
             return builder.ToString();

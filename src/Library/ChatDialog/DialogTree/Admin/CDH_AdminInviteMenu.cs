@@ -14,11 +14,11 @@ namespace ClassLibrary
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDH_AdminInviteMenu(ChatDialogHandlerBase next) : base(next, "invitemenu")
-        {   this.Parents.Add("welcome_sysadmin");
-            this.Route = "\\invitar";
-
-
+        {   
+            this.parents.Add("welcome_sysadmin");
+            this.route = "/invitar";
         }
+        
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
@@ -27,7 +27,8 @@ namespace ClassLibrary
             builder.Append("Que tipio de invitacion quiere crear:\n\n");
             builder.Append("\\admin : Invitacion de administradores del sistema.\n");
             builder.Append("\\emprendedor : Invitacion de emprendedores al sistema.\n");
-            builder.Append("\\compania : Invitacion de companias al sistema.\n");
+            builder.Append("\\compania_nueva : Invitacion de companias al sistema.\n");
+            builder.Append("\\compania_existente \n");
             builder.Append("\\cancelar");
             return builder.ToString();
         }

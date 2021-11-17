@@ -7,29 +7,30 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de la plataforma.
     /// </summary>
-    public class CDH_QualificationAddConfirmation : ChatDialogHandlerBase
+    public class CDH_InviteAdminConfirmation : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeSysAdmin"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_InviteAdminConfirmation"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_QualificationAddConfirmation(ChatDialogHandlerBase next) : base(next, "hab_confir")
-        {   this.Parents.Add("hab_add_name");
-            this.Route = null;
+        public CDH_InviteAdminConfirmation(ChatDialogHandlerBase next) : base(next, "invite_admin_confirm")
+        {   this.parents.Add("invitemenu");
+            this.route = "/admin" ;
 
 
         }
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            InsertQualificationData data = new InsertQualificationData();
-            data.Qualification.Name=selector.Code;
-            DProcessData process = new DProcessData("add_Qualification", this.code, data);
+            InsertInvitationData data = new InsertInvitationData();
+            data.Invitation.Type= RegistrationType.SystemAdminJoin;
+            DProcessData process = new DProcessData("Admin_invite", this.code, data);
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             session.Process = process;
+
             StringBuilder builder = new StringBuilder();
 
-            builder.Append("Desea agregar la habilitacion.\n");
+            builder.Append("Desea crear una invitacion para admin.\n");
             builder.Append("\\confirmar \n");
             builder.Append("\\cancelar");
             return builder.ToString();

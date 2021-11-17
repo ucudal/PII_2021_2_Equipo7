@@ -13,12 +13,12 @@ namespace ClassLibrary
         /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeSysAdmin"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_AdminQualificationsMenu(ChatDialogHandlerBase next) : base(next, "hab_manu")
-        {   this.Parents.Add("welcome_sysadmin");
-            this.Route = "\\habilitaciones";
-
-
+        public CDH_AdminQualificationsMenu(ChatDialogHandlerBase next) : base(next, "hab_menu")
+        {   
+            this.parents.Add("welcome_sysadmin");
+            this.route = "/habilitaciones";
         }
+        
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {

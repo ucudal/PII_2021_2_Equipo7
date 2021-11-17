@@ -7,29 +7,30 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de la plataforma.
     /// </summary>
-    public class CDH_QualificationAddConfirmation : ChatDialogHandlerBase
+    public class CDH_InviteEntrepreneurConfirmation : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeSysAdmin"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_InviteEntrepreneurConfirmation"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_QualificationAddConfirmation(ChatDialogHandlerBase next) : base(next, "hab_confir")
-        {   this.Parents.Add("hab_add_name");
-            this.Route = null;
+        public CDH_InviteEntrepreneurConfirmation(ChatDialogHandlerBase next) : base(next, "invite_entre_confirm")
+        {   this.parents.Add("invitemenu");
+            this.route = "/emprendedor" ;
 
 
         }
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            InsertQualificationData data = new InsertQualificationData();
-            data.Qualification.Name=selector.Code;
-            DProcessData process = new DProcessData("add_Qualification", this.code, data);
+            InsertInvitationData data = new InsertInvitationData();
+            data.Invitation.Type= RegistrationType.EntrepreneurNew;
+            DProcessData process = new DProcessData("entrepreneur_invite", this.code, data);
             Session session = this.sessions.GetSession(selector.Service, selector.Account);
             session.Process = process;
+
             StringBuilder builder = new StringBuilder();
 
-            builder.Append("Desea agregar la habilitacion.\n");
+            builder.Append("Desea crear una invitacion para una compania nueva\n");
             builder.Append("\\confirmar \n");
             builder.Append("\\cancelar");
             return builder.ToString();
