@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -170,11 +171,16 @@ namespace ClassLibrary
 
         private static bool StoreData(IDictionary<string, List<dynamic>> tables)
         {
+            JsonSerializerSettings settings = new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+            };
+
             try
             {
                 using FileStream fileStream = File.Create(path);
                 using StreamWriter file = new StreamWriter(fileStream, Encoding.UTF8);
-                string json = JsonConvert.SerializeObject(tables);
+                string json = JsonConvert.SerializeObject(tables, settings);
                 file.Write(json);
                 file.Close();
             }
