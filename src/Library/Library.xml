@@ -1219,6 +1219,27 @@
         <member name="M:ClassLibrary.CDH_Material_Regeneration_Menu.Execute(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
+        <member name="M:ClassLibrary.CDH_Material_Regeneration_Menu.GetTextToPrintListMaterialRegeneration">
+            <summary>
+            Listar todos los materiales y la compañia que los vende.
+            </summary>
+            <returns>Una string con el id, nombre del mat y el nombre de la compañia que lo vende</returns>
+        </member>
+        <member name="T:ClassLibrary.CDH_Material_Regeneration_ShowDetail_Menu">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un emprendedor.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_Material_Regeneration_ShowDetail_Menu.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_Material_Regeneration_ShowDetail_Menu"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_Material_Regeneration_ShowDetail_Menu.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
         <member name="T:ClassLibrary.CDH_Qualifications_Add_Confirmation_Menu">
             <summary>
             <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:

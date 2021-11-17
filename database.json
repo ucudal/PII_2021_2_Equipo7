@@ -1,1 +1,89 @@
-﻿{"Invitation":[{"Id":1,"Code":"2021320-CN-00001","Type":2,"ValidAfter":"2021-09-16T09:08:06.9319278-03:00","ValidBefore":"2022-01-16T09:08:06.9327469-03:00","CompanyId":0,"Used":false,"Deleted":false},{"Id":2,"Code":"2021320-CN-00002","Type":2,"ValidAfter":"2021-09-16T09:08:30.7053563-03:00","ValidBefore":"2022-01-16T09:08:30.7061972-03:00","CompanyId":0,"Used":false,"Deleted":false},{"Id":3,"Code":"2021321-CN-00003","Type":2,"ValidAfter":"2021-09-17T08:45:53.0858019-03:00","ValidBefore":"2022-01-17T08:45:53.0868469-03:00","CompanyId":0,"Used":true,"Deleted":false},{"Id":4,"Code":"2021321-CN-00004","Type":2,"ValidAfter":"2021-09-17T09:23:33.9877713-03:00","ValidBefore":"2022-01-17T09:23:33.9885709-03:00","CompanyId":0,"Used":false,"Deleted":false}],"User":[{"Id":1,"FirstName":"Rodrigo","LastName":"Jauregui","Deleted":false,"Role":2,"Suspended":false}],"Company":[{"Name":"Combobulative Designs","Trade":"Software","Id":1,"Deleted":false}],"Account":[{"Id":1,"Deleted":false,"UserId":1,"Service":2,"CodeInService":"1554827100"}],"CompanyUser":[{"Id":1,"Deleted":false,"CompanyId":1,"AdminUserId":1}]}
+﻿{
+  "Invitation": [
+    {
+      "Id": 1,
+      "Code": "2021320-CN-00001",
+      "Type": 2,
+      "ValidAfter": "2021-09-16T09:08:06.9319278-03:00",
+      "ValidBefore": "2022-01-16T09:08:06.9327469-03:00",
+      "CompanyId": 0,
+      "Used": false,
+      "Deleted": false
+    },
+    {
+      "Id": 2,
+      "Code": "2021320-CN-00002",
+      "Type": 2,
+      "ValidAfter": "2021-09-16T09:08:30.7053563-03:00",
+      "ValidBefore": "2022-01-16T09:08:30.7061972-03:00",
+      "CompanyId": 0,
+      "Used": false,
+      "Deleted": false
+    },
+    {
+      "Id": 3,
+      "Code": "2021321-CN-00003",
+      "Type": 2,
+      "ValidAfter": "2021-09-17T08:45:53.0858019-03:00",
+      "ValidBefore": "2022-01-17T08:45:53.0868469-03:00",
+      "CompanyId": 0,
+      "Used": true,
+      "Deleted": false
+    },
+    {
+      "Id": 4,
+      "Code": "2021321-CN-00004",
+      "Type": 2,
+      "ValidAfter": "2021-09-17T09:23:33.9877713-03:00",
+      "ValidBefore": "2022-01-17T09:23:33.9885709-03:00",
+      "CompanyId": 0,
+      "Used": false,
+      "Deleted": false
+    },
+    {
+      "Id": 5,
+      "Code": "2021321-CN-00005",
+      "Type": 2,
+      "ValidAfter": "2021-09-17T10:33:07.3414883-03:00",
+      "ValidBefore": "2022-01-17T10:33:07.3422993-03:00",
+      "CompanyId": 0,
+      "Used": false,
+      "Deleted": false
+    }
+  ],
+  "User": [
+    {
+      "Id": 1,
+      "FirstName": "Rodrigo",
+      "LastName": "Jauregui",
+      "Deleted": false,
+      "Role": 2,
+      "Suspended": false
+    }
+  ],
+  "Company": [
+    {
+      "Name": "Combobulative Designs",
+      "Trade": "Software",
+      "Id": 1,
+      "Deleted": false
+    }
+  ],
+  "Account": [
+    {
+      "Id": 1,
+      "Deleted": false,
+      "UserId": 1,
+      "Service": 2,
+      "CodeInService": "1554827100"
+    }
+  ],
+  "CompanyUser": [
+    {
+      "Id": 1,
+      "Deleted": false,
+      "CompanyId": 1,
+      "AdminUserId": 1
+    }
+  ]
+}
