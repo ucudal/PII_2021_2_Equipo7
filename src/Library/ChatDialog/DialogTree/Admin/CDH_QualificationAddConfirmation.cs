@@ -24,8 +24,8 @@ namespace ClassLibrary
         {
             InsertQualificationData data = new InsertQualificationData();
             data.Qualification.Name=selector.Code;
-            DProcessData process = new DProcessData("add_Qualification", this.code, data);
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            DProcessData process = new DProcessData("add_Qualification", this.Code, data);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.Process = process;
             StringBuilder builder = new StringBuilder();
 

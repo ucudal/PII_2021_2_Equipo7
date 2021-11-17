@@ -15,8 +15,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_InviteEntrepreneurCreate(ChatDialogHandlerBase next) : base(next, "invite_company_create")
         {
-            this.parents.Add("invite_entre_confirm");
-            this.route = "/confirmar";
+            this.Parents.Add("invite_entre_confirm");
+            this.Route = "/confirmar";
         }
 
         /// <inheritdoc/>
@@ -32,11 +32,11 @@ namespace ClassLibrary
         
         private void QualificationAdd(ChatDialogSelector selector)
         {
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             InsertInvitationData data = process.GetData<InsertInvitationData>();
             Invitation invitation=data.Invitation;
-            this.datMgr.Invitation.Insert(invitation);
+            this.DatMgr.Invitation.Insert(invitation);
         }
     }
 }

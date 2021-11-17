@@ -15,15 +15,15 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_InviteCompanyExistList(ChatDialogHandlerBase next) : base(next, "invite_company_exist_list")
         {
-            this.parents.Add("invitemenu");
-            this.route = "/compania_existente";
+            this.Parents.Add("invitemenu");
+            this.Route = "/compania_existente";
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             
             builder.Append("Listado de Companias existentes: \n");
             builder.Append("En caso de querer hacer una accion sobre alguna compania ingrese su numero.\n");
@@ -38,7 +38,7 @@ namespace ClassLibrary
             StringBuilder xListMats=new StringBuilder();
             
             
-            foreach( Company company in this.datMgr.Company.Items)
+            foreach( Company company in this.DatMgr.Company.Items)
             {
                 
                 xListMats.Append("" + company.Name +" " +company.Id + "\n");

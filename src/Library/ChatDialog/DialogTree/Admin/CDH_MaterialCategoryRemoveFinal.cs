@@ -15,8 +15,8 @@ namespace ClassLibrary
         /// <param name="next">Siguiente handler.</param>
         public CDH_MaterialCategoryRemoveFinal(ChatDialogHandlerBase next) : base(next, "matcat_remove_final")
         {
-            this.parents.Add("material_remove_from_list");
-            this.route = "/confirmar";
+            this.Parents.Add("material_remove_from_list");
+            this.Route = "/confirmar";
         }
 
         /// <inheritdoc/>
@@ -40,13 +40,13 @@ namespace ClassLibrary
         private bool EraseMatcat(ChatDialogSelector selector)
         {
             bool xretorno=false;
-            Session session = this.sessions.GetSession(selector.Service, selector.Account);
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             InsertMaterialCategoryData data = process.GetData<InsertMaterialCategoryData>();
             MaterialCategory materialCategory = data.MaterialCategory;
             if(IsNotAllReadyToDelete(data)==false)
             {
-                this.datMgr.MaterialCategory.Delete(materialCategory.Id);
+                this.DatMgr.MaterialCategory.Delete(materialCategory.Id);
                 xretorno=true;
             }
             return xretorno;
@@ -55,7 +55,7 @@ namespace ClassLibrary
         private bool IsNotAllReadyToDelete(InsertMaterialCategoryData data)
         {
             bool xretorno=false;
-            foreach(MaterialCategory xMatCat in this.datMgr.MaterialCategory.Items)
+            foreach(MaterialCategory xMatCat in this.DatMgr.MaterialCategory.Items)
             {
                 if(xMatCat.Id == data.MaterialCategory.Id)
                 {
