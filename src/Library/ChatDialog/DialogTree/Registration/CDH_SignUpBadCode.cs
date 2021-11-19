@@ -40,9 +40,6 @@ namespace ClassLibrary
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity activity = session.CurrentActivity;
-            SignUpData data = activity.GetData<SignUpData>();
-
-            data.Type = RegistrationType.CompanyJoin;
 
             session.CurrentActivity = activity;
             session.MenuLocation = "registration_invite";

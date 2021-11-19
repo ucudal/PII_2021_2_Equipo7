@@ -17,7 +17,7 @@ namespace ClassLibrary
     {
         private IReadOnlyCollection<int> searchResults;
         private int currentPage;
-        private int pageItemCount = 10;
+        private int pageItemCount;
         private string searchPageContext;
         private string searchPageRoute;
 
@@ -43,7 +43,7 @@ namespace ClassLibrary
         /// <param name="pageItemCount">
         /// Items por pagina.
         /// </param>
-        public SearchData(IReadOnlyCollection<int> searchResults, string searchPageContext, string searchPageRoute, int pageItemCount = 10)
+        public SearchData(IReadOnlyCollection<int> searchResults, string searchPageContext, string searchPageRoute, int pageItemCount = 6)
         {
             this.searchResults = searchResults ?? throw new ArgumentNullException(paramName: nameof(searchResults));
             this.pageItemCount = pageItemCount;
@@ -87,12 +87,11 @@ namespace ClassLibrary
             {
                 IList<int> results = new List<int>();
                 int startIndex = this.currentPage * this.pageItemCount;
-                if (!(this.searchResults.Count >= startIndex))
+                int endIndex = startIndex + this.pageItemCount;
+                endIndex = endIndex > this.searchResults.Count ? this.searchResults.Count : endIndex;
+                for (int i = startIndex; i < endIndex; i++)
                 {
-                    for (int i = startIndex; i < (startIndex + this.pageItemCount) && i < this.searchResults.Count; i++)
-                    {
-                        results.Add(this.searchResults.ElementAt(i));
-                    }
+                    results.Add(this.searchResults.ElementAt(i));
                 }
 
                 return results.ToList().AsReadOnly();

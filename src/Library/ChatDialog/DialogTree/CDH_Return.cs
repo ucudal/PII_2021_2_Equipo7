@@ -51,7 +51,11 @@ namespace ClassLibrary
 
             if (this.Route == selector.Code)
             {
-                return true;
+                Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+                if (session.StackHasActivities())
+                {
+                    return true;
+                }
             }
 
             return false;

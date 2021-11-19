@@ -37,7 +37,7 @@ namespace ClassLibrary
             SearchData search = activity.GetData<SearchData>();
 
             search.NextPage();
-            activity.SetHandlerChain(selector.Context, this.Route);
+            activity.SetHandlerChain(search.SearchPageContext, search.SearchPageRoute);
             session.CurrentActivity = activity;
 
             return null;
@@ -56,7 +56,7 @@ namespace ClassLibrary
                 Session session = this.Sessions.GetSession(selector.Service, selector.Account);
                 UserActivity activity = session.CurrentActivity;
 
-                if (activity.Code == "search_by_page")
+                if (activity.Code.StartsWith("search_by_page", StringComparison.InvariantCulture))
                 {
                   return true;
                 }

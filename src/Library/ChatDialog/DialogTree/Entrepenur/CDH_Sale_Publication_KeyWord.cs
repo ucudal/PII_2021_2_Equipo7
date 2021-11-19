@@ -40,7 +40,7 @@ namespace ClassLibrary
             int id = int.Parse(selector.Code, NumberStyles.Integer, CultureInfo.InvariantCulture);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             EntrepreneurPurchaseData data = new EntrepreneurPurchaseData(session.EntityId, id);
-            UserActivity activity = new UserActivity("entrepreneur_pub_by_key_purchase", "Search_KeyWord_Menu", "/pagina_siguiente", data);
+            UserActivity activity = new UserActivity("entrepreneur_pub_by_key_purchase", "Search_KeyWord_Menu", $"{id}", data);
             session.PushActivity(activity);
 
             Publication pub = this.DatMgr.Publication.GetById(id);
@@ -72,7 +72,7 @@ namespace ClassLibrary
             builder.AppendLine($"<b>Precio</b>: {pub.Price}\n");
             if (hasAllQualifications && stock != 0)
             {
-                builder.AppendLine("/comprar : Comprar publicación.");
+                builder.AppendLine("/comprar : Comprar publicación.\n");
             }
 
             builder.Append("/volver - Volver.");

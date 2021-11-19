@@ -25,7 +25,7 @@ namespace ClassLibrary
             {
                 if (qualification.EntrepreneurId == entrepreneurId)
                 {
-                    resultList.Add(qualification.QualificationId);
+                    resultList.Add(qualification.Id);
                 }
             }
             return resultList.AsReadOnly();

@@ -48,14 +48,27 @@ namespace ClassLibrary
             }
 
             activity = session.CurrentActivity;
+            SearchData data = activity.GetData<SearchData>();
 
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("<b>Lista de habilitaciones</b>\n");
             builder.AppendLine("Ingrese el numero de la habilitacion para eliminarla.\n");
-            builder.AppendLine(this.TextoToPrintQualifications(activity.GetData<SearchData>()));
-            builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
-            builder.AppendLine("/pagina_anterior - Pagina anterior.");
-            builder.AppendLine("/volver - Volver al menu de habilitaciones.");
+            if (data.SearchResults.Count > 0)
+            {
+                builder.AppendLine($"{this.TextoToPrintQualifications(data)}");
+            }
+            else
+            {
+                builder.AppendLine("(No se encontraron habilitaciones)\n");
+            }
+
+            if (data.PageItemCount < data.SearchResults.Count)
+            {
+                builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
+                builder.AppendLine("/pagina_anterior - Pagina anterior.\n");
+            }
+
+            builder.Append("/volver - Volver al menu de habilitaciones.");
             return builder.ToString();
         }
 

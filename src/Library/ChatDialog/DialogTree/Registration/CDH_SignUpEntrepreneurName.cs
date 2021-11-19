@@ -48,7 +48,7 @@ namespace ClassLibrary
             session.CurrentActivity = activity;
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Ingrese el nombre de su <b>emprendimiento</b>.");
+            builder.Append("Ingrese el <b>nombre</b> de su emprendimiento.");
             return builder.ToString();
         }
 
@@ -65,9 +65,13 @@ namespace ClassLibrary
                 if (!selector.Code.StartsWith('/'))
                 {
                     Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-                    if (session.CurrentActivity.GetData<SignUpData>()?.Type == RegistrationType.EntrepreneurNew)
+                    if (typeof(SignUpData).IsAssignableFrom(session.CurrentActivity.TypeOfData))
                     {
-                        return true;
+                        SignUpData data = session.CurrentActivity.GetData() as SignUpData;
+                        if (data.Type == RegistrationType.EntrepreneurNew)
+                        {
+                            return true;
+                        }
                     }
                 }
             }

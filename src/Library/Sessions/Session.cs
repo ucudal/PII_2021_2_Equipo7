@@ -164,5 +164,16 @@ namespace ClassLibrary
         {
             this.activities.Clear();
         }
+
+        /// <summary>
+        /// Revisa si existen actividades en el stack.
+        /// </summary>
+        /// <returns>
+        /// Confirmacion de existencia de actividades.
+        /// </returns>
+        public bool StackHasActivities()
+        {
+            return this.activities.Count != 0;
+        }
     }
 }

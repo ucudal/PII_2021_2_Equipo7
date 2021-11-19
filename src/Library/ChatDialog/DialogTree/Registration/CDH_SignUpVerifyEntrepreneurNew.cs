@@ -37,7 +37,7 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            SignUpDataCompanyJoin data = new SignUpDataCompanyJoin(selector.Account, selector.Service)
+            SignUpDataEntrepreneurNew data = new SignUpDataEntrepreneurNew(selector.Account, selector.Service)
             {
                 Type = RegistrationType.EntrepreneurNew,
                 InviteCode = selector.Code,

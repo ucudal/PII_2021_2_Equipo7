@@ -40,9 +40,9 @@ namespace ClassLibrary
             StringBuilder builder = new StringBuilder();
             builder.AppendLine($"<b>Bienvenido a PieTech {user.FirstName} {user.LastName}!</b>\n");
             builder.AppendLine("Como emprendedor usted puede realizar las siguientes acciones:\n");
-            builder.Append("/buscarpublicacion - Buscar publicaciones.\n");
-            builder.Append("/regeneracionmaterial - Muestra la regeneración del material.\n");
-            builder.Append("/historialcompras - Mostrar historial de compra.");
+            builder.AppendLine("/buscar - Buscar publicaciones.");
+            builder.AppendLine("/regeneracion - Regeneración de materiales.");
+            builder.AppendLine("/compras - Historial de compras.");
             builder.Append("/habilitaciones - Menú de habilitaciones.");
             return builder.ToString();
         }
@@ -57,7 +57,7 @@ namespace ClassLibrary
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             User user = this.DatMgr.User.GetById(session.UserId);
-            if (selector.Code == "/welcome" && user.Role == UserRole.Entrepreneur)
+            if (selector.Code == "/welcome" && user?.Role == UserRole.Entrepreneur)
             {
                 return true;
             }

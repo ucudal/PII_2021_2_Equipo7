@@ -4,6 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System;
 using System.Text;
 
 namespace ClassLibrary
@@ -23,7 +24,7 @@ namespace ClassLibrary
         public CDH_WelcomeUnregistered(ChatDialogHandlerBase next)
             : base(next, "registration_prompt")
         {
-            this.Route = "/registration";
+            this.Route = "/welcome";
         }
 
         /// <inheritdoc/>
@@ -34,6 +35,26 @@ namespace ClassLibrary
             builder.Append("Si usted tiene un codigo de invitacion, por favor ingrese el siguiente commando:\n\n");
             builder.Append("/registrar");
             return builder.ToString();
+        }
+
+        /// <inheritdoc/>
+        public override bool ValidateDataEntry(ChatDialogSelector selector)
+        {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            User user = this.DatMgr.User.GetById(session.UserId);
+            if (selector.Code == "/welcome" && user is null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

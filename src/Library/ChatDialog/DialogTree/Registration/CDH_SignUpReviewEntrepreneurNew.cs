@@ -25,7 +25,7 @@ namespace ClassLibrary
         public CDH_SignUpReviewEntrepreneurNew(ChatDialogHandlerBase next)
             : base(next, "registration_new_entre_verify")
         {
-            this.Parents.Add("registration_new_entre_trade");
+            this.Parents.Add("registration_new_entre_addr");
             this.Route = null;
         }
 
@@ -42,7 +42,7 @@ namespace ClassLibrary
             SignUpDataEntrepreneurNew data = activity.GetData<SignUpDataEntrepreneurNew>();
 
             Entrepreneur entrepreneur = data.Entrepreneur;
-            entrepreneur.Trade = selector.Code;
+            entrepreneur.GeoReference = selector.Code;
             User user = data.User;
 
             session.CurrentActivity = activity;

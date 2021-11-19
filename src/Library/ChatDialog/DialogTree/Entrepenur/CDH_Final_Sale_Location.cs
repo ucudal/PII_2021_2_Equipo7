@@ -24,7 +24,7 @@ namespace ClassLibrary
         : base(next, "Final_Sale_Location")
         {
             this.Parents.Add("Confirmation_Sale_Location");
-            this.Route = "\\confirmar";
+            this.Route = "/confirmar";
         }
 
         /// <inheritdoc/>

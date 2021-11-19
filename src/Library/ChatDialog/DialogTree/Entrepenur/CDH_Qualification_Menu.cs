@@ -34,17 +34,17 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            UserActivity activity = new UserActivity("entrepreneur_qualifications_menu", null, null, null);
+            UserActivity activity = new UserActivity("entrepreneur_qualifications_menu", null, "/welcome", null);
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.PushActivity(activity);
 
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("<b>Menu de habilitaciones</b>.\n");
-            builder.Append("/eliminar - Listar todas las habilitaciones para eliminar una de ellas.\n");
-            builder.Append("/agregar - Agregar una habilitacion\n");
-            builder.Append("/listar - Listar las habilitaciones\n");
-            builder.Append("/volver - Volver al menu de emprendedor .\n");
+            builder.AppendLine("/eliminar - Eliminar habilitaciones.");
+            builder.AppendLine("/agregar - Agregar habilitaciones.");
+            builder.AppendLine("/listar - Listar habilitaciones\n");
+            builder.Append("/volver - Volver al menu de emprendedor.");
             return builder.ToString();
         }
     }

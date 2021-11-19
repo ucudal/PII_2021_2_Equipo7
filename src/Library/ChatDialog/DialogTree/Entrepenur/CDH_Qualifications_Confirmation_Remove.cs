@@ -45,7 +45,7 @@ namespace ClassLibrary
             Qualification qual = this.DatMgr.Qualification.GetById(entreQual.QualificationId);
             StringBuilder builder = new StringBuilder();
             builder.AppendLine($"Esta seguro que desea eliminar la habilitacion <b>{qual.Name}</b>?\n");
-            builder.AppendLine("/confirmar - Confirmar eliminacion.");
+            builder.AppendLine("/confirmar - Confirmar eliminacion.\n");
             builder.AppendLine("/volver - Volver al menu de habilitaciones.");
             return builder.ToString();
         }

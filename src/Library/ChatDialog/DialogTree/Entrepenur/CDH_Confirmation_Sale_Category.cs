@@ -50,7 +50,7 @@ namespace ClassLibrary
             builder.AppendLine($"<b>Cantidad</b>: {pub.Quantity}");
             builder.AppendLine($"<b>Moneda</b>: {Enum.GetName(typeof(Currency), pub.Currency)}");
             builder.AppendLine($"<b>Precio</b>: {pub.Price}\n");
-            builder.AppendLine("/confirmar - Confirma compra.");
+            builder.AppendLine("/confirmar - Confirma compra.\n");
             builder.Append("/volver - Cancelar la compra.");
             return builder.ToString();
         }

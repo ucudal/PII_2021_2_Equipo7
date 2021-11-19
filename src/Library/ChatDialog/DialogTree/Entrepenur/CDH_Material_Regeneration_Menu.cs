@@ -22,7 +22,7 @@ namespace ClassLibrary
         : base(next, "Material_Regeneration_Menu")
         {
             this.Parents.Add("welcome_entrepreneur");
-            this.Route = "\\regeneracionmaterial";
+            this.Route = "/regeneracion";
         }
 
         /// <inheritdoc/>

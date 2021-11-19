@@ -70,7 +70,7 @@ namespace ClassLibrary
                     switch (message.UserStatus)
                     {
                         case UserStatus.Unregistered:
-                            message.Message = "/registration";
+                            message.Message = "/welcome";
                             break;
                         case UserStatus.Undefined:
                         case UserStatus.Suspended:
@@ -88,7 +88,7 @@ namespace ClassLibrary
                         switch (message.UserStatus)
                         {
                             case UserStatus.Unregistered:
-                                message.Message = "/registration";
+                                message.Message = "/welcome";
                                 break;
                             case UserStatus.Undefined:
                             case UserStatus.Suspended:
@@ -112,20 +112,23 @@ namespace ClassLibrary
 
             string response = chatEntry.Start(selector);
 
-            if (session.CurrentActivity?.ChainHandler ?? false)
-            {
-                message.Message = session.CurrentActivity.ChainHandlerRoute;
-                context = session.CurrentActivity.ChainHandlerContext;
-                selector = new ChatDialogSelector(message, context);
-
-                session.PopActivity();
-
-                response = chatEntry.Start(selector);
-            }
-
+            UserActivity activity;
             if (session.CurrentActivity?.IsTerminating ?? false)
             {
-                session.PopActivity();
+                activity = session.PopActivity();
+            }
+            else
+            {
+                activity = session.CurrentActivity;
+            }
+
+            if (activity?.ChainHandler ?? false)
+            {
+                message.Message = activity.ChainHandlerRoute;
+                context = activity.ChainHandlerContext;
+                selector = new ChatDialogSelector(message, context);
+
+                response = chatEntry.Start(selector);
             }
 
             return response;

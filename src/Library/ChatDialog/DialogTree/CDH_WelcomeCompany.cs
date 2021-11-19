@@ -50,7 +50,7 @@ namespace ClassLibrary
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             User user = this.DatMgr.User.GetById(session.UserId);
-            if (selector.Code == "/welcome" && user.Role == UserRole.CompanyAdministrator)
+            if (selector.Code == "/welcome" && user?.Role == UserRole.CompanyAdministrator)
             {
                 return true;
             }

@@ -42,18 +42,31 @@ namespace ClassLibrary
             {
                 IReadOnlyCollection<int> matCats = this.DatMgr.MaterialCategory.Items.OrderBy(matCat => matCat.Name).Select(matCat => matCat.Id).ToList().AsReadOnly();
                 SearchData search = new SearchData(matCats, this.Parents.First(), this.Route);
-                activity = new UserActivity("search_by_page_entre_pubs_cat", "welcome_entrepreneur", "/buscarpublicacion", search);
+                activity = new UserActivity("search_by_page_entre_pubs_cat", "welcome_entrepreneur", "/buscar", search);
                 session.PushActivity(activity);
             }
 
             activity = session.CurrentActivity;
+            SearchData data = activity.GetData<SearchData>();
 
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("<b>Busqueda por Categoria</b>\n");
             builder.AppendLine("Ingrese el numero de la categoria por la cual buscar.\n");
-            builder.AppendLine(this.TextToPrintMaterialCategory(activity.GetData<SearchData>()));
-            builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
-            builder.AppendLine("/pagina_anterior - Pagina anterior.");
+            if (data.SearchResults.Count > 0)
+            {
+                builder.AppendLine($"{this.TextToPrintMaterialCategory(data)}");
+            }
+            else
+            {
+                builder.AppendLine("(No se encontraron habilitaciones)\n");
+            }
+
+            if (data.PageItemCount < data.SearchResults.Count)
+            {
+                builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
+                builder.AppendLine("/pagina_anterior - Pagina anterior.\n");
+            }
+
             builder.Append("/volver - Volver al menu de busqueda.");
             return builder.ToString();
         }

@@ -42,20 +42,33 @@ namespace ClassLibrary
             {
                 IReadOnlyCollection<int> qualifications = this.DatMgr.Qualification.Items.Select(qual => qual.Id).ToList().AsReadOnly();
                 SearchData search = new SearchData(qualifications, this.Parents.First(), this.Route);
-                activity = new UserActivity("search_by_page_entre_qual_ins_1", null, null, search);
+                activity = new UserActivity("search_by_page_entre_qual_ins_1", "welcome_entrepreneur", "/habilitaciones", search);
                 session.PushActivity(activity);
             }
 
             activity = session.CurrentActivity;
+            SearchData data = activity.GetData<SearchData>();
 
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("<b>Agregar habilitacion</b>.\n");
             builder.Append("El siguiente listado contiene todas las habilitaciones que puede agregar. ");
-            builder.AppendLine("Escoja una para poder continuar.");
-            builder.AppendLine(this.TextoToPrintQualifications(activity.GetData<SearchData>()));
-            builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
-            builder.AppendLine("/pagina_anterior - Pagina anterior.");
-            builder.AppendLine("/volver - Volver al menu de habilitaciones.");
+            builder.AppendLine("Escoja una para poder continuar.\n");
+            if (data.SearchResults.Count > 0)
+            {
+                builder.AppendLine($"{this.TextoToPrintQualifications(data)}");
+            }
+            else
+            {
+                builder.AppendLine("(No se encontraron habilitaciones)\n");
+            }
+
+            if (data.PageItemCount < data.SearchResults.Count)
+            {
+                builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
+                builder.AppendLine("/pagina_anterior - Pagina anterior.\n");
+            }
+
+            builder.Append("/volver - Volver al menu de habilitaciones.");
             return builder.ToString();
         }
 

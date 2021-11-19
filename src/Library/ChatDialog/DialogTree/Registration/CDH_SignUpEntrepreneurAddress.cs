@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_SignUpEntrepreneurTrade.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDH_SignUpEntrepreneurAddress.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -15,17 +15,17 @@ namespace ClassLibrary
     /// empresa a agregar. Procede a pedirle al
     /// usuario introducir el oficio de la Empresa.
     /// </summary>
-    public class CDH_SignUpEntrepreneurTrade : ChatDialogHandlerBase
+    public class CDH_SignUpEntrepreneurAddress : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CDH_SignUpEntrepreneurTrade"/> class.
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpEntrepreneurTrade"/>.
+        /// Initializes a new instance of the <see cref="CDH_SignUpEntrepreneurAddress"/> class.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpEntrepreneurAddress"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpEntrepreneurTrade(ChatDialogHandlerBase next)
-            : base(next, "registration_new_entre_trade")
+        public CDH_SignUpEntrepreneurAddress(ChatDialogHandlerBase next)
+            : base(next, "registration_new_entre_addr")
         {
-            this.Parents.Add("registration_new_entre_name");
+            this.Parents.Add("registration_new_entre_trade");
             this.Route = null;
         }
 
@@ -37,19 +37,17 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            Entrepreneur entrepreneur = this.DatMgr.Entrepreneur.New();
-            entrepreneur.Name = selector.Code;
-
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity activity = session.CurrentActivity;
             SignUpDataEntrepreneurNew data = activity.GetData<SignUpDataEntrepreneurNew>();
 
-            data.Entrepreneur = entrepreneur;
+            Entrepreneur entrepreneur = data.Entrepreneur;
+            entrepreneur.Trade = selector.Code;
 
             session.CurrentActivity = activity;
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Ingrese el <b>oficio</b> de su emprendimiento.");
+            builder.Append("Ingrese la <b>direccion</b> de su emprendimiento.");
             return builder.ToString();
         }
 

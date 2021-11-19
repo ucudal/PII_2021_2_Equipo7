@@ -41,44 +41,83 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override bool RunTask()
         {
+            bool isOk = true;
+
+            int userId;
             User user = this.DatMgr.User.New();
             user.FirstName = this.User.FirstName;
             user.LastName = this.User.LastName;
             user.Role = UserRole.Entrepreneur;
-            int userId = this.DatMgr.User.Insert(user);
+            userId = this.DatMgr.User.Insert(user);
+            isOk = userId != 0;
 
-            if (userId == 0)
+            int accId = 0;
+            if (isOk)
             {
-                return false;
+                Account acc = this.DatMgr.Account.New();
+                acc.UserId = userId;
+                acc.Service = this.Service;
+                acc.CodeInService = this.Account;
+                accId = this.DatMgr.Account.Insert(acc);
+                isOk = accId != 0;
             }
 
-            Account acc = this.DatMgr.Account.New();
-            acc.UserId = userId;
-            acc.Service = this.Service;
-            acc.CodeInService = this.Account;
-            int accId = this.DatMgr.Account.Insert(acc);
-
-            if (accId == 0)
+            int entreId = 0;
+            if (isOk)
             {
-                return false;
+                Entrepreneur entre = this.DatMgr.Entrepreneur.New();
+                entre.Name = this.Entrepreneur.Name;
+                entre.Trade = this.Entrepreneur.Trade;
+                entre.GeoReference = this.Entrepreneur.GeoReference;
+                entre.UserId = userId;
+                entreId = this.DatMgr.Entrepreneur.Insert(entre);
+                isOk = entreId != 0;
             }
 
-            Entrepreneur entre = this.DatMgr.Entrepreneur.New();
-            entre.Name = this.Entrepreneur.Name;
-            entre.Trade = this.Entrepreneur.Trade;
-            entre.UserId = userId;
-            int entreId = this.DatMgr.Entrepreneur.Insert(entre);
-
-            if (entreId == 0)
+            if (isOk)
             {
-                return false;
+                Invitation invite = this.DatMgr.Invitation.GetByCode(this.InviteCode);
+                invite.Used = true;
+                isOk = this.DatMgr.Invitation.Update(invite);
             }
 
-            Invitation invite = this.DatMgr.Invitation.GetByCode(this.InviteCode);
-            invite.Used = true;
-            bool isOk = this.DatMgr.Invitation.Update(invite);
+            if (!isOk)
+            {
+                this.CancelTask(userId: userId, accId: accId, entreId: entreId);
+            }
 
             return isOk;
+        }
+
+        /// <summary>
+        /// Deshace los cambios realizados en caso de error
+        /// al correr la tarea del Data.
+        /// </summary>
+        /// <param name="userId">
+        /// Id del usuario.
+        /// </param>
+        /// <param name="accId">
+        /// Id de la cuenta.
+        /// </param>
+        /// <param name="entreId">
+        /// Id del emprendedor.
+        /// </param>
+        private void CancelTask(int userId = 0, int accId = 0, int entreId = 0)
+        {
+            if (userId != 0)
+            {
+                this.DatMgr.User.Delete(userId);
+            }
+
+            if (accId != 0)
+            {
+                this.DatMgr.Account.Delete(accId);
+            }
+
+            if (entreId != 0)
+            {
+                this.DatMgr.Entrepreneur.Delete(entreId);
+            }
         }
     }
 }

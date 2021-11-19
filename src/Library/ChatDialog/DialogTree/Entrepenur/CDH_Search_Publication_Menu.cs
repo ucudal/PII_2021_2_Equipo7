@@ -23,7 +23,7 @@ namespace ClassLibrary
         : base(next, "Search_Publication_Menu")
         {
             this.Parents.Add("welcome_entrepreneur");
-            this.Route = "/buscarpublicacion";
+            this.Route = "/buscar";
         }
 
         /// <inheritdoc/>
@@ -34,7 +34,7 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            UserActivity activity = new UserActivity("entrepreneur_publ_search_menu", null, null, null);
+            UserActivity activity = new UserActivity("entrepreneur_publ_search_menu", null, "/welcome", null);
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.PushActivity(activity);
@@ -42,9 +42,9 @@ namespace ClassLibrary
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("<b>Busqueda de publicaciones</b>\n");
             builder.AppendLine("Que tipo de busqueda desea realizar?\n");
-            builder.AppendLine("/palabraclave : Buscar publicación por palabra clave.");
+            builder.AppendLine("/palabraclave : Buscar por palabra clave.");
             builder.AppendLine("/localidad : Buscar por localidad.");
-            builder.AppendLine("/categoria : Buscar por categoria.");
+            builder.AppendLine("/categoria : Buscar por categoria.\n");
             builder.Append("/volver - Volver al menu de emprendedor.");
             return builder.ToString();
         }

@@ -103,6 +103,7 @@ namespace ClassLibrary
             this.Title = publication.Title;
             this.Description = publication.Description;
             this.CompanyLocationId = publication.CompanyLocationId;
+            this.Quantity = publication.Quantity;
         }
 
         /// <inheritdoc/>

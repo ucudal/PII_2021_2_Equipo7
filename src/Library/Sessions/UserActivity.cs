@@ -116,6 +116,17 @@ namespace ClassLibrary
         }
 
         /// <summary>
+        /// Devuelve el objeto con los datos especificos del proceso.
+        /// </summary>
+        /// <returns>
+        /// Contenedor de datos.
+        /// </returns>
+        public ActivityData GetData()
+        {
+            return this.data;
+        }
+
+        /// <summary>
         /// Configura el flag de terminar actividad.
         /// </summary>
         /// <param name="chainInitiator">

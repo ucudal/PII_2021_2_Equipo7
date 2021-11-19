@@ -65,9 +65,13 @@ namespace ClassLibrary
                 if (!selector.Code.StartsWith('/'))
                 {
                     Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-                    if (session.CurrentActivity.GetData<SignUpData>()?.Type == RegistrationType.CopmanyNew)
+                    if (typeof(SignUpData).IsAssignableFrom(session.CurrentActivity.TypeOfData))
                     {
-                        return true;
+                        SignUpData data = session.CurrentActivity.GetData() as SignUpData;
+                        if (data.Type == RegistrationType.CopmanyNew)
+                        {
+                            return true;
+                        }
                     }
                 }
             }

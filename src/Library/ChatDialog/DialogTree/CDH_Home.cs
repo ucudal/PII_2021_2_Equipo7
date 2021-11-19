@@ -38,7 +38,7 @@ namespace ClassLibrary
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.ClearActivitiesStack();
-            UserActivity activity = new UserActivity("go_home", null, null, null);
+            UserActivity activity = new UserActivity("go_home", null, "/welcome", null);
             activity.Terminate(chainInitiator: true);
             session.PushActivity(activity);
 

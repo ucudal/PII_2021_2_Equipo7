@@ -43,7 +43,7 @@ namespace ClassLibrary
 
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("Ingrese una url donde se pueda ubicar el documento que verifica la habilitacion.\n");
-            builder.AppendLine("[url] - Continuar.");
+            builder.AppendLine("[url] - Continuar.\n");
             builder.Append("/volver - Volver al menu de habilitaciones.");
             return builder.ToString();
         }

@@ -1,1 +1,299 @@
-﻿{"Invitation":[{"Id":1,"Code":"2021320-CN-00001","Type":2,"ValidAfter":"2021-09-16T09:00:26.3954501-03:00","ValidBefore":"2022-01-16T09:00:26.3962115-03:00","CompanyId":0,"Used":true,"Deleted":false},{"Id":2,"Code":"2021320-CN-00002","Type":2,"ValidAfter":"2021-09-16T09:02:29.6287247-03:00","ValidBefore":"2022-01-16T09:02:29.6296902-03:00","CompanyId":0,"Used":false,"Deleted":false}],"User":[{"Id":1,"FirstName":"Rodrigo","LastName":"Jauregui","Deleted":false,"Role":2,"Suspended":false}],"Company":[{"Name":"Google","Trade":"Web Services","Id":1,"Deleted":false}],"Account":[{"Id":1,"Deleted":false,"UserId":1,"Service":2,"CodeInService":"1554827100"}],"CompanyUser":[{"Id":1,"Deleted":false,"CompanyId":1,"AdminUserId":1}]}
+﻿{
+  "Qualification": [
+    {
+      "Id": 1,
+      "Name": "Armas de Fuego",
+      "Deleted": false
+    },
+    {
+      "Id": 2,
+      "Name": "Armas Blancas",
+      "Deleted": false
+    },
+    {
+      "Id": 3,
+      "Name": "Biologicos",
+      "Deleted": false
+    },
+    {
+      "Id": 4,
+      "Name": "Combustibles",
+      "Deleted": false
+    },
+    {
+      "Id": 5,
+      "Name": "Acidos",
+      "Deleted": false
+    },
+    {
+      "Id": 6,
+      "Name": "Solventes",
+      "Deleted": false
+    },
+    {
+      "Id": 7,
+      "Name": "Animales",
+      "Deleted": false
+    },
+    {
+      "Id": 8,
+      "Name": "Alimentos",
+      "Deleted": false
+    },
+    {
+      "Id": 9,
+      "Name": "Humanos",
+      "Deleted": false
+    },
+    {
+      "Id": 10,
+      "Name": "Nucleares",
+      "Deleted": false
+    }
+  ],
+  "MaterialCategory": [
+    {
+      "Id": 1,
+      "Name": "Madera",
+      "Deleted": false
+    },
+    {
+      "Id": 2,
+      "Name": "Plastico",
+      "Deleted": false
+    },
+    {
+      "Id": 3,
+      "Name": "Vidrio",
+      "Deleted": false
+    },
+    {
+      "Id": 4,
+      "Name": "Quimico",
+      "Deleted": false
+    },
+    {
+      "Id": 5,
+      "Name": "Metal",
+      "Deleted": false
+    },
+    {
+      "Id": 6,
+      "Name": "Biologico",
+      "Deleted": false
+    },
+    {
+      "Id": 7,
+      "Name": "Discos",
+      "Deleted": false
+    }
+  ],
+  "Company": [
+    {
+      "Name": "Dream Theater",
+      "Trade": "Musica",
+      "Id": 1,
+      "Deleted": false
+    }
+  ],
+  "Invitation": [
+    {
+      "Id": 1,
+      "Code": "2021323-CJ-00001",
+      "Type": 3,
+      "ValidAfter": "2021-09-19T16:45:54.2999413-03:00",
+      "ValidBefore": "2022-01-19T16:45:54.300644-03:00",
+      "CompanyId": 1,
+      "Used": false,
+      "Deleted": false
+    },
+    {
+      "Id": 2,
+      "Code": "2021323-CN-00002",
+      "Type": 2,
+      "ValidAfter": "2021-09-19T16:45:54.4642894-03:00",
+      "ValidBefore": "2022-01-19T16:45:54.4642918-03:00",
+      "CompanyId": 0,
+      "Used": false,
+      "Deleted": false
+    },
+    {
+      "Id": 3,
+      "Code": "2021323-EN-00003",
+      "Type": 1,
+      "ValidAfter": "2021-09-19T16:45:54.4890127-03:00",
+      "ValidBefore": "2022-01-19T16:45:54.4890133-03:00",
+      "CompanyId": 0,
+      "Used": true,
+      "Deleted": false
+    },
+    {
+      "Id": 4,
+      "Code": "2021323-SJ-00004",
+      "Type": 4,
+      "ValidAfter": "2021-09-19T16:45:54.5052816-03:00",
+      "ValidBefore": "2022-01-19T16:45:54.5052832-03:00",
+      "CompanyId": 0,
+      "Used": false,
+      "Deleted": false
+    },
+    {
+      "Id": 5,
+      "Code": "2021323-CJ-00005",
+      "Type": 3,
+      "ValidAfter": "2021-09-19T16:45:54.5209941-03:00",
+      "ValidBefore": "2022-01-19T16:45:54.5209948-03:00",
+      "CompanyId": 1,
+      "Used": false,
+      "Deleted": false
+    }
+  ],
+  "User": [
+    {
+      "Id": 1,
+      "FirstName": "John",
+      "LastName": "Petrucci",
+      "Deleted": false,
+      "Role": 2,
+      "Suspended": false
+    },
+    {
+      "Id": 2,
+      "FirstName": "Rodrigo",
+      "LastName": "Jauregui",
+      "Deleted": false,
+      "Role": 3,
+      "Suspended": false
+    }
+  ],
+  "Account": [
+    {
+      "Id": 1,
+      "Deleted": false,
+      "UserId": 1,
+      "Service": 1,
+      "CodeInService": "11121"
+    },
+    {
+      "Id": 2,
+      "Deleted": false,
+      "UserId": 2,
+      "Service": 2,
+      "CodeInService": "1554827100"
+    }
+  ],
+  "CompanyUser": [
+    {
+      "Id": 1,
+      "Deleted": false,
+      "CompanyId": 1,
+      "AdminUserId": 1
+    }
+  ],
+  "CompanyLocation": [
+    {
+      "Id": 1,
+      "Deleted": false,
+      "CompanyId": 1,
+      "GeoReference": "Paraguay 1312"
+    }
+  ],
+  "CompanyMaterial": [
+    {
+      "Id": 1,
+      "Name": "Images and Words",
+      "LastRestock": "2021-11-14T16:45:54.3905835-03:00",
+      "DateBetweenRestocks": 0,
+      "Deleted": false,
+      "MaterialCategoryId": 7,
+      "CompanyId": 1
+    },
+    {
+      "Id": 2,
+      "Name": "Systematic Chaos",
+      "LastRestock": "2021-11-14T16:45:54.4150364-03:00",
+      "DateBetweenRestocks": 0,
+      "Deleted": false,
+      "MaterialCategoryId": 7,
+      "CompanyId": 1
+    }
+  ],
+  "CompanyMaterialStock": [
+    {
+      "Id": 1,
+      "Deleted": false,
+      "CompanyMatId": 1,
+      "CompanyLocationId": 1,
+      "Stock": 15
+    },
+    {
+      "Id": 2,
+      "Deleted": false,
+      "CompanyMatId": 2,
+      "CompanyLocationId": 1,
+      "Stock": 19
+    }
+  ],
+  "Publication": [
+    {
+      "CompanyId": 1,
+      "CompanyMaterialId": 1,
+      "Id": 1,
+      "ActiveFrom": "2021-09-19T16:45:54.4340585-03:00",
+      "ActiveUntil": "2026-11-19T16:45:54.434083-03:00",
+      "Price": 21,
+      "Quantity": 1,
+      "Currency": 2,
+      "Deleted": false,
+      "CompanyLocationId": 1,
+      "Title": "Images and Words",
+      "Description": "Second studio album by American progressive metal band Dream Theater, released on July 7, 1992"
+    },
+    {
+      "CompanyId": 1,
+      "CompanyMaterialId": 2,
+      "Id": 2,
+      "ActiveFrom": "2021-09-19T16:45:54.4529446-03:00",
+      "ActiveUntil": "2026-11-19T16:45:54.4529463-03:00",
+      "Price": 16,
+      "Quantity": 1,
+      "Currency": 2,
+      "Deleted": false,
+      "CompanyLocationId": 1,
+      "Title": "Systematic Chaos",
+      "Description": "Ninth studio album by American progressive metal band Dream Theater. Released on June 4, 2007 in the United Kingdom and June 5, 2007 in the United States."
+    }
+  ],
+  "Entrepreneur": [
+    {
+      "GeoReference": "Coruña 3026",
+      "UserId": 2,
+      "Name": "SpaceX",
+      "Trade": "Spaaaaaace",
+      "Id": 1,
+      "Deleted": false
+    }
+  ],
+  "Sale": [
+    {
+      "ProductCompanyMaterialId": 2,
+      "ProductQuantity": 1,
+      "SellerCompanyId": 1,
+      "BuyerEntrepreneurId": 1,
+      "Id": 1,
+      "DateTime": "2021-11-19T16:53:25.2467733-03:00",
+      "Price": 16,
+      "Currency": 2,
+      "Deleted": false
+    }
+  ],
+  "EntrepreneurQualification": [
+    {
+      "Id": 1,
+      "Deleted": false,
+      "EntrepreneurId": 1,
+      "QualificationId": 3,
+      "DocumentUri": "http://hephaestus.archimedes.tools/file.pdf"
+    }
+  ]
+}

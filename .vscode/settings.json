@@ -6,6 +6,7 @@
         "Doxify",
         "inicializador",
         "manejador",
+        "Petrucci",
         "serializacion"
     ],
     "omnisharp.enableRoslynAnalyzers": true

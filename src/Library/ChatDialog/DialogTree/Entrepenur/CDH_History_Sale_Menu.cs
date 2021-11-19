@@ -25,7 +25,7 @@ namespace ClassLibrary
         : base(next, "History_Sale_Menu")
         {
             this.Parents.Add("welcome_entrepreneur");
-            this.Route = "/historialcompras";
+            this.Route = "/compras";
         }
 
         /// <inheritdoc/>
@@ -38,22 +38,35 @@ namespace ClassLibrary
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity activity;
-            if (session.CurrentActivity.Code != "search_by_page_entre_purchases_view")
+            if (session.CurrentActivity?.Code != "search_by_page_entre_purchases_view")
             {
                 IReadOnlyCollection<int> sales = this.DatMgr.Sale.GetSalesByBuyer(session.EntityId);
                 SearchData search = new SearchData(sales, this.Parents.First(), this.Route);
-                activity = new UserActivity("search_by_page_entre_purchases_view", null, null, search);
+                activity = new UserActivity("search_by_page_entre_purchases_view", null, "/welcome", search);
                 session.PushActivity(activity);
             }
 
             activity = session.CurrentActivity;
+            SearchData data = activity.GetData<SearchData>();
 
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("<b>Lista de compras</b>\n");
             builder.AppendLine("Ingrese el numero de la compra para ver detalles.\n");
-            builder.AppendLine(this.TextAllPublicationsBought(activity.GetData<SearchData>()));
-            builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
-            builder.AppendLine("/pagina_anterior - Pagina anterior.");
+            if (data.SearchResults.Count > 0)
+            {
+                builder.AppendLine($"{this.TextAllPublicationsBought(data)}");
+            }
+            else
+            {
+                builder.AppendLine("(No se encontraron compras)\n");
+            }
+
+            if (data.PageItemCount < data.SearchResults.Count)
+            {
+                builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
+                builder.AppendLine("/pagina_anterior - Pagina anterior.\n");
+            }
+
             builder.Append("/volver - Volver al menu de inicio.");
             return builder.ToString();
         }

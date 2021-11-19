@@ -34,7 +34,7 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            UserActivity activity = new UserActivity("entrepreneur_publ_search_location", "welcome_entrepreneur", "/buscarpublicacion", null);
+            UserActivity activity = new UserActivity("entrepreneur_publ_search_location", "welcome_entrepreneur", "/buscar", null);
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.PushActivity(activity);
@@ -42,7 +42,7 @@ namespace ClassLibrary
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("<b>Busqueda por Localidad</b>\n");
             builder.AppendLine("Ingrese una direccion por la cual buscar.\n");
-            builder.AppendLine("[localidad] - Direccion a buscar.");
+            builder.AppendLine("[localidad] - Direccion a buscar.\n");
             builder.Append("/volver - Volver al menu de busqueda.");
             return builder.ToString();
         }

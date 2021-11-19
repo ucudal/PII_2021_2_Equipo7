@@ -38,7 +38,7 @@ namespace ClassLibrary
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity activity = session.CurrentActivity;
-            SignUpData data = activity.GetData<SignUpData>();
+            SignUpData data = activity.GetData() as SignUpData;
 
             User user = this.DatMgr.User.New();
             user.FirstName = selector.Code.Trim();

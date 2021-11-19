@@ -60,13 +60,26 @@ namespace ClassLibrary
             }
 
             activity = session.CurrentActivity;
+            SearchData data = activity.GetData<SearchData>();
 
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("<b>Resultados por Localidad</b>\n");
             builder.AppendLine($"Ingrese un id para ver detalles y/o realizar una compra.\n");
-            builder.AppendLine(this.TextToPrintPublicationMaterialLocation(activity.GetData<SearchData>()));
-            builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
-            builder.AppendLine("/pagina_anterior - Pagina anterior.");
+            if (data.SearchResults.Count > 0)
+            {
+                builder.AppendLine($"{this.TextToPrintPublicationMaterialLocation(data)}");
+            }
+            else
+            {
+                builder.AppendLine("(No se encontraron publicaciones)\n");
+            }
+
+            if (data.PageItemCount < data.SearchResults.Count)
+            {
+                builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
+                builder.AppendLine("/pagina_anterior - Pagina anterior.\n");
+            }
+
             builder.Append("/volver - Volver al menu de busqueda.");
             return builder.ToString();
         }
