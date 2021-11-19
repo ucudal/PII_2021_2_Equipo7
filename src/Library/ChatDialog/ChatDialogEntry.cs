@@ -145,7 +145,6 @@ namespace ClassLibrary
             ChatDialogHandlerBase handler118 = new CDH_SignUpVerifySysAdminNew(handler117);
             ChatDialogHandlerBase handler119 = new CDH_SignUpEntrepreneurAddress(handler118);
 
-
             this.firstHandler = handler119;
         }
 
