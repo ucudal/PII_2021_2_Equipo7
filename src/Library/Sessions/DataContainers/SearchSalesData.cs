@@ -5,7 +5,7 @@ namespace ClassLibrary
     /// del proceso de registro
     /// para un usuario
     /// </summary>
-    public class SearchSalesData
+    public class SearchSalesData : ActivityData
     {
         private Sale sale;
         

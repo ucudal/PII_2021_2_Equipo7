@@ -23,7 +23,7 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
+            UserActivity process = session.CurrentActivity;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
             Qualification habilitaciones = this.DatMgr.Qualification.GetById(int.Parse(selector.Code));
             data.Qualification=habilitaciones;
@@ -42,7 +42,7 @@ namespace ClassLibrary
         {
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
                     Qualification qualification = this.DatMgr.Qualification.GetById(int.Parse(selector.Code));
                     if (qualification is not null)

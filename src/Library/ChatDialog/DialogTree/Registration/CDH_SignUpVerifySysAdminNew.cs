@@ -38,11 +38,15 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
+            SignUpDataCompanyJoin data = new SignUpDataCompanyJoin(selector.Account, selector.Service)
+            {
+                Type = RegistrationType.SystemAdminJoin,
+                InviteCode = selector.Code,
+            };
+            UserActivity activity = new UserActivity("registration", null, "/registration", data);
+
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
-            SignUpData data = process.GetData<SignUpData>();
-            data.Type = RegistrationType.SystemAdminJoin;
-            data.InviteCode = selector.Code;
+            session.PushActivity(activity);
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Su codigo de invitacion le permite ingresar como un administrador de la plataforma.\n\n");
@@ -61,7 +65,7 @@ namespace ClassLibrary
 
             if (this.Parents.Contains(selector.Context))
             {
-                 if (!selector.Code.StartsWith('\\'))
+                 if (!selector.Code.StartsWith('/'))
                 {
                     Invitation invite = this.DatMgr.Invitation.GetByCode(selector.Code);
                     if (invite is not null)

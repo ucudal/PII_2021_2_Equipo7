@@ -24,7 +24,8 @@ namespace ClassLibrary
         {
             SelectCompanyMaterialData data = new SelectCompanyMaterialData();
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = new DProcessData("select_companymaterial",this.Code,data);
+            UserActivity process = new UserActivity("select_companymaterial", null, this.Code, data);
+
             data.CompanyMaterial=this.DatMgr.CompanyMaterial.GetById(int.Parse(selector.Code));
             
             StringBuilder builder = new StringBuilder();
@@ -41,7 +42,7 @@ namespace ClassLibrary
         {
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
                     CompanyMaterial companyMaterial = this.DatMgr.CompanyMaterial.GetById(int.Parse(selector.Code));
                     if (companyMaterial is not null)

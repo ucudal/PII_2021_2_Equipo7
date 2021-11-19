@@ -24,7 +24,7 @@ namespace ClassLibrary
         {
             StringBuilder builder = new StringBuilder();
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
+            UserActivity process = session.CurrentActivity;
             SelectCompanyMaterialQualificationData data = process.GetData<SelectCompanyMaterialQualificationData>();
             data.CompanyMaterialQualification=this.DatMgr.CompanyMaterialQualification.GetById(int.Parse(selector.Code));
 
@@ -39,7 +39,7 @@ namespace ClassLibrary
         {
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
                     Qualification qualification = this.DatMgr.Qualification.GetById(int.Parse(selector.Code));
                     if (qualification is not null)

@@ -4,6 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System;
 using System.Text;
 
 namespace ClassLibrary
@@ -22,20 +23,29 @@ namespace ClassLibrary
         : base(next, "Search_Publication_Menu")
         {
             this.Parents.Add("welcome_entrepreneur");
-            this.Route = "\\buscarpublicacion";
+            this.Route = "/buscarpublicacion";
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            StringBuilder builder = new StringBuilder();
-            builder.Append("Menu para buscar una publicación\n");
-            builder.Append("Desde este menu puede realizar las\n");
-            builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\palabraclave : Buscar publicación por palabra clave.\n");
-            builder.Append("\\localidad : Buscar por localidad.\n");
-            builder.Append("\\cartegoria : Buscar por categoria.\n");
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
 
+            UserActivity activity = new UserActivity("entrepreneur_publ_search_menu", null, null, null);
+
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            session.PushActivity(activity);
+
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("<b>Busqueda de publicaciones</b>\n");
+            builder.AppendLine("Que tipo de busqueda desea realizar?\n");
+            builder.AppendLine("/palabraclave : Buscar publicación por palabra clave.");
+            builder.AppendLine("/localidad : Buscar por localidad.");
+            builder.AppendLine("/categoria : Buscar por categoria.");
+            builder.Append("/volver - Volver al menu de emprendedor.");
             return builder.ToString();
         }
     }

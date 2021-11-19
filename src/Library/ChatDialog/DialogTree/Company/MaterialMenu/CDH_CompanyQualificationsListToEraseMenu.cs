@@ -40,7 +40,7 @@ namespace ClassLibrary
         {
             StringBuilder builder = new StringBuilder();
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
+            UserActivity process = session.CurrentActivity;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
             IReadOnlyCollection<int> xHabilitacionesAgregadas=this.DatMgr.CompanyMaterialQualification.GetQualificationsForCompanyMaterial(data.CompanyMaterial.Id);
             foreach(int i in xHabilitacionesAgregadas)

@@ -37,12 +37,14 @@ namespace ClassLibrary
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
-            SignUpData data = process.GetData<SignUpData>();
+            UserActivity activity = session.CurrentActivity;
+            SignUpData data = activity.GetData<SignUpData>();
 
             User user = this.DatMgr.User.New();
             user.FirstName = selector.Code.Trim();
             data.User = user;
+
+            session.CurrentActivity = activity;
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese su <b>primer apellido</b>");
@@ -59,7 +61,7 @@ namespace ClassLibrary
 
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
                     return true;
                 }

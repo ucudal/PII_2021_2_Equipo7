@@ -29,14 +29,21 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            User user = this.DatMgr.User.GetById(session.UserId);
+
             StringBuilder builder = new StringBuilder();
-            builder.Append("Usted es un emprendedor.\n");
-            builder.Append("Desde este menu puede realizar las\n");
-            builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\buscarpublicacion : Buscar publicaciones.\n");
-            builder.Append("\\regeneracionmaterial : Muestra la regeneración del material.\n");
-            builder.Append("\\historialcompras: Mostrar historial de compra.");
-            builder.Append("\\habilitaciones: Menú de habilitaciones.");
+            builder.AppendLine($"<b>Bienvenido a PieTech {user.FirstName} {user.LastName}!</b>\n");
+            builder.AppendLine("Como emprendedor usted puede realizar las siguientes acciones:\n");
+            builder.Append("/buscarpublicacion - Buscar publicaciones.\n");
+            builder.Append("/regeneracionmaterial - Muestra la regeneración del material.\n");
+            builder.Append("/historialcompras - Mostrar historial de compra.");
+            builder.Append("/habilitaciones - Menú de habilitaciones.");
             return builder.ToString();
         }
 

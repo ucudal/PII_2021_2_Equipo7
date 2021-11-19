@@ -55,8 +55,7 @@ namespace ClassLibrary
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            session.MenuLocation = null;
-            session.Process = null;
+            session.CurrentActivity.Terminate();
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Ha cancelado el proceso de registro. Gracias por visitar.");

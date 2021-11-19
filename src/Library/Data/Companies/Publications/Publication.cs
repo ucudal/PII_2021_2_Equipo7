@@ -17,6 +17,16 @@ namespace ClassLibrary
     public class Publication : IManagableData<Publication>
     {
         /// <summary>
+        /// Constructor vacio para PublicationAdmin.
+        /// </summary>
+        [JsonConstructor]
+        public Publication()
+        {
+            this.Id = 0;
+            this.Deleted = false;
+        }
+
+        /// <summary>
         /// Publication tiene una property de Company.
         /// </summary>
         /// <value>.</value>
@@ -66,17 +76,17 @@ namespace ClassLibrary
         /// <summary>
         ///  Location sirve para saber donde se encuentran los materiales de la publicacion.
         /// </summary>
-        public CompanyLocation Location { get; set; }
+        public int CompanyLocationId { get; set; }
 
         /// <summary>
-        /// Constructor vacio para PublicationAdmin.
+        /// Titulo de la publicacion.
         /// </summary>
-        [JsonConstructor]
-        public Publication()
-        {
-            this.Id = 0;
-            this.Deleted = false;
-        }
+        public string Title { get; set; }
+
+        /// <summary>
+        /// Descripcion de la publicacion.
+        /// </summary>
+        public string Description { get; set; }
 
         /// <inheritdoc/>
         public void LoadFromJson(string json)
@@ -90,6 +100,9 @@ namespace ClassLibrary
             this.Price = publication.Price;
             this.CompanyId = publication.CompanyId;
             this.CompanyMaterialId = publication.CompanyMaterialId;
+            this.Title = publication.Title;
+            this.Description = publication.Description;
+            this.CompanyLocationId = publication.CompanyLocationId;
         }
 
         /// <inheritdoc/>

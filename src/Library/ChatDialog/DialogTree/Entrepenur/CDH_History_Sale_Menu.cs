@@ -5,6 +5,8 @@
 // -----------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ClassLibrary
@@ -23,43 +25,55 @@ namespace ClassLibrary
         : base(next, "History_Sale_Menu")
         {
             this.Parents.Add("welcome_entrepreneur");
-            this.Route = "\\historialcompras";
+            this.Route = "/historialcompras";
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            StringBuilder builder = new StringBuilder();
             if (selector is null)
             {
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            builder.Append($"Listado de compras hechas \n");
-            builder.Append("Ademas puede realizar las\n");
-            builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\siguiente : Siguiente pagina de publicaciones.\n");
-            builder.Append("\\anterior: Pagina anterior de publicaciones.\n");
-            builder.Append("\\cancelar : Volver a menu de buscar publicacion por localidad.\n");
-            builder.Append(this.TextAllPublicationsBougth(selector));
-            builder.Append("LISTADO DE Compras");
-            builder.Append("Ingrese el id de la compra para ver mas detalles.\n");
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            UserActivity activity;
+            if (session.CurrentActivity.Code != "search_by_page_entre_purchases_view")
+            {
+                IReadOnlyCollection<int> sales = this.DatMgr.Sale.GetSalesByBuyer(session.EntityId);
+                SearchData search = new SearchData(sales, this.Parents.First(), this.Route);
+                activity = new UserActivity("search_by_page_entre_purchases_view", null, null, search);
+                session.PushActivity(activity);
+            }
+
+            activity = session.CurrentActivity;
+
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("<b>Lista de compras</b>\n");
+            builder.AppendLine("Ingrese el numero de la compra para ver detalles.\n");
+            builder.AppendLine(this.TextAllPublicationsBought(activity.GetData<SearchData>()));
+            builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
+            builder.AppendLine("/pagina_anterior - Pagina anterior.");
+            builder.Append("/volver - Volver al menu de inicio.");
             return builder.ToString();
         }
 
-        private string TextAllPublicationsBougth(ChatDialogSelector selector)
+        private string TextAllPublicationsBought(SearchData search)
         {
-            StringBuilder listaCompras = new StringBuilder();
-            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            foreach (Sale xSale in this.DatMgr.Sale.Items)
+            if (search is null)
             {
-                if (xSale.BuyerEntrepreneurId == session.UserId)
-                {
-                    listaCompras.Append($" Identificador de la compra - {xSale.Id}, nombre del material - {this.DatMgr.CompanyMaterial.GetById(xSale.ProductCompanyMaterialId).Name}\n");
-                }
+                throw new ArgumentNullException(paramName: nameof(search));
             }
 
-            return listaCompras.ToString();
+            StringBuilder builder = new StringBuilder();
+            foreach (int saleId in search.PageItems)
+            {
+                Sale sale = this.DatMgr.Sale.GetById(saleId);
+                CompanyMaterial compMat = this.DatMgr.CompanyMaterial.GetById(sale.ProductCompanyMaterialId);
+                builder.AppendLine($"{sale.Id} - {compMat.Name}");
+            }
+
+            return builder.ToString();
         }
     }
 }

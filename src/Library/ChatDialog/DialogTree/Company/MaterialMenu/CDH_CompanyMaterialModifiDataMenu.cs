@@ -33,7 +33,7 @@ namespace ClassLibrary
         private void MaterialModifi(ChatDialogSelector selector)
         {
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
+            UserActivity process = session.CurrentActivity;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
 
             CompanyMaterial companyMaterial=data.CompanyMaterial;

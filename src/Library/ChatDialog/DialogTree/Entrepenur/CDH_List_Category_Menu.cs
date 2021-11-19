@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace ClassLibrary
@@ -31,44 +32,76 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            StringBuilder builder = new StringBuilder();
             if (selector is null)
             {
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            SearchPublication data = new SearchPublication();
-            DProcessData process = new DProcessData("search_Publication_By_Category", this.Code, data);
+            UserActivity activity;
+            if (session.CurrentActivity.Code != "search_by_page_entre_pubs_cat_results")
+            {
+                int id = int.Parse(selector.Code, NumberStyles.Integer, CultureInfo.InvariantCulture);
+                IReadOnlyCollection<int> compMats = this.DatMgr.CompanyMaterial.GetCompanyMaterialsForCategory(id);
+                IReadOnlyCollection<int> publ = this.DatMgr.Publication.Items.Where(pub => compMats.Contains(pub.CompanyMaterialId)).Select(pub => pub.Id).ToList().AsReadOnly();
+                SearchData search = new SearchData(publ, this.Parents.First(), this.Route);
+                activity = new UserActivity("search_by_page_entre_pubs_cat_results", "Search_Publication_Menu", "/categoria", search);
+                session.PushActivity(activity);
+            }
 
-            builder.Append($"Listado de publicaciones con el id de categoria ingresada - {selector.Code} \n");
-            builder.Append("Ademas puede realizar las\n");
-            builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\siguiente : Siguiente pagina de publicaciones.\n");
-            builder.Append("\\anterior: Pagina anterior de publicaciones.\n");
-            builder.Append("\\cancelar : Volver a menu de buscar publicacion por localidad.\n");
-            builder.Append(this.TextToPrintPublicationMaterialCategory(selector));
-            builder.Append("LISTADO DE PUBLICACIONES");
-            builder.Append("Ingrese el id de la publicación para comprar.\n");
+            activity = session.CurrentActivity;
+
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("<b>Resultados por Categoria</b>\n");
+            builder.AppendLine($"Ingrese un id para ver detalles y/o realizar una compra.\n");
+            builder.AppendLine(this.TextToPrintPublicationMaterialCategory(activity.GetData<SearchData>()));
+            builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
+            builder.AppendLine("/pagina_anterior - Pagina anterior.");
+            builder.Append("/volver - Volver al menu de busqueda.");
             return builder.ToString();
         }
 
-        private string TextToPrintPublicationMaterialCategory(ChatDialogSelector selector)
+        /// <inheritdoc/>
+        public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
-            StringBuilder listpublicaciones = new StringBuilder();
-
-            IReadOnlyCollection<int> xListaMaterialesEnCat = this.DatMgr.CompanyMaterial.GetCompanyMaterialsForCategory(int.Parse(selector.Code, CultureInfo.InvariantCulture));
-            foreach (int i in xListaMaterialesEnCat)
+            if (selector is null)
             {
-               IReadOnlyCollection<int> xPublicationsPerMat = this.DatMgr.Publication.GetPublicationsWithCompanyMaterial(i);
-               foreach (int j in xPublicationsPerMat)
-               {
-                   Publication xPubli = this.DatMgr.Publication.GetById(j);
-                   listpublicaciones.Append(" Identificador de la publicacion - " + xPubli.Id + "nombre del material - " + this.DatMgr.CompanyMaterial.GetById(i).Name + " \n");
-               }
+                throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            return listpublicaciones.ToString();
+            if (this.Parents.Contains(selector.Context))
+            {
+                if (!selector.Code.StartsWith('/'))
+                {
+                    if (int.TryParse(selector.Code, NumberStyles.Integer, CultureInfo.InvariantCulture, out int id))
+                    {
+                        MaterialCategory matCat = this.DatMgr.MaterialCategory.GetById(id);
+                        if (matCat is not null)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private string TextToPrintPublicationMaterialCategory(SearchData search)
+        {
+            if (search is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(search));
+            }
+
+            StringBuilder builder = new StringBuilder();
+            foreach (int pubId in search.PageItems)
+            {
+                Publication pub = this.DatMgr.Publication.GetById(pubId);
+                builder.AppendLine($"{pub.Id} - {pub.Title}");
+            }
+
+            return builder.ToString();
         }
     }
 }

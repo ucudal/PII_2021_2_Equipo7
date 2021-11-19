@@ -24,9 +24,9 @@ namespace ClassLibrary
         {
             InsertInvitationData data = new InsertInvitationData();
             data.Invitation.Type= RegistrationType.EntrepreneurNew;
-            DProcessData process = new DProcessData("entrepreneur_invite", this.Code, data);
+            UserActivity process = new UserActivity("entrepreneur_invite", null, this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            session.Process = process;
+            session.CurrentActivity = process;
 
             StringBuilder builder = new StringBuilder();
 

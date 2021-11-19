@@ -25,9 +25,9 @@ namespace ClassLibrary
             MaterialCategory matCat = this.DatMgr.MaterialCategory.GetById(int.Parse(selector.Code));
             InsertCompanyMaterialData data = new InsertCompanyMaterialData();
             data.MaterialCategory=matCat;
-            DProcessData process = new DProcessData("add_Material", this.Code, data);
+            UserActivity process = new UserActivity("add_Material", null, this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            session.Process = process;
+            session.CurrentActivity = process;
             
 
 
@@ -41,7 +41,7 @@ namespace ClassLibrary
         {
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
                     MaterialCategory matCat = this.DatMgr.MaterialCategory.GetById(int.Parse(selector.Code));
                     if (matCat is not null)

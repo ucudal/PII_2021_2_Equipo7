@@ -39,29 +39,12 @@ namespace ClassLibrary
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            SignUpData data = session.Process.GetData<SignUpData>();
+            UserActivity activity = session.CurrentActivity;
+            ActivityData data = activity.GetData<SignUpDataSysAdminJoin>();
 
-            User user = this.DatMgr.User.New();
-            user.FirstName = data.User.FirstName;
-            user.LastName = data.User.LastName;
-            user.Role = UserRole.SystemAdministrator;
-            int userId = this.DatMgr.User.Insert(user);
+            data.RunTask();
 
-            if (userId != 0)
-            {
-                Account acc = this.DatMgr.Account.New();
-                acc.UserId = userId;
-                acc.Service = selector.Service;
-                acc.CodeInService = selector.Account;
-                this.DatMgr.Account.Insert(acc);
-
-                Invitation invite = this.DatMgr.Invitation.GetByCode(data.InviteCode);
-                invite.Used = true;
-                this.DatMgr.Invitation.Update(invite);
-            }
-
-            session.MenuLocation = null;
-            session.Process = null;
+            session.CurrentActivity.Terminate(chainInitiator: true);
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Gracias registrarse en nuestra plataforma.\n\n");

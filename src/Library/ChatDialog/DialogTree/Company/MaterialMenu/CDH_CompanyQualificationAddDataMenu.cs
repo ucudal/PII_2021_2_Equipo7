@@ -33,7 +33,7 @@ namespace ClassLibrary
         private void AddQualificationToMaterial(ChatDialogSelector selector)
         {
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
+            UserActivity process = session.CurrentActivity;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
             CompanyMaterialQualification xHabiMat=this.DatMgr.CompanyMaterialQualification.New();
             xHabiMat.QualificationId=data.Qualification.Id;

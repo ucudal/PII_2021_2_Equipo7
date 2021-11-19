@@ -24,9 +24,9 @@ namespace ClassLibrary
         {
             InsertQualificationData data = new InsertQualificationData();
             data.Qualification.Name=selector.Code;
-            DProcessData process = new DProcessData("add_Qualification", this.Code, data);
+            UserActivity process = new UserActivity("add_Qualification", null, this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            session.Process = process;
+            session.CurrentActivity = process;
             StringBuilder builder = new StringBuilder();
 
             builder.Append("Desea agregar la habilitacion.\n");

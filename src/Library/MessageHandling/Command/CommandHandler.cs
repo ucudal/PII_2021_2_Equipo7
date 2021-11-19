@@ -110,7 +110,25 @@ namespace ClassLibrary
 
             ChatDialogSelector selector = new ChatDialogSelector(message, context);
 
-            return chatEntry.Start(selector);
+            string response = chatEntry.Start(selector);
+
+            if (session.CurrentActivity?.ChainHandler ?? false)
+            {
+                message.Message = session.CurrentActivity.ChainHandlerRoute;
+                context = session.CurrentActivity.ChainHandlerContext;
+                selector = new ChatDialogSelector(message, context);
+
+                session.PopActivity();
+
+                response = chatEntry.Start(selector);
+            }
+
+            if (session.CurrentActivity?.IsTerminating ?? false)
+            {
+                session.PopActivity();
+            }
+
+            return response;
         }
     }
 }

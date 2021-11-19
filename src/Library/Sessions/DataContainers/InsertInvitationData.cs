@@ -5,7 +5,7 @@ namespace ClassLibrary
     /// del proceso de registro
     /// para un usuario
     /// </summary>
-    public class InsertInvitationData
+    public class InsertInvitationData : ActivityData
     {
        private Invitation invitation;
        private RegistrationType registrationtype;

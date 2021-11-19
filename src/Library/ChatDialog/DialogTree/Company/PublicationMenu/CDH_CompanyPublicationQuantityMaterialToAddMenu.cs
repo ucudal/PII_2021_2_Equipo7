@@ -25,9 +25,9 @@ namespace ClassLibrary
             InsertPublicationData data = new InsertPublicationData();
             CompanyMaterial xMat=this.DatMgr.CompanyMaterial.GetById(int.Parse(selector.Code));            
             data.Publication.CompanyMaterialId=xMat.CompanyId;
-            DProcessData process = new DProcessData("add_material_to_publication", this.Code, data);
+            UserActivity process = new UserActivity("add_material_to_publication", null, this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            session.Process = process;
+            session.CurrentActivity = process;
             data.Publication.CompanyId=this.DatMgr.CompanyUser.GetCompanyForUser(session.UserId);
 
             
@@ -43,7 +43,7 @@ namespace ClassLibrary
         {
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
                     CompanyMaterial xMat = this.DatMgr.CompanyMaterial.GetById(int.Parse(selector.Code));
                     if (xMat is not null)

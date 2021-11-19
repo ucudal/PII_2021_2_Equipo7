@@ -3,7 +3,7 @@ namespace ClassLibrary
     /// <summary>
     /// 
     /// </summary>
-    public class ListData
+    public class ListData : ActivityData
     {
 
     }

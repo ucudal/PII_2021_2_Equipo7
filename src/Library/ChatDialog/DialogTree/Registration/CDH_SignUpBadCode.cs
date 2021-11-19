@@ -39,9 +39,12 @@ namespace ClassLibrary
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
-            SignUpData data = process.GetData<SignUpData>();
+            UserActivity activity = session.CurrentActivity;
+            SignUpData data = activity.GetData<SignUpData>();
+
             data.Type = RegistrationType.CompanyJoin;
+
+            session.CurrentActivity = activity;
             session.MenuLocation = "registration_invite";
 
             StringBuilder builder = new StringBuilder();
@@ -60,7 +63,7 @@ namespace ClassLibrary
 
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
                     Invitation invite = this.DatMgr.Invitation.GetByCode(selector.Code);
                     if (invite is null)

@@ -5,7 +5,7 @@ namespace ClassLibrary
     /// del proceso de registro
     /// para un usuario
     /// </summary>
-    public class InsertPublicationData
+    public class InsertPublicationData : ActivityData
     {
         private CompanyMaterial companyMaterial;
         private Publication publication;

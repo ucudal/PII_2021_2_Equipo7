@@ -24,7 +24,7 @@ namespace ClassLibrary
         {
             InsertPublicationData data = new InsertPublicationData();
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = new DProcessData("select_publication",this.Code,data);
+            UserActivity process = new UserActivity("select_publication", null, this.Code,data);
             data.Publication=this.DatMgr.Publication.GetById(int.Parse(selector.Code));
     
             StringBuilder builder = new StringBuilder();
@@ -40,7 +40,7 @@ namespace ClassLibrary
         {
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
                     Publication publication = this.DatMgr.Publication.GetById(int.Parse(selector.Code));
                     if (publication is not null)

@@ -40,10 +40,13 @@ namespace ClassLibrary
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
-            SignUpData data = process.GetData<SignUpData>();
+            UserActivity activity = session.CurrentActivity;
+            SignUpDataSysAdminJoin data = activity.GetData<SignUpDataSysAdminJoin>();
+
             User user = data.User;
             user.LastName = selector.Code.Trim();
+
+            session.CurrentActivity = activity;
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Antes de completar el proceso de registro, por favor verifique los datos ingresados.\n\n");
@@ -64,10 +67,10 @@ namespace ClassLibrary
 
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
                     Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-                    if (session.Process.GetData<SignUpData>()?.Type == RegistrationType.SystemAdminJoin)
+                    if (session.CurrentActivity.GetData<SignUpData>()?.Type == RegistrationType.SystemAdminJoin)
                     {
                         return true;
                     }

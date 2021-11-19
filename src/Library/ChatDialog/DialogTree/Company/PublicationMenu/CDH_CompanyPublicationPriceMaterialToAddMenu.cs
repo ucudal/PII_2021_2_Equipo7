@@ -24,7 +24,7 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
+            UserActivity process = session.CurrentActivity;
             InsertPublicationData data = process.GetData<InsertPublicationData>();
             data.Publication.Quantity=int.Parse(selector.Code);
             
@@ -40,7 +40,7 @@ namespace ClassLibrary
             bool xretorno=false;
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
     
                     xretorno=true;

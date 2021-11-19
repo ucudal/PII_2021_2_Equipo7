@@ -5,7 +5,7 @@ namespace ClassLibrary
     /// del proceso de registro
     /// para un usuario
     /// </summary>
-    public class InsertQualificationData
+    public class InsertQualificationData : ActivityData
     {
        private Qualification qualification;
        

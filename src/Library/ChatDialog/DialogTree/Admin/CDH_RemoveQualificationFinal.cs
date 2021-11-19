@@ -41,7 +41,7 @@ namespace ClassLibrary
         {
             bool xretorno=false;
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
+            UserActivity process = session.CurrentActivity;
             InsertQualificationData data = process.GetData<InsertQualificationData>();
             Qualification qualification=data.Qualification;
             if(IsNotAllReadyToDelete(data)==false)

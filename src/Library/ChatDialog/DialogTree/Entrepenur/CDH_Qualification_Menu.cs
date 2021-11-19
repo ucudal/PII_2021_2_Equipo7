@@ -29,19 +29,22 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            StringBuilder builder = new StringBuilder();
             if (selector is null)
             {
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            builder.Append("Menu de habilitaciones.\n");
-            builder.Append("Desde este menu puede realizar las\n");
-            builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\eliminar : Listar todas las habilitaciones para eliminar una de ellas.\n");
-            builder.Append("\\agregar : Agregar una habilitacion\n");
-            builder.Append("\\listar : Listar las habilitaciones\n");
-            builder.Append("\\volver : Volver al menu de emprendedor .\n");
+            UserActivity activity = new UserActivity("entrepreneur_qualifications_menu", null, null, null);
+
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            session.PushActivity(activity);
+
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("<b>Menu de habilitaciones</b>.\n");
+            builder.Append("/eliminar - Listar todas las habilitaciones para eliminar una de ellas.\n");
+            builder.Append("/agregar - Agregar una habilitacion\n");
+            builder.Append("/listar - Listar las habilitaciones\n");
+            builder.Append("/volver - Volver al menu de emprendedor .\n");
             return builder.ToString();
         }
     }

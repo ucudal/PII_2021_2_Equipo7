@@ -24,7 +24,7 @@ namespace ClassLibrary
         public override string Execute(ChatDialogSelector selector)
         {
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            SelectCompanyMaterialData data = session.Process.GetData<SelectCompanyMaterialData>();
+            SelectCompanyMaterialData data = session.CurrentActivity.GetData<SelectCompanyMaterialData>();
             
 
             StringBuilder builder = new StringBuilder();

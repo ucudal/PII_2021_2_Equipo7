@@ -24,9 +24,9 @@ namespace ClassLibrary
         {
             InsertMaterialCategoryData data = new InsertMaterialCategoryData();
             data.MaterialCategory.Name=selector.Code;
-            DProcessData process = new DProcessData("add_MatCat", this.Code, data);
+            UserActivity process = new UserActivity("add_MatCat", null, this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            session.Process = process;
+            session.CurrentActivity = process;
             StringBuilder builder = new StringBuilder();
 
             builder.Append("Desea agregar la categoria de el material.\n");

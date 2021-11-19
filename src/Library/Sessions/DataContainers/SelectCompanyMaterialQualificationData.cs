@@ -5,7 +5,7 @@ namespace ClassLibrary
     /// del proceso de registro
     /// para un usuario
     /// </summary>
-    public class SelectCompanyMaterialQualificationData
+    public class SelectCompanyMaterialQualificationData : ActivityData
     {
         private CompanyMaterialQualification companyMaterialQualification;
 

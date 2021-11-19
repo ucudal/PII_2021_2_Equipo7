@@ -37,12 +37,6 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            SignUpData signUpData = new SignUpData(selector.Account, selector.Service);
-            DProcessData process = new DProcessData("registration", this.Code, signUpData);
-
-            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            session.Process = process;
-
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese su <b>codigo de invitacion</b>.");
             return builder.ToString();

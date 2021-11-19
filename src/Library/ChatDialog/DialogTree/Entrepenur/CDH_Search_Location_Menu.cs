@@ -23,35 +23,28 @@ namespace ClassLibrary
         : base(next, "Search_Location_Menu")
         {
             this.Parents.Add("Search_Publication_Menu");
-            this.Route = "\\localidad";
+            this.Route = "/localidad";
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            StringBuilder builder = new StringBuilder();
             if (selector is null)
             {
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
+            UserActivity activity = new UserActivity("entrepreneur_publ_search_location", "welcome_entrepreneur", "/buscarpublicacion", null);
+
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            builder.Append("Menu para ingresar localidad \n");
-            builder.Append(this.TextToPrintLocationCompany());
-            builder.Append("Ingrese el id de la localidad.\n");
-            builder.Append("\\cancelar : Volver a menu de busqueda .\n");
+            session.PushActivity(activity);
+
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("<b>Busqueda por Localidad</b>\n");
+            builder.AppendLine("Ingrese una direccion por la cual buscar.\n");
+            builder.AppendLine("[localidad] - Direccion a buscar.");
+            builder.Append("/volver - Volver al menu de busqueda.");
             return builder.ToString();
-        }
-
-        private string TextToPrintLocationCompany()
-        {
-            StringBuilder listlocation = new StringBuilder();
-            foreach (CompanyLocation location in this.DatMgr.CompanyLocation.Items)
-            {
-               listlocation.Append($" Identificador de la location - {location.Id}\n");
-            }
-
-            return listlocation.ToString();
         }
     }
 }

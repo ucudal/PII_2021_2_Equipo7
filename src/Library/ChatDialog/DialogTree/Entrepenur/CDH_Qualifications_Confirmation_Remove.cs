@@ -30,20 +30,23 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            StringBuilder builder = new StringBuilder();
             if (selector is null)
             {
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
-            EntrepreneurQualification data = process.GetData<EntrepreneurQualification>();
-            data = this.DatMgr.EntrepreneurQualification.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
+            int id = int.Parse(selector.Code, NumberStyles.Integer, CultureInfo.InvariantCulture);
+            EntrepreneurQualificationDeleteData deleteData = new EntrepreneurQualificationDeleteData(id);
+            UserActivity activity = new UserActivity("entrepreneur_qualification_delete", "Qualification_Menu", "/eliminar", deleteData);
+            session.PushActivity(activity);
 
-            builder.Append($"Esta seguro que desea eliminar la habilitacion con el id {this.DatMgr.EntrepreneurQualification.GetById(session.UserId)} ?\n ");
-            builder.Append("\\confirmar : Confirmar en caso de que este seguro.\n");
-            builder.Append("\\cancelar : Volver al menu de materiales .\n");
+            EntrepreneurQualification entreQual = this.DatMgr.EntrepreneurQualification.GetById(id);
+            Qualification qual = this.DatMgr.Qualification.GetById(entreQual.QualificationId);
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine($"Esta seguro que desea eliminar la habilitacion <b>{qual.Name}</b>?\n");
+            builder.AppendLine("/confirmar - Confirmar eliminacion.");
+            builder.AppendLine("/volver - Volver al menu de habilitaciones.");
             return builder.ToString();
         }
 
@@ -57,12 +60,15 @@ namespace ClassLibrary
 
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
-                    Qualification qualification = this.DatMgr.Qualification.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
-                    if (qualification is not null)
+                    if (int.TryParse(selector.Code, NumberStyles.Integer, CultureInfo.InvariantCulture, out int id))
                     {
-                        return true;
+                        EntrepreneurQualification qualification = this.DatMgr.EntrepreneurQualification.GetById(id);
+                        if (qualification is not null)
+                        {
+                            return true;
+                        }
                     }
                 }
             }

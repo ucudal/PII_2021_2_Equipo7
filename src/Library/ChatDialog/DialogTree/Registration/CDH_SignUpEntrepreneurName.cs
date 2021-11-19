@@ -39,10 +39,13 @@ namespace ClassLibrary
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
-            SignUpData data = process.GetData<SignUpData>();
+            UserActivity activity = session.CurrentActivity;
+            SignUpDataEntrepreneurNew data = activity.GetData<SignUpDataEntrepreneurNew>();
+
             User user = data.User;
             user.LastName = selector.Code.Trim();
+
+            session.CurrentActivity = activity;
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese el nombre de su <b>emprendimiento</b>.");
@@ -59,10 +62,10 @@ namespace ClassLibrary
 
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
                     Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-                    if (session.Process.GetData<SignUpData>()?.Type == RegistrationType.EntrepreneurNew)
+                    if (session.CurrentActivity.GetData<SignUpData>()?.Type == RegistrationType.EntrepreneurNew)
                     {
                         return true;
                     }

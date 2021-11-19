@@ -33,7 +33,7 @@ namespace ClassLibrary
         private void MaterialCategoryAdd(ChatDialogSelector selector)
         {
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
+            UserActivity process = session.CurrentActivity;
             InsertMaterialCategoryData data = process.GetData<InsertMaterialCategoryData>();
             MaterialCategory materialCategory =data.MaterialCategory;
             this.DatMgr.MaterialCategory.Insert(materialCategory);

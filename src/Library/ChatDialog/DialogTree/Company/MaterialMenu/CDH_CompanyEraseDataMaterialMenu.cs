@@ -33,7 +33,7 @@ namespace ClassLibrary
         private void EraseMaterialFromCompany(ChatDialogSelector selector)
         {
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
+            UserActivity process = session.CurrentActivity;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
             CompanyMaterial xMat=this.DatMgr.CompanyMaterial.GetById(data.CompanyMaterial.Id);
             xMat.Deleted=true;

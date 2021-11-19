@@ -30,28 +30,19 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            StringBuilder builder = new StringBuilder();
             if (selector is null)
             {
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            this.AddQualificationToMaterial(selector);
-            builder.Append("Habilitacion agregada con exito.\n");
-            builder.Append("Escriba \n");
-            builder.Append("\\volver : para retornar al menu de materiales.\n");
-            return builder.ToString();
-        }
-
-        private void AddQualificationToMaterial(ChatDialogSelector selector)
-        {
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
-            SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            EntrepreneurQualification habi = this.DatMgr.EntrepreneurQualification.New();
-            habi.QualificationId = data.Qualification.Id;
-            habi.EntrepreneurId = data.Qualification.Id;
-            this.DatMgr.EntrepreneurQualification.Insert(habi);
+            EntrepreneurQualificationInsertData data = session.CurrentActivity.GetData<EntrepreneurQualificationInsertData>();
+            data.RunTask();
+
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("La habilitacion se añadió con exito.\n");
+            builder.Append("/volver - Regresar al listado de habilitaciones.");
+            return builder.ToString();
         }
     }
 }

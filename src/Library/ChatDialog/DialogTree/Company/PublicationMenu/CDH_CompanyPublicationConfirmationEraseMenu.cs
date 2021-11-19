@@ -24,7 +24,7 @@ namespace ClassLibrary
         {
             StringBuilder builder = new StringBuilder();
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
+            UserActivity process = session.CurrentActivity;
             InsertPublicationData data = process.GetData<InsertPublicationData>();
             
 
@@ -39,7 +39,7 @@ namespace ClassLibrary
         {
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
                     Publication publication = this.DatMgr.Publication.GetById(int.Parse(selector.Code));
                     if (publication is not null)

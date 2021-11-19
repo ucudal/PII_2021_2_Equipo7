@@ -33,7 +33,7 @@ namespace ClassLibrary
         private void QualificationAdd(ChatDialogSelector selector)
         {
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
+            UserActivity process = session.CurrentActivity;
             InsertQualificationData data = process.GetData<InsertQualificationData>();
             Qualification qualification=data.Qualification;
             this.DatMgr.Qualification.Insert(qualification);

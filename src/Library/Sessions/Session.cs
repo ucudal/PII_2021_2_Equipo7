@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 
 namespace ClassLibrary
 {
@@ -19,7 +20,7 @@ namespace ClassLibrary
         private int entityId;
         private UserRole userRole;
         private string menuLocation;
-        private DProcessData process;
+        private Stack<UserActivity> activities;
         private DateTime lastActivity;
 
         /// <summary>
@@ -44,6 +45,7 @@ namespace ClassLibrary
             this.account = account;
             this.menuLocation = menuLocation;
             this.lastActivity = DateTime.Now;
+            this.activities = new Stack<UserActivity>();
         }
 
         /// <summary>
@@ -79,19 +81,6 @@ namespace ClassLibrary
         }
 
         /// <summary>
-        /// Datos del proceso actual si hay uno activo.
-        /// </summary>
-        public DProcessData Process
-        {
-            get => this.process;
-            set
-            {
-                this.process = value;
-                this.lastActivity = DateTime.Now;
-            }
-        }
-
-        /// <summary>
         /// Id del usuario en la plataforma.
         /// </summary>
         public int UserId
@@ -116,6 +105,64 @@ namespace ClassLibrary
         {
             get => this.userRole;
             set => this.userRole = value;
+        }
+
+        /// <summary>
+        /// Ultima actividad en el stack.
+        /// </summary>
+        public UserActivity CurrentActivity
+        {
+            get
+            {
+                if (this.activities.TryPeek(out UserActivity data))
+                {
+                    return data;
+                }
+
+                return null;
+            }
+
+            set
+            {
+                this.activities.TryPop(out _);
+                this.activities.Push(value);
+            }
+        }
+
+        /// <summary>
+        /// Empuja una nueva actividad al stack de actividades.
+        /// </summary>
+        /// <param name="activity">
+        /// Actividad a añadir.
+        /// </param>
+        public void PushActivity(UserActivity activity)
+        {
+            this.activities.Push(activity);
+        }
+
+        /// <summary>
+        /// Saca una actividad del stack de
+        /// actividades.
+        /// </summary>
+        /// <returns>
+        /// Actividad al tope de la lista.
+        /// </returns>
+        public UserActivity PopActivity()
+        {
+            if (this.activities.TryPop(out UserActivity data))
+            {
+                return data;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Limpia el stack de actividades.
+        /// </summary>
+        public void ClearActivitiesStack()
+        {
+            this.activities.Clear();
         }
     }
 }

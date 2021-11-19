@@ -33,7 +33,7 @@ namespace ClassLibrary
         private void QualificationEraseData(ChatDialogSelector selector)
         {
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
+            UserActivity process = session.CurrentActivity;
             SelectCompanyMaterialQualificationData data = process.GetData<SelectCompanyMaterialQualificationData>();
             CompanyMaterialQualification xHabiMat=this.DatMgr.CompanyMaterialQualification.GetById(data.CompanyMaterialQualification.Id);
             xHabiMat.Deleted=true;
