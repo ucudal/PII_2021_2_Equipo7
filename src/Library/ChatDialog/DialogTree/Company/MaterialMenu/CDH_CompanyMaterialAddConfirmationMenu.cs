@@ -1,3 +1,10 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_CompanyMaterialAddConfirmationMenu.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Text;
 
 namespace ClassLibrary
@@ -13,7 +20,8 @@ namespace ClassLibrary
         /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyMaterialAddConfirmationMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_CompanyMaterialAddConfirmationMenu(ChatDialogHandlerBase next) : base(next, "company_material_add_confirmation_menu")
+        public CDH_CompanyMaterialAddConfirmationMenu(ChatDialogHandlerBase next)
+        : base(next, "company_material_add_confirmation_menu")
         {
             this.Parents.Add("company_material_add_name_menu");
             this.Route = null;
@@ -22,16 +30,21 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
-            
+
             CompanyMaterial companyMaterial = this.DatMgr.CompanyMaterial.New();
             companyMaterial.Name = selector.Code.Trim();
-            companyMaterial.MaterialCategoryId=data.MaterialCategory.Id;
-            companyMaterial.CompanyId=session.UserId;
+            companyMaterial.MaterialCategoryId = data.MaterialCategory.Id;
+            companyMaterial.CompanyId = session.UserId;
             data.CompanyMaterial = companyMaterial;
-            
+
             StringBuilder builder = new StringBuilder();
             builder.Append("Seguro que desea crear un material con los siguientes datos.\n");
             builder.Append("Nombre: " + data.CompanyMaterial.Name);
@@ -42,14 +55,21 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
-            bool xretorno=false;
+            bool xretorno = false;
+
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
             if (this.Parents.Contains(selector.Context))
             {
                 if (!selector.Code.StartsWith('\\'))
                 {
-                    xretorno=true;
+                    xretorno = true;
                 }
             }
+
             return xretorno;
         }
     }

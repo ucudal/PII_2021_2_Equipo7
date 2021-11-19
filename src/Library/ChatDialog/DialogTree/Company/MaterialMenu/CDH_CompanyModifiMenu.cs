@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_CompanyModifiMenu.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Text;
 
 namespace ClassLibrary
@@ -13,7 +19,8 @@ namespace ClassLibrary
         /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyModifiMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_CompanyModifiMenu(ChatDialogHandlerBase next) : base(next, "company_modifi_menu")
+        public CDH_CompanyModifiMenu(ChatDialogHandlerBase next)
+        : base(next, "company_modifi_menu")
         {
             this.Parents.Add("company_actions_material_menu");
             this.Route = "/modificar";
@@ -27,16 +34,18 @@ namespace ClassLibrary
             builder.Append("Ingrese el numero de la categoria en la cual va el material.\n");
             builder.Append("En caso de querer cancelar la operacion escriba\n\n");
             builder.Append("\\cancelar : cancelar la operacion.\n");
-            builder.Append(TextToPrintListCategories());
+            builder.Append(this.TextToPrintListCategories());
             return builder.ToString();
         }
+
         private string TextToPrintListCategories()
         {
             StringBuilder builder = new StringBuilder();
-            foreach(MaterialCategory xCat in this.DatMgr.MaterialCategory.Items)
+            foreach (MaterialCategory xCat in this.DatMgr.MaterialCategory.Items)
             {
-                builder.Append("" + xCat.Name + " " + xCat.Id + "");
+                builder.Append(" " + xCat.Name + " " + xCat.Id + " ");
             }
+
             return builder.ToString();
         }
     }

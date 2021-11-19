@@ -1,6 +1,13 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_CompanyQualificationListToAddMenu.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Text;
 
 namespace ClassLibrary
 {
@@ -15,7 +22,8 @@ namespace ClassLibrary
         /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyQualificationListToAddMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_CompanyQualificationListToAddMenu(ChatDialogHandlerBase next) : base(next, "company_qualification_list_to_add_menu")
+        public CDH_CompanyQualificationListToAddMenu(ChatDialogHandlerBase next)
+        : base(next, "company_qualification_list_to_add_menu")
         {
             this.Parents.Add("company_qualifications_menu");
             this.Route = "/agregar";
@@ -24,43 +32,50 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu lista de habilitaciones.\n");
             builder.Append("Aparecen la lista de habilitaciones que puede agregar.\n");
             builder.Append("Ingrese el numero de la habilitacion que quiere agregar.\n");
             builder.Append("Sino, en caso de querer retornar escriba\n");
             builder.Append("\\volver para volver al menu de materiales.\n");
-            builder.Append(TextoToPrintQualifications(selector));
+            builder.Append(this.TextoToPrintQualifications(selector));
             builder.Append("LISTADO_HABILITACIONES");
             return builder.ToString();
         }
-        
+
         private string TextoToPrintQualifications(ChatDialogSelector selector)
         {
-            StringBuilder builder=new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            List<Qualification> xhabilitacionesNoAgegadas=new List<Qualification>();
-            int i=0;
-            bool xSigo=true;
-            foreach(Qualification xHabi in this.DatMgr.Qualification.Items)
+            List<Qualification> xhabilitacionesNoAgegadas = new List<Qualification>();
+            int i = 0;
+            bool xSigo = true;
+            foreach (Qualification xHabi in this.DatMgr.Qualification.Items)
             {
-                xSigo=true;
-                IReadOnlyCollection<int> xHabilitaciones=this.DatMgr.CompanyMaterialQualification.GetQualificationsForCompanyMaterial(data.CompanyMaterial.Id);
-                while(i<xHabilitaciones.Count && xSigo==true)
+                xSigo = true;
+                IReadOnlyCollection<int> xHabilitaciones = this.DatMgr.CompanyMaterialQualification.GetQualificationsForCompanyMaterial(data.CompanyMaterial.Id);
+                while (i < xHabilitaciones.Count && xSigo == true)
                 {
-                   if(xHabi.Id==xHabilitaciones.ElementAt(i))
+                   if (xHabi.Id == xHabilitaciones.ElementAt(i))
                    {
-                       xSigo=false;
+                       xSigo = false;
                        xhabilitacionesNoAgegadas.Add(xHabi);
-                   } 
+                   }
                 }
             }
-            foreach(Qualification x in xhabilitacionesNoAgegadas)
+
+            foreach (Qualification x in xhabilitacionesNoAgegadas)
             {
-                builder.Append(""+ x.Name+" "+ x.Id + "\n");
+                builder.Append(" " + x.Name + " " + x.Id + "\n");
             }
+
             return builder.ToString();
         }
     }

@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_CompanyPublicationMenu.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Text;
 
 namespace ClassLibrary
@@ -9,12 +15,12 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_CompanyPublicationMenu : ChatDialogHandlerBase
     {
-
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyPublicationMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_CompanyPublicationMenu(ChatDialogHandlerBase next) : base(next, "company_publication_menu")
+        public CDH_CompanyPublicationMenu(ChatDialogHandlerBase next)
+        : base(next, "company_publication_menu")
         {
             this.Parents.Add("welcome_company");
             this.Route = "/publicaciones";

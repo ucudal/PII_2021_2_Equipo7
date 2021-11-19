@@ -1,4 +1,9 @@
-using System.Collections.Generic;
+// -----------------------------------------------------------------------
+// <copyright file="CDH_Company_Tracing_Menu.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Text;
 
 namespace ClassLibrary
@@ -12,21 +17,20 @@ namespace ClassLibrary
         /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Company_Tracing_Menu(ChatDialogHandlerBase next) : base(next, "company_Tracing_menu")
+        public CDH_Company_Tracing_Menu(ChatDialogHandlerBase next)
+        : base(next, "company_Tracing_menu")
         {
             this.Parents.Add("welcome_company");
             this.Route = "/listar";
         }
+
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
             builder.Append("Seguimiento de materiales \n");
             builder.Append("Cantidad vendida por material\n");
-            //builder.Append("\\siguiente : Siguiente pagina de materiales.\n");
-            //builder.Append("\\anterior: Pagina anterior de materiales.\n");
             builder.Append("\\cancelar : Volver a menu de empresas .\n");
-            //builder.Append(TextToPrintCompanyMaterial(selector));
             return builder.ToString();
         }
 

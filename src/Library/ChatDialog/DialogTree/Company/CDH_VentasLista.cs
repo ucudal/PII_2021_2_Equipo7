@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_VentasLista.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Text;
 
 namespace ClassLibrary
@@ -13,7 +19,8 @@ namespace ClassLibrary
         /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_VentasLista(ChatDialogHandlerBase next) : base(next, "listar_vetas")
+        public CDH_VentasLista(ChatDialogHandlerBase next)
+        : base(next, "listar_vetas")
         {
             this.Parents.Add("welcome_company");
             this.Route = "/listar";
