@@ -1,3 +1,10 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_CompanyPublicationEraseDataMenu.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Text;
 
 namespace ClassLibrary
@@ -13,7 +20,8 @@ namespace ClassLibrary
         /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyPublicationEraseDataMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_CompanyPublicationEraseDataMenu(ChatDialogHandlerBase next) : base(next, "company_publication_erase_data_menu")
+        public CDH_CompanyPublicationEraseDataMenu(ChatDialogHandlerBase next)
+        : base(next, "company_publication_erase_data_menu")
         {
             this.Parents.Add("company_publication_confirmation_erase_menu");
             this.Route = "/confirmar";
@@ -22,13 +30,19 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
             StringBuilder builder = new StringBuilder();
-            PublicationEraseData(selector);
+            this.PublicationEraseData(selector);
             builder.Append("La publicacion se elimino con exito.\n");
             builder.Append("Escriba ");
             builder.Append("\\cancelar : para volver al menu de materiales .\n");
             return builder.ToString();
         }
+
         private void PublicationEraseData(ChatDialogSelector selector)
         {
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);

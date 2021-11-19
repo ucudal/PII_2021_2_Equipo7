@@ -1,3 +1,10 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_CompanyPublicationListMenu.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Text;
 
 namespace ClassLibrary
@@ -13,7 +20,8 @@ namespace ClassLibrary
         /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyPublicationListMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_CompanyPublicationListMenu(ChatDialogHandlerBase next) : base(next, "company_publication_list_menu")
+        public CDH_CompanyPublicationListMenu(ChatDialogHandlerBase next)
+        : base(next, "company_publication_list_menu")
         {
             this.Parents.Add("company_publication_menu");
             this.Route = "/listar";
@@ -22,6 +30,11 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
             StringBuilder builder = new StringBuilder();
             builder.Append("Lista de publicaciones.\n");
             builder.Append("Desde este menu puede realizar las\n");
@@ -29,18 +42,24 @@ namespace ClassLibrary
             builder.Append("Ingrese el numero de la publicacion con la cual quiere trabajar \n");
             builder.Append(" en caso contrario escriba \n");
             builder.Append("\\cancelar : Volver al menu de materiales .\n");
-            builder.Append(TextoToPrintQualificationsToErase(selector));
+            builder.Append(this.TextoToPrintQualificationsToErase(selector));
             builder.Append("LISTADO_PUBLICACIONES");
             return builder.ToString();
         }
-        
+
         private string TextoToPrintQualificationsToErase(ChatDialogSelector selector)
-        {            
-             StringBuilder builder = new StringBuilder();
-            foreach(Publication xPub in this.DatMgr.Publication.Items)
+        {
+            if (selector is null)
             {
-                builder.Append("" + xPub.Id + " "+  this.DatMgr.CompanyMaterial.GetById(xPub.CompanyMaterialId).Name + " " + xPub.Price + "\n");
+                throw new ArgumentNullException(paramName: nameof(selector));
             }
+
+            StringBuilder builder = new StringBuilder();
+            foreach (Publication xPub in this.DatMgr.Publication.Items)
+            {
+                builder.Append(" " + xPub.Id + " " + this.DatMgr.CompanyMaterial.GetById(xPub.CompanyMaterialId).Name + " " + xPub.Price + "\n");
+            }
+
             return builder.ToString();
         }
     }
