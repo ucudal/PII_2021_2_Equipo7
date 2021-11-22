@@ -48,7 +48,7 @@ namespace ClassLibrary
                 IList<Publication> publ = this.DatMgr.Publication.Items.ToList();
                 Location location = locApi.GetLocation(selector.Code);
                 IList<Task<int>> apiCalls = publ.Select(pub => this.IdForCloseOrDefault(pub, location)).ToList();
-                IList<int> closePublications = AsyncContext.Run(() => RunAllDistanceCalcs(apiCalls));
+                IList<int> closePublications = AsyncContext.Run(() => RunAllDistanceCalcs(apiCalls)).ToList();
                 while (closePublications.Remove(0))
                 {
                 }
@@ -135,7 +135,7 @@ namespace ClassLibrary
             Distance distance = await locApi.GetDistanceAsync(entreLoc, compLocObj).ConfigureAwait(false);
 
             locApi.Dispose();
-            return distance.TravelDistance <= 20000 ? publication.Id : 0;
+            return distance.TravelDistance <= 2.0 ? publication.Id : 0;
         }
     }
 }

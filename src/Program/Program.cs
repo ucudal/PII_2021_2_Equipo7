@@ -180,6 +180,7 @@ namespace Program
             CompanyLocation compLoc;
             Invitation inv4;
             Publication pub;
+            PublicationKeyWord keyWord;
 
             company = dataManager.Company.New();
             company.Name = "Dream Theater";
@@ -251,6 +252,8 @@ namespace Program
             compMatStock.CompanyLocationId = compLocId;
             dataManager.CompanyMaterialStock.Insert(compMatStock);
 
+            int pubId;
+
             pub = dataManager.Publication.New();
             pub.CompanyLocationId = compLocId;
             pub.CompanyMaterialId = compMat1Id;
@@ -262,7 +265,12 @@ namespace Program
             pub.ActiveFrom = DateTime.Now.AddMonths(-2);
             pub.ActiveUntil = DateTime.Now.AddYears(5);
             pub.CompanyId = companyId;
-            dataManager.Publication.Insert(pub);
+            pubId = dataManager.Publication.Insert(pub);
+
+            keyWord = dataManager.PublicationKeyWord.New();
+            keyWord.PublicationId = pubId;
+            keyWord.KeyWord = "Progressive";
+            dataManager.PublicationKeyWord.Insert(keyWord);
 
             pub = dataManager.Publication.New();
             pub.CompanyLocationId = compLocId;
@@ -275,7 +283,12 @@ namespace Program
             pub.ActiveFrom = DateTime.Now.AddMonths(-2);
             pub.ActiveUntil = DateTime.Now.AddYears(5);
             pub.CompanyId = companyId;
-            dataManager.Publication.Insert(pub);
+            pubId = dataManager.Publication.Insert(pub);
+
+            keyWord = dataManager.PublicationKeyWord.New();
+            keyWord.PublicationId = pubId;
+            keyWord.KeyWord = "Progressive";
+            dataManager.PublicationKeyWord.Insert(keyWord);
         }
     }
 }

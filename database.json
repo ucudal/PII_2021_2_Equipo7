@@ -94,61 +94,55 @@
       "Trade": "Musica",
       "Id": 1,
       "Deleted": false
-    },
-    {
-      "Name": "Nmaisonn",
-      "Trade": "Venta de armas",
-      "Id": 2,
-      "Deleted": false
     }
   ],
   "Invitation": [
     {
       "Id": 1,
-      "Code": "2021323-EN-00001",
-      "Type": 1,
-      "ValidAfter": "2021-09-19T16:45:54.2999413-03:00",
-      "ValidBefore": "2022-01-19T16:45:54.300644-03:00",
-      "CompanyId": 0,
-      "Used": true,
+      "Code": "2021326-CJ-00001",
+      "Type": 3,
+      "ValidAfter": "2021-09-22T10:08:28.4110621-03:00",
+      "ValidBefore": "2022-01-22T10:08:28.4127464-03:00",
+      "CompanyId": 1,
+      "Used": false,
       "Deleted": false
     },
     {
       "Id": 2,
-      "Code": "2021323-CN-00002",
+      "Code": "2021326-CN-00002",
       "Type": 2,
-      "ValidAfter": "2021-09-19T16:45:54.4642894-03:00",
-      "ValidBefore": "2022-01-19T16:45:54.4642918-03:00",
+      "ValidAfter": "2021-09-22T10:08:28.7974694-03:00",
+      "ValidBefore": "2022-01-22T10:08:28.797472-03:00",
       "CompanyId": 0,
-      "Used": true,
+      "Used": false,
       "Deleted": false
     },
     {
       "Id": 3,
-      "Code": "2021323-EN-00003",
+      "Code": "2021326-EN-00003",
       "Type": 1,
-      "ValidAfter": "2021-09-19T16:45:54.4890127-03:00",
-      "ValidBefore": "2022-01-19T16:45:54.4890133-03:00",
+      "ValidAfter": "2021-09-22T10:08:28.8422547-03:00",
+      "ValidBefore": "2022-01-22T10:08:28.8422577-03:00",
       "CompanyId": 0,
       "Used": true,
       "Deleted": false
     },
     {
       "Id": 4,
-      "Code": "2021323-SJ-00004",
+      "Code": "2021326-SJ-00004",
       "Type": 4,
-      "ValidAfter": "2021-09-19T16:45:54.5052816-03:00",
-      "ValidBefore": "2022-01-19T16:45:54.5052832-03:00",
+      "ValidAfter": "2021-09-22T10:08:28.8873788-03:00",
+      "ValidBefore": "2022-01-22T10:08:28.8873816-03:00",
       "CompanyId": 0,
       "Used": false,
       "Deleted": false
     },
     {
       "Id": 5,
-      "Code": "2021323-CJ-00005",
+      "Code": "2021326-CJ-00005",
       "Type": 3,
-      "ValidAfter": "2021-09-19T16:45:54.5209941-03:00",
-      "ValidBefore": "2022-01-19T16:45:54.5209948-03:00",
+      "ValidAfter": "2021-09-22T10:08:28.924898-03:00",
+      "ValidBefore": "2022-01-22T10:08:28.9249001-03:00",
       "CompanyId": 1,
       "Used": false,
       "Deleted": false
@@ -170,30 +164,6 @@
       "Deleted": false,
       "Role": 3,
       "Suspended": false
-    },
-    {
-      "Id": 3,
-      "FirstName": "Nicolas",
-      "LastName": "Maisonnave",
-      "Deleted": false,
-      "Role": 2,
-      "Suspended": false
-    },
-    {
-      "Id": 4,
-      "FirstName": "Sebastian",
-      "LastName": "Forische",
-      "Deleted": false,
-      "Role": 2,
-      "Suspended": false
-    },
-    {
-      "Id": 5,
-      "FirstName": "Sebastian",
-      "LastName": "Forische",
-      "Deleted": false,
-      "Role": 3,
-      "Suspended": false
     }
   ],
   "Account": [
@@ -210,27 +180,6 @@
       "UserId": 2,
       "Service": 2,
       "CodeInService": "1554827100"
-    },
-    {
-      "Id": 3,
-      "Deleted": false,
-      "UserId": 3,
-      "Service": 1,
-      "CodeInService": "1423578"
-    },
-    {
-      "Id": 4,
-      "Deleted": false,
-      "UserId": 4,
-      "Service": 2,
-      "CodeInService": "4897984948948"
-    },
-    {
-      "Id": 5,
-      "Deleted": false,
-      "UserId": 5,
-      "Service": 2,
-      "CodeInService": "1320585631"
     }
   ],
   "CompanyUser": [
@@ -239,12 +188,6 @@
       "Deleted": false,
       "CompanyId": 1,
       "AdminUserId": 1
-    },
-    {
-      "Id": 2,
-      "Deleted": false,
-      "CompanyId": 2,
-      "AdminUserId": 3
     }
   ],
   "CompanyLocation": [
@@ -259,7 +202,7 @@
     {
       "Id": 1,
       "Name": "Images and Words",
-      "LastRestock": "2021-11-14T16:45:54.3905835-03:00",
+      "LastRestock": "2021-11-17T10:08:28.6232487-03:00",
       "DateBetweenRestocks": 0,
       "Deleted": false,
       "MaterialCategoryId": 7,
@@ -268,7 +211,7 @@
     {
       "Id": 2,
       "Name": "Systematic Chaos",
-      "LastRestock": "2021-11-14T16:45:54.4150364-03:00",
+      "LastRestock": "2021-11-17T10:08:28.6706075-03:00",
       "DateBetweenRestocks": 0,
       "Deleted": false,
       "MaterialCategoryId": 7,
@@ -296,8 +239,8 @@
       "CompanyId": 1,
       "CompanyMaterialId": 1,
       "Id": 1,
-      "ActiveFrom": "2021-09-19T16:45:54.4340585-03:00",
-      "ActiveUntil": "2026-11-19T16:45:54.434083-03:00",
+      "ActiveFrom": "2021-09-22T10:08:28.7057443-03:00",
+      "ActiveUntil": "2026-11-22T10:08:28.7058236-03:00",
       "Price": 21,
       "Quantity": 1,
       "Currency": 2,
@@ -310,8 +253,8 @@
       "CompanyId": 1,
       "CompanyMaterialId": 2,
       "Id": 2,
-      "ActiveFrom": "2021-09-19T16:45:54.4529446-03:00",
-      "ActiveUntil": "2026-11-19T16:45:54.4529463-03:00",
+      "ActiveFrom": "2021-09-22T10:08:28.7615792-03:00",
+      "ActiveUntil": "2026-11-22T10:08:28.7615825-03:00",
       "Price": 16,
       "Quantity": 1,
       "Currency": 2,
@@ -321,73 +264,34 @@
       "Description": "Ninth studio album by American progressive metal band Dream Theater. Released on June 4, 2007 in the United Kingdom and June 5, 2007 in the United States."
     }
   ],
-  "Entrepreneur": [
-    {
-      "GeoReference": "Coruña 3026",
-      "UserId": 2,
-      "Name": "SpaceX",
-      "Trade": "Spaaaaaace",
-      "Id": 1,
-      "Deleted": false
-    },
-    {
-      "GeoReference": "colonia 3026",
-      "UserId": 5,
-      "Name": "Los 4 fantasticos emp",
-      "Trade": "vendedor de madera",
-      "Id": 2,
-      "Deleted": false
-    }
-  ],
-  "Sale": [
-    {
-      "ProductCompanyMaterialId": 2,
-      "ProductQuantity": 1,
-      "SellerCompanyId": 1,
-      "BuyerEntrepreneurId": 1,
-      "Id": 1,
-      "DateTime": "2021-11-19T16:53:25.2467733-03:00",
-      "Price": 16,
-      "Currency": 2,
-      "Deleted": false
-    },
-    {
-      "ProductCompanyMaterialId": 1,
-      "ProductQuantity": 1,
-      "SellerCompanyId": 1,
-      "BuyerEntrepreneurId": 1,
-      "Id": 2,
-      "DateTime": "2021-11-20T15:40:42.8316289-03:00",
-      "Price": 21,
-      "Currency": 2,
-      "Deleted": false
-    },
-    {
-      "ProductCompanyMaterialId": 2,
-      "ProductQuantity": 1,
-      "SellerCompanyId": 1,
-      "BuyerEntrepreneurId": 2,
-      "Id": 3,
-      "DateTime": "2021-11-20T16:50:57.4677134-03:00",
-      "Price": 16,
-      "Currency": 2,
-      "Deleted": false
-    }
-  ],
-  "EntrepreneurQualification": [
+  "PublicationKeyWord": [
     {
       "Id": 1,
       "Deleted": false,
-      "EntrepreneurId": 1,
-      "QualificationId": 3,
-      "DocumentUri": "http://hephaestus.archimedes.tools/file.pdf"
+      "PublicationId": 1,
+      "KeyWord": "Progressive"
     },
     {
       "Id": 2,
-      "Deleted": true,
-      "EntrepreneurId": 2,
-      "QualificationId": 4,
-      "DocumentUri": "http://snfinsfnsnf.com/holaprueba"
+      "Deleted": false,
+      "PublicationId": 2,
+      "KeyWord": "Progressive"
+    },
+    {
+      "Id": 3,
+      "Deleted": false,
+      "PublicationId": 2,
+      "KeyWord": "Rock"
+    }
+  ],
+  "Entrepreneur": [
+    {
+      "GeoReference": "Paraguay 1312",
+      "UserId": 2,
+      "Name": "Amazon",
+      "Trade": "Ventas",
+      "Id": 1,
+      "Deleted": false
     }
   ]
 }
