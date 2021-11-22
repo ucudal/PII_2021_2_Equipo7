@@ -1,9 +1,15 @@
+// -----------------------------------------------------------------------
+// <copyright file="CompanyMaterialStockAdmin.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using Ucu.Poo.Locations.Client;
 using Nito.AsyncEx;
+using Ucu.Poo.Locations.Client;
 
 namespace ClassLibrary
 {
@@ -107,7 +113,7 @@ namespace ClassLibrary
         /// <summary>
         /// Obtiene un listado de materiales
         /// de empresa con stock para una
-        /// localizacion concreta de la 
+        /// localizacion concreta de la
         /// empresa.
         /// </summary>
         /// <param name="companyLocationId">
@@ -134,36 +140,36 @@ namespace ClassLibrary
         }
 
         /// <summary>
-        /// Obtiene el CompanyStock a partir de 
-        /// un id de material y un id de localidad
+        /// Obtiene el CompanyStock a partir de
+        /// un id de material y un id de localidad.
         /// </summary>
         /// <param name="matId">
         /// Id del material de la empresa.
         /// </param>
-        /// /// <param name="locId">
+        /// <param name="locId">
         /// Id de la localidad de la empresa.
         /// </param>
         /// <returns>
-        /// Un objeto CompanyMaterialStock
+        /// Un objeto CompanyMaterialStock.
         /// </returns>
-
         public CompanyMaterialStock GetCompanyMaterialStockByMatAndLocation(int matId, int locId)
         {
-            CompanyMaterialStock xretorno=null;
-            foreach(CompanyMaterialStock xMatStock in this.Items)
+            CompanyMaterialStock xretorno = null;
+            foreach (CompanyMaterialStock xMatStock in this.Items)
             {
-                if(xMatStock.CompanyLocationId==locId && xMatStock.CompanyMatId==matId)
+                if (xMatStock.CompanyLocationId == locId && xMatStock.CompanyMatId == matId)
                 {
-                    xretorno=xMatStock;
+                    xretorno = xMatStock;
                 }
             }
+
             return xretorno;
         }
 
         /// <summary>
         /// Obtiene un listado de materiales
         /// de empresa con stock para una
-        /// localizacion concreta de la 
+        /// localizacion concreta de la
         /// empresa.
         /// </summary>
         /// <param name="companyLocationId">
@@ -232,7 +238,7 @@ namespace ClassLibrary
             foreach (int compLocId in locationIds)
             {
                 compLoc = dataManager.CompanyLocation.GetById(compLocId);
-                Task<Distance> task = locClient.GetDistanceAsync(compLoc.GeoReference, geoReference); 
+                Task<Distance> task = locClient.GetDistanceAsync(compLoc.GeoReference, geoReference);
                 distance = AsyncContext.Run(() => task);
 
                 if (closestLocationId == 0)
@@ -257,10 +263,18 @@ namespace ClassLibrary
         protected override void ValidateData(CompanyMaterialStock item)
         {
             DataManager dataManager = new DataManager();
-            if(item.CompanyLocationId == 0/* || !dataManager.CompanyLocation.Exists(item.CompanyLocationId)*/) 
-                throw new ValidationException("Requerida localizacion del material.");
-            if(item.CompanyMatId == 0/* || !dataManager.CompanyMaterial.Exists(item.CompanyMatId)*/) 
-                throw new ValidationException("Requerido material de la empresa.");
+            if (item != null)
+            {
+                if (item.CompanyLocationId == 0/* || !dataManager.CompanyLocation.Exists(item.CompanyLocationId)*/)
+                {
+                    throw new ValidationException("Requerida localizacion del material.");
+                }
+
+                if (item.CompanyMatId == 0/* || !dataManager.CompanyMaterial.Exists(item.CompanyMatId)*/)
+                {
+                    throw new ValidationException("Requerido material de la empresa.");
+                }
+            }
         }
     }
 }

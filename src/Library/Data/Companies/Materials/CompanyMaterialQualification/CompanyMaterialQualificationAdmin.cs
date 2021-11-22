@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="CompanyMaterialQualificationAdmin.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -31,7 +37,7 @@ namespace ClassLibrary
 
             return resultList.AsReadOnly();
         }
-        
+
         /// <summary>
         /// Obtiene la lista de habilitaciones para un material de empresa por su id.
         /// </summary>
@@ -86,10 +92,18 @@ namespace ClassLibrary
         protected override void ValidateData(CompanyMaterialQualification item)
         {
             DataManager dataManager = new DataManager();
-            if(item.CompanyMatId == 0/* || !dataManager.CompanyMaterial.Exists(item.CompanyMatId)*/) 
-                throw new ValidationException("Requerido material de la empresa.");
-            if(item.QualificationId == 0/* || !dataManager.Qualification.Exists(item.QualificationId)*/) 
-                throw new ValidationException("Requerida habilitacion.");
+            if (item != null)
+            {
+                if (item.CompanyMatId == 0/* || !dataManager.CompanyMaterial.Exists(item.CompanyMatId)*/)
+                {
+                    throw new ValidationException("Requerido material de la empresa.");
+                }
+
+                if (item.QualificationId == 0/* || !dataManager.Qualification.Exists(item.QualificationId)*/)
+                {
+                    throw new ValidationException("Requerida habilitacion.");
+                }
+            }
         }
     }
 }
