@@ -1,4 +1,9 @@
-using System;
+// -----------------------------------------------------------------------
+// <copyright file="AccountAdmin.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -12,7 +17,7 @@ namespace ClassLibrary
     public sealed class AccountAdmin : DataAdmin<Account>
     {
         /// <summary>
-        /// Obtiene una lista de cuentas 
+        /// Obtiene una lista de cuentas
         /// segun el id del usuario al
         /// cual pertenecen.
         /// </summary>
@@ -34,11 +39,12 @@ namespace ClassLibrary
                     resultList.Add(acc);
                 }
             }
+
             return resultList.AsReadOnly();
         }
 
         /// <summary>
-        /// Obtiene el id de usuario para 
+        /// Obtiene el id de usuario para
         /// una cuenta en concreto.
         /// </summary>
         /// <param name="service">
@@ -46,7 +52,7 @@ namespace ClassLibrary
         /// cuenta.
         /// </param>
         /// <param name="account">
-        /// Identificador de la cuenta en el 
+        /// Identificador de la cuenta en el
         /// servicio de mensajeria.
         /// </param>
         /// <returns>
@@ -63,16 +69,31 @@ namespace ClassLibrary
                     return acc.UserId;
                 }
             }
+
             return 0;
         }
 
         /// <inheritdoc/>
         protected override void ValidateData(Account item)
         {
-            DataManager dataManager = new DataManager();
-            if(item.UserId == 0 /*|| !dataManager.User.Exists(item.UserId)*/) throw new ValidationException("Se precisa un identificador de usuario.");
-            if(item.Service == MessagingService.Undefined) throw new ValidationException("Servicio de mensajeria es requerido.");
-            if(item.CodeInService is null || item.CodeInService.Length == 0) throw new ValidationException("Codigo en el servicio de mensajeria requerido.");
+            if (item != null)
+            {
+                DataManager dataManager = new DataManager();
+                if (item.UserId == 0 /*|| !dataManager.User.Exists(item.UserId)*/)
+                {
+                    throw new ValidationException("Se precisa un identificador de usuario.");
+                }
+
+                if (item.Service == MessagingService.Undefined)
+                {
+                    throw new ValidationException("Servicio de mensajeria es requerido.");
+                }
+
+                if (item.CodeInService is null || item.CodeInService.Length == 0)
+                {
+                    throw new ValidationException("Codigo en el servicio de mensajeria requerido.");
+                }
+            }
         }
     }
 }

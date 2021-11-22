@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="CompanyUser.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -5,7 +11,7 @@ namespace ClassLibrary
 {
     /// <summary>
     /// Registro de asociacion entre
-    /// compania y usuario que la 
+    /// compania y usuario que la.
     /// administra.
     /// </summary>
     public class CompanyUser : IManagableData<CompanyUser>
@@ -26,25 +32,25 @@ namespace ClassLibrary
         }
 
         /// <inheritdoc/>
-        public int Id 
-        { 
+        public int Id
+        {
             get => this.id;
             set => this.id = value;
         }
 
         /// <inheritdoc/>
-        public bool Deleted 
-        { 
+        public bool Deleted
+        {
             get => this.deleted;
             set => this.deleted = value;
         }
 
         /// <summary>
-        /// Id de la compania a la 
+        /// Id de la compania a la
         /// cual pertenece el usuario.
         /// </summary>
         public int CompanyId
-        { 
+        {
             get => this.companyId;
             set => this.companyId = value;
         }
@@ -54,7 +60,7 @@ namespace ClassLibrary
         /// usuario.
         /// </summary>
         public int AdminUserId
-        { 
+        {
             get => this.adminUserId;
             set => this.adminUserId = value;
         }
