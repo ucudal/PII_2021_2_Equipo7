@@ -337,6 +337,7 @@ namespace Tests
             Assert.AreEqual(1, pubsList.Count);
             Assert.Contains(pubId3, pubsList);
         }
+
         /// <summary>
         /// Test de verificar si un material se
         /// regenera constantemente.

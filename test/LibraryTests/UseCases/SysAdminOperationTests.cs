@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="SysAdminOperationTests.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
 using ClassLibrary;
@@ -28,7 +34,7 @@ namespace Tests
         public void InvitationCreationTest(RegistrationType type)
         {
             IReadOnlyCollection<Invitation> prevInvites = this.datMgr.Invitation.Items;
-            
+
             DateTime validAfter = DateTime.Now.AddMonths(-1);
             DateTime validBefore = DateTime.Now.AddMonths(1);
             int companyId = type == RegistrationType.CompanyJoin ? 42 : 0;
@@ -152,7 +158,7 @@ namespace Tests
             Assert.AreNotEqual(0, usrId);
 
             usr = this.datMgr.User.GetById(usrId);
-            
+
             Assert.AreEqual(false, usr.Suspended);
 
             usr.Suspended = true;
@@ -160,7 +166,7 @@ namespace Tests
 
             Assert.That(isOk);
             usr = this.datMgr.User.GetById(usrId);
-            
+
             Assert.AreEqual(true, usr.Suspended);
         }
 
@@ -173,25 +179,26 @@ namespace Tests
         {
             IReadOnlyCollection<Qualification> prevQualificationAdd = this.datMgr.Qualification.Items;
 
-            string name="Habilitacion madera";
+            string name = "Habilitacion madera";
 
             Qualification qualification = this.datMgr.Qualification.New();
             qualification.Name = name;
             int qualificationId = this.datMgr.Qualification.Insert(qualification);
 
-            //Valido que se le haya agregado una habilitacion
-            Assert.AreNotEqual(0,qualificationId);
+            // Valido que se le haya agregado una habilitacion
+            Assert.AreNotEqual(0, qualificationId);
 
             Qualification xNuevo = this.datMgr.Qualification.GetById(qualificationId);
-            //Valido que la habilitacion traida por GetById= al que ingrese
-            Assert.AreEqual(name,xNuevo.Name);
-            Assert.AreEqual(qualificationId,xNuevo.Id);
+
+            // Valido que la habilitacion traida por GetById= al que ingrese
+            Assert.AreEqual(name, xNuevo.Name);
+            Assert.AreEqual(qualificationId, xNuevo.Id);
 
             IReadOnlyCollection<Qualification> postQualificationAdd = this.datMgr.Qualification.Items;
 
             int expectedQualificationCount = prevQualificationAdd.Count + 1;
 
-            //Valido que se haya agregado una habilitacion a la lista de habilitaciones dentro de this.datMgr.Qualification.Items
+            // Valido que se haya agregado una habilitacion a la lista de habilitaciones dentro de this.datMgr.Qualification.Items
             Assert.AreEqual(expectedQualificationCount, postQualificationAdd.Count);
         }
     }

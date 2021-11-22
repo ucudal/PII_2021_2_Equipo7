@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="UnregisteredUserOperationTests.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System;
 using System.Collections.Generic;
 using ClassLibrary;
@@ -22,12 +28,11 @@ namespace Tests
         public void AcceptCompanyNewInvitationTest()
         {
             IReadOnlyCollection<Invitation> prevInvites = this.datMgr.Invitation.Items;
-            
+
             DateTime validAfter = DateTime.Now.AddMonths(-1);
             DateTime validBefore = DateTime.Now.AddMonths(1);
             RegistrationType type = RegistrationType.CopmanyNew;
             int companyId = 0;
-
 
             Invitation inv = this.datMgr.Invitation.New();
             inv.Type = type;
@@ -69,9 +74,8 @@ namespace Tests
 
             inv.Used = true;
             this.datMgr.Invitation.Update(inv);
-            
             inv = this.datMgr.Invitation.GetById(invId);
-            
+
             Assert.That(inv.Used);
             Assert.AreEqual(compId, comp.Id);
             Assert.AreEqual(compName, comp.Name);
@@ -90,12 +94,11 @@ namespace Tests
         public void AcceptCompanyJoinInvitationTest()
         {
             IReadOnlyCollection<Invitation> prevInvites = this.datMgr.Invitation.Items;
-            
+
             DateTime validAfter = DateTime.Now.AddMonths(-1);
             DateTime validBefore = DateTime.Now.AddMonths(1);
             RegistrationType type = RegistrationType.CompanyJoin;
             int companyId = 5;
-
 
             Invitation inv = this.datMgr.Invitation.New();
             inv.Type = type;
@@ -138,9 +141,8 @@ namespace Tests
 
             inv.Used = true;
             this.datMgr.Invitation.Update(inv);
-            
             inv = this.datMgr.Invitation.GetById(invId);
-            
+
             Assert.That(inv.Used);
             Assert.AreEqual(compId, comp.Id);
             Assert.AreEqual(compName, comp.Name);
@@ -159,12 +161,10 @@ namespace Tests
         public void AcceptEntrepreneurNewInvitationTest()
         {
             IReadOnlyCollection<Invitation> prevInvites = this.datMgr.Invitation.Items;
-            
             DateTime validAfter = DateTime.Now.AddMonths(-1);
             DateTime validBefore = DateTime.Now.AddMonths(1);
             RegistrationType type = RegistrationType.EntrepreneurNew;
             int companyId = 0;
-
 
             Invitation inv = this.datMgr.Invitation.New();
             inv.Type = type;
@@ -209,9 +209,8 @@ namespace Tests
 
             inv.Used = true;
             this.datMgr.Invitation.Update(inv);
-            
             inv = this.datMgr.Invitation.GetById(invId);
-            
+
             Assert.That(inv.Used);
             Assert.AreEqual(entreId, entre.Id);
             Assert.AreEqual(entreName, entre.Name);
@@ -230,12 +229,11 @@ namespace Tests
         public void AcceptSysAdminNewInvitationTest()
         {
             IReadOnlyCollection<Invitation> prevInvites = this.datMgr.Invitation.Items;
-            
+
             DateTime validAfter = DateTime.Now.AddMonths(-1);
             DateTime validBefore = DateTime.Now.AddMonths(1);
             RegistrationType type = RegistrationType.SystemAdminJoin;
             int companyId = 0;
-
 
             Invitation inv = this.datMgr.Invitation.New();
             inv.Type = type;
@@ -264,14 +262,10 @@ namespace Tests
 
             usr = this.datMgr.User.GetById(usrId);
 
-          
-
-
             inv.Used = true;
             this.datMgr.Invitation.Update(inv);
-            
             inv = this.datMgr.Invitation.GetById(invId);
-            
+
             Assert.That(inv.Used);
             Assert.AreEqual(usrFName, usr.FirstName);
             Assert.AreEqual(usrLName, usr.LastName);
