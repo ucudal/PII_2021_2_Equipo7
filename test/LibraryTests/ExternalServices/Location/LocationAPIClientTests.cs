@@ -1,9 +1,15 @@
+// -----------------------------------------------------------------------
+// <copyright file="LocationAPIClientTests.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using ClassLibrary;
+using Nito.AsyncEx;
 using NUnit.Framework;
 using Ucu.Poo.Locations.Client;
-using System.Collections.ObjectModel;
-using Nito.AsyncEx;
-using System.Threading.Tasks;
 
 namespace Tests
 {
@@ -13,7 +19,7 @@ namespace Tests
     [TestFixture]
     public class LocationAPIClientTests
     {
-        private LocationApiClient locClient = new LocationApiClient();
+        // private LocationApiClient locClient = new LocationApiClient();
 
         /// <summary>
         /// Test que prueba si se puede encontrar
@@ -30,7 +36,6 @@ namespace Tests
             // para poder generar la documentacion de doxygen.
             // Descomentar si se busca realizar el test una
             // vez clonado el repositorio.
-
             Assert.Pass();  // Commentar esta linea si se busca des-comentar el resto del test.
 
             /*
@@ -50,12 +55,12 @@ namespace Tests
             loc.CompanyId = compId;
             loc.GeoReference = locationClosest;
             int locId = this.datMgr.CompanyLocation.Insert(loc);
-            
+
             loc = this.datMgr.CompanyLocation.New();
             loc.CompanyId = compId;
             loc.GeoReference = locationExtra1;
             this.datMgr.CompanyLocation.Insert(loc);
-            
+
             loc = this.datMgr.CompanyLocation.New();
             loc.CompanyId = compId;
             loc.GeoReference = locationExtra2;
