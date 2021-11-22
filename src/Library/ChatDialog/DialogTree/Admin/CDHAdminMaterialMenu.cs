@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDHAdminMaterialMenu.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Text;
 
 namespace ClassLibrary
@@ -7,18 +13,19 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de la plataforma.
     /// </summary>
-    public class CDH_AdminMaterialMenu : ChatDialogHandlerBase
+    public class CDHAdminMaterialMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeSysAdmin"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHAdminMaterialMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_AdminMaterialMenu(ChatDialogHandlerBase next) : base(next, "mat_menu")
-        {   
+        public CDHAdminMaterialMenu(ChatDialogHandlerBase next)
+        : base(next, "mat_menu")
+        {
             this.Parents.Add("welcome_sysadmin");
             this.Route = "/materiales";
         }
-        
+
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
@@ -30,6 +37,5 @@ namespace ClassLibrary
             builder.Append("\\cancelar : Invitacion de companias al sistema.");
             return builder.ToString();
         }
-
     }
 }

@@ -1,3 +1,10 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDHMaterialCategoryConfirm.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Text;
 
 namespace ClassLibrary
@@ -7,23 +14,29 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de la plataforma.
     /// </summary>
-    public class CDH_MaterialCategoryConfirm : ChatDialogHandlerBase
+    public class CDHMaterialCategoryConfirm : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeSysAdmin"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHMaterialCategoryConfirm"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_MaterialCategoryConfirm(ChatDialogHandlerBase next) : base(next, "matcat_confir")
-        {   this.Parents.Add("matcat_add_name");
+        public CDHMaterialCategoryConfirm(ChatDialogHandlerBase next)
+        : base(next, "matcat_confir")
+        {
+            this.Parents.Add("matcat_add_name");
             this.Route = null;
-
-
         }
+
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
             InsertMaterialCategoryData data = new InsertMaterialCategoryData();
-            data.MaterialCategory.Name=selector.Code;
+            data.MaterialCategory.Name = selector.Code;
             DProcessData process = new DProcessData("add_MatCat", this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.Process = process;
@@ -33,8 +46,6 @@ namespace ClassLibrary
             builder.Append("\\confirmar \n");
             builder.Append("\\cancelar");
             return builder.ToString();
-
         }
-
     }
 }

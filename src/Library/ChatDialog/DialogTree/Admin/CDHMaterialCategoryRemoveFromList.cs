@@ -1,3 +1,11 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDHMaterialCategoryRemoveFromList.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
+using System.Globalization;
 using System.Text;
 
 namespace ClassLibrary
@@ -7,13 +15,14 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_MaterialCategoryRemoveFromList : ChatDialogHandlerBase
+    public class CDHMaterialCategoryRemoveFromList : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_MaterialCategoryRemoveFromList"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHMaterialCategoryRemoveFromList"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_MaterialCategoryRemoveFromList(ChatDialogHandlerBase next) : base(next, "material_remove_from_list")
+        public CDHMaterialCategoryRemoveFromList(ChatDialogHandlerBase next)
+        : base(next, "material_remove_from_list")
         {
             this.Parents.Add("material_category_list");
             this.Route = null;
@@ -22,8 +31,13 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
             InsertMaterialCategoryData data = new InsertMaterialCategoryData();
-            data.MaterialCategory=this.DatMgr.MaterialCategory.GetById(int.Parse(selector.Code));
+            data.MaterialCategory = this.DatMgr.MaterialCategory.GetById(int.Parse(selector.Code,  CultureInfo.InvariantCulture));
             DProcessData process = new DProcessData("remove_category", this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.Process = process;
@@ -34,7 +48,5 @@ namespace ClassLibrary
             builder.Append("\\cancelar");
             return builder.ToString();
         }
-        
-       
     }
 }

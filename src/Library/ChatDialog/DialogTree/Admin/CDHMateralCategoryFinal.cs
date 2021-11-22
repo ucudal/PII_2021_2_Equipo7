@@ -1,3 +1,10 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDHMateralCategoryFinal.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Text;
 
 namespace ClassLibrary
@@ -7,13 +14,14 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_MateralCategoryFinal : ChatDialogHandlerBase
+    public class CDHMateralCategoryFinal : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_MateralCategoryFinal"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHMateralCategoryFinal"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_MateralCategoryFinal(ChatDialogHandlerBase next) : base(next, "matcat_final")
+        public CDHMateralCategoryFinal(ChatDialogHandlerBase next)
+        : base(next, "matcat_final")
         {
             this.Parents.Add("matcat_confir");
             this.Route = "/confirmar";
@@ -22,20 +30,25 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
             StringBuilder builder = new StringBuilder();
-            MaterialCategoryAdd(selector);
+            this.MaterialCategoryAdd(selector);
             builder.Append("La categoria de material se agrego satisfactoriamente.\n");
             builder.Append("Escriba ");
             builder.Append("\\volver : para volver al menu .\n");
             return builder.ToString();
         }
-        
+
         private void MaterialCategoryAdd(ChatDialogSelector selector)
         {
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             DProcessData process = session.Process;
             InsertMaterialCategoryData data = process.GetData<InsertMaterialCategoryData>();
-            MaterialCategory materialCategory =data.MaterialCategory;
+            MaterialCategory materialCategory = data.MaterialCategory;
             this.DatMgr.MaterialCategory.Insert(materialCategory);
         }
     }
