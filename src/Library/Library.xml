@@ -246,6 +246,150 @@
         <member name="M:ClassLibrary.CDH_AdminQualificationsMenu.Execute(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
+        <member name="T:ClassLibrary.CDH_InviteAdminConfirmation">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de la plataforma.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_InviteAdminConfirmation.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_InviteAdminConfirmation"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_InviteAdminConfirmation.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_InviteAdminCreate">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de empresa.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_InviteAdminCreate.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_InviteAdminCreate"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_InviteAdminCreate.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_InviteComapnyExistConfirmation">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de la plataforma.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_InviteComapnyExistConfirmation.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_InviteComapnyExistConfirmation"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_InviteComapnyExistConfirmation.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_InviteCompanyConfirmation">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de la plataforma.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_InviteCompanyConfirmation.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_InviteCompanyConfirmation"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_InviteCompanyConfirmation.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_InviteCompanyCreate">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de empresa.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_InviteCompanyCreate.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_InviteCompanyCreate"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_InviteCompanyCreate.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_InviteCompanyExistCreate">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de empresa.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_InviteCompanyExistCreate.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_InviteCompanyExistCreate"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_InviteCompanyExistCreate.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_InviteCompanyExistList">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de empresa.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_InviteCompanyExistList.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_InviteCompanyExistList"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_InviteCompanyExistList.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_InviteEntrepreneurConfirmation">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de la plataforma.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_InviteEntrepreneurConfirmation.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_InviteEntrepreneurConfirmation"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_InviteEntrepreneurConfirmation.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_InviteEntrepreneurCreate">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de empresa.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_InviteEntrepreneurCreate.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_InviteEntrepreneurCreate"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_InviteEntrepreneurCreate.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
         <member name="T:ClassLibrary.CDH_MateralCategoryFinal">
             <summary>
             <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
@@ -292,6 +436,54 @@
             <param name="next">Siguiente handler.</param>
         </member>
         <member name="M:ClassLibrary.CDH_MaterialCategoryConfirm.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_MaterialCategoryList">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de empresa.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_MaterialCategoryList.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_MaterialCategoryList"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_MaterialCategoryList.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_MaterialCategoryRemoveFinal">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de empresa.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_MaterialCategoryRemoveFinal.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_MaterialCategoryRemoveFinal"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_MaterialCategoryRemoveFinal.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDH_MaterialCategoryRemoveFromList">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de empresa.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDH_MaterialCategoryRemoveFromList.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_MaterialCategoryRemoveFromList"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDH_MaterialCategoryRemoveFromList.Execute(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
         <member name="T:ClassLibrary.CDH_QualificationAddConfirmation">
@@ -4171,6 +4363,30 @@
             Identificador dentro del servicio de
             mensajeria del usuario a registrar.
             </summary>
+        </member>
+        <member name="T:ClassLibrary.InsertInvitationData">
+            <summary>
+            Contenedor con los datos
+            del proceso de registro
+            para un usuario
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.InsertInvitationData.#ctor">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.InsertInvitationData"/>.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.InsertInvitationData.Invitation">
+            <summary>
+            invitacion del usuario
+            
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.InsertInvitationData.RegistrationType">
+            <summary>
+            tipo de registro del usuario
+            </summary>
+            <value></value>
         </member>
         <member name="T:ClassLibrary.InsertMaterialCategoryData">
             <summary>

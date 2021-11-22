@@ -6,14 +6,14 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Menu de habilitaciones
     /// </summary>
-    public class CDH_Qualification_Menu : ChatDialogHandlerBase
+    public class CDHQualification_Menu : ChatDialogHandlerBase
     {
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Qualification_Menu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHQualification_Menu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Qualification_Menu(ChatDialogHandlerBase next) : base(next, "Qualification_Menu")
+        public CDHQualification_Menu(ChatDialogHandlerBase next) : base(next, "Qualification_Menu")
         {
             this.parents.Add("welcome_entrepreneur");
             this.route = "/habilitaciones";

@@ -10,7 +10,7 @@ namespace ClassLibrary
     public class CHD_AdminMaterialMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeSysAdmin"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHWelcomeSysAdmin"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CHD_AdminMaterialMenu(ChatDialogHandlerBase next) : base(next, "mat_menu")

@@ -9,13 +9,13 @@ namespace ClassLibrary
     /// de ingreso de datos pidiendo en primer lugar
     /// el primer nombre del usuario.
     /// </summary>
-    public class CDH_SignUpUserFirstName : ChatDialogHandlerBase
+    public class CDHSignUpUserFirstName : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpUserFirstName"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSignUpUserFirstName"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpUserFirstName(ChatDialogHandlerBase next) : base(next, "registration_user_f_name")
+        public CDHSignUpUserFirstName(ChatDialogHandlerBase next) : base(next, "registration_user_f_name")
         {
             this.parents.Add("registration_invite_comp_new");
             this.parents.Add("registration_invite_comp_join");

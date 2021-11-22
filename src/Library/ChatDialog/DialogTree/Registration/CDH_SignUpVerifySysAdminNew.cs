@@ -9,13 +9,13 @@ namespace ClassLibrary
     /// le pide al usuario verificar que esta es la 
     /// accion deseada.
     /// </summary>
-    public class CDH_SignUpVerifySysAdminNew : ChatDialogHandlerBase
+    public class CDHSignUpVerifySysAdminNew : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpVerifySysAdminNew"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSignUpVerifySysAdminNew"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpVerifySysAdminNew(ChatDialogHandlerBase next) : base(next, "registration_invite_sysadmin_join")
+        public CDHSignUpVerifySysAdminNew(ChatDialogHandlerBase next) : base(next, "registration_invite_sysadmin_join")
         {
             this.parents.Add("registration_invite");
             this.route = null;

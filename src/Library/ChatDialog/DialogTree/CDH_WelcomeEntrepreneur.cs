@@ -7,13 +7,13 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// emprendedor.
     /// </summary>
-    public class CDH_WelcomeEntrepreneur : ChatDialogHandlerBase
+    public class CDHWelcomeEntrepreneur : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeEntrepreneur"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHWelcomeEntrepreneur"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_WelcomeEntrepreneur(ChatDialogHandlerBase next) : base(next, "welcome_entrepreneur")
+        public CDHWelcomeEntrepreneur(ChatDialogHandlerBase next) : base(next, "welcome_entrepreneur")
         {}
 
         /// <inheritdoc/>

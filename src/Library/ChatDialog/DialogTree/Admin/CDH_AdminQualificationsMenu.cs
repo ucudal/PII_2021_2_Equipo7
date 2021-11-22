@@ -7,13 +7,13 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de la plataforma.
     /// </summary>
-    public class CDH_AdminQualificationsMenu : ChatDialogHandlerBase
+    public class CDHAdminQualificationsMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeSysAdmin"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHWelcomeSysAdmin"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_AdminQualificationsMenu(ChatDialogHandlerBase next) : base(next, "hab_menu")
+        public CDHAdminQualificationsMenu(ChatDialogHandlerBase next) : base(next, "hab_menu")
         {   this.parents.Add("welcome_sysadmin");
             this.route = "/habilitaciones";
 

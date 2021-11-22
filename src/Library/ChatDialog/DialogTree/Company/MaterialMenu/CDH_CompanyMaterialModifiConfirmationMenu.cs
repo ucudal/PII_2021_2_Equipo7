@@ -7,13 +7,13 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_CompanyMaterialModifiConfirmationMenu : ChatDialogHandlerBase
+    public class CDHCompanyMaterialModifiConfirmationMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyMaterialModifiConfirmationMenu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHCompanyMaterialModifiConfirmationMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_CompanyMaterialModifiConfirmationMenu(ChatDialogHandlerBase next) : base(next, "company_material_modifi_confirmation_menu")
+        public CDHCompanyMaterialModifiConfirmationMenu(ChatDialogHandlerBase next) : base(next, "company_material_modifi_confirmation_menu")
         {
             this.parents.Add("company_material_modifi_dateBetweenReStock_menu");
             this.route = null;

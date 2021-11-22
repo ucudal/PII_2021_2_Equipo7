@@ -7,13 +7,13 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de la plataforma.
     /// </summary>
-    public class CDH_MaterialCategoryConfirm : ChatDialogHandlerBase
+    public class CDHMaterialCategoryConfirm : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeSysAdmin"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHWelcomeSysAdmin"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_MaterialCategoryConfirm(ChatDialogHandlerBase next) : base(next, "matcat_confir")
+        public CDHMaterialCategoryConfirm(ChatDialogHandlerBase next) : base(next, "matcat_confir")
         {   this.parents.Add("matcat_add_name");
             this.route = null;
 

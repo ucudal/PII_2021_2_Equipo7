@@ -7,13 +7,13 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_Qualifications_Final_Remove : ChatDialogHandlerBase
+    public class CDHQualifications_Final_Remove : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Qualifications_Final_Remove"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHQualifications_Final_Remove"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Qualifications_Final_Remove(ChatDialogHandlerBase next) : base(next, "Qualifications_Final_Remove")
+        public CDHQualifications_Final_Remove(ChatDialogHandlerBase next) : base(next, "Qualifications_Final_Remove")
         {
             this.parents.Add("Qualifications_Confirmation_Remove");
             this.route = "/confirmar";

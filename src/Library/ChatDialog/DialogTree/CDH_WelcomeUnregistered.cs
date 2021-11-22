@@ -7,13 +7,13 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// no registrado en la plataforma.
     /// </summary>
-    public class CDH_WelcomeUnregistered : ChatDialogHandlerBase
+    public class CDHWelcomeUnregistered : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeUnregistered"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHWelcomeUnregistered"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_WelcomeUnregistered(ChatDialogHandlerBase next) : base(next, "registration_prompt")
+        public CDHWelcomeUnregistered(ChatDialogHandlerBase next) : base(next, "registration_prompt")
         {
             this.route = "/registration";
         }

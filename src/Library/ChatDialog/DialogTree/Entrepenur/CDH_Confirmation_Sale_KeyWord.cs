@@ -6,13 +6,13 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Realiza la confirmación de la ´publicación.
     /// </summary>
-    public class CDH_Confirmation_Sale_KeyWord : ChatDialogHandlerBase
+    public class CDHConfirmation_Sale_KeyWord : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Confirmation_Sale_KeyWord"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHConfirmation_Sale_KeyWord"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Confirmation_Sale_KeyWord(ChatDialogHandlerBase next) : base(next, "Confirmation_Sale_KeyWord")
+        public CDHConfirmation_Sale_KeyWord(ChatDialogHandlerBase next) : base(next, "Confirmation_Sale_KeyWord")
         {
             this.parents.Add("Sale_Publication_KeyWord");
             this.route = "\\comprar";

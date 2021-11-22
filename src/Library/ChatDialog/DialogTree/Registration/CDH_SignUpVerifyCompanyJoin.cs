@@ -8,13 +8,13 @@ namespace ClassLibrary
     /// para unirse a una empresa, y le pide al usuario
     /// verificar que esta es la accion deseada.
     /// </summary>
-    public class CDH_SignUpVerifyCompanyJoin : ChatDialogHandlerBase
+    public class CDHSignUpVerifyCompanyJoin : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpVerifyCompanyJoin"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSignUpVerifyCompanyJoin"/>.
         /// </summary>
         /// <param name="next">Siguiente handler</param>
-        public CDH_SignUpVerifyCompanyJoin(ChatDialogHandlerBase next) : base(next, "registration_invite_comp_join")
+        public CDHSignUpVerifyCompanyJoin(ChatDialogHandlerBase next) : base(next, "registration_invite_comp_join")
         {
             this.parents.Add("registration_invite");
             this.route = null;

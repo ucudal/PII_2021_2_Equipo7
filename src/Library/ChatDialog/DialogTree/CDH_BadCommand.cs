@@ -4,12 +4,12 @@ namespace ClassLibrary
     /// ChatDialogHandler concreto:
     /// Responde a un comando incorrecto.
     /// </summary>
-    public class CDH_BadCommand : ChatDialogHandlerBase
+    public class CDHBadCommand : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_BadCommand"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHBadCommand"/>.
         /// </summary>
-        public CDH_BadCommand() : base(null, "bad_command")
+        public CDHBadCommand() : base(null, "bad_command")
         {
             this.route = null;
         }

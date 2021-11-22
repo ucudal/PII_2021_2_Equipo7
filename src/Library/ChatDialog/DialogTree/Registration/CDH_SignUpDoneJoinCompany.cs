@@ -9,13 +9,13 @@ namespace ClassLibrary
     /// a una compañía ya existente. Ingresa los
     /// datos al sistema.
     /// </summary>
-    public class CDH_SignUpDoneJoinCompany : ChatDialogHandlerBase
+    public class CDHSignUpDoneJoinCompany : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpDoneJoinCompany"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSignUpDoneJoinCompany"/>.
         /// </summary>
         /// <param name="next">Siguiente handler</param>
-        public CDH_SignUpDoneJoinCompany(ChatDialogHandlerBase next) : base(next, "registration_Done_join_Company")
+        public CDHSignUpDoneJoinCompany(ChatDialogHandlerBase next) : base(next, "registration_Done_join_Company")
         {
             this.parents.Add("Sign_Review_Join_Company");
             this.route = "/confirmar";

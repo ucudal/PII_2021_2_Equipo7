@@ -8,13 +8,13 @@ namespace ClassLibrary
     /// empresa. Le pide al usuario revisar los datos 
     /// ingresados y confirmar su ingreso al sistema.
     /// </summary>
-    public class CDH_SignUpReviewEntrepreneurNew : ChatDialogHandlerBase
+    public class CDHSignUpReviewEntrepreneurNew : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpReviewEntrepreneurNew"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSignUpReviewEntrepreneurNew"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpReviewEntrepreneurNew(ChatDialogHandlerBase next) : base(next, "registration_new_entre_verify")
+        public CDHSignUpReviewEntrepreneurNew(ChatDialogHandlerBase next) : base(next, "registration_new_entre_verify")
         {
             this.parents.Add("registration_new_entre_trade");
             this.route = null;

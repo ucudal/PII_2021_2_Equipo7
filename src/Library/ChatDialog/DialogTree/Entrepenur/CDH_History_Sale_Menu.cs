@@ -6,13 +6,13 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Muestra una lista compras hechas por el emprendedor.
     /// </summary>
-    public class CDH_History_Sale_Menu : ChatDialogHandlerBase
+    public class CDHHistory_Sale_Menu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_History_Sale_Menu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHHistory_Sale_Menu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_History_Sale_Menu(ChatDialogHandlerBase next) : base(next, "History_Sale_Menu")
+        public CDHHistory_Sale_Menu(ChatDialogHandlerBase next) : base(next, "History_Sale_Menu")
         {
             this.parents.Add("welcome_entrepreneur");
             this.route = "\\historialcompras";

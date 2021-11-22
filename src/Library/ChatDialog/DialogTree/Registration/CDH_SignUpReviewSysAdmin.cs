@@ -10,13 +10,13 @@ namespace ClassLibrary
     /// usuario revisar los datos ingresados y confirmar
     /// el ingreso al sistema.
     /// </summary>
-    public class CDH_SignUpReviewSysAdmin : ChatDialogHandlerBase
+    public class CDHSignUpReviewSysAdmin : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpReviewSysAdmin"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSignUpReviewSysAdmin"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpReviewSysAdmin(ChatDialogHandlerBase next) : base(next, "registration_join_sysadmin_verify")
+        public CDHSignUpReviewSysAdmin(ChatDialogHandlerBase next) : base(next, "registration_join_sysadmin_verify")
         {
             this.parents.Add("registration_user_l_name");
             this.route = null;

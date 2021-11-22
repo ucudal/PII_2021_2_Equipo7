@@ -9,13 +9,13 @@ namespace ClassLibrary
     /// al usuario que ingrese otro codigo o se le da
     /// la opcion de cancelar el proceso.
     /// </summary>
-    public class CDH_SignUpBadCode : ChatDialogHandlerBase
+    public class CDHSignUpBadCode : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpBadCode"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSignUpBadCode"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpBadCode(ChatDialogHandlerBase next) : base(next, "registration_bad_invite")
+        public CDHSignUpBadCode(ChatDialogHandlerBase next) : base(next, "registration_bad_invite")
         {
             this.parents.Add("registration_invite");
             this.route = null;

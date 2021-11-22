@@ -7,13 +7,13 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// no registrado en la plataforma.
     /// </summary>
-    public class CDH_SessionExpired : ChatDialogHandlerBase
+    public class CDHSessionExpired : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SessionExpired"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSessionExpired"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SessionExpired(ChatDialogHandlerBase next) : base(next, "session_expired_alert")
+        public CDHSessionExpired(ChatDialogHandlerBase next) : base(next, "session_expired_alert")
         {
             this.parents.Add("session_expired");
             this.route = "/resetsession";

@@ -8,13 +8,13 @@ namespace ClassLibrary
     /// empresa a agregar. Procede a pedirle al
     /// usuario introducir el oficio de la Empresa.
     /// </summary>
-    public class CDH_SignUpCompanyTrade : ChatDialogHandlerBase
+    public class CDHSignUpCompanyTrade : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpCompanyTrade"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSignUpCompanyTrade"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpCompanyTrade(ChatDialogHandlerBase next) : base(next, "registration_new_comp_trade")
+        public CDHSignUpCompanyTrade(ChatDialogHandlerBase next) : base(next, "registration_new_comp_trade")
         {
             this.parents.Add("registration_new_comp_name");
             this.route = null;

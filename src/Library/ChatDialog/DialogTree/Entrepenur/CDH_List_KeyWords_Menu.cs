@@ -6,13 +6,13 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Muestra una lista de publicaciones.
     /// </summary>
-    public class CDH_List_KeyWords_Menu : ChatDialogHandlerBase
+    public class CDHList_KeyWords_Menu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_List_KeyWords_Menu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHList_KeyWords_Menu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_List_KeyWords_Menu(ChatDialogHandlerBase next) : base(next, "List_KeyWords_Menu")
+        public CDHList_KeyWords_Menu(ChatDialogHandlerBase next) : base(next, "List_KeyWords_Menu")
         {
             this.parents.Add("Search_KeyWord_Menu");
             this.route = null;

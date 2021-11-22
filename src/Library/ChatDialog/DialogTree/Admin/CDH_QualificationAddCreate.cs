@@ -7,13 +7,13 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_QualificationAddCreate : ChatDialogHandlerBase
+    public class CDHQualificationAddCreate : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_QualificationAddCreate"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHQualificationAddCreate"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_QualificationAddCreate(ChatDialogHandlerBase next) : base(next, "hab_create")
+        public CDHQualificationAddCreate(ChatDialogHandlerBase next) : base(next, "hab_create")
         {
             this.parents.Add("hab_confir");
             this.route = "/confirmar";

@@ -7,13 +7,13 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_MaterialCategoryRemoveFromList : ChatDialogHandlerBase
+    public class CDHMaterialCategoryRemoveFromList : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_MaterialCategoryRemoveFromList"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHMaterialCategoryRemoveFromList"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_MaterialCategoryRemoveFromList(ChatDialogHandlerBase next) : base(next, "material_remove_from_list")
+        public CDHMaterialCategoryRemoveFromList(ChatDialogHandlerBase next) : base(next, "material_remove_from_list")
         {
             this.parents.Add("material_category_list");
             this.route = null;

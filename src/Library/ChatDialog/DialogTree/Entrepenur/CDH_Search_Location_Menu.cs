@@ -6,13 +6,13 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Busca una publicación con una palabra clave
     /// </summary>
-    public class CDH_Search_Location_Menu : ChatDialogHandlerBase
+    public class CDHSearch_Location_Menu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Search_Location_Menu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSearch_Location_Menu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Search_Location_Menu(ChatDialogHandlerBase next) : base(next, "Search_Location_Menu")
+        public CDHSearch_Location_Menu(ChatDialogHandlerBase next) : base(next, "Search_Location_Menu")
         {
             this.parents.Add("Search_Publication_Menu");
             this.route = "\\localidad";

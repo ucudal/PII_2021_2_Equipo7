@@ -7,13 +7,13 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_MateralCategoryFinal : ChatDialogHandlerBase
+    public class CDHMateralCategoryFinal : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_MateralCategoryFinal"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHMateralCategoryFinal"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_MateralCategoryFinal(ChatDialogHandlerBase next) : base(next, "matcat_final")
+        public CDHMateralCategoryFinal(ChatDialogHandlerBase next) : base(next, "matcat_final")
         {
             this.parents.Add("matcat_confir");
             this.route = "/confirmar";

@@ -6,14 +6,14 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Responde al inicio de un emprendedor.
     /// </summary>
-    public class CDH_Material_Regeneration_Menu : ChatDialogHandlerBase
+    public class CDHMaterial_Regeneration_Menu : ChatDialogHandlerBase
     {
 
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Material_Regeneration_Menu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHMaterial_Regeneration_Menu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Material_Regeneration_Menu(ChatDialogHandlerBase next) : base(next, "Material_Regeneration_Menu")
+        public CDHMaterial_Regeneration_Menu(ChatDialogHandlerBase next) : base(next, "Material_Regeneration_Menu")
         {
             this.parents.Add("welcome_entrepreneur");
             this.route = "\\regeneracionmaterial";

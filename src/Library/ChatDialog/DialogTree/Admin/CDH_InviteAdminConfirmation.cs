@@ -7,13 +7,13 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de la plataforma.
     /// </summary>
-    public class CDH_InviteAdminConfirmation : ChatDialogHandlerBase
+    public class CDHInviteAdminConfirmation : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_InviteAdminConfirmation"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHInviteAdminConfirmation"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_InviteAdminConfirmation(ChatDialogHandlerBase next) : base(next, "invite_admin_confirm")
+        public CDHInviteAdminConfirmation(ChatDialogHandlerBase next) : base(next, "invite_admin_confirm")
         {   this.parents.Add("invitemenu");
             this.route = "/admin" ;
 

@@ -7,13 +7,13 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_InviteEntrepreneurCreate : ChatDialogHandlerBase
+    public class CDHInviteEntrepreneurCreate : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_InviteEntrepreneurCreate"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHInviteEntrepreneurCreate"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_InviteEntrepreneurCreate(ChatDialogHandlerBase next) : base(next, "invite_company_create")
+        public CDHInviteEntrepreneurCreate(ChatDialogHandlerBase next) : base(next, "invite_company_create")
         {
             this.parents.Add("invite_entre_confirm");
             this.route = "/confirmar";

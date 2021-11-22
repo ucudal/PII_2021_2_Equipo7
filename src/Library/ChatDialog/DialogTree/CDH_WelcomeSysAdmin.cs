@@ -3,17 +3,17 @@ using System.Text;
 namespace ClassLibrary
 {
     /// <summary>
-    /// <see cref="CDH_WelcomeSysAdmin"/> concreto:
+    /// <see cref="CDHWelcomeSysAdmin"/> concreto:
     /// Responde al inicio de un usuario
     /// administrador de la plataforma.
     /// </summary>
-    public class CDH_WelcomeSysAdmin : ChatDialogHandlerBase
+    public class CDHWelcomeSysAdmin : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeSysAdmin"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHWelcomeSysAdmin"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_WelcomeSysAdmin(ChatDialogHandlerBase next) : base(next, "welcome_sysadmin")
+        public CDHWelcomeSysAdmin(ChatDialogHandlerBase next) : base(next, "welcome_sysadmin")
         {}
 
         /// <inheritdoc/>

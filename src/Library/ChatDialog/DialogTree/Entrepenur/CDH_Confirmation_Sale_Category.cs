@@ -6,13 +6,13 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Realiza la confirmación de la ´publicación.
     /// </summary>
-    public class CDH_Confirmation_Sale_Category : ChatDialogHandlerBase
+    public class CDHConfirmation_Sale_Category : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Confirmation_Sale_Category"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHConfirmation_Sale_Category"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Confirmation_Sale_Category(ChatDialogHandlerBase next) : base(next, "Confirmation_Sale_Category")
+        public CDHConfirmation_Sale_Category(ChatDialogHandlerBase next) : base(next, "Confirmation_Sale_Category")
         {
             this.parents.Add("Sale_Publication_Category");
             this.route = "\\comprar";
