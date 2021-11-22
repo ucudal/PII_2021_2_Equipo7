@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="CompanyMaterialStock.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -29,14 +35,14 @@ namespace ClassLibrary
 
         /// <inheritdoc/>
         public int Id
-        { 
+        {
             get => this.id;
             set => this.id = value;
         }
 
         /// <inheritdoc/>
         public bool Deleted
-        { 
+        {
             get => this.deleted;
             set => this.deleted = value;
         }
@@ -44,10 +50,10 @@ namespace ClassLibrary
         /// <summary>
         /// Id del material de compania
         /// al cual se le va a indicar
-        /// el stock
+        /// el stock.
         /// </summary>
         public int CompanyMatId
-        { 
+        {
             get => this.companyMatId;
             set => this.companyMatId = value;
         }
@@ -58,7 +64,7 @@ namespace ClassLibrary
         /// material de empresa.
         /// </summary>
         public int CompanyLocationId
-        { 
+        {
             get => this.companyLocationId;
             set => this.companyLocationId = value;
         }
@@ -69,7 +75,7 @@ namespace ClassLibrary
         /// dentro del lugar especificado.
         /// </summary>
         public int Stock
-        { 
+        {
             get => this.stock;
             set => this.stock = value;
         }

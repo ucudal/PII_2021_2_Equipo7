@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="CompanyMaterialQualification.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -26,14 +32,14 @@ namespace ClassLibrary
 
         /// <inheritdoc/>
         public int Id
-        { 
+        {
             get => this.id;
             set => this.id = value;
         }
 
         /// <inheritdoc/>
         public bool Deleted
-        { 
+        {
             get => this.deleted;
             set => this.deleted = value;
         }
@@ -42,7 +48,7 @@ namespace ClassLibrary
         /// Id del material de la compania.
         /// </summary>
         public int CompanyMatId
-        { 
+        {
             get => this.companyMatId;
             set => this.companyMatId = value;
         }
@@ -51,7 +57,7 @@ namespace ClassLibrary
         /// Habilitacion asociada al material de la compania.
         /// </summary>
         public int QualificationId
-        { 
+        {
             get => this.qualificationId;
             set => this.qualificationId = value;
         }
@@ -80,5 +86,4 @@ namespace ClassLibrary
             this.QualificationId = qualification.QualificationId;
         }
     }
-
 }
