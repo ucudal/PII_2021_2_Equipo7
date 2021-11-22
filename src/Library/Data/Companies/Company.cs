@@ -4,25 +4,32 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Collections;
-using System.Text.Json.Serialization;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace ClassLibrary
 {
-
-        public Company( int id, string name, string trade)
+    /// <summary>
+    /// esta clase representa a la compania.
+    /// </summary>
+    public class Company : IManagableData<Company>
+    {
+        /// <summary>
+        /// constructor de la clase Company.
+        /// </summary>
+        /// <param name="name"> nombre de la company. </param>
+        /// <param name="id">id de la company. </param>
+        /// <param name="trade">trade de la company. </param>
+        public Company(int id, string name, string trade)
         {
-            this.Name =name;
+            this.Name = name;
             this.Id = id;
             this.Trade = trade;
-            this.Deleted= false;
-            
+            this.Deleted = false;
         }
+
         /// <summary>
-        /// constructor vacio de company
+        /// constructor vacio de company.
         /// </summary>
         [JsonConstructor]
         public Company()
@@ -30,11 +37,7 @@ namespace ClassLibrary
             this.Id = 0;
             this.Deleted = false;
         }
-    /// <summary>
-    /// esta clase representa a la compania
-    /// </summary>
-    public class Company : IManagableData<Company>
-    {
+
         /// <summary>
         /// nombre de la compania.
         /// </summary>
@@ -56,7 +59,7 @@ namespace ClassLibrary
         /// <summary>
         /// identificador de la compania para ser identificado adentro del programa.
         /// </summary>
-        /// <value>identificador de la compania para ser identificado adentro del programa</value>
+        /// <value>identificador de la compania. </value>
         public int Id { get; set; }
 
         /// <summary>
@@ -66,43 +69,36 @@ namespace ClassLibrary
         public bool Deleted { get; set; }
 
         /// <summary>
-        /// constructor de la clase Company.
+        /// cargar json.
         /// </summary>
-        /// <param name="name"> nombre de la company. </param>
-        /// <param name="id">id de la company. </param>
-        /// <param name="trade">trade de la company. </param>
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="json"></param>
+        /// <param name="json">json de company.</param>
         public void LoadFromJson(string json)
         {
-            Company compania=JsonSerializer.Deserialize<Company>(json);
-            this.Id=compania.Id;
-            this.Name=compania.Name;
-            this.Deleted=compania.Deleted;
-            this.Trade=compania.Trade;
-            
+            Company compania = JsonSerializer.Deserialize<Company>(json);
+            this.Id = compania.Id;
+            this.Name = compania.Name;
+            this.Deleted = compania.Deleted;
+            this.Trade = compania.Trade;
         }
+
         /// <summary>
-        /// 
+        /// clonar el objeto.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>objeto de tipo company.</returns>
         public Company Clone()
         {
-            Company company =new Company();
+            Company company = new Company();
             company.LoadFromJson(this.ConvertToJson());
             return company;
         }
+
         /// <summary>
-        /// 
+        /// convierte a json.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>objeto serializado a json.</returns>
         public string ConvertToJson()
         {
             return JsonSerializer.Serialize(this);
         }
-    } 
-
+    }
 }
