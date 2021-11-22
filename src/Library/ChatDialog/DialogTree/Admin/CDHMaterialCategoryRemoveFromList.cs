@@ -36,8 +36,11 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            InsertMaterialCategoryData data = new InsertMaterialCategoryData();
-            data.MaterialCategory=this.DatMgr.MaterialCategory.GetById(int.Parse(selector.Code));
+            InsertMaterialCategoryData data = new InsertMaterialCategoryData
+            {
+                MaterialCategory = this.DatMgr.MaterialCategory.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture)),
+            };
+
             UserActivity process = new UserActivity("remove_category", null, this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.CurrentActivity = process;

@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_NextPage.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHNextPage.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -12,13 +12,13 @@ namespace ClassLibrary
     /// <summary>
     /// asd.
     /// </summary>
-    public class CDH_NextPage : ChatDialogHandlerBase
+    public class CDHNextPage : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase. <see cref="CDH_NextPage"/>.
+        /// Inicializa una nueva instancia de la clase. <see cref="CDHNextPage"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_NextPage(ChatDialogHandlerBase next)
+        public CDHNextPage(ChatDialogHandlerBase next)
             : base(next, "list_next_page")
         {
             this.Route = "/pagina_siguiente";

@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Return.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHReturn.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -16,13 +16,13 @@ namespace ClassLibrary
     /// al proceso de registro de usuarios. Devuelve al
     /// usuario al menu de bienvenida.
     /// </summary>
-    public class CDH_Return : ChatDialogHandlerBase
+    public class CDHReturn : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Return"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHReturn"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Return(ChatDialogHandlerBase next)
+        public CDHReturn(ChatDialogHandlerBase next)
             : base(next, "return")
         {
             this.Route = "/volver";

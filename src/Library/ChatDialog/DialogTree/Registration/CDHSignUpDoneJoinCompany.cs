@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_SignUpDoneJoinCompany.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHSignUpDoneJoinCompany.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------

@@ -3,11 +3,17 @@
     "cSpell.language": "en,es",
     "cSpell.words": [
         "autenticacion",
+        "Comapny",
+        "cref",
         "Doxify",
         "inicializador",
         "manejador",
+        "Materal",
+        "Modifi",
         "Petrucci",
-        "serializacion"
+        "referenciando",
+        "serializacion",
+        "Ubication"
     ],
     "omnisharp.enableRoslynAnalyzers": true
 }

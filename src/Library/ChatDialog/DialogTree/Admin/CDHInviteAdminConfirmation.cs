@@ -36,7 +36,7 @@ namespace ClassLibrary
             }
 
             InsertInvitationData data = new InsertInvitationData();
-            data.Invitation.Type= RegistrationType.SystemAdminJoin;
+            data.Invitation.Type = RegistrationType.SystemAdminJoin;
             UserActivity process = new UserActivity("Admin_invite", null, this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.CurrentActivity = process;

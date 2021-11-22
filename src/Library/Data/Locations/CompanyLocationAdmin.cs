@@ -1,8 +1,15 @@
+// -----------------------------------------------------------------------
+// <copyright file="CompanyLocationAdmin.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using Ucu.Poo.Locations.Client;
 using Nito.AsyncEx;
+using Ucu.Poo.Locations.Client;
 
 namespace ClassLibrary
 {
@@ -53,7 +60,7 @@ namespace ClassLibrary
         /// <param name="geoRef">
         /// Geo referencia contra cual se quiere
         /// comparar la distancia a las localizaciones
-        /// de la empresa
+        /// de la empresa.
         /// </param>
         /// <returns>
         /// <see cref="CompanyLocation"/> con los datos
@@ -66,12 +73,12 @@ namespace ClassLibrary
 
             double closestDistance = 0;
             CompanyLocation closestLocation = null;
-            
+
             Distance distance;
 
             foreach (CompanyLocation compLoc in compLocs)
             {
-                Task<Distance> task = locClient.GetDistanceAsync(compLoc.GeoReference, geoRef); 
+                Task<Distance> task = locClient.GetDistanceAsync(compLoc.GeoReference, geoRef);
                 distance = AsyncContext.Run(() => task);
 
                 if (closestLocation is null)
@@ -89,17 +96,29 @@ namespace ClassLibrary
                 }
             }
 
+            locClient.Dispose();
+
             return closestLocation.Clone();
         }
 
         /// <inheritdoc/>
         protected override void ValidateData(CompanyLocation item)
         {
-            DataManager dataManager = new DataManager();
-            if(item.CompanyId == 0 /*|| !dataManager.Company.Exists(item.CompanyId)*/) 
+            if (item is null)
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
+
+            // DataManager dataManager = new DataManager();
+            if (item.CompanyId == 0 /*|| !dataManager.Company.Exists(item.CompanyId)*/)
+            {
                 throw new ValidationException("Requerida compania valida.");
-            if(item.GeoReference is null || item.GeoReference.Length == 0) 
+            }
+
+            if (item.GeoReference is null || item.GeoReference.Length == 0)
+            {
                 throw new ValidationException("Requerida geo referencia.");
+            }
         }
     }
 }

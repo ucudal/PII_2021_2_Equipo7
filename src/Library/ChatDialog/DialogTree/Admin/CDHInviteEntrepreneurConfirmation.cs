@@ -36,7 +36,7 @@ namespace ClassLibrary
             }
 
             InsertInvitationData data = new InsertInvitationData();
-            data.Invitation.Type= RegistrationType.EntrepreneurNew;
+            data.Invitation.Type = RegistrationType.EntrepreneurNew;
             UserActivity process = new UserActivity("entrepreneur_invite", null, this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.CurrentActivity = process;

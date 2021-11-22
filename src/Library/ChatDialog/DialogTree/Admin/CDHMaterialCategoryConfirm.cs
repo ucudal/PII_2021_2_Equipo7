@@ -36,7 +36,7 @@ namespace ClassLibrary
             }
 
             InsertMaterialCategoryData data = new InsertMaterialCategoryData();
-            data.MaterialCategory.Name=selector.Code;
+            data.MaterialCategory.Name = selector.Code;
             UserActivity process = new UserActivity("add_MatCat", null, this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.CurrentActivity = process;

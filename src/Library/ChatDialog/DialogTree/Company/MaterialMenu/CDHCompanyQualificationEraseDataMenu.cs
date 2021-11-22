@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_CompanyQualificationEraseDataMenu.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHCompanyQualificationEraseDataMenu.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------

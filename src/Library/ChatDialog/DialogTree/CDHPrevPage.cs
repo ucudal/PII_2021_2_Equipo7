@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_PrevPage.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHPrevPage.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -12,13 +12,13 @@ namespace ClassLibrary
     /// <summary>
     /// asd.
     /// </summary>
-    public class CDH_PrevPage : ChatDialogHandlerBase
+    public class CDHPrevPage : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase. <see cref="CDH_PrevPage"/>.
+        /// Inicializa una nueva instancia de la clase. <see cref="CDHPrevPage"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_PrevPage(ChatDialogHandlerBase next)
+        public CDHPrevPage(ChatDialogHandlerBase next)
             : base(next, "list_prev_page")
         {
             this.Route = "/pagina_anterior";

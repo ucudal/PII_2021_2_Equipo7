@@ -37,8 +37,8 @@ namespace ClassLibrary
             }
 
             InsertInvitationData data = new InsertInvitationData();
-            data.Invitation.Type= RegistrationType.CompanyJoin;
-            data.Invitation.CompanyId = int.Parse(selector.Code);
+            data.Invitation.Type = RegistrationType.CompanyJoin;
+            data.Invitation.CompanyId = int.Parse(selector.Code, CultureInfo.InvariantCulture);
             UserActivity process = new UserActivity("companyexist_invite", null, this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.CurrentActivity = process;

@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Company_Tracing_Menu.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHCompany_Tracing_Menu.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
