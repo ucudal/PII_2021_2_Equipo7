@@ -1,3 +1,10 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDHMaterialCategoryRemoveFinal.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Text;
 
 namespace ClassLibrary
@@ -7,13 +14,14 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_MaterialCategoryRemoveFinal : ChatDialogHandlerBase
+    public class CDHMaterialCategoryRemoveFinal : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_MaterialCategoryRemoveFinal"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHMaterialCategoryRemoveFinal"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_MaterialCategoryRemoveFinal(ChatDialogHandlerBase next) : base(next, "matcat_remove_final")
+        public CDHMaterialCategoryRemoveFinal(ChatDialogHandlerBase next)
+        : base(next, "matcat_remove_final")
         {
             this.Parents.Add("material_remove_from_list");
             this.Route = "/confirmar";
@@ -22,47 +30,53 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
             StringBuilder builder = new StringBuilder();
-            if(EraseMatcat(selector))
+            if (this.EraseMatcat(selector))
             {
                 builder.Append("Los datos se eliminaron correctamente.\n");
             }
             else
             {
                 builder.Append("Los datos no se pudieron eliminar .\n");
-
             }
+
             builder.Append("escriba \n");
             builder.Append("\\volver : para retornar al menu de materiales.\n");
             return builder.ToString();
         }
-        
+
         private bool EraseMatcat(ChatDialogSelector selector)
         {
-            bool xretorno=false;
+            bool xretorno = false;
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity process = session.CurrentActivity;
             InsertMaterialCategoryData data = process.GetData<InsertMaterialCategoryData>();
             MaterialCategory materialCategory = data.MaterialCategory;
-            if(IsNotAllReadyToDelete(data)==false)
+            if (this.IsNotAllReadyToDelete(data) == false)
             {
                 this.DatMgr.MaterialCategory.Delete(materialCategory.Id);
-                xretorno=true;
+                xretorno = true;
             }
-            return xretorno;
 
+            return xretorno;
         }
+
         private bool IsNotAllReadyToDelete(InsertMaterialCategoryData data)
         {
-            bool xretorno=false;
-            foreach(MaterialCategory xMatCat in this.DatMgr.MaterialCategory.Items)
+            bool xretorno = false;
+            foreach (MaterialCategory xMatCat in this.DatMgr.MaterialCategory.Items)
             {
-                if(xMatCat.Id == data.MaterialCategory.Id)
+                if (xMatCat.Id == data.MaterialCategory.Id)
                 {
-                    xretorno=true;
+                    xretorno = true;
                 }
             }
-            
+
             return xretorno;
         }
     }

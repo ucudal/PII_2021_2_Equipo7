@@ -1,3 +1,11 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDHQualificationRemoveList.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
+using System.Globalization;
 using System.Text;
 
 namespace ClassLibrary
@@ -7,13 +15,14 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_QualificationRemoveList : ChatDialogHandlerBase
+    public class CDHQualificationRemoveList : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CHD_QualificationRemoveList"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHQualificationRemoveList"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_QualificationRemoveList(ChatDialogHandlerBase next) : base(next, "hab_remove_conf")
+        public CDHQualificationRemoveList(ChatDialogHandlerBase next)
+        : base(next, "hab_remove_conf")
         {
             this.Parents.Add("hab_remove");
             this.Route = null;
@@ -22,6 +31,11 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
             InsertQualificationData data = new InsertQualificationData();
             data.Qualification=this.DatMgr.Qualification.GetById(int.Parse(selector.Code));
             UserActivity process = new UserActivity("Remove_Qualification", null, this.Code, data);
@@ -34,7 +48,5 @@ namespace ClassLibrary
             builder.Append("\\cancelar");
             return builder.ToString();
         }
-        
-       
     }
 }

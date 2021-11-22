@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDHQualificationsAddNameMenu.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Text;
 
 namespace ClassLibrary
@@ -7,18 +13,19 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de la plataforma.
     /// </summary>
-    public class CDH_QualificationsAddNameMenu : ChatDialogHandlerBase
+    public class CDHQualificationsAddNameMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeSysAdmin"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHQualificationsAddNameMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_QualificationsAddNameMenu(ChatDialogHandlerBase next) : base(next, "hab_add_name")
-        {   
+        public CDHQualificationsAddNameMenu(ChatDialogHandlerBase next)
+        : base(next, "hab_add_name")
+        {
             this.Parents.Add("hab_menu");
             this.Route = "/agregar";
         }
-        
+
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
@@ -27,6 +34,5 @@ namespace ClassLibrary
             builder.Append("\\cancelar");
             return builder.ToString();
         }
-
     }
 }

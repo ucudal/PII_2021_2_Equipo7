@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDHAdminQualificationsMenu.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Text;
 
 namespace ClassLibrary
@@ -7,31 +13,30 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de la plataforma.
     /// </summary>
-    public class CDH_AdminInviteMenu : ChatDialogHandlerBase
+    public class CDHAdminQualificationsMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeSysAdmin"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHAdminQualificationsMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_AdminInviteMenu(ChatDialogHandlerBase next) : base(next, "invitemenu")
-        {   
+        public CDHAdminQualificationsMenu(ChatDialogHandlerBase next)
+        : base(next, "hab_menu")
+        {
             this.Parents.Add("welcome_sysadmin");
-            this.Route = "/invitar";
+            this.Route = "/habilitaciones";
         }
-        
+
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
             StringBuilder builder = new StringBuilder();
-            builder.Append("Usted ha seleccionado la opcion invitar .\n");
+            builder.Append("Usted ha seleccionado la opcionhabilitaciones .\n");
             builder.Append("Que tipio de invitacion quiere crear:\n\n");
             builder.Append("\\admin : Invitacion de administradores del sistema.\n");
             builder.Append("\\emprendedor : Invitacion de emprendedores al sistema.\n");
-            builder.Append("\\compania_nueva : Invitacion de companias al sistema.\n");
-            builder.Append("\\compania_existente \n");
-            builder.Append("\\cancelar");
+            builder.Append("\\compania : Invitacion de companias al sistema.\n");
+            builder.Append("\\cancelar \n");
             return builder.ToString();
         }
-
     }
 }
