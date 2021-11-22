@@ -803,7 +803,6 @@
         </member>
         <member name="M:ClassLibrary.CDH_WelcomeSysAdmin.#ctor(ClassLibrary.ChatDialogHandlerBase)">
             <summary>
-            Initializes a new instance of the <see cref="T:ClassLibrary.CDH_WelcomeSysAdmin"/> class.
             Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDH_WelcomeSysAdmin"/>.
             </summary>
             <param name="next">Siguiente handler.</param>
