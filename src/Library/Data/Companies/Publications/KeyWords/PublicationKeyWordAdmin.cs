@@ -27,9 +27,14 @@ namespace ClassLibrary
         public bool PublicationMatchesKeyWord(int pubId, string keyWord)
         {
             IReadOnlyCollection<PublicationKeyWord> keyWords = this.Items;
+            if (keyWord is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(keyWord));
+            }
+
             foreach (PublicationKeyWord word in keyWords)
             {
-                if (word.PublicationId == pubId && word.KeyWord.ToLower() == keyWord.ToLower())
+                if (word.PublicationId == pubId && word.KeyWord.ToUpperInvariant() == keyWord.ToUpperInvariant())
                 {
                     return true;
                 }
