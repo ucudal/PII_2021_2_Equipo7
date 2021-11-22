@@ -31,48 +31,59 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            StringBuilder builder = new StringBuilder();
-            builder.Append("Menu lista de habilitaciones.\n");
-            builder.Append("lista de habilitaciones que puede agregar.\n");
-            builder.Append("Ingrese el numero de la habilitacion que quiere agregar.\n");
-            builder.Append("Sino, en caso de querer retornar escriba\n");
-            builder.Append("\\volver para volver al menu de materiales.\n");
-            builder.Append(this.TextoToPrintQualifications(selector));
-            builder.Append("LISTADO_HABILITACIONES");
-            return builder.ToString();
-        }
-
-        private string TextoToPrintQualifications(ChatDialogSelector selector)
-        {
-            StringBuilder builder = new StringBuilder();
             if (selector is null)
             {
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
-            SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            List<Qualification> habilitacionesNoAgegadas = new List<Qualification>();
-            int i = 0;
-            bool sigo = true;
-            foreach (Qualification habi in this.DatMgr.Qualification.Items)
+            UserActivity activity;
+            if (session.CurrentActivity.Code != "search_by_page_entre_qual_ins_1")
             {
-                sigo = true;
-                IReadOnlyCollection<int> habilitaciones = this.DatMgr.EntrepreneurQualification.GetQualificationsForEntrepreneur(session.UserId);
-                while (i < habilitaciones.Count && sigo == true)
-                {
-                   if (habi.Id == habilitaciones.ElementAt(i))
-                   {
-                       sigo = false;
-                       habilitacionesNoAgegadas.Add(habi);
-                   }
-                }
+                IReadOnlyCollection<int> qualifications = this.DatMgr.Qualification.Items.Select(qual => qual.Id).ToList().AsReadOnly();
+                SearchData search = new SearchData(qualifications, this.Parents.First(), this.Route);
+                activity = new UserActivity("search_by_page_entre_qual_ins_1", "welcome_entrepreneur", "/habilitaciones", search);
+                session.PushActivity(activity);
             }
 
-            foreach (Qualification x in habilitacionesNoAgegadas)
+            activity = session.CurrentActivity;
+            SearchData data = activity.GetData<SearchData>();
+
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("<b>Agregar habilitacion</b>.\n");
+            builder.Append("El siguiente listado contiene todas las habilitaciones que puede agregar. ");
+            builder.AppendLine("Escoja una para poder continuar.\n");
+            if (data.SearchResults.Count > 0)
             {
-                builder.Append(" " + x.Name + " " + x.Id + "\n");
+                builder.AppendLine($"{this.TextoToPrintQualifications(data)}");
+            }
+            else
+            {
+                builder.AppendLine("(No se encontraron habilitaciones)\n");
+            }
+
+            if (data.PageItemCount < data.SearchResults.Count)
+            {
+                builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
+                builder.AppendLine("/pagina_anterior - Pagina anterior.\n");
+            }
+
+            builder.Append("/volver - Volver al menu de habilitaciones.");
+            return builder.ToString();
+        }
+
+        private string TextoToPrintQualifications(SearchData search)
+        {
+            if (search is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(search));
+            }
+
+            StringBuilder builder = new StringBuilder();
+            foreach (int qualificationId in search.PageItems)
+            {
+                Qualification qualification = this.DatMgr.Qualification.GetById(qualificationId);
+                builder.AppendLine($"{qualificationId} - {qualification.Name}");
             }
 
             return builder.ToString();

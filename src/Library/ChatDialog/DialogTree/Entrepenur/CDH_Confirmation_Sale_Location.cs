@@ -23,25 +23,35 @@ namespace ClassLibrary
         : base(next, "Confirmation_Sale_Location")
         {
             this.Parents.Add("Sale_Publication_Location");
-            this.Route = "\\comprar";
+            this.Route = "/comprar";
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            StringBuilder builder = new StringBuilder();
             if (selector is null)
             {
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
-            SearchPublication data = process.GetData<SearchPublication>();
+            UserActivity activity = session.CurrentActivity;
+            EntrepreneurPurchaseData data = activity.GetData<EntrepreneurPurchaseData>();
 
-            builder.Append($"Seguro que desea comprar la publicacion con Id - {data.Publication.Id} \n");
-            builder.Append("\\confirmar : Confirma la compra la publicación\n");
-            builder.Append("\\cancelar : Cancelar la compra\n");
+            Publication pub = this.DatMgr.Publication.GetById(data.PublicationId);
+            Company comp = this.DatMgr.Company.GetById(pub.CompanyId);
+            CompanyMaterial compMat = this.DatMgr.CompanyMaterial.GetById(pub.CompanyMaterialId);
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("<b>Resumen de Compra</b>\n");
+            builder.AppendLine("Antes de confirmar la compra, verifique todos los datos de esta.\n");
+            builder.AppendLine($"<b>Publicacion</b>: {pub.Title}");
+            builder.AppendLine($"<b>Material</b>: {compMat.Name}");
+            builder.AppendLine($"<b>Vendedor</b>: {comp.Name}");
+            builder.AppendLine($"<b>Cantidad</b>: {pub.Quantity}");
+            builder.AppendLine($"<b>Moneda</b>: {Enum.GetName(typeof(Currency), pub.Currency)}");
+            builder.AppendLine($"<b>Precio</b>: {pub.Price}\n");
+            builder.AppendLine("/confirmar - Confirma compra.\n");
+            builder.Append("/volver - Cancelar la compra.");
             return builder.ToString();
         }
     }

@@ -24,9 +24,9 @@ namespace ClassLibrary
         {
             InsertMaterialCategoryData data = new InsertMaterialCategoryData();
             data.MaterialCategory=this.DatMgr.MaterialCategory.GetById(int.Parse(selector.Code));
-            DProcessData process = new DProcessData("remove_category", this.Code, data);
+            UserActivity process = new UserActivity("remove_category", null, this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            session.Process = process;
+            session.CurrentActivity = process;
             StringBuilder builder = new StringBuilder();
 
             builder.Append("Desea eliminar la categoria del material.\n");

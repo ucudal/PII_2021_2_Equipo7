@@ -38,8 +38,14 @@ namespace ClassLibrary
 
             InsertPublicationData data = new InsertPublicationData();
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+
+            UserActivity process = new UserActivity("select_publication", null, this.Code,data);
+            data.Publication=this.DatMgr.Publication.GetById(int.Parse(selector.Code));
+    
+
             DProcessData process = new DProcessData("select_publication", this.Code, data);
             data.Publication = this.DatMgr.Publication.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
+
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu acciones sobre la publicacion elegido.\n");
@@ -60,7 +66,7 @@ namespace ClassLibrary
 
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
                     Publication publication = this.DatMgr.Publication.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
                     if (publication is not null)

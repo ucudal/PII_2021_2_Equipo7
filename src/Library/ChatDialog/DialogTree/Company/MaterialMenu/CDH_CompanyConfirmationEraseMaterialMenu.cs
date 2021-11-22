@@ -36,7 +36,12 @@ namespace ClassLibrary
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+
+            SelectCompanyMaterialData data = session.CurrentActivity.GetData<SelectCompanyMaterialData>();
+            
+
             SelectCompanyMaterialData data = session.Process.GetData<SelectCompanyMaterialData>();
+
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu confirmar eliminacion.\n");
             builder.Append($"El nombre del material es {data.CompanyMaterial.Name}\n");

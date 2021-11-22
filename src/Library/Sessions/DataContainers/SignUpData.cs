@@ -11,15 +11,14 @@ namespace ClassLibrary
     /// del proceso de registro
     /// para un usuario.
     /// </summary>
-    public class SignUpData
+    public abstract class SignUpData : ActivityData
     {
         private readonly string account;
         private readonly MessagingService service;
         private RegistrationType type;
         private string inviteCode;
         private User user;
-        private Company company;
-        private Entrepreneur entrepreneur;
+        private DataManager datMgr = new DataManager();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SignUpData"/> class.
@@ -32,7 +31,7 @@ namespace ClassLibrary
         /// Servicio de mensajeria utilizado
         /// por el usuario a registrar.
         /// </param>
-        public SignUpData(string account, MessagingService service)
+        protected SignUpData(string account, MessagingService service)
         {
             this.account = account;
             this.service = service;
@@ -69,17 +68,12 @@ namespace ClassLibrary
         public User User { get => this.user; set => this.user = value; }
 
         /// <summary>
-        /// Instancia de <see cref="ClassLibrary.Company"/> que almacenara
-        /// los datos de la empresa para registrarlos al
-        /// terminar el proceso, si es requerido.
+        /// Acceso protegido al contenedor de administradores.
         /// </summary>
-        public Company Company { get => this.company; set => this.company = value; }
-
-        /// <summary>
-        /// Instancia de <see cref="ClassLibrary.Entrepreneur"/> que almacenara
-        /// los datos del emprendedor para registrarlos al
-        /// terminar el proceso, si es requerido.
-        /// </summary>
-        public Entrepreneur Entrepreneur { get => this.entrepreneur; set => this.entrepreneur = value; }
+        protected DataManager DatMgr
+        {
+            get => this.datMgr;
+            set => this.datMgr = value;
+        }
     }
 }

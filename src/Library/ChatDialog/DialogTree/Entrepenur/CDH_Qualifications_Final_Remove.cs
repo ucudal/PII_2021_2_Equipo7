@@ -31,32 +31,19 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            StringBuilder builder = new StringBuilder();
-            if (selector is null)
-            {
-                throw new ArgumentNullException(paramName: nameof(selector));
-            }
-
-            this.QualificationEraseData(selector);
-            builder.Append("La habilitacion se elimino con exito.\n");
-            builder.Append("Escriba ");
-            builder.Append("\\cancelar : para volver al menu de materiales .\n");
-            return builder.ToString();
-        }
-
-        private void QualificationEraseData(ChatDialogSelector selector)
-        {
             if (selector is null)
             {
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
-            EntrepreneurQualification data = process.GetData<EntrepreneurQualification>();
-            EntrepreneurQualification habi = this.DatMgr.EntrepreneurQualification.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
-            habi.Deleted = true;
-            this.DatMgr.EntrepreneurQualification.Update(habi);
+            EntrepreneurQualificationDeleteData deleteData = session.CurrentActivity.GetData<EntrepreneurQualificationDeleteData>();
+            deleteData.RunTask();
+
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("La habilitacion se elimino con exito.\n");
+            builder.Append("/volver - Regresar al listado de habilitaciones.");
+            return builder.ToString();
         }
     }
 }

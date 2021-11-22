@@ -38,10 +38,13 @@ namespace ClassLibrary
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
-            SignUpData data = process.GetData<SignUpData>();
+            UserActivity activity = session.CurrentActivity;
+            SignUpDataCompanyJoin data = activity.GetData<SignUpDataCompanyJoin>();
+
             User user = data.User;
             user.LastName = selector.Code.Trim();
+
+            session.CurrentActivity = activity;
 
             Invitation invitation = this.DatMgr.Invitation.GetByCode(data.InviteCode);
             Company company = this.DatMgr.Company.GetById(invitation.CompanyId);
@@ -66,12 +69,16 @@ namespace ClassLibrary
 
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
                     Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-                    if (session.Process.GetData<SignUpData>()?.Type == RegistrationType.CompanyJoin)
+                    if (typeof(SignUpData).IsAssignableFrom(session.CurrentActivity.TypeOfData))
                     {
-                        return true;
+                        SignUpData data = session.CurrentActivity.GetData() as SignUpData;
+                        if (data.Type == RegistrationType.CompanyJoin)
+                        {
+                            return true;
+                        }
                     }
                 }
             }

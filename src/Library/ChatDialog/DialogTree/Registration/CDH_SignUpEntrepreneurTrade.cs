@@ -41,11 +41,15 @@ namespace ClassLibrary
             entrepreneur.Name = selector.Code;
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            SignUpData data = session.Process.GetData<SignUpData>();
+            UserActivity activity = session.CurrentActivity;
+            SignUpDataEntrepreneurNew data = activity.GetData<SignUpDataEntrepreneurNew>();
+
             data.Entrepreneur = entrepreneur;
 
+            session.CurrentActivity = activity;
+
             StringBuilder builder = new StringBuilder();
-            builder.Append("Ingrese el oficio de su <b>emprendimiento</b>.");
+            builder.Append("Ingrese el <b>oficio</b> de su emprendimiento.");
             return builder.ToString();
         }
 
@@ -59,7 +63,7 @@ namespace ClassLibrary
 
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
                     return true;
                 }

@@ -5,6 +5,8 @@
 // -----------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ClassLibrary
@@ -23,35 +25,67 @@ namespace ClassLibrary
         : base(next, "Search_Category_Menu")
         {
             this.Parents.Add("Search_Publication_Menu");
-            this.Route = "\\categoria";
+            this.Route = "/categoria";
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            StringBuilder builder = new StringBuilder();
             if (selector is null)
             {
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            builder.Append("Menu para ingresar categoria \n");
-            builder.Append(this.TextToPrintMaterialCategory());
-            builder.Append("Ingrese el id de la categoria.\n");
-            builder.Append("\\cancelar : Volver a menu de busqueda .\n");
+            UserActivity activity;
+            if (session.CurrentActivity.Code != "search_by_page_entre_pubs_cat")
+            {
+                IReadOnlyCollection<int> matCats = this.DatMgr.MaterialCategory.Items.OrderBy(matCat => matCat.Name).Select(matCat => matCat.Id).ToList().AsReadOnly();
+                SearchData search = new SearchData(matCats, this.Parents.First(), this.Route);
+                activity = new UserActivity("search_by_page_entre_pubs_cat", "welcome_entrepreneur", "/buscar", search);
+                session.PushActivity(activity);
+            }
+
+            activity = session.CurrentActivity;
+            SearchData data = activity.GetData<SearchData>();
+
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("<b>Busqueda por Categoria</b>\n");
+            builder.AppendLine("Ingrese el numero de la categoria por la cual buscar.\n");
+            if (data.SearchResults.Count > 0)
+            {
+                builder.AppendLine($"{this.TextToPrintMaterialCategory(data)}");
+            }
+            else
+            {
+                builder.AppendLine("(No se encontraron habilitaciones)\n");
+            }
+
+            if (data.PageItemCount < data.SearchResults.Count)
+            {
+                builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
+                builder.AppendLine("/pagina_anterior - Pagina anterior.\n");
+            }
+
+            builder.Append("/volver - Volver al menu de busqueda.");
             return builder.ToString();
         }
 
-        private string TextToPrintMaterialCategory()
+        private string TextToPrintMaterialCategory(SearchData search)
         {
-            StringBuilder listCategory = new StringBuilder();
-            foreach (MaterialCategory cate in this.DatMgr.MaterialCategory.Items)
+            if (search is null)
             {
-               listCategory.Append($" Identificador de la categoria - {cate.Id}\n");
+                throw new ArgumentNullException(paramName: nameof(search));
             }
 
-            return listCategory.ToString();
+            StringBuilder builder = new StringBuilder();
+            foreach (int matCatId in search.PageItems)
+            {
+                MaterialCategory matCat = this.DatMgr.MaterialCategory.GetById(matCatId);
+                builder.AppendLine($"{matCat.Id} - {matCat.Name}");
+            }
+
+            return builder.ToString();
         }
     }
 }

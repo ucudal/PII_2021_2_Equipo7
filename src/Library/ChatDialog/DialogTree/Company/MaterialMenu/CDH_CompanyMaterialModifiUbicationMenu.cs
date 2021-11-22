@@ -37,8 +37,13 @@ namespace ClassLibrary
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+
+            UserActivity process = session.CurrentActivity;;
+            session.CurrentActivity = process;
+
             DProcessData process = session.Process;
             session.Process = process;
+
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
             data.CompanyMaterialStock.Stock = int.Parse(selector.Code, CultureInfo.InvariantCulture);
             data.CompanyMaterialStock.CompanyMatId = data.CompanyMaterial.Id;
@@ -59,7 +64,7 @@ namespace ClassLibrary
 
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
                     return true;
                 }

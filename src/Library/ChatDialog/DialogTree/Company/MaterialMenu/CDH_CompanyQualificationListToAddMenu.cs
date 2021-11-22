@@ -52,7 +52,7 @@ namespace ClassLibrary
         {
             StringBuilder builder = new StringBuilder();
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
+            UserActivity process = session.CurrentActivity;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
             List<Qualification> xhabilitacionesNoAgegadas = new List<Qualification>();
             int i = 0;

@@ -38,10 +38,14 @@ namespace ClassLibrary
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            SignUpData data = session.Process.GetData<SignUpData>();
+            UserActivity activity = session.CurrentActivity;
+            SignUpDataCompanyNew data = activity.GetData<SignUpDataCompanyNew>();
+
             Company company = data.Company;
             company.Trade = selector.Code;
             User user = data.User;
+
+            session.CurrentActivity = activity;
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Antes de completar el proceso de registro, por favor verifique los datos ingresados.\n\n");
@@ -64,7 +68,7 @@ namespace ClassLibrary
 
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
                     return true;
                 }

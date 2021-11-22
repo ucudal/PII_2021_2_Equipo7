@@ -24,9 +24,9 @@ namespace ClassLibrary
         {
             InsertQualificationData data = new InsertQualificationData();
             data.Qualification=this.DatMgr.Qualification.GetById(int.Parse(selector.Code));
-            DProcessData process = new DProcessData("Remove_Qualification", this.Code, data);
+            UserActivity process = new UserActivity("Remove_Qualification", null, this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            session.Process = process;
+            session.CurrentActivity = process;
             StringBuilder builder = new StringBuilder();
 
             builder.Append("Desea eliminar la habilitacion.\n");

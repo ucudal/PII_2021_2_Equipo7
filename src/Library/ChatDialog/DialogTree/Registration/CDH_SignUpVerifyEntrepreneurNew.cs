@@ -37,11 +37,15 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
+            SignUpDataEntrepreneurNew data = new SignUpDataEntrepreneurNew(selector.Account, selector.Service)
+            {
+                Type = RegistrationType.EntrepreneurNew,
+                InviteCode = selector.Code,
+            };
+            UserActivity activity = new UserActivity("registration", null, "/registration", data);
+
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
-            SignUpData data = process.GetData<SignUpData>();
-            data.Type = RegistrationType.EntrepreneurNew;
-            data.InviteCode = selector.Code;
+            session.PushActivity(activity);
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Su codigo de invitacion le permite ingresar como un nuevo emprendedor.\n\n");
@@ -60,7 +64,7 @@ namespace ClassLibrary
 
             if (this.Parents.Contains(selector.Context))
             {
-                 if (!selector.Code.StartsWith('\\'))
+                 if (!selector.Code.StartsWith('/'))
                 {
                     Invitation invite = this.DatMgr.Invitation.GetByCode(selector.Code);
                     if (invite is not null)

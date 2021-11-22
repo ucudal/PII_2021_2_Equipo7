@@ -5,8 +5,13 @@
 // -----------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Nito.AsyncEx;
+using Ucu.Poo.Locations.Client;
 
 namespace ClassLibrary
 {
@@ -30,43 +35,107 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            StringBuilder builder = new StringBuilder();
             if (selector is null)
             {
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            SearchPublication data = new SearchPublication();
-            data.Location = this.DatMgr.CompanyLocation.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
-            DProcessData process = new DProcessData("search_Publication_By_Location", this.Code, data);
-            builder.Append($"Listado de publicaciones con el id de localidad ingresada - {selector.Code} \n");
-            builder.Append("Ademas puede realizar las\n");
-            builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\siguiente : Siguiente pagina de publicaciones.\n");
-            builder.Append("\\anterior: Pagina anterior de publicaciones.\n");
-            builder.Append("\\cancelar : Volver a menu de buscar publicacion por localidad.\n");
-            builder.Append("LISTADO DE PUBLICACIONES:");
-            builder.Append(this.TextToPrintPublicationMaterialLocation(selector, data));
-            builder.Append("Ingrese el id de la publicación para ver los detalles de la publicacion.\n");
+            UserActivity activity;
+            if (session.CurrentActivity.Code != "search_by_page_entre_pubs_loc_results")
+            {
+                LocationApiClient locApi = new LocationApiClient();
+                IList<Publication> publ = this.DatMgr.Publication.Items.ToList();
+                Location location = locApi.GetLocation(selector.Code);
+                IList<Task<int>> apiCalls = publ.Select(pub => this.IdForCloseOrDefault(pub, location)).ToList();
+                IList<int> closePublications = AsyncContext.Run(() => RunAllDistanceCalcs(apiCalls)).ToList();
+                while (closePublications.Remove(0))
+                {
+                }
+
+                SearchData search = new SearchData(closePublications.ToList().AsReadOnly(), this.Parents.First(), this.Route);
+                activity = new UserActivity("search_by_page_entre_pubs_loc_results", "Search_Publication_Menu", "/localidad", search);
+                session.PushActivity(activity);
+                locApi.Dispose();
+            }
+
+            activity = session.CurrentActivity;
+            SearchData data = activity.GetData<SearchData>();
+
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("<b>Resultados por Localidad</b>\n");
+            builder.AppendLine($"Ingrese un id para ver detalles y/o realizar una compra.\n");
+            if (data.SearchResults.Count > 0)
+            {
+                builder.AppendLine($"{this.TextToPrintPublicationMaterialLocation(data)}");
+            }
+            else
+            {
+                builder.AppendLine("(No se encontraron publicaciones)\n");
+            }
+
+            if (data.PageItemCount < data.SearchResults.Count)
+            {
+                builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
+                builder.AppendLine("/pagina_anterior - Pagina anterior.\n");
+            }
+
+            builder.Append("/volver - Volver al menu de busqueda.");
             return builder.ToString();
         }
 
-        private string TextToPrintPublicationMaterialLocation(ChatDialogSelector selector, SearchPublication data)
+        /// <inheritdoc/>
+        public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
-            StringBuilder listpublicaciones = new StringBuilder();
-            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            foreach (Publication publi in this.DatMgr.Publication.Items)
+            if (selector is null)
             {
-                if (publi.Location.Id == data.Location.Id && publi.Deleted == false)
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            if (this.Parents.Contains(selector.Context))
+            {
+                if (!selector.Code.StartsWith('/'))
                 {
-                    Publication publication = this.DatMgr.Publication.GetById(publi.Id);
-                    CompanyMaterial mat = this.DatMgr.CompanyMaterial.GetById(publication.CompanyMaterialId);
-                    listpublicaciones.Append($" Identificador de la publicación - {publication.Id}, nombre del material - {mat.Name}\n");
+                    return true;
                 }
             }
 
-            return listpublicaciones.ToString();
+            return false;
+        }
+
+        private static async Task<IList<int>> RunAllDistanceCalcs(IList<Task<int>> distanceCalcTasks)
+        {
+            IList<int> results = await Task.WhenAll(distanceCalcTasks).ConfigureAwait(false);
+            return results;
+        }
+
+        private string TextToPrintPublicationMaterialLocation(SearchData search)
+        {
+            if (search is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(search));
+            }
+
+            StringBuilder builder = new StringBuilder();
+            foreach (int pubId in search.PageItems)
+            {
+                Publication pub = this.DatMgr.Publication.GetById(pubId);
+                builder.AppendLine($"{pub.Id} - {pub.Title}");
+            }
+
+            return builder.ToString();
+        }
+
+        private async Task<int> IdForCloseOrDefault(Publication publication, Location entreLoc)
+        {
+            LocationApiClient locApi = new LocationApiClient();
+
+            CompanyLocation compLoc = this.DatMgr.CompanyLocation.GetById(publication.CompanyLocationId);
+            Location compLocObj = await locApi.GetLocationAsync(compLoc.GeoReference).ConfigureAwait(false);
+            Distance distance = await locApi.GetDistanceAsync(entreLoc, compLocObj).ConfigureAwait(false);
+
+            locApi.Dispose();
+            return distance.TravelDistance <= 2.0 ? publication.Id : 0;
         }
     }
 }

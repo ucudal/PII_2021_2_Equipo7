@@ -38,10 +38,15 @@ namespace ClassLibrary
 
             MaterialCategory matCat = this.DatMgr.MaterialCategory.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
             SelectCompanyMaterialData data = new SelectCompanyMaterialData();
+
+            data.MaterialCategory=matCat;
+            UserActivity process = new UserActivity("modifi_material", null, this.Code, data);
+
             data.MaterialCategory = matCat;
             DProcessData process = new DProcessData("modifi_material", this.Code, data);
+
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            session.Process = process;
+            session.CurrentActivity = process;
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese el nombre del material.\n");
@@ -59,7 +64,7 @@ namespace ClassLibrary
 
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
                     MaterialCategory matCat = this.DatMgr.MaterialCategory.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
                     if (matCat is not null)

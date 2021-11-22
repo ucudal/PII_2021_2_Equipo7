@@ -5,6 +5,8 @@
 // -----------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ClassLibrary
@@ -29,42 +31,80 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            StringBuilder builder = new StringBuilder();
             if (selector is null)
             {
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            SearchPublication data = new SearchPublication();
-            DProcessData process = new DProcessData("search_Publication_By_Location", this.Code, data);
+            UserActivity activity;
+            if (session.CurrentActivity.Code != "search_by_page_entre_pubs_key_results")
+            {
+                IReadOnlyCollection<int> pubKeyWords = this.DatMgr.PublicationKeyWord.GetPublicationFromKeyWord(selector.Code);
+                SearchData search = new SearchData(pubKeyWords, this.Parents.First(), this.Route);
+                activity = new UserActivity("search_by_page_entre_pubs_key_results", "Search_Publication_Menu", "/palabraclave", search);
+                session.PushActivity(activity);
+            }
 
-            builder.Append($"Listado de publicaciones con la palabra clave ingresada {selector.Code} \n");
-            builder.Append("Ademas puede realizar las\n");
-            builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\siguiente : Siguiente pagina de publicaciones.\n");
-            builder.Append("\\anterior: Pagina anterior de publicaciones.\n");
-            builder.Append("\\cancelar : Volver a menu de buscar publicacion por palabra clave .\n");
-            builder.Append("LISTADO DE PUBLICACIONES: \n");
-            builder.Append(this.TextToPrintPublication(selector));
-            builder.Append("Ingrese el id de la publicación para ver detalles.\n");
+            activity = session.CurrentActivity;
+            SearchData data = activity.GetData<SearchData>();
+
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("<b>Resultados por Palabra Clave</b>\n");
+            builder.AppendLine($"Ingrese un id para ver detalles y/o realizar una compra.\n");
+            if (data.SearchResults.Count > 0)
+            {
+                builder.AppendLine($"{this.TextToPrintPublication(data)}");
+            }
+            else
+            {
+                builder.AppendLine("(No se encontraron publicaciones)\n");
+            }
+
+            if (data.PageItemCount < data.SearchResults.Count)
+            {
+                builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
+                builder.AppendLine("/pagina_anterior - Pagina anterior.\n");
+            }
+
+            builder.Append("/volver - Volver al menu de busqueda.");
             return builder.ToString();
         }
 
-        private string TextToPrintPublication(ChatDialogSelector selector)
+        /// <inheritdoc/>
+        public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
-            StringBuilder listpublicaciones = new StringBuilder();
-            foreach (PublicationKeyWord keyWord in this.DatMgr.PublicationKeyWord.Items)
+            if (selector is null)
             {
-                if (keyWord.KeyWord == selector.Code)
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            if (this.Parents.Contains(selector.Context))
+            {
+                if (!selector.Code.StartsWith('/'))
                 {
-                    Publication publication = this.DatMgr.Publication.GetById(keyWord.PublicationId);
-                    CompanyMaterial mat = this.DatMgr.CompanyMaterial.GetById(publication.CompanyMaterialId);
-                    listpublicaciones.Append($" Identificador de la publicación - {publication.Id}, nombre del material - {mat.Name}\n");
+                    return true;
                 }
             }
 
-            return listpublicaciones.ToString();
+            return false;
+        }
+
+        private string TextToPrintPublication(SearchData search)
+        {
+            if (search is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(search));
+            }
+
+            StringBuilder builder = new StringBuilder();
+            foreach (int pubId in search.PageItems)
+            {
+                Publication pub = this.DatMgr.Publication.GetById(pubId);
+                builder.AppendLine($"{pub.Id} - {pub.Title}");
+            }
+
+            return builder.ToString();
         }
     }
 }

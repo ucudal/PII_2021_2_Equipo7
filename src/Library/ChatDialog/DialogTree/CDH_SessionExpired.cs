@@ -39,7 +39,7 @@ namespace ClassLibrary
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
 
             session.MenuLocation = null;
-            session.Process = null;
+            session.ClearActivitiesStack();
 
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("Su sesion ha caducado.");

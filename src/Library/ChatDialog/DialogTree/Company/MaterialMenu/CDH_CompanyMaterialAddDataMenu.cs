@@ -46,7 +46,7 @@ namespace ClassLibrary
         private void MaterialAdd(ChatDialogSelector selector)
         {
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
+            UserActivity process = session.CurrentActivity;
             InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
             CompanyMaterial companyMaterial = data.CompanyMaterial;
             this.DatMgr.CompanyMaterial.Insert(companyMaterial);

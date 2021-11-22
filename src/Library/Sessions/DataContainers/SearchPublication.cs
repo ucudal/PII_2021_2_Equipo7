@@ -11,7 +11,7 @@ namespace ClassLibrary
     /// del proceso de registro
     /// para un usuario.
     /// </summary>
-    public class SearchPublication
+    public class SearchPublication : ActivityData
     {
         private CompanyLocation location;
         private Publication publication;

@@ -38,8 +38,14 @@ namespace ClassLibrary
 
             SelectCompanyMaterialData data = new SelectCompanyMaterialData();
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = new DProcessData("select_companymaterial", this.Code, data);
+
+            UserActivity process = new UserActivity("select_companymaterial", null, this.Code, data);
+
+            data.CompanyMaterial=this.DatMgr.CompanyMaterial.GetById(int.Parse(selector.Code));
+            
+    DProcessData process = new DProcessData("select_companymaterial", this.Code, data);
             data.CompanyMaterial = this.DatMgr.CompanyMaterial.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
+
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu acciones sobre el material elegido.\n");
             builder.Append("Desde este menu puede realizar las\n");
@@ -60,7 +66,7 @@ namespace ClassLibrary
 
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
                     CompanyMaterial companyMaterial = this.DatMgr.CompanyMaterial.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
                     if (companyMaterial is not null)

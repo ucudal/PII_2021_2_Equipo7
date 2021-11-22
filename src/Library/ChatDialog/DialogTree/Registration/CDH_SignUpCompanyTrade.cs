@@ -41,8 +41,12 @@ namespace ClassLibrary
             company.Name = selector.Code;
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            SignUpData data = session.Process.GetData<SignUpData>();
+            UserActivity activity = session.CurrentActivity;
+            SignUpDataCompanyNew data = activity.GetData<SignUpDataCompanyNew>();
+
             data.Company = company;
+
+            session.CurrentActivity = activity;
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese el oficio de su <b>empresa</b>.");
@@ -59,7 +63,7 @@ namespace ClassLibrary
 
             if (this.Parents.Contains(selector.Context))
             {
-                if (!selector.Code.StartsWith('\\'))
+                if (!selector.Code.StartsWith('/'))
                 {
                     return true;
                 }

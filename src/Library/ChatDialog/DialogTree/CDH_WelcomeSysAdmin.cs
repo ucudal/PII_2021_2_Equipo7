@@ -17,7 +17,6 @@ namespace ClassLibrary
     public class CDH_WelcomeSysAdmin : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CDH_WelcomeSysAdmin"/> class.
         /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeSysAdmin"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
@@ -29,13 +28,20 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            User user = this.DatMgr.User.GetById(session.UserId);
+
             StringBuilder builder = new StringBuilder();
-            builder.Append("Usted es administrador del sistema.\n");
-            builder.Append("Desde este menu puede realizar las\n");
-            builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\invitar : Invitar usuarios.\n");
-            builder.Append("\\habilitaciones : Administrar las habilitaciones de la plataforma.\n");
-            builder.Append("\\materiales : Administrar categorias de materiales.");
+            builder.AppendLine($"<b>Bienvenido a PieTech {user.FirstName} {user.LastName}!</b>\n");
+            builder.AppendLine("Como administrador de empresa usted puede realizar las siguientes acciones:\n");
+            builder.AppendLine("/invitar - Invitar usuarios.");
+            builder.AppendLine("/habilitaciones - Habilitaciones.");
+            builder.Append("/materiales - Categorias de Materiales.");
             return builder.ToString();
         }
 
@@ -49,7 +55,7 @@ namespace ClassLibrary
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             User user = this.DatMgr.User.GetById(session.UserId);
-            if (selector.Code == "/welcome" && user.Role == UserRole.SystemAdministrator)
+            if (selector.Code == "/welcome" && user?.Role == UserRole.SystemAdministrator)
             {
                 return true;
             }

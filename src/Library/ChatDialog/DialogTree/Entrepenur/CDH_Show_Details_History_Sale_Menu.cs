@@ -30,26 +30,56 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            StringBuilder builder = new StringBuilder();
-            SearchSalesData data = new SearchSalesData();
-            DProcessData process = new DProcessData("search_Sale", this.Code, data);
             if (selector is null)
             {
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
+            UserActivity activity = new UserActivity("entrepreneur_sale_details", "welcome_entrepreneur", "/compras", null);
+
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            session.Process = process;
-            data.Sale = this.DatMgr.Sale.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
-            builder.Append("Datos de la venta:");
-            builder.Append("Identificador de la venta" + data.Sale.Id);
-            builder.Append("Nombre del material vendido" + this.DatMgr.CompanyMaterial.GetById(data.Sale.ProductCompanyMaterialId).Name);
-            builder.Append("Precio de la compra" + data.Sale.Price);
-            builder.Append("Cantidad:" + data.Sale.ProductQuantity);
-            builder.Append("Fecha de compra" + data.Sale.DateTime.ToString(CultureInfo.InvariantCulture));
-            builder.Append("Vendedor:" + this.DatMgr.User.GetById(data.Sale.SellerCompanyId).FirstName);
-            builder.Append("\\cancelar : Volver a menu de buscar publicacion por localidad.\n");
+            session.PushActivity(activity);
+
+            int id = int.Parse(selector.Code, NumberStyles.Integer, CultureInfo.InvariantCulture);
+            Sale sale = this.DatMgr.Sale.GetById(id);
+            CompanyMaterial compMat = this.DatMgr.CompanyMaterial.GetById(sale.ProductCompanyMaterialId);
+            Company comp = this.DatMgr.Company.GetById(sale.SellerCompanyId);
+
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("<b>Detalles de Compra</b>\n");
+            builder.AppendLine($"<b>Material</b>: {compMat.Name}");
+            builder.AppendLine($"<b>Vendedor</b>: {comp.Name}");
+            builder.AppendLine($"<b>Cantidad</b>: {sale.ProductQuantity}");
+            builder.AppendLine($"<b>Moneda</b>: {Enum.GetName(typeof(Currency), sale.Currency)}");
+            builder.AppendLine($"<b>Precio</b>: {sale.Price}\n");
+            builder.Append("/volver - Volver.");
             return builder.ToString();
+        }
+
+        /// <inheritdoc/>
+        public override bool ValidateDataEntry(ChatDialogSelector selector)
+        {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            if (this.Parents.Contains(selector.Context))
+            {
+                if (!selector.Code.StartsWith('/'))
+                {
+                    if (int.TryParse(selector.Code, NumberStyles.Integer, CultureInfo.InvariantCulture, out int id))
+                    {
+                        Sale sale = this.DatMgr.Sale.GetById(id);
+                        if (sale is not null)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }
