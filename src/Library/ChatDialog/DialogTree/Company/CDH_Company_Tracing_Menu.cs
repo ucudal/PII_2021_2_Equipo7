@@ -9,12 +9,12 @@ using System.Text;
 namespace ClassLibrary
 {
     /// <summary>
-    /// 
+    /// Clase para el seguimiento del material.
     /// </summary>
     public class CDH_Company_Tracing_Menu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeCompany"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDH_Company_Tracing_Menu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDH_Company_Tracing_Menu(ChatDialogHandlerBase next)
@@ -42,7 +42,7 @@ namespace ClassLibrary
             Company company = this.DatMgr.Company.FindAdminUser(session.UserId);
             List<Sale> sales = this.DatMgr.User.GetByCompanyId(company.Id);
             Dictionary<int,int> saleByMatirial = new Dictionary<int,int>();
-        
+
             foreach(Sale sale in sales)
             {
                 if(saleByMatirial.ContainsKey(sale.PublicationItem.CompanyMaterial.Id))
