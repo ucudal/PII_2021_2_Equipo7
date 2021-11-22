@@ -1,3 +1,11 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_CompanyPublicationPriceMaterialToAddMenu.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
+using System.Globalization;
 using System.Text;
 
 namespace ClassLibrary
@@ -9,12 +17,12 @@ namespace ClassLibrary
     /// </summary>
     public class CDH_CompanyPublicationPriceMaterialToAddMenu : ChatDialogHandlerBase
     {
-        
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyPublicationPriceMaterialToAddMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_CompanyPublicationPriceMaterialToAddMenu(ChatDialogHandlerBase next) : base(next, "company_publication_price_material_to_add_menu")
+        public CDH_CompanyPublicationPriceMaterialToAddMenu(ChatDialogHandlerBase next)
+        : base(next, "company_publication_price_material_to_add_menu")
         {
             this.Parents.Add("company_publication_quantity_material_to_add_menu");
             this.Route = null;
@@ -23,11 +31,16 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity process = session.CurrentActivity;
             InsertPublicationData data = process.GetData<InsertPublicationData>();
-            data.Publication.Quantity=int.Parse(selector.Code);
-            
+            data.Publication.Quantity = int.Parse(selector.Code, CultureInfo.InvariantCulture);
+
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese el precio que le quiere poner a la publicacion.\n");
             builder.Append("\\cancelar : En caso de querer canclear la operacion.\n");
@@ -37,16 +50,20 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
-            bool xretorno=false;
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            bool xretorno = false;
             if (this.Parents.Contains(selector.Context))
             {
                 if (!selector.Code.StartsWith('/'))
                 {
-    
-                    xretorno=true;
-
+                    xretorno = true;
                 }
             }
+
             return xretorno;
         }
     }

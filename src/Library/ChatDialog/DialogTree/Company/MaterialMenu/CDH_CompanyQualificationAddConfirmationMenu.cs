@@ -1,3 +1,11 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_CompanyQualificationAddConfirmationMenu.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
+using System.Globalization;
 using System.Text;
 
 namespace ClassLibrary
@@ -13,7 +21,8 @@ namespace ClassLibrary
         /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyQualificationAddConfirmationMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_CompanyQualificationAddConfirmationMenu(ChatDialogHandlerBase next) : base(next, "company_qualification_add_confirmation_menu")
+        public CDH_CompanyQualificationAddConfirmationMenu(ChatDialogHandlerBase next)
+        : base(next, "company_qualification_add_confirmation_menu")
         {
             this.Parents.Add("company_qualification_list_to_add_menu");
             this.Route = null;
@@ -22,12 +31,17 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity process = session.CurrentActivity;
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            Qualification habilitaciones = this.DatMgr.Qualification.GetById(int.Parse(selector.Code));
-            data.Qualification=habilitaciones;
-            
+            Qualification habilitaciones = this.DatMgr.Qualification.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
+            data.Qualification = habilitaciones;
+
             StringBuilder builder = new StringBuilder();
             builder.Append("Seguro que desea añadir esta habilitacion al material.\n");
             builder.Append("Nombre: " + data.Qualification.Name);
@@ -40,17 +54,23 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
             if (this.Parents.Contains(selector.Context))
             {
                 if (!selector.Code.StartsWith('/'))
                 {
-                    Qualification qualification = this.DatMgr.Qualification.GetById(int.Parse(selector.Code));
+                    Qualification qualification = this.DatMgr.Qualification.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
                     if (qualification is not null)
                     {
                         return true;
                     }
                 }
             }
+
             return false;
         }
     }

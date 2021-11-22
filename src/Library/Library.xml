@@ -3355,7 +3355,7 @@
             <summary>
             Id del material de compania
             al cual se le va a indicar
-            el stock
+            el stock.
             </summary>
         </member>
         <member name="P:ClassLibrary.CompanyMaterialStock.CompanyLocationId">

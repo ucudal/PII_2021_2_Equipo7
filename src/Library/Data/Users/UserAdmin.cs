@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="UserAdmin.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -38,17 +44,45 @@ namespace ClassLibrary
         /// <inheritdoc/>
         protected override void ValidateInsert(User item)
         {
-            if(item.Id != 0) throw new ValidationException("Id debe ser vacio.");
-            if(item.Suspended == true) throw new ValidationException("No se puede crear un usuario suspendido.");
-            if(item.Deleted == true) throw new ValidationException("No se puede crear un usuario eliminado.");
+            if (item != null)
+            {
+                if (item.Id != 0)
+                {
+                    throw new ValidationException("Id debe ser vacio.");
+                }
+
+                if (item.Suspended == true)
+                {
+                    throw new ValidationException("No se puede crear un usuario suspendido.");
+                }
+
+                if (item.Deleted == true)
+                {
+                    throw new ValidationException("No se puede crear un usuario eliminado.");
+                }
+            }
         }
 
         /// <inheritdoc/>
         protected override void ValidateData(User item)
         {
-            if(item.FirstName is null || item.FirstName.Length == 0) throw new ValidationException("Primer nombre no puede ser vacio.");
-            if(item.LastName is null || item.LastName.Length == 0) throw new ValidationException("Primer apellido no puede ser vacio.");
-            if(item.Role == 0) throw new ValidationException("Usuario debe tener un rol.");
+            if (item != null)
+            {
+                if (item.FirstName is null || item.FirstName.Length == 0)
+                {
+                    throw new ValidationException("Primer nombre no puede ser vacio.");
+                }
+
+                if (item.LastName is null || item.LastName.Length == 0)
+                {
+                    throw new ValidationException("Primer apellido no puede ser vacio.");
+                }
+
+                if (item.Role == 0)
+                {
+                    throw new ValidationException("Usuario debe tener un rol.");
+                }
+            }
         }
     }
 }

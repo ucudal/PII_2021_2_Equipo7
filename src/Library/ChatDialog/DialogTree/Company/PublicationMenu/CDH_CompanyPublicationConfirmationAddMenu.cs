@@ -1,3 +1,11 @@
+// -----------------------------------------------------------------------
+// <copyright file="CDH_CompanyPublicationConfirmationAddMenu.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
+using System.Globalization;
 using System.Text;
 
 namespace ClassLibrary
@@ -13,7 +21,8 @@ namespace ClassLibrary
         /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyPublicationConfirmationAddMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_CompanyPublicationConfirmationAddMenu(ChatDialogHandlerBase next) : base(next, "company_publication_confirmation_add_menu")
+        public CDH_CompanyPublicationConfirmationAddMenu(ChatDialogHandlerBase next)
+        : base(next, "company_publication_confirmation_add_menu")
         {
             this.Parents.Add("company_publication_price_material_to_add_menu");
             this.Route = null;
@@ -22,11 +31,16 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity process = session.CurrentActivity;
             InsertPublicationData data = process.GetData<InsertPublicationData>();
 
-            data.Publication.Price=int.Parse(selector.Code);
+            data.Publication.Price = int.Parse(selector.Code, CultureInfo.InvariantCulture);
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Seguro que desea crear un material con los siguientes datos.\n");
@@ -38,16 +52,20 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
-            bool xretorno=false;
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            bool xretorno = false;
             if (this.Parents.Contains(selector.Context))
             {
                 if (!selector.Code.StartsWith('/'))
                 {
-    
-                    xretorno=true;
-
+                    xretorno = true;
                 }
             }
+
             return xretorno;
         }
     }

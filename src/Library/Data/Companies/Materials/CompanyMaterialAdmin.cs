@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="CompanyMaterialAdmin.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -104,7 +110,7 @@ namespace ClassLibrary
 
             return resultList.AsReadOnly();
         }
-        
+
         /// <summary>
         /// Obtiene un listado de materiales
         /// de compania filtrado por una dada
@@ -144,10 +150,10 @@ namespace ClassLibrary
             IReadOnlyCollection<CompanyMaterial> companyMatsPage = this.GetItemPage(resultList.AsReadOnly(), itemCount, page);
             return companyMatsPage.Select(mat => mat.Id).ToList().AsReadOnly();
         }
-        
+
         /// <summary>
         /// Obtiene un listado de materiales
-        /// de empresas filtrado por su 
+        /// de empresas filtrado por su
         /// categoria de materiales.
         /// </summary>
         /// <param name="materialCatId">
@@ -174,10 +180,10 @@ namespace ClassLibrary
 
             return resultList.AsReadOnly();
         }
-        
+
         /// <summary>
         /// Obtiene un listado de materiales
-        /// de empresas filtrado por su 
+        /// de empresas filtrado por su
         /// categoria de materiales.
         /// </summary>
         /// <param name="materialCatId">
@@ -216,12 +222,23 @@ namespace ClassLibrary
         protected override void ValidateData(CompanyMaterial item)
         {
             DataManager dataManager = new DataManager();
-            if(item.CompanyId == 0/* || !dataManager.Company.Exists(item.CompanyId)*/) 
-                throw new ValidationException("Requerida compania.");
-            if(item.MaterialCategoryId == 0/* || !dataManager.MaterialCategory.Exists(item.MaterialCategoryId)*/) 
-                throw new ValidationException("Requerida categoria del material.");
-            if(item.Name is null || item.Name.Length == 0) 
-                throw new ValidationException("Requerido nombre.");
+            if (item != null)
+            {
+                if (item.CompanyId == 0/* || !dataManager.Company.Exists(item.CompanyId)*/)
+                {
+                    throw new ValidationException("Requerida compania.");
+                }
+
+                if (item.MaterialCategoryId == 0/* || !dataManager.MaterialCategory.Exists(item.MaterialCategoryId)*/)
+                {
+                    throw new ValidationException("Requerida categoria del material.");
+                }
+
+                if (item.Name is null || item.Name.Length == 0)
+                {
+                    throw new ValidationException("Requerido nombre.");
+                }
+            }
         }
     }
 }
