@@ -36,8 +36,11 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            InsertQualificationData data = new InsertQualificationData();
-            data.Qualification=this.DatMgr.Qualification.GetById(int.Parse(selector.Code));
+            InsertQualificationData data = new InsertQualificationData
+            {
+                Qualification = this.DatMgr.Qualification.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture)),
+            };
+
             UserActivity process = new UserActivity("Remove_Qualification", null, this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.CurrentActivity = process;

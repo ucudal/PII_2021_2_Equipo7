@@ -36,7 +36,7 @@ namespace ClassLibrary
             }
 
             InsertQualificationData data = new InsertQualificationData();
-            data.Qualification.Name=selector.Code;
+            data.Qualification.Name = selector.Code;
             UserActivity process = new UserActivity("add_Qualification", null, this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.CurrentActivity = process;
