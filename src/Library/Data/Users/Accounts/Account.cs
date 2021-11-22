@@ -1,12 +1,18 @@
+// -----------------------------------------------------------------------
+// <copyright file="Account.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace ClassLibrary
 {
     /// <summary>
-    /// la clase account maneja las cuentas de lso usuarios
+    /// La clase account maneja las cuentas de los usuarios.
     /// </summary>
-    public class Account: IManagableData<Account>
+    public class Account : IManagableData<Account>
     {
         private int id;
         private bool deleted;
@@ -25,48 +31,48 @@ namespace ClassLibrary
         }
 
         /// <inheritdoc/>
-        public int Id 
-        { 
-            get => this.id; 
-            set => this.id = value; 
+        public int Id
+        {
+            get => this.id;
+            set => this.id = value;
         }
 
         /// <inheritdoc/>
-        public bool Deleted 
-        { 
-            get => this.deleted; 
-            set => this.deleted = value; 
+        public bool Deleted
+        {
+            get => this.deleted;
+            set => this.deleted = value;
         }
 
         /// <summary>
         /// Id del usuario asociado
-        /// a la cuenta
+        /// a la cuenta.
         /// </summary>
-        public int UserId 
-        { 
-            get => this.userId; 
-            set => this.userId = value; 
+        public int UserId
+        {
+            get => this.userId;
+            set => this.userId = value;
         }
 
         /// <summary>
         /// Servicio de mensajeria
         /// asociado a la cuenta.
         /// </summary>
-        public MessagingService Service 
-        { 
-            get => this.service; 
-            set => this.service = value; 
+        public MessagingService Service
+        {
+            get => this.service;
+            set => this.service = value;
         }
 
         /// <summary>
         /// Identificador de la
         /// cuenta en el servicio
-        /// de mensajeria asociado
+        /// de mensajeria asociado.
         /// </summary>
-        public string CodeInService 
-        { 
-            get => this.codeInService; 
-            set => this.codeInService = value; 
+        public string CodeInService
+        {
+            get => this.codeInService;
+            set => this.codeInService = value;
         }
 
         /// <inheritdoc/>

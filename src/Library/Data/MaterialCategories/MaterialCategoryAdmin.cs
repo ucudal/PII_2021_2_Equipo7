@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="MaterialCategoryAdmin.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.ComponentModel.DataAnnotations;
 
 namespace ClassLibrary
@@ -10,8 +16,13 @@ namespace ClassLibrary
         /// <inheritdoc/>
         protected override void ValidateData(MaterialCategory item)
         {
-            if(item.Name is null || item.Name.Length == 0) 
-                throw new ValidationException("Requerido nombre.");
+            if (item != null)
+            {
+                if (item.Name is null || item.Name.Length == 0)
+                {
+                    throw new ValidationException("Requerido nombre.");
+                }
+            }
         }
     }
 }

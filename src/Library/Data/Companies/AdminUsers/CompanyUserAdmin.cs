@@ -1,3 +1,9 @@
+// -----------------------------------------------------------------------
+// <copyright file="CompanyUserAdmin.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -59,18 +65,26 @@ namespace ClassLibrary
                     return user.CompanyId;
                 }
             }
-            
+
             return 0;
         }
 
         /// <inheritdoc/>
         protected override void ValidateData(CompanyUser item)
         {
-            DataManager dataManager = new DataManager();
-            if(item.AdminUserId == 0/* || !dataManager.CompanyUser.Exists(item.AdminUserId)*/) 
-                throw new ValidationException("Requerido usuario.");
-            if(item.CompanyId == 0/* || !dataManager.Company.Exists(item.CompanyId)*/) 
+            if (item != null)
+            {
+                DataManager dataManager = new DataManager();
+                if (item.AdminUserId == 0/* || !dataManager.CompanyUser.Exists(item.AdminUserId)*/)
+                {
+                    throw new ValidationException("Requerido usuario.");
+                }
+
+                if (item.CompanyId == 0/* || !dataManager.Company.Exists(item.CompanyId)*/)
+                {
                 throw new ValidationException("Requerida compania.");
+                }
+            }
         }
     }
 }
