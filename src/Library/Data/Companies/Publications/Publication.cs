@@ -17,6 +17,16 @@ namespace ClassLibrary
     public class Publication : IManagableData<Publication>
     {
         /// <summary>
+        /// Constructor vacio para PublicationAdmin.
+        /// </summary>
+        [JsonConstructor]
+        public Publication()
+        {
+            this.Id = 0;
+            this.Deleted = false;
+        }
+
+        /// <summary>
         /// Publication tiene una property de Company.
         /// </summary>
         /// <value>.</value>
@@ -67,16 +77,6 @@ namespace ClassLibrary
         ///  Location sirve para saber donde se encuentran los materiales de la publicacion.
         /// </summary>
         public CompanyLocation Location { get; set; }
-
-        /// <summary>
-        /// Constructor vacio para PublicationAdmin.
-        /// </summary>
-        [JsonConstructor]
-        public Publication()
-        {
-            this.Id = 0;
-            this.Deleted = false;
-        }
 
         /// <inheritdoc/>
         public void LoadFromJson(string json)

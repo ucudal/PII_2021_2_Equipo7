@@ -17,24 +17,6 @@ namespace ClassLibrary
     public class Qualification : IManagableData<Qualification>
     {
         /// <summary>
-        /// Id de habilitaciones.
-        /// </summary>
-        /// <value>.</value>
-        public int Id { get; set; }
-
-        /// <summary>
-        /// Nombre de la habilitacion.
-        /// </summary>
-        /// <value>.</value>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Habilita la habilitación.
-        /// </summary>
-        /// <value>.</value>
-        public bool Deleted { get; set; }
-
-        /// <summary>
         /// Constructor de Qualification.
         /// </summary>
         /// <param name="name">.</param>
@@ -53,6 +35,24 @@ namespace ClassLibrary
             this.Id = 0;
             this.Deleted = false;
         }
+
+        /// <summary>
+        /// Id de habilitaciones.
+        /// </summary>
+        /// <value>.</value>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Nombre de la habilitacion.
+        /// </summary>
+        /// <value>.</value>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Habilita la habilitación.
+        /// </summary>
+        /// <value>.</value>
+        public bool Deleted { get; set; }
 
         /// <inheritdoc/>
         public void LoadFromJson(string json)

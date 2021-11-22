@@ -17,6 +17,30 @@ namespace ClassLibrary
     public class Sale : IManagableData<Sale>
     {
         /// <summary>
+        /// Constructor de la clase Sale para definir los atributos.
+        /// </summary>
+        /// <param name="dateTime">DateTime.</param>
+        /// <param name="price">int.</param>
+        /// <param name="currency">Currency.</param>
+        public Sale(DateTime dateTime, int price, Currency currency)
+        {
+            this.DateTime = dateTime;
+            this.Price = price;
+            this.Currency = currency;
+            this.Deleted = false;
+        }
+
+        /// <summary>
+        /// Constructor vacio para la clase SaleAdmin.
+        /// </summary>
+        [JsonConstructor]
+        public Sale()
+        {
+            this.Id = 0;
+            this.Deleted = false;
+        }
+
+        /// <summary>
         /// Material de empresa comprado.
         /// </summary>
         public int ProductCompanyMaterialId { get; set; }
@@ -56,30 +80,6 @@ namespace ClassLibrary
 
         /// <inheritdoc/>
         public bool Deleted { get; set; }
-
-        /// <summary>
-        /// Constructor de la clase Sale para definir los atributos.
-        /// </summary>
-        /// <param name="dateTime">.</param>
-        /// <param name="price">.</param>
-        /// <param name="currency">.</param>
-        public Sale(DateTime dateTime, int price, Currency currency)
-        {
-            this.DateTime = dateTime;
-            this.Price = price;
-            this.Currency = currency;
-            this.Deleted = false;
-        }
-
-        /// <summary>
-        /// Constructor vacio para la clase SaleAdmin.
-        /// </summary>
-        [JsonConstructor]
-        public Sale()
-        {
-            this.Id = 0;
-            this.Deleted = false;
-        }
 
         /// <inheritdoc/>
         public void LoadFromJson(string json)
