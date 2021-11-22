@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Sale_Publication_Location.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHSalePublicationLocation.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -15,13 +15,13 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Realiza la compra de la ´publicación.
     /// </summary>
-    public class CDH_Sale_Publication_Location : ChatDialogHandlerBase
+    public class CDHSalePublicationLocation : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Sale_Publication_Location"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSalePublicationLocation"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Sale_Publication_Location(ChatDialogHandlerBase next)
+        public CDHSalePublicationLocation(ChatDialogHandlerBase next)
         : base(next, "Sale_Publication_Location")
         {
             this.Parents.Add("List_Location_Menu");

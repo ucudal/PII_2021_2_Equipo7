@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Material_Regeneration_ShowDetail_Menu.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHMaterialRegenerationShowDetailMenu.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -14,13 +14,13 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Responde al inicio de un emprendedor.
     /// </summary>
-    public class CDH_Material_Regeneration_ShowDetail_Menu : ChatDialogHandlerBase
+    public class CDHMaterialRegenerationShowDetailMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Material_Regeneration_ShowDetail_Menu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHMaterialRegenerationShowDetailMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Material_Regeneration_ShowDetail_Menu(ChatDialogHandlerBase next)
+        public CDHMaterialRegenerationShowDetailMenu(ChatDialogHandlerBase next)
         : base(next, "Material_Regeneration_ShowDetail_Menu")
         {
             this.Parents.Add("Material_Regeneration_Menu");

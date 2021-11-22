@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Final_Sale_Keyword.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHFinalSaleKeyword.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -14,13 +14,13 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Realiza la transacción de la compra.
     /// </summary>
-    public class CDH_Final_Sale_Keyword : ChatDialogHandlerBase
+    public class CDHFinalSaleKeyword : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Final_Sale_Keyword"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHFinalSaleKeyword"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Final_Sale_Keyword(ChatDialogHandlerBase next)
+        public CDHFinalSaleKeyword(ChatDialogHandlerBase next)
         : base(next, "Final_Sale_Keyword")
         {
             this.Parents.Add("Confirmation_Sale_KeyWord");

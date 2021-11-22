@@ -16,14 +16,14 @@ namespace ClassLibrary
     /// le pide al usuario verificar que esta es la
     /// accion deseada.
     /// </summary>
-    public class CDH_SignUpVerifySysAdminNew : ChatDialogHandlerBase
+    public class CDHSignUpVerifySysAdminNew : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CDH_SignUpVerifySysAdminNew"/> class.
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpVerifySysAdminNew"/>.
+        /// Initializes a new instance of the <see cref="CDHSignUpVerifySysAdminNew"/> class.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSignUpVerifySysAdminNew"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpVerifySysAdminNew(ChatDialogHandlerBase next)
+        public CDHSignUpVerifySysAdminNew(ChatDialogHandlerBase next)
             : base(next, "registration_invite_sysadmin_join")
         {
             this.Parents.Add("registration_invite");

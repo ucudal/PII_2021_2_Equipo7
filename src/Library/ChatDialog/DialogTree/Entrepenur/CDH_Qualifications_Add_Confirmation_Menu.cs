@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Qualifications_Add_Confirmation_Menu.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHQualificationsAddConfirmationMenu.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -14,13 +14,13 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Confirmación de añadir habilitación.
     /// </summary>
-    public class CDH_Qualifications_Add_Confirmation_Menu : ChatDialogHandlerBase
+    public class CDHQualificationsAddConfirmationMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Qualifications_Add_Confirmation_Menu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHQualificationsAddConfirmationMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Qualifications_Add_Confirmation_Menu(ChatDialogHandlerBase next)
+        public CDHQualificationsAddConfirmationMenu(ChatDialogHandlerBase next)
         : base(next, "Qualifications_Add_Confirmation_Menu")
         {
             this.Parents.Add("Qualifications_Add_DocUrl");

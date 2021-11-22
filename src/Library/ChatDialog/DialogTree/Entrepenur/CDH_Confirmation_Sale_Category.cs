@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Confirmation_Sale_Category.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHConfirmationSaleCategory.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -13,14 +13,14 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Realiza la confirmación de la publicación por busqueda de categoria.
     /// </summary>
-    public class CDH_Confirmation_Sale_Category : ChatDialogHandlerBase
+    public class CDHConfirmationSaleCategory : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Confirmation_Sale_Category"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHConfirmationSaleCategory"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Confirmation_Sale_Category(ChatDialogHandlerBase next)
-        : base(next, "Confirmation_Sale_Category")
+        public CDHConfirmationSaleCategory(ChatDialogHandlerBase next)
+            : base(next, "Confirmation_Sale_Category")
         {
             this.Parents.Add("Sale_Publication_Category");
             this.Route = "/comprar";

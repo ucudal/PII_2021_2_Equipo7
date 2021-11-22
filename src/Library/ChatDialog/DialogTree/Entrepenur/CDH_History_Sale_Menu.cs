@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_History_Sale_Menu.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHHistorySaleMenu.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -15,13 +15,13 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Muestra una lista compras hechas por el emprendedor.
     /// </summary>
-    public class CDH_History_Sale_Menu : ChatDialogHandlerBase
+    public class CDHHistorySaleMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_History_Sale_Menu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHHistorySaleMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_History_Sale_Menu(ChatDialogHandlerBase next)
+        public CDHHistorySaleMenu(ChatDialogHandlerBase next)
         : base(next, "History_Sale_Menu")
         {
             this.Parents.Add("welcome_entrepreneur");

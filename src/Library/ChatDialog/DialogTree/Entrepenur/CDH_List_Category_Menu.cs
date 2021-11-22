@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_List_Category_Menu.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHListCategoryMenu.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -16,13 +16,13 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Muestra una lista de publicaciones por localidad.
     /// </summary>
-    public class CDH_List_Category_Menu : ChatDialogHandlerBase
+    public class CDHListCategoryMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_List_Category_Menu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHListCategoryMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_List_Category_Menu(ChatDialogHandlerBase next)
+        public CDHListCategoryMenu(ChatDialogHandlerBase next)
         : base(next, "List_Category_Menu")
         {
             this.Parents.Add("Search_Category_Menu");

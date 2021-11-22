@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Qualifications_Add_DocumentUrl.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHQualificationsAddDocumentUrl.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -14,13 +14,13 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Confirmación de añadir habilitación.
     /// </summary>
-    public class CDH_Qualifications_Add_DocumentUrl : ChatDialogHandlerBase
+    public class CDHQualificationsAddDocumentUrl : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Qualifications_Add_DocumentUrl"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHQualificationsAddDocumentUrl"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Qualifications_Add_DocumentUrl(ChatDialogHandlerBase next)
+        public CDHQualificationsAddDocumentUrl(ChatDialogHandlerBase next)
         : base(next, "Qualifications_Add_DocUrl")
         {
             this.Parents.Add("Qualifications_Add_Menu");

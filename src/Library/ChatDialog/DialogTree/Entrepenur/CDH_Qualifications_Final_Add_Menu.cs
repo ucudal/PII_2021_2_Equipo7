@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Qualifications_Final_Add_Menu.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHQualificationsFinalAddMenu.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -14,13 +14,13 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_Qualifications_Final_Add_Menu : ChatDialogHandlerBase
+    public class CDHQualificationsFinalAddMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Qualifications_Final_Add_Menu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHQualificationsFinalAddMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Qualifications_Final_Add_Menu(ChatDialogHandlerBase next)
+        public CDHQualificationsFinalAddMenu(ChatDialogHandlerBase next)
         : base(next, "Qualifications_Final_Add_Menu")
         {
             this.Parents.Add("Qualifications_Add_Confirmation_Menu");

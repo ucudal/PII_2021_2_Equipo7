@@ -20,7 +20,7 @@ namespace ClassLibrary
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDHMaterialCategoryAddName(ChatDialogHandlerBase next)
-        : base(next, "matcat_add_name")
+            : base(next, "matcat_add_name")
         {
             this.Parents.Add("mat_menu");
             this.Route = "/agregar";

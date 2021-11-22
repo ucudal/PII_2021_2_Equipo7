@@ -15,14 +15,14 @@ namespace ClassLibrary
     /// ingresados en el registro de una nueva
     /// empresa. Ingresa los datos al sistema.
     /// </summary>
-    public class CDH_SignUpDoneCompanyNew : ChatDialogHandlerBase
+    public class CDHSignUpDoneCompanyNew : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CDH_SignUpDoneCompanyNew"/> class.
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpDoneCompanyNew"/>.
+        /// Initializes a new instance of the <see cref="CDHSignUpDoneCompanyNew"/> class.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSignUpDoneCompanyNew"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpDoneCompanyNew(ChatDialogHandlerBase next)
+        public CDHSignUpDoneCompanyNew(ChatDialogHandlerBase next)
             : base(next, "registration_new_comp_end")
         {
             this.Parents.Add("registration_new_comp_verify");

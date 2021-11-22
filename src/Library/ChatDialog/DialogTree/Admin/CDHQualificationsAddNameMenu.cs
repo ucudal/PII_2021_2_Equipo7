@@ -20,7 +20,7 @@ namespace ClassLibrary
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDHQualificationsAddNameMenu(ChatDialogHandlerBase next)
-        : base(next, "hab_add_name")
+            : base(next, "hab_add_name")
         {
             this.Parents.Add("hab_menu");
             this.Route = "/agregar";

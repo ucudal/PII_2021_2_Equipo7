@@ -10,13 +10,13 @@ namespace ClassLibrary
     /// ChatDialogHandler concreto:
     /// Responde a un comando incorrecto.
     /// </summary>
-    public class CDH_BadCommand : ChatDialogHandlerBase
+    public class CDHBadCommand : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CDH_BadCommand"/> class.
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_BadCommand"/>.
+        /// Initializes a new instance of the <see cref="CDHBadCommand"/> class.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHBadCommand"/>.
         /// </summary>
-        public CDH_BadCommand()
+        public CDHBadCommand()
             : base(null, "bad_command")
         {
             this.Route = null;

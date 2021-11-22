@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Confirmation_Sale_Location.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHConfirmationSaleLocation.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -13,13 +13,13 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Realiza la confirmación de la publicación por busqueda de localización.
     /// </summary>
-    public class CDH_Confirmation_Sale_Location : ChatDialogHandlerBase
+    public class CDHConfirmationSaleLocation : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Confirmation_Sale_Location"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHConfirmationSaleLocation"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Confirmation_Sale_Location(ChatDialogHandlerBase next)
+        public CDHConfirmationSaleLocation(ChatDialogHandlerBase next)
         : base(next, "Confirmation_Sale_Location")
         {
             this.Parents.Add("Sale_Publication_Location");

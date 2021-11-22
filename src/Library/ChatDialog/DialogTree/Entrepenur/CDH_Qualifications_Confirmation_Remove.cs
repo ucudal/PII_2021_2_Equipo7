@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Qualifications_Confirmation_Remove.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHQualificationsConfirmationRemove.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -14,13 +14,13 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Confirmar.
     /// </summary>
-    public class CDH_Qualifications_Confirmation_Remove : ChatDialogHandlerBase
+    public class CDHQualificationsConfirmationRemove : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Qualifications_Confirmation_Remove"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHQualificationsConfirmationRemove"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Qualifications_Confirmation_Remove(ChatDialogHandlerBase next)
+        public CDHQualificationsConfirmationRemove(ChatDialogHandlerBase next)
         : base(next, "Qualifications_Confirmation_Remove")
         {
             this.Parents.Add("Qualifications_Remove_Menu");

@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Search_Category_Menu.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHSearchCategoryMenu.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -15,13 +15,13 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Busca una publicación por una categoria del material.
     /// </summary>
-    public class CDH_Search_Category_Menu : ChatDialogHandlerBase
+    public class CDHSearchCategoryMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Search_Category_Menu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSearchCategoryMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Search_Category_Menu(ChatDialogHandlerBase next)
+        public CDHSearchCategoryMenu(ChatDialogHandlerBase next)
         : base(next, "Search_Category_Menu")
         {
             this.Parents.Add("Search_Publication_Menu");

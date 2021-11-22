@@ -16,14 +16,14 @@ namespace ClassLibrary
     /// empresa. Procede a pedirle al usuario el nombre
     /// de la empresa a ingresar.
     /// </summary>
-    public class CDH_SignUpCompanyName : ChatDialogHandlerBase
+    public class CDHSignUpCompanyName : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CDH_SignUpCompanyName"/> class.
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpCompanyName"/>.
+        /// Initializes a new instance of the <see cref="CDHSignUpCompanyName"/> class.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSignUpCompanyName"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpCompanyName(ChatDialogHandlerBase next)
+        public CDHSignUpCompanyName(ChatDialogHandlerBase next)
             : base(next, "registration_new_comp_name")
         {
             this.Parents.Add("registration_user_l_name");

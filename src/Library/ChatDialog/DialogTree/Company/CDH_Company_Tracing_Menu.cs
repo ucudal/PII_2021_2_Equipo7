@@ -11,13 +11,13 @@ namespace ClassLibrary
     /// <summary>
     /// Clase para el seguimiento del material.
     /// </summary>
-    public class CDH_Company_Tracing_Menu : ChatDialogHandlerBase
+    public class CDHCompanyTracingMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Company_Tracing_Menu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHCompanyTracingMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Company_Tracing_Menu(ChatDialogHandlerBase next)
+        public CDHCompanyTracingMenu(ChatDialogHandlerBase next)
         : base(next, "company_Tracing_menu")
         {
             this.Parents.Add("welcome_company");

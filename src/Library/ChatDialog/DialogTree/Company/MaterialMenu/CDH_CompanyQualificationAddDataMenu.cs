@@ -14,14 +14,14 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_CompanyQualificationAddDataMenu : ChatDialogHandlerBase
+    public class CDHCompanyQualificationAddDataMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyQualificationAddDataMenu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHCompanyQualificationAddDataMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_CompanyQualificationAddDataMenu(ChatDialogHandlerBase next)
-        : base(next, "company_qualification_add_data_menu")
+        public CDHCompanyQualificationAddDataMenu(ChatDialogHandlerBase next)
+            : base(next, "company_qualification_add_data_menu")
         {
             this.Parents.Add("company_qualification_add_confirmation_menu");
             this.Route = "/confirmar";

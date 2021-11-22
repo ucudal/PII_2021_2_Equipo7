@@ -16,14 +16,14 @@ namespace ClassLibrary
     /// administrador de la plataforma. Ingresa los
     /// datos al sistema.
     /// </summary>
-    public class CDH_SignUpDoneSysAdmin : ChatDialogHandlerBase
+    public class CDHSignUpDoneSysAdmin : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CDH_SignUpDoneSysAdmin"/> class.
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpDoneSysAdmin"/>.
+        /// Initializes a new instance of the <see cref="CDHSignUpDoneSysAdmin"/> class.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSignUpDoneSysAdmin"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpDoneSysAdmin(ChatDialogHandlerBase next)
+        public CDHSignUpDoneSysAdmin(ChatDialogHandlerBase next)
             : base(next, "registration_join_sysadmin_end")
         {
             this.Parents.Add("registration_join_sysadmin_verify");

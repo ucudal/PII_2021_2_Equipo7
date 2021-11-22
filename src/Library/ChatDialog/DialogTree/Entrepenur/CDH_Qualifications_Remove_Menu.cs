@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Qualifications_Remove_Menu.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHQualificationsRemoveMenu.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -16,13 +16,13 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_Qualifications_Remove_Menu : ChatDialogHandlerBase
+    public class CDHQualificationsRemoveMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase. <see cref="CDH_Qualifications_Remove_Menu"/>.
+        /// Inicializa una nueva instancia de la clase. <see cref="CDHQualificationsRemoveMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Qualifications_Remove_Menu(ChatDialogHandlerBase next)
+        public CDHQualificationsRemoveMenu(ChatDialogHandlerBase next)
         : base(next, "Qualifications_Remove_Menu")
         {
             this.Parents.Add("Qualification_Menu");

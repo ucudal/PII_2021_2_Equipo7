@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_List_Location_Menu.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHListLocationMenu.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -19,13 +19,13 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Muestra una lista de publicaciones por localidad.
     /// </summary>
-    public class CDH_List_Location_Menu : ChatDialogHandlerBase
+    public class CDHListLocationMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_List_Location_Menu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHListLocationMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_List_Location_Menu(ChatDialogHandlerBase next)
+        public CDHListLocationMenu(ChatDialogHandlerBase next)
         : base(next, "List_Location_Menu")
         {
             this.Parents.Add("Search_Location_Menu");

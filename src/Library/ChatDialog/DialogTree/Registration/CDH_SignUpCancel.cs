@@ -16,14 +16,14 @@ namespace ClassLibrary
     /// al proceso de registro de usuarios. Devuelve al
     /// usuario al menu de bienvenida.
     /// </summary>
-    public class CDH_SignUpCancel : ChatDialogHandlerBase
+    public class CDHSignUpCancel : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CDH_SignUpCancel"/> class.
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpCancel"/>.
+        /// Initializes a new instance of the <see cref="CDHSignUpCancel"/> class.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSignUpCancel"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpCancel(ChatDialogHandlerBase next)
+        public CDHSignUpCancel(ChatDialogHandlerBase next)
             : base(next, "registration_cancel")
         {
             this.Parents.Add("registration_invite");

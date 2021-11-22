@@ -16,14 +16,14 @@ namespace ClassLibrary
     /// al usuario que ingrese otro codigo o se le da
     /// la opcion de cancelar el proceso.
     /// </summary>
-    public class CDH_SignUpBadCode : ChatDialogHandlerBase
+    public class CDHSignUpBadCode : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CDH_SignUpBadCode"/> class.
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpBadCode"/>.
+        /// Initializes a new instance of the <see cref="CDHSignUpBadCode"/> class.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSignUpBadCode"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpBadCode(ChatDialogHandlerBase next)
+        public CDHSignUpBadCode(ChatDialogHandlerBase next)
             : base(next, "registration_bad_invite")
         {
             this.Parents.Add("registration_invite");

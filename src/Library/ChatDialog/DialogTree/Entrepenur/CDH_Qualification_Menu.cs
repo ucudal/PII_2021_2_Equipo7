@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Qualification_Menu.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHQualificationMenu.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -13,13 +13,13 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Menu de habilitaciones.
     /// </summary>
-    public class CDH_Qualification_Menu : ChatDialogHandlerBase
+    public class CDHQualificationMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Qualification_Menu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHQualificationMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Qualification_Menu(ChatDialogHandlerBase next)
+        public CDHQualificationMenu(ChatDialogHandlerBase next)
         : base(next, "Qualification_Menu")
         {
             this.Parents.Add("welcome_entrepreneur");

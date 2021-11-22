@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Confirmation_Sale_KeyWord.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHConfirmationSaleKeyWord.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -13,14 +13,14 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Realiza la confirmación de la publicación por busqueda de palabra clave.
     /// </summary>
-    public class CDH_Confirmation_Sale_KeyWord : ChatDialogHandlerBase
+    public class CDHConfirmationSaleKeyWord : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Confirmation_Sale_KeyWord"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHConfirmationSaleKeyWord"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Confirmation_Sale_KeyWord(ChatDialogHandlerBase next)
-        : base(next, "Confirmation_Sale_KeyWord")
+        public CDHConfirmationSaleKeyWord(ChatDialogHandlerBase next)
+            : base(next, "Confirmation_Sale_KeyWord")
         {
             this.Parents.Add("Sale_Publication_KeyWord");
             this.Route = "/comprar";

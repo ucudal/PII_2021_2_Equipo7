@@ -20,7 +20,7 @@ namespace ClassLibrary
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDHAdminQualificationsMenu(ChatDialogHandlerBase next)
-        : base(next, "hab_menu")
+            : base(next, "hab_menu")
         {
             this.Parents.Add("welcome_sysadmin");
             this.Route = "/habilitaciones";

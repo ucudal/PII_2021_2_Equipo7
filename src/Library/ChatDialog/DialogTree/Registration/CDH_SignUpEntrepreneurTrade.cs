@@ -15,14 +15,14 @@ namespace ClassLibrary
     /// empresa a agregar. Procede a pedirle al
     /// usuario introducir el oficio de la Empresa.
     /// </summary>
-    public class CDH_SignUpEntrepreneurTrade : ChatDialogHandlerBase
+    public class CDHSignUpEntrepreneurTrade : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CDH_SignUpEntrepreneurTrade"/> class.
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpEntrepreneurTrade"/>.
+        /// Initializes a new instance of the <see cref="CDHSignUpEntrepreneurTrade"/> class.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSignUpEntrepreneurTrade"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpEntrepreneurTrade(ChatDialogHandlerBase next)
+        public CDHSignUpEntrepreneurTrade(ChatDialogHandlerBase next)
             : base(next, "registration_new_entre_trade")
         {
             this.Parents.Add("registration_new_entre_name");

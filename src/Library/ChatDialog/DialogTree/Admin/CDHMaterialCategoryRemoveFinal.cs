@@ -21,7 +21,7 @@ namespace ClassLibrary
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDHMaterialCategoryRemoveFinal(ChatDialogHandlerBase next)
-        : base(next, "matcat_remove_final")
+            : base(next, "matcat_remove_final")
         {
             this.Parents.Add("material_remove_from_list");
             this.Route = "/confirmar";

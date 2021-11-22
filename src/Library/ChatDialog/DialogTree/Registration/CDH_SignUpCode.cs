@@ -15,14 +15,14 @@ namespace ClassLibrary
     /// Le pide al usuario introducir su codigo de
     /// registro.
     /// </summary>
-    public class CDH_SignUpCode : ChatDialogHandlerBase
+    public class CDHSignUpCode : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CDH_SignUpCode"/> class.
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpCode"/>.
+        /// Initializes a new instance of the <see cref="CDHSignUpCode"/> class.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSignUpCode"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpCode(ChatDialogHandlerBase next)
+        public CDHSignUpCode(ChatDialogHandlerBase next)
             : base(next, "registration_invite")
         {
             this.Parents.Add("registration_prompt");

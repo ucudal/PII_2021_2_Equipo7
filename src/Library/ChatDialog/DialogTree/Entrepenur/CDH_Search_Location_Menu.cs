@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Search_Location_Menu.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHSearchLocationMenu.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -13,13 +13,13 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Busca una publicación con una locación.
     /// </summary>
-    public class CDH_Search_Location_Menu : ChatDialogHandlerBase
+    public class CDHSearchLocationMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Search_Location_Menu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSearchLocationMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Search_Location_Menu(ChatDialogHandlerBase next)
+        public CDHSearchLocationMenu(ChatDialogHandlerBase next)
         : base(next, "Search_Location_Menu")
         {
             this.Parents.Add("Search_Publication_Menu");

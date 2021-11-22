@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Sale_Publication_Category.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHSalePublicationCategory.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -15,13 +15,13 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Realiza la compra de la ´publicación.
     /// </summary>
-    public class CDH_Sale_Publication_Category : ChatDialogHandlerBase
+    public class CDHSalePublicationCategory : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Sale_Publication_Category"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSalePublicationCategory"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Sale_Publication_Category(ChatDialogHandlerBase next)
+        public CDHSalePublicationCategory(ChatDialogHandlerBase next)
         : base(next, "Sale_Publication_Category")
         {
             this.Parents.Add("List_Category_Menu");

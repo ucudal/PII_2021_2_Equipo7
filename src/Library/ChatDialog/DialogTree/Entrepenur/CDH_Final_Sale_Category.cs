@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDH_Final_Sale_Category.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHFinalSaleCategory.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -14,13 +14,13 @@ namespace ClassLibrary
     /// <see cref="ChatDialogHandlerBase"/> concreto:
     /// Realiza la transacción de la compra.
     /// </summary>
-    public class CDH_Final_Sale_Category : ChatDialogHandlerBase
+    public class CDHFinalSaleCategory : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_Final_Sale_Category"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHFinalSaleCategory"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_Final_Sale_Category(ChatDialogHandlerBase next)
+        public CDHFinalSaleCategory(ChatDialogHandlerBase next)
         : base(next, "Final_Sale_Category")
         {
             this.Parents.Add("Confirmation_Sale_Category");

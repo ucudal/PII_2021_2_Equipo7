@@ -14,14 +14,14 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// no registrado en la plataforma.
     /// </summary>
-    public class CDH_WelcomeUnregistered : ChatDialogHandlerBase
+    public class CDHWelcomeUnregistered : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CDH_WelcomeUnregistered"/> class.
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeUnregistered"/>.
+        /// Initializes a new instance of the <see cref="CDHWelcomeUnregistered"/> class.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHWelcomeUnregistered"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_WelcomeUnregistered(ChatDialogHandlerBase next)
+        public CDHWelcomeUnregistered(ChatDialogHandlerBase next)
             : base(next, "registration_prompt")
         {
             this.Route = "/welcome";

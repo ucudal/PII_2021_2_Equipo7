@@ -15,13 +15,13 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDH_CompanyMaterialModifiDateBetweenReStockMenu : ChatDialogHandlerBase
+    public class CDHCompanyMaterialModifiDateBetweenReStockMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_CompanyMaterialModifiDateBetweenReStockMenu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHCompanyMaterialModifiDateBetweenReStockMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_CompanyMaterialModifiDateBetweenReStockMenu(ChatDialogHandlerBase next)
+        public CDHCompanyMaterialModifiDateBetweenReStockMenu(ChatDialogHandlerBase next)
         : base(next, "company_material_modifi_dateBetweenReStock_menu")
         {
             this.Parents.Add("company_material_modifi_ubication_menu");

@@ -14,14 +14,14 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// emprendedor.
     /// </summary>
-    public class CDH_WelcomeEntrepreneur : ChatDialogHandlerBase
+    public class CDHWelcomeEntrepreneur : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CDH_WelcomeEntrepreneur"/> class.
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_WelcomeEntrepreneur"/>.
+        /// Initializes a new instance of the <see cref="CDHWelcomeEntrepreneur"/> class.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHWelcomeEntrepreneur"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_WelcomeEntrepreneur(ChatDialogHandlerBase next)
+        public CDHWelcomeEntrepreneur(ChatDialogHandlerBase next)
             : base(next, "welcome_entrepreneur")
         {
         }

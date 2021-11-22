@@ -14,14 +14,14 @@ namespace ClassLibrary
     /// Responde a la introduccion del primer nombre
     /// del usuario y continua pidiendole el apellido.
     /// </summary>
-    public class CDH_SignUpUserLastName : ChatDialogHandlerBase
+    public class CDHSignUpUserLastName : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CDH_SignUpUserLastName"/> class.
-        /// Inicializa una nueva instancia de la clase <see cref="CDH_SignUpUserLastName"/>.
+        /// Initializes a new instance of the <see cref="CDHSignUpUserLastName"/> class.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHSignUpUserLastName"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDH_SignUpUserLastName(ChatDialogHandlerBase next)
+        public CDHSignUpUserLastName(ChatDialogHandlerBase next)
             : base(next, "registration_user_l_name")
         {
             this.Parents.Add("registration_user_f_name");
