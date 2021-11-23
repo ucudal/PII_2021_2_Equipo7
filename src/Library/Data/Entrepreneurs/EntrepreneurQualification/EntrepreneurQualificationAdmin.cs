@@ -92,12 +92,12 @@ namespace ClassLibrary
         /// <inheritdoc/>
         protected override void ValidateData(EntrepreneurQualification item)
         {
-            DataManager dataManager = new DataManager();
             if (item is null)
             {
-                throw new ArgumentNullException(paramName: nameof(item));
+                throw new ArgumentNullException(nameof(item));
             }
 
+            // DataManager dataManager = new DataManager();
             if (item.EntrepreneurId == 0/* || !dataManager.Entrepreneur.Exists(item.CompanyMatId)*/)
             {
                 throw new ValidationException("Requerido material de la empresa.");

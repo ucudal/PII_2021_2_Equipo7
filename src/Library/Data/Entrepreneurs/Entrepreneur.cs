@@ -8,13 +8,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace ClassLibrary
-
 {
     /// <summary>
-    /// clase que representa los emprendedores
+    /// clase que representa los emprendedores.
     /// </summary>
     public class Entrepreneur
-    : IManagableData<Entrepreneur>
+        : IManagableData<Entrepreneur>
     {
         /// <summary>
         /// constructor de emprendedor.
@@ -51,7 +50,7 @@ namespace ClassLibrary
         /// <summary>
         /// usuario del emprendedor.
         /// </summary>
-        /// <value>Almacenamos el usuario en un objeto tipo user. </value>
+        /// <value>Almacenamos el usuario en un objeto tipo user.</value>
         public int UserId { get; set; }
 
         /// <summary>
@@ -59,23 +58,24 @@ namespace ClassLibrary
         /// </summary>
         /// <value>almacenamos el nombre en un string.</value>
         public string Name { get; set; }
+
         /// <summary>
         /// oficio del emprendedor.
         /// </summary>
-        /// <value>almacenamos el oficio en un String</value>
+        /// <value>almacenamos el oficio en un String.</value>
         public string Trade { get; set; }
 
         /// <summary>
         /// id del emprendedor.
         /// </summary>
-        /// <value>almacenamos el id en un int</value>
+        /// <value>almacenamos el id en un int.</value>
         public int Id { get; set; }
 
         /// <summary>
         /// verificar si esta activo o no.
         /// </summary>
         /// <value>si la compania fue eliminada<c>true</c>
-        ///  en caso contrario <c>false</c>. </value>
+        ///  en caso contrario <c>false</c>.</value>
         public bool Deleted { get; set; }
 
         /// <inheritdoc/>
