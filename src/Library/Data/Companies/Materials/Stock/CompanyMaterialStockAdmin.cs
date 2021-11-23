@@ -257,6 +257,7 @@ namespace ClassLibrary
             }
 
             locClient.Dispose();
+            
             return closestLocationId;
         }
 
