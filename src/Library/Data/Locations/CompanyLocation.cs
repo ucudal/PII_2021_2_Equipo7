@@ -1,3 +1,8 @@
+// -----------------------------------------------------------------------
+// <copyright file="CompanyLocation.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
 
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -28,14 +33,14 @@ namespace ClassLibrary
 
         /// <inheritdoc/>
         public int Id
-        { 
+        {
             get => this.id;
             set => this.id = value;
         }
 
         /// <inheritdoc/>
         public bool Deleted
-        { 
+        {
             get => this.deleted;
             set => this.deleted = value;
         }
@@ -46,7 +51,7 @@ namespace ClassLibrary
         /// la localizacion.
         /// </summary>
         public int CompanyId
-        { 
+        {
             get => this.companyId;
             set => this.companyId = value;
         }
@@ -56,7 +61,7 @@ namespace ClassLibrary
         /// localizacion.
         /// </summary>
         public string GeoReference
-        { 
+        {
             get => this.geoReference;
             set => this.geoReference = value;
         }

@@ -11,7 +11,7 @@ namespace ClassLibrary
     /// del proceso de registro
     /// para un usuario.
     /// </summary>
-    public class InsertMaterialCategoryData
+    public class InsertMaterialCategoryData : ActivityData
     {
         private MaterialCategory materialCategory;
 

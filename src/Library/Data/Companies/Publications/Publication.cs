@@ -76,7 +76,17 @@ namespace ClassLibrary
         /// <summary>
         ///  Location sirve para saber donde se encuentran los materiales de la publicacion.
         /// </summary>
-        public CompanyLocation Location { get; set; }
+        public int CompanyLocationId { get; set; }
+
+        /// <summary>
+        /// Titulo de la publicacion.
+        /// </summary>
+        public string Title { get; set; }
+
+        /// <summary>
+        /// Descripcion de la publicacion.
+        /// </summary>
+        public string Description { get; set; }
 
         /// <inheritdoc/>
         public void LoadFromJson(string json)
@@ -90,6 +100,10 @@ namespace ClassLibrary
             this.Price = publication.Price;
             this.CompanyId = publication.CompanyId;
             this.CompanyMaterialId = publication.CompanyMaterialId;
+            this.Title = publication.Title;
+            this.Description = publication.Description;
+            this.CompanyLocationId = publication.CompanyLocationId;
+            this.Quantity = publication.Quantity;
         }
 
         /// <inheritdoc/>

@@ -1,3 +1,7 @@
+// <copyright file="InvitationAdminTests.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 using System;
 using System.Collections.Generic;
 using ClassLibrary;
@@ -55,6 +59,7 @@ namespace Tests
 
             Assert.AreEqual(expectedInvites, afterInvites.Count);
         }
+
         /// <summary>
         /// Test del metodo GetByCode(string pCode).
         /// </summary>
@@ -82,11 +87,10 @@ namespace Tests
             this.datMgr.Invitation.GenerateNewInviteCode(invId);
             inv = this.datMgr.Invitation.GetById(invId);
 
-            Invitation xComp=this.datMgr.Invitation.GetByCode(inv.Code);
+            Invitation xComp = this.datMgr.Invitation.GetByCode(inv.Code);
 
-        
             Assert.AreEqual(inv.Id, xComp.Id);
-            Assert.AreEqual(inv.Type,xComp.Type);
+            Assert.AreEqual(inv.Type, xComp.Type);
             Assert.AreEqual(inv.ValidAfter, xComp.ValidAfter);
             Assert.AreEqual(inv.ValidBefore, xComp.ValidBefore);
             Assert.AreEqual(inv.CompanyId, xComp.CompanyId);
@@ -101,7 +105,7 @@ namespace Tests
         [Test]
         public void GetInvitationIsOfTypeTest()
         {
-            //Inserto una company
+            // Inserto una company
             IReadOnlyCollection<Invitation> prevInvites = this.datMgr.Invitation.Items;
 
             RegistrationType type = RegistrationType.CopmanyNew;
@@ -122,19 +126,17 @@ namespace Tests
 
             this.datMgr.Invitation.GenerateNewInviteCode(invId);
 
-            Invitation CompanyInvitation=this.datMgr.Invitation.GetById(invId);
-        
+            Invitation companyInvitation = this.datMgr.Invitation.GetById(invId);
+
             IReadOnlyCollection<Invitation> afterInvites = this.datMgr.Invitation.Items;
 
             int expectedInvites = prevInvites.Count + 1;
 
-            //Valido que me haya agregado bien
+            // Valido que me haya agregado bien
             Assert.AreEqual(expectedInvites, afterInvites.Count);
-            
-            bool expectedIsCompanyInvitation=true;
-            Assert.AreEqual(expectedIsCompanyInvitation, this.datMgr.Invitation.GetInvitationIsOfType(CompanyInvitation.Code,RegistrationType.CopmanyNew));
 
-
+            bool expectedIsCompanyInvitation = true;
+            Assert.AreEqual(expectedIsCompanyInvitation, this.datMgr.Invitation.GetInvitationIsOfType(companyInvitation.Code, RegistrationType.CopmanyNew));
         }
 
         /// <summary>
@@ -162,7 +164,6 @@ namespace Tests
             Assert.AreNotEqual(0, invId);
 
             this.datMgr.Invitation.GenerateNewInviteCode(invId);
-        
             IReadOnlyCollection<Invitation> afterInvites = this.datMgr.Invitation.Items;
 
             int expectedInvites = prevInvites.Count + 1;
@@ -176,7 +177,7 @@ namespace Tests
         [Test]
         public void UpdateTest()
         {
-            //Insertamos una invitacion y validamos que haya quedado agregada
+            // Insertamos una invitacion y validamos que haya quedado agregada
             IReadOnlyCollection<Invitation> prevInvites = this.datMgr.Invitation.Items;
 
             RegistrationType type = RegistrationType.CopmanyNew;
@@ -196,37 +197,36 @@ namespace Tests
             Assert.AreNotEqual(0, invId);
 
             this.datMgr.Invitation.GenerateNewInviteCode(invId);
-        
             IReadOnlyCollection<Invitation> afterInvites = this.datMgr.Invitation.Items;
 
             int expectedInvites = prevInvites.Count + 1;
 
             Assert.AreEqual(expectedInvites, afterInvites.Count);
-            
-            //Obtenemos la invitacion recien agregada, le cambiamos los campos y le damos a update
-            Invitation xToUpdate=this.datMgr.Invitation.New();
-            xToUpdate=this.datMgr.Invitation.GetById(invId);
-            
-            //atributos nuevos
+
+            // Obtenemos la invitacion recien agregada, le cambiamos los campos y le damos a update
+            Invitation xToUpdate = this.datMgr.Invitation.New();
+            xToUpdate = this.datMgr.Invitation.GetById(invId);
+
+            // atributos nuevos
             RegistrationType xType = RegistrationType.CopmanyNew;
             DateTime xValidAfter = DateTime.Now.AddMonths(1);
             DateTime xValidBefore = DateTime.Now.AddMonths(2);
             int xCompanyId = 1;
             bool xUsed = false;
 
-            xToUpdate.Id=invId;
-            xToUpdate.Type=xType;
-            xToUpdate.ValidAfter=xValidAfter;
-            xToUpdate.ValidBefore=xValidBefore;
-            xToUpdate.CompanyId=xCompanyId;
-            xToUpdate.Used=xUsed;
+            xToUpdate.Id = invId;
+            xToUpdate.Type = xType;
+            xToUpdate.ValidAfter = xValidAfter;
+            xToUpdate.ValidBefore = xValidBefore;
+            xToUpdate.CompanyId = xCompanyId;
+            xToUpdate.Used = xUsed;
 
             this.datMgr.Invitation.Update(xToUpdate);
 
-            Invitation xComp=this.datMgr.Invitation.GetById(invId);
+            Invitation xComp = this.datMgr.Invitation.GetById(invId);
 
             Assert.AreEqual(xToUpdate.Id, xComp.Id);
-            Assert.AreEqual(xToUpdate.Type,xComp.Type);
+            Assert.AreEqual(xToUpdate.Type, xComp.Type);
             Assert.AreEqual(xToUpdate.ValidAfter, xComp.ValidAfter);
             Assert.AreEqual(xToUpdate.ValidBefore, xComp.ValidBefore);
             Assert.AreEqual(xToUpdate.CompanyId, xComp.CompanyId);
@@ -241,7 +241,7 @@ namespace Tests
         [Test]
         public void DeleteTest()
         {
-            //Insertamos un elemento
+            // Insertamos un elemento
             IReadOnlyCollection<Invitation> prevInvites = this.datMgr.Invitation.Items;
 
             RegistrationType type = RegistrationType.CopmanyNew;
@@ -261,25 +261,24 @@ namespace Tests
             Assert.AreNotEqual(0, invId);
 
             this.datMgr.Invitation.GenerateNewInviteCode(invId);
-        
             IReadOnlyCollection<Invitation> afterInvites = this.datMgr.Invitation.Items;
 
             int expectedInvites = prevInvites.Count + 1;
 
-            //Validamos que se haya agregado 
+            // Validamos que se haya agregado.
             Assert.AreEqual(expectedInvites, afterInvites.Count);
 
-            //Hacemos el delete y luego validamos que al cantidad haya disminuido 1
-            IReadOnlyCollection<Invitation> beforeDelete=afterInvites;
+            // Hacemos el delete y luego validamos que al cantidad haya disminuido 1
+            IReadOnlyCollection<Invitation> beforeDelete = afterInvites;
 
-            expectedInvites=afterInvites.Count - 1;
+            expectedInvites = afterInvites.Count - 1;
 
             this.datMgr.Invitation.Delete(invId);
 
             IReadOnlyCollection<Invitation> afterDelete = this.datMgr.Invitation.Items;
 
-            //Comprobamos que se elimino una invitacion
-            Assert.AreEqual(expectedInvites,afterDelete.Count);
+            // Comprobamos que se elimino una invitacion
+            Assert.AreEqual(expectedInvites, afterDelete.Count);
         }
 
         /// <summary>
@@ -288,7 +287,7 @@ namespace Tests
         [Test]
         public void GetByIdTest()
         {
-            //Insertamos una invitacion y validamos que haya quedado agregada
+            // Insertamos una invitacion y validamos que haya quedado agregada
             IReadOnlyCollection<Invitation> prevInvites = this.datMgr.Invitation.Items;
 
             RegistrationType type = RegistrationType.CopmanyNew;
@@ -308,18 +307,16 @@ namespace Tests
             Assert.AreNotEqual(0, invId);
 
             this.datMgr.Invitation.GenerateNewInviteCode(invId);
-        
             IReadOnlyCollection<Invitation> afterInvites = this.datMgr.Invitation.Items;
 
             int expectedInvites = prevInvites.Count + 1;
 
             Assert.AreEqual(expectedInvites, afterInvites.Count);
-            
-            //Obtenemos la invitacion agregada con GetById y comparamos
-            Invitation xComp=this.datMgr.Invitation.GetById(invId);
-            
+
+            // Obtenemos la invitacion agregada con GetById y comparamos
+            Invitation xComp = this.datMgr.Invitation.GetById(invId);
             Assert.AreEqual(invId, xComp.Id);
-            Assert.AreEqual(inv.Type,xComp.Type);
+            Assert.AreEqual(inv.Type, xComp.Type);
             Assert.AreEqual(inv.ValidAfter, xComp.ValidAfter);
             Assert.AreEqual(inv.ValidBefore, xComp.ValidBefore);
             Assert.AreEqual(inv.CompanyId, xComp.CompanyId);

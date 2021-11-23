@@ -9,7 +9,7 @@ namespace ClassLibrary
     /// <summary>
     /// lista de data.
     /// </summary>
-    public class ListData
+    public class ListData : ActivityData
     {
     }
 }

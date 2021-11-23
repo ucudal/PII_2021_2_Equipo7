@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Text;
 
 namespace ClassLibrary
@@ -90,8 +91,8 @@ namespace ClassLibrary
             {
                 DateTime now = DateTime.Now;
                 StringBuilder builder = new StringBuilder();
-                builder.Append(now.Year.ToString("D4"));
-                builder.Append(now.DayOfYear.ToString("D3"));
+                builder.Append(now.Year.ToString("D4", CultureInfo.InvariantCulture));
+                builder.Append(now.DayOfYear.ToString("D3", CultureInfo.InvariantCulture));
                 builder.Append("-");
                 switch (invite.Type)
                 {
@@ -112,7 +113,7 @@ namespace ClassLibrary
                         break;
                 }
 
-                string idTransformed = inviteId.ToString().PadLeft(8, '0');
+                string idTransformed = inviteId.ToString(CultureInfo.InvariantCulture).PadLeft(8, '0');
                 idTransformed = idTransformed.Substring(idTransformed.Length - 5);
                 builder.Append(idTransformed);
 

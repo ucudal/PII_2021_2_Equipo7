@@ -1,3 +1,10 @@
+// -----------------------------------------------------------------------
+// <copyright file="EntrepreneurQualification.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -13,6 +20,7 @@ namespace ClassLibrary
         private bool deleted;
         private int entrepreneurId;
         private int qualificationId;
+        private Uri documentUri;
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CompanyMaterialQualification"/>.
@@ -26,14 +34,14 @@ namespace ClassLibrary
 
         /// <inheritdoc/>
         public int Id
-        { 
+        {
             get => this.id;
             set => this.id = value;
         }
 
         /// <inheritdoc/>
         public bool Deleted
-        { 
+        {
             get => this.deleted;
             set => this.deleted = value;
         }
@@ -42,7 +50,7 @@ namespace ClassLibrary
         /// Id del material de la compania.
         /// </summary>
         public int EntrepreneurId
-        { 
+        {
             get => this.entrepreneurId;
             set => this.entrepreneurId = value;
         }
@@ -51,9 +59,18 @@ namespace ClassLibrary
         /// Habilitacion asociada al material de la compania.
         /// </summary>
         public int QualificationId
-        { 
+        {
             get => this.qualificationId;
             set => this.qualificationId = value;
+        }
+
+        /// <summary>
+        /// Url del documento con la habilitacion.
+        /// </summary>
+        public Uri DocumentUri
+        {
+            get => this.documentUri;
+            set => this.documentUri = value;
         }
 
         /// <inheritdoc/>
@@ -78,8 +95,7 @@ namespace ClassLibrary
             this.Deleted = qualification.Deleted;
             this.EntrepreneurId = qualification.entrepreneurId;
             this.QualificationId = qualification.QualificationId;
+            this.DocumentUri = qualification.DocumentUri;
         }
-
     }
-
 }

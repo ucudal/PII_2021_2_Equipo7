@@ -1,3 +1,10 @@
+// -----------------------------------------------------------------------
+// <copyright file="EntrepreneurQualificationAdmin.cs" company="Universidad Católica del Uruguay">
+// Copyright (c) Programación II. Derechos reservados.
+// </copyright>
+// -----------------------------------------------------------------------
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -25,12 +32,13 @@ namespace ClassLibrary
             {
                 if (qualification.EntrepreneurId == entrepreneurId)
                 {
-                    resultList.Add(qualification.QualificationId);
+                    resultList.Add(qualification.Id);
                 }
             }
+
             return resultList.AsReadOnly();
         }
-        
+
         /// <summary>
         /// Obtiene la lista de habilitaciones para un emprendedor por su id.
         /// </summary>
@@ -84,11 +92,21 @@ namespace ClassLibrary
         /// <inheritdoc/>
         protected override void ValidateData(EntrepreneurQualification item)
         {
-            DataManager dataManager = new DataManager();
-            if(item.EntrepreneurId == 0/* || !dataManager.Entrepreneur.Exists(item.CompanyMatId)*/) 
+            if (item is null)
+            {
+                throw new ArgumentNullException(nameof(item));
+            }
+
+            // DataManager dataManager = new DataManager();
+            if (item.EntrepreneurId == 0/* || !dataManager.Entrepreneur.Exists(item.CompanyMatId)*/)
+            {
                 throw new ValidationException("Requerido material de la empresa.");
-            if(item.QualificationId == 0/* || !dataManager.Qualification.Exists(item.QualificationId)*/) 
+            }
+
+            if (item.QualificationId == 0/* || !dataManager.Qualification.Exists(item.QualificationId)*/)
+            {
                 throw new ValidationException("Requerida habilitacion.");
+            }
         }
     }
 }
