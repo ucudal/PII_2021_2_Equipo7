@@ -78,7 +78,6 @@ namespace ClassLibrary
         /// </summary>
         public int CompanyLocationId { get; set; }
 
-
         /// <summary>
         /// Titulo de la publicacion.
         /// </summary>
@@ -88,7 +87,6 @@ namespace ClassLibrary
         /// Descripcion de la publicacion.
         /// </summary>
         public string Description { get; set; }
-
 
         /// <inheritdoc/>
         public void LoadFromJson(string json)
