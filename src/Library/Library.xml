@@ -3097,7 +3097,7 @@
         <member name="T:ClassLibrary.CompanyUser">
             <summary>
             Registro de asociacion entre
-            compania y usuario que la 
+            compania y usuario que la.
             administra.
             </summary>
         </member>
@@ -3114,7 +3114,7 @@
         </member>
         <member name="P:ClassLibrary.CompanyUser.CompanyId">
             <summary>
-            Id de la compania a la 
+            Id de la compania a la
             cual pertenece el usuario.
             </summary>
         </member>
@@ -4165,58 +4165,58 @@
         </member>
         <member name="T:ClassLibrary.Invitation">
             <summary>
-            Clase encargada para conocer los datos de la invitacion
+            Clase encargada para conocer los datos de la invitacion.
             </summary>
-        </member>
-        <member name="P:ClassLibrary.Invitation.Id">
-            <summary>
-            Identificador de cada Invitacion
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Invitation.Code">
-            <summary>
-            Codigo de la invitacion
-            </summary>
-            <value>Almacenamos el codigo de la invitacion en un string</value>
-        </member>
-        <member name="P:ClassLibrary.Invitation.Type">
-            <summary>
-            Tipo de la invitacion
-            </summary>
-            <value>Almacenamos que tipo de invitacion es. Si es una invitación a una empresa ya existente o a una empresa nueva o a un emprendedor o a un admin del sistema</value>
-        </member>
-        <member name="P:ClassLibrary.Invitation.ValidAfter">
-            <summary>
-            Fecha desde cuando es valida la invitacion
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Invitation.ValidBefore">
-            <summary>
-            Fecha hasta cuando es valida la invitacion
-            </summary>
-        </member>
-        <member name="P:ClassLibrary.Invitation.CompanyId">
-            <summary>
-            Id de la company a unirse
-            </summary>
-            <value>En caso de unirnos a una company, nos unimos segun su id. En caso de no unirse a ninguna empresa, se alamacena 0</value>
-        </member>
-        <member name="P:ClassLibrary.Invitation.Used">
-            <summary>
-            Si la invitacion esta utilizada
-            </summary>
-            <value>En caso de que la invitacion haya sido utilizada entonces used=true. En caso contrario used=false</value>
-        </member>
-        <member name="P:ClassLibrary.Invitation.Deleted">
-            <summary>
-            Si la invitacion esta eliminada
-            </summary>
-            <value>En caso de que la invitacion haya sido eliminada entonces deleted=true. En caso contrario deleted=false</value>
         </member>
         <member name="M:ClassLibrary.Invitation.#ctor">
             <summary>
             Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.Invitation"/>.
             </summary>
+        </member>
+        <member name="P:ClassLibrary.Invitation.Id">
+            <summary>
+            Identificador de cada Invitacion.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Invitation.Code">
+            <summary>
+            Codigo de la invitacion.
+            </summary>
+            <value>Almacenamos el codigo de la invitacion en un string.</value>
+        </member>
+        <member name="P:ClassLibrary.Invitation.Type">
+            <summary>
+            Tipo de la invitacion.
+            </summary>
+            <value>Almacenamos que tipo de invitacion es. Si es una invitación a una empresa ya existente o a una empresa nueva o a un emprendedor o a un admin del sistema.</value>
+        </member>
+        <member name="P:ClassLibrary.Invitation.ValidAfter">
+            <summary>
+            Fecha desde cuando es valida la invitacion.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Invitation.ValidBefore">
+            <summary>
+            Fecha hasta cuando es valida la invitacion.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.Invitation.CompanyId">
+            <summary>
+            Id de la company a unirse.
+            </summary>
+            <value>En caso de unirnos a una company, nos unimos segun su id. En caso de no unirse a ninguna empresa, se alamacena.</value>
+        </member>
+        <member name="P:ClassLibrary.Invitation.Used">
+            <summary>
+            Si la invitacion esta utilizada.
+            </summary>
+            <value>En caso de que la invitacion haya sido utilizada entonces used=true. En caso contrario used=false.</value>
+        </member>
+        <member name="P:ClassLibrary.Invitation.Deleted">
+            <summary>
+            Si la invitacion esta eliminada.
+            </summary>
+            <value>En caso de que la invitacion haya sido eliminada entonces deleted=true. En caso contrario deleted=false.</value>
         </member>
         <member name="M:ClassLibrary.Invitation.LoadFromJson(System.String)">
             <inheritdoc/>
@@ -4234,13 +4234,13 @@
         </member>
         <member name="M:ClassLibrary.InvitationAdmin.GetByCode(System.String)">
             <summary>
-            Obtener la invitacion a 
+            Obtener la invitacion a
             partir de su codigo.
             </summary>
             <param name="pCode">
             Codigo de la invitacion.
             </param>
-            <returns></returns>
+            <returns>Retorna la invitacion a partir del Codigo.</returns>
         </member>
         <member name="M:ClassLibrary.InvitationAdmin.GetInvitationIsOfType(System.String,ClassLibrary.RegistrationType)">
             <summary>
@@ -4369,33 +4369,39 @@
             Esta clase representa las categorias de los materialesEmpresa.
             </summary>
         </member>
+        <member name="M:ClassLibrary.MaterialCategory.#ctor(System.Int32,System.String)">
+            <summary>
+            Constructor de la clase.
+            </summary>
+            <param name="id">
+            Id de la categoria.
+            </param>
+            <param name="name">
+            Nombre de la categoria.
+            </param>
+        </member>
+        <member name="M:ClassLibrary.MaterialCategory.#ctor">
+            <summary>
+            Constructor de la clase vacio.
+            </summary>
+        </member>
         <member name="P:ClassLibrary.MaterialCategory.Id">
             <summary>
-            Identificador de cada Categoria de Material 
+            Identificador de cada Categoria de Material.
             </summary>
             <value>Almacenamos un numero el cual va a identificar cada Categoria de Material.</value>
         </member>
         <member name="P:ClassLibrary.MaterialCategory.Name">
             <summary>
-            Nombre de cada Categoria de Material 
+            Nombre de cada Categoria de Material.
             </summary>
             <value>Almacenamos un nombre de cada Categoria de Material.</value>
         </member>
         <member name="P:ClassLibrary.MaterialCategory.Deleted">
             <summary>
-            Obtiene un valor que indica si el MaterialCategory fue eliminado
+            Obtiene un valor que indica si el MaterialCategory fue eliminado.
             </summary>
             <value><c>true</c> si el MaterialCategory fue eliminado, <c>false</c> en caso contrario.</value>
-        </member>
-        <member name="M:ClassLibrary.MaterialCategory.#ctor(System.Int32,System.String)">
-            <summary>
-            Constructor de la clase
-            </summary>
-        </member>
-        <member name="M:ClassLibrary.MaterialCategory.#ctor">
-            <summary>
-            Constructor de la clase vacio
-            </summary>
         </member>
         <member name="M:ClassLibrary.MaterialCategory.LoadFromJson(System.String)">
             <inheritdoc/>
@@ -4419,6 +4425,17 @@
             Clase para definir habilitaciones.
             </summary>
         </member>
+        <member name="M:ClassLibrary.Qualification.#ctor(System.String)">
+            <summary>
+            Constructor de Qualification.
+            </summary>
+            <param name="name">.</param>
+        </member>
+        <member name="M:ClassLibrary.Qualification.#ctor">
+            <summary>
+            Constructor para la utilización de Qualification Admin.
+            </summary>
+        </member>
         <member name="P:ClassLibrary.Qualification.Id">
             <summary>
             Id de habilitaciones.
@@ -4436,17 +4453,6 @@
             Habilita la habilitación.
             </summary>
             <value>.</value>
-        </member>
-        <member name="M:ClassLibrary.Qualification.#ctor(System.String)">
-            <summary>
-            Constructor de Qualification.
-            </summary>
-            <param name="name">.</param>
-        </member>
-        <member name="M:ClassLibrary.Qualification.#ctor">
-            <summary>
-            Constructor para la utilización de Qualification Admin.
-            </summary>
         </member>
         <member name="M:ClassLibrary.Qualification.LoadFromJson(System.String)">
             <inheritdoc/>
@@ -4468,6 +4474,19 @@
         <member name="T:ClassLibrary.Sale">
             <summary>
             Clase Sale.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.Sale.#ctor(System.DateTime,System.Int32,ClassLibrary.Currency)">
+            <summary>
+            Constructor de la clase Sale para definir los atributos.
+            </summary>
+            <param name="dateTime">DateTime.</param>
+            <param name="price">int.</param>
+            <param name="currency">Currency.</param>
+        </member>
+        <member name="M:ClassLibrary.Sale.#ctor">
+            <summary>
+            Constructor vacio para la clase SaleAdmin.
             </summary>
         </member>
         <member name="P:ClassLibrary.Sale.ProductCompanyMaterialId">
@@ -4510,19 +4529,6 @@
         </member>
         <member name="P:ClassLibrary.Sale.Deleted">
             <inheritdoc/>
-        </member>
-        <member name="M:ClassLibrary.Sale.#ctor(System.DateTime,System.Int32,ClassLibrary.Currency)">
-            <summary>
-            Constructor de la clase Sale para definir los atributos.
-            </summary>
-            <param name="dateTime">.</param>
-            <param name="price">.</param>
-            <param name="currency">.</param>
-        </member>
-        <member name="M:ClassLibrary.Sale.#ctor">
-            <summary>
-            Constructor vacio para la clase SaleAdmin.
-            </summary>
         </member>
         <member name="M:ClassLibrary.Sale.LoadFromJson(System.String)">
             <inheritdoc/>
@@ -4591,7 +4597,7 @@
         </member>
         <member name="T:ClassLibrary.Account">
             <summary>
-            la clase account maneja las cuentas de lso usuarios
+            La clase account maneja las cuentas de los usuarios.
             </summary>
         </member>
         <member name="M:ClassLibrary.Account.#ctor">
@@ -4608,7 +4614,7 @@
         <member name="P:ClassLibrary.Account.UserId">
             <summary>
             Id del usuario asociado
-            a la cuenta
+            a la cuenta.
             </summary>
         </member>
         <member name="P:ClassLibrary.Account.Service">
@@ -4621,7 +4627,7 @@
             <summary>
             Identificador de la
             cuenta en el servicio
-            de mensajeria asociado
+            de mensajeria asociado.
             </summary>
         </member>
         <member name="M:ClassLibrary.Account.Clone">
@@ -4642,7 +4648,7 @@
         </member>
         <member name="M:ClassLibrary.AccountAdmin.GetByUserId(System.Int32)">
             <summary>
-            Obtiene una lista de cuentas 
+            Obtiene una lista de cuentas
             segun el id del usuario al
             cual pertenecen.
             </summary>
@@ -4656,7 +4662,7 @@
         </member>
         <member name="M:ClassLibrary.AccountAdmin.GetUserIdForAccount(ClassLibrary.MessagingService,System.String)">
             <summary>
-            Obtiene el id de usuario para 
+            Obtiene el id de usuario para
             una cuenta en concreto.
             </summary>
             <param name="service">
@@ -4664,7 +4670,7 @@
             cuenta.
             </param>
             <param name="account">
-            Identificador de la cuenta en el 
+            Identificador de la cuenta en el
             servicio de mensajeria.
             </param>
             <returns>
@@ -4680,48 +4686,60 @@
             Esta clase representa Usuarios.
             </summary>
         </member>
+        <member name="M:ClassLibrary.User.#ctor(System.Int32,System.String,System.String,ClassLibrary.UserRole)">
+            <summary>
+            Constructor de la clase.
+            </summary>
+            <param name="id">
+            Id del usuario.
+            </param>
+            <param name="firstName">
+            Nombre del usuario.
+            </param>
+            <param name="lastName">
+            Apellido del usuario.
+            </param>
+            <param name="role">
+            Rol del usuario.
+            </param>
+        </member>
+        <member name="M:ClassLibrary.User.#ctor">
+            <summary>
+            Constructor de la clase.
+            </summary>
+        </member>
         <member name="P:ClassLibrary.User.Id">
             <summary>
-            Identificador de cada Usuario
-            </summary>
+            Identificador de cada Usuario.
+            </summary>.
         </member>
         <member name="P:ClassLibrary.User.FirstName">
             <summary>
-            Nombre del Usuario
+            Nombre del Usuario.
             </summary>
-            <value>Almacenamos el nombre del Usuario en un string</value>
+            <value>Almacenamos el nombre del Usuario en un string.</value>
         </member>
         <member name="P:ClassLibrary.User.LastName">
             <summary>
-            Apellido del Usuario
+            Apellido del Usuario.
             </summary>
-            <value>Almacenamos el apellido del Usuario en un string</value>
+            <value>Almacenamos el apellido del Usuario en un string.</value>
         </member>
         <member name="P:ClassLibrary.User.Deleted">
             <summary>
-            Obtiene un valor que indica si el usuario fue eliminado
+            Obtiene un valor que indica si el usuario fue eliminado.
             </summary>
             <value><c>true</c> si el usuario fue eliminado, <c>false</c> en caso contrario.</value>
         </member>
         <member name="P:ClassLibrary.User.Role">
             <summary>
-            Rol del Usuario
+            Rol del Usuario.
             </summary>
-            <value>Almacenamos el rol del Usuario en un objeto de tipo Role</value>
+            <value>Almacenamos el rol del Usuario en un objeto de tipo Role.</value>
         </member>
         <member name="P:ClassLibrary.User.Suspended">
             <summary>
             Estado de suspension del usuario.
-            </summary>
-        </member>
-        <member name="M:ClassLibrary.User.#ctor(System.Int32,System.String,System.String,ClassLibrary.UserRole)">
-            <summary>
-            Constructor de la clase.
-            </summary>
-        </member>
-        <member name="M:ClassLibrary.User.#ctor">
-            <summary>
-            Constructor de la clase.
             </summary>
         </member>
         <member name="M:ClassLibrary.User.LoadFromJson(System.String)">
@@ -5064,7 +5082,7 @@
             <summary>
             Contenedor con los datos
             del proceso de registro
-            para un usuario
+            para un usuario.
             </summary>
         </member>
         <member name="M:ClassLibrary.InsertCompanyMaterialData.#ctor">
@@ -5088,7 +5106,7 @@
             <summary>
             Contenedor con los datos
             del proceso de registro
-            para un usuario
+            para un usuario.
             </summary>
         </member>
         <member name="M:ClassLibrary.InsertInvitationData.#ctor">
@@ -5098,21 +5116,19 @@
         </member>
         <member name="P:ClassLibrary.InsertInvitationData.Invitation">
             <summary>
-            invitacion del usuario
-            
+            invitacion del usuario.
             </summary>
         </member>
         <member name="P:ClassLibrary.InsertInvitationData.RegistrationType">
             <summary>
-            tipo de registro del usuario
+            tipo de registro del usuario.
             </summary>
-            <value></value>
         </member>
         <member name="T:ClassLibrary.InsertMaterialCategoryData">
             <summary>
             Contenedor con los datos
             del proceso de registro
-            para un usuario
+            para un usuario.
             </summary>
         </member>
         <member name="M:ClassLibrary.InsertMaterialCategoryData.#ctor">
@@ -5130,7 +5146,7 @@
             <summary>
             Contenedor con los datos
             del proceso de registro
-            para un usuario
+            para un usuario.
             </summary>
         </member>
         <member name="M:ClassLibrary.InsertPublicationData.#ctor">
@@ -5154,7 +5170,7 @@
             <summary>
             Contenedor con los datos
             del proceso de registro
-            para un usuario
+            para un usuario.
             </summary>
         </member>
         <member name="M:ClassLibrary.InsertQualificationData.#ctor">
@@ -5170,7 +5186,7 @@
         </member>
         <member name="T:ClassLibrary.ListData">
             <summary>
-            
+            lista de data.
             </summary>
         </member>
         <member name="T:ClassLibrary.SearchData">
@@ -5244,7 +5260,7 @@
             <summary>
             Contenedor con los datos
             del proceso de registro
-            para un usuario
+            para un usuario.
             </summary>
         </member>
         <member name="M:ClassLibrary.SearchPublication.#ctor">
@@ -5280,7 +5296,7 @@
             <summary>
             Contenedor con los datos
             del proceso de registro
-            para un usuario
+            para un usuario.
             </summary>
         </member>
         <member name="M:ClassLibrary.SearchSalesData.#ctor">
@@ -5298,7 +5314,7 @@
             <summary>
             Contenedor con los datos
             del proceso de registro
-            para un usuario
+            para un usuario.
             </summary>
         </member>
         <member name="M:ClassLibrary.SelectCompanyMaterialData.#ctor">
@@ -5334,7 +5350,7 @@
             <summary>
             Contenedor con los datos
             del proceso de registro
-            para un usuario
+            para un usuario.
             </summary>
         </member>
         <member name="M:ClassLibrary.SelectCompanyMaterialQualificationData.#ctor">

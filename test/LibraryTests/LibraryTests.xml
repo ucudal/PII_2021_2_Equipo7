@@ -347,16 +347,6 @@
             Test del metodo GetById(int pId).
             </summary>
         </member>
-        <member name="T:Tests.CompanyMaterialTest">
-            <summary>
-            Prueba de la clase <see cref="T:ClassLibrary.CompanyMaterial"/>.
-            </summary>
-        </member>
-        <member name="T:Tests.CompanyStockTest">
-            <summary>
-            Test de la clase CompanyStock.
-            </summary>
-        </member>
         <member name="T:Tests.PublicationAdminTest">
             <summary>
             Test de la clase que administra las publicaciones.
