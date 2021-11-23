@@ -93,7 +93,7 @@ namespace ClassLibrary
                 StringBuilder builder = new StringBuilder();
                 builder.Append(now.Year.ToString("D4", CultureInfo.InvariantCulture));
                 builder.Append(now.DayOfYear.ToString("D3", CultureInfo.InvariantCulture));
-                builder.Append('-');
+                builder.Append("-");
                 switch (invite.Type)
                 {
                     case RegistrationType.CopmanyNew:
@@ -114,7 +114,7 @@ namespace ClassLibrary
                 }
 
                 string idTransformed = inviteId.ToString(CultureInfo.InvariantCulture).PadLeft(8, '0');
-                idTransformed = idTransformed[^5..];
+                idTransformed = idTransformed.Substring(idTransformed.Length - 5);
                 builder.Append(idTransformed);
 
                 invite.Code = builder.ToString();
@@ -141,7 +141,7 @@ namespace ClassLibrary
         {
             if (item != null)
             {
-                // DataManager dataManager = new DataManager();
+                DataManager dataManager = new DataManager();
                 if (item.Type == RegistrationType.CompanyJoin && (item.CompanyId == 0/* || !dataManager.Company.Exists(item.CompanyId)*/))
                 {
                     throw new ValidationException("Requerida compania valida para registro de union a compania.");
