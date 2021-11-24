@@ -35,11 +35,16 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            UserActivity activity = session.CurrentActivity;
+            InsertInvitationData data = activity.GetData<InsertInvitationData>();
+            data.RunTask();
+            session.CurrentActivity.Terminate(chainInitiator: false);
             StringBuilder builder = new StringBuilder();
             this.QualificationAdd(selector);
             builder.Append("La invitacion se ha creado satisfactorimente.\n");
             builder.Append("Escriba ");
-            builder.Append("\\volver : para volver al menu.\n");
+            builder.Append("/volver : para volver al menu.\n");
             return builder.ToString();
         }
 
