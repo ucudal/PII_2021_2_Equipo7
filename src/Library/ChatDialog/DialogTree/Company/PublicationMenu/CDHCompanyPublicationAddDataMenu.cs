@@ -46,7 +46,7 @@ namespace ClassLibrary
         private void PublicationAdd(ChatDialogSelector selector)
         {
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            DProcessData process = session.Process;
+            UserActivity process = new UserActivity("company_publication_menu", "company_publication_list_material_to_add_menu", "/confirmar", null);
             InsertPublicationData data = process.GetData<InsertPublicationData>();
             data.CompanyMaterial = data.CompanyMaterial;
             Publication xPubl = data.Publication;

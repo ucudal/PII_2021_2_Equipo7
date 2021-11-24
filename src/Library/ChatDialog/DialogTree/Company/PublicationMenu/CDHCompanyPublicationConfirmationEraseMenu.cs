@@ -44,7 +44,7 @@ namespace ClassLibrary
             builder.Append("Esta seguro que desea eliminar la publicacion del material " + this.DatMgr.CompanyMaterial.GetById(data.Publication.CompanyMaterialId).Name + " ?\n ");
             builder.Append("Esta seguro que desea eliminar la publicacion del material\n");
             builder.Append("\\confirmar : Confirmar en caso de que este seguro.\n");
-            builder.Append("\\cancelar : Volver al menu de publicaciones .\n");
+            builder.Append("\\volver : Volver al menu de publicaciones .\n");
             return builder.ToString();
         }
 

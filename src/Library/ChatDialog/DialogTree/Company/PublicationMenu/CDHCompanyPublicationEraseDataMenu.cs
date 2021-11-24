@@ -39,7 +39,7 @@ namespace ClassLibrary
             this.PublicationEraseData(selector);
             builder.Append("La publicacion se elimino con exito.\n");
             builder.Append("Escriba ");
-            builder.Append("\\cancelar : para volver al menu de materiales .\n");
+            builder.Append("\\volver : para volver al menu de materiales .\n");
             return builder.ToString();
         }
 

@@ -39,7 +39,7 @@ namespace ClassLibrary
             MaterialCategory matCat = this.DatMgr.MaterialCategory.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
             SelectCompanyMaterialData data = new SelectCompanyMaterialData();
 
-            data.MaterialCategory=matCat;
+            data.MaterialCategory = matCat;
             UserActivity process = new UserActivity("modifi_material", null, this.Code, data);
 
             data.MaterialCategory = matCat;
