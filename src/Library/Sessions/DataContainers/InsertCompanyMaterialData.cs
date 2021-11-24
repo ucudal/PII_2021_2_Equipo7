@@ -4,6 +4,8 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System.Collections.Generic;
+
 namespace ClassLibrary
 {
     /// <summary>
@@ -11,7 +13,7 @@ namespace ClassLibrary
     /// del proceso de registro
     /// para un usuario.
     /// </summary>
-    public class InsertCompanyMaterialData : ActivityData
+    public class InsertCompanyMaterialData : SearchData
     {
         private CompanyMaterial companyMaterial;
         private MaterialCategory materialCategory;
@@ -19,7 +21,8 @@ namespace ClassLibrary
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="InsertCompanyMaterialData"/>.
         /// </summary>
-        public InsertCompanyMaterialData()
+        public InsertCompanyMaterialData(IReadOnlyCollection<int> searchResults, string searchPageContext, string searchPageRoute, int pageItemCount = 6)
+            : base(searchResults, searchPageContext, searchPageRoute, pageItemCount)
         {
         }
 

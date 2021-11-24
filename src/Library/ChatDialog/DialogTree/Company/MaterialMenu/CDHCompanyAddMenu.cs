@@ -5,6 +5,8 @@
 // -----------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ClassLibrary
@@ -35,26 +37,54 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            UserActivity activity = new UserActivity("company_add_material", "welcome_company", "/materiales", null);
-
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            session.PushActivity(activity);
+            UserActivity activity;
+            if (session.CurrentActivity.Code != "company_add_menu")
+            {
+                IReadOnlyCollection<int> categories = this.DatMgr.MaterialCategory.GetAllCategories();
+                InsertCompanyMaterialData search = new InsertCompanyMaterialData(categories, this.Parents.First(), this.Route);
+                activity = new UserActivity("company_add_menu", "welcome_company", "/materiales", search);
+                session.PushActivity(activity);
+            }
 
+            activity = session.CurrentActivity;
+            InsertCompanyMaterialData data = activity.GetData<InsertCompanyMaterialData>();
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu para agregar un material.\n");
             builder.Append("Ingrese el numero de la categoria en la cual va el material.\n");
             builder.Append("En caso de querer cancelar la operacion escriba\n\n");
-            builder.Append("\\cancelar : Listar todos los materiales que ya posee.\n");
-            builder.Append(this.TextToPrintListCategories());
+
+            if (data.SearchResults.Count > 0)
+            {
+                builder.AppendLine($"{this.TextToPrintListCategories(data)}");
+            }
+            else
+            {
+                builder.AppendLine("(No se encontraron categorias)\n");
+            }
+
+            if (data.PageItemCount < data.SearchResults.Count)
+            {
+                builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
+                builder.AppendLine("/pagina_anterior - Pagina anterior.\n");
+            }
+
+            builder.Append("/volver - Volver al menu principal de compañía.");
             return builder.ToString();
         }
 
-        private string TextToPrintListCategories()
+        private string TextToPrintListCategories(InsertCompanyMaterialData search)
         {
-            StringBuilder builder = new StringBuilder();
-            foreach (MaterialCategory xCat in this.DatMgr.MaterialCategory.Items)
+            if (search is null)
             {
-                builder.Append(" " + xCat.Name + " " + xCat.Id + " ");
+                throw new ArgumentNullException(paramName: nameof(search));
+            }
+
+            StringBuilder builder = new StringBuilder();
+            foreach (int xCatId in search.PageItems)
+            {
+                MaterialCategory xMat = this.DatMgr.MaterialCategory.GetById(xCatId);
+                builder.AppendLine($"{xMat.Id} - {xMat.Name}");
             }
 
             return builder.ToString();

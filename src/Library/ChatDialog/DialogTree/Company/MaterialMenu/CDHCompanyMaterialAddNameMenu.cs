@@ -36,22 +36,16 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            UserActivity activity = session.CurrentActivity;
+            InsertCompanyMaterialData data = activity.GetData<InsertCompanyMaterialData>();
             MaterialCategory matCat = this.DatMgr.MaterialCategory.GetById(int.Parse(selector.Code,  CultureInfo.InvariantCulture));
-            InsertCompanyMaterialData data = new InsertCompanyMaterialData();
-
-            data.MaterialCategory=matCat;
-            UserActivity process = new UserActivity("add_Material", null, this.Code, data);
-            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            session.CurrentActivity = process;
-
             data.MaterialCategory = matCat;
-            DProcessData process = new DProcessData("add_Material", this.Code, data);
-            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            session.Process = process;
+            session.CurrentActivity = activity;
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese el nombre del material.\n");
-            builder.Append("\\cancelar : Listar todos los materiales que ya posee.\n");
+            builder.Append("/volver : Volver al menu principal de compañía.\n");
             return builder.ToString();
         }
 
