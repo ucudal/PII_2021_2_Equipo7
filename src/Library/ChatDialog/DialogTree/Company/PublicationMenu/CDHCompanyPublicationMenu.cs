@@ -4,6 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System;
 using System.Text;
 
 namespace ClassLibrary
@@ -29,6 +30,15 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            UserActivity activity = new UserActivity("company_publication_menu", null, "/welcome", null);
+
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            session.PushActivity(activity);
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu de publicaciones.\n");
             builder.Append("Desde este menu puede realizar las\n");

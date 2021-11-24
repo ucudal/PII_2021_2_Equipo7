@@ -36,14 +36,12 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            SelectCompanyMaterialData data = new SelectCompanyMaterialData();
+            UserActivity activity = new UserActivity("company_action_material_menu", "welcome_company", "/materiales", null);
+
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            session.PushActivity(activity);
 
-            UserActivity process = new UserActivity("select_companymaterial", null, this.Code, data);
-
-            data.CompanyMaterial=this.DatMgr.CompanyMaterial.GetById(int.Parse(selector.Code));
-            
-    DProcessData process = new DProcessData("select_companymaterial", this.Code, data);
+            SelectCompanyMaterialData data = new SelectCompanyMaterialData();
             data.CompanyMaterial = this.DatMgr.CompanyMaterial.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
 
             StringBuilder builder = new StringBuilder();
