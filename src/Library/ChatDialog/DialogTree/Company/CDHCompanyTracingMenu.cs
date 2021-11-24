@@ -4,6 +4,8 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace ClassLibrary
@@ -21,45 +23,68 @@ namespace ClassLibrary
         : base(next, "company_Tracing_menu")
         {
             this.Parents.Add("welcome_company");
-            this.Route = "/listar";
+            this.Route = "/seguimiento";
         }
 
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            UserActivity activity;
+            if (session.CurrentActivity?.Code != "search_by_page_entre_purchases_view")
+            {
+                IReadOnlyCollection<int> sales = this.DatMgr.Sale.GetSalesBySeller(session.EntityId);
+                SearchData search = new SearchData(sales, this.Parents.First(), this.Route);
+                activity = new UserActivity("search_by_page_entre_purchases_view", null, "/welcomecompany", search);
+                session.PushActivity(activity);
+            }
+
+            activity = session.CurrentActivity;
+            SearchData data = activity.GetData<SearchData>();
+
             StringBuilder builder = new StringBuilder();
-            builder.Append("Seguimiento de materiales \n");
-            builder.Append("Cantidad vendida por material\n");
-            builder.Append("\\cancelar : Volver a menu de empresas .\n");
+            builder.AppendLine("<b>Lista de ventas</b>\n");
+            builder.AppendLine("Ingrese el numero de la venta para ver detalles.\n");
+            if (data.SearchResults.Count > 0)
+            {
+                builder.AppendLine($"{this.TextAllPublicationsBought(data)}");
+            }
+            else
+            {
+                builder.AppendLine("(No se encontraron compras)\n");
+            }
+
+            if (data.PageItemCount < data.SearchResults.Count)
+            {
+                builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
+                builder.AppendLine("/pagina_anterior - Pagina anterior.\n");
+            }
+
+            builder.Append("/volver - Volver al menu de inicio.");
             return builder.ToString();
         }
 
-        /*
-        private string TextToPrintCompanyMaterial(ChatDialogSelector selector)
+        private string TextAllPublicationsBought(SearchData search)
         {
-            StringBuilder xListMats=new StringBuilder();
-            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            Company company = this.DatMgr.Company.FindAdminUser(session.UserId);
-            List<Sale> sales = this.DatMgr.User.GetByCompanyId(company.Id);
-            Dictionary<int,int> saleByMatirial = new Dictionary<int,int>();
+            if (search is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(search));
+            }
 
-            foreach(Sale sale in sales)
+            StringBuilder builder = new StringBuilder();
+            foreach (int saleId in search.PageItems)
             {
-                if(saleByMatirial.ContainsKey(sale.PublicationItem.CompanyMaterial.Id))
-                {
-                    saleByMatirial[sale.PublicationItem.CompanyMaterial.Id] += sale.PublicationItem.Quantity;
-                }
-                else
-                {
-                    saleByMatirial[sale.PublicationItem.CompanyMaterial.Id] = sale.PublicationItem.Quantity;
-                }
+                Sale sale = this.DatMgr.Sale.GetById(saleId);
+                CompanyMaterial compMat = this.DatMgr.CompanyMaterial.GetById(sale.ProductCompanyMaterialId);
+                builder.AppendLine($"{sale.Id} - {compMat.Name}");
             }
-            foreach(int key in saleByMatirial.Keys)
-            {
-                xListMats.Append($"El material {key} se vendió una cantidad de {saleByMatirial[key]}\n");
-            }
-            return xListMats.ToString();
+
+            return builder.ToString();
         }
-        */
     }
 }
