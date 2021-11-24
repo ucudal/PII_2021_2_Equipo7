@@ -43,9 +43,6 @@ namespace ClassLibrary
             UserActivity process = new UserActivity("add_Material", null, this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.CurrentActivity = process;
-            
-
-
 
             data.MaterialCategory = matCat;
             DProcessData process = new DProcessData("add_Material", this.Code, data);

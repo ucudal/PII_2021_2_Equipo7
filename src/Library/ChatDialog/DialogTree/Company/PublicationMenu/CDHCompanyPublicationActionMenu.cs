@@ -39,19 +39,13 @@ namespace ClassLibrary
             InsertPublicationData data = new InsertPublicationData();
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
 
-            UserActivity process = new UserActivity("select_publication", null, this.Code,data);
-            data.Publication=this.DatMgr.Publication.GetById(int.Parse(selector.Code));
-    
-
-            DProcessData process = new DProcessData("select_publication", this.Code, data);
+            UserActivity process = new UserActivity("select_publication", null, this.Code, data);
             data.Publication = this.DatMgr.Publication.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
-
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu acciones sobre la publicacion elegido.\n");
-            builder.Append("Desde este menu puede realizar las\n");
-            builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\modificar : Modificar la publicacion.\n");
+            builder.Append("Desde este menu puede realizar la\n");
+            builder.Append("siguientes operacion:\n\n");
             builder.Append("\\eliminar : Eliminar la publicacion.\n");
             return builder.ToString();
         }

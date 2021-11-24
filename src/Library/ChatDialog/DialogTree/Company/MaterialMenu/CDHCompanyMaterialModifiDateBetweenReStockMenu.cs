@@ -38,7 +38,7 @@ namespace ClassLibrary
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
 
-            UserActivity process = session.CurrentActivity;;
+            UserActivity process = session.CurrentActivity;
             session.CurrentActivity = process;
 
             DProcessData process = session.Process;

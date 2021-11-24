@@ -6,6 +6,7 @@
 
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace ClassLibrary
@@ -38,9 +39,10 @@ namespace ClassLibrary
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity process = session.CurrentActivity;
+
             InsertPublicationData data = process.GetData<InsertPublicationData>();
 
-            data.Publication.Price = int.Parse(selector.Code, CultureInfo.InvariantCulture);
+            data.CompanyMaterial.Id = int.Parse(selector.Code, CultureInfo.InvariantCulture);
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Seguro que desea crear un material con los siguientes datos.\n");

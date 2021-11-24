@@ -5,6 +5,8 @@
 // -----------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ClassLibrary
@@ -35,29 +37,57 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
+            StringBuilder xListMats = new StringBuilder();
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            UserActivity activity;
+
+            if (session.CurrentActivity.Code != "company_publication_list_material_to_add_menu")
+            {
+            IReadOnlyCollection<int> publications = this.DatMgr.Publication.GetPublicationsByCompany(session.EntityId);
+            SearchData search = new SearchData(publications, this.Parents.First(), this.Route);
+            activity = new UserActivity("company_publication_list_menu", "welcome_company", "/publicaciones", search);
+            session.PushActivity(activity);
+            }
+
+            activity = session.CurrentActivity;
+            SearchData data = activity.GetData<SearchData>();
+
             StringBuilder builder = new StringBuilder();
             builder.Append("Lista de publicaciones.\n");
             builder.Append("Desde este menu puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
             builder.Append("Ingrese el numero de la publicacion con la cual quiere trabajar \n");
-            builder.Append(" en caso contrario escriba \n");
-            builder.Append("\\cancelar : Volver al menu de materiales .\n");
-            builder.Append(this.TextoToPrintQualificationsToErase(selector));
-            builder.Append("LISTADO_PUBLICACIONES");
+            builder.Append(" en caso contrario \n");
+            if (data.SearchResults.Count > 0)
+            {
+                builder.AppendLine($"{this.TextoToPrintPublication(data)}");
+            }
+            else
+            {
+                builder.AppendLine("(No se encontraron publicaciones)\n");
+            }
+
+            if (data.PageItemCount < data.SearchResults.Count)
+            {
+                builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
+                builder.AppendLine("/pagina_anterior - Pagina anterior.\n");
+            }
+
+            builder.Append("/volver - Volver al menu de compañía.");
             return builder.ToString();
         }
 
-        private string TextoToPrintQualificationsToErase(ChatDialogSelector selector)
+        private string TextoToPrintPublication(SearchData search)
         {
-            if (selector is null)
+            if (search is null)
             {
-                throw new ArgumentNullException(paramName: nameof(selector));
+                throw new ArgumentNullException(paramName: nameof(search));
             }
 
             StringBuilder builder = new StringBuilder();
             foreach (Publication xPub in this.DatMgr.Publication.Items)
             {
-                builder.Append(" " + xPub.Id + " " + this.DatMgr.CompanyMaterial.GetById(xPub.CompanyMaterialId).Name + " " + xPub.Price + "\n");
+                builder.Append(" " + xPub.Id + " " + this.DatMgr.Publication.GetById(xPub.Id).Title + " " + xPub.Price + "\n");
             }
 
             return builder.ToString();
