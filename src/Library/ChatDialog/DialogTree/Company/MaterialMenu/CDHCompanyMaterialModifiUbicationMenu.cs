@@ -41,9 +41,6 @@ namespace ClassLibrary
             UserActivity process = session.CurrentActivity;;
             session.CurrentActivity = process;
 
-            DProcessData process = session.Process;
-            session.Process = process;
-
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
             data.CompanyMaterialStock.Stock = int.Parse(selector.Code, CultureInfo.InvariantCulture);
             data.CompanyMaterialStock.CompanyMatId = data.CompanyMaterial.Id;

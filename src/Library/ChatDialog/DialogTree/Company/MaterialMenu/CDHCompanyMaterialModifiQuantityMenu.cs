@@ -40,9 +40,6 @@ namespace ClassLibrary
             UserActivity process = session.CurrentActivity;;
             session.CurrentActivity = process;
 
-            DProcessData process = session.Process;
-            session.Process = process;
-
             SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
             CompanyMaterial companyMaterial = this.DatMgr.CompanyMaterial.New();
             companyMaterial.Name = selector.Code.Trim();

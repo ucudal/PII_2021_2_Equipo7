@@ -54,7 +54,7 @@ namespace ClassLibrary
             builder.AppendLine($"<b>Stock</b>: {stock}");
             builder.AppendLine($"<b>Vendedor</b>: {comp.Name}\n");
             builder.AppendLine($"<b>Descripcion</b>:\n{pub.Description}\n");
-            builder.AppendLine("<b>Qualifications</b>:");
+            builder.AppendLine("<b>Habilitaciones</b>:");
             bool hasAllQualifications = true;
             bool hasQualification;
             string line;
@@ -65,6 +65,11 @@ namespace ClassLibrary
                 line = hasQualification ? $"{qualification.Name}" : $"{qualification.Name} (Falta)";
                 builder.AppendLine(line);
                 hasAllQualifications &= hasQualification;
+            }
+
+            if (qualifications.Count == 0)
+            {
+                builder.AppendLine("Sin habilitaciones requeridas.");
             }
 
             builder.AppendLine($"\n<b>Cantidad</b>: {pub.Quantity}");

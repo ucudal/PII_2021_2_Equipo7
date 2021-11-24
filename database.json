@@ -293,5 +293,41 @@
       "Id": 1,
       "Deleted": false
     }
+  ],
+  "EntrepreneurQualification": [
+    {
+      "Id": 1,
+      "Deleted": true,
+      "EntrepreneurId": 1,
+      "QualificationId": 3,
+      "DocumentUri": "http://pagina.com/file.pdf"
+    },
+    {
+      "Id": 2,
+      "Deleted": true,
+      "EntrepreneurId": 1,
+      "QualificationId": 10,
+      "DocumentUri": "http://pagina.com/file.pdf"
+    },
+    {
+      "Id": 3,
+      "Deleted": false,
+      "EntrepreneurId": 1,
+      "QualificationId": 3,
+      "DocumentUri": "http://pagina.com/file.pdf"
+    }
+  ],
+  "Sale": [
+    {
+      "ProductCompanyMaterialId": 1,
+      "ProductQuantity": 1,
+      "SellerCompanyId": 1,
+      "BuyerEntrepreneurId": 1,
+      "Id": 1,
+      "DateTime": "2021-11-24T10:08:00.222904-03:00",
+      "Price": 21,
+      "Currency": 2,
+      "Deleted": false
+    }
   ]
 }

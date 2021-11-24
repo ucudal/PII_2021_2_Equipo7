@@ -47,6 +47,7 @@ namespace ClassLibrary
 
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("<b>Detalles de Compra</b>\n");
+            builder.AppendLine($"<b>Fecha</b>: {sale.DateTime.ToShortDateString()}");
             builder.AppendLine($"<b>Material</b>: {compMat.Name}");
             builder.AppendLine($"<b>Vendedor</b>: {comp.Name}");
             builder.AppendLine($"<b>Cantidad</b>: {sale.ProductQuantity}");

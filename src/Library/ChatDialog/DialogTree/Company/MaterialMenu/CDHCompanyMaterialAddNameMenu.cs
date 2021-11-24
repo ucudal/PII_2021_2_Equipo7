@@ -48,10 +48,10 @@ namespace ClassLibrary
 
 
             data.MaterialCategory = matCat;
-            DProcessData process = new DProcessData("add_Material", this.Code, data);
+            /*DProcessData process = new DProcessData("add_Material", this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.Process = process;
-
+*/
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese el nombre del material.\n");
             builder.Append("\\cancelar : Listar todos los materiales que ya posee.\n");

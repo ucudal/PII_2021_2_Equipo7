@@ -41,11 +41,6 @@ namespace ClassLibrary
 
             UserActivity process = new UserActivity("select_publication", null, this.Code,data);
             data.Publication=this.DatMgr.Publication.GetById(int.Parse(selector.Code));
-    
-
-            DProcessData process = new DProcessData("select_publication", this.Code, data);
-            data.Publication = this.DatMgr.Publication.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
-
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu acciones sobre la publicacion elegido.\n");
