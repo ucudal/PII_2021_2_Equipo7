@@ -35,9 +35,12 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            StringBuilder builder = new StringBuilder();
-            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            UserActivity activity = new UserActivity("company_material_list", "welcome_company", "/materiales", null);
 
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            session.PushActivity(activity);
+
+            StringBuilder builder = new StringBuilder();
             builder.Append("Listado de materiales existentes: \n");
             builder.Append("En caso de querer hacer una accion sobre algun material ingrese su numero.\n");
             builder.Append("Ademas puede realizar las\n");

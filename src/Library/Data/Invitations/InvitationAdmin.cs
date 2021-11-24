@@ -93,7 +93,7 @@ namespace ClassLibrary
                 StringBuilder builder = new StringBuilder();
                 builder.Append(now.Year.ToString("D4", CultureInfo.InvariantCulture));
                 builder.Append(now.DayOfYear.ToString("D3", CultureInfo.InvariantCulture));
-                builder.Append("-");
+                builder.Append(" - ");
                 switch (invite.Type)
                 {
                     case RegistrationType.CopmanyNew:

@@ -4,6 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System;
 using System.Text;
 
 namespace ClassLibrary
@@ -29,6 +30,16 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            UserActivity activity = new UserActivity("company_add_material", "welcome_company", "/materiales", null);
+
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            session.PushActivity(activity);
+
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu para agregar un material.\n");
             builder.Append("Ingrese el numero de la categoria en la cual va el material.\n");
