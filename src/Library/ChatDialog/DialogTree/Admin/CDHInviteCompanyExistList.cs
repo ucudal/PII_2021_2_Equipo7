@@ -5,6 +5,9 @@
 // -----------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace ClassLibrary
@@ -37,25 +40,53 @@ namespace ClassLibrary
 
             StringBuilder builder = new StringBuilder();
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            UserActivity activity;
+            if (session.CurrentActivity.Code != "search_by_page_admin_inv_comp_join")
+            {
+                int id = int.Parse(selector.Code, NumberStyles.Integer, CultureInfo.InvariantCulture);
+                IReadOnlyCollection<int> companies = this.DatMgr.Company.Items.Select(comp => comp.Id).ToList().AsReadOnly();
 
-            builder.Append("Listado de Companias existentes: \n");
-            builder.Append("En caso de querer hacer una accion sobre alguna compania ingrese su numero.\n");
-            builder.Append("\\cancelar : Volver a menu.\n");
-            builder.Append(this.TextToPrintQualification());
-            builder.Append("LISTADO_CATMAT");
+                InsertInvitationData search = new InsertInvitationData(companies, this.Parents.First(), this.Route);
+                activity = new UserActivity("inv_companyJoin_ins", null, "/invitar", search);
+                session.PushActivity(activity);
+            }
+
+            activity = session.CurrentActivity;
+            InsertInvitationData data = activity.GetData<InsertInvitationData>();
+            if (data.SearchResults.Count > 0)
+            {
+                builder.AppendLine($"{this.TextToPrintQualification(data)}");
+            }
+            else
+            {
+                builder.AppendLine("(No se encontraron publicaciones)\n");
+            }
+
+            if (data.PageItemCount < data.SearchResults.Count)
+            {
+                builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
+                builder.AppendLine("/pagina_anterior - Pagina anterior.\n");
+            }
+
+            builder.Append("/volver - Volver al menu de busqueda.");
             return builder.ToString();
         }
 
-        private string TextToPrintQualification()
+        private string TextToPrintQualification(SearchData search)
         {
-            StringBuilder xListMats = new StringBuilder();
-
-            foreach (Company company in this.DatMgr.Company.Items)
+            if (search is null)
             {
-                xListMats.Append(" " + company.Name + " " + company.Id + "\n");
+                throw new ArgumentNullException(paramName: nameof(search));
             }
 
-            return xListMats.ToString();
+            StringBuilder builder = new StringBuilder();
+            foreach (int compid in search.PageItems)
+            {
+                Company comp = this.DatMgr.Company.GetById(compid);
+                builder.AppendLine($"{comp.Id} - {comp.Name}");
+            }
+
+            return builder.ToString();
         }
     }
 }

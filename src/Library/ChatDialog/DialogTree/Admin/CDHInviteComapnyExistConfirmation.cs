@@ -36,19 +36,43 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            InsertInvitationData data = new InsertInvitationData();
-            data.Invitation.Type = RegistrationType.CompanyJoin;
-            data.Invitation.CompanyId = int.Parse(selector.Code, CultureInfo.InvariantCulture);
-            UserActivity process = new UserActivity("companyexist_invite", null, this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            session.CurrentActivity = process;
-
+            UserActivity activity = session.CurrentActivity;
+            InsertInvitationData data = activity.GetData<InsertInvitationData>();
+            data.Invitation.CompanyId = int.Parse(selector.Code, CultureInfo.InvariantCulture);
+            session.CurrentActivity = activity;
             StringBuilder builder = new StringBuilder();
 
             builder.Append("Desea crear una invitacion para una compania nueva\n");
-            builder.Append("\\confirmar \n");
-            builder.Append("\\cancelar");
+            builder.Append("/confirmar \n");
+            builder.Append("/cancelar");
             return builder.ToString();
+        }
+
+        /// <inheritdoc/>
+        public override bool ValidateDataEntry(ChatDialogSelector selector)
+        {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            if (this.Parents.Contains(selector.Context))
+            {
+                if (!selector.Code.StartsWith('/'))
+                {
+                    if (int.TryParse(selector.Code, NumberStyles.Integer, CultureInfo.InvariantCulture, out int id))
+                    {
+                        Company company = this.DatMgr.Company.GetById(id);
+                        if (company is not null)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }
