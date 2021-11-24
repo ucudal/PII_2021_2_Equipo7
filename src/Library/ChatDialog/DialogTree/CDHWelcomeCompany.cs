@@ -37,6 +37,8 @@ namespace ClassLibrary
             builder.Append("\\publicaciones : Administrar sus publicaciones.\n");
             builder.Append("\\ventas : Manejar sus ventas.\n");
             builder.Append("\\usuarios : Administrar los usuarios administradores.");
+            builder.Append("\\seguimiento : Listar el total de todos los materiales (Los vendidos en todas las  publicaciones)\n");
+
             return builder.ToString();
         }
 
