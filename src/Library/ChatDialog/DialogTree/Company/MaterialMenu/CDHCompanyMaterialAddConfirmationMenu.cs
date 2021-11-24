@@ -36,8 +36,8 @@ namespace ClassLibrary
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            UserActivity process = session.CurrentActivity;
-            InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
+            UserActivity activity = session.CurrentActivity;
+            InsertCompanyMaterialData data = activity.GetData<InsertCompanyMaterialData>();
 
             CompanyMaterial companyMaterial = this.DatMgr.CompanyMaterial.New();
             companyMaterial.Name = selector.Code.Trim();
@@ -45,10 +45,13 @@ namespace ClassLibrary
             companyMaterial.CompanyId = session.UserId;
             data.CompanyMaterial = companyMaterial;
 
+            session.CurrentActivity = activity;
+
             StringBuilder builder = new StringBuilder();
             builder.Append("Seguro que desea crear un material con los siguientes datos.\n");
             builder.Append("Nombre: " + data.CompanyMaterial.Name);
-            builder.Append("\\confirmar : En caso de querer confirmar la operacion.\n");
+            builder.Append("/confirmar : En caso de querer confirmar la operacion.\n");
+            builder.Append("/volver : Volver al menu principal de compañía");
             return builder.ToString();
         }
 

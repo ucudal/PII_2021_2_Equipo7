@@ -36,13 +36,12 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            UserActivity activity = new UserActivity("company_action_material_menu", "welcome_company", "/materiales", null);
-
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            session.PushActivity(activity);
-
-            SelectCompanyMaterialData data = new SelectCompanyMaterialData();
-            data.CompanyMaterial = this.DatMgr.CompanyMaterial.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
+            UserActivity activity = session.CurrentActivity;
+            SelectCompanyMaterialData data = activity.GetData<SelectCompanyMaterialData>();
+            CompanyMaterial xMat = this.DatMgr.CompanyMaterial.GetById(int.Parse(selector.Code,  CultureInfo.InvariantCulture));
+            data.CompanyMaterial = xMat;
+            session.CurrentActivity = activity;
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu acciones sobre el material elegido.\n");

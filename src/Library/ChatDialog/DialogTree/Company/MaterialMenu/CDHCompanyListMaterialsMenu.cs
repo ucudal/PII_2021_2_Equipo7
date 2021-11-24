@@ -5,6 +5,8 @@
 // -----------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ClassLibrary
@@ -35,37 +37,58 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            UserActivity activity = new UserActivity("company_material_list", "welcome_company", "/materiales", null);
-
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            session.PushActivity(activity);
+            UserActivity activity;
+            if (session.CurrentActivity.Code != "company_list_material_menu")
+            {
+                IReadOnlyCollection<int> materials = this.DatMgr.CompanyMaterial.GetCompanyMaterialsInCompany(session.EntityId);
+                SelectCompanyMaterialData search = new SelectCompanyMaterialData(materials, this.Parents.First(), this.Route);
+                activity = new UserActivity("company_list_material_menu", "welcome_company", "/materiales", search);
+                session.PushActivity(activity);
+            }
+
+            activity = session.CurrentActivity;
+            SelectCompanyMaterialData data = activity.GetData<SelectCompanyMaterialData>();
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Listado de materiales existentes: \n");
             builder.Append("En caso de querer hacer una accion sobre algun material ingrese su numero.\n");
             builder.Append("Ademas puede realizar las\n");
             builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\siguiente : Siguiente pagina de materiales.\n");
-            builder.Append("\\anterior: Pagina anterior de materiales.\n");
-            builder.Append("\\cancelar : Volver a menu de materiales .\n");
-            builder.Append(this.TextToPrintCompanyMaterial(selector));
-            builder.Append("LISTADO_MATERIALES");
+            if (data.SearchResults.Count > 0)
+            {
+                builder.AppendLine($"{this.TextToPrintCompanyMaterial(data)}");
+            }
+            else
+            {
+                builder.AppendLine("(No se encontraron materiales)\n");
+            }
+
+            if (data.PageItemCount < data.SearchResults.Count)
+            {
+                builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
+                builder.AppendLine("/pagina_anterior - Pagina anterior.\n");
+            }
+
+            builder.Append("/volver - Volver al menu principal de compañía.");
             return builder.ToString();
         }
 
-        private string TextToPrintCompanyMaterial(ChatDialogSelector selector)
+        private string TextToPrintCompanyMaterial(SelectCompanyMaterialData search)
         {
-            StringBuilder xListMats = new StringBuilder();
-            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-
-            Company company = this.DatMgr.Company.GetById(this.DatMgr.CompanyUser.GetCompanyForUser(session.UserId));
-            foreach (int xIdCompanyMaterial in this.DatMgr.CompanyMaterial.GetCompanyMaterialsInCompany(company.Id))
+            if (search is null)
             {
-                CompanyMaterial xMat = this.DatMgr.CompanyMaterial.GetById(xIdCompanyMaterial);
-                xListMats.Append(" " + xMat.Name + " " + xMat.Id + "\n");
+                throw new ArgumentNullException(paramName: nameof(search));
             }
 
-            return xListMats.ToString();
+            StringBuilder builder = new StringBuilder();
+            foreach (int xMatId in search.PageItems)
+            {
+                CompanyMaterial xMat = this.DatMgr.CompanyMaterial.GetById(xMatId);
+                builder.AppendLine($"{xMat.Id} - {xMat.Name}");
+            }
+
+            return builder.ToString();
         }
     }
 }

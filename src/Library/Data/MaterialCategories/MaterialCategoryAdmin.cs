@@ -4,6 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ClassLibrary
@@ -23,6 +24,16 @@ namespace ClassLibrary
                     throw new ValidationException("Requerido nombre.");
                 }
             }
+        }
+
+        public IReadOnlyCollection<int> GetAllCategories()
+        {
+            List<int> resultList = new List<int>();
+            foreach (MaterialCategory xMat in this.Items)
+            {
+                resultList.Add(xMat.Id);
+            }
+            return resultList.AsReadOnly();
         }
     }
 }

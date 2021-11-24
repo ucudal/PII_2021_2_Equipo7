@@ -39,18 +39,18 @@ namespace ClassLibrary
             this.EraseMaterialFromCompany(selector);
             builder.Append("Los datos se eliminaron correctamente.\n");
             builder.Append("escriba \n");
-            builder.Append("\\volver : para retornar al menu de materiales.\n");
+            builder.Append("/volver : para retornar al menu de materiales.\n");
             return builder.ToString();
         }
 
         private void EraseMaterialFromCompany(ChatDialogSelector selector)
         {
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            UserActivity process = session.CurrentActivity;
-            SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
-            CompanyMaterial xMat = this.DatMgr.CompanyMaterial.GetById(data.CompanyMaterial.Id);
-            xMat.Deleted = true;
-            this.DatMgr.CompanyMaterial.Update(xMat);
+            UserActivity activity = session.CurrentActivity;
+            SelectCompanyMaterialData data = activity.GetData<SelectCompanyMaterialData>();
+            data.RunTask();
+            session.CurrentActivity.Terminate(chainInitiator: false);
+            this.DatMgr.CompanyMaterial.Delete(data.CompanyMaterial.Id);
         }
     }
 }
