@@ -4,6 +4,9 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ClassLibrary
@@ -29,29 +32,62 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            StringBuilder builder = new StringBuilder();
-            builder.Append("Listado de Ventas existentes: \n");
-            builder.Append("En caso de querer hacer una accion sobre algun material ingrese su numero.\n");
-            builder.Append("\\cancelar : Volver a menu de Empresa .\n");
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
 
-            // builder.Append(TextToPrintCompanyMaterial(selector));
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            UserActivity activity;
+            if (session.CurrentActivity?.Code != "search_by_page_company_sales_view")
+            {
+                IReadOnlyCollection<int> sales = this.DatMgr.Sale.GetSalesBySeller(session.EntityId);
+                SearchData search = new SearchData(sales, this.Parents.First(), this.Route);
+                activity = new UserActivity("search_by_page_company_sales_view", null, "/welcome", search);
+                session.PushActivity(activity);
+            }
+
+            activity = session.CurrentActivity;
+            SearchData data = activity.GetData<SearchData>();
+
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("<b>Lista de ventas</b>\n");
+            builder.AppendLine("Ingrese el numero de la compra para ver detalles.\n");
+            if (data.SearchResults.Count > 0)
+            {
+                builder.AppendLine($"{this.TextAllPublicationsBought(data)}");
+            }
+            else
+            {
+                builder.AppendLine("(No se encontraron ventas)\n");
+            }
+
+            if (data.PageItemCount < data.SearchResults.Count)
+            {
+                builder.AppendLine("/pagina_siguiente - Pagina siguiente.");
+                builder.AppendLine("/pagina_anterior - Pagina anterior.\n");
+            }
+
+            builder.Append("/volver - Volver al menu de inicio.");
             return builder.ToString();
         }
 
-        /*
-        private string TextToPrintCompanyMaterial(ChatDialogSelector selector)
+        private string TextAllPublicationsBought(SearchData search)
         {
-            StringBuilder xListMats=new StringBuilder();
-            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            Company company = this.companyAdmin.FindAdminUser(session.UserId);
-
-            List<Sale> sales = this.saleAdmin.GetByCompanyId(company.Id);
-
-            foreach(Sale sale  in sales)
+            if (search is null)
             {
-                xListMats.Append("en la fecha" + sale.DateTime.ToString() +"se compro" + sale.PublicationItem.CompanyMaterial.Name + "\n");
+                throw new ArgumentNullException(paramName: nameof(search));
             }
-            return xListMats.ToString();
-        }*/
+
+            StringBuilder builder = new StringBuilder();
+            foreach (int saleId in search.PageItems)
+            {
+                Sale sale = this.DatMgr.Sale.GetById(saleId);
+                CompanyMaterial compMat = this.DatMgr.CompanyMaterial.GetById(sale.ProductCompanyMaterialId);
+                builder.AppendLine($"{sale.Id} - {compMat.Name}");
+            }
+
+            return builder.ToString();
+        }
     }
 }
