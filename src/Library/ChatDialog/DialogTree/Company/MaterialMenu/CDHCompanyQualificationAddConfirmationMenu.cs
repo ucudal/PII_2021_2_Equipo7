@@ -37,8 +37,8 @@ namespace ClassLibrary
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            UserActivity process = session.CurrentActivity;
-            SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
+            UserActivity activity = session.CurrentActivity;
+            SelectCompanyMaterialData data = activity.GetData<SelectCompanyMaterialData>();
             Qualification habilitaciones = this.DatMgr.Qualification.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
             data.Qualification = habilitaciones;
 
@@ -46,8 +46,8 @@ namespace ClassLibrary
             builder.Append("Seguro que desea añadir esta habilitacion al material.\n");
             builder.Append("Nombre: " + data.Qualification.Name);
             builder.Append("Nombre: NOMBRE\n");
-            builder.Append("\\confirmar : En caso de querer confirmar la operacion.\n");
-            builder.Append("\\volver : Listar todos los materiales que ya posee.\n");
+            builder.Append("/confirmar : En caso de querer confirmar la operacion.\n");
+            builder.Append("/volver : Volver al menu principal de materiales.\n");
             return builder.ToString();
         }
 

@@ -35,23 +35,30 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            UserActivity activity = session.CurrentActivity;
+            InsertCompanyMaterialData data = activity.GetData<InsertCompanyMaterialData>();
+
             StringBuilder builder = new StringBuilder();
             this.AddQualificationToMaterial(selector);
             builder.Append("Habilitacion agregada con exito.\n");
             builder.Append("escriba \n");
             builder.Append("\\volver : para retornar al menu de materiales.\n");
+            data.RunTask();
+            session.CurrentActivity.Terminate(chainInitiator: false);
             return builder.ToString();
         }
 
         private void AddQualificationToMaterial(ChatDialogSelector selector)
         {
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            UserActivity process = session.CurrentActivity;
-            SelectCompanyMaterialData data = process.GetData<SelectCompanyMaterialData>();
+            UserActivity activity = session.CurrentActivity;
+            SelectCompanyMaterialData data = activity.GetData<SelectCompanyMaterialData>();
             CompanyMaterialQualification xHabiMat = this.DatMgr.CompanyMaterialQualification.New();
             xHabiMat.QualificationId = data.Qualification.Id;
             xHabiMat.CompanyMatId = data.CompanyMaterial.Id;
             this.DatMgr.CompanyMaterialQualification.Insert(xHabiMat);
+            session.CurrentActivity = activity;
         }
     }
 }
