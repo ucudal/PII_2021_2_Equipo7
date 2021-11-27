@@ -38,25 +38,12 @@ namespace ClassLibrary
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity activity = session.CurrentActivity;
             InsertCompanyMaterialData data = activity.GetData<InsertCompanyMaterialData>();
-
             data.RunTask();
-            session.CurrentActivity.Terminate(chainInitiator: false);
-
             StringBuilder builder = new StringBuilder();
-            this.MaterialAdd(selector);
             builder.Append("El material se agrego satisfactoriamente.\n");
             builder.Append("Escriba ");
             builder.Append("/volver : para volver al menu de materiales.\n");
             return builder.ToString();
-        }
-
-        private void MaterialAdd(ChatDialogSelector selector)
-        {
-            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            UserActivity process = session.CurrentActivity;
-            InsertCompanyMaterialData data = process.GetData<InsertCompanyMaterialData>();
-            CompanyMaterial companyMaterial = data.CompanyMaterial;
-            this.DatMgr.CompanyMaterial.Insert(companyMaterial);
         }
     }
 }

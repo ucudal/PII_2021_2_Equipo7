@@ -38,7 +38,13 @@ namespace ClassLibrary
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            UserActivity activity;
+            UserActivity activity = session.CurrentActivity;
+            SelectCompanyMaterialData data = activity.GetData<SelectCompanyMaterialData>();
+            if (session.CurrentActivity.Code != "search_by_page_company_qualifications_to_erase_results")
+            {
+                IReadOnlyCollection<int> qualificationsToErase = this.DatMgr.CompanyMaterialQualification.GetQualificationsForCompanyMaterial(data.CompanyMaterial.Id);
+                activity = new UserActivity("search_by_page_company_qualifications_to_erase_results", "company_actions_material_menu", "/habilitaciones", null);
+                session.PushActivity(activity);
 
             // Comparar con CDHListCategoryMenu.cs. No entiendo como hago para guardarme el mat y despues la habilitacion
             if (session.CurrentActivity.Code != "search_by_page_company_qualifications_to_erase_results")
@@ -46,10 +52,11 @@ namespace ClassLibrary
                 // IReadOnlyCollection<int> qualificationsToErase = this.DatMgr.CompanyMaterialQualification.GetQualificationsForCompanyMaterial(data.CompanyMaterial.Id);
                 // activity = new UserActivity("search_by_page_company_qualifications_to_erase_results", "company_actions_material_menu", "/habilitaciones", data);
                 // session.PushActivity(activity);
+
             }
 
             activity = session.CurrentActivity;
-            SelectCompanyMaterialData data = activity.GetData<SelectCompanyMaterialData>();
+            SelectCompanyMaterialData data1 = activity.GetData<SelectCompanyMaterialData>();
             StringBuilder builder = new StringBuilder();
             builder.Append("Lista de habilitaciones del material.\n");
             builder.Append("Desde este menu puede realizar las\n");
@@ -57,7 +64,7 @@ namespace ClassLibrary
             builder.Append("Ingrese el numero de la habilitacion que desea eliminar, \n");
             builder.Append(" en caso contrario escriba \n");
             builder.Append("/cancelar : Volver al menu de materiales .\n");
-            builder.Append(this.TextoToPrintQualificationsToErase(data));
+            builder.Append(this.TextoToPrintQualificationsToErase(data1));
             return builder.ToString();
         }
 

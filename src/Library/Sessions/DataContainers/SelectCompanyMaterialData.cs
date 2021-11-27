@@ -19,7 +19,7 @@ namespace ClassLibrary
         private CompanyMaterial companyMaterial;
         private MaterialCategory materialCategory;
         private CompanyMaterialStock companyMaterialStock;
-
+        private DataManager DatMgr;
         /// <summary>
         /// Inicializa una nueva instancia de la clase.
         /// </summary>
@@ -63,5 +63,14 @@ namespace ClassLibrary
         /// mensajeria del usuario a registrar.
         /// </summary>
         public CompanyMaterialStock CompanyMaterialStock { get => this.companyMaterialStock; set => this.companyMaterialStock = value; }
+
+        /// <summary>
+        /// Identificador dentro del servicio de
+        /// mensajeria del usuario a registrar.
+        /// </summary>
+        public override bool RunTask()
+        {
+            return this.DatMgr.CompanyMaterial.Delete(this.CompanyMaterial.Id);
+        }
     }
 }

@@ -17,6 +17,8 @@ namespace ClassLibrary
     {
         private CompanyMaterial companyMaterial;
         private MaterialCategory materialCategory;
+        private DataManager DatMgr;
+
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="InsertCompanyMaterialData"/>.
@@ -49,5 +51,22 @@ namespace ClassLibrary
         /// mensajeria del usuario a registrar.
         /// </summary>
         public MaterialCategory MaterialCategory { get => this.materialCategory; set => this.materialCategory = value; }
+
+        /// <summary>
+        /// Identificador dentro del servicio de
+        /// mensajeria del usuario a registrar.
+        /// </summary>
+        public override bool RunTask()
+        {
+            bool xretonro = false;
+            CompanyMaterial companyMaterial = this.CompanyMaterial;
+            int idCompanyMatId = this.DatMgr.CompanyMaterial.Insert(companyMaterial);
+            if (idCompanyMatId != 0)
+            {
+                xretonro = true;
+            }
+
+            return xretonro;
+        }
     }
 }

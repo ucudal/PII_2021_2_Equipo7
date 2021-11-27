@@ -37,6 +37,17 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            UserActivity activity = session.CurrentActivity;
+            SelectCompanyMaterialData data = activity.GetData<SelectCompanyMaterialData>();
+
+            if (session.CurrentActivity.Code != "search_by_page_company_qualifications_to_erase_results")
+            {
+                IReadOnlyCollection<int> qualificationsAdded = this.DatMgr.CompanyMaterialQualification.GetQualificationsForCompanyMaterial(data.CompanyMaterial.Id);
+                activity = new UserActivity("search_by_page_company_qualifications_to_erase_results", "company_actions_material_menu", "/habilitaciones", null);
+                session.PushActivity(activity);
+            }
+
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu lista de habilitaciones.\n");
             builder.Append("Aparecen la lista de habilitaciones que puede agregar.\n");

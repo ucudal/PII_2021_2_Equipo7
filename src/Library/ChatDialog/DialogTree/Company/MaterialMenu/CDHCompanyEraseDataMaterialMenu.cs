@@ -35,22 +35,15 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            StringBuilder builder = new StringBuilder();
-            this.EraseMaterialFromCompany(selector);
-            builder.Append("Los datos se eliminaron correctamente.\n");
-            builder.Append("escriba \n");
-            builder.Append("/volver : para retornar al menu de materiales.\n");
-            return builder.ToString();
-        }
-
-        private void EraseMaterialFromCompany(ChatDialogSelector selector)
-        {
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity activity = session.CurrentActivity;
             SelectCompanyMaterialData data = activity.GetData<SelectCompanyMaterialData>();
             data.RunTask();
-            session.CurrentActivity.Terminate(chainInitiator: false);
-            this.DatMgr.CompanyMaterial.Delete(data.CompanyMaterial.Id);
+            StringBuilder builder = new StringBuilder();
+            builder.Append("Los datos se eliminaron correctamente.\n");
+            builder.Append("escriba \n");
+            builder.Append("/volver : para retornar al menu de materiales.\n");
+            return builder.ToString();
         }
     }
 }

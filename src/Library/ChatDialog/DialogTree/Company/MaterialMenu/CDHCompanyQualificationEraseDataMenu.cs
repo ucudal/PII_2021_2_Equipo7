@@ -37,27 +37,14 @@ namespace ClassLibrary
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity activity = session.CurrentActivity;
-            InsertCompanyMaterialData data = activity.GetData<InsertCompanyMaterialData>();
-
+            SelectCompanyMaterialQualificationData data = activity.GetData<SelectCompanyMaterialQualificationData>();
             data.RunTask();
-            session.CurrentActivity.Terminate(chainInitiator: false);
 
             StringBuilder builder = new StringBuilder();
-            this.QualificationEraseData(selector);
             builder.Append("La habilitacion se elimino con exito.\n");
             builder.Append("Escriba ");
             builder.Append("/volver : Para volver al menu de materiales .\n");
             return builder.ToString();
-        }
-
-        private void QualificationEraseData(ChatDialogSelector selector)
-        {
-            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            UserActivity process = session.CurrentActivity;
-            SelectCompanyMaterialQualificationData data = process.GetData<SelectCompanyMaterialQualificationData>();
-            CompanyMaterialQualification xHabiMat = this.DatMgr.CompanyMaterialQualification.GetById(data.CompanyMaterialQualification.Id);
-            xHabiMat.Deleted = true;
-            this.DatMgr.CompanyMaterialQualification.Update(xHabiMat);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            UserActivity activity = new UserActivity("company_publication_menu", null, null, null);
+            UserActivity activity = new UserActivity("company_publication_menu", null, "/welcome", null);
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.PushActivity(activity);
