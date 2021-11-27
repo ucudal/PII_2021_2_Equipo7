@@ -36,17 +36,19 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            InsertPublicationData data = new InsertPublicationData();
+            ErasePublicationData data = new ErasePublicationData();
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
 
-            UserActivity process = new UserActivity("select_publication", null, this.Code, data);
+            UserActivity process = new UserActivity("select_publication", "company_publication_menu", "/listar", data);
             data.Publication = this.DatMgr.Publication.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
-
+            session.PushActivity(process);
+            process = session.CurrentActivity;
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu acciones sobre la publicacion elegido.\n");
             builder.Append("Desde este menu puede realizar la\n");
             builder.Append("siguientes operacion:\n\n");
-            builder.Append("\\eliminar : Eliminar la publicacion.\n");
+            builder.Append("/eliminar : Eliminar la publicacion.\n");
+            builder.Append("/volver : Volver a la lista de publicaciones.\n");
             return builder.ToString();
         }
 

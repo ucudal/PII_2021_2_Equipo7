@@ -42,11 +42,11 @@ namespace ClassLibrary
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity activity;
 
-            if (session.CurrentActivity.Code != "company_publication_list_material_to_add_menu")
+            if (session.CurrentActivity.Code != "search_company_publication_list_material_to_add_menu")
             {
             IReadOnlyCollection<int> materials = this.DatMgr.CompanyMaterial.GetCompanyMaterialsInCompany(session.EntityId);
             SearchData search = new SearchData(materials, this.Parents.First(), this.Route);
-            activity = new UserActivity("company_publication_list_material_to_add_menu", "welcome_company", "/publicaciones", search);
+            activity = new UserActivity("search_company_publication_list_material_to_add_menu", "welcome_company", "/publicaciones", search);
             session.PushActivity(activity);
             }
 

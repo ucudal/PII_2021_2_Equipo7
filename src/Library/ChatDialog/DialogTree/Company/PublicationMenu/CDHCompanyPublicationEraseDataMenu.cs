@@ -35,20 +35,15 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            StringBuilder builder = new StringBuilder();
-            this.PublicationEraseData(selector);
-            builder.Append("La publicacion se elimino con exito.\n");
-            builder.Append("Escriba ");
-            builder.Append("\\volver : para volver al menu de materiales .\n");
-            return builder.ToString();
-        }
-
-        private void PublicationEraseData(ChatDialogSelector selector)
-        {
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity process = session.CurrentActivity;
-            InsertPublicationData data = process.GetData<InsertPublicationData>();
-            this.DatMgr.Publication.Delete(data.Publication.Id);
+            ErasePublicationData data = process.GetData<ErasePublicationData>();
+            data.RunTask();
+            StringBuilder builder = new StringBuilder();
+            builder.Append("La publicacion se elimino con exito.\n");
+            builder.Append("Escriba ");
+            builder.Append("/volver : Para volver a la lista de publicaciones.\n");
+            return builder.ToString();
         }
     }
 }

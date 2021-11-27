@@ -39,7 +39,7 @@ namespace ClassLibrary
             StringBuilder builder = new StringBuilder();
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity process = session.CurrentActivity;
-            InsertPublicationData data = process.GetData<InsertPublicationData>();
+            ErasePublicationData data = process.GetData<ErasePublicationData>();
 
             builder.Append("Esta seguro que desea eliminar la publicacion del material " + this.DatMgr.CompanyMaterial.GetById(data.Publication.CompanyMaterialId).Name + " ?\n ");
             builder.Append("Esta seguro que desea eliminar la publicacion del material\n");

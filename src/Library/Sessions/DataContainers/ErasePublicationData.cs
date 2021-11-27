@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="InsertPublicationData.cs" company="Universidad Católica del Uruguay">
+// <copyright file="ErasePublicationData.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -11,7 +11,7 @@ namespace ClassLibrary
     /// del proceso de registro
     /// para un usuario.
     /// </summary>
-    public class InsertPublicationData : ActivityData
+    public class ErasePublicationData : ActivityData
     {
         private CompanyMaterial companyMaterial;
         private Publication publication;
@@ -21,7 +21,7 @@ namespace ClassLibrary
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="InsertPublicationData"/>.
         /// </summary>
-        public InsertPublicationData()
+        public ErasePublicationData()
         {
         }
 
@@ -50,11 +50,7 @@ namespace ClassLibrary
         public override bool RunTask()
         {
             bool xretorno = false;
-            Publication xPubl = this.Publication;
-            xPubl.CompanyMaterialId = this.CompanyMaterial.Id;
-            xPubl.CompanyId = this.dataManager.Company.GetById(this.companyId).Id;
-            int idPub = this.dataManager.Publication.Insert(xPubl);
-            if (idPub != 0)
+            if (this.dataManager.Publication.Delete(this.Publication.Id))
             {
                 xretorno = true;
             }
