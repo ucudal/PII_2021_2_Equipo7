@@ -4795,6 +4795,42 @@
         <member name="M:ClassLibrary.EntrepreneurQualificationInsertData.RunTask">
             <inheritdoc/>
         </member>
+        <member name="T:ClassLibrary.ErasePublicationData">
+            <summary>
+            Contenedor con los datos
+            del proceso de registro
+            para un usuario.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.ErasePublicationData.#ctor">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.InsertPublicationData"/>.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.ErasePublicationData.CompanyMaterial">
+            <summary>
+            Identificador dentro del servicio de
+            mensajeria del usuario a registrar.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.ErasePublicationData.Publication">
+            <summary>
+            Identificador dentro del servicio de
+            mensajeria del usuario a registrar.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.ErasePublicationData.CompanyId">
+            <summary>
+            Identificador dentro del servicio de
+            mensajeria del usuario a registrar.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.ErasePublicationData.RunTask">
+            <summary>
+            Identificador dentro del servicio de
+            mensajeria del usuario a registrar.
+            </summary>
+        </member>
         <member name="T:ClassLibrary.InsertCompanyMaterialData">
             <summary>
             Contenedor con los datos
@@ -4907,6 +4943,18 @@
             mensajeria del usuario a registrar.
             </summary>
         </member>
+        <member name="P:ClassLibrary.InsertPublicationData.CompanyId">
+            <summary>
+            Identificador dentro del servicio de
+            mensajeria del usuario a registrar.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.InsertPublicationData.RunTask">
+            <summary>
+            Identificador dentro del servicio de
+            mensajeria del usuario a registrar.
+            </summary>
+        </member>
         <member name="T:ClassLibrary.InsertQualificationData">
             <summary>
             Contenedor con los datos
@@ -4985,6 +5033,11 @@
         <member name="P:ClassLibrary.SearchData.SearchPageRoute">
             <summary>
             Ruta del menu de busqueda.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.SearchData.Query">
+            <summary>
+            Terminos de la busqueda.
             </summary>
         </member>
         <member name="M:ClassLibrary.SearchData.NextPage">

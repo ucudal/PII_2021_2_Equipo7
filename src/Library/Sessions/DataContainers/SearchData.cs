@@ -15,6 +15,7 @@ namespace ClassLibrary
     /// </summary>
     public class SearchData : ActivityData
     {
+        private string query;
         private IReadOnlyCollection<int> searchResults;
         private int currentPage;
         private int pageItemCount;
@@ -114,6 +115,15 @@ namespace ClassLibrary
         {
             get => this.searchPageRoute;
             set => this.searchPageRoute = value;
+        }
+
+        /// <summary>
+        /// Terminos de la busqueda.
+        /// </summary>
+        public string Query
+        {
+            get => this.query;
+            set => this.query = value;
         }
 
         /// <summary>

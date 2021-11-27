@@ -44,7 +44,10 @@ namespace ClassLibrary
                 int id = int.Parse(selector.Code, NumberStyles.Integer, CultureInfo.InvariantCulture);
                 IReadOnlyCollection<int> compMats = this.DatMgr.CompanyMaterial.GetCompanyMaterialsForCategory(id);
                 IReadOnlyCollection<int> publ = this.DatMgr.Publication.Items.Where(pub => compMats.Contains(pub.CompanyMaterialId)).Select(pub => pub.Id).ToList().AsReadOnly();
-                SearchData search = new SearchData(publ, this.Parents.First(), this.Route);
+                SearchData search = new SearchData(publ, this.Parents.First(), this.Route)
+                {
+                    Query = id.ToString(CultureInfo.InvariantCulture),
+                };
                 activity = new UserActivity("search_by_page_entre_pubs_cat_results", "Search_Publication_Menu", "/categoria", search);
                 session.PushActivity(activity);
             }
