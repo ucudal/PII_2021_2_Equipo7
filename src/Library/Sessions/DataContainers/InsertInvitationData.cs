@@ -22,6 +22,14 @@ namespace ClassLibrary
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="InsertInvitationData"/>.
         /// </summary>
+        public InsertInvitationData()
+            : base()
+        {
+        }
+
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="InsertInvitationData"/>.
+        /// </summary>
         /// <param name="searchResults">buscar resultados.</param>
         /// <param name="searchPageContext">contexto de pag.</param>
         /// <param name="searchPageRoute">ruta fde pag.</param>

@@ -82,9 +82,12 @@ namespace ClassLibrary
             StringBuilder builder = new StringBuilder();
             foreach (int qualificationId in search.PageItems)
             {
-                EntrepreneurQualification entreQual = this.DatMgr.EntrepreneurQualification.GetById(qualificationId);
-                Qualification qualification = this.DatMgr.Qualification.GetById(entreQual.QualificationId);
-                builder.AppendLine($"{entreQual.Id} - {qualification.Name}");
+                if (this.DatMgr.EntrepreneurQualification.Exists(qualificationId))
+                {
+                    EntrepreneurQualification entreQual = this.DatMgr.EntrepreneurQualification.GetById(qualificationId);
+                    Qualification qualification = this.DatMgr.Qualification.GetById(entreQual.QualificationId);
+                    builder.AppendLine($"{entreQual.Id} - {qualification.Name}");
+                }
             }
 
             return builder.ToString();

@@ -82,8 +82,11 @@ namespace ClassLibrary
             StringBuilder builder = new StringBuilder();
             foreach (int qualificationId in search.PageItems)
             {
-                Qualification qualification = this.DatMgr.Qualification.GetById(qualificationId);
-                builder.AppendLine($"{qualificationId} - {qualification.Name}");
+                if (this.DatMgr.Qualification.Exists(qualificationId))
+                {
+                    Qualification qualification = this.DatMgr.Qualification.GetById(qualificationId);
+                    builder.AppendLine($"{qualificationId} - {qualification.Name}");
+                }
             }
 
             return builder.ToString();

@@ -39,7 +39,7 @@ namespace ClassLibrary
             UserActivity activity = session.CurrentActivity;
             EntrepreneurQualificationInsertData data = activity.GetData<EntrepreneurQualificationInsertData>();
 
-            data.DocumentUri = new Uri(selector.Code);
+            data.DocumentUri = new Uri(selector.Code, UriKind.Absolute);
 
             session.CurrentActivity = activity;
 
@@ -65,7 +65,7 @@ namespace ClassLibrary
             {
                 if (!selector.Code.StartsWith('/'))
                 {
-                    return true;
+                    return Uri.TryCreate(selector.Code, UriKind.Absolute, out _);
                 }
             }
 

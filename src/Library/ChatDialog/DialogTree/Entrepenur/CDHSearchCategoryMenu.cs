@@ -81,8 +81,11 @@ namespace ClassLibrary
             StringBuilder builder = new StringBuilder();
             foreach (int matCatId in search.PageItems)
             {
-                MaterialCategory matCat = this.DatMgr.MaterialCategory.GetById(matCatId);
-                builder.AppendLine($"{matCat.Id} - {matCat.Name}");
+                if (this.DatMgr.MaterialCategory.Exists(matCatId))
+                {
+                    MaterialCategory matCat = this.DatMgr.MaterialCategory.GetById(matCatId);
+                    builder.AppendLine($"{matCat.Id} - {matCat.Name}");
+                }
             }
 
             return builder.ToString();
