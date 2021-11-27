@@ -119,8 +119,11 @@ namespace ClassLibrary
             StringBuilder builder = new StringBuilder();
             foreach (int pubId in search.PageItems)
             {
-                Publication pub = this.DatMgr.Publication.GetById(pubId);
-                builder.AppendLine($"{pub.Id} - {pub.Title}");
+                if (this.DatMgr.Publication.Exists(pubId))
+                {
+                    Publication pub = this.DatMgr.Publication.GetById(pubId);
+                    builder.AppendLine($"{pub.Id} - {pub.Title}");
+                }
             }
 
             return builder.ToString();

@@ -67,7 +67,11 @@ namespace ClassLibrary
                         EntrepreneurQualification qualification = this.DatMgr.EntrepreneurQualification.GetById(id);
                         if (qualification is not null)
                         {
-                            return true;
+                            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+                            if (qualification.EntrepreneurId == session.EntityId && session.UserRole == UserRole.Entrepreneur)
+                            {
+                                return true;
+                            }
                         }
                     }
                 }

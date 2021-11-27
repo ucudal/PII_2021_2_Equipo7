@@ -23,6 +23,18 @@ namespace ClassLibrary
         /// <summary>
         /// Inicializa una nueva instancia de la clase.
         /// </summary>
+        /// <param name="searchResults">
+        /// Resultados de busqueda.
+        /// </param>
+        /// <param name="searchPageContext">
+        /// Contexto de la busqueda.
+        /// </param>
+        /// <param name="searchPageRoute">
+        /// Ruta de la busqueda.
+        /// </param>
+        /// <param name="pageItemCount">
+        /// Items por pagina de resultados.
+        /// </param>
         public SelectCompanyMaterialData(IReadOnlyCollection<int> searchResults, string searchPageContext, string searchPageRoute, int pageItemCount = 6)
             : base(searchResults, searchPageContext, searchPageRoute, pageItemCount)
         {

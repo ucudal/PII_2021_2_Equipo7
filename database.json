@@ -293,5 +293,34 @@
       "Id": 1,
       "Deleted": false
     }
+  ],
+  "EntrepreneurQualification": [
+    {
+      "Id": 1,
+      "Deleted": true,
+      "EntrepreneurId": 1,
+      "QualificationId": 4,
+      "DocumentUri": "http://asdasd.asd/asd.pdf"
+    },
+    {
+      "Id": 2,
+      "Deleted": false,
+      "EntrepreneurId": 1,
+      "QualificationId": 5,
+      "DocumentUri": "http://pagina.com/file.pdf"
+    }
+  ],
+  "Sale": [
+    {
+      "ProductCompanyMaterialId": 1,
+      "ProductQuantity": 1,
+      "SellerCompanyId": 1,
+      "BuyerEntrepreneurId": 1,
+      "Id": 1,
+      "DateTime": "2021-11-27T12:46:19.9404579-03:00",
+      "Price": 21,
+      "Currency": 2,
+      "Deleted": false
+    }
   ]
 }
