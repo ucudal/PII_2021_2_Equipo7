@@ -29,13 +29,6 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            if (selector != null)
-            {
-                Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-                UserActivity activity = session.CurrentActivity;
-                SelectCompanyMaterialData data = activity.GetData<SelectCompanyMaterialData>();
-            }
-
             StringBuilder builder = new StringBuilder();
             builder.Append("Menu de habilitaciones.\n");
             builder.Append("Desde este menu puede realizar las\n");
