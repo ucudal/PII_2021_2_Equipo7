@@ -14,6 +14,7 @@ namespace ClassLibrary
     public class SelectCompanyMaterialQualificationData : ActivityData
     {
         private CompanyMaterialQualification companyMaterialQualification;
+        private DataManager dataManager;
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase.
@@ -27,5 +28,21 @@ namespace ClassLibrary
         /// mensajeria del usuario a registrar.
         /// </summary>
         public CompanyMaterialQualification CompanyMaterialQualification { get => this.companyMaterialQualification; set => this.companyMaterialQualification = value; }
+
+        /// <summary>
+        /// Identificador dentro del servicio de
+        /// mensajeria del usuario a registrar.
+        /// </summary>
+        public override bool RunTask()
+        {
+            bool xretonro = false;
+            CompanyMaterialQualification xHabiMat = this.dataManager.CompanyMaterialQualification.GetById(this.CompanyMaterialQualification.Id);
+            xHabiMat.Deleted = true;
+            if (this.dataManager.CompanyMaterialQualification.Update(xHabiMat))
+            {
+                xretonro = true;
+            }
+            return xretonro;
+        }
     }
 }

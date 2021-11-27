@@ -19,6 +19,7 @@ namespace ClassLibrary
         private bool deleted;
         private int companyMatId;
         private int qualificationId;
+        private DataManager dataManager;
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="CompanyMaterialQualification"/>.

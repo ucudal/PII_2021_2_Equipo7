@@ -41,7 +41,7 @@ namespace ClassLibrary
             UserActivity activity = session.CurrentActivity;
             SelectCompanyMaterialQualificationData data = activity.GetData<SelectCompanyMaterialQualificationData>();
             data.CompanyMaterialQualification = this.DatMgr.CompanyMaterialQualification.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
-
+            session.CurrentActivity = activity;
             builder.Append("Esta seguro que desea eliminar la habilitacion con el nombre " + this.DatMgr.CompanyMaterial.GetById(data.CompanyMaterialQualification.CompanyMatId).Name + " ?\n ");
             builder.Append("Esta seguro que desea eliminar la habilitacion con el nombre ?\n");
             builder.Append("/confirmar : Confirmar en caso de que este seguro.\n");

@@ -39,11 +39,11 @@ namespace ClassLibrary
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity activity;
-            if (session.CurrentActivity.Code != "company_list_material_menu")
+            if (session.CurrentActivity.Code != "search_company_list_material_menu")
             {
                 IReadOnlyCollection<int> materials = this.DatMgr.CompanyMaterial.GetCompanyMaterialsInCompany(session.EntityId);
                 SelectCompanyMaterialData search = new SelectCompanyMaterialData(materials, this.Parents.First(), this.Route);
-                activity = new UserActivity("company_list_material_menu", "welcome_company", "/materiales", search);
+                activity = new UserActivity("search_company_list_material_menu", "welcome_company", "/materiales", search);
                 session.PushActivity(activity);
             }
 
