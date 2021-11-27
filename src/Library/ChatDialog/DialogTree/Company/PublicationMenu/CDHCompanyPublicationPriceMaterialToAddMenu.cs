@@ -40,6 +40,7 @@ namespace ClassLibrary
             UserActivity process = session.CurrentActivity;
             InsertPublicationData data = process.GetData<InsertPublicationData>();
             data.Publication.Quantity = int.Parse(selector.Code, CultureInfo.InvariantCulture);
+            session.CurrentActivity = process;
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese el precio que le quiere poner a la publicacion.\n");

@@ -40,10 +40,10 @@ namespace ClassLibrary
 
             CompanyMaterial xMat = this.DatMgr.CompanyMaterial.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
             data.Publication.CompanyMaterialId = xMat.CompanyId;
-            UserActivity process = new UserActivity("add_material_to_publication", null, this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            session.CurrentActivity = process;
+            UserActivity process = session.CurrentActivity;
             data.Publication.CompanyId = this.DatMgr.CompanyUser.GetCompanyForUser(session.UserId);
+            session.CurrentActivity = process;
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Ingrese la cantidad del material que quiere agregar a la publicacion.\n");

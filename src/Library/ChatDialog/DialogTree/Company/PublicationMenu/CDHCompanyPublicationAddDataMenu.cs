@@ -35,24 +35,16 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            UserActivity process = session.CurrentActivity;
+            InsertPublicationData data = process.GetData<InsertPublicationData>();
+            data.CompanyId = this.DatMgr.Company.GetById(session.EntityId).Id;
+            data.RunTask();
             StringBuilder builder = new StringBuilder();
-            this.PublicationAdd(selector);
             builder.Append("La publicacion se agrego satisfactoriamente.\n");
             builder.Append("Escriba ");
-            builder.Append("\\volver : para volver al menu de materiales.\n");
+            builder.Append("/volver : para volver al menu de materiales.\n");
             return builder.ToString();
-        }
-
-        private void PublicationAdd(ChatDialogSelector selector)
-        {
-            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            UserActivity process = new UserActivity("company_publication_menu", "company_publication_list_material_to_add_menu", "/confirmar", null);
-            InsertPublicationData data = process.GetData<InsertPublicationData>();
-            data.CompanyMaterial = data.CompanyMaterial;
-            Publication xPubl = data.Publication;
-            xPubl.CompanyMaterialId = data.CompanyMaterial.Id;
-            xPubl.CompanyId = this.DatMgr.Company.GetById(this.DatMgr.User.GetById(session.UserId).Id).Id;
-            this.DatMgr.Publication.Insert(xPubl);
         }
     }
 }
