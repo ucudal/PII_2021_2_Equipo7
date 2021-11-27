@@ -35,11 +35,18 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            UserActivity activity = session.CurrentActivity;
+            InsertCompanyMaterialData data = activity.GetData<InsertCompanyMaterialData>();
+
+            data.RunTask();
+            session.CurrentActivity.Terminate(chainInitiator: false);
+
             StringBuilder builder = new StringBuilder();
             this.QualificationEraseData(selector);
             builder.Append("La habilitacion se elimino con exito.\n");
             builder.Append("Escriba ");
-            builder.Append("\\cancelar : para volver al menu de materiales .\n");
+            builder.Append("/volver : Para volver al menu de materiales .\n");
             return builder.ToString();
         }
 
