@@ -14,6 +14,23 @@ namespace ClassLibrary
     /// </summary>
     public sealed class MaterialCategoryAdmin : DataAdmin<MaterialCategory>
     {
+        /// <summary>
+        /// Obtener listado con todas las categorias.
+        /// </summary>
+        /// <returns>
+        /// Listado de ids de categorias.
+        /// </returns>
+        public IReadOnlyCollection<int> GetAllCategories()
+        {
+            List<int> resultList = new List<int>();
+            foreach (MaterialCategory xMat in this.Items)
+            {
+                resultList.Add(xMat.Id);
+            }
+
+            return resultList.AsReadOnly();
+        }
+
         /// <inheritdoc/>
         protected override void ValidateData(MaterialCategory item)
         {
@@ -24,16 +41,6 @@ namespace ClassLibrary
                     throw new ValidationException("Requerido nombre.");
                 }
             }
-        }
-
-        public IReadOnlyCollection<int> GetAllCategories()
-        {
-            List<int> resultList = new List<int>();
-            foreach (MaterialCategory xMat in this.Items)
-            {
-                resultList.Add(xMat.Id);
-            }
-            return resultList.AsReadOnly();
         }
     }
 }

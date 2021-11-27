@@ -41,27 +41,27 @@
         </member>
         <member name="M:Tests.CompanyAdminTest.InsertTest">
             <summary>
-            
+            Test para saber si se insertan los datos de la compañía.
             </summary>
         </member>
         <member name="M:Tests.CompanyAdminTest.UpdateTest">
             <summary>
-            
+            Test para probar si se puede modificar una compañía.
             </summary>
         </member>
         <member name="M:Tests.CompanyAdminTest.NewTest">
             <summary>
-            
+            Test para crear nueva compañía.
             </summary>
         </member>
         <member name="M:Tests.CompanyAdminTest.GetByIdTest">
             <summary>
-            
+            Test para obtener un id de una compañía.
             </summary>
         </member>
         <member name="M:Tests.CompanyAdminTest.DeleteTest">
             <summary>
-            
+            Test para borrar datos de una compañía.
             </summary>
         </member>
         <member name="T:Tests.CompanyLocationAdminTest">
@@ -71,32 +71,32 @@
         </member>
         <member name="M:Tests.CompanyLocationAdminTest.InsertTest">
             <summary>
-            
+            Test para saber si se insertan los datos de la compañía.
             </summary>
         </member>
         <member name="M:Tests.CompanyLocationAdminTest.UpdateTest">
             <summary>
-            
+            Test para modificar un dato.
             </summary>
         </member>
         <member name="M:Tests.CompanyLocationAdminTest.NewTest">
             <summary>
-            
+            Test para crear una nueva localización de la compañía.
             </summary>
         </member>
         <member name="M:Tests.CompanyLocationAdminTest.GetByIdTest">
             <summary>
-            
+            Test para obtener id de la localización.
             </summary>
         </member>
         <member name="M:Tests.CompanyLocationAdminTest.DeleteTest">
             <summary>
-            
+            Test para borrar un dato.
             </summary>
         </member>
         <member name="M:Tests.CompanyLocationAdminTest.GetLocationsForCompany">
             <summary>
-            busca por el id de compania las locaciones de la misma
+            Busca por el id de compania las locaciones de la misma.
             </summary>
         </member>
         <member name="T:Tests.CompanyMaterialAdminTest">
@@ -166,7 +166,7 @@
         </member>
         <member name="M:Tests.CompanyMaterialQualificationAdminTest.GetCompanyMaterialHasQualificationTest">
             <summary>
-            Test del metodo GetCompanyMaterialHasQualification(int companyMatId, int qualificationId)
+            Test del metodo GetCompanyMaterialHasQualification(int companyMatId, int qualificationId).
             </summary>
         </member>
         <member name="T:Tests.CompanyMaterialStockAdminTest">
@@ -216,27 +216,27 @@
         </member>
         <member name="M:Tests.CompanyUserAdminTest.InsertTest">
             <summary>
-            
+            Test, insertar un usuario a una compañia.
             </summary>
         </member>
         <member name="M:Tests.CompanyUserAdminTest.UpdateTest">
             <summary>
-            
+            Test, actualizar un usuario de una compañia.
             </summary>
         </member>
         <member name="M:Tests.CompanyUserAdminTest.NewTest">
             <summary>
-            
+            Test, crea una nueva instancia del obejto.
             </summary>
         </member>
         <member name="M:Tests.CompanyUserAdminTest.GetByIdTest">
             <summary>
-            
+            Test, trae un usuario de una compañia por id.
             </summary>
         </member>
         <member name="M:Tests.CompanyUserAdminTest.DeleteTest">
             <summary>
-            
+            Test, elimina un usuario de una compañia.
             </summary>
         </member>
         <member name="T:Tests.EntrepreneurAdminTest">
@@ -246,27 +246,27 @@
         </member>
         <member name="M:Tests.EntrepreneurAdminTest.InsertTest">
             <summary>
-            test para incertar un objeto en emprendedor 
+            test para incertar un objeto en emprendedor.
             </summary>
         </member>
         <member name="M:Tests.EntrepreneurAdminTest.UpdateTest">
             <summary>
-            
+            Test que prueba la actualizacion de un entreprenur.
             </summary>
         </member>
         <member name="M:Tests.EntrepreneurAdminTest.NewTest">
             <summary>
-            
+            Test que crea una nueva instancia de entrepreneur.
             </summary>
         </member>
         <member name="M:Tests.EntrepreneurAdminTest.GetByIdTest">
             <summary>
-            
+            Test, traer un entrepreneur a partir de un id.
             </summary>
         </member>
         <member name="M:Tests.EntrepreneurAdminTest.DeleteTest">
             <summary>
-            
+            Test, eliminar un entrepreneur del sistema.
             </summary>
         </member>
         <member name="T:Tests.LocationAPIClientTests">

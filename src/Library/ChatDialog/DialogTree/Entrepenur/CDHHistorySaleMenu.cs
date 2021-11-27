@@ -81,9 +81,12 @@ namespace ClassLibrary
             StringBuilder builder = new StringBuilder();
             foreach (int saleId in search.PageItems)
             {
-                Sale sale = this.DatMgr.Sale.GetById(saleId);
-                CompanyMaterial compMat = this.DatMgr.CompanyMaterial.GetById(sale.ProductCompanyMaterialId);
-                builder.AppendLine($"{sale.Id} - {compMat.Name}");
+                if (this.DatMgr.Sale.Exists(saleId))
+                {
+                    Sale sale = this.DatMgr.Sale.GetById(saleId);
+                    CompanyMaterial compMat = this.DatMgr.CompanyMaterial.GetById(sale.ProductCompanyMaterialId);
+                    builder.AppendLine($"{sale.Id} - {compMat.Name}");
+                }
             }
 
             return builder.ToString();

@@ -40,6 +40,7 @@ namespace ClassLibrary
             {
                 User user = dataManager.User.GetById(message.UserId);
                 session.UserId = user.Id;
+                session.UserRole = user.Role;
                 switch (user.Role)
                 {
                     case UserRole.CompanyAdministrator:

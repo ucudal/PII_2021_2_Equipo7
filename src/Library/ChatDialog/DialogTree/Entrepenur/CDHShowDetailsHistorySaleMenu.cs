@@ -73,7 +73,11 @@ namespace ClassLibrary
                         Sale sale = this.DatMgr.Sale.GetById(id);
                         if (sale is not null)
                         {
-                            return true;
+                            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+                            if (sale.BuyerEntrepreneurId == session.EntityId && session.UserRole == UserRole.Entrepreneur)
+                            {
+                                return true;
+                            }
                         }
                     }
                 }
