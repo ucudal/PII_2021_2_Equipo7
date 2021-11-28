@@ -45,14 +45,6 @@ namespace ClassLibrary
                 IReadOnlyCollection<int> qualificationsToErase = this.DatMgr.CompanyMaterialQualification.GetQualificationsForCompanyMaterial(data.CompanyMaterial.Id);
                 activity = new UserActivity("search_by_page_company_qualifications_to_erase_results", "company_actions_material_menu", "/habilitaciones", null);
                 session.PushActivity(activity);
-
-            // Comparar con CDHListCategoryMenu.cs. No entiendo como hago para guardarme el mat y despues la habilitacion
-            if (session.CurrentActivity.Code != "search_by_page_company_qualifications_to_erase_results")
-            {
-                // IReadOnlyCollection<int> qualificationsToErase = this.DatMgr.CompanyMaterialQualification.GetQualificationsForCompanyMaterial(data.CompanyMaterial.Id);
-                // activity = new UserActivity("search_by_page_company_qualifications_to_erase_results", "company_actions_material_menu", "/habilitaciones", data);
-                // session.PushActivity(activity);
-
             }
 
             activity = session.CurrentActivity;
