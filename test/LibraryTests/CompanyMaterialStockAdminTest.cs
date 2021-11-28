@@ -192,6 +192,8 @@ namespace Tests
         [Test]
         public void GetStockTotalForCompanyMaterialTest()
         {
+            int antes = this.datMgr.CompanyMaterialStock.GetStockTotalForCompanyMaterial(20);
+
             // Agregamos un stock de un material.
             int companyMatId = 20;
             int companyLocationId = 1;
@@ -203,7 +205,7 @@ namespace Tests
             companyMaterialStock.Stock = stock;
             int companyMaterialStockId = this.datMgr.CompanyMaterialStock.Insert(companyMaterialStock);
 
-            int expected = stock;
+            int expected = stock + antes;
 
             Assert.AreEqual(expected, this.datMgr.CompanyMaterialStock.GetStockTotalForCompanyMaterial(20));
         }
@@ -214,6 +216,8 @@ namespace Tests
         [Test]
         public void GetLocationsWithStockForCompanyMaterialTest()
         {
+            IReadOnlyCollection<int> listaAntes = this.datMgr.CompanyMaterialStock.GetLocationsWithStockForCompanyMaterial(21);
+
             // Agregamos un stock de un material.
             int companyMatId = 21;
             int companyLocationId = 1;
@@ -237,7 +241,7 @@ namespace Tests
 
             int expected = 2;
 
-            Assert.AreEqual(expected, this.datMgr.CompanyMaterialStock.GetLocationsWithStockForCompanyMaterial(21).Count);
+            Assert.AreEqual(expected + listaAntes.Count, this.datMgr.CompanyMaterialStock.GetLocationsWithStockForCompanyMaterial(21).Count);
         }
 
         /// <summary>
@@ -246,6 +250,8 @@ namespace Tests
         [Test]
         public void GetCompanyMaterialsInStockForLocationTest()
         {
+            IReadOnlyCollection<int> listaAntes = this.datMgr.CompanyMaterialStock.GetCompanyMaterialsInStockForLocation(3);
+
             // Agregamos un stock de un material.
             int companyMatId = 22;
             int companyLocationId = 3;
@@ -269,7 +275,7 @@ namespace Tests
 
             int expected = 2;
 
-            Assert.AreEqual(expected, this.datMgr.CompanyMaterialStock.GetCompanyMaterialsInStockForLocation(3).Count);
+            Assert.AreEqual(expected + listaAntes.Count, this.datMgr.CompanyMaterialStock.GetCompanyMaterialsInStockForLocation(3).Count);
         }
     }
 }
