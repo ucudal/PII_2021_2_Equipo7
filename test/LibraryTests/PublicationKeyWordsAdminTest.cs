@@ -51,9 +51,8 @@ namespace Tests
             pkey.KeyWord = "fiambre";
             int p = this.datMgr.PublicationKeyWord.Insert(pkey);
             Assert.AreNotEqual(0, p);
-            int newId = pkey.Id;
-            this.datMgr.PublicationKeyWord.Delete(newId);
-            Assert.IsNull(this.datMgr.PublicationKeyWord.GetById(newId));
+            this.datMgr.PublicationKeyWord.Delete(p);
+            Assert.IsNull(this.datMgr.PublicationKeyWord.GetById(pkey.Id));
         }
 
         /// <summary>
@@ -62,6 +61,8 @@ namespace Tests
         [Test]
         public void GetKeyWordsForPublicationTest()
         {
+            IReadOnlyCollection<string> listaantes0 = this.datMgr.PublicationKeyWord.GetKeyWordsForPublication(5);
+
             PublicationKeyWord keyw = this.datMgr.PublicationKeyWord.New();
             keyw.PublicationId = 5;
             keyw.KeyWord = "madera";
@@ -79,7 +80,7 @@ namespace Tests
 
             IReadOnlyCollection<string> lista = this.datMgr.PublicationKeyWord.GetKeyWordsForPublication(5);
 
-            Assert.AreEqual(3, lista.Count);
+            Assert.AreEqual(listaantes0.Count + 3, lista.Count);
         }
     }
 }

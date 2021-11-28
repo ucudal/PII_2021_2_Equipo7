@@ -76,16 +76,27 @@ namespace Tests
         [Test]
         public void DeleteTest()
         {
+            Entrepreneur usuario = this.datMgr.Entrepreneur.New();
+            usuario.Name = "NOMBRE";
+            usuario.Trade = "Rubro";
+            usuario.GeoReference = "Malasia";
+            usuario.UserId = 12223;
+
+            int buyerId = this.datMgr.Entrepreneur.Insert(usuario);
             Sale saleprueba2 = this.datMgr.Sale.New();
             saleprueba2.DateTime = DateTime.Today;
             saleprueba2.Price = 100;
+            saleprueba2.ProductCompanyMaterialId = 21212;
+            saleprueba2.ProductQuantity = 121223;
+            saleprueba2.SellerCompanyId = 2223;
             saleprueba2.Currency = Currency.DolarEstadounidense;
 
-            this.datMgr.Sale.Insert(saleprueba2);
+            saleprueba2.BuyerEntrepreneurId = buyerId;
 
-            int newId = saleprueba2.Id;
-            this.datMgr.Sale.Delete(newId);
-            Assert.IsNull(this.datMgr.Sale.GetById(newId));
+            int saleId = this.datMgr.Sale.Insert(saleprueba2);
+
+            this.datMgr.Sale.Delete(saleId);
+            Assert.IsNull(this.datMgr.Sale.GetById(saleprueba2.Id));
         }
 
         /// <summary>
@@ -143,6 +154,10 @@ namespace Tests
         [Test]
         public void GetSalesBySellerTest()
         {
+            int sellerCompanyId = 2;
+
+            IReadOnlyCollection<int> listaantes1 = this.datMgr.Sale.GetSalesBySeller(sellerCompanyId);
+
             Sale sale1 = this.datMgr.Sale.New();
 
             DateTime datetime = DateTime.Today;
@@ -154,7 +169,6 @@ namespace Tests
             Currency currency = Currency.PesoUruguayo;
             sale1.Currency = currency;
 
-            int sellerCompanyId = 2;
             sale1.SellerCompanyId = sellerCompanyId;
 
             int compMatId = 91170;
@@ -211,7 +225,7 @@ namespace Tests
 
             IReadOnlyCollection<int> lista = this.datMgr.Sale.GetSalesBySeller(sellerCompanyId);
 
-            Assert.AreEqual(cventa, lista.Count);
+            Assert.AreEqual(listaantes1.Count + 3, lista.Count);
         }
 
         /// <summary>
@@ -220,6 +234,8 @@ namespace Tests
         [Test]
         public void GetSalesByBuyerTest()
         {
+            IReadOnlyCollection<int> listaantes = this.datMgr.Sale.GetSalesByBuyer(2);
+
             Sale sale1 = this.datMgr.Sale.New();
 
             DateTime datetime = DateTime.Today;
@@ -287,7 +303,7 @@ namespace Tests
 
             IReadOnlyCollection<int> lista = this.datMgr.Sale.GetSalesByBuyer(2);
 
-            Assert.AreEqual(cventa, lista.Count);
+            Assert.AreEqual(listaantes.Count + 3, lista.Count);
         }
     }
 }

@@ -69,7 +69,8 @@ namespace ClassLibrary
             try
             {
                 this.ValidateInsert(pElemento);
-                return this.Storage.Insert<T>(pElemento.Clone());
+                int xretorno = this.Storage.Insert<T>(pElemento.Clone());
+                return xretorno;
             }
             catch (ValidationException)
             {

@@ -51,10 +51,9 @@ namespace Tests
         {
             Qualification qualification = this.datMgr.Qualification.New();
             qualification.Name = "Franco";
-            this.datMgr.Qualification.Insert(qualification);
-            int newId = qualification.Id;
-            this.datMgr.Qualification.Delete(newId);
-            Assert.IsNull(this.datMgr.Qualification.GetById(newId));
+            int quaid = this.datMgr.Qualification.Insert(qualification);
+            this.datMgr.Qualification.Delete(quaid);
+            Assert.IsNull(this.datMgr.Qualification.GetById(qualification.Id));
         }
 
         /// <summary>
