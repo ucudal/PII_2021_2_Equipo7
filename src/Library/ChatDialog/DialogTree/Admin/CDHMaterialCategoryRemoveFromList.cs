@@ -41,7 +41,7 @@ namespace ClassLibrary
                 MaterialCategory = this.DatMgr.MaterialCategory.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture)),
             };
 
-            UserActivity process = new UserActivity("remove_category", null, this.Code, data);
+            UserActivity process = new UserActivity("remove_category", "mat_menu", "/listar", data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.CurrentActivity = process;
             StringBuilder builder = new StringBuilder();

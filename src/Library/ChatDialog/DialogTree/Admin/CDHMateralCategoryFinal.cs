@@ -35,21 +35,30 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            UserActivity activity = session.CurrentActivity;
+            InsertMaterialCategoryData data = activity.GetData<InsertMaterialCategoryData>();
+
             StringBuilder builder = new StringBuilder();
-            this.MaterialCategoryAdd(selector);
-            builder.Append("La categoria de material se agrego satisfactoriamente.\n");
-            builder.Append("Escriba ");
-            builder.Append("\\volver : para volver al menu .\n");
+            this.AddQualificationToMaterial(selector);
+            builder.Append("categoria de material agregada con exito.\n");
+            builder.Append("escriba \n");
+            builder.Append("\\volver : para retornar al menu de materiales.\n");
+            data.RunTask();
+            session.CurrentActivity.Terminate(chainInitiator: false);
             return builder.ToString();
         }
 
-        private void MaterialCategoryAdd(ChatDialogSelector selector)
+        private void AddQualificationToMaterial(ChatDialogSelector selector)
         {
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            UserActivity process = session.CurrentActivity;
-            InsertMaterialCategoryData data = process.GetData<InsertMaterialCategoryData>();
-            MaterialCategory materialCategory = data.MaterialCategory;
-            this.DatMgr.MaterialCategory.Insert(materialCategory);
+            UserActivity activity = session.CurrentActivity;
+            InsertMaterialCategoryData data = activity.GetData<InsertMaterialCategoryData>();
+            MaterialCategory compmat = this.DatMgr.MaterialCategory.New();
+            compmat.Id = data.MaterialCategory.Id;
+
+            this.DatMgr.MaterialCategory.Insert(compmat);
+            session.CurrentActivity = activity;
         }
     }
 }

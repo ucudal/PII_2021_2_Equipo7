@@ -4,6 +4,8 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System;
+using System.Globalization;
 using System.Text;
 
 namespace ClassLibrary
@@ -29,10 +31,45 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            UserActivity activity = session.CurrentActivity;
+            InsertMaterialCategoryData data = activity.GetData<InsertMaterialCategoryData>();
+            MaterialCategory matCat = this.DatMgr.MaterialCategory.GetById(int.Parse(selector.Code,  CultureInfo.InvariantCulture));
+            data.MaterialCategory = matCat;
+            session.CurrentActivity = activity;
+
             StringBuilder builder = new StringBuilder();
-            builder.Append("Ingrese el nombre de la categorria que desea agregar\n");
-            builder.Append("\\cancelar");
+            builder.Append("Ingrese el nombre del material.\n");
+            builder.Append("/volver : Volver al menu principal de compañía.\n");
             return builder.ToString();
+        }
+
+        /// <inheritdoc/>
+        public override bool ValidateDataEntry(ChatDialogSelector selector)
+        {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            if (this.Parents.Contains(selector.Context))
+            {
+                if (!selector.Code.StartsWith('/'))
+                {
+                    MaterialCategory matCat = this.DatMgr.MaterialCategory.GetById(int.Parse(selector.Code,  CultureInfo.InvariantCulture));
+                    if (matCat is not null)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }
