@@ -221,6 +221,7 @@ namespace Tests
         [Test]
         public void GetCompanyMaterialsInCompanyTest()
         {
+            IReadOnlyCollection<int> listaAntes = this.datMgr.CompanyMaterial.GetCompanyMaterialsInCompany(11);
             CompanyMaterial company1 = this.datMgr.CompanyMaterial.New();
             company1.CompanyId = 11;
             company1.MaterialCategoryId = 197;
@@ -239,7 +240,7 @@ namespace Tests
             this.datMgr.CompanyMaterial.Insert(company3);
 
             IReadOnlyCollection<int> lista = this.datMgr.CompanyMaterial.GetCompanyMaterialsInCompany(11);
-            Assert.AreEqual(lista.Count, 3);
+            Assert.AreEqual(lista.Count, 3 + listaAntes.Count);
         }
 
         /// <summary>
@@ -248,6 +249,7 @@ namespace Tests
         [Test]
         public void GetCompanyMaterialsInCompanyForCategoryTest()
         {
+            IReadOnlyCollection<int> listaAntes = this.datMgr.CompanyMaterial.GetCompanyMaterialsInCompanyForCategory(8467, 197);
             CompanyMaterial company1 = this.datMgr.CompanyMaterial.New();
             company1.CompanyId = 8467;
             company1.MaterialCategoryId = 197;
@@ -266,7 +268,7 @@ namespace Tests
             this.datMgr.CompanyMaterial.Insert(company3);
 
             IReadOnlyCollection<int> lista = this.datMgr.CompanyMaterial.GetCompanyMaterialsInCompanyForCategory(8467, 197);
-            Assert.AreEqual(3, lista.Count);
+            Assert.AreEqual(3 + listaAntes.Count, lista.Count);
         }
     }
 }

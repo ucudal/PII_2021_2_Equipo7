@@ -162,6 +162,7 @@ namespace Tests
         [Test]
         public void GetLocationsForCompany()
         {
+            IReadOnlyCollection<CompanyLocation> listaAntes = this.datMgr.CompanyLocation.GetLocationsForCompany(1972);
             CompanyLocation company1 = this.datMgr.CompanyLocation.New();
             company1.CompanyId = 1972;
             company1.GeoReference = "Carlos Maria Ramires y Conciliacion";
@@ -177,7 +178,7 @@ namespace Tests
 
             IReadOnlyCollection<CompanyLocation> lista = this.datMgr.CompanyLocation.GetLocationsForCompany(1972);
 
-            Assert.AreEqual(3, lista.Count);
+            Assert.AreEqual(listaAntes.Count + 3, lista.Count);
         }
     }
 }

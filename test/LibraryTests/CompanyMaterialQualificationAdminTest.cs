@@ -184,6 +184,8 @@ namespace Tests
         [Test]
         public void GetQualificationsForCompanyMaterialTest()
         {
+            IReadOnlyCollection<int> listaAntes = this.datMgr.CompanyMaterialQualification.GetQualificationsForCompanyMaterial(10);
+
             // Agregamos una Habilitacion de un material.
             bool deleted = false;
             int companyMatId = 10;
@@ -209,7 +211,7 @@ namespace Tests
             int expectedCountQualificationsFromMaterial1 = 2;
 
             // Comparo que el numero de habilitaciones agregadas= al numero de habilitaciones que agregue
-            Assert.AreEqual(expectedCountQualificationsFromMaterial1, this.datMgr.CompanyMaterialQualification.GetQualificationsForCompanyMaterial(10).Count);
+            Assert.AreEqual(expectedCountQualificationsFromMaterial1 + listaAntes.Count, this.datMgr.CompanyMaterialQualification.GetQualificationsForCompanyMaterial(10).Count);
         }
 
         /// <summary>
