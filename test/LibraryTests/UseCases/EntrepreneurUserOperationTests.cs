@@ -47,7 +47,7 @@ namespace Tests
             this.datMgr.Publication.Insert(publica2);
 
             IReadOnlyCollection<int> lista1 = this.datMgr.Publication.GetPublicationsByCompany(com_id);
-            int kk = 2 + prevSales.Count; 
+            int kk = 2 + prevSales.Count;
             Assert.AreEqual(kk, lista1.Count);
         }
 
@@ -85,7 +85,35 @@ namespace Tests
             Assert.NotZero(pubId2);
             Assert.NotZero(pubId3);
 
+            IReadOnlyCollection<Publication> publications = this.datMgr.Publication.Items;
             int keyWordsBefore = this.datMgr.PublicationKeyWord.Items.Count;
+
+            List<int> keyWord1PubsAntes = new List<int>();
+            foreach (Publication publication in publications)
+            {
+                if (this.datMgr.PublicationKeyWord.PublicationMatchesKeyWord(publication.Id, keyWord1))
+                {
+                    keyWord1PubsAntes.Add(publication.Id);
+                }
+            }
+
+            List<int> keyWord2PubsAntes = new List<int>();
+            foreach (Publication publication in publications)
+            {
+                if (this.datMgr.PublicationKeyWord.PublicationMatchesKeyWord(publication.Id, keyWord2))
+                {
+                    keyWord2PubsAntes.Add(publication.Id);
+                }
+            }
+
+            List<int> keyWord3PubsAntes = new List<int>();
+            foreach (Publication publication in publications)
+            {
+                if (this.datMgr.PublicationKeyWord.PublicationMatchesKeyWord(publication.Id, keyWord3))
+                {
+                    keyWord3PubsAntes.Add(publication.Id);
+                }
+            }
 
             PublicationKeyWord pubKeyWord;
 
@@ -118,8 +146,6 @@ namespace Tests
             int keyWordsExpected = keyWordsBefore + 6;
             Assert.AreEqual(keyWordsExpected, keyWordsAfter);
 
-            IReadOnlyCollection<Publication> publications = this.datMgr.Publication.Items;
-
             List<int> keyWord1Pubs = new List<int>();
             foreach (Publication publication in publications)
             {
@@ -147,16 +173,16 @@ namespace Tests
                 }
             }
 
-            Assert.AreEqual(3, keyWord1Pubs.Count);
+            Assert.AreEqual(3 + keyWord1PubsAntes.Count, keyWord1Pubs.Count);
             Assert.Contains(pubId1, keyWord1Pubs);
             Assert.Contains(pubId2, keyWord1Pubs);
             Assert.Contains(pubId3, keyWord1Pubs);
 
-            Assert.AreEqual(2, keyWord2Pubs.Count);
+            Assert.AreEqual(2 + keyWord2PubsAntes.Count, keyWord2Pubs.Count);
             Assert.Contains(pubId2, keyWord2Pubs);
             Assert.Contains(pubId3, keyWord2Pubs);
 
-            Assert.AreEqual(1, keyWord3Pubs.Count);
+            Assert.AreEqual(1 + keyWord3PubsAntes.Count, keyWord3Pubs.Count);
             Assert.Contains(pubId3, keyWord3Pubs);
         }
 
@@ -271,6 +297,36 @@ namespace Tests
             Assert.NotZero(compMatId2);
             Assert.NotZero(compMatId3);
 
+            List<int> pubsListAntes = new List<int>();
+            IReadOnlyCollection<int> pubsSubListAntes;
+            IReadOnlyCollection<int> compMatsListAntes = this.datMgr.CompanyMaterial.GetCompanyMaterialsForCategory(matCatId1);
+            foreach (int compMatId in compMatsListAntes)
+            {
+                pubsSubListAntes = this.datMgr.Publication.GetPublicationsWithCompanyMaterial(compMatId);
+                foreach (int pubId in pubsSubListAntes)
+                {
+                    if (!pubsListAntes.Contains(pubId))
+                    {
+                        pubsListAntes.Add(pubId);
+                    }
+                }
+            }
+
+            List<int> pubsListAntes2 = new List<int>();
+            IReadOnlyCollection<int> pubsSubListAntes2;
+            IReadOnlyCollection<int> compMatsListAntes2 = this.datMgr.CompanyMaterial.GetCompanyMaterialsForCategory(matCatId2);
+            foreach (int compMatId in compMatsListAntes2)
+            {
+                pubsSubListAntes2 = this.datMgr.Publication.GetPublicationsWithCompanyMaterial(compMatId);
+                foreach (int pubId in pubsSubListAntes2)
+                {
+                    if (!pubsListAntes2.Contains(pubId))
+                    {
+                        pubsListAntes2.Add(pubId);
+                    }
+                }
+            }
+
             Publication pub1 = this.datMgr.Publication.New();
             pub1.CompanyId = 5;
             pub1.ActiveFrom = DateTime.Now.AddMonths(-1);
@@ -316,8 +372,8 @@ namespace Tests
                     }
                 }
             }
-            
-            Assert.AreEqual(2, pubsList.Count);
+
+            Assert.AreEqual(2 + pubsListAntes.Count, pubsList.Count);
             Assert.Contains(pubId1, pubsList);
             Assert.Contains(pubId2, pubsList);
 
@@ -335,7 +391,7 @@ namespace Tests
                 }
             }
 
-            Assert.AreEqual(1, pubsList.Count);
+            Assert.AreEqual(1 + pubsListAntes2.Count, pubsList.Count);
             Assert.Contains(pubId3, pubsList);
         }
 
@@ -378,7 +434,6 @@ namespace Tests
         [Test]
         public void ListBoughtMaterials()
         {
-
             int id_entrepenur = 12002392;
             IReadOnlyCollection<int> prevSales = this.datMgr.Sale.GetSalesByBuyer(id_entrepenur);
             Sale venta = this.datMgr.Sale.New();
