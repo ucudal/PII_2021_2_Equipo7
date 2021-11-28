@@ -221,8 +221,6 @@ namespace Tests
             this.datMgr.Sale.Insert(sale2);
             this.datMgr.Sale.Insert(sale3);
 
-            int cventa = 3;
-
             IReadOnlyCollection<int> lista = this.datMgr.Sale.GetSalesBySeller(sellerCompanyId);
 
             Assert.AreEqual(listaantes1.Count + 3, lista.Count);
@@ -298,8 +296,6 @@ namespace Tests
             this.datMgr.Sale.Insert(sale1);
             this.datMgr.Sale.Insert(sale2);
             this.datMgr.Sale.Insert(sale3);
-
-            int cventa = 3;
 
             IReadOnlyCollection<int> lista = this.datMgr.Sale.GetSalesByBuyer(2);
 
