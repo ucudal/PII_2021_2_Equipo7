@@ -106,6 +106,8 @@ namespace Tests
             empre.Name = "pepito";
             empre.Trade = "galletas";
             empre.UserId = 48927;
+            empre.Deleted = false;
+            empre.GeoReference = "mi casa";
             int id = this.datMgr.Entrepreneur.Insert(empre);
             this.datMgr.Entrepreneur.Delete(id);
             Entrepreneur entre3 = this.datMgr.Entrepreneur.GetById(id);
