@@ -41,7 +41,10 @@ namespace ClassLibrary
             if (session.CurrentActivity.Code != "search_by_page_entre_pubs_key_results")
             {
                 IReadOnlyCollection<int> pubKeyWords = this.DatMgr.PublicationKeyWord.GetPublicationFromKeyWord(selector.Code);
-                SearchData search = new SearchData(pubKeyWords, this.Parents.First(), this.Route);
+                SearchData search = new SearchData(pubKeyWords, this.Parents.First(), this.Route)
+                {
+                    Query = selector.Code,
+                };
                 activity = new UserActivity("search_by_page_entre_pubs_key_results", "Search_Publication_Menu", "/palabraclave", search);
                 session.PushActivity(activity);
             }

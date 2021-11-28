@@ -39,7 +39,8 @@ namespace ClassLibrary
             int id = int.Parse(selector.Code, NumberStyles.Integer, CultureInfo.InvariantCulture);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             EntrepreneurPurchaseData data = new EntrepreneurPurchaseData(session.EntityId, id);
-            UserActivity activity = new UserActivity("entrepreneur_pub_by_cat_purchase", "Search_Category_Menu", $"{id}", data);
+            string query = session.CurrentActivity.GetData<SearchData>().Query;
+            UserActivity activity = new UserActivity("entrepreneur_pub_by_cat_purchase", "Search_Category_Menu", $"{query}", data);
             session.PushActivity(activity);
 
             Publication pub = this.DatMgr.Publication.GetById(id);

@@ -53,7 +53,10 @@ namespace ClassLibrary
                 {
                 }
 
-                SearchData search = new SearchData(closePublications.ToList().AsReadOnly(), this.Parents.First(), this.Route);
+                SearchData search = new SearchData(closePublications.ToList().AsReadOnly(), this.Parents.First(), this.Route)
+                {
+                    Query = selector.Code,
+                };
                 activity = new UserActivity("search_by_page_entre_pubs_loc_results", "Search_Publication_Menu", "/localidad", search);
                 session.PushActivity(activity);
                 locApi.Dispose();
