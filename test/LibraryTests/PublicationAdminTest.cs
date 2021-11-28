@@ -87,7 +87,7 @@ namespace Tests
             Assert.AreNotEqual(0, prueba);
 
             int newId = pPrueba1.Id;
-            this.datMgr.Publication.Delete(newId);
+            this.datMgr.Publication.Delete(prueba);
             Assert.IsNull(this.datMgr.Publication.GetById(newId));
         }
 
@@ -147,6 +147,8 @@ namespace Tests
         [Test]
         public void GetPublicationsByCompanyTest()
         {
+            IReadOnlyCollection<int> listaantes3 = this.datMgr.Publication.GetPublicationsByCompany(1);
+
             Publication pPrueba = this.datMgr.Publication.New();
             pPrueba.ActiveFrom = DateTime.Today;
             pPrueba.ActiveUntil = DateTime.Today.AddMonths(3);
@@ -168,7 +170,7 @@ namespace Tests
 
             IReadOnlyCollection<int> lista = this.datMgr.Publication.GetPublicationsByCompany(1);
 
-            Assert.AreEqual(3, lista.Count);
+            Assert.AreEqual(listaantes3.Count + 3, lista.Count);
         }
     }
 }
