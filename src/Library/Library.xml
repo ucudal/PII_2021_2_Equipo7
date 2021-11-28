@@ -486,6 +486,9 @@
         <member name="M:ClassLibrary.CDHMaterialCategoryAddName.Execute(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
+        <member name="M:ClassLibrary.CDHMaterialCategoryAddName.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
         <member name="T:ClassLibrary.CDHMaterialCategoryConfirm">
             <summary>
             <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
@@ -500,6 +503,9 @@
             <param name="next">Siguiente handler.</param>
         </member>
         <member name="M:ClassLibrary.CDHMaterialCategoryConfirm.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.CDHMaterialCategoryConfirm.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
         <member name="T:ClassLibrary.CDHMaterialCategoryList">
@@ -4830,6 +4836,7 @@
             Identificador dentro del servicio de
             mensajeria del usuario a registrar.
             </summary>
+            <returns>boleano de publication.</returns>
         </member>
         <member name="T:ClassLibrary.InsertCompanyMaterialData">
             <summary>
@@ -4866,6 +4873,13 @@
             Identificador dentro del servicio de
             mensajeria del usuario a registrar.
             </summary>
+        </member>
+        <member name="M:ClassLibrary.InsertCompanyMaterialData.RunTask">
+            <summary>r
+            Identificador dentro del servicio de
+            mensajeria del usuario a registrar.
+            </summary>
+            <returns>retorna un boleano.</returns>
         </member>
         <member name="T:ClassLibrary.InsertInvitationData">
             <summary>
@@ -4954,6 +4968,7 @@
             Identificador dentro del servicio de
             mensajeria del usuario a registrar.
             </summary>
+            <returns>valor del retorno .</returns>
         </member>
         <member name="T:ClassLibrary.InsertQualificationData">
             <summary>
@@ -5152,6 +5167,13 @@
             mensajeria del usuario a registrar.
             </summary>
         </member>
+        <member name="M:ClassLibrary.SelectCompanyMaterialData.RunTask">
+            <summary>
+            Identificador dentro del servicio de
+            mensajeria del usuario a registrar.
+            </summary>
+            <returns>retorna un bool.</returns>
+        </member>
         <member name="T:ClassLibrary.SelectCompanyMaterialQualificationData">
             <summary>
             Contenedor con los datos
@@ -5169,6 +5191,13 @@
             Identificador dentro del servicio de
             mensajeria del usuario a registrar.
             </summary>
+        </member>
+        <member name="M:ClassLibrary.SelectCompanyMaterialQualificationData.RunTask">
+            <summary>
+            Identificador dentro del servicio de
+            mensajeria del usuario a registrar.
+            </summary>
+            <returns>retorna un bool.</returns>
         </member>
         <member name="T:ClassLibrary.SignUpData">
             <summary>
