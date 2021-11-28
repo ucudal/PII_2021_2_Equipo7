@@ -47,6 +47,7 @@ namespace ClassLibrary
         /// Identificador dentro del servicio de
         /// mensajeria del usuario a registrar.
         /// </summary>
+        /// <returns>valor del retorno .</returns>
         public override bool RunTask()
         {
             bool xretorno = false;

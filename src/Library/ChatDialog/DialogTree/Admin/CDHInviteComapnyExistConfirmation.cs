@@ -43,7 +43,7 @@ namespace ClassLibrary
             session.CurrentActivity = activity;
             StringBuilder builder = new StringBuilder();
 
-            builder.Append("Desea crear una invitacion para una compania nueva\n");
+            builder.Append("Desea crear una invitacion para una compania ya existente\n");
             builder.Append("/confirmar \n");
             builder.Append("/cancelar");
             return builder.ToString();

@@ -59,7 +59,7 @@ namespace ClassLibrary
             }
             else
             {
-                builder.AppendLine("(No se encontraron publicaciones)\n");
+                builder.AppendLine("(No se encontraron companias)\n");
             }
 
             if (data.PageItemCount < data.SearchResults.Count)

@@ -35,17 +35,43 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            InsertMaterialCategoryData data = new InsertMaterialCategoryData();
-            data.MaterialCategory.Name = selector.Code;
-            UserActivity process = new UserActivity("add_MatCat", null, this.Code, data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            session.CurrentActivity = process;
-            StringBuilder builder = new StringBuilder();
+            UserActivity activity = session.CurrentActivity;
+            InsertCompanyMaterialData data = activity.GetData<InsertCompanyMaterialData>();
 
-            builder.Append("Desea agregar la categoria de el material.\n");
-            builder.Append("\\confirmar \n");
-            builder.Append("\\cancelar");
+            MaterialCategory companyMaterial = this.DatMgr.MaterialCategory.New();
+            companyMaterial.Name = selector.Code.Trim();
+            data.MaterialCategory = companyMaterial;
+
+            session.CurrentActivity = activity;
+
+            StringBuilder builder = new StringBuilder();
+            builder.Append("Seguro que desea crear un material con los siguientes datos.\n");
+            builder.Append("Nombre: " + data.CompanyMaterial.Name);
+            builder.Append("/confirmar : En caso de querer confirmar la operacion.\n");
+            builder.Append("/volver : Volver al menu principal de compañía");
             return builder.ToString();
+        }
+
+        /// <inheritdoc/>
+        public override bool ValidateDataEntry(ChatDialogSelector selector)
+        {
+            bool xretorno = false;
+
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            if (this.Parents.Contains(selector.Context))
+            {
+                if (!selector.Code.StartsWith('/'))
+                {
+                    xretorno = true;
+                }
+            }
+
+            return xretorno;
         }
     }
 }
