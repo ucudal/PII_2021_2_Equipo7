@@ -27,6 +27,7 @@ namespace Tests
         public void ListPublicationsTest()
         {
             int com_id = 12300006;
+            IReadOnlyCollection<int> prevSales = this.datMgr.Publication.GetPublicationsByCompany(com_id);
             Publication publica1 = this.datMgr.Publication.New();
             publica1.CompanyId = com_id;
             publica1.CompanyMaterialId = 11165;
@@ -46,8 +47,8 @@ namespace Tests
             this.datMgr.Publication.Insert(publica2);
 
             IReadOnlyCollection<int> lista1 = this.datMgr.Publication.GetPublicationsByCompany(com_id);
-
-            Assert.AreEqual(2, lista1.Count);
+            int kk = 2 + prevSales.Count; 
+            Assert.AreEqual(kk, lista1.Count);
         }
 
         /// <summary>
@@ -315,7 +316,7 @@ namespace Tests
                     }
                 }
             }
-
+            
             Assert.AreEqual(2, pubsList.Count);
             Assert.Contains(pubId1, pubsList);
             Assert.Contains(pubId2, pubsList);
@@ -377,7 +378,9 @@ namespace Tests
         [Test]
         public void ListBoughtMaterials()
         {
+
             int id_entrepenur = 12002392;
+            IReadOnlyCollection<int> prevSales = this.datMgr.Sale.GetSalesByBuyer(id_entrepenur);
             Sale venta = this.datMgr.Sale.New();
             venta.BuyerEntrepreneurId = id_entrepenur;
             venta.Currency = Currency.DolarEstadounidense;
@@ -399,8 +402,8 @@ namespace Tests
             this.datMgr.Sale.Insert(venta);
             this.datMgr.Sale.Insert(venta2);
             IReadOnlyCollection<int> lista = this.datMgr.Sale.GetSalesByBuyer(id_entrepenur);
-
-            Assert.AreEqual(2, lista.Count);
+            int kk = 2 + prevSales.Count;
+            Assert.AreEqual(kk, lista.Count);
         }
     }
 }
