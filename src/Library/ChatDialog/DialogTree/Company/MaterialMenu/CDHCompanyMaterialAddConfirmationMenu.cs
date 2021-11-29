@@ -42,16 +42,17 @@ namespace ClassLibrary
             CompanyMaterial companyMaterial = this.DatMgr.CompanyMaterial.New();
             companyMaterial.Name = selector.Code.Trim();
             companyMaterial.MaterialCategoryId = data.MaterialCategory.Id;
-            companyMaterial.CompanyId = session.UserId;
+            companyMaterial.CompanyId = session.EntityId;
             data.CompanyMaterial = companyMaterial;
 
             session.CurrentActivity = activity;
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Seguro que desea crear un material con los siguientes datos.\n");
-            builder.Append("Nombre: " + data.CompanyMaterial.Name);
-            builder.Append("/confirmar : En caso de querer confirmar la operacion.\n");
-            builder.Append("/volver : Volver al menu principal de compañía");
+            builder.AppendLine("Seguro que desea crear un material con los siguientes datos?\n");
+            builder.AppendLine($"<b>Nombre</b>: {data.CompanyMaterial.Name}");
+            builder.AppendLine($"<b>Material</b>: {data.MaterialCategory.Name}\n");
+            builder.AppendLine("/confirmar - Confirmar operacion.\n");
+            builder.Append("/volver : Volver al menu de materiales.");
             return builder.ToString();
         }
 

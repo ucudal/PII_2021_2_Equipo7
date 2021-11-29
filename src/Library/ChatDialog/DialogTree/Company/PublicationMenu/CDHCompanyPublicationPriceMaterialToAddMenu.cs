@@ -43,8 +43,8 @@ namespace ClassLibrary
             session.CurrentActivity = process;
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Ingrese el precio que le quiere poner a la publicacion.\n");
-            builder.Append("\\volver : En caso de querer canclear la operacion.\n");
+            builder.AppendLine("Ingrese el precio que le quiere poner a la publicacion:\n");
+            builder.Append("/volver - En caso de querer canclear la operacion.\n");
             return builder.ToString();
         }
 

@@ -41,11 +41,11 @@ namespace ClassLibrary
             session.PushActivity(activity);
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Menu de materiales.\n");
-            builder.Append("Desde este menu puede realizar las\n");
-            builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\ingresar : Ingresar un material nuevo.\n");
-            builder.Append("\\listar : Listar todos los materiales que ya posee.\n");
+            builder.AppendLine("<b>Menu de materiales</b>.\n");
+            builder.AppendLine("Desde este menu puede realizar las siguientes operaciones:\n");
+            builder.AppendLine("/ingresar - Agregar material.");
+            builder.AppendLine("/listar - Listar materiales.\n");
+            builder.Append("/volver - Volver al menu de empresa.");
             return builder.ToString();
         }
     }

@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDHCompanyListMaterialsMenu.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHCompanyListLocationMenu.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -16,16 +16,16 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDHCompanyListMaterialsMenu : ChatDialogHandlerBase
+    public class CDHCompanyListLocationMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDHCompanyListMaterialsMenu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHCompanyListLocationMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDHCompanyListMaterialsMenu(ChatDialogHandlerBase next)
-        : base(next, "company_list_material_menu")
+        public CDHCompanyListLocationMenu(ChatDialogHandlerBase next)
+        : base(next, "company_list_location_menu")
         {
-            this.Parents.Add("company_material_menu");
+            this.Parents.Add("company_location_menu");
             this.Route = "/listar";
         }
 
@@ -39,20 +39,20 @@ namespace ClassLibrary
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity activity;
-            if (session.CurrentActivity.Code != "search_by_page_company_list_material_menu")
+            if (session.CurrentActivity.Code != "search_by_page_company_list_location_menu")
             {
-                IReadOnlyCollection<int> materials = this.DatMgr.CompanyMaterial.GetCompanyMaterialsInCompany(session.EntityId);
-                SelectCompanyMaterialData search = new SelectCompanyMaterialData(materials, this.Parents.First(), this.Route);
-                activity = new UserActivity("search_by_page_company_list_material_menu", "welcome_company", "/materiales", search);
+                IReadOnlyCollection<int> materials = this.DatMgr.CompanyLocation.GetLocationsForCompany(session.EntityId).Select(loc => loc.Id).ToList().AsReadOnly();
+                SelectCompanyLocationData search = new SelectCompanyLocationData(materials, this.Parents.First(), this.Route);
+                activity = new UserActivity("search_by_page_company_list_location_menu", "welcome_company", "/localizaciones", search);
                 session.PushActivity(activity);
             }
 
             activity = session.CurrentActivity;
-            SelectCompanyMaterialData data = activity.GetData<SelectCompanyMaterialData>();
+            SearchData data = activity.GetData<SearchData>();
 
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine("<b>Listado de Materiales</b>:\n");
-            builder.AppendLine("En caso de querer hacer una accion sobre algun material ingrese su numero.\n");
+            builder.AppendLine("<b>Listado de Localizaciones</b>\n");
+            builder.AppendLine("Escoja una localizacion por su id:\n");
             if (data.SearchResults.Count > 0)
             {
                 builder.AppendLine($"{this.TextToPrintCompanyMaterial(data)}");
@@ -72,7 +72,7 @@ namespace ClassLibrary
             return builder.ToString();
         }
 
-        private string TextToPrintCompanyMaterial(SelectCompanyMaterialData search)
+        private string TextToPrintCompanyMaterial(SearchData search)
         {
             if (search is null)
             {
@@ -80,10 +80,10 @@ namespace ClassLibrary
             }
 
             StringBuilder builder = new StringBuilder();
-            foreach (int xMatId in search.PageItems)
+            foreach (int locId in search.PageItems)
             {
-                CompanyMaterial xMat = this.DatMgr.CompanyMaterial.GetById(xMatId);
-                builder.AppendLine($"{xMat.Id} - {xMat.Name}");
+                CompanyLocation loc = this.DatMgr.CompanyLocation.GetById(locId);
+                builder.AppendLine($"{loc.Id} - {loc.GeoReference}");
             }
 
             return builder.ToString();

@@ -128,6 +128,7 @@ namespace ClassLibrary
                 message.Message = activity.ChainHandlerRoute;
                 context = activity.ChainHandlerContext;
                 selector = new ChatDialogSelector(message, context);
+                activity.ClearHandlerChain();
 
                 response = chatEntry.Start(selector);
             }

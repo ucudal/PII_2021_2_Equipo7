@@ -29,16 +29,24 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override string Execute(ChatDialogSelector selector)
         {
-            StringBuilder builder = new StringBuilder();
-            builder.Append("Usted es administrador de una empresa.\n");
-            builder.Append("Desde este menu puede realizar las\n");
-            builder.Append("siguientes operaciones:\n\n");
-            builder.Append("\\materiales : Administrar materiales.\n");
-            builder.Append("\\publicaciones : Administrar sus publicaciones.\n");
-            builder.Append("\\ventas : Manejar sus ventas.\n");
-            builder.Append("\\usuarios : Administrar los usuarios administradores.");
-            builder.Append("\\seguimiento : Listar el total de todos los materiales (Los vendidos en todas las  publicaciones)\n");
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
 
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            User user = this.DatMgr.User.GetById(session.UserId);
+
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine($"<b>Bienvenido a PieTech {user.FirstName} {user.LastName}!</b>\n");
+            builder.AppendLine("Como empresa usted puede realizar las siguientes acciones:\n");
+            builder.AppendLine("/materiales - Administrar materiales.");
+            builder.AppendLine("/localizaciones - Administrar localizaciones.");
+            builder.AppendLine("/publicaciones - Administrar publicaciones.");
+            builder.Append("/ventas - Ver ventas.");
+
+            // builder.Append("/usuarios - Administrar usuarios.");
+            // builder.Append("/seguimiento - Materiales vendidos.");
             return builder.ToString();
         }
 

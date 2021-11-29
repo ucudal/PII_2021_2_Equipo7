@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDHCompanyMaterialAddDataMenu.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHCompanyLocationAddDoneMenu.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -14,16 +14,16 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDHCompanyMaterialAddDataMenu : ChatDialogHandlerBase
+    public class CDHCompanyLocationAddDoneMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDHCompanyMaterialAddDataMenu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHCompanyLocationAddDoneMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDHCompanyMaterialAddDataMenu(ChatDialogHandlerBase next)
-        : base(next, "company_material_add_data_menu")
+        public CDHCompanyLocationAddDoneMenu(ChatDialogHandlerBase next)
+        : base(next, "company_location_add_done_menu")
         {
-            this.Parents.Add("company_material_add_confirmation_menu");
+            this.Parents.Add("company_location_add_confirm_menu");
             this.Route = "/confirmar";
         }
 
@@ -37,11 +37,12 @@ namespace ClassLibrary
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity activity = session.CurrentActivity;
-            InsertCompanyMaterialData data = activity.GetData<InsertCompanyMaterialData>();
+            InsertCompanyLocationData data = activity.GetData<InsertCompanyLocationData>();
             data.RunTask();
+
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine("El material se agrego satisfactoriamente.\n");
-            builder.Append("/volver - Volver al menu de materiales.\n");
+            builder.AppendLine("La localizacion se agrego satisfactoriamente.\n");
+            builder.Append("/volver - Volver al menu de localizaciones.\n");
             return builder.ToString();
         }
     }

@@ -37,20 +37,25 @@ namespace ClassLibrary
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            UserActivity activity = new UserActivity("company_actions_material_menu", "company_material_menu", "/materiales", null);
+            UserActivity activity = session.CurrentActivity;
+
+            // UserActivity activity = new UserActivity("company_actions_material_menu", "company_material_menu", "/materiales", null);
             SelectCompanyMaterialData data = activity.GetData<SelectCompanyMaterialData>();
             CompanyMaterial xMat = this.DatMgr.CompanyMaterial.GetById(int.Parse(selector.Code,  CultureInfo.InvariantCulture));
             data.CompanyMaterial = xMat;
+            data.Query = selector.Code;
             session.CurrentActivity = activity;
+            MaterialCategory cat = this.DatMgr.MaterialCategory.GetById(xMat.MaterialCategoryId);
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Menu acciones sobre el material elegido.\n");
-            builder.Append("Desde este menu puede realizar las\n");
-            builder.Append("siguientes operaciones:\n\n");
+            builder.AppendLine("<b>Detalles de Material</b>\n");
+            builder.AppendLine($"<b>Nombre</b>: {xMat.Name}");
+            builder.AppendLine($"<b>Categoria</b>: {cat.Name}\n");
+            builder.AppendLine("/eliminar - Eliminar el material.");
 
-            // builder.Append("/stock : Stock del material.\n");
-            builder.Append("/eliminar : Eliminar el material.\n");
-            builder.Append("/habilitaciones : Acceder a menu de habilitaciones.\n");
+            // builder.AppendLine("/habilitaciones - Administrar habilitaciones.\n");
+            // builder.AppendLine("/stock - Administrar stock.\n");
+            builder.AppendLine("/volver - Volver al menu de materiales.\n");
             return builder.ToString();
         }
 
@@ -69,7 +74,11 @@ namespace ClassLibrary
                     CompanyMaterial companyMaterial = this.DatMgr.CompanyMaterial.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
                     if (companyMaterial is not null)
                     {
-                        return true;
+                        Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+                        if (companyMaterial.CompanyId == session.EntityId && session.UserRole == UserRole.CompanyAdministrator)
+                        {
+                            return true;
+                        }
                     }
                 }
             }

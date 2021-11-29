@@ -41,7 +41,8 @@ namespace ClassLibrary
             builder.AppendLine($"<b>Bienvenido a PieTech {user.FirstName} {user.LastName}!</b>\n");
             builder.AppendLine("Como emprendedor usted puede realizar las siguientes acciones:\n");
             builder.AppendLine("/buscar - Buscar publicaciones.");
-            builder.AppendLine("/regeneracion - Regeneración de materiales.");
+
+            // builder.AppendLine("/regeneracion - Regeneración de materiales.");
             builder.AppendLine("/compras - Historial de compras.");
             builder.Append("/habilitaciones - Menú de habilitaciones.");
             return builder.ToString();

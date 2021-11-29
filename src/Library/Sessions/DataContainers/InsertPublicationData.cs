@@ -4,6 +4,9 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+
 namespace ClassLibrary
 {
     /// <summary>
@@ -11,17 +14,37 @@ namespace ClassLibrary
     /// del proceso de registro
     /// para un usuario.
     /// </summary>
-    public class InsertPublicationData : ActivityData
+    public class InsertPublicationData : SearchData
     {
         private CompanyMaterial companyMaterial;
         private Publication publication;
-        private DataManager dataManager;
+        private DataManager dataManager = new DataManager();
         private int companyId;
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="InsertPublicationData"/>.
         /// </summary>
         public InsertPublicationData()
+        {
+        }
+
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase <see cref="InsertPublicationData"/>.
+        /// </summary>
+        /// <param name="searchResults">
+        /// Resultados de busqueda.
+        /// </param>
+        /// <param name="searchPageContext">
+        /// Contexto de la busqueda.
+        /// </param>
+        /// <param name="searchPageRoute">
+        /// Ruta de la busqueda.
+        /// </param>
+        /// <param name="pageItemCount">
+        /// Items por pagina de resultados.
+        /// </param>
+        public InsertPublicationData(IReadOnlyCollection<int> searchResults, string searchPageContext, string searchPageRoute, int pageItemCount = 6)
+            : base(searchResults, searchPageContext, searchPageRoute, pageItemCount)
         {
         }
 
@@ -50,17 +73,20 @@ namespace ClassLibrary
         /// <returns>valor del retorno .</returns>
         public override bool RunTask()
         {
-            bool xretorno = false;
-            Publication xPubl = this.Publication;
-            xPubl.CompanyMaterialId = this.CompanyMaterial.Id;
-            xPubl.CompanyId = this.dataManager.Company.GetById(this.companyId).Id;
-            int idPub = this.dataManager.Publication.Insert(xPubl);
-            if (idPub != 0)
-            {
-                xretorno = true;
-            }
+            Publication pub = this.dataManager.Publication.New();
+            pub.ActiveFrom = DateTime.Now;
+            pub.ActiveUntil = DateTime.Now.AddYears(50);
+            pub.CompanyId = this.Publication.CompanyId;
+            pub.CompanyMaterialId = this.Publication.CompanyMaterialId;
+            pub.CompanyLocationId = this.Publication.CompanyLocationId;
+            pub.Currency = this.Publication.Currency;
+            pub.Description = this.Publication.Description;
+            pub.Price = this.Publication.Price;
+            pub.Quantity = this.Publication.Quantity;
+            pub.Title = this.Publication.Title;
+            int idPub = this.dataManager.Publication.Insert(pub);
 
-            return xretorno;
+            return idPub != 0;
         }
     }
 }

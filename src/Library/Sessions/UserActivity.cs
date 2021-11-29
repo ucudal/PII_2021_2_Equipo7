@@ -107,7 +107,7 @@ namespace ClassLibrary
         public T GetData<T>()
             where T : ActivityData
         {
-            if (typeof(T) == this.typeOfData)
+            if (this.typeOfData.IsAssignableTo(typeof(T)))
             {
                 return (T)this.data;
             }

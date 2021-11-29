@@ -40,9 +40,8 @@ namespace ClassLibrary
             SelectCompanyMaterialData data = activity.GetData<SelectCompanyMaterialData>();
             data.RunTask();
             StringBuilder builder = new StringBuilder();
-            builder.Append("Los datos se eliminaron correctamente.\n");
-            builder.Append("escriba \n");
-            builder.Append("/volver : para retornar al menu de materiales.\n");
+            builder.AppendLine("Los datos se eliminaron correctamente.\n");
+            builder.Append("/volver - Volver al menu de materiales.\n");
             return builder.ToString();
         }
     }

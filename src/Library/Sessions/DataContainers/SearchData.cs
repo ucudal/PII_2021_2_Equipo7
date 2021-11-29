@@ -59,6 +59,7 @@ namespace ClassLibrary
         public IReadOnlyCollection<int> SearchResults
         {
             get => this.searchResults;
+            set => this.searchResults = value;
         }
 
         /// <summary>

@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDHCompanyPublicationConfirmationEraseMenu.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHCompanyPublicationTitleMaterialToAddMenu.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -15,17 +15,17 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDHCompanyPublicationConfirmationEraseMenu : ChatDialogHandlerBase
+    public class CDHCompanyPublicationTitleMaterialToAddMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDHCompanyPublicationConfirmationEraseMenu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHCompanyPublicationTitleMaterialToAddMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDHCompanyPublicationConfirmationEraseMenu(ChatDialogHandlerBase next)
-            : base(next, "company_publication_confirmation_erase_menu")
+        public CDHCompanyPublicationTitleMaterialToAddMenu(ChatDialogHandlerBase next)
+            : base(next, "company_publication_title_material_to_add_menu")
         {
-            this.Parents.Add("company_publication_action_menu");
-            this.Route = "/eliminar";
+            this.Parents.Add("company_publication_currency_material_to_add_menu");
+            this.Route = null;
         }
 
         /// <inheritdoc/>
@@ -36,14 +36,15 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            StringBuilder builder = new StringBuilder();
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity process = session.CurrentActivity;
-            ErasePublicationData data = process.GetData<ErasePublicationData>();
+            InsertPublicationData data = process.GetData<InsertPublicationData>();
+            data.Publication.Currency = Enum.Parse<Currency>(selector.Code);
+            session.CurrentActivity = process;
 
-            builder.AppendLine("Esta seguro que desea eliminar la publicacion del material\n");
-            builder.AppendLine("/confirmar - Confirmar eliminacion.");
-            builder.Append("/volver : Volver al listado de publicaciones.\n");
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("Ingrese un <b>titulo</b> para la publicacion:\n");
+            builder.Append("/volver - En caso de querer canclear la operacion.\n");
             return builder.ToString();
         }
 
@@ -59,8 +60,7 @@ namespace ClassLibrary
             {
                 if (!selector.Code.StartsWith('/'))
                 {
-                    Publication publication = this.DatMgr.Publication.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
-                    if (publication is not null)
+                    if (Enum.TryParse(selector.Code, out Currency _) && selector.Code != "0")
                     {
                         return true;
                     }

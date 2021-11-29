@@ -19,7 +19,7 @@ namespace ClassLibrary
         private CompanyMaterial companyMaterial;
         private MaterialCategory materialCategory;
         private CompanyMaterialStock companyMaterialStock;
-        private DataManager datMgr;
+        private DataManager datMgr = new DataManager();
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase.

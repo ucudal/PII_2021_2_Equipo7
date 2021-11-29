@@ -38,26 +38,23 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            StringBuilder xListMats = new StringBuilder();
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity activity;
 
             if (session.CurrentActivity.Code != "search_company_publication_list_material_to_add_menu")
             {
-            IReadOnlyCollection<int> materials = this.DatMgr.CompanyMaterial.GetCompanyMaterialsInCompany(session.EntityId);
-            SearchData search = new SearchData(materials, this.Parents.First(), this.Route);
-            activity = new UserActivity("search_company_publication_list_material_to_add_menu", "welcome_company", "/publicaciones", search);
-            session.PushActivity(activity);
+                IReadOnlyCollection<int> materials = this.DatMgr.CompanyMaterial.GetCompanyMaterialsInCompany(session.EntityId);
+                InsertPublicationData search = new InsertPublicationData(materials, this.Parents.First(), this.Route);
+                activity = new UserActivity("search_company_publication_list_material_to_add_menu", "welcome_company", "/publicaciones", search);
+                session.PushActivity(activity);
             }
 
             activity = session.CurrentActivity;
             SearchData data = activity.GetData<SearchData>();
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Listado de materiales existentes: \n");
-            builder.Append("Ingrese el numero del material que quiere añadir a la publicacion.\n");
-            builder.Append("Ademas puede realizar las\n");
-            builder.Append("siguientes operaciones:\n\n");
+            builder.AppendLine("<b>Materiales de la Compania</b>\n");
+            builder.AppendLine("Ingrese el numero del material que quiere añadir a la publicacion.\n");
             if (data.SearchResults.Count > 0)
             {
                 builder.AppendLine($"{this.TextToPrintCompanyMaterial(data)}");

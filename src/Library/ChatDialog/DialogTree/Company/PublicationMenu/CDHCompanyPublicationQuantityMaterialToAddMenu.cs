@@ -36,18 +36,19 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            InsertPublicationData data = new InsertPublicationData();
-
-            CompanyMaterial xMat = this.DatMgr.CompanyMaterial.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
-            data.Publication.CompanyMaterialId = xMat.CompanyId;
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity process = session.CurrentActivity;
-            data.Publication.CompanyId = this.DatMgr.CompanyUser.GetCompanyForUser(session.UserId);
+            InsertPublicationData data = process.GetData<InsertPublicationData>();
+
+            Publication pub = this.DatMgr.Publication.New();
+            pub.CompanyMaterialId = int.Parse(selector.Code, CultureInfo.InvariantCulture);
+            pub.CompanyId = session.EntityId;
+            data.Publication = pub;
             session.CurrentActivity = process;
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Ingrese la cantidad del material que quiere agregar a la publicacion.\n");
-            builder.Append("\\volver : Listar todos los materiales que ya posee.\n");
+            builder.AppendLine("Ingrese la <b>cantidad</b> del material que quiere agregar a la publicacion:\n");
+            builder.Append("/volver - Listar todos los materiales que ya posee.\n");
             return builder.ToString();
         }
 
@@ -66,7 +67,11 @@ namespace ClassLibrary
                     CompanyMaterial xMat = this.DatMgr.CompanyMaterial.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
                     if (xMat is not null)
                     {
-                        return true;
+                        Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+                        if (xMat.CompanyId == session.EntityId && session.UserRole == UserRole.CompanyAdministrator)
+                        {
+                            return true;
+                        }
                     }
                 }
             }
