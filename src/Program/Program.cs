@@ -44,11 +44,11 @@ namespace Program
             Qualification qual;
 
             qual = dataManager.Qualification.New();
-            qual.Name = "Armas de Fuego";
+            qual.Name = "Certificado Notarial con inscripción en DGI y BPS.";
             dataManager.Qualification.Insert(qual);
 
             qual = dataManager.Qualification.New();
-            qual.Name = "Armas Blancas";
+            qual.Name = "Certificado para Tenencia de materiales peligrosos";
             dataManager.Qualification.Insert(qual);
 
             qual = dataManager.Qualification.New();
@@ -64,23 +64,7 @@ namespace Program
             dataManager.Qualification.Insert(qual);
 
             qual = dataManager.Qualification.New();
-            qual.Name = "Solventes";
-            dataManager.Qualification.Insert(qual);
-
-            qual = dataManager.Qualification.New();
-            qual.Name = "Animales";
-            dataManager.Qualification.Insert(qual);
-
-            qual = dataManager.Qualification.New();
-            qual.Name = "Alimentos";
-            dataManager.Qualification.Insert(qual);
-
-            qual = dataManager.Qualification.New();
-            qual.Name = "Humanos";
-            dataManager.Qualification.Insert(qual);
-
-            qual = dataManager.Qualification.New();
-            qual.Name = "Nucleares";
+            qual.Name = "certificado THATA";
             dataManager.Qualification.Insert(qual);
         }
 
@@ -112,6 +96,30 @@ namespace Program
 
             matCat = dataManager.MaterialCategory.New();
             matCat.Name = "Biologico";
+            dataManager.MaterialCategory.Insert(matCat);
+
+            matCat = dataManager.MaterialCategory.New();
+            matCat.Name = "Metales Ferrosos";
+            dataManager.MaterialCategory.Insert(matCat);
+
+            matCat = dataManager.MaterialCategory.New();
+            matCat.Name = "Plantas Industriales";
+            dataManager.MaterialCategory.Insert(matCat);
+
+            matCat = dataManager.MaterialCategory.New();
+            matCat.Name = "Electronica";
+            dataManager.MaterialCategory.Insert(matCat);
+
+            matCat = dataManager.MaterialCategory.New();
+            matCat.Name = "Residuos Organicos";
+            dataManager.MaterialCategory.Insert(matCat);
+
+            matCat = dataManager.MaterialCategory.New();
+            matCat.Name = "Residuos Reciclables";
+            dataManager.MaterialCategory.Insert(matCat);
+
+            matCat = dataManager.MaterialCategory.New();
+            matCat.Name = "Residuos Peligrosos";
             dataManager.MaterialCategory.Insert(matCat);
         }
 
@@ -181,6 +189,18 @@ namespace Program
             Invitation inv4;
             Publication pub;
             PublicationKeyWord keyWord;
+
+            User user2;
+            Company company2;
+            Account account2;
+            CompanyUser companyUser2;
+            CompanyMaterial compMat2;
+            MaterialCategory matCat2;
+            CompanyMaterialStock compMatStock2;
+            CompanyLocation compLoc2;
+            Invitation inv5;
+            Publication pub2;
+            PublicationKeyWord keyWord2;
 
             company = dataManager.Company.New();
             company.Name = "Dream Theater";
@@ -288,6 +308,82 @@ namespace Program
             keyWord = dataManager.PublicationKeyWord.New();
             keyWord.PublicationId = pubId;
             keyWord.KeyWord = "Progressive";
+            dataManager.PublicationKeyWord.Insert(keyWord);
+
+            company2 = dataManager.Company.New();
+            company2.Name = "InfoMatic";
+            company2.Trade = "Informatica y Electronica";
+            int companyId2 = dataManager.Company.Insert(company);
+
+            inv5 = dataManager.Invitation.New();
+            inv5.Used = false;
+            inv5.ValidAfter = DateTime.Now.AddMonths(-2);
+            inv5.ValidBefore = DateTime.Now.AddMonths(2);
+            inv5.Type = RegistrationType.CompanyJoin;
+            inv5.CompanyId = 2;
+            int inv5Id = dataManager.Invitation.Insert(inv4);
+
+            dataManager.Invitation.GenerateNewInviteCode(inv5Id);
+
+            user2 = dataManager.User.New();
+            user2.FirstName = "Juan";
+            user2.LastName = "Forische";
+            user2.Suspended = false;
+            user2.Role = UserRole.CompanyAdministrator;
+            int user2Id = dataManager.User.Insert(user2);
+
+            account2 = dataManager.Account.New();
+            account2.CodeInService = "11121";
+            account2.Service = MessagingService.Console;
+            account2.UserId = user2Id;
+            dataManager.Account.Insert(account2);
+
+            companyUser2 = dataManager.CompanyUser.New();
+            companyUser2.AdminUserId = userId;
+            companyUser2.CompanyId = companyId2;
+            dataManager.CompanyUser.Insert(companyUser2);
+
+            compLoc2 = dataManager.CompanyLocation.New();
+            compLoc2.CompanyId = companyId2;
+            compLoc2.GeoReference = "Solferino 3355";
+            int compLocId2 = dataManager.CompanyLocation.Insert(compLoc2);
+
+            matCat2 = dataManager.MaterialCategory.New();
+            matCat2.Name = "Residuos Informaticos";
+            int matCatId2 = dataManager.MaterialCategory.Insert(matCat2);
+
+            compMat2 = dataManager.CompanyMaterial.New();
+            compMat2.CompanyId = companyId2;
+            compMat2.DateBetweenRestocks = 0;
+            compMat2.LastRestock = DateTime.Now.AddDays(-5);
+            compMat2.MaterialCategoryId = matCatId2;
+            compMat2.Name = "Pantallas AMOLED 24'' Rotas";
+            int compMatId2 = dataManager.CompanyMaterial.Insert(compMat2);
+
+            compMatStock2 = dataManager.CompanyMaterialStock.New();
+            compMatStock2.CompanyMatId = compMatId2;
+            compMatStock2.Stock = 15;
+            compMatStock2.CompanyLocationId = compLocId2;
+            dataManager.CompanyMaterialStock.Insert(compMatStock2);
+
+            int pubId2;
+
+            pub2 = dataManager.Publication.New();
+            pub2.CompanyLocationId = compLocId;
+            pub2.CompanyMaterialId = compMat1Id;
+            pub2.Currency = Currency.DolarEstadounidense;
+            pub2.Description = "monitor gamer curvo Samsung C24F390FH led 24 black high glossy 100V/240V";
+            pub2.Price = 21;
+            pub2.Quantity = 1;
+            pub2.Title = "monitor curvo";
+            pub2.ActiveFrom = DateTime.Now.AddMonths(-2);
+            pub2.ActiveUntil = DateTime.Now.AddYears(5);
+            pub2.CompanyId = companyId;
+            pubId2 = dataManager.Publication.Insert(pub2);
+
+            keyWord2 = dataManager.PublicationKeyWord.New();
+            keyWord2.PublicationId = pubId2;
+            keyWord2.KeyWord = "Monitor";
             dataManager.PublicationKeyWord.Insert(keyWord);
         }
     }
