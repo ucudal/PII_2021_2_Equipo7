@@ -16,7 +16,6 @@ namespace ClassLibrary
     public class SelectCompanyLocationData : SearchData
     {
         private int companyLocationId;
-        private DataManager datMgr = new DataManager();
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase.
