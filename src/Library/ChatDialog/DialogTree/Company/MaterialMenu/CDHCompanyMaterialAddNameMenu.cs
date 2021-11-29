@@ -44,8 +44,8 @@ namespace ClassLibrary
             session.CurrentActivity = activity;
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Ingrese el nombre del material.\n");
-            builder.Append("/volver : Volver al menu principal de compañía.\n");
+            builder.AppendLine("Ingrese el <b>nombre</b> del material.\n");
+            builder.Append("/volver - Volver al menu de materiales.");
             return builder.ToString();
         }
 

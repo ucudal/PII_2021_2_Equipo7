@@ -39,20 +39,19 @@ namespace ClassLibrary
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity activity;
-            if (session.CurrentActivity.Code != "company_add_menu")
+            if (session.CurrentActivity.Code != "search_by_page_company_add_menu")
             {
                 IReadOnlyCollection<int> categories = this.DatMgr.MaterialCategory.GetAllCategories();
                 InsertCompanyMaterialData search = new InsertCompanyMaterialData(categories, this.Parents.First(), this.Route);
-                activity = new UserActivity("company_add_menu", "welcome_company", "/materiales", search);
+                activity = new UserActivity("search_by_page_company_add_menu", "welcome_company", "/materiales", search);
                 session.PushActivity(activity);
             }
 
             activity = session.CurrentActivity;
             InsertCompanyMaterialData data = activity.GetData<InsertCompanyMaterialData>();
             StringBuilder builder = new StringBuilder();
-            builder.Append("Menu para agregar un material.\n");
-            builder.Append("Ingrese el numero de la categoria en la cual va el material.\n");
-            builder.Append("En caso de querer cancelar la operacion escriba\n\n");
+            builder.AppendLine("<b>Agregar un Material</b>.\n");
+            builder.AppendLine("Ingrese el numero de la categoria en la cual va el material.\n");
 
             if (data.SearchResults.Count > 0)
             {
@@ -69,7 +68,7 @@ namespace ClassLibrary
                 builder.AppendLine("/pagina_anterior - Pagina anterior.\n");
             }
 
-            builder.Append("/volver - Volver al menu principal de compañía.");
+            builder.Append("/volver - Volver al menu de materiales.");
             return builder.ToString();
         }
 

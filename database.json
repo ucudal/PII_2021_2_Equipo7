@@ -94,6 +94,24 @@
       "Trade": "Musica",
       "Id": 1,
       "Deleted": false
+    },
+    {
+      "Name": "Google",
+      "Trade": "Busquedas Web",
+      "Id": 2,
+      "Deleted": false
+    },
+    {
+      "Name": "Amazon",
+      "Trade": "Ventas",
+      "Id": 3,
+      "Deleted": false
+    },
+    {
+      "Name": "Antel",
+      "Trade": "Telecomunicaciones",
+      "Id": 4,
+      "Deleted": false
     }
   ],
   "Invitation": [
@@ -114,7 +132,7 @@
       "ValidAfter": "2021-09-22T10:08:28.7974694-03:00",
       "ValidBefore": "2022-01-22T10:08:28.797472-03:00",
       "CompanyId": 0,
-      "Used": false,
+      "Used": true,
       "Deleted": false
     },
     {
@@ -164,6 +182,54 @@
       "Deleted": false,
       "Role": 3,
       "Suspended": false
+    },
+    {
+      "Id": 3,
+      "FirstName": "Rodrigo",
+      "LastName": "Jauregui",
+      "Deleted": false,
+      "Role": 2,
+      "Suspended": false
+    },
+    {
+      "Id": 4,
+      "FirstName": "James",
+      "LastName": "LaBrie",
+      "Deleted": false,
+      "Role": 2,
+      "Suspended": false
+    },
+    {
+      "Id": 5,
+      "FirstName": "emprendedor",
+      "LastName": "Forische",
+      "Deleted": false,
+      "Role": 3,
+      "Suspended": false
+    },
+    {
+      "Id": 6,
+      "FirstName": "Benjamin",
+      "LastName": "Smith",
+      "Deleted": false,
+      "Role": 2,
+      "Suspended": false
+    },
+    {
+      "Id": 7,
+      "FirstName": "Sebastian",
+      "LastName": "De Armas",
+      "Deleted": false,
+      "Role": 2,
+      "Suspended": false
+    },
+    {
+      "Id": 8,
+      "FirstName": "Sebastian\\",
+      "LastName": "Jauregui",
+      "Deleted": false,
+      "Role": 3,
+      "Suspended": false
     }
   ],
   "Account": [
@@ -179,7 +245,42 @@
       "Deleted": false,
       "UserId": 2,
       "Service": 2,
+      "CodeInService": "1554827100-A"
+    },
+    {
+      "Id": 3,
+      "Deleted": false,
+      "UserId": 3,
+      "Service": 2,
+      "CodeInService": "1554827100-B"
+    },
+    {
+      "Id": 4,
+      "Deleted": false,
+      "UserId": 4,
+      "Service": 2,
+      "CodeInService": "1554827100-C"
+    },
+    {
+      "Id": 5,
+      "Deleted": false,
+      "UserId": 5,
+      "Service": 2,
+      "CodeInService": "1320585631"
+    },
+    {
+      "Id": 6,
+      "Deleted": false,
+      "UserId": 7,
+      "Service": 2,
       "CodeInService": "1554827100"
+    },
+    {
+      "Id": 7,
+      "Deleted": false,
+      "UserId": 8,
+      "Service": 2,
+      "CodeInService": "1554827100-E"
     }
   ],
   "CompanyUser": [
@@ -188,6 +289,24 @@
       "Deleted": false,
       "CompanyId": 1,
       "AdminUserId": 1
+    },
+    {
+      "Id": 2,
+      "Deleted": false,
+      "CompanyId": 2,
+      "AdminUserId": 3
+    },
+    {
+      "Id": 3,
+      "Deleted": false,
+      "CompanyId": 3,
+      "AdminUserId": 4
+    },
+    {
+      "Id": 4,
+      "Deleted": false,
+      "CompanyId": 4,
+      "AdminUserId": 7
     }
   ],
   "CompanyLocation": [
@@ -196,6 +315,30 @@
       "Deleted": false,
       "CompanyId": 1,
       "GeoReference": "Paraguay 1312"
+    },
+    {
+      "Id": 2,
+      "Deleted": false,
+      "CompanyId": 3,
+      "GeoReference": "Paraguay 1312"
+    },
+    {
+      "Id": 3,
+      "Deleted": false,
+      "CompanyId": 3,
+      "GeoReference": "Propios y Avenida Italia"
+    },
+    {
+      "Id": 4,
+      "Deleted": false,
+      "CompanyId": 3,
+      "GeoReference": "Avenida General Flores y Heraclio Fajardo"
+    },
+    {
+      "Id": 5,
+      "Deleted": false,
+      "CompanyId": 4,
+      "GeoReference": "Miguelete y Cabildo"
     }
   ],
   "CompanyMaterial": [
@@ -216,6 +359,87 @@
       "Deleted": false,
       "MaterialCategoryId": 7,
       "CompanyId": 1
+    },
+    {
+      "Id": 3,
+      "Name": "Botella de CocaCola",
+      "LastRestock": "2021-11-28T00:00:00-03:00",
+      "DateBetweenRestocks": 0,
+      "Deleted": false,
+      "MaterialCategoryId": 2,
+      "CompanyId": 3
+    },
+    {
+      "Id": 4,
+      "Name": "Botella de Pepsi",
+      "LastRestock": "2021-11-28T00:00:00-03:00",
+      "DateBetweenRestocks": 0,
+      "Deleted": true,
+      "MaterialCategoryId": 2,
+      "CompanyId": 3
+    },
+    {
+      "Id": 5,
+      "Name": "Cedro",
+      "LastRestock": "2021-11-28T00:00:00-03:00",
+      "DateBetweenRestocks": 0,
+      "Deleted": false,
+      "MaterialCategoryId": 1,
+      "CompanyId": 3
+    },
+    {
+      "Id": 6,
+      "Name": "Botella de Fanta",
+      "LastRestock": "2021-11-28T00:00:00-03:00",
+      "DateBetweenRestocks": 0,
+      "Deleted": false,
+      "MaterialCategoryId": 2,
+      "CompanyId": 3
+    },
+    {
+      "Id": 7,
+      "Name": "Botella de Sprite",
+      "LastRestock": "2021-11-28T00:00:00-03:00",
+      "DateBetweenRestocks": 0,
+      "Deleted": false,
+      "MaterialCategoryId": 2,
+      "CompanyId": 3
+    },
+    {
+      "Id": 8,
+      "Name": "Adamantio",
+      "LastRestock": "2021-11-28T00:00:00-03:00",
+      "DateBetweenRestocks": 0,
+      "Deleted": false,
+      "MaterialCategoryId": 5,
+      "CompanyId": 3
+    },
+    {
+      "Id": 9,
+      "Name": "Antrax",
+      "LastRestock": "2021-11-28T00:00:00-03:00",
+      "DateBetweenRestocks": 0,
+      "Deleted": false,
+      "MaterialCategoryId": 6,
+      "CompanyId": 3
+    },
+    {
+      "Id": 10,
+      "Name": "Napalm",
+      "LastRestock": "2021-11-28T00:00:00-03:00",
+      "DateBetweenRestocks": 0,
+      "Deleted": false,
+      "MaterialCategoryId": 4,
+      "CompanyId": 3
+    },
+    {
+      "Id": 11,
+      "Name": "Tablones de Cedro",
+      "LastRestock": "2021-11-29T00:00:00-03:00",
+      "DateBetweenRestocks": 0,
+      "Deleted": false,
+      "MaterialCategoryId": 1,
+      "CompanyId": 4
     }
   ],
   "CompanyMaterialStock": [
@@ -232,6 +456,13 @@
       "CompanyMatId": 2,
       "CompanyLocationId": 1,
       "Stock": 19
+    },
+    {
+      "Id": 3,
+      "Deleted": false,
+      "CompanyMatId": 3,
+      "CompanyLocationId": 2,
+      "Stock": 42
     }
   ],
   "Publication": [
@@ -262,6 +493,62 @@
       "CompanyLocationId": 1,
       "Title": "Systematic Chaos",
       "Description": "Ninth studio album by American progressive metal band Dream Theater. Released on June 4, 2007 in the United Kingdom and June 5, 2007 in the United States."
+    },
+    {
+      "CompanyId": 3,
+      "CompanyMaterialId": 3,
+      "Id": 3,
+      "ActiveFrom": "2021-11-28T19:39:02.604912-03:00",
+      "ActiveUntil": "2071-11-28T19:39:02.6049525-03:00",
+      "Price": 100,
+      "Quantity": 5,
+      "Currency": 1,
+      "Deleted": false,
+      "CompanyLocationId": 2,
+      "Title": "PLACEHOLDER",
+      "Description": ""
+    },
+    {
+      "CompanyId": 3,
+      "CompanyMaterialId": 8,
+      "Id": 4,
+      "ActiveFrom": "2021-11-29T01:14:14.1456664-03:00",
+      "ActiveUntil": "2071-11-29T01:14:14.1457157-03:00",
+      "Price": 4500,
+      "Quantity": 3,
+      "Currency": 1,
+      "Deleted": false,
+      "CompanyLocationId": 3,
+      "Title": "Garras de Wolverine",
+      "Description": "Garras de adamantio de un hombre X"
+    },
+    {
+      "CompanyId": 3,
+      "CompanyMaterialId": 5,
+      "Id": 5,
+      "ActiveFrom": "2021-11-29T01:37:16.6856834-03:00",
+      "ActiveUntil": "2071-11-29T01:37:16.6856853-03:00",
+      "Price": 500,
+      "Quantity": 5,
+      "Currency": 1,
+      "Deleted": false,
+      "CompanyLocationId": 4,
+      "Title": "Madera de Cedro",
+      "Description": "Una descripcion sobre madera de cedro."
+    },
+    {
+      "CompanyId": 4,
+      "CompanyMaterialId": 11,
+      "Id": 6,
+      "ActiveFrom": "2021-11-29T02:51:23.5780281-03:00",
+      "ActiveUntil": "2071-11-29T02:51:23.5780283-03:00",
+      "Price": 5000,
+      "Quantity": 11,
+      "Currency": 1,
+      "Deleted": false,
+      "CompanyLocationId": 5,
+      "Title": "Pack de Tablones de Madera",
+      "Description": "Pack de 11 tablones de madera"
     }
   ],
   "PublicationKeyWord": [
@@ -292,6 +579,22 @@
       "Trade": "Ventas",
       "Id": 1,
       "Deleted": false
+    },
+    {
+      "GeoReference": "solferino 3975",
+      "UserId": 5,
+      "Name": "4fantastic",
+      "Trade": "carpintero",
+      "Id": 2,
+      "Deleted": false
+    },
+    {
+      "GeoReference": "Avenida Italia y Boulevard Artigas",
+      "UserId": 8,
+      "Name": "IT",
+      "Trade": "IT",
+      "Id": 3,
+      "Deleted": false
     }
   ],
   "EntrepreneurQualification": [
@@ -308,6 +611,34 @@
       "EntrepreneurId": 1,
       "QualificationId": 5,
       "DocumentUri": "http://pagina.com/file.pdf"
+    },
+    {
+      "Id": 3,
+      "Deleted": true,
+      "EntrepreneurId": 2,
+      "QualificationId": 1,
+      "DocumentUri": "https://hjjhshduh.com"
+    },
+    {
+      "Id": 4,
+      "Deleted": false,
+      "EntrepreneurId": 2,
+      "QualificationId": 5,
+      "DocumentUri": "https://ksokfoskof.com"
+    },
+    {
+      "Id": 5,
+      "Deleted": false,
+      "EntrepreneurId": 2,
+      "QualificationId": 3,
+      "DocumentUri": "https://ksokfoskof.com"
+    },
+    {
+      "Id": 6,
+      "Deleted": false,
+      "EntrepreneurId": 2,
+      "QualificationId": 3,
+      "DocumentUri": "https://ksokfoskof.com"
     }
   ],
   "Sale": [
@@ -320,6 +651,28 @@
       "DateTime": "2021-11-27T12:46:19.9404579-03:00",
       "Price": 21,
       "Currency": 2,
+      "Deleted": false
+    },
+    {
+      "ProductCompanyMaterialId": 3,
+      "ProductQuantity": 5,
+      "SellerCompanyId": 3,
+      "BuyerEntrepreneurId": 2,
+      "Id": 2,
+      "DateTime": "2021-11-28T20:42:57.7056216-03:00",
+      "Price": 100,
+      "Currency": 1,
+      "Deleted": false
+    },
+    {
+      "ProductCompanyMaterialId": 5,
+      "ProductQuantity": 5,
+      "SellerCompanyId": 3,
+      "BuyerEntrepreneurId": 1,
+      "Id": 3,
+      "DateTime": "2021-11-29T02:35:32.2147221-03:00",
+      "Price": 500,
+      "Currency": 1,
       "Deleted": false
     }
   ]

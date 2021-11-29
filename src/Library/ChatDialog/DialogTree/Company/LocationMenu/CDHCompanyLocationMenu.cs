@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDHCompanyMaterialAddDataMenu.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHCompanyLocationMenu.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -14,17 +14,17 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDHCompanyMaterialAddDataMenu : ChatDialogHandlerBase
+    public class CDHCompanyLocationMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDHCompanyMaterialAddDataMenu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHCompanyLocationMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDHCompanyMaterialAddDataMenu(ChatDialogHandlerBase next)
-        : base(next, "company_material_add_data_menu")
+        public CDHCompanyLocationMenu(ChatDialogHandlerBase next)
+        : base(next, "company_location_menu")
         {
-            this.Parents.Add("company_material_add_confirmation_menu");
-            this.Route = "/confirmar";
+            this.Parents.Add("welcome_company");
+            this.Route = "/localizaciones";
         }
 
         /// <inheritdoc/>
@@ -35,13 +35,16 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
+            UserActivity activity = new UserActivity("company_location_menu", null, "/welcome", null);
+
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            UserActivity activity = session.CurrentActivity;
-            InsertCompanyMaterialData data = activity.GetData<InsertCompanyMaterialData>();
-            data.RunTask();
+            session.PushActivity(activity);
+
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine("El material se agrego satisfactoriamente.\n");
-            builder.Append("/volver - Volver al menu de materiales.\n");
+            builder.AppendLine("<b>Menu de Localizaciones</b>.\n");
+            builder.AppendLine("/ingresar - Agregar localizacion.");
+            builder.AppendLine("/listar - Listar localizaciones.\n");
+            builder.Append("/volver - Volver al menu de empresa.");
             return builder.ToString();
         }
     }

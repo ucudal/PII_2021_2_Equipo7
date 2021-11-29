@@ -44,7 +44,7 @@ namespace ClassLibrary
 
             data.RunTask();
 
-            session.CurrentActivity.Terminate(chainInitiator: true);
+            session.CurrentActivity.Terminate(chainInitiator: false);
 
             StringBuilder builder = new StringBuilder();
             builder.Append("Gracias registrarse en nuestra plataforma.\n\n");

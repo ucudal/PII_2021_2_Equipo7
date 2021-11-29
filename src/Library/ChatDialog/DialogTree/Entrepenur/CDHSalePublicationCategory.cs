@@ -51,7 +51,8 @@ namespace ClassLibrary
             StringBuilder builder = new StringBuilder();
             builder.AppendLine($"<b>Detalles: {pub.Title}</b>\n");
             builder.AppendLine($"<b>Material</b>: {compMat.Name}");
-            builder.AppendLine($"<b>Stock</b>: {stock}");
+
+            // builder.AppendLine($"<b>Stock</b>: {stock}");
             builder.AppendLine($"<b>Vendedor</b>: {comp.Name}\n");
             builder.AppendLine($"<b>Descripcion</b>:\n{pub.Description}\n");
             builder.AppendLine("<b>Habilitaciones</b>:");
@@ -75,9 +76,11 @@ namespace ClassLibrary
             builder.AppendLine($"\n<b>Cantidad</b>: {pub.Quantity}");
             builder.AppendLine($"<b>Moneda</b>: {Enum.GetName(typeof(Currency), pub.Currency)}");
             builder.AppendLine($"<b>Precio</b>: {pub.Price}\n");
-            if (hasAllQualifications && stock != 0)
+
+            // if (hasAllQualifications && stock != 0)
+            if (hasAllQualifications)
             {
-                builder.AppendLine("/comprar : Comprar publicación.\n");
+                builder.AppendLine("/comprar - Comprar publicación.\n");
             }
 
             builder.Append("/volver - Volver.");

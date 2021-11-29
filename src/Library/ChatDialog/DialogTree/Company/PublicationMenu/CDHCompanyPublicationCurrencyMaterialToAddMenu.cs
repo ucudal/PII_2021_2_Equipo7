@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDHCompanyPublicationConfirmationEraseMenu.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHCompanyPublicationCurrencyMaterialToAddMenu.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -15,17 +15,17 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDHCompanyPublicationConfirmationEraseMenu : ChatDialogHandlerBase
+    public class CDHCompanyPublicationCurrencyMaterialToAddMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDHCompanyPublicationConfirmationEraseMenu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHCompanyPublicationCurrencyMaterialToAddMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDHCompanyPublicationConfirmationEraseMenu(ChatDialogHandlerBase next)
-            : base(next, "company_publication_confirmation_erase_menu")
+        public CDHCompanyPublicationCurrencyMaterialToAddMenu(ChatDialogHandlerBase next)
+            : base(next, "company_publication_currency_material_to_add_menu")
         {
-            this.Parents.Add("company_publication_action_menu");
-            this.Route = "/eliminar";
+            this.Parents.Add("company_publication_price_material_to_add_menu");
+            this.Route = null;
         }
 
         /// <inheritdoc/>
@@ -36,14 +36,23 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            StringBuilder builder = new StringBuilder();
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity process = session.CurrentActivity;
-            ErasePublicationData data = process.GetData<ErasePublicationData>();
+            InsertPublicationData data = process.GetData<InsertPublicationData>();
+            data.Publication.Price = int.Parse(selector.Code, CultureInfo.InvariantCulture);
+            session.CurrentActivity = process;
 
-            builder.AppendLine("Esta seguro que desea eliminar la publicacion del material\n");
-            builder.AppendLine("/confirmar - Confirmar eliminacion.");
-            builder.Append("/volver : Volver al listado de publicaciones.\n");
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("Escoja la <b>moneda</b> a utilizar:\n");
+            foreach (Currency currency in Enum.GetValues(typeof(Currency)))
+            {
+                if (currency != Currency.Undefined)
+                {
+                    builder.AppendLine(((int)currency) + " - " + Enum.GetName<Currency>(currency));
+                }
+            }
+
+            builder.Append("\n/volver - En caso de querer canclear la operacion.");
             return builder.ToString();
         }
 
@@ -55,19 +64,16 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
+            bool xretorno = false;
             if (this.Parents.Contains(selector.Context))
             {
                 if (!selector.Code.StartsWith('/'))
                 {
-                    Publication publication = this.DatMgr.Publication.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture));
-                    if (publication is not null)
-                    {
-                        return true;
-                    }
+                    xretorno = true;
                 }
             }
 
-            return false;
+            return xretorno;
         }
     }
 }

@@ -43,21 +43,18 @@ namespace ClassLibrary
 
             if (session.CurrentActivity.Code != "search_company_publication_list_material_to_add_menu")
             {
-            IReadOnlyCollection<int> publications = this.DatMgr.Publication.GetPublicationsByCompany(session.EntityId);
-            SearchData search = new SearchData(publications, this.Parents.First(), this.Route);
-            activity = new UserActivity("search_company_publication_list_menu", "welcome_company", "/publicaciones", search);
-            session.PushActivity(activity);
+                IReadOnlyCollection<int> publications = this.DatMgr.Publication.GetPublicationsByCompany(session.EntityId);
+                SearchData search = new SearchData(publications, this.Parents.First(), this.Route);
+                activity = new UserActivity("search_company_publication_list_menu", "welcome_company", "/publicaciones", search);
+                session.PushActivity(activity);
             }
 
             activity = session.CurrentActivity;
             SearchData data = activity.GetData<SearchData>();
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Lista de publicaciones.\n");
-            builder.Append("Desde este menu puede realizar las\n");
-            builder.Append("siguientes operaciones:\n\n");
-            builder.Append("Ingrese el numero de la publicacion con la cual quiere trabajar \n");
-            builder.Append(" en caso contrario \n");
+            builder.AppendLine("<b>Lista de publicaciones</b>\n");
+            builder.AppendLine("Ingrese el numero de la publicacion con la cual quiere trabajar.\n");
             if (data.SearchResults.Count > 0)
             {
                 builder.AppendLine($"{this.TextoToPrintPublication(data)}");
@@ -85,9 +82,10 @@ namespace ClassLibrary
             }
 
             StringBuilder builder = new StringBuilder();
-            foreach (Publication xPub in this.DatMgr.Publication.Items)
+            foreach (int matId in search.PageItems)
             {
-                builder.Append(" " + xPub.Id + " " + this.DatMgr.Publication.GetById(xPub.Id).Title + " " + xPub.Price + "\n");
+                Publication pub = this.DatMgr.Publication.GetById(matId);
+                builder.AppendLine($"{pub.Id} - {pub.Title}");
             }
 
             return builder.ToString();

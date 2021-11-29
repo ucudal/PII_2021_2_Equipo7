@@ -872,6 +872,89 @@
         <member name="M:ClassLibrary.CDHVentasLista.Execute(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
+        <member name="T:ClassLibrary.CDHCompanyAddLocationMenu">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de empresa.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyAddLocationMenu.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDHCompanyAddLocationMenu"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyAddLocationMenu.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDHCompanyListLocationMenu">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de empresa.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyListLocationMenu.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDHCompanyListLocationMenu"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyListLocationMenu.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDHCompanyLocationAddDoneMenu">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de empresa.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyLocationAddDoneMenu.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDHCompanyLocationAddDoneMenu"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyLocationAddDoneMenu.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDHCompanyLocationConfirmationAddMenu">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de empresa.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyLocationConfirmationAddMenu.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDHCompanyLocationConfirmationAddMenu"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyLocationConfirmationAddMenu.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyLocationConfirmationAddMenu.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDHCompanyLocationMenu">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de empresa.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyLocationMenu.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDHCompanyLocationMenu"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyLocationMenu.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
         <member name="T:ClassLibrary.CDHCompanyActionsMaterialMenu">
             <summary>
             <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
@@ -1216,6 +1299,44 @@
         <member name="M:ClassLibrary.CDHCompanyPublicationConfirmationEraseMenu.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
+        <member name="T:ClassLibrary.CDHCompanyPublicationCurrencyMaterialToAddMenu">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de empresa.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyPublicationCurrencyMaterialToAddMenu.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDHCompanyPublicationCurrencyMaterialToAddMenu"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyPublicationCurrencyMaterialToAddMenu.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyPublicationCurrencyMaterialToAddMenu.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDHCompanyPublicationDescriptionMaterialToAddMenu">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de empresa.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyPublicationDescriptionMaterialToAddMenu.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDHCompanyPublicationDescriptionMaterialToAddMenu"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyPublicationDescriptionMaterialToAddMenu.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyPublicationDescriptionMaterialToAddMenu.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
         <member name="T:ClassLibrary.CDHCompanyPublicationEraseDataMenu">
             <summary>
             <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
@@ -1262,6 +1383,25 @@
             <param name="next">Siguiente handler.</param>
         </member>
         <member name="M:ClassLibrary.CDHCompanyPublicationListMenu.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDHCompanyPublicationLocationMaterialToAddMenu">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de empresa.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyPublicationLocationMaterialToAddMenu.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDHCompanyPublicationLocationMaterialToAddMenu"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyPublicationLocationMaterialToAddMenu.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyPublicationLocationMaterialToAddMenu.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
         <member name="T:ClassLibrary.CDHCompanyPublicationMenu">
@@ -1316,6 +1456,25 @@
             <inheritdoc/>
         </member>
         <member name="M:ClassLibrary.CDHCompanyPublicationQuantityMaterialToAddMenu.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ClassLibrary.CDHCompanyPublicationTitleMaterialToAddMenu">
+            <summary>
+            <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
+            Responde al inicio de un usuario
+            administrador de empresa.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyPublicationTitleMaterialToAddMenu.#ctor(ClassLibrary.ChatDialogHandlerBase)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.CDHCompanyPublicationTitleMaterialToAddMenu"/>.
+            </summary>
+            <param name="next">Siguiente handler.</param>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyPublicationTitleMaterialToAddMenu.Execute(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ClassLibrary.CDHCompanyPublicationTitleMaterialToAddMenu.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
         <member name="T:ClassLibrary.CDHConfirmationSaleCategory">
@@ -4838,6 +4997,26 @@
             </summary>
             <returns>boleano de publication.</returns>
         </member>
+        <member name="T:ClassLibrary.InsertCompanyLocationData">
+            <summary>
+            Contenedor con los datos
+            del proceso de registro
+            para un usuario.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.InsertCompanyLocationData.#ctor">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.InsertCompanyLocationData"/>.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.InsertCompanyLocationData.CompLoc">
+            <summary>
+            Objeto con la localizacion a agregar.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.InsertCompanyLocationData.RunTask">
+            <inheritdoc/>
+        </member>
         <member name="T:ClassLibrary.InsertCompanyMaterialData">
             <summary>
             Contenedor con los datos
@@ -4944,6 +5123,23 @@
             <summary>
             Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.InsertPublicationData"/>.
             </summary>
+        </member>
+        <member name="M:ClassLibrary.InsertPublicationData.#ctor(System.Collections.Generic.IReadOnlyCollection{System.Int32},System.String,System.String,System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.InsertPublicationData"/>.
+            </summary>
+            <param name="searchResults">
+            Resultados de busqueda.
+            </param>
+            <param name="searchPageContext">
+            Contexto de la busqueda.
+            </param>
+            <param name="searchPageRoute">
+            Ruta de la busqueda.
+            </param>
+            <param name="pageItemCount">
+            Items por pagina de resultados.
+            </param>
         </member>
         <member name="P:ClassLibrary.InsertPublicationData.CompanyMaterial">
             <summary>
@@ -5118,6 +5314,42 @@
             Identificador dentro del servicio de
             mensajeria del usuario a registrar.
             </summary>
+        </member>
+        <member name="T:ClassLibrary.SelectCompanyLocationData">
+            <summary>
+            Contenedor con los datos
+            del proceso de registro
+            para un usuario.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.SelectCompanyLocationData.#ctor(System.Collections.Generic.IReadOnlyCollection{System.Int32},System.String,System.String,System.Int32)">
+            <summary>
+            Inicializa una nueva instancia de la clase.
+            </summary>
+            <param name="searchResults">
+            Resultados de busqueda.
+            </param>
+            <param name="searchPageContext">
+            Contexto de la busqueda.
+            </param>
+            <param name="searchPageRoute">
+            Ruta de la busqueda.
+            </param>
+            <param name="pageItemCount">
+            Items por pagina de resultados.
+            </param>
+        </member>
+        <member name="P:ClassLibrary.SelectCompanyLocationData.CompanyLocationId">
+            <summary>
+            Id de la localizacion de la compania.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.SelectCompanyLocationData.RunTask">
+            <summary>
+            Identificador dentro del servicio de
+            mensajeria del usuario a registrar.
+            </summary>
+            <returns>retorna un bool.</returns>
         </member>
         <member name="T:ClassLibrary.SelectCompanyMaterialData">
             <summary>

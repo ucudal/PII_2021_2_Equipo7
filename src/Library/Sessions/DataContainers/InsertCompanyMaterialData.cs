@@ -4,6 +4,7 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 
 namespace ClassLibrary
@@ -17,7 +18,7 @@ namespace ClassLibrary
     {
         private CompanyMaterial companyMaterial;
         private MaterialCategory materialCategory;
-        private DataManager datMgr;
+        private DataManager datMgr = new DataManager();
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="InsertCompanyMaterialData"/>.
@@ -58,15 +59,15 @@ namespace ClassLibrary
         /// <returns>retorna un boleano.</returns>
         public override bool RunTask()
         {
-            bool xretonro = false;
-            CompanyMaterial companyMaterial = this.CompanyMaterial;
+            CompanyMaterial companyMaterial = this.datMgr.CompanyMaterial.New();
+            companyMaterial.CompanyId = this.CompanyMaterial.CompanyId;
+            companyMaterial.DateBetweenRestocks = 0;
+            companyMaterial.LastRestock = DateTime.Today;
+            companyMaterial.MaterialCategoryId = this.MaterialCategory.Id;
+            companyMaterial.Name = this.CompanyMaterial.Name;
             int idCompanyMatId = this.datMgr.CompanyMaterial.Insert(companyMaterial);
-            if (idCompanyMatId != 0)
-            {
-                xretonro = true;
-            }
 
-            return xretonro;
+            return idCompanyMatId != 0;
         }
     }
 }

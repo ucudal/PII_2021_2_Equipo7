@@ -40,11 +40,11 @@ namespace ClassLibrary
             SelectCompanyMaterialData data = activity.GetData<SelectCompanyMaterialData>();
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Menu confirmar eliminacion.\n");
-            builder.Append($"El nombre del material es {data.CompanyMaterial.Name}\n");
-            builder.Append("¿Seguro que desea eliminar el material? \n");
-            builder.Append("\\confirmar : Confirmar que quiere eliminar el material.\n");
-            builder.Append("\\cancelar : Cancelar operacion.\n");
+            builder.AppendLine("<b>Confirmar Eliminacion</b>\n");
+            builder.AppendLine("¿Seguro que desea eliminar el material?");
+            builder.AppendLine($"<b>Nombre</b>: {data.CompanyMaterial.Name}\n");
+            builder.AppendLine("/confirmar - Confirmar eliminacion.");
+            builder.Append("/volver - Volver al menu de materiales.");
             return builder.ToString();
         }
     }

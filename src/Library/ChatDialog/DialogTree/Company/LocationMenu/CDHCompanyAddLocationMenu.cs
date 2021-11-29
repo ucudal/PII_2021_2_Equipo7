@@ -1,10 +1,12 @@
 // -----------------------------------------------------------------------
-// <copyright file="CDHCompanyPublicationMenu.cs" company="Universidad Católica del Uruguay">
+// <copyright file="CDHCompanyAddLocationMenu.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ClassLibrary
@@ -14,17 +16,17 @@ namespace ClassLibrary
     /// Responde al inicio de un usuario
     /// administrador de empresa.
     /// </summary>
-    public class CDHCompanyPublicationMenu : ChatDialogHandlerBase
+    public class CDHCompanyAddLocationMenu : ChatDialogHandlerBase
     {
         /// <summary>
-        /// Inicializa una nueva instancia de la clase <see cref="CDHCompanyPublicationMenu"/>.
+        /// Inicializa una nueva instancia de la clase <see cref="CDHCompanyAddLocationMenu"/>.
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
-        public CDHCompanyPublicationMenu(ChatDialogHandlerBase next)
-            : base(next, "company_publication_menu")
+        public CDHCompanyAddLocationMenu(ChatDialogHandlerBase next)
+            : base(next, "company_location_add_menu")
         {
-            this.Parents.Add("welcome_company");
-            this.Route = "/publicaciones";
+            this.Parents.Add("company_location_menu");
+            this.Route = "/ingresar";
         }
 
         /// <inheritdoc/>
@@ -35,15 +37,18 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            UserActivity activity = new UserActivity("company_publication_menu", null, "/welcome", null);
-
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            InsertCompanyLocationData data = new InsertCompanyLocationData()
+            {
+                CompLoc = this.DatMgr.CompanyLocation.New(),
+            };
+            data.CompLoc.CompanyId = session.EntityId;
+            UserActivity activity = new UserActivity("comp_add_loc", "welcome_company", "/localizaciones", data);
             session.PushActivity(activity);
+
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine("Menu de publicaciones.\n");
-            builder.AppendLine("/ingresar - Ingresar publicacion.");
-            builder.AppendLine("/listar - Listar publicaciones.\n");
-            builder.Append("/volver - Volver al menu de empresa.");
+            builder.AppendLine("Ingrese la <b>direccion</b> de la localizacion:.\n");
+            builder.Append("/volver - Volver al menu de localizaciones.");
             return builder.ToString();
         }
     }

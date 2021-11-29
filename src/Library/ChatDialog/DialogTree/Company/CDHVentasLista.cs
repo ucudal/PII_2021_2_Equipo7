@@ -23,10 +23,10 @@ namespace ClassLibrary
         /// </summary>
         /// <param name="next">Siguiente handler.</param>
         public CDHVentasLista(ChatDialogHandlerBase next)
-            : base(next, "listar_vetas")
+            : base(next, "listar_ventas")
         {
             this.Parents.Add("welcome_company");
-            this.Route = "/listar";
+            this.Route = "/ventas";
         }
 
         /// <inheritdoc/>
@@ -84,7 +84,7 @@ namespace ClassLibrary
             {
                 Sale sale = this.DatMgr.Sale.GetById(saleId);
                 CompanyMaterial compMat = this.DatMgr.CompanyMaterial.GetById(sale.ProductCompanyMaterialId);
-                builder.AppendLine($"{sale.Id} - {compMat.Name}");
+                builder.AppendLine($"{sale.Id} - {compMat.Name} ({sale.DateTime.Date.ToShortDateString()})");
             }
 
             return builder.ToString();

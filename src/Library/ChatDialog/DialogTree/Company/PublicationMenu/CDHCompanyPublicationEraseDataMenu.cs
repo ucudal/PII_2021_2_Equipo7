@@ -39,10 +39,10 @@ namespace ClassLibrary
             UserActivity process = session.CurrentActivity;
             ErasePublicationData data = process.GetData<ErasePublicationData>();
             data.RunTask();
+
             StringBuilder builder = new StringBuilder();
-            builder.Append("La publicacion se elimino con exito.\n");
-            builder.Append("Escriba ");
-            builder.Append("/volver : Para volver a la lista de publicaciones.\n");
+            builder.AppendLine("La publicacion se elimino con exito.\n");
+            builder.Append("/volver - Para volver a la lista de publicaciones.\n");
             return builder.ToString();
         }
     }

@@ -38,12 +38,11 @@ namespace ClassLibrary
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity process = session.CurrentActivity;
             InsertPublicationData data = process.GetData<InsertPublicationData>();
-            data.CompanyId = this.DatMgr.Company.GetById(session.EntityId).Id;
+            data.CompanyId = session.EntityId;
             data.RunTask();
             StringBuilder builder = new StringBuilder();
-            builder.Append("La publicacion se agrego satisfactoriamente.\n");
-            builder.Append("Escriba ");
-            builder.Append("/volver : para volver al menu de materiales.\n");
+            builder.AppendLine("La publicacion se agrego satisfactoriamente.\n");
+            builder.Append("/volver - Volver al menu de publicaciones.\n");
             return builder.ToString();
         }
     }
