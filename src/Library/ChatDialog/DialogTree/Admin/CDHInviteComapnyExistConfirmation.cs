@@ -39,13 +39,17 @@ namespace ClassLibrary
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity activity = session.CurrentActivity;
             InsertInvitationData data = activity.GetData<InsertInvitationData>();
-            data.Invitation.CompanyId = int.Parse(selector.Code, CultureInfo.InvariantCulture);
+            Invitation inv = this.DatMgr.Invitation.New();
+            inv.Type = RegistrationType.CompanyJoin;
+            inv.CompanyId = int.Parse(selector.Code, CultureInfo.InvariantCulture);
+            data.Invitation = inv;
             session.CurrentActivity = activity;
-            StringBuilder builder = new StringBuilder();
 
-            builder.Append("Desea crear una invitacion para una compania ya existente\n");
-            builder.Append("/confirmar \n");
-            builder.Append("/cancelar");
+            Company comp = this.DatMgr.Company.GetById(data.Invitation.CompanyId);
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine($"Esta por generar una invitacion para un nuevo administrador de la empresa {comp.Name}.\n");
+            builder.AppendLine("/confirmar - Confirmar la operacion.");
+            builder.Append("/volver - Volver al menu de invitaciones.");
             return builder.ToString();
         }
 

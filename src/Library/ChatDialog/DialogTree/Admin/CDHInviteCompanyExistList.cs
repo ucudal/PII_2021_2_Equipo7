@@ -38,21 +38,21 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            StringBuilder builder = new StringBuilder();
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity activity;
             if (session.CurrentActivity.Code != "search_by_page_admin_inv_comp_join")
             {
-                int id = int.Parse(selector.Code, NumberStyles.Integer, CultureInfo.InvariantCulture);
                 IReadOnlyCollection<int> companies = this.DatMgr.Company.Items.Select(comp => comp.Id).ToList().AsReadOnly();
 
                 InsertInvitationData search = new InsertInvitationData(companies, this.Parents.First(), this.Route);
-                activity = new UserActivity("inv_companyJoin_ins", null, "/invitar", search);
+                activity = new UserActivity("search_by_page_admin_inv_comp_join", "welcome_sysadmin", "/invitar", search);
                 session.PushActivity(activity);
             }
 
             activity = session.CurrentActivity;
             InsertInvitationData data = activity.GetData<InsertInvitationData>();
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("Escoja para que empresa desea crear una invitacion.\n");
             if (data.SearchResults.Count > 0)
             {
                 builder.AppendLine($"{this.TextToPrintQualification(data)}");
@@ -80,9 +80,9 @@ namespace ClassLibrary
             }
 
             StringBuilder builder = new StringBuilder();
-            foreach (int compid in search.PageItems)
+            foreach (int compId in search.PageItems)
             {
-                Company comp = this.DatMgr.Company.GetById(compid);
+                Company comp = this.DatMgr.Company.GetById(compId);
                 builder.AppendLine($"{comp.Id} - {comp.Name}");
             }
 

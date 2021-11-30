@@ -35,21 +35,17 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            StringBuilder builder = new StringBuilder();
-            this.QualificationAdd(selector);
-            builder.Append("La invitacion se ha creado satisfactorimente.\n");
-            builder.Append("Escriba ");
-            builder.Append("\\volver : para volver al menu.\n");
-            return builder.ToString();
-        }
-
-        private void QualificationAdd(ChatDialogSelector selector)
-        {
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity process = session.CurrentActivity;
             InsertInvitationData data = process.GetData<InsertInvitationData>();
-            Invitation invitation = data.Invitation;
-            this.DatMgr.Invitation.Insert(invitation);
+            data.RunTask();
+
+            Invitation invitation = this.DatMgr.Invitation.GetById(data.GeneratedId);
+            StringBuilder builder = new StringBuilder();
+
+            builder.AppendLine($"Se ha generado la siguiente invitacion: <b>{invitation.Code}</b>. Recuerde enviarselo al usuario final.\n");
+            builder.Append("/volver - Volver al menu de invitaciones.\n");
+            return builder.ToString();
         }
     }
 }

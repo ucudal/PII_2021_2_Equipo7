@@ -36,16 +36,17 @@ namespace ClassLibrary
             }
 
             InsertInvitationData data = new InsertInvitationData();
-            data.Invitation.Type = RegistrationType.SystemAdminJoin;
-            UserActivity process = new UserActivity("Admin_invite", null, this.Code, data);
+            Invitation inv = this.DatMgr.Invitation.New();
+            inv.Type = RegistrationType.SystemAdminJoin;
+            data.Invitation = inv;
+            UserActivity process = new UserActivity("Admin_invite", "welcome_sysadmin", "/invitar", data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.CurrentActivity = process;
 
             StringBuilder builder = new StringBuilder();
-
-            builder.Append("Desea crear una invitacion para admin.\n");
-            builder.Append("\\confirmar \n");
-            builder.Append("\\cancelar");
+            builder.AppendLine("Esta por generar una invitacion para administrador del sistema.\n");
+            builder.AppendLine("/confirmar - Confirmar la operacion.");
+            builder.Append("/volver - Volver al menu de invitaciones.");
             return builder.ToString();
         }
     }

@@ -152,7 +152,7 @@
       "ValidAfter": "2021-09-22T10:08:28.8873788-03:00",
       "ValidBefore": "2022-01-22T10:08:28.8873816-03:00",
       "CompanyId": 0,
-      "Used": false,
+      "Used": true,
       "Deleted": false
     },
     {
@@ -162,6 +162,46 @@
       "ValidAfter": "2021-09-22T10:08:28.924898-03:00",
       "ValidBefore": "2022-01-22T10:08:28.9249001-03:00",
       "CompanyId": 1,
+      "Used": false,
+      "Deleted": false
+    },
+    {
+      "Id": 6,
+      "Code": "2021334-SJ-00006",
+      "Type": 4,
+      "ValidAfter": "2021-11-30T18:31:18.5587603-03:00",
+      "ValidBefore": "2021-12-30T18:31:18.5588007-03:00",
+      "CompanyId": 0,
+      "Used": false,
+      "Deleted": false
+    },
+    {
+      "Id": 7,
+      "Code": "2021334-EN-00007",
+      "Type": 1,
+      "ValidAfter": "2021-11-30T18:31:58.0554245-03:00",
+      "ValidBefore": "2021-12-30T18:31:58.0554246-03:00",
+      "CompanyId": 0,
+      "Used": false,
+      "Deleted": false
+    },
+    {
+      "Id": 8,
+      "Code": "2021334-CN-00008",
+      "Type": 2,
+      "ValidAfter": "2021-11-30T18:33:34.3855946-03:00",
+      "ValidBefore": "2021-12-30T18:33:34.385634-03:00",
+      "CompanyId": 0,
+      "Used": false,
+      "Deleted": false
+    },
+    {
+      "Id": 9,
+      "Code": "2021334-CJ-00009",
+      "Type": 1,
+      "ValidAfter": "2021-11-30T18:34:39.5650527-03:00",
+      "ValidBefore": "2021-12-30T18:34:39.5650995-03:00",
+      "CompanyId": 4,
       "Used": false,
       "Deleted": false
     }
@@ -230,6 +270,14 @@
       "Deleted": false,
       "Role": 3,
       "Suspended": false
+    },
+    {
+      "Id": 9,
+      "FirstName": "Rodrigo",
+      "LastName": "Jauregui",
+      "Deleted": false,
+      "Role": 1,
+      "Suspended": false
     }
   ],
   "Account": [
@@ -273,7 +321,7 @@
       "Deleted": false,
       "UserId": 7,
       "Service": 2,
-      "CodeInService": "1554827100"
+      "CodeInService": "1554827100-D"
     },
     {
       "Id": 7,
@@ -281,6 +329,13 @@
       "UserId": 8,
       "Service": 2,
       "CodeInService": "1554827100-E"
+    },
+    {
+      "Id": 8,
+      "Deleted": false,
+      "UserId": 9,
+      "Service": 2,
+      "CodeInService": "1554827100"
     }
   ],
   "CompanyUser": [

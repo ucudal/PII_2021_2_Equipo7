@@ -49,11 +49,11 @@ namespace ClassLibrary
             session.CurrentActivity = activity;
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Antes de completar el proceso de registro, por favor verifique los datos ingresados.\n\n");
-            builder.Append($"<b>1er Nombre</b>: {user.FirstName}\n");
-            builder.Append($"<b>1er Apellido</b>: {user.LastName}\n");
-            builder.Append("/confirmar - Completar el registro.\n");
-            builder.Append("/cancelar - Abandonar el registro.\n");
+            builder.AppendLine("Antes de completar el proceso de registro, por favor verifique los datos ingresados.\n");
+            builder.AppendLine($"<b>1er Nombre</b>: {user.FirstName}");
+            builder.AppendLine($"<b>1er Apellido</b>: {user.LastName}\n");
+            builder.AppendLine("/confirmar - Completar el registro.");
+            builder.Append("/cancelar - Abandonar el registro.");
             return builder.ToString();
         }
 

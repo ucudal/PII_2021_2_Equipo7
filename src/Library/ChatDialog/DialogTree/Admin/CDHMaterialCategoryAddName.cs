@@ -37,39 +37,14 @@ namespace ClassLibrary
             }
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            UserActivity activity = session.CurrentActivity;
-            InsertMaterialCategoryData data = activity.GetData<InsertMaterialCategoryData>();
-            MaterialCategory matCat = this.DatMgr.MaterialCategory.GetById(int.Parse(selector.Code,  CultureInfo.InvariantCulture));
-            data.MaterialCategory = matCat;
-            session.CurrentActivity = activity;
+            InsertMaterialCategoryData data = new InsertMaterialCategoryData();
+            UserActivity activity = new UserActivity("comp_mat_cat_add", "welcome_sysadmin", "/materiales", data);
+            session.PushActivity(activity);
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Ingrese el nombre del material.\n");
-            builder.Append("/volver : Volver al menu principal de compañía.\n");
+            builder.AppendLine("Ingrese el <b>nombre</b> del material:\n");
+            builder.Append("/volver : Volver al menu de materiales.");
             return builder.ToString();
-        }
-
-        /// <inheritdoc/>
-        public override bool ValidateDataEntry(ChatDialogSelector selector)
-        {
-            if (selector is null)
-            {
-                throw new ArgumentNullException(paramName: nameof(selector));
-            }
-
-            if (this.Parents.Contains(selector.Context))
-            {
-                if (!selector.Code.StartsWith('/'))
-                {
-                    MaterialCategory matCat = this.DatMgr.MaterialCategory.GetById(int.Parse(selector.Code,  CultureInfo.InvariantCulture));
-                    if (matCat is not null)
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
         }
     }
 }

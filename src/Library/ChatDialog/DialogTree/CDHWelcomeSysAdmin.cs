@@ -38,7 +38,7 @@ namespace ClassLibrary
 
             StringBuilder builder = new StringBuilder();
             builder.AppendLine($"<b>Bienvenido a PieTech {user.FirstName} {user.LastName}!</b>\n");
-            builder.AppendLine("Como administrador de empresa usted puede realizar las siguientes acciones:\n");
+            builder.AppendLine("Como administrador del sistema usted puede realizar las siguientes acciones:\n");
             builder.AppendLine("/invitar - Invitar usuarios.");
             builder.AppendLine("/habilitaciones - Habilitaciones.");
             builder.Append("/materiales - Categorias de Materiales.");

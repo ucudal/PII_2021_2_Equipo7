@@ -39,11 +39,12 @@ namespace ClassLibrary
             UserActivity process = session.CurrentActivity;
             InsertInvitationData data = process.GetData<InsertInvitationData>();
             data.RunTask();
+
+            Invitation invitation = this.DatMgr.Invitation.GetById(data.GeneratedId);
             StringBuilder builder = new StringBuilder();
 
-            builder.Append("La invitacion se ha creado satisfactorimente.\n");
-            builder.Append("Escriba ");
-            builder.Append("\\volver : para volver al menu.\n");
+            builder.AppendLine($"Se ha generado la siguiente invitacion: <b>{invitation.Code}</b>. Recuerde enviarselo al usuario final.\n");
+            builder.Append("/volver - Volver al menu de invitaciones.\n");
             return builder.ToString();
         }
     }

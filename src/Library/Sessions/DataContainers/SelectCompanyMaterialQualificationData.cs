@@ -14,7 +14,7 @@ namespace ClassLibrary
     public class SelectCompanyMaterialQualificationData : ActivityData
     {
         private CompanyMaterialQualification companyMaterialQualification;
-        private DataManager dataManager;
+        private DataManager dataManager = new DataManager();
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase.
@@ -36,15 +36,15 @@ namespace ClassLibrary
         /// <returns>retorna un bool.</returns>
         public override bool RunTask()
         {
-            bool xretonro = false;
-            CompanyMaterialQualification xHabiMat = this.dataManager.CompanyMaterialQualification.GetById(this.CompanyMaterialQualification.Id);
-            xHabiMat.Deleted = true;
-            if (this.dataManager.CompanyMaterialQualification.Update(xHabiMat))
+            bool retorno = false;
+            CompanyMaterialQualification matQual = this.dataManager.CompanyMaterialQualification.GetById(this.CompanyMaterialQualification.Id);
+            matQual.Deleted = true;
+            if (this.dataManager.CompanyMaterialQualification.Update(matQual))
             {
-                xretonro = true;
+                retorno = true;
             }
 
-            return xretonro;
+            return retorno;
         }
     }
 }

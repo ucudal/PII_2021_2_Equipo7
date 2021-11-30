@@ -5086,9 +5086,11 @@
             invitacion del usuario.
             </summary>
         </member>
-        <member name="P:ClassLibrary.InsertInvitationData.RegistrationType">
+        <member name="P:ClassLibrary.InsertInvitationData.GeneratedId">
             <summary>
-            tipo de registro del usuario.
+            Id generado por el proveedor
+            de almacenamiento al guardar los datos
+            luego de correr la tarea.
             </summary>
         </member>
         <member name="M:ClassLibrary.InsertInvitationData.RunTask">

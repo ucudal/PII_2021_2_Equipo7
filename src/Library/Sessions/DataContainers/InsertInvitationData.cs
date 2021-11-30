@@ -17,7 +17,7 @@ namespace ClassLibrary
     public class InsertInvitationData : SearchData
     {
         private Invitation invitation;
-        private RegistrationType registrationtype;
+        private int generatedId;
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="InsertInvitationData"/>.
@@ -45,16 +45,21 @@ namespace ClassLibrary
         public Invitation Invitation { get => this.invitation; set => this.invitation = value; }
 
         /// <summary>
-        /// tipo de registro del usuario.
+        /// Id generado por el proveedor
+        /// de almacenamiento al guardar los datos
+        /// luego de correr la tarea.
         /// </summary>
-        public RegistrationType RegistrationType { get => this.registrationtype; set => this.registrationtype = value; }
+        public int GeneratedId
+        {
+            get => this.generatedId;
+        }
 
         /// <inheritdoc/>
         public override bool RunTask()
         {
             DataManager dataManager = new DataManager();
             Invitation inv = dataManager.Invitation.New();
-            inv.Type = this.registrationtype;
+            inv.Type = this.Invitation.Type;
             inv.CompanyId = this.Invitation.CompanyId;
             inv.Used = false;
             inv.ValidAfter = DateTime.Now;
@@ -66,6 +71,8 @@ namespace ClassLibrary
             }
 
             dataManager.Invitation.GenerateNewInviteCode(id);
+
+            this.generatedId = id;
 
             return true;
       }

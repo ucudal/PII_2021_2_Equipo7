@@ -42,7 +42,7 @@ namespace ClassLibrary
                 Type = RegistrationType.EntrepreneurNew,
                 InviteCode = selector.Code,
             };
-            UserActivity activity = new UserActivity("registration", null, "/registration", data);
+            UserActivity activity = new UserActivity("registration", null, "/inicio", data);
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.PushActivity(activity);

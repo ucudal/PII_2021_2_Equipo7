@@ -15,7 +15,7 @@ namespace ClassLibrary
     {
         private CompanyMaterial companyMaterial;
         private Publication publication;
-        private DataManager dataManager;
+        private DataManager dataManager = new DataManager();
         private int companyId;
 
         /// <summary>
@@ -50,13 +50,13 @@ namespace ClassLibrary
         /// <returns>boleano de publication.</returns>
         public override bool RunTask()
         {
-            bool xretorno = false;
+            bool retorno = false;
             if (this.dataManager.Publication.Delete(this.Publication.Id))
             {
-                xretorno = true;
+                retorno = true;
             }
 
-            return xretorno;
+            return retorno;
         }
     }
 }

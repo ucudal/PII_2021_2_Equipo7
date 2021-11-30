@@ -36,15 +36,14 @@ namespace ClassLibrary
             }
 
             UserActivity activity = new UserActivity("mat_menu", null, "/welcome", null);
-
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.PushActivity(activity);
+
             StringBuilder builder = new StringBuilder();
-            builder.Append("Usted ha seleccionado la opcion invitar .\n");
-            builder.Append("Que tipio de invitacion quiere crear:\n\n");
-            builder.Append("\\agregar : Invitacion de administradores del sistema.\n");
-            builder.Append("\\listar : Invitacion de emprendedores al sistema.\n");
-            builder.Append("\\cancelar : Invitacion de companias al sistema.");
+            builder.AppendLine("<>Menu de Materiales</b>\n");
+            builder.AppendLine("/agregar - Agregar materiales.");
+            builder.AppendLine("/listar - Listar materiales.\n");
+            builder.Append("/volver - Volver al menu de administrador.");
             return builder.ToString();
         }
     }

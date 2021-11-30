@@ -40,13 +40,13 @@ namespace ClassLibrary
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             session.PushActivity(activity);
             StringBuilder builder = new StringBuilder();
-            builder.Append("Usted ha seleccionado la opcion invitar .\n");
-            builder.Append("Que tipio de invitacion quiere crear:\n\n");
-            builder.Append("\\admin : Invitacion de administradores del sistema.\n");
-            builder.Append("\\emprendedor : Invitacion de emprendedores al sistema.\n");
-            builder.Append("\\compania_nueva : Invitacion de companias al sistema.\n");
-            builder.Append("\\compania_existente \n");
-            builder.Append("\\cancelar");
+            builder.AppendLine("<b>Generar Invitacion</b>.\n");
+            builder.AppendLine("Escoja el tipo de invitacion a generar.\n");
+            builder.AppendLine("/admin - A administradores.");
+            builder.AppendLine("/emprendedor - A emprendedores.");
+            builder.AppendLine("/compania_nueva - Como nueva compania.");
+            builder.AppendLine("/compania_existente - A compania existente.\n");
+            builder.Append("/volver - Volver al menu de administrador.");
             return builder.ToString();
         }
     }
