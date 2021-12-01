@@ -36,20 +36,48 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            InsertMaterialCategoryData data = new InsertMaterialCategoryData
+            EraseMaterialCategoryData data = new EraseMaterialCategoryData
             {
-                MaterialCategory = this.DatMgr.MaterialCategory.GetById(int.Parse(selector.Code, CultureInfo.InvariantCulture)),
+                MatCatId = int.Parse(selector.Code, CultureInfo.InvariantCulture),
             };
 
             UserActivity process = new UserActivity("remove_category", "mat_menu", "/listar", data);
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            session.CurrentActivity = process;
-            StringBuilder builder = new StringBuilder();
+            session.PushActivity(process);
 
-            builder.Append("Desea eliminar la categoria del material.\n");
-            builder.Append("\\confirmar \n");
-            builder.Append("\\cancelar");
+            MaterialCategory matCat = this.DatMgr.MaterialCategory.GetById(data.MatCatId);
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("Desea eliminar la siguiente categoria?\n");
+            builder.AppendLine($"<b>Nombre:</b> {matCat.Name}\n");
+            builder.AppendLine("/confirmar - Confirmar eliminacion.");
+            builder.Append("/volver - Volver al listado de categorias.");
             return builder.ToString();
+        }
+
+        /// <inheritdoc/>
+        public override bool ValidateDataEntry(ChatDialogSelector selector)
+        {
+            if (selector is null)
+            {
+                throw new ArgumentNullException(paramName: nameof(selector));
+            }
+
+            if (this.Parents.Contains(selector.Context))
+            {
+                if (!selector.Code.StartsWith('/'))
+                {
+                    if (int.TryParse(selector.Code, NumberStyles.Integer, CultureInfo.InvariantCulture, out int id))
+                    {
+                        MaterialCategory matCat = this.DatMgr.MaterialCategory.GetById(id);
+                        if (matCat is not null)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }

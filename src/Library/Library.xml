@@ -553,6 +553,9 @@
         <member name="M:ClassLibrary.CDHMaterialCategoryRemoveFromList.Execute(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
+        <member name="M:ClassLibrary.CDHMaterialCategoryRemoveFromList.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
+            <inheritdoc/>
+        </member>
         <member name="T:ClassLibrary.CDHQualificationAddConfirmation">
             <summary>
             <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
@@ -4957,6 +4960,27 @@
         <member name="M:ClassLibrary.EntrepreneurQualificationInsertData.RunTask">
             <inheritdoc/>
         </member>
+        <member name="T:ClassLibrary.EraseMaterialCategoryData">
+            <summary>
+            Contenedor con los datos
+            del proceso de registro
+            para un usuario.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.EraseMaterialCategoryData.#ctor">
+            <summary>
+            Inicializa una nueva instancia de la clase <see cref="T:ClassLibrary.InsertMaterialCategoryData"/>.
+            </summary>
+        </member>
+        <member name="P:ClassLibrary.EraseMaterialCategoryData.MatCatId">
+            <summary>
+            Identificador dentro del servicio de
+            mensajeria del usuario a registrar.
+            </summary>
+        </member>
+        <member name="M:ClassLibrary.EraseMaterialCategoryData.RunTask">
+            <inheritdoc/>
+        </member>
         <member name="T:ClassLibrary.ErasePublicationData">
             <summary>
             Contenedor con los datos
@@ -5110,6 +5134,9 @@
             Identificador dentro del servicio de
             mensajeria del usuario a registrar.
             </summary>
+        </member>
+        <member name="M:ClassLibrary.InsertMaterialCategoryData.RunTask">
+            <inheritdoc/>
         </member>
         <member name="T:ClassLibrary.InsertPublicationData">
             <summary>

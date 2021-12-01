@@ -38,24 +38,22 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
-            StringBuilder builder = new StringBuilder();
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity activity;
             if (session.CurrentActivity.Code != "search_by_page_admin_material_category")
             {
-                int id = int.Parse(selector.Code, NumberStyles.Integer, CultureInfo.InvariantCulture);
-                IReadOnlyCollection<int> compmat = this.DatMgr.CompanyMaterial.Items.Select(comp => comp.Id).ToList().AsReadOnly();
-
-                InsertCompanyMaterialData search = new InsertCompanyMaterialData(compmat, this.Parents.First(), this.Route);
-                activity = new UserActivity("comp_mat_cat_list", "welcome_sysadmin", "/materiales", search);
+                IReadOnlyCollection<int> compmat = this.DatMgr.MaterialCategory.Items.Select(comp => comp.Id).ToList().AsReadOnly();
+                SearchData search = new SearchData(compmat, this.Parents.First(), this.Route);
+                activity = new UserActivity("search_by_page_admin_material_category", "welcome_sysadmin", "/materiales", search);
                 session.PushActivity(activity);
             }
 
             activity = session.CurrentActivity;
-            InsertInvitationData data = activity.GetData<InsertInvitationData>();
+            SearchData data = activity.GetData<SearchData>();
 
-            builder.Append("Listado de Categoria de Materiales existentes: \n");
-            builder.Append("En caso de querer hacer una accion sobre alguna cat ingrese su numero.\n");
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("<b>Listado de Categorias</b>\n");
+            builder.AppendLine("En caso de querer eliminar alguna categoria, ingrese su numero.\n");
             if (data.SearchResults.Count > 0)
             {
                 builder.AppendLine($"{this.TextToPrintQualification(data)}");
@@ -83,10 +81,13 @@ namespace ClassLibrary
             }
 
             StringBuilder builder = new StringBuilder();
-            foreach (int compcatid in search.PageItems)
+            foreach (int compCatId in search.PageItems)
             {
-                MaterialCategory comp = this.DatMgr.MaterialCategory.GetById(compcatid);
-                builder.AppendLine($"{comp.Id} - {comp.Name}");
+                MaterialCategory comp = this.DatMgr.MaterialCategory.GetById(compCatId);
+                if (comp is not null)
+                {
+                    builder.AppendLine($"{comp.Id} - {comp.Name}");
+                }
             }
 
             return builder.ToString();
