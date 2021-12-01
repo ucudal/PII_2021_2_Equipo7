@@ -51,7 +51,7 @@ namespace Tests
             Assert.AreEqual(companyId, inv.CompanyId);
             Assert.AreEqual(used, inv.Used);
             Assert.AreEqual(false, inv.Deleted);
-            Assert.AreEqual(18, inv.Code.Length);
+            Assert.AreEqual(16, inv.Code.Length);
 
             IReadOnlyCollection<Invitation> afterInvites = this.datMgr.Invitation.Items;
 
