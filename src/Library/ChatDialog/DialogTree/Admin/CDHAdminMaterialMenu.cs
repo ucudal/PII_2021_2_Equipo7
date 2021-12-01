@@ -40,7 +40,7 @@ namespace ClassLibrary
             session.PushActivity(activity);
 
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine("<>Menu de Materiales</b>\n");
+            builder.AppendLine("<b>Menu de Materiales</b>\n");
             builder.AppendLine("/agregar - Agregar materiales.");
             builder.AppendLine("/listar - Listar materiales.\n");
             builder.Append("/volver - Volver al menu de administrador.");

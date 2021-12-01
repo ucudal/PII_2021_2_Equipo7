@@ -35,49 +35,21 @@ namespace ClassLibrary
                 throw new ArgumentNullException(paramName: nameof(selector));
             }
 
+            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
+            EraseMaterialCategoryData data = session.CurrentActivity.GetData<EraseMaterialCategoryData>();
+
             StringBuilder builder = new StringBuilder();
-            if (this.EraseMatcat(selector))
+            if (data.RunTask())
             {
-                builder.Append("Los datos se eliminaron correctamente.\n");
+                builder.AppendLine("Los datos se eliminaron correctamente.\n");
             }
             else
             {
-                builder.Append("Los datos no se pudieron eliminar .\n");
+                builder.AppendLine("Los datos no se pudieron eliminar .\n");
             }
 
-            builder.Append("escriba \n");
-            builder.Append("\\volver : para retornar al menu de materiales.\n");
+            builder.Append("/volver - Volver al menu de materiales.\n");
             return builder.ToString();
-        }
-
-        private bool EraseMatcat(ChatDialogSelector selector)
-        {
-            bool xretorno = false;
-            Session session = this.Sessions.GetSession(selector.Service, selector.Account);
-            UserActivity process = session.CurrentActivity;
-            InsertMaterialCategoryData data = process.GetData<InsertMaterialCategoryData>();
-            MaterialCategory materialCategory = data.MaterialCategory;
-            if (this.IsNotAllReadyToDelete(data) == false)
-            {
-                this.DatMgr.MaterialCategory.Delete(materialCategory.Id);
-                xretorno = true;
-            }
-
-            return xretorno;
-        }
-
-        private bool IsNotAllReadyToDelete(InsertMaterialCategoryData data)
-        {
-            bool xretorno = false;
-            foreach (MaterialCategory xMatCat in this.DatMgr.MaterialCategory.Items)
-            {
-                if (xMatCat.Id == data.MaterialCategory.Id)
-                {
-                    xretorno = true;
-                }
-            }
-
-            return xretorno;
         }
     }
 }

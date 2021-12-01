@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------
-// <copyright file="InsertMaterialCategoryData.cs" company="Universidad Católica del Uruguay">
+// <copyright file="EraseMaterialCategoryData.cs" company="Universidad Católica del Uruguay">
 // Copyright (c) Programación II. Derechos reservados.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -11,14 +11,14 @@ namespace ClassLibrary
     /// del proceso de registro
     /// para un usuario.
     /// </summary>
-    public class InsertMaterialCategoryData : ActivityData
+    public class EraseMaterialCategoryData : ActivityData
     {
-        private MaterialCategory materialCategory;
+        private int matCatId;
 
         /// <summary>
         /// Inicializa una nueva instancia de la clase <see cref="InsertMaterialCategoryData"/>.
         /// </summary>
-        public InsertMaterialCategoryData()
+        public EraseMaterialCategoryData()
         {
         }
 
@@ -26,18 +26,14 @@ namespace ClassLibrary
         /// Identificador dentro del servicio de
         /// mensajeria del usuario a registrar.
         /// </summary>
-        public MaterialCategory MaterialCategory { get => this.materialCategory; set => this.materialCategory = value; }
+        public int MatCatId { get => this.matCatId; set => this.matCatId = value; }
 
         /// <inheritdoc/>
         public override bool RunTask()
         {
             DataManager datMgr = new DataManager();
 
-            MaterialCategory matCat = datMgr.MaterialCategory.New();
-            matCat.Name = this.materialCategory.Name;
-            int matCatId = datMgr.MaterialCategory.Insert(matCat);
-
-            return matCatId != 0;
+            return datMgr.MaterialCategory.Delete(this.matCatId);
         }
     }
 }

@@ -65,7 +65,7 @@
     {
       "Id": 3,
       "Name": "Vidrio",
-      "Deleted": false
+      "Deleted": true
     },
     {
       "Id": 4,
@@ -80,11 +80,21 @@
     {
       "Id": 6,
       "Name": "Biologico",
-      "Deleted": false
+      "Deleted": true
     },
     {
       "Id": 7,
       "Name": "Discos",
+      "Deleted": false
+    },
+    {
+      "Id": 8,
+      "Name": "Comestibles",
+      "Deleted": false
+    },
+    {
+      "Id": 9,
+      "Name": "Marmol",
       "Deleted": false
     }
   ],
@@ -202,6 +212,16 @@
       "ValidAfter": "2021-11-30T18:34:39.5650527-03:00",
       "ValidBefore": "2021-12-30T18:34:39.5650995-03:00",
       "CompanyId": 4,
+      "Used": false,
+      "Deleted": false
+    },
+    {
+      "Id": 10,
+      "Code": "2021334-EN-00010",
+      "Type": 1,
+      "ValidAfter": "2021-11-30T22:07:23.5402511-03:00",
+      "ValidBefore": "2021-12-30T22:07:23.5402799-03:00",
+      "CompanyId": 0,
       "Used": false,
       "Deleted": false
     }

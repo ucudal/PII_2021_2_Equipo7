@@ -37,7 +37,7 @@ namespace ClassLibrary
 
             Session session = this.Sessions.GetSession(selector.Service, selector.Account);
             UserActivity activity = session.CurrentActivity;
-            InsertCompanyMaterialData data = activity.GetData<InsertCompanyMaterialData>();
+            InsertMaterialCategoryData data = activity.GetData<InsertMaterialCategoryData>();
 
             MaterialCategory companyMaterial = this.DatMgr.MaterialCategory.New();
             companyMaterial.Name = selector.Code.Trim();
@@ -46,9 +46,9 @@ namespace ClassLibrary
             session.CurrentActivity = activity;
 
             StringBuilder builder = new StringBuilder();
-            builder.Append("Seguro que desea crear un material con los siguientes datos.\n");
-            builder.Append("Nombre: " + data.CompanyMaterial.Name);
-            builder.Append("/confirmar : En caso de querer confirmar la operacion.\n");
+            builder.AppendLine("Seguro que desea crear un material con los siguientes datos.\n");
+            builder.AppendLine($"<b>Nombre</b>: {data.MaterialCategory.Name}\n");
+            builder.AppendLine("/confirmar : En caso de querer confirmar la operacion.");
             builder.Append("/volver : Volver al menu principal de compañía");
             return builder.ToString();
         }
@@ -56,8 +56,6 @@ namespace ClassLibrary
         /// <inheritdoc/>
         public override bool ValidateDataEntry(ChatDialogSelector selector)
         {
-            bool xretorno = false;
-
             if (selector is null)
             {
                 throw new ArgumentNullException(paramName: nameof(selector));
@@ -67,11 +65,11 @@ namespace ClassLibrary
             {
                 if (!selector.Code.StartsWith('/'))
                 {
-                    xretorno = true;
+                    return true;
                 }
             }
 
-            return xretorno;
+            return false;
         }
     }
 }
