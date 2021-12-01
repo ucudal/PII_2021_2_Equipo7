@@ -486,9 +486,6 @@
         <member name="M:ClassLibrary.CDHMaterialCategoryAddName.Execute(ClassLibrary.ChatDialogSelector)">
             <inheritdoc/>
         </member>
-        <member name="M:ClassLibrary.CDHMaterialCategoryAddName.ValidateDataEntry(ClassLibrary.ChatDialogSelector)">
-            <inheritdoc/>
-        </member>
         <member name="T:ClassLibrary.CDHMaterialCategoryConfirm">
             <summary>
             <see cref="T:ClassLibrary.ChatDialogHandlerBase"/> concreto:
