@@ -66,4 +66,6 @@ Es una aplicacion del patron chain of responsability.
 5. `DataAdmin` cumple SRP porque tiene la unica responsabilidad de manejar los datos que van a persistir. Aplica creator ya que es la unica clase que genera instancias de las clases de datos administrados. Tambien es un caso de Polimorfismo ya que sus metodos devuelven datos de tipos distintos dependiendo de la clase admin concreta que implementa esta. Es tambien una aplicacion de OCP porque  encapsula las operaciones basicas de todos los datos administrados a la vez que permite que cada admin concreto pueda extenderse con operaciones adicionales. Aplica singleton para acceder al proveedor de almacenamiento (en nuestro caso database.json)
 6. `IManagableData` Es una aplicacion de el principio de inversion de dependencias pues permite al data admin depender de un tipo abstracto que asegura las propiedades y operaciones basicas necesarias para su funcion sin depender de las clases a administrar concretas. 
 7. `IStorageProvider` Tambien Aplica DIP ya que admin no depende de proveedores de almacenamiento concretos. Esto tambien cumple con OCP ya que deja el programa abierto a ser extendido con otros proveedores. 
-8. 
+8. `DataManager` aplica Singleton para acceder a todos los admin.Aplica SRP porque tiene la unica responsabilidad de acceder a todos los admin.
+
+9. `Session Y SessionContainer` cumplen con SRP ya que tiene la unica responsabilidad de contener todas las sesiones activas.
